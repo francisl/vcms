@@ -1,0 +1,370 @@
+{% extends "admin/change_list.html" %}
+{% load adminmedia admin_list i18n %}
+{% load admin_extras %}
+{% block title %}{% trans "List of pages" %}{% endblock %}
+{% block bodyclass %}change-list{% endblock %}
+
+
+{% if not is_popup %}{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="../../">{% trans "Home" %}</a> &rsaquo;
+    <a href="../">{{ app_label|capfirst|escape }}</a> &rsaquo; {{ opts.verbose_name_plural|capfirst|escape }}
+</div>
+{% endblock %}{% endif %}
+
+{% block coltype %}flex{% endblock %}
+{% block extrahead %}
+    {{ block.super }}
+    <!-- <link rel="stylesheet" type="text/css" href="{{ PAGES_MEDIA_URL }}css/rte.css" />
+    <link rel="stylesheet" type="text/css" href="{{ PAGES_MEDIA_URL }}css/pages.css" />
+	<script type="text/javascript" src="/static/js/jquery/jquery-1.3.2.min.js"></script> -->
+    <script type="text/javascript" src="/static/js/dojo-release-1.3.0/dojo/dojo.js"></script>
+
+	<style type="text/css" media="all">
+		@import "/static/css/simthetiq.css";
+        @import "/static/js/dojo-release-1.3.0/dijit/themes/nihilo/nihilo.css";
+	</style>
+<style type="text/css">
+  .dndContainer {
+    width: 100px;
+    display: block;
+  }
+
+  .clear {
+    clear: both;
+  }
+  /*
+
+	there are basically all the classes you can set
+	for the various dojo.dnd states and elements in
+	their simplest form. hacking welcome.
+
+*/
+.dndContainer {
+	border:3px solid #ccc;
+	padding: 1em 3em;
+	cursor: default;
+	radius:8pt;
+	background:#fff;
+	-moz-border-radius:8pt 8pt;
+}
+
+.dojoDndContainerOver {
+	/* cursor:pointer; */
+	/* border:3px solid #aaa; */
+}
+
+ul.dndContainer li {
+    color: black;
+    font-size: 1.2em;
+    list-style-type: none;
+    }
+
+.dojoDndItem {
+	padding:3px;
+}
+
+.dojoDndItemOver {
+	background: #ededed;
+	cursor:pointer;
+}
+
+.dojoDndItemSelected {
+	background: #ccf; color: #444;
+}
+
+.dojoDndItemAnchor {
+	background: #ccf; color: black;
+}
+
+.dojoDndItemOver .dojoDndItemSelected {
+	background: #ededed;
+}
+
+.dojoDndItemOver .dojoDndItemAnchor {
+	background: #ededed;
+}
+
+.dojoDndItemBefore {
+	border-top: 2px solid #369;
+}
+
+.dojoDndItemAfter {
+	border-bottom: 2px solid #369;
+}
+
+.dojoDndAvatar {
+	border:2px solid #ccc;
+	font-size: 75%;
+	width: 50px;
+	-moz-border-radius:8pt 8pt;
+	radius:8pt;
+}
+
+.dojoDndAvatarHeader {
+	background: #aaa;
+}
+
+.dojoDndAvatarItem {
+	background: #fff;
+	border-bottom:1px solid #666;
+}
+
+li { font-size : 1.4em; }
+
+
+</style>
+
+{% if has_add_permission %}
+<script type="text/javascript">
+
+dojo.require("dojo.dnd.Source");
+dojo.require("dijit.form.Button");
+
+// PAGE CONTRUCTOR
+function page(id, name, display, level, parent, tree_position, module){
+	this.Id = id;
+    this.Name = name.toString();
+    this.Display = display; 
+    this.Level = level;
+    this.Parent = parent;
+	this.Position = tree_position;
+    this.Module = module.toString();
+}
+// Page object containing all pages available for this site
+var all_pages = {};
+
+
+function logPage(page){
+	console.log(page);
+    console.log(
+    	"page Name = " + page.Name + "\n" +
+        "page Display = " + page.Display + "\n" +
+        "page Level = " + page.Level + "\n" +
+        "page Parent = " + page.Parent + "\n" +
+        "page Module = " + page.Module
+     );
+}
+
+function logAllPages(pages){
+	console.log("LOGGIN ALL PAGES : " + pages);
+	for(page in pages){
+		if(all_pages.hasOwnProperty(page)){
+			logPage(pages[page]);
+		}
+	}
+}
+		
+function initDND(){
+	
+	// Global variable for menu containers
+	var menucontainer = {};
+    menucontainer.mainmenu = new dojo.dnd.Source('mainmenu_container');
+    menucontainer.mainmenu.horizontal = true;
+	var selected_mainmenu = 0;
+	menucontainer.submenu = new dojo.dnd.Source("submenu_container");
+    menucontainer.submenu.horizontal = true;
+	// var submenus = {};
+    menucontainer.trash = new dojo.dnd.Target('trash');
+
+	// update the submenu on the screen
+	function update_submenu(menu_id){
+		menucontainer.submenu.selectAll()
+		menucontainer.submenu.deleteSelectedNodes();
+		var menulist = [];
+		for (page in all_pages){
+			if (all_pages.hasOwnProperty(page)){
+				if (all_pages[page].Parent === menu_id){
+					//console.log("updating " + all_pages[page].Position + all_pages[page].Name)
+					menulist[all_pages[page].Position] = all_pages[page].Name;
+				}
+			}
+		}
+		for (var i = 0; i < menulist.length; i++){
+			menucontainer.submenu.insertNodes(false, [menulist[i]]);
+		}
+		delete menulist;
+	}
+	
+	// --------------- DnD FUNCTION -----------------------
+	function add_clickable(node, pages){
+		//console.log("add clickable : " + node.innerHTML)
+		dojo.connect(node, "onclick", function(m_evt){
+			//console.debug("SELECTED init connect NODE " + pages[node.innerHTML].Id);
+			selected_mainmenu = pages[node.innerHTML].Id;
+			update_submenu(pages[node.innerHTML].Id);
+		});
+	}
+
+	function remove_clickable(node){
+		dojo.disconnect(node);
+	}
+
+	// set page order for menu
+	function set_order_position(cont){
+		//order menu list
+		var list = cont.getAllNodes();
+		for (var i = 0; i < list.length; i++){
+			//console.log("ordering : " + list[i].innerHTML);
+			all_pages[list[i].innerHTML].Position = i;
+		}
+	}
+
+	function dropOnMenu(source, target, node, level, parent){
+		if( target !== source){
+			// only if new node
+			// This a node to the specified container "source"
+			var moved_page = all_pages[node.innerHTML];
+			if ( parent === moved_page.Id ){
+				source.insertNodes(false, [node.innerHTML])
+				update_submenu(selected_mainmenu);
+				return false;
+			}
+        	moved_page.Display = true;
+			if ( !level ){
+        		moved_page.Level = 0;
+			} else {
+				moved_page.Level = level;
+			}
+   		
+			if ( parent ){
+	        	moved_page.Parent = parent;
+			} else {
+				// not parent menu select, assume it mainmenu node
+				moved_page.Parent = null;
+				add_clickable(node, all_pages);
+				selected_mainmenu = all_pages[node.innerHTML].Id;
+			}
+		} else if (target === menucontainer.mainmenu) {
+			// select menu that has been reordered
+			selected_mainmenu = all_pages[node.innerHTML].Id
+		}
+		set_order_position(target);
+		set_order_position(source);	// make sure submenu is reorder
+   		update_submenu(selected_mainmenu);
+		
+	}
+	
+   	function delete_menu_node(target, node){
+   		target.deleteSelectedNodes();
+        var moved_page = all_pages[node.innerHTML];
+        moved_page.Display = false;
+        moved_page.Level = 0;
+        moved_page.Parent = null; 
+        //logPage(moved_page);
+        menucontainer[moved_page.Module].insertNodes(false, [moved_page.Name]);
+   	}
+   	
+	// place all pages in the corresponding container - menu, submenu of available container
+	for ( page in all_pages){
+   		if(all_pages.hasOwnProperty(page)){
+           	//console.log("Passing trhough all page " + all_pages[page].Name)
+           	// create container even if empty, required to delete page from menu
+           	if ( ! menucontainer[all_pages[page].Module]){
+                  	menucontainer[all_pages[page].Module] = new dojo.dnd.Source("container_"+ all_pages[page].Module);
+					menucontainer[all_pages[page].Module].accept = [];
+                  	//console.log("Container " + all_pages[page].Module + " hab been created")
+           	}
+           	if (all_pages[page].Display === true){
+               	// Display in menus instead of section it belongs to
+               	if (all_pages[page].Level === 0){
+                  		// main menu
+                  		menucontainer.mainmenu.insertNodes(false, [all_pages[page].Name]);
+						// submenus[all_pages[page].Id] = []; // create a submenu for this page
+                  		//console.log("Page " + all_pages[page].Name + " hab been added to mainmenu")
+               	}
+           	} else {
+				// add to available page container
+               	menucontainer[all_pages[page].Module].insertNodes(false, [all_pages[page].Name]);
+          		//console.log("Page " + all_pages[page].Name + " hab been added to " + all_pages[page].Module)
+           	}
+		}
+    }
+
+   	// Generate submenu
+	try {
+		selected_mainmenu = all_pages[menucontainer.mainmenu.getAllNodes()[0].innerHTML].Id;
+		//console.log("SELECTED MENU = " + selected_mainmenu);
+   		if(selected_mainmenu){
+   			// only selects ubmenu if there is main menu
+   			update_submenu(selected_mainmenu);
+   		}
+	} catch (except) {
+		console.log(except);
+		
+	}
+
+	//console.log("submenus = " + submenus[null]);
+	//logAllPages(all_pages);
+   	// Make mainmenu clickable
+   	var nodes = menucontainer.mainmenu.getAllNodes();
+   	for (var n= 0; n < nodes.length; n++){
+   		add_clickable(nodes[n], all_pages);
+   	}
+
+   	// ----------------- DnD CONNECTOR EVENT ------------------
+    dojo.connect(menucontainer.mainmenu, "onDrop", function(source, nodes, copy, target){
+		dropOnMenu(source, this, nodes[0]);
+    });
+
+    dojo.connect(menucontainer.submenu, "onDrop", function(source, nodes, copy){
+		console.debug("selected_mainmenu == " + selected_mainmenu);
+		dropOnMenu(source, this, nodes[0], 1, selected_mainmenu);
+    });
+
+	dojo.connect(menucontainer["trash"], "onDrop", function(source, nodes, copy){
+   		delete_menu_node(this, nodes[0]);
+    });
+
+};
+
+dojo.addOnLoad(initDND);
+
+function submit_data(){
+	var json_pages = dojo.toJson( all_pages);
+	dojo.byId("savingmess").innerHTML = "Saving ...";
+    //console.log(json_pages)
+    dojo.xhrPost({
+    	url:"/gestion/www/update_menu",
+        postData: json_pages,
+        handleAs: 'json',
+        load: function(data){
+        	//console.log("return data : " + data);
+			dojo.byId("savingmess").innerHTML = "Saved";
+        },
+		error: function(error){
+			//console.log(error);
+			dojo.byId("savingmess").innerHTML = "Error";
+		}
+
+	});
+}
+
+
+</script>
+    
+<style type="text/css">
+        ul.dropul {margin-right: 10px; background-color: #ddd; padding: 5px; width: 143px; float: left; min-height: 34px;}
+        .dropul li { margin: 5px; padding: 5px; font-size: 1.2em; width: 120px; border: thin dashed black; display: block;}
+        li.selected { border: thin solid green; font-weight: bold;}
+        #trash { margin: 15px; padding: 5px; height: 65px; clear: left; float: left; width: 143px; background-color: #9F2727; }
+        .droppable-active {  }
+		.droppable-hover {	outline: 1px dotted black;}
+        .nodrop { background :  #e44; }
+         #menus { width: 100%; }
+        #page_container  { float: left;}
+
+</style>
+{% endif %}
+
+{% endblock %}
+
+
+{% block result_list %}
+    <div id="content-main">
+        <div class="module" id="changelist">
+            {% show_menu_table %}
+        </div>
+    </div>
+
+{% endblock %}

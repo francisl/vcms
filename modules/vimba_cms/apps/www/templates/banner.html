@@ -1,0 +1,12 @@
+{% if has_banner %}
+<!-- Banner -->
+<div id="banner" class="division_menu">
+    {% if banner.url %}
+	<a class="imagelink" href="{{banner.url}}">
+		<img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+	</a>
+	{% else %}
+		<img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+	{% endif %}
+ </div>
+{% endif %}

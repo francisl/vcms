@@ -1,0 +1,39 @@
+{% load thumbnail %}
+
+{% if news %}
+<div class="division_content" name="latest_news">
+	<h4>{{ title|upper }}</h4>
+</div>
+<hr />
+{% for c in news %}
+<div class="division_content" name="{{ c.id }}">
+	<h4>{{ c.name }}</h4>
+	<p>{{ c.excerpt|safe }}</p>
+    
+	{% if images %}
+	{% if c.get_images_preview %} <!-- IMAGES -->
+        <div class="media_holder">
+        {% for image in c.get_images_preview %} <!-- FOR IMAGES -->
+            <a href="{{ MEDIA_URL }}/{{ image.file }}" title="{{image.name}}" rel="prettyPhoto[{{ c.id }}]">
+                <img alt="{{image.description|striptags}}" src="{% thumbnail image.file 100x40  crop %}" />
+            </a>
+        {% endfor%}
+        </div>
+	{% endif %}
+	{% endif %}
+	{% if videos %}
+	{% if c.get_videos_preview %} <!-- VIDEOS -->
+        <div class="media_holder">
+        {% for video in c.get_videos_preview %} <!-- FOR IMAGES -->
+            <a href="{{ MEDIA_URL }}/{{ video.file }}?width=560&amp;height=330&amp;" title="{{video.name}}" rel="prettyPhoto[{{ c.id }}]">
+                <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}/{{ video.thumbnail }}" />
+            </a>
+        {% endfor%}
+        </div>
+	{% endif %}
+	{% endif %}
+	<a href="/news/{{c.id}}/" title="more info" style="width: 90%; position: absolute; text-align: right;">Read more</a>
+</div>
+{% endfor %}
+<br />
+{% endif %}

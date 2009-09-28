@@ -1,0 +1,70 @@
+{% extends "master.html" %}
+
+{% block stylesheet %}
+	<!--  <link href="/static/css/simthetiq_services.css" rel="stylesheet" type="text/css"> -->
+{% endblock stylesheet %}
+
+{% block ubercontent %}
+     <div class="content">
+		<div class="division_content">
+		<script language="JavaScript" type="text/JavaScript" src="/static/js/order.js"></script>
+		<script>
+			var requiredfield = new Array();
+			requiredfield = {{ requiredfields|safe }};
+			var errormess = new Array();
+			errormess = ["Please fill all required fields!","Please, enter a valid email address!", "Email address don't match!"	];				
+		</script>
+		
+		<div class="content_center">
+			<h2>ORDER FORM</h2>
+			<hr />
+		</div>
+		<form name="orderform" method="post" action="/order/orderform/" onsubmit="return checkifcompleted(this, requiredfield, errormess );">
+			<div class="form_sideleft">
+				<label id="CieName" for="CieName">Business Name: &nbsp;<span style="color: red;"> {{ orderform.Business_name.errors.0 }}</span></label><br />
+					{{ orderform.Business_name }}<br />
+				<label id="Street">Street: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Street.errors.0}}</span></label>
+					<br />{{ orderform.Street }}<br />
+				<label id="City">City: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.City.errors.0}}</span></label><br />
+					{{ orderform.City }}<br />
+				<label id="ZipCode">Postal Code: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Postal_code.errors.0}}</span></label><br />
+					{{ orderform.Postal_code }}<br />
+				<label id="State">State: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.State.errors.0}}</span></label><br />
+					{{ orderform.State }}<br />
+				<label id="Country">Country: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Country.errors.0}}</span></label><br />
+					{{ orderform.Country }}<br />
+				<label id="Firstname">First name: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Firstname.errors.0}}</span></label><br />
+					{{ orderform.Firstname }}<br />
+				<label id="Lastname">Last name: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Lastname.errors.0}}</span></label><br />
+					{{ orderform.Lastname }}<br />
+				<label id="PhoneNumber">Phone Number: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Phone_number.errors.0}}</label><br />
+					{{ orderform.Phone_number }}<br />
+				<label id="Email">Email: &nbsp;<span style="color: red;"> &nbsp;{{ orderform.Email.errors.0}}</span></label><br />
+					{{ orderform.Email }}<br />
+				<label id="Email2">Email Validation: &nbsp;<span style="color: red;"> </span></label><br />
+				<input id="id_Email2" type="text" name="Email2" value="" />
+            </div>
+			<div class="form_sideright">
+                <label>Application Type:</label><span style="color: red;">{{ orderform.Application_type.errors.0}}</span><br />
+					{{ orderform.Application_type }}<br />
+				<label>Product:</label><span style="color: red;">{{ orderform.Application_type.errors.0}}</span><br />
+					{{ orderform.Product }}<br />
+				<label>Message: &nbsp; <span style="color: red;">{{ orderform.Message.errors.0}}</span></label><br />
+					{{ orderform.Message }}<br />
+            </div>
+			<div class="submit">
+                <button type="reset"><u>Clear</u></button>
+                <span class="separator">|</span>
+                <button type="submit"><u>Submit</u></button>
+			</div>
+
+			<br />
+		</form>
+		<div class="clear"></div>
+		<br />
+	</div>
+<br />
+<div class="clear"></div>
+</div>
+
+{% endblock ubercontent %}

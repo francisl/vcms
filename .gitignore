@@ -1,0 +1,3 @@
+# ignore python compiled files
+*.py[co]
+

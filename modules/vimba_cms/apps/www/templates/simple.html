@@ -1,0 +1,17 @@
+{% extends "master.html" %}
+
+{% block content %}
+		<!-- Content -->
+		{% if contents %}
+		{% for c in contents %}
+		<div class="division_content" name="{{ c.id }}">
+			<br />
+			<h4>{{ c.name|upper }}</h4>
+			<hr />
+			<div class="division_content">
+				{{ c.content|safe }}
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+{% endblock content %}

@@ -1,0 +1,18 @@
+
+Your message has been sent to Simthetiq
+
+        Business Name:  {{orderinfo.CieName}}
+        Street:         {{orderinfo.Street}}
+        City:           {{orderinfo.City}}
+        ZipCode:        {{orderinfo.ZipCode}}
+        State:          {{orderinfo.State}}
+        Country:        {{orderinfo.Country}}
+        Firstname:      {{orderinfo.Firstname}} 
+        Lastname:       {{orderinfo.Lastname}} 
+        PhoneNumber:    {{orderinfo.PhoneNumber}} 
+        Email:          {{orderinfo.Email}}
+        AppType:        {{orderinfo.AppType}}
+        Message:        {{orderinfo.Message}}
+
+
+

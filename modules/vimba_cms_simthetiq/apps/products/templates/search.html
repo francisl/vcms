@@ -1,0 +1,35 @@
+{% extends "master.html" %}
+
+{% block title %}
+	Search result for {{ query }}
+{% endblock title %}
+
+{% block content %}
+<!--=========content=========== -->
+<div id="Page_result" class="division_header">
+
+</div>
+<div class="division_content">
+	{% if results %}
+		Found {{ results_len }} result{{ results_len|pluralize }} for <i>"{{ query }}"</i>:
+	{% else %}
+		Your search for <i>"{{ query }}"</i> yield no result!
+	{% endif %}
+	
+	{% if results %}
+	<table style="width: 60%; border: none; ">
+		{% for result in results %} 
+			<tr>
+				<td style="width: 20%; vertical-align: text-top;">{{ result.percent }} %</td>
+				<td style="text-align: left"><a href="{{ result.instance.get_absolute_url }}">{{ result.instance.name }}</a><br />
+					  {{ result.instance.description }}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+</div>
+
+
+<!--=========//content=========== -->
+{% endblock content %}

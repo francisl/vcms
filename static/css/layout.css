@@ -1,0 +1,30 @@
+
+
+.main{width:766px; margin:auto}
+
+#header{height:195px;}
+
+#footer{height:146px;}
+
+/*=========page_2========*/
+#page2 .cont{width:704px;}
+/*=========//page_2========*/
+
+/*=========page_3========*/
+#page3 .col_1{width:420px; float:left;}
+#page3 .col_2{width:284px; float:left;}
+/*=========//page_3========*/
+
+/*=========page_4========*/
+#page4 .col_1{width:410px; float:left;}
+#page4 .col_2{width:218px; float:left;}
+/*=========//page_4========*/
+
+/*=========page_5========*/
+#page5 .col_1{width:324px; float:left;}
+#page5 .col_2{width:284px; float:left;}
+/*=========//page_5========*/
+
+/*=========page_6========*/
+#page6 .cnt{width:643px;}
+/*=========//page_6========*/

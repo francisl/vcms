@@ -1,0 +1,145 @@
+{% extends "master.html" %}
+{% load thumbnail %}
+
+{% block javascript-include %}
+	<script type="text/javascript" src="/static/js/jquery/jquery-ui-1.7.custom.min.js"></script>
+	<script type="text/javascript" src="/static/js/jQueryRotate.js"></script>
+	<script type="text/javascript" src="/static/js/content_header_arrow_rotation.js"></script>
+{% endblock javascript-include%}
+{% block jquery %}
+	{% for element in product_contents %}
+		create_header_arrow("{{element.id}}", "{{element.display}}");
+    	$("#{{element.id}}").click(function () {
+    		$("#{{element.id}}_content").toggle("blind", { direction: "vertical" }, 500);
+			change_status({{element.id}}); 
+		});
+   	{% endfor %}
+
+	create_header_arrow("technical_specification", "True");
+	$("#technical_specification").click(function () {
+    	$("#technical_specification_content").toggle("blind", { direction: "vertical" }, 500);
+		change_status("technical_specification");
+ 	});
+
+	create_header_arrow("similar_products", "True");
+   	$("#similar_products").click(function () {
+  		$("#similar_products_content").toggle("blind", { direction: "vertical" }, 500);
+		change_status("similar_products");
+ 	});
+
+{% endblock jquery %}
+
+
+
+{% block content %}
+	<div class="content">
+
+		<!-- MENU -->
+		{% if category.domain.get_absolute_url %}
+		<div class="division_content" style="margin-left: 2em;">
+			<a href="{{ category.domain.get_absolute_url }}">{{ category.domain.name }}</a> > <a href="{{ category.domain.get_absolute_url }}/category/{{ category.id }}">{{ category.name }}</a> > <span> {{ productpage.name|upper }} :</span>
+		 </div>
+		{% endif %}
+		<!-- Content -->
+
+		{% if productpage %} <!-- TYPES -->
+		<div class="division_content">
+		    <div class="product_nav" id="product_nav_left">
+                <a href="{{ productpage.next.get_absolute_url }}"><img src="{{ MEDIA_URL }}static/img/gallery/left.gif" alt="Scroll left" /></a>
+            </div>
+			<div class="division_content media_holder">
+				{% if productpage.original_image %}
+				<img src={{ MEDIA_URL }}{{ productpage.original_image }} style="float: left; margin-right: 1em; width: 320px; height: 240px;" />
+				{% endif %}
+				<h4> {{ productpage.name|upper }} :</h4>
+				{{ productpage.product_description|safe }}
+			</div>
+	
+			<div id="{{element.id}}_content" class="division_content">
+				{% if productpage.images.all %}
+				<div class="media_holder">
+				<h6>IMAGE : </h6>
+				{% for image in productpage.images.all %}
+					<a href="{{ MEDIA_URL }}{{ image.file }}" title="{{image.description}}" rel="prettyPhoto[{{element.name}}]">
+						<img alt="{{image.description|striptags}}" src="{% thumbnail image.file 100x40  crop %}" />
+					</a>
+				{% endfor %}
+				</div>
+				{% endif %}
+				
+				{% if productpage.videos.all %}
+				<div class="media_holder">
+				<h6>VIDEO : </h6>
+				{% for video in productpage.videos.all %}
+					<a href="{{ MEDIA_URL}}{{ video.file }}?width=560&amp;height=330&amp;" 
+						rel="prettyPhoto;width=600;height=430;flashvars=clip_id={{ video.id }}">
+						{% if video.thumbnail %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
+						{% else %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}static/img/default/media/video.png" />
+						{% endif %}
+					</a>
+				{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+
+                <div class="product_nav" id="product_nav_right">
+                    <a href="{{ productpage.previous.get_absolute_url }}"><img src ="{{ MEDIA_URL }}static/img/gallery/right.gif" alt="Scroll right"  /></a>
+                </div>
+                <div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+		<div id="technical_specification" class="division_header">TECHNICAL SPECIFICATION
+			<img id="technical_specification_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+		</div>
+		<div id="technical_specification_content" class="division_content" style="display: block;">
+			<table cellspacing="0">
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<colgroup />
+			<thead>
+				<tr class="under">
+					<th>Polygon</th>
+					<th>Texture Format</th>
+					<th>Texture Resolution</th>
+					<th>File Format</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ productpage.polygon }}</td>
+					<td>{{ productpage.texture_format }}</td>
+					<td>{{ productpage.texture_resolution }}</td>
+					<td><ul>{% for ff in productpage.file_format.all %}<li>{{ ff }}</li>{% endfor %}</td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+		{% if product_contents %}
+		{% for c in product_contents %}
+		<div id="{{ c.id }}" class="division_header">{{ c.title|upper }}
+			<img id="{{c.id}}_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+		</div>
+		<div id="{{ c.id }}_content" class="division_content" name="{{ c.id }}"  style="display: block;">
+				{{ c.content|safe }}
+		</div>
+		<div class="clear"></div>
+		{% endfor %}
+		{% endif %}
+		
+		{% if productpage.similar_products.all %}
+		<div id="similar_products" class="division_header">SIMILAR PRODUCT
+			<img id="similar_products_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+		</div>
+		<div id="similar_products_content" class="division_content" style="display: block;">
+			<ul>
+			{% for sp in productpage.similar_products.all %}
+				<li><a href="{{ sp.get_absolute_url }}">{{ sp.name }}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+		{% endif %}
+	</div>
+
+{% endblock content %}

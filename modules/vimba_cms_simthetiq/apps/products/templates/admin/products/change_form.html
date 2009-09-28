@@ -1,0 +1,42 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<script language="javascript" type="text/javascript" src="/static/js/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+	theme : "simple",
+	skin : "default",
+	mode : "exact",
+	auto_resize : true
+});
+
+tinyMCE.init({
+	theme : "advanced",
+	skin : "default",
+	mode : "textareas",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	elements :" id_test, id_term, id_text, id_content, id_domainelement_set-*",
+	editor_deselector : "norichtext",
+	auto_resize : true
+});
+</script> 
+<!--  
+﻿<script type="text/javascript" src="/static/js/nicEdit.js"></script>
+<script type="text/javascript">
+	bkLib.onDomLoaded(function() { 
+		new nicEditor({fullPanel : true}).panelInstance('id_content');
+		new nicEditor({fullPanel : true}).panelInstance('id_level_of_detail');
+		new nicEditor({fullPanel : true}).panelInstance('id_thermal');
+		new nicEditor({fullPanel : true}).panelInstance('id_damage');
+		new nicEditor({fullPanel : true}).panelInstance('id_articulated_part');
+		new nicEditor({fullPanel : true}).panelInstance('id_animation');
+		new nicEditor({fullPanel : true}).panelInstance('id_description');
+		new nicEditor({fullPanel : true}).panelInstance('id_test'); 
+		new nicEditor({fullPanel : true}).panelInstance('id_term'); 
+		new nicEditor({fullPanel : true}).panelInstance('id_text'); 
+	});
+</script>-->
+{% endblock %}
+
