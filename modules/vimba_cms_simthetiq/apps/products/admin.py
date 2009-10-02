@@ -7,8 +7,10 @@ from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, Produ
 # -----------
 
 def delete_selected(modeladmin, request, queryset):
+    import time
     for product in queryset:
         product.delete()
+        time.sleep(2)
 delete_selected.short_description = "Delete selected product(s)"
 
 class MediaTagsTranslationInline(admin.StackedInline):

@@ -137,7 +137,7 @@ def importProducts():
                     product_info[0] = product_info[1]
 
             # print col assigment
-            """
+            print("Line === %s " % line)
             print("Name : " + product_info[0].replace("\r", "").replace("\n", ""))
             print("slug : " + product_info[1].replace("\n", "").replace("\r", "").lower())
             print("description : " + product_info[2].replace("_", " "))
@@ -151,7 +151,7 @@ def importProducts():
 
             print("category : " + (product_info[11]))
             print("file format : " + (product_info[12]))
-            """
+            
             
             #image = product_info[14].split("\\")
             #print("original_image = %s " % image[len(image)-1:])

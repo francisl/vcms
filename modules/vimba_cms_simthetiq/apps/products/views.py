@@ -51,7 +51,7 @@ def getPageList():
 
 def Domain(request, context={}):
     #print("------------- Domain -------------")
-    print("selected_category is set : %s " % type(context["selected_category"]))
+    #print("selected_category is set : %s " % type(context["selected_category"]))
     # selected the domain page to retreive information not in www.models.page
     try:
         #print("context['current_page'].id = %s" % context['current_page'].id)

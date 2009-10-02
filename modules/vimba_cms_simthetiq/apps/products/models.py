@@ -206,26 +206,22 @@ class ProductPage(Page):
         return self.name
 
     def save(self, reorder=True):
+        print("saving product ...")
         self.module  = 'Product'
         self.app_slug = APP_SLUGS
-        """ save one time before, this enable the paginator to find de product in the right order """
-        super(ProductPage, self).save()
 
         if reorder:
+            """ save one time before, this enable the paginator to find de product in the right order """
+            super(ProductPage, self).save()
             """ by default, will reorder the paginator built-in """
             ProductPage.objects.set_product_position(self)
 
         super(ProductPage, self).save()
         
     def delete(self):
-        print("delete is getting called")
+        #print("delete is getting called")
         ProductPage.objects.remove_product_position(self)
         super(ProductPage, self).delete()
-        
-    def pre_delete(self):
-        print("pre_delete is getting called")
-        ProductPage.objects.remove_product_position(self)
-        
 
 # -- CONTENT
 # ----------

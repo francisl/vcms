@@ -148,6 +148,13 @@ div.product_nav img { top: 30%; bottom: 30%; }
 div#product_nav_left { left: 0;}
 div#product_nav_right { right: 0; }
 
+div.product_nav { position: absolute; top: 0; cursor: pointer;
+                    padding: 0 10px;  width: 30px; height: 310px;}
+
+div#category_nav  { float: left; width: 320px; }
+div#category_items { float: left; width: 600px; }
+
+
 /*=========================================GALLERY==========================================*/
 div.gallery_nav { position: absolute; top: 0; cursor: pointer;
                     padding: 0 10px;  width: 30px; height: 310px;}
