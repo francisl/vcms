@@ -4,18 +4,16 @@
 {% endblock stylesheet %}
 
 {% block javascript-include %}
-	<script type="text/javascript" src="/static/js/jquery/jquery-ui-1.7.custom.min.js"></script>
-	<script type="text/javascript" src="/static/js/jQueryRotate.js"></script>
-	<script type="text/javascript" src="/static/js/content_header_arrow_rotation.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}/Library/jquery/jquery-ui-1.7.1.custom.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/Library/jQueryRotate.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/Library/content_header_arrow_rotation.js"></script>
 	<script type="text/javascript">
 	   function category_change(obj){
 	       alert(obj);
-	       
-	       
 	   }
+
 	   function selectAll(obj){
 	       if (obj.checked===false) {
-	           
 	       }
 	   }
 	</script>
@@ -62,7 +60,7 @@
 		{% endif %}
 		{% if categories %} <!-- TYPES -->
 		<div id="modellist" class="division_header">MODEL LIST
-			<img id="modellist_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />	
+			<img id="modellist_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />	
 		</div>
 		<div id="modellist_content" class="division_content" style="display: block;">
 		  <div id="category_nav">
@@ -106,12 +104,12 @@
 				{% endfor %}
 			</div>
 			
-			<div class="clear"></div> -->
-		</div>
+			<div class="clear"></div>
+		</div> -->
 		{% endif %}
 		{% for element in elements %}
 			<div id="{{element.id}}" class="division_header">{{element.name|upper }} 
-				<img id="{{element.id}}_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+				<img id="{{element.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
 			</div>
 			<div id="{{element.id}}_content" class="division_content" style="display: {% if element.display %} block {% else %} none {% endif %};">
 				{% if element.images.all %} <!-- IMAGES -->
@@ -134,7 +132,7 @@
                             {% if video.thumbnail %}
                                 <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
                             {% else %}
-                                <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}static/img/default/media/video.png" />
+                                <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/default/media/video.png" />
                             {% endif %}
                         </a>
                     {% endfor%}
@@ -148,7 +146,7 @@
 	
 		{% if category.file_format %} <!-- FILE FORMAT -->
 		<div id="fileformat" class="division_header">FILE FORMAT
-			<img id="fileformat_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+			<img id="fileformat_image" class="image" src="{{ MEDIA_URL }}/content_header_arrow2.png" />
 		</div>
 		<div id="fileformat_content" class="division_content"  style="display: none;">
 		{% for format in fileformat%} <!-- FOR FILEFORMAT -->

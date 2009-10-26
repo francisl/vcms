@@ -7,11 +7,21 @@ from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, Produ
 # -----------
 
 def delete_selected(modeladmin, request, queryset):
-    import time
     for product in queryset:
-        product.delete()
-        time.sleep(2)
+        selected_product = ProductPage.objects.get(id=product.id)
+        selected_product.delete()
+
 delete_selected.short_description = "Delete selected product(s)"
+
+def delete_all_product(modeladmin, request, queryset):
+    for product in ProductPage.objects.all():
+        #print("deleting product %s " % product)
+        try:
+            selected_product = ProductPage.objects.get(id=product.id)
+            selected_product.delete()
+        except:
+            print("product not found %s" % product)
+delete_all_product.short_description = "Delete all product(s)"
 
 class MediaTagsTranslationInline(admin.StackedInline):
     model = MediaTagsTranslation
@@ -25,7 +35,9 @@ class FileFormatAdmin(admin.ModelAdmin):
     pass
 
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
+    list_filter = ['tags']
+    list_display = ['name', 'description']
 
 class VideoAdmin(admin.ModelAdmin):
     pass
@@ -51,13 +63,14 @@ class ProductContentInline(admin.StackedInline):
     extra = 1
 
 class ProductPageAdmin(admin.ModelAdmin):
+    search_fields = ['name']
     inlines = [ ProductContentInline ]
     list_filter = ['category', 'status']
     # for debug 
     #list_display = ['name', 'previous', 'next', 'category', 'status']
     #production
-    list_display = ['name', 'category', 'status']
-    actions = [delete_selected]
+    list_display = ['name', 'previous','next', 'category', 'status', 'original_image']
+    actions = [delete_selected, delete_all_product]
     filter_horizontal = ["images", "videos"]
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = (( 'Page information',

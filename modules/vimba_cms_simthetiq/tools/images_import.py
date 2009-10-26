@@ -12,13 +12,13 @@ from decimal import Decimal
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 
-from vimba_cms_simthetiq.products.models import ProductPage, Image, Language, MediaTags
+from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Language, MediaTags
 
 language = Language.objects.getDefault()
 
 
 def createNewImage(name, file_name=None, description=None, tags=None, show_in_gallery=False):
-    imagesDir = "images/"
+    imagesDir = os.path.dirname(__file__) + "/images/"
     
     if file_name==None or description==None or tags==None:
         return False
@@ -61,9 +61,8 @@ def createNewImage(name, file_name=None, description=None, tags=None, show_in_ga
     return newImage
 
 def importImages():
-    toImport = open("tools/exportedimages.csv", 'r')
-    logfile = open("tools/log/image_import.log", 'w')
-
+    toImport = open(os.path.dirname(__file__) + "/exportedimages.csv", 'r')
+    logfile = open(os.path.dirname(__file__) + "/log/image_import.log", 'w')
 
     i = 0
     for line in toImport:
@@ -75,7 +74,7 @@ def importImages():
             image_info = line.split(";")
             # create image only if needed
             try:
-                image = Images.objects.get(name=image_info[0])
+                image = Image.objects.get(name=image_info[0])
             except:
                 image = False
             if image:
@@ -84,23 +83,30 @@ def importImages():
 
             newImage = createNewImage(image_info[0], file_name=image_info[1], description=image_info[2], tags=image_info[3], show_in_gallery=image_info[4])
             
-            if newImage:
-                try:
-                    if newImage.name == "" or newImage.name == " ":
-                        products = []
-                    else:
-                        products = ProductPage.objects.filter(slug=image_info[6].lower().replace('\n','').replace('\r',''))
-                except:
-                    #no product found
-                    products = []
-                for product in products:
-                    #print("adding %s to %s" % (newImage.name, product))
-                    product.images = list(product.images.all()) + [newImage]
-                    product.save()
-                logfile.write("Image %s, link to = %s products\n" % (newImage.name,products))
-                logfile.write("image as tag = %s\n" % newImage.tags)
-            else:
-                logfile.write("Image %s Failed!\n" % image_info[0])
+            added_to = []
+            for product in image_info[5].replace("\"", "").split(','):
+                product = product.lower().replace('\n','').replace('\r','').replace(" ", "")
+                if newImage:
+                    try:
+                        if newImage.name == "" or newImage.name == " ":
+                            productObj = []
+                        else:
+                            productObj = ProductPage.objects.get(slug=product)
+                            added_to = added_to + [productObj]
+                    except:
+                        #no product found
+                        productObj = []
+
+                    print("product obj = %s" % productObj) 
+                    if isinstance(productObj, ProductPage):
+                        print("product obj is instance : typeof = %s" % type(productObj))
+                        productObj.images = list(productObj.images.all()) + [newImage]
+                        productObj.save(reorder=False)
+                    logfile.write("Image %s, link to = %s products\n" % (newImage.name,productObj))
+                    logfile.write("image as tag = %s\n" % newImage.tags)
+                else:
+                    logfile.write("Image %s Failed!\n" % image_info[0])
+                    
     logfile.close()
 
 def run():

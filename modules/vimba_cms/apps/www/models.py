@@ -13,8 +13,8 @@ from vimba_cms.apps.www.managers import PageManager, BannerManager, DashboardEle
 
 
 # -- variable
-PRODUCT_IMAGES = "static/uploadto/prod_images"
-PRODUCT_VIDEOS = "static/uploadto/prod_videos"
+PRODUCT_IMAGES = "uploadto/prod_images"
+PRODUCT_VIDEOS = "uploadto/prod_videos"
 APP_SLUGS = "www"
 
 class Language(models.Model):

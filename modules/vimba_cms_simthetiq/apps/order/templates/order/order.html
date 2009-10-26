@@ -1,9 +1,5 @@
 {% extends "master.html" %}
 
-{% block stylesheet %}
-	<!--  <link href="/static/css/simthetiq_services.css" rel="stylesheet" type="text/css"> -->
-{% endblock stylesheet %}
-
 {% block ubercontent %}
 	 {%if orderform.errors %}<span style="color: red;"> {{ orderform.errors }}</span>{% endif%}
      <div class="content">
@@ -31,6 +27,6 @@
             <br />
 		</div>
     </div>
-    <div class="" style="position: relative; heigth: 200px; width: 700px; margin-top: -64px; margin-left: auto; margin-right: auto;"><img src="/static/img/order/big_panzer.jpg" /></div>
+    <div class="" style="position: relative; heigth: 200px; width: 700px; margin-top: -64px; margin-left: auto; margin-right: auto;"><img src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/order/big_panzer.jpg" /></div>
 	
 {% endblock ubercontent %}

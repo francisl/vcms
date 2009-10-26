@@ -2,6 +2,7 @@
 # Create your views here.
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.template import Template, Context, RequestContext 
 from config import simthetiq_config
 from django import forms
 from vimba_cms_simthetiq.apps.order.list import *
@@ -24,7 +25,7 @@ class FreeOrderForm(forms.Form):
     Message = forms.CharField(widget=forms.Textarea, required=True)
   
 def Order(request):
-    return render_to_response('order/order.html', {})
+    return render_to_response('order/order.html', {}, context_instance=RequestContext(request))
 
 def OrderForm(request):
     orderform = FreeOrderForm()
@@ -68,10 +69,10 @@ def OrderForm(request):
             # send confirmation that email has been sent
             return render_to_response('email_confirmation.html', {"completed": completed[0]})
     
-    return render_to_response('order/orderform.html', {'orderform': orderform, "requiredfields" : requiredfields })
-
+    return render_to_response('order/orderform.html', {'orderform': orderform, "requiredfields" : requiredfields },
+                                context_instance=RequestContext(request))
 
 def Confirm(request):
     if request.method != 'POST': return HttpResponseRedirect("/")
-    return render_to_response('order/confirmation.html')
+    return render_to_response('order/confirmation.html', {}, context_instance=RequestContext(request))
 

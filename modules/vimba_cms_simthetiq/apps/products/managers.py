@@ -37,8 +37,8 @@ class ProductPageManager(models.Manager):
         
         if len(all_product) <= 1:
             #print("Product is lonely")
-            next_product = selected_product.next = selected_product
-            previous_product = selected_product.previous = selected_product
+            selected_product.next = selected_product
+            selected_product.previous = selected_product
         elif previous_product == selected_product:
             #print("Product is the first one of many")
             previous_product = last_product = all_product[len(all_product)-1]
@@ -83,41 +83,75 @@ class ProductPageManager(models.Manager):
 
     def remove_product_position(self, selected_product):
         #print("remove_product_position is getting called")
+        #import time
+        #print("removing product = %s " % selected_product)
+        #print("removing product.id = %s " % selected_product.id)
+       
         try:
-            previous = selected_product.previous
+            previous = self.get(id=selected_product.previous.id)
         except:
+            #print("previous exception")
             previous = None
+            selected_product.save()
             
         try: 
-            next = selected_product.next
+            next = self.get(id=selected_product.next.id)
         except:
+            #print("next exception")
             next = None
+            selected_product.save()
+        
+        #print("previous = %s" % previous)
+        #print("next = %s" % next)    
+        if previous != next and (previous == selected_product or next == selected_product):
+            #print('no valid pointer to self')
+            if previous == selected_product:
+                #print('no valid pointer to self - previous')
+                previous = None
+            if next == selected_product:
+                #print('no valid pointer to self - next')
+                next = None
             
-        print("product = %s " % selected_product) 
-        print("previous = %s" % previous)
-        print("next = %s" % next)
-            
-        if previous == next:
+        if previous == next and previous != None:
             """ in condition there is only one product """
-            previous_product = selected_product.previous
-            previous_product.next = selected_product.next
-            previous_product.previous = selected_product.previous
+            #print("previous same as next")
+            previous_product = previous
+            previous_product.next = next
+            previous_product.previous = previous
             previous_product.save(reorder=False)
         else:
-            next_product = selected_product.next
-            print("next_product = %s:%d" % (next_product, id(next_product)))
-            next_product.previous = selected_product.previous
-            next_product.save(reorder=False)
-            print("next_product = %s:%d" % (next_product, id(next_product)))
+            #print("else")
+            if not next == None:
+                next_product = next
+                #print("next_product = %s:%d" % (next_product, id(next_product)))
+                next_product.previous = previous
+                next_product.save(reorder=False)
             
-            previous_product = selected_product.previous
-            previous_product.next = selected_product.next
-            print("previous_product = %s:%d" % (previous_product, id(previous_product)))
-            previous_product.save(reorder=False)
-            print("previous_product = %s:%d" % (previous_product, id(previous_product)))
+            if previous != None: 
+                previous_product = previous
+                previous_product.next = next
+                #print("previous_product = %s:%d" % (previous_product, id(previous_product)))
+                previous_product.save(reorder=False)
 
+
+        return selected_product
+
+    def set_previous_next_product(self, selected_product, previous_product, next_product):
+        products = self.all()
+        for product in products:
+            if product.next == selected_product:
+                #print("found next product : %s->%s " % (product, product.next))
+                product.next = selected_product.next
+                product.save(reorder=False)
+            if product.previous == selected_product:
+                #print("found previous product : %s<-%s " % (product.previous, product))
+                product.previous = selected_product.previous
+                product.save(reorder=False)
+
+        
+        #if previous_product != None:
+            #previous_product.save()
+        #if next_product != None:
+            #next_product.save()
+        
             
-        selected_product.previous = None
-        selected_product.next = None
-        selected_product.save(reorder=False)
-

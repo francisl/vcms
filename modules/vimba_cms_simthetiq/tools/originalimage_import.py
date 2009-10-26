@@ -12,13 +12,13 @@ from decimal import Decimal
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 
-from vimba_cms_simthetiq.products.models import ProductPage, Image, Language, MediaTags
+from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Language, MediaTags
 
 language = Language.objects.getDefault()
 
 def importOriginalImages():
-    toImport = open("tools/exportedimagesoriginal.csv", 'r')
-    logfile = open("tools/log/imageoriginal_import.log", 'w')
+    toImport = open(os.path.dirname(__file__) + "/exportedimagesoriginal.csv", 'r')
+    logfile = open(os.path.dirname(__file__) + "/log/imageoriginal_import.log", 'w')
     imagesDir = "images/"
     
     i = 0

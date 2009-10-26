@@ -81,5 +81,5 @@ urlpatterns += patterns('',
 if settings.DEBUG:
     import os
     urlpatterns += patterns('',
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../static', 'show_indexes': True}),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../client_cms_static', 'show_indexes': True}),
 )

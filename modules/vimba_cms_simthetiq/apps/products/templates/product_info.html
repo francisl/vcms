@@ -2,9 +2,9 @@
 {% load thumbnail %}
 
 {% block javascript-include %}
-	<script type="text/javascript" src="/static/js/jquery/jquery-ui-1.7.custom.min.js"></script>
-	<script type="text/javascript" src="/static/js/jQueryRotate.js"></script>
-	<script type="text/javascript" src="/static/js/content_header_arrow_rotation.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}/Library/jquery/jquery-ui-1.7.1.custom.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}/Library/media/jQueryRotate.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}/Library/media/content_header_arrow_rotation.js"></script>
 {% endblock javascript-include%}
 {% block jquery %}
 	{% for element in product_contents %}
@@ -43,60 +43,67 @@
 		<!-- Content -->
 
 		{% if productpage %} <!-- TYPES -->
-		<div class="division_content">
-		    <div class="product_nav" id="product_nav_left">
-                <a href="{{ productpage.next.get_absolute_url }}"><img src="{{ MEDIA_URL }}static/img/gallery/left.gif" alt="Scroll left" /></a>
-            </div>
-			<div class="division_content media_holder">
-				{% if productpage.original_image %}
-				<img src={{ MEDIA_URL }}{{ productpage.original_image }} style="float: left; margin-right: 1em; width: 320px; height: 240px;" />
-				{% endif %}
-				<h4> {{ productpage.name|upper }} :</h4>
-				{{ productpage.product_description|safe }}
-			</div>
-	
-			<div id="{{element.id}}_content" class="division_content">
-				{% if productpage.images.all %}
-				<div class="media_holder">
-				<h6>IMAGE : </h6>
-				{% for image in productpage.images.all %}
-					<a href="{{ MEDIA_URL }}{{ image.file }}" title="{{image.description}}" rel="prettyPhoto[{{element.name}}]">
-						<img alt="{{image.description|striptags}}" src="{% thumbnail image.file 100x40  crop %}" />
-					</a>
-				{% endfor %}
-				</div>
-				{% endif %}
-				
-				{% if productpage.videos.all %}
-				<div class="media_holder">
-				<h6>VIDEO : </h6>
-				{% for video in productpage.videos.all %}
-					<a href="{{ MEDIA_URL}}{{ video.file }}?width=560&amp;height=330&amp;" 
-						rel="prettyPhoto;width=600;height=430;flashvars=clip_id={{ video.id }}">
-						{% if video.thumbnail %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
-						{% else %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}static/img/default/media/video.png" />
+        <div class="division_content">
+		    <div class="division_content" id="product_description">
+			  	<div class="product_nav" id="product_nav_left">
+	                <a href="{{ productpage.next.get_absolute_url }}"><img src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/left.gif" alt="Scroll left" /></a>
+	            </div>
+				<div class="product_content">
+					<div class="division_content media_holder">
+						{% if productpage.original_image %}
+						<a href="{{ MEDIA_URL }}{{productpage.original_image.file}}" rel="prettyPhoto">
+						<img class="original_image" src="{% thumbnail productpage.original_image.file 320x240 %}"  alt="{{productpage.original_image.name}}" />
+						</a>
 						{% endif %}
-					</a>
-				{% endfor %}
-				</div>
-				{% endif %}
-			</div>
-
-                <div class="product_nav" id="product_nav_right">
-                    <a href="{{ productpage.previous.get_absolute_url }}"><img src ="{{ MEDIA_URL }}static/img/gallery/right.gif" alt="Scroll right"  /></a>
+						<h4> {{ productpage.name|upper }} :</h4>
+						{{ productpage.product_description|safe }}
+					</div>
+	
+	                <div id="{{element.id}}_content" class="division_content">
+						{% if productpage.images.all %}
+						<div class="media_holder">
+							<h6>IMAGE : </h6>
+							{% for image in productpage.images.all %}
+								<a href="{{ MEDIA_URL }}{{ image.file }}" title="{{image.description}}" rel="prettyPhoto[{{element.name}}]">
+									<img class="thumbnail" alt="{{image.description|striptags}}" src="{% thumbnail image.file 100x40  crop %}" />
+								</a>
+							{% endfor %}
+						</div>
+						{% endif %}
+					
+						{% if productpage.videos.all %}
+						<div class="media_holder">
+							<h6>VIDEO : </h6>
+							{% for video in productpage.videos.all %}
+								<a href="{{ MEDIA_URL}}{{ video.file }}?width=560&amp;height=330&amp;" 
+									rel="prettyPhoto;width=600;height=430;flashvars=clip_id={{ video.id }}">
+									{% if video.thumbnail %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
+									{% else %}<img class="thumbnail" alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/default/media/video.png" />
+									{% endif %}
+								</a>
+							{% endfor %}
+						</div>
+						{% endif %}
+				     </div>
+	
+	                
+	                <div class="clear"></div>
+	            </div>
+	            <div class="product_nav" id="product_nav_right">
+                        <a href="{{ productpage.previous.get_absolute_url }}"><img src ="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/right.gif" alt="Scroll right"  /></a>
                 </div>
-                <div class="clear"></div>
+            </div>
 		</div>
 		<div class="clear"></div>
 		<div id="technical_specification" class="division_header">TECHNICAL SPECIFICATION
-			<img id="technical_specification_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+			<img id="technical_specification_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="technical_specification_content" class="division_content" style="display: block;">
 			<table cellspacing="0">
-			<colgroup />
-			<colgroup />
-			<colgroup />
-			<colgroup />
+			<colgroup></colgroup>
+			<colgroup></colgroup>
+			<colgroup></colgroup>
+			<colgroup></colgroup>
 			<thead>
 				<tr class="under">
 					<th>Polygon</th>
@@ -118,7 +125,7 @@
 		{% if product_contents %}
 		{% for c in product_contents %}
 		<div id="{{ c.id }}" class="division_header">{{ c.title|upper }}
-			<img id="{{c.id}}_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+			<img id="{{c.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="{{ c.id }}_content" class="division_content" name="{{ c.id }}"  style="display: block;">
 				{{ c.content|safe }}
@@ -129,7 +136,7 @@
 		
 		{% if productpage.similar_products.all %}
 		<div id="similar_products" class="division_header">SIMILAR PRODUCT
-			<img id="similar_products_image" class="image" src="{{ MEDIA_URL }}static/img/content_header_arrow2.png" />
+			<img id="similar_products_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="similar_products_content" class="division_content" style="display: block;">
 			<ul>

@@ -46,12 +46,15 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.dirname(__file__) + "/../static/"
+MEDIA_ROOT = os.path.dirname(__file__) + "/../client_cms_static/"
+#VIMBA_CMS_MEDIA_ROOT = os.path.dirname(__file__) + "/../vimba_cms_static/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/'
+MEDIA_URL = '/static/'
+#VIMBA_CMS_MEDIA_URL = '/static/'
+#THEME = "Simthetiq"
 
 #TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.auth',
 #        'django.core.context_processors.debug',
@@ -129,7 +132,7 @@ INSTALLED_APPS = (
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
 )
-
+THUMBNAIL_DEBUG = True
 # use to load dashboard module dynamically
 PAGE_MODULES = []
 

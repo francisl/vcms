@@ -15,13 +15,13 @@ from vimba_cms_simthetiq.apps.products.managers import ProductPageManager
 
 
 # -- variable
-PRODUCT_IMAGES = "static/uploadto/product_images/"
-PRODUCT_VIDEOS = "static/uploadto/product_videos/"
+PRODUCT_IMAGES = "uploadto/product_images/"
+PRODUCT_VIDEOS = "uploadto/product_videos/"
 APP_SLUGS = "products"
 
 # -- GENERAL FUNCTION
 # -- ----------------
-def _save_thumbnail(self, fileName, url="static/uploadto/misc/", size=(100,40), genthumbnail=True ):
+def _save_thumbnail(self, fileName, url="uploadto/misc/", size=(100,40), genthumbnail=True ):
     if self.file:
         #filename = fileName
         if genthumbnail:
@@ -70,7 +70,7 @@ class Licence(models.Model):
 # -- TAGS
 # -------
 class MediaTags(models.Model):
-    tagname = models.CharField(max_length=30, unique=True)
+    tagname = models.CharField(max_length=30, unique=True, null=False, blank=False)
 
     class Meta:
         verbose_name_plural = "Product Media Tags"
@@ -107,15 +107,20 @@ class Image(models.Model):
         self.file_size = int(os.path.getsize(self.file.path))
         super(Image, self).save()
         
+    def get_absolute_url(self):
+        #return str(settings.MEDIA_URL) + str(self.file)
+        #return str(settings.MEDIA_ROOT) + str(self.file)
+        return self.file
 
 class Video(models.Model):
+    default_image = "CustomThemes/Simthetiq/images/default/media/video.png"
     name = models.CharField(max_length=150, unique=True)
     #category = models.ForeignKey(Category)
     file = models.FileField(upload_to=PRODUCT_VIDEOS)
     description = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(MediaTags)
     file_size = models.IntegerField(editable=False, blank=True, null=True, default=0)
-    thumbnail = models.ImageField(upload_to=PRODUCT_VIDEOS, blank=True, null=True, default="static/img/default/media/video.png")
+    thumbnail = models.ImageField(upload_to=PRODUCT_VIDEOS, blank=True, null=True, default=default_image)
     
     def __unicode__(self):
         return self.name
@@ -186,7 +191,8 @@ class ProductPage(Page):
     polygon = models.IntegerField()
     texture_format = models.CharField(max_length=50)
     texture_resolution = models.CharField(max_length=50)
-    original_image = models.ImageField(upload_to=PRODUCT_IMAGES)
+    #original_image = models.ImageField(upload_to=PRODUCT_IMAGES)
+    original_image = models.ForeignKey(Image, related_name="original_image", null=True, blank=True)
     category = models.ForeignKey(Category)
     file_format = models.ManyToManyField(FileFormat)
     similar_products = models.ManyToManyField('self', symmetrical=True, null=True, blank=True)
@@ -206,10 +212,9 @@ class ProductPage(Page):
         return self.name
 
     def save(self, reorder=True):
-        print("saving product ...")
+        #print("saving product ...")
         self.module  = 'Product'
         self.app_slug = APP_SLUGS
-
         if reorder:
             """ save one time before, this enable the paginator to find de product in the right order """
             super(ProductPage, self).save()
@@ -220,7 +225,15 @@ class ProductPage(Page):
         
     def delete(self):
         #print("delete is getting called")
-        ProductPage.objects.remove_product_position(self)
+        #ProductPage.objects.remove_product_position(self)
+
+        #print('-------------------------')
+        #print("Deleting! %s " % self)
+        ProductPage.objects.set_previous_next_product(self, self.previous, self.next)
+        self.next = None
+        self.previous = None
+        #self.previous_set.clear()
+        
         super(ProductPage, self).delete()
 
 # -- CONTENT

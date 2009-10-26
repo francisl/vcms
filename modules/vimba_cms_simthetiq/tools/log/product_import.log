@@ -1,883 +1,1341 @@
 --------------------------------
 --------------------------------
-Product Koni  Class already exist
---------------------------------
-Product M88A2 already exist
---------------------------------
-Product Frog-7 rocket launcher already exist
---------------------------------
-Product AT 105 Saxon already exist
---------------------------------
-Product BGM-109 Tomahawk already exist
---------------------------------
-Product  already exist
---------------------------------
-Product M109  Howitzer already exist
---------------------------------
-Product Technical-029  ZU-23-2 already exist
---------------------------------
-Product truck-028  M2 already exist
---------------------------------
-Product truck-027  UB-16 already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product  already exist
---------------------------------
-Product Boeing  RC-135 already exist
---------------------------------
-Product RQ  Predator  Medium  Altitude  Endurance  UAV already exist
---------------------------------
-Product Lockheed  S-3  Viking already exist
---------------------------------
-Product Boeing  ScanEagle already exist
---------------------------------
-Product Silver  Fox already exist
---------------------------------
-Product Skylark already exist
---------------------------------
-Product Su-24  Fencer already exist
---------------------------------
-Product Su-27  Flanker already exist
---------------------------------
-Product Su-30MKI already exist
---------------------------------
-Product Su-30MKK already exist
---------------------------------
-Product Su-37  multirole  fighter already exist
---------------------------------
-Product Goshawk  T-45A already exist
---------------------------------
-Product Lockheed  U-2 already exist
---------------------------------
-Product Bell  Boeing  V-22  Osprey already exist
---------------------------------
-Product Warrior  ERMP already exist
---------------------------------
-Product Watchkeeper already exist
---------------------------------
-Product 2S12  120a-mm already exist
---------------------------------
-Product S-60  57mm  AA  Gun/57 mm AZP S-60 already exist
---------------------------------
-Product 155mm  Gun-Howitzer already exist
---------------------------------
-Product KPV  TOWED already exist
---------------------------------
-Product M-220  Tow already exist
---------------------------------
-Product M115  8-inch  Howitzer already exist
---------------------------------
-Product M901  40-mm  machine  gun already exist
---------------------------------
-Product A320  AirBus already exist
---------------------------------
-Product An-2-3  Colt already exist
---------------------------------
-Product A-10 Thunderbolt already exist
---------------------------------
-Product Bae  Hawk already exist
---------------------------------
-Product Boeing  737 already exist
---------------------------------
-Product Boeing  747-400 already exist
---------------------------------
-Product C-12 Huron already exist
---------------------------------
-Product Lockheed  C-130 already exist
---------------------------------
-Product C-141B  Starlifter already exist
---------------------------------
-Product Short C-23A  Sherpa already exist
---------------------------------
-Product E-2  Hawkeye already exist
---------------------------------
-Product Boeing  E-3  Sentry already exist
---------------------------------
-Product EA-6  Prowler already exist
---------------------------------
-Product F-15  Eagle already exist
---------------------------------
-Product F-15E Strike Eagle already exist
---------------------------------
-Product F-16  Fighting  Falcon already exist
---------------------------------
-Product F-4  Phantom  II already exist
---------------------------------
-Product FA-18  Hornet already exist
---------------------------------
-Product BAE Hawk already exist
---------------------------------
-Product Il-76  Candid already exist
---------------------------------
-Product Chengdu J-10 already exist
---------------------------------
-Product SEPECAT Jaguar already exist
---------------------------------
-Product KC-10  Extender already exist
---------------------------------
-Product Boeing  KC-135  Stratotanker already exist
---------------------------------
-Product Boeing  B-52  Stratofortress already exist
---------------------------------
-Product Aero  L-159 already exist
---------------------------------
-Product MiG-25  Foxbat already exist
---------------------------------
-Product MiG-29  Fulcrum already exist
---------------------------------
-Product MiG-31  Foxhound already exist
---------------------------------
-Product Mirage  2000 already exist
---------------------------------
-Product Mirage  F-1 already exist
---------------------------------
-Product Pilatus  Flugzeugwerke  SA  PC-9 already exist
---------------------------------
-Product Pelikan already exist
---------------------------------
-Product AH-64D already exist
---------------------------------
-Product ARH-70 already exist
---------------------------------
-Product Boeing  Models  114/414 already exist
---------------------------------
-Product FCS  UAV  Class  I already exist
---------------------------------
-Product FCS  UAV  Class  II already exist
---------------------------------
-Product FCS  UAV  Class  III already exist
---------------------------------
-Product FCS  UAV  Class  IV already exist
---------------------------------
-Product MAV already exist
---------------------------------
-Product Mi-2UPR already exist
---------------------------------
-Product Mi-28  Havoc already exist
---------------------------------
-Product RQ-8A already exist
---------------------------------
-Product Sikorsky  S-92 already exist
---------------------------------
-Product DDG-1000  Zumwalt already exist
---------------------------------
-Product USS Kitty  Hawk already exist
---------------------------------
-Product Sawar  Class  inshore  patrol  boat already exist
---------------------------------
-Product AAV7A1 (amphibious assault vehicle) already exist
---------------------------------
-Product AMX-30 already exist
---------------------------------
-Product Buffel  ARV already exist
---------------------------------
-Product AS90  155-mm already exist
---------------------------------
-Product BAE  Black  Knight already exist
---------------------------------
-Product BMD-2 already exist
---------------------------------
-Product BMD-3 already exist
---------------------------------
-Product BMP-2 already exist
---------------------------------
-Product bandvagn 206 already exist
---------------------------------
-Product M4 Command and Control Vehicle (C2V) already exist
---------------------------------
-Product Challenger  MBT already exist
---------------------------------
-Product SA-5  Gammon already exist
---------------------------------
-Product SA-2  Missile  Launcher already exist
---------------------------------
-Product Type  63  130mm  Multiple  Rocket  Launcher  MRL already exist
---------------------------------
-Product ZPU-4 already exist
---------------------------------
-Product ZU-23  twin  23mm  AA  Gun already exist
---------------------------------
-Product AH-1W already exist
---------------------------------
-Product AH-64  Apache already exist
---------------------------------
-Product FCS  Command  and  Control  Vehicle already exist
---------------------------------
-Product FV  101  Scorpion already exist
---------------------------------
-Product FV103  Spartan already exist
---------------------------------
-Product FV 105  Sultan already exist
---------------------------------
-Product Irobot  Packbot  Explorer already exist
---------------------------------
-Product  already exist
---------------------------------
-Product Leopard MBT already exist
---------------------------------
-Created product = Multifunction Utility/Logistics Equipment Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x206cb50> 
-            Slug = fcs_mule 
-        Category = Small Wheeled Utility Vehicle 
---------------------------------
-Created product = M1A2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20726d0> 
-            Slug = m1a2 
-        Category = Tank 
---------------------------------
-Created product = M60  Main  Battle  Tank  MBT 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2066f50> 
-            Slug = m60a3 
-        Category = Tank 
---------------------------------
-Created product = FMC  M113  Armored  Personnel  Carrier  APC 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x207d6d0> 
-            Slug = m113 
-        Category = Armored Fighting Vehicle 
---------------------------------
-Created product = M901A1 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x208eef0> 
-            Slug = m901a3 
-        Category = Armored Fighting Vehicle 
---------------------------------
-Created product = FCS  Medical  Vehicle-Evacuation 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x208eb50> 
-            Slug = medical_vehicle_mv 
-        Category = Armored Fighting Vehicle 
---------------------------------
-Created product = FCS  Armed  Robotic  vehicle-STA 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x200d610> 
-            Slug = mule_armed_robotic_vehicule_arva-l 
-        Category = Armored Fighting Vehicle 
---------------------------------
-Created product = FCS  MULE  Countermine 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2072b30> 
-            Slug = mule_mine_clearing 
-        Category = Small Wheeled Utility Vehicle 
---------------------------------
-Created product = FCS  MULE  Transport 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20870f0> 
-            Slug = mule_transport 
-        Category = Small Wheeled Utility Vehicle 
---------------------------------
-Created product = RSV  Recon  and  Surveillance  Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x207adb0> 
-            Slug = multifunctional_utility_logistics_and_equipment_mule_darpa 
-        Category = Large Wheeled Utility Vehicle 
---------------------------------
-Created product = FRMV  Recovery  and  Maintenance  Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x204e030> 
-            Slug = frmv_recovery_and_maintenance_vehicle 
-        Category = Large Wheeled Utility Vehicle 
---------------------------------
-Created product = FCS  Recon  and  Survey  Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x203f070> 
-            Slug = rsv_recon_and_surveillance_vehicle 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = FCS  Armed  Robotic  Vehicle-RSTA 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x207d9d0> 
-            Slug = robot_talon 
-        Category = Armored Fighting Vehicle 
---------------------------------
-using default category !
-Created product = Robot  Talon  GRENADE 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x208efd0> 
-            Slug = robot_talon_grenade 
-        Category = Other 
---------------------------------
-using default category !
-Created product = Robot  Talon  SWORD 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2059390> 
-            Slug = robot_talon_sword 
-        Category = Other 
---------------------------------
-Created product = SA-4  Ganef  SAM  System 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x207a9d0> 
-            Slug = sa-4 
+Created product = ZU-23  twin  23mm  AA  Gun 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1534910> 
+            Slug = zu_23_2 
         Category = Air Defense / Missile Defense Unit Equip 
---------------------------------
-Created product = SA-6  Gainful  SAM  System 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2097e50> 
-            Slug = sa-6 
-        Category = Air Defense / Missile Defense Unit Equip 
---------------------------------
-Created product = SA-19  Grison 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2087d50> 
-            Slug = sa-19-grison 
-        Category = Air Defense / Missile Defense Unit Equip 
---------------------------------
-Created product = FCS  Small  Unattended  Ground  Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2097eb0> 
-            Slug = small_unmanned_ground_vehicle_sugv 
-        Category = Small Wheeled Utility Vehicle 
---------------------------------
-Created product = T-80  MBT 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20974d0> 
-            Slug = t80um1 
-        Category = Tank 
---------------------------------
-Created product = T-90  MBT 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20bae90> 
-            Slug = t90 
-        Category = Tank 
---------------------------------
-using default category !
-Created product = Technical  019  DHSK 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ad230> 
-            Slug = technical_019_dhsk 
-        Category = Other 
---------------------------------
-Created product = Type  69 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ba170> 
-            Slug = type69 
-        Category = Tank 
---------------------------------
-using default category !
-Created product = Wiesel  Oselot 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ba130> 
-            Slug = wiesel_oselot 
-        Category = Other 
 --------------------------------
 Created product = ZSU-23  4  Quad  23mm  AAA 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x16abc50> 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1534890> 
             Slug = zsu23-4 
         Category = Air Defense / Missile Defense Unit Equip 
 --------------------------------
-Created product = 120  mm  HE  FRAG 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2090590> 
-            Slug = 120mm_he 
-        Category = Mortar 
+Created product = ZPU-4 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x153c970> 
+            Slug = zpu-4 
+        Category = Air Defense / Missile Defense Unit Equip 
 --------------------------------
-Created product = B-10  82-mm  recoilless  gun 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20a2e70> 
-            Slug = b-10 
-        Category = Towed Artillery 
+Created product = ZIL-131 6x6 3500-kg truck 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x153cf30> 
+            Slug = zilh131 
+        Category = Large wheeled utility vehicle 
 --------------------------------
-Created product = DSHK 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b8990> 
-            Slug = dshk 
-        Category = Mortar 
---------------------------------
-Created product = DSHK-MOUNTED 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20c14f0> 
-            Slug = dshk-mounted 
-        Category = Mortar 
---------------------------------
-Created product = IED 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20bb0d0> 
-            Slug = ied 
-        Category = Mortar 
---------------------------------
-Created product = KPV-MOUNTED 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20bb7d0> 
-            Slug = kpv-mounted 
-        Category = Mortar 
---------------------------------
-Created product = M2  60-mm 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20c1c90> 
-            Slug = m2_stand 
-        Category = Mortar 
---------------------------------
-creating new category !
-Created product = M2-MOUNTED 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20df1b0> 
-            Slug = m2-mounted 
-        Category = Towed Artillerie 
---------------------------------
-creating new category !
-Created product = 106  mm  RCL40  M40 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20baf90> 
-            Slug = m40_stand 
-        Category = Ballistic 
+Created product = Zil 130 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1544b30> 
+            Slug = zil 
+        Category = Large wheeled utility vehicle 
 --------------------------------
 using default category !
-Created product = Magnum 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20bb090> 
-            Slug = mag_gpng_7-62 
+Created product = Wiesel  Oselot 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1544d50> 
+            Slug = wiesel_oselot 
         Category = Other 
 --------------------------------
-Created product = Mk  19  40-mm 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b0cd0> 
-            Slug = mk_19 
-        Category = Towed Artillerie 
+Created product = Watchkeeper 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x152b970> 
+            Slug = watchkeeper 
+        Category = Unmanned 
 --------------------------------
-Created product = Mortar  2B14  1 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2033bb0> 
-            Slug = mortar_2b14_1 
-        Category = Mortar 
+Created product = MQ-1C Warrior 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x153c210> 
+            Slug = warrior_ermp 
+        Category = Unmanned 
 --------------------------------
-Created product = 2S12  120-mm 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20bad30> 
-            Slug = mortar_2s12 
-        Category = Mortar 
---------------------------------
-using default category !
-Created product = Type  63  130mm  Multiple  Rocket  Launcher  MRL 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2097610> 
-            Slug = type63_rocket 
-        Category = Other 
---------------------------------
-using default category !
-Created product = The M-220 TOW Missile System 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20a2ab0> 
-            Slug = m220 
-        Category = Other 
---------------------------------
-Created product = Patriot Advanced Capability-3 (MIM-104 Patriot) 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b4f70> 
-            Slug = pac3 
-        Category = Guided 
---------------------------------
-using default category !
-Created product = airport 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ba790> 
-            Slug = airport 
-        Category = Other 
---------------------------------
-creating new category !
-Created product = Alpha MRAP 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b4cd0> 
-            Slug = alpha 
-        Category = armored fighting vehicles 
---------------------------------
-Created product = Grumman F8F Bearcat 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20f9bb0> 
-            Slug = bearcat 
-        Category = Fighter/Air Defense 
---------------------------------
-creating new category !
-Created product = BRDM-2  Reconnaissance  vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20e6250> 
-            Slug = brdm-2 
+Created product = Panhard Véhicule Blindé Léger 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154a450> 
+            Slug = vbl 
         Category = Armored fighting vehicle 
 --------------------------------
-Created product = BTR-80 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20f9f30> 
-            Slug = btr-80 
+Created product = VAB  APC 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550570> 
+            Slug = vab_4x4 
         Category = Armored Fighting Vehicle 
 --------------------------------
-Created product = BTR-152 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20f10d0> 
-            Slug = btr_152 
-        Category = Armored Fighting Vehicle 
+Created product = Bell  Boeing  V-22  Osprey 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550eb0> 
+            Slug = v-22 
+        Category = Cargo/Tanker 
 --------------------------------
 using default category !
-Created product = Buffalo 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20fce30> 
-            Slug = buffalo 
+Created product = UGV  MULE 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1559790> 
+            Slug = ugv_mule 
         Category = Other 
 --------------------------------
-using default category !
-Created product = BULL 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x207b370> 
-            Slug = bull 
-        Category = Other 
+Created product = Lockheed  U-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1521d90> 
+            Slug = u-2_spy_plane 
+        Category = Reconnaissance 
 --------------------------------
-Created product = M109 155-mm SP Howitzer 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20e6e10> 
-            Slug = caesar 
-        Category = Self-propelled artillery 
---------------------------------
-using default category !
-Created product = BAE Caiman 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x163ab10> 
-            Slug = caiman 
-        Category = Other 
---------------------------------
-Created product = Centauro  B-1 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20e6ab0> 
-            Slug = centauro 
+Created product = Type  69 MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1559910> 
+            Slug = type69 
         Category = Tank 
 --------------------------------
-using default category !
-Created product = Cheetah 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b4cd0> 
-            Slug = cheetah 
-        Category = Other 
---------------------------------
-Created product = CHEVY  AFGHAN 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20f94f0> 
-            Slug = chevy_afghan 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = Cougar  Type 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ed310> 
-            Slug = cougar_6x6 
-        Category = Light/Patrol Craft 
---------------------------------
-Created product = Cougar  H  Series  4X4 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x220f210> 
-            Slug = cougar_h_series_4x4 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Dana  Howitzer-77 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20ed350> 
-            Slug = dana_howitzer-77 
-        Category = Self-propelled Artillery 
---------------------------------
-Created product = ATF Dingo 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x220f610> 
-            Slug = dingo 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Fennek 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x220f350> 
-            Slug = fennek 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Ford 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x221b810> 
-            Slug = ford 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = FORD350  Bronco 2  Utility 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x201f8b0> 
-            Slug = ford350_2_utility 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = G6 155-mm Howitzer 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x16d2830> 
-            Slug = g6_howitzer 
-        Category = Self-propelled Artillery 
---------------------------------
-Created product = GAZ-66  4x4  2000-kg  truck 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20b4cd0> 
-            Slug = gaz-66 
-        Category = Large Wheeled Utility Vehicle 
---------------------------------
-Created product = GCD 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x220fb50> 
-            Slug = gcd 
+Created product = Type  63  130mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550d50> 
+            Slug = type63_rocket 
         Category = Mortar 
 --------------------------------
-Created product = GMC  Sierra  Utility 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22421b0> 
-            Slug = gmc_sierra_utility 
+Created product = Type  63  130mm  Multiple  Rocket  Launcher  MRL 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155f870> 
+            Slug = type_63_mrl 
+        Category = Mortar 
+--------------------------------
+using default category !
+Created product = Tu22M3 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155fa70> 
+            Slug = tu22m3 
+        Category = Other 
+--------------------------------
+Created product = truck-029  united 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1563d10> 
+            Slug = truck-029_united 
         Category = Civilian Vehicle 
 --------------------------------
-creating new category !
-Created product = HMMWV  M998-series 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2222850> 
-            Slug = hmmwv 
-        Category = Small wheeled utility vehicle 
---------------------------------
-Created product = ARV Husky 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2222ed0> 
-            Slug = husky 
-        Category = Small wheeled utility vehicle 
---------------------------------
-Created product = International MaxxPro 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20fe670> 
-            Slug = international_maxxpro_mpv 
-        Category = Armored Fighting Vehicle 
+Created product = truck-028  M2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550d50> 
+            Slug = truck-028_m2 
+        Category = Civilian Vehicle 
 --------------------------------
 using default category !
-Created product = IVMMD F-MDT (Trailer) 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224b490> 
-            Slug = ivmmd_f-mdt 
+Created product = truck-027  UB-16 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1534eb0> 
+            Slug = truck-027_ub-16 
         Category = Other 
+--------------------------------
+Created product = truck-025  united 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155f5b0> 
+            Slug = truck-025_united 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = truck-024  usairways 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x156c7b0> 
+            Slug = truck-024_usairways 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = truck-010-jingle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x156cc90> 
+            Slug = truck-010-jingle 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = truck  017B 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1559e50> 
+            Slug = truck_017b 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = truck  007 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154a830> 
+            Slug = truck_007 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = Trailer  generator 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x156d1d0> 
+            Slug = trailer_generator-002 
+        Category = Generator trailer 
+--------------------------------
+Created product = trailer  generator 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x157a330> 
+            Slug = trailer_generator-001 
+        Category = Generator trailer 
+--------------------------------
+Created product = Technical-029  ZU-23-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x157adb0> 
+            Slug = technical-029_zu-23-2 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical-027  UB-16 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155f7d0> 
+            Slug = technical-027_ub-16 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical-025  UB  16  57 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1559e50> 
+            Slug = technical-025_ub_16_57 
+        Category = Mortar 
+--------------------------------
+Created product = Technical-023_ZU-23-1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580b30> 
+            Slug = technical-023_zu-23-1 
+        Category = Mortar 
+--------------------------------
+Created product = Technical-022  KPV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580710> 
+            Slug = technical-022_kpv 
+        Category = Mortar 
+--------------------------------
+Created product = Technical-021  B8M1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1585e50> 
+            Slug = technical-021_b8m1 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical M2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1544070> 
+            Slug = technical-020_m2 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical ZPU2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155fa70> 
+            Slug = technical-018_zpu2 
+        Category = Mortar 
 --------------------------------
 using default category !
-Created product = IVMMD  S-MDT (Trailer) 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20fea90> 
-            Slug = ivmmd_s-mdt 
+Created product = Technical RPK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580c70> 
+            Slug = technical-018_rpk 
         Category = Other 
 --------------------------------
-using default category !
-Created product = IVMMD  T-MDT (Trailer) 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20fedf0> 
-            Slug = ivmmd_t-mdt 
-        Category = Other 
+Created product = Technical ZU-23-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15884d0> 
+            Slug = technical-017_zu-23-2 
+        Category = Civilian Vehicle 
 --------------------------------
-Created product = KrAZ-255B  6x6  7500-kg  truck 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224b1d0> 
-            Slug = kraz_255 
-        Category = Large Wheeled Utility Vehicle 
+Created product = Technical  RPK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15905f0> 
+            Slug = technical-016_rpk 
+        Category = Armored Utility Vehicle 
 --------------------------------
-using default category !
-Created product = Luggage  Cart-001 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224ba70> 
-            Slug = luggage_cart-001 
-        Category = Other 
+Created product = Technical  M249 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580cb0> 
+            Slug = technical-015_m249 
+        Category = Armored Utility Vehicle 
 --------------------------------
-Created product = M1046  TOW  missile  carrier 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20dfe10> 
-            Slug = m1046 
-        Category = Small Wheeled Utility Vehicle 
+Created product = Technical_ZU-23-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1521f30> 
+            Slug = technical-014_zu-23-2 
+        Category = Civilian Vehicle 
 --------------------------------
-using default category !
-Created product = M1097 Heavy HMMWV 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20feed0> 
-            Slug = m1097 
-        Category = Other 
+Created product = Technical ZPU2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1588b50> 
+            Slug = technical-013_zpu-4 
+        Category = Mortar 
 --------------------------------
-Created product = M1117  Armored  Security  Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22421d0> 
-            Slug = m1117 
-        Category = Armored Fighting Vehicle 
+Created product = Technical_ZU-23-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159a9d0> 
+            Slug = technical-012_zu-23-2 
+        Category = Civilian Vehicle 
 --------------------------------
-using default category !
-Created product = M1126  M2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x163aab0> 
-            Slug = m1126_m2 
-        Category = Other 
+Created product = Technical  M2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159a810> 
+            Slug = technical-011_m2 
+        Category = Armored Utility Vehicle 
 --------------------------------
-using default category !
-Created product = M1127 Reconnaissance Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2256210> 
-            Slug = m1127 
-        Category = Other 
+Created product = Technical-010  Type  63 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x155f7d0> 
+            Slug = technical-010_type_63 
+        Category = Armored Utility Vehicle 
 --------------------------------
-Created product = Stryker Mobile Gun System 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x222d3b0> 
-            Slug = m1128 
-        Category = Armored fighting vehicle 
+Created product = Technical ZU-23-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15880f0> 
+            Slug = technical-009_zu-23-2 
+        Category = Armored Utility Vehicle 
 --------------------------------
-Created product = M1130 Commander's Vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22277d0> 
-            Slug = m1130 
+Created product = Technical-007  B-10 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580cb0> 
+            Slug = technical-007_b-10 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical-006  ZPU-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15a5590> 
+            Slug = technical-006_zpu-2 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical-005  DHSK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15a5830> 
+            Slug = technical-005_dhsk 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical-004  M40 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154a9d0> 
+            Slug = technical-004_m40 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical  Kornet 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550810> 
+            Slug = technical-002_kornet 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Technical ZPU-4 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159c7d0> 
+            Slug = technical-001_zpu-4 
         Category = Armored Utility Vehicle 
 --------------------------------
 using default category !
-Created product = M1131 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2275430> 
-            Slug = m1131 
+Created product = Technical  019  DHSK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159cff0> 
+            Slug = technical_019_dhsk 
         Category = Other 
 --------------------------------
-Created product = M1133 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x222d990> 
-            Slug = m1133 
-        Category = Armored fighting vehicle 
+Created product = T-90  MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1544070> 
+            Slug = t90 
+        Category = Tank 
 --------------------------------
-Created product = M1135 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2267d50> 
-            Slug = m1135 
-        Category = Armored fighting vehicle 
+Created product = T-80  MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159a9b0> 
+            Slug = t80um1 
+        Category = Tank 
 --------------------------------
-creating new category !
-Created product = M1089  Truck  Wrecker  MTV  Equip  Winch 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x222d9b0> 
-            Slug = m_1089 
-        Category = Large wheeled utility vehicle 
+Created product = Goshawk  T-45A 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15aba10> 
+            Slug = t-45a_goshawk 
+        Category = Trainer 
 --------------------------------
 using default category !
-Created product = Meerkat 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2275ef0> 
-            Slug = meerkat 
+Created product = SuperWedge_Launcher 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15b7d90> 
+            Slug = superwedge_launcher 
         Category = Other 
 --------------------------------
-Created product = Bus 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224bf70> 
-            Slug = military_bus 
-        Category = Civilian Vehicle 
+Created product = Su-30MKK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15885d0> 
+            Slug = su-30mkk 
+        Category = Fighter/Air Defense 
 --------------------------------
-Created product = Oshkosh  MK48-series  articulated  8x8  vehicle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x226db50> 
-            Slug = oshkosh_bushmaster 
-        Category = Large wheeled utility vehicle 
+Created product = Su-30MKI 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154a9d0> 
+            Slug = su-30mki 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = Sukhoi Su-27  Flanker 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15901d0> 
+            Slug = su-27 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = Su-24  Fencer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159c850> 
+            Slug = su-24 
+        Category = Attack/Strike 
+--------------------------------
+Created product = Su-37  multirole  fighter 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159cf50> 
+            Slug = su_37 
+        Category = Attack/Strike 
+--------------------------------
+using default category !
+Created product = SU_22_M4 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15abbf0> 
+            Slug = su_22_m4 
+        Category = Other 
+--------------------------------
+Created product = Stryker M1126 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154aa90> 
+            Slug = stryker(m1126) 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = FCS  Small  Unattended  Ground  Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159c890> 
+            Slug = small_unmanned_ground_vehicle_sugv 
+        Category = Small Wheeled Utility Vehicle 
+--------------------------------
+Created product = Skylark 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x156d2b0> 
+            Slug = skylark 
+        Category = Unmanned 
+--------------------------------
+Created product = Silver  Fox 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1590d90> 
+            Slug = silver_fox 
+        Category = Unmanned 
+--------------------------------
+Created product = Shadow-200 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c8970> 
+            Slug = shadow-200 
+        Category = Unmanned 
+--------------------------------
+Created product = Boeing  ScanEagle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1580e30> 
+            Slug = scaneagle 
+        Category = Unmanned 
+--------------------------------
+Created product = AT 105 Saxon 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1550cb0> 
+            Slug = saxon 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = SA-6  Gainful  SAM  System 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159ae90> 
+            Slug = sa-6 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+Created product = SA-4  Ganef  SAM  System 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d54b0> 
+            Slug = sa-4 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+Created product = SA-2  Missile  Launcher 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e0c30> 
+            Slug = sa-2 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+Created product = SA-19  Grison 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1544070> 
+            Slug = sa-19-grison 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+using default category !
+Created product = SA-15-Gauntlet 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15b7110> 
+            Slug = sa-15-gauntlet 
+        Category = Other 
+--------------------------------
+Created product = Sikorsky  S-92 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d54b0> 
+            Slug = s-92_sikorsky 
+        Category = Cargo helicopter 
+--------------------------------
+using default category !
+Created product = S60 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e0fd0> 
+            Slug = s60 
+        Category = Other 
+--------------------------------
+Created product = Lockheed  S-3  Viking 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15b7cb0> 
+            Slug = s-3b_viking 
+        Category = Antisubmarine/patrol/observation 
+--------------------------------
+Created product = SA-5  Gammon 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c6d50> 
+            Slug = s-200_sa-5_gammon 
+        Category = Guided 
+--------------------------------
+Created product = FCS  XM1201 RSV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d50d0> 
+            Slug = rsv_recon_and_surveillance_vehicle 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = RQ-8A 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15a0cd0> 
+            Slug = rq-8a 
+        Category = Unmanned 
+--------------------------------
+Created product = RQ Endurance  UAV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159a630> 
+            Slug = rq-1a_predator 
+        Category = Unmanned 
+--------------------------------
+using default category !
+Created product = Robot  Talon  SWORD 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15b4790> 
+            Slug = robot_talon_sword 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = Robot  Talon  GRENADE 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d5970> 
+            Slug = robot_talon_grenade 
+        Category = Other 
+--------------------------------
+Created product = FCS  Armed  Robotic  Vehicle-RSTA 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15abf90> 
+            Slug = robot_talon 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = RG-33 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15eedb0> 
+            Slug = rg-33 
+        Category = Light Armored Vehicle 
+--------------------------------
+using default category !
+Created product = RG-31 Nyala 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15a0170> 
+            Slug = rg-31 
+        Category = Other 
+--------------------------------
+Created product = Boeing  RC-135 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d5910> 
+            Slug = rc135 
+        Category = Reconnaissance 
+--------------------------------
+using default category !
+Created product = RAFAEL  Golan 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15ee0b0> 
+            Slug = rafael_golan 
+        Category = Other 
+--------------------------------
+Created product = Pelikan 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1704070> 
+            Slug = pelikan 
+        Category = Attack/Strike 
+--------------------------------
+Created product = Pilatus  Flugzeugwerke  SA  PC-9 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e0ab0> 
+            Slug = pc-9 
+        Category = Trainer 
+--------------------------------
+Created product = Sawar  Class  inshore  patrol  boat 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d57f0> 
+            Slug = patrolboat_sing 
+        Category = Light/Patrol Craft 
+--------------------------------
+Created product = patria 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f63b0> 
+            Slug = patria 
+        Category = Armored utility vehicle 
+--------------------------------
+using default category !
+Created product = Pantsyr  S1  Air  Defense 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d57f0> 
+            Slug = pantsyr_s1_air_defense 
+        Category = Other 
 --------------------------------
 using default category !
 Created product = Pandur  II  6X6  KD-V30 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x222df90> 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1711ad0> 
             Slug = pandur_ii_6x6_kd-v30 
         Category = Other 
 --------------------------------
 using default category !
-Created product = Pantsyr  S1  Air  Defense 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22473f0> 
-            Slug = pantsyr_s1_air_defense 
+Created product = M901 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1704670> 
+            Slug = pac3_m901 
         Category = Other 
 --------------------------------
-creating new category !
-Created product = patria 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22839f0> 
-            Slug = patria 
-        Category = Armored utility vehicle 
+Created product = Patriot Advanced Capability-3 (MIM-104 Patriot) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154aa90> 
+            Slug = pac3 
+        Category = Guided 
 --------------------------------
-Created product = RAFAEL  Golan 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22753d0> 
-            Slug = rafael_golan 
+Created product = Oshkosh  MK48-series  articulated  8x8  vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172ba30> 
+            Slug = oshkosh_bushmaster 
+        Category = Large wheeled utility vehicle 
+--------------------------------
+Created product = Mule RSV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x171ed50> 
+            Slug = multifunctional_utility_logistics_and_equipment_mule_darpa 
+        Category = Large Wheeled Utility Vehicle 
+--------------------------------
+Created product = FCS  MULE  Transport 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x154aa90> 
+            Slug = mule_transport 
+        Category = Small Wheeled Utility Vehicle 
+--------------------------------
+Created product = FCS  MULE  Countermine 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1711570> 
+            Slug = mule_mine_clearing 
+        Category = Small Wheeled Utility Vehicle 
+--------------------------------
+Created product = FCS  Armed  Robotic  vehicle-STA 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730450> 
+            Slug = mule_armed_robotic_vehicule_arva-l 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = 2S12  120-mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x171af50> 
+            Slug = mortar_2s12 
+        Category = Mortar 
+--------------------------------
+Created product = Mortar  2B14  1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15a0190> 
+            Slug = mortar_2b14_1 
+        Category = Mortar 
+--------------------------------
+using default category !
+Created product = MLRS-M270 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e0830> 
+            Slug = mlrs-m270 
+        Category = Other 
+--------------------------------
+Created product = Mk  19  40-mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d52f0> 
+            Slug = mk_19 
+        Category = Towed Artillerie 
+--------------------------------
+Created product = Mirage-5 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1704c90> 
+            Slug = mirage-5 
+        Category = Attack/Strike 
+--------------------------------
+Created product = Mirage-3 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e5cb0> 
+            Slug = mirage-3 
+        Category = Attack/Strike 
+--------------------------------
+Created product = Mirage  F-1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x171e450> 
+            Slug = mirage_f1 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = Mirage  2000 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x171a0d0> 
+            Slug = mirage_2000c 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = Bus 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17119d0> 
+            Slug = military_bus 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = MiG-31  Foxhound 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172b770> 
+            Slug = mig-31 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = MiG-29  Fulcrum 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x171a9d0> 
+            Slug = mig-29 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = MiG-25  Foxbat 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730a70> 
+            Slug = mig-25 
+        Category = Fighter/Air Defense 
+--------------------------------
+using default category !
+Created product = Mi-2UPR 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172ee50> 
+            Slug = mi-2upr 
+        Category = Other 
+--------------------------------
+Created product = Mi-28  Havoc 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d5890> 
+            Slug = mi-28_havoc 
+        Category = Attack helicopter 
+--------------------------------
+using default category !
+Created product = Meerkat 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c90d0> 
+            Slug = meerkat 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = FCS  Medical  Vehicle-Evacuation 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730a70> 
+            Slug = medical_vehicle_mv 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = MAV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c9e70> 
+            Slug = mav 
+        Category = Other 
+--------------------------------
+Created product = MAG_GPMG_7-62 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159ae90> 
+            Slug = mag_gpng_7-62 
+        Category = Mortar 
+--------------------------------
+using default category !
+Created product = M901A1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730570> 
+            Slug = m901a3 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = M88A2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15d5890> 
+            Slug = m88a2 
+        Category = Other 
+--------------------------------
+Created product = M60 MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15ef890> 
+            Slug = m60a3 
+        Category = Tank 
+--------------------------------
+Created product = 106  mm  RCL40  M40 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172e930> 
+            Slug = m40_stand 
+        Category = Armor 
+--------------------------------
+using default category !
+Created product = M3 Bradley 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c9390> 
+            Slug = m3_bradley 
+        Category = Other 
+--------------------------------
+Created product = M2-MOUNTED 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172e610> 
+            Slug = m2-mounted 
+        Category = Mortar 
+--------------------------------
+Created product = M-220  Tow 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1726630> 
+            Slug = m-220_tow 
+        Category = Mortar 
+--------------------------------
+using default category !
+Created product = The M-220 TOW Missile System 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1704190> 
+            Slug = m220 
+        Category = Other 
+--------------------------------
+Created product = M2  60-mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15ef390> 
+            Slug = m2_stand 
+        Category = Mortar 
+--------------------------------
+Created product = M1A2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17301d0> 
+            Slug = m1a2 
+        Category = Tank 
+--------------------------------
+Created product = M115  8-inch  Howitzer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1726cd0> 
+            Slug = m115_how 
+        Category = Towed Artillery 
+--------------------------------
+Created product = M1135 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15b4c10> 
+            Slug = m1135 
+        Category = Armored fighting vehicle 
+--------------------------------
+Created product = M1133 Medical Evacuation Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e5510> 
+            Slug = m1133 
+        Category = Armored fighting vehicle 
+--------------------------------
+using default category !
+Created product = M1131 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730eb0> 
+            Slug = m1131 
+        Category = Other 
+--------------------------------
+Created product = M1130 Commander's Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159ae90> 
+            Slug = m1130 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = FMC  M113 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17309b0> 
+            Slug = m113 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = Stryker Mobile Gun System 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1772d90> 
+            Slug = m1128 
+        Category = Armored fighting vehicle 
+--------------------------------
+using default category !
+Created product = M1127 Reconnaissance Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1763cd0> 
+            Slug = m1127 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = M1126  M2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f1e70> 
+            Slug = m1126_m2 
+        Category = Other 
+--------------------------------
+Created product = M1117  Armored  Security  Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f12d0> 
+            Slug = m1117 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = M109  Howitzer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f1990> 
+            Slug = m109a6 
+        Category = Self-propelled artillery 
+--------------------------------
+using default category !
+Created product = M1097 Heavy HMMWV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f1970> 
+            Slug = m1097 
+        Category = Other 
+--------------------------------
+Created product = M1046  TOW  missile  carrier 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c9710> 
+            Slug = m1046 
+        Category = Small Wheeled Utility Vehicle 
+--------------------------------
+Created product = M1089  Truck  Wrecker  MTV  Equip  Winch 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17309f0> 
+            Slug = m_1089 
+        Category = Large wheeled utility vehicle 
+--------------------------------
+using default category !
+Created product = Luggage  Cart-001 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159ae90> 
+            Slug = luggage_cart-001 
+        Category = Other 
+--------------------------------
+Created product = Leopard MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15e0ab0> 
+            Slug = leopard_c2a1_mexas 
+        Category = Tank 
+--------------------------------
+Created product = Leclerc 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c9710> 
+            Slug = leclerc 
+        Category = Tank 
+--------------------------------
+Created product = Aero  L-159 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173fbb0> 
+            Slug = l-159 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = KrAZ-255B  6x6  7500-kg  truck 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f9e50> 
+            Slug = kraz_255 
+        Category = Large Wheeled Utility Vehicle 
+--------------------------------
+Created product = KPV-MOUNTED 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177e930> 
+            Slug = kpv-mounted 
+        Category = Mortar 
+--------------------------------
+Created product = KPV  TOWED 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177e890> 
+            Slug = kpv_towed 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+Created product = Koni  Class 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177ea50> 
+            Slug = koni_class 
+        Category = Frigate 
+--------------------------------
+Created product = USS Kitty  Hawk 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173f5b0> 
+            Slug = kittyhawk 
+        Category = Carrier 
+--------------------------------
+using default category !
+Created product = KE-3A 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176cb30> 
+            Slug = ke-3a 
+        Category = Other 
+--------------------------------
+Created product = Boeing  KC-135  Stratotanker 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f9b10> 
+            Slug = kc-135 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = KC-10  Extender 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15c9fd0> 
+            Slug = kc-10a 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = SEPECAT Jaguar 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730650> 
+            Slug = jaguar 
+        Category = Attack/Strike 
+--------------------------------
+Created product = Chengdu J-10 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176c330> 
+            Slug = j10 
+        Category = Guided 
+--------------------------------
+using default category !
+Created product = IVMMD  T-MDT (Trailer) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176c6d0> 
+            Slug = ivmmd_t-mdt 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = IVMMD  S-MDT (Trailer) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1768670> 
+            Slug = ivmmd_s-mdt 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = IVMMD F-MDT (Trailer) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1799770> 
+            Slug = ivmmd_f-mdt 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = Irobot  Packbot  Explorer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177b330> 
+            Slug = irobot_packbot_explorer 
+        Category = Other 
+--------------------------------
+Created product = eInternational MaxxPro 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173f370> 
+            Slug = international_maxxpro_mpv 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = Il-76  Candid 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1730650> 
+            Slug = il-76 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = IED 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177a950> 
+            Slug = ied 
+        Category = Mortar 
+--------------------------------
+Created product = ARV Husky 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177a4d0> 
+            Slug = husky 
+        Category = Small wheeled utility vehicle 
+--------------------------------
+Created product = HMMWV  M998-series 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x159ae90> 
+            Slug = hmmwv 
+        Category = Small wheeled utility vehicle 
+--------------------------------
+Created product = BAE Hawk 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1768d90> 
+            Slug = hawk 
+        Category = Guided 
+--------------------------------
+Created product = GMC  Sierra  Utility 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15f9950> 
+            Slug = gmc_sierra_utility 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = GCD 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177be90> 
+            Slug = gcd 
+        Category = Mortar 
+--------------------------------
+Created product = GAZ-66  4x4  2000-kg  truck 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15ef850> 
+            Slug = gaz-66 
+        Category = Large Wheeled Utility Vehicle 
+--------------------------------
+Created product = G6 155-mm Howitzer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17727b0> 
+            Slug = g6_howitzer 
+        Category = Self-propelled Artillery 
+--------------------------------
+Created product = 155mm  Gun-Howitzer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1799870> 
+            Slug = g5_155mm 
+        Category = Towed Artillery 
+--------------------------------
+Created product = FV 105  Sultan 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17bd510> 
+            Slug = fv105 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = FV103  Spartan 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177a990> 
+            Slug = fv103_spartan 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = FV  101  Scorpion 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x178d610> 
+            Slug = fv101_scorpion 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = Frog-7 rocket launcher 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17bd730> 
+            Slug = frog-7b 
+        Category = Self-propelled Artillery 
+--------------------------------
+Created product = FRMV  Recovery  and  Maintenance  Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b8850> 
+            Slug = frmv_recovery_and_maintenance_vehicle 
+        Category = Large Wheeled Utility Vehicle 
+--------------------------------
+Created product = FORD350  Bronco 2  Utility 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177a9f0> 
+            Slug = ford350_2_utility 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = Ford 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17722f0> 
+            Slug = ford 
+        Category = Civilian Vehicle 
+--------------------------------
+Created product = Fennek 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1793df0> 
+            Slug = fennek 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Multifunction Utility/Logistics Equipment Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176c3b0> 
+            Slug = fcs_mule 
+        Category = Small Wheeled Utility Vehicle 
+--------------------------------
+Created product = FA-18  Hornet 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177a550> 
+            Slug = fa-18c 
+        Category = Fighter/Air Defense 
+--------------------------------
+using default category !
+Created product = F-6A 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b7a90> 
+            Slug = f-6a 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = F-5 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x177b650> 
+            Slug = f-5 
+        Category = Other 
+--------------------------------
+Created product = F-4  Phantom  II 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1748bb0> 
+            Slug = f4_phantom 
+        Category = Reconnaissance 
+--------------------------------
+using default category !
+Created product = F-35 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1765c10> 
+            Slug = f-35 
+        Category = Other 
+--------------------------------
+Created product = F-16  Fighting  Falcon 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1765a90> 
+            Slug = f16 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = F-15E Strike Eagle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b70b0> 
+            Slug = f-15e 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = F-15  Eagle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b6890> 
+            Slug = f-15c 
+        Category = Fighter/Air Defense 
+--------------------------------
+using default category !
+Created product = F-14A 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1765a90> 
+            Slug = f-14a 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = F-117 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17bdd50> 
+            Slug = f-117 
+        Category = Other 
+--------------------------------
+Created product = EA-6  Prowler 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b6730> 
+            Slug = ea-6b 
+        Category = Electronic Warfare (EW) 
+--------------------------------
+Created product = Boeing  E-3  Sentry 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17b6030> 
+            Slug = e3a 
+        Category = Surveillance / C2 (Airborne Early Warnin 
+--------------------------------
+Created product = E-2  Hawkeye 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1765c90> 
+            Slug = e2c_hawkeye 
+        Category = Surveillance / C2 (Airborne Early Warnin 
+--------------------------------
+Created product = DSHK-MOUNTED 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1768d90> 
+            Slug = dshk-mounted 
+        Category = Mortar 
+--------------------------------
+Created product = DSHK 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x179a2b0> 
+            Slug = dshk 
+        Category = Mortar 
+--------------------------------
+Created product = ATF Dingo 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f4ed0> 
+            Slug = dingo 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = DDG-1000  Zumwalt 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x172e370> 
+            Slug = ddg-1000_zumwalt 
+        Category = Destroyer 
+--------------------------------
+Created product = Dana  Howitzer-77 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x179ab50> 
+            Slug = dana_howitzer-77 
+        Category = Self-propelled Artillery 
+--------------------------------
+Created product = Cougar  H  Series  4X4 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f4170> 
+            Slug = cougar_h_series_4x4 
+        Category = Armored Utility Vehicle 
+--------------------------------
+Created product = Cougar  Type 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173f1f0> 
+            Slug = cougar_6x6 
+        Category = Light/Patrol Craft 
+--------------------------------
+Created product = FCS  Command  and  Control  Vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f84d0> 
+            Slug = command_and_control_vehicle_c2v 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = FCS  UAV  Class  IV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1768d90> 
+            Slug = class_iv_uav 
+        Category = Unmanned 
+--------------------------------
+Created product = FCS  UAV  Class  III 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15bed50> 
+            Slug = class_iii_uav 
+        Category = Unmanned 
+--------------------------------
+Created product = FCS  UAV  Class  II 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x179b2b0> 
+            Slug = class_ii_uav 
+        Category = Unmanned 
+--------------------------------
+Created product = FCS  UAV  Class  I 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17ffb30> 
+            Slug = class_i_uav 
+        Category = Unmanned 
+--------------------------------
+Created product = CHEVY  AFGHAN 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f4770> 
+            Slug = chevy_afghan 
+        Category = Civilian Vehicle 
+--------------------------------
+using default category !
+Created product = Cheetah 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17ff690> 
+            Slug = cheetah 
+        Category = Other 
+--------------------------------
+Created product = Challenger  MBT 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x179bb70> 
+            Slug = challenger1 
+        Category = Tank 
+--------------------------------
+Created product = Boeing  Models  114/414 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17ff730> 
+            Slug = ch-47d 
+        Category = Cargo helicopter 
+--------------------------------
+Created product = Centauro  B-1 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17712b0> 
+            Slug = centauro 
         Category = Tank 
 --------------------------------
 using default category !
-Created product = RG-31 Nyala 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2282d50> 
-            Slug = rg-31 
+Created product = BAE Caiman 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17fff30> 
+            Slug = caiman 
         Category = Other 
 --------------------------------
-creating new category !
-Created product = RG-33 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229e750> 
-            Slug = rg-33 
-        Category = Light Armored Vehicle 
+Created product = M109 155-mm SP Howitzer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1748970> 
+            Slug = caesar 
+        Category = Self-propelled artillery 
 --------------------------------
-Created product = Stryker  Reconnaissance  Vehicle  MK  240  7-62  mm  machine 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229e470> 
-            Slug = stryker (m1126) 
-        Category = Armored Utility Vehicle 
---------------------------------
-using default category !
-Created product = gun 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2283430> 
-            Slug = superwedge_launcher 
-        Category = Other 
---------------------------------
-Created product = Technical-001  ZPU-4 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x201fe30> 
-            Slug = technical-001_zpu-4 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-002  Kornet 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229eb50> 
-            Slug = technical-002_kornet 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-004  M40 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2256650> 
-            Slug = technical-004_m40 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-005  DHSK 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x227eb50> 
-            Slug = technical-005_dhsk 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-006  ZPU-2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x226de50> 
-            Slug = technical-006_zpu-2 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-007  B-10 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229eb50> 
-            Slug = technical-007_b-10 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-009  ZU-23-2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22833f0> 
-            Slug = technical-009_zu-23-2 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-010  Type  63 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x227e1d0> 
-            Slug = technical-010_type_63 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-011  M2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22a1d90> 
-            Slug = technical-011_m2 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-015  M249 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229efd0> 
-            Slug = technical-015_m249 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-016  RPK 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225d390> 
-            Slug = technical-016_rpk 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-020  M2 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22a1bb0> 
-            Slug = technical-020_m2 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = Technical-021  B8M1 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22bfa50> 
-            Slug = technical-021_b8m1 
-        Category = Armored Utility Vehicle 
---------------------------------
-using default category !
-Created product = Technical-022  KPV 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225d2d0> 
-            Slug = technical-022_kpv 
-        Category = Other 
---------------------------------
-using default category !
-Created product = Technical-025  UB  16  57 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x20e6e10> 
-            Slug = technical-025_ub_16_57 
-        Category = Other 
---------------------------------
-Created product = Technical-027  UB-16 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225d350> 
-            Slug = technical-027_ub-16 
-        Category = Armored Utility Vehicle 
---------------------------------
-Created product = trailer  generator-001 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224bf70> 
-            Slug = trailer_generator-001 
-        Category = Generator trailer 
---------------------------------
-Created product = trailer  generator-002 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x227b290> 
-            Slug = trailer_generator-002 
-        Category = Generator trailer 
---------------------------------
-Created product = truck-010-jingle 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x229efd0> 
-            Slug = truck-010-jingle 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = truck-024  usairways 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x224bf70> 
-            Slug = truck-024_usairways 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = truck-025  united 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225df50> 
-            Slug = truck-025_united 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = truck-029  united 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225c1d0> 
-            Slug = truck-029_united 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = truck  007 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22df1b0> 
-            Slug = truck_007 
-        Category = Civilian Vehicle 
---------------------------------
-Created product = truck  017B 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22b53f0> 
-            Slug = truck_017b 
-        Category = Civilian Vehicle 
---------------------------------
-using default category !
-Created product = UGV  MULE 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22e5af0> 
-            Slug = ugv_mule 
-        Category = Other 
---------------------------------
-Created product = VAB  APC 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22dfd70> 
-            Slug = vab_4x4 
+Created product = M4 Command and Control Vehicle (C2V) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1771530> 
+            Slug = c2v 
         Category = Armored Fighting Vehicle 
 --------------------------------
-Created product = Panhard Véhicule Blindé Léger 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22e5cf0> 
-            Slug = vbl 
+Created product = Short C-23A  Sherpa 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17bd510> 
+            Slug = c23_sherpa 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = C-141B  Starlifter 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1771e10> 
+            Slug = c-141b_starlifter 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = Lockheed  C-130 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15be9f0> 
+            Slug = c-130 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = C-12 Huron 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1771910> 
+            Slug = c-12_huron 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = bandvagn 206 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176c510> 
+            Slug = bv206 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+using default category !
+Created product = BULL 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212e550> 
+            Slug = bull 
+        Category = Other 
+--------------------------------
+using default category !
+Created product = Buffalo 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f4ef0> 
+            Slug = buffalo 
+        Category = Other 
+--------------------------------
+Created product = BTR-80 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17ffdf0> 
+            Slug = btr-80 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = BTR-152 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176fb90> 
+            Slug = btr_152 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = BRDM-2  Reconnaissance  vehicle 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1545650> 
+            Slug = brdm-2 
         Category = Armored fighting vehicle 
 --------------------------------
-Created product = Zil 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x225c1d0> 
-            Slug = zil 
-        Category = Large wheeled utility vehicle 
+Created product = Boeing  737 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2136310> 
+            Slug = boeing-737 
+        Category = Non-Combatant Commercial Aircraft 
 --------------------------------
-Created product = ZIL-131 6x6 3500-kg truck 
-     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x22a1cf0> 
-            Slug = zilh131 
-        Category = Large wheeled utility vehicle 
+Created product = Boeing  B-52  Stratofortress 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x210a690> 
+            Slug = boeing_b-52d 
+        Category = Bomber 
+--------------------------------
+Created product = Boeing  747-400 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176c510> 
+            Slug = boeing_747 
+        Category = Non-Combatant Commercial Aircraft 
+--------------------------------
+Created product = BMP-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176fe70> 
+            Slug = bmp-2 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = BMD-3 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173b3f0> 
+            Slug = bmd-3 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = BMD-2 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1771f10> 
+            Slug = bmd-2 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = BGM-109 Tomahawk 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1771d50> 
+            Slug = bgm-109 
+        Category = Guided 
+--------------------------------
+Created product = Grumman F8F Bearcat 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x210a0b0> 
+            Slug = bearcat 
+        Category = Fighter/Air Defense 
+--------------------------------
+Created product = Bae  Hawk 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212eef0> 
+            Slug = bae_hawk_200 
+        Category = Attack/Strike 
+--------------------------------
+Created product = BAE  Black  Knight 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173b350> 
+            Slug = bae_black_knight 
+        Category = Other 
+--------------------------------
+Created product = B-52 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x15453b0> 
+            Slug = b-52 
+        Category = Bomber 
+--------------------------------
+Created product = B-2_Spirit 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x1545c10> 
+            Slug = b-2_spirit 
+        Category = Bomber 
+--------------------------------
+Created product = B-10  82-mm  recoilless  gun 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f5050> 
+            Slug = b-10 
+        Category = Towed Artillery 
+--------------------------------
+Created product = B-1_Lancer 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x210a270> 
+            Slug = b-1_lancer 
+        Category = Bomber 
+--------------------------------
+using default category !
+Created product = AV-8B_Harrier_II 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17ff5f0> 
+            Slug = av-8b_harrier_ii 
+        Category = Other 
+--------------------------------
+Created product = AS90  155-mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212e5f0> 
+            Slug = as_90 
+        Category = Self-propelled Artillery 
+--------------------------------
+Created product = Buffel  ARV 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f4ef0> 
+            Slug = armed_robotic_vehicle_arv 
+        Category = Armored Fighting Vehicle Moffel Unibuffel  Bulldog Rhino APC 
+--------------------------------
+Created product = ARH-70 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212e5f0> 
+            Slug = arh-70 
+        Category = Reconnaissance 
+--------------------------------
+using default category !
+Created product = AN-TWQ-1-Avenger 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176f7b0> 
+            Slug = an-twq-1-avenger 
+        Category = Other 
+--------------------------------
+Created product = An-2-3  Colt 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17fa9f0> 
+            Slug = an-2 
+        Category = Cargo/Tanker 
+--------------------------------
+Created product = AMX-30 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17fadf0> 
+            Slug = amx-30 
+        Category = Tank 
+--------------------------------
+Created product = Alpha MRAP 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17f6570> 
+            Slug = alpha 
+        Category = armored fighting vehicles 
+--------------------------------
+using default category !
+Created product = airport 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212a770> 
+            Slug = airport 
+        Category = Other 
+--------------------------------
+Created product = AH-64D 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212ab70> 
+            Slug = ah-64d 
+        Category = Attack helicopter 
+--------------------------------
+Created product = AH-64  Apache 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x216a630> 
+            Slug = ah-64a 
+        Category = Attack helicopter 
+--------------------------------
+Created product = AH-1W 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x173b3d0> 
+            Slug = ah-1w 
+        Category = Attack helicopter 
+--------------------------------
+Created product = AAV7A1 (amphibious assault vehicle) 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212e5f0> 
+            Slug = aavc7a 
+        Category = Armored Fighting Vehicle 
+--------------------------------
+Created product = A320  AirBus 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x176f7b0> 
+            Slug = a320 
+        Category = Non-Combatant Commercial Aircraft 
+--------------------------------
+Created product = A-10 Thunderbolt 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x212aa30> 
+            Slug = a-10 
+        Category = Attack/Strike 
+--------------------------------
+Created product = S-60  57mm  AA  Gun/57 mm AZP S-60 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2165e90> 
+            Slug = 57mm_s60 
+        Category = Air Defense / Missile Defense Unit Equip 
+--------------------------------
+using default category !
+Created product = 2S9 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17fa670> 
+            Slug = 2s9 
+        Category = Other 
+--------------------------------
+Created product = 2S12  120a-mm 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x2173c10> 
+            Slug = 2s12 
+        Category = Mortar 
+--------------------------------
+using default category !
+Created product = 23B 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17fafb0> 
+            Slug = 23b 
+        Category = Other 
+--------------------------------
+Created product = 120  mm  HE  FRAG 
+     File Format = <django.db.models.fields.related.ManyRelatedManager object at 0x17db450> 
+            Slug = 120mm_he 
+        Category = Mortar 

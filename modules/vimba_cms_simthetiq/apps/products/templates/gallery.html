@@ -3,7 +3,7 @@
 
 {% block javascript %}
     {{ block.super }} 
-	<script type="text/javascript" src="/static/js/jquery/jquery-ui-1.7.custom.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery-ui-min.js"></script>
 {% endblock %}
 
 {% block jquery%}
@@ -186,7 +186,7 @@
 		<div id="gallery_content" class="division_content" style="display: block;">
             <div id="gallery_container">
                 <div class="gallery_nav" id="gallery_left">
-                    <img src="{{ MEDIA_URL }}static/img/gallery/left.gif" alt="Scroll left" />
+                    <img src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/left.gif" alt="Scroll left" />
                 </div>
                 <div class="gallery_display media_holder">
                     <div id="gallery">
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="gallery_nav" id="gallery_right">
-                    <img src ="{{ MEDIA_URL }}static/img/gallery/right.gif" alt="Scroll right"  />
+                    <img src ="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/right.gif" alt="Scroll right"  />
                 </div>
             </div>
 		</div>

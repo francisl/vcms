@@ -10,6 +10,7 @@ import datetime
 import random
 from decimal import Decimal
 from django.contrib.contenttypes.models import ContentType
+from django.core.files import File
 
 from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Video, Category, DomainPage, FileFormat, Language
 
@@ -42,7 +43,7 @@ def createCategory(name, description, domain=False):
     return newCategory
 
 def createDomain(name, slug, description="", keywords="", status=1, language=language, content="", video=False):
-    slug = slug.lower().replace("\n", "").replace("\r", "")
+    slug = slug.lower().replace("\n", "").replace("\r", "").replace("(", "_").replace(")", "_")
     try:
         newDomain = DomainPage.objects.get(slug=slug)
         print("Domain %s already exist !" % name)
@@ -100,7 +101,7 @@ def createFileFormat(name, code):
     try:
         f = FileFormat()
         f.name = name
-        f.code = code
+        f.code = code[:3]
         f.save()
         print("Fileformat created : %s" % code)
     except:
@@ -109,7 +110,91 @@ def createFileFormat(name, code):
         
     return f
 
-def importProducts():
+def printLine(line, printFullLine=False):
+    product_info = line
+    # print col assigment
+    if printFullLine:
+        print("Line === %s " % product_info)
+    print("Name : " + product_info[0].replace("\r", "").replace("\n", "").replace("\"", ""))
+    print("slug : " + product_info[1].replace("\n", "").replace("\r", "").replace("\"", "").lower())
+    print("description : " + product_info[2].replace("_", " ").replace("\"", ""))
+    print("keywords : " + product_info[3].replace("_", " ").replace("\"", ""))
+    print("status : " + (product_info[4].replace("\"", "") if product_info[4].replace("\"", "") else 0))
+    print("product_description : " + product_info[5].replace("_", " ").replace("\"", ""))
+    print("product_id : " + str(product_info[6].replace("\"", "") if product_info[6].replace("\"", "") else 0))
+    print("polygon : " + str(int(product_info[7].replace(" ","").replace("\"", "")) if product_info[7].replace("\"", "") else 0))
+    print("texture_format : " + product_info[8].replace("\"", ""))
+    print("texture_resolution : " + (product_info[9].replace("\"", "") if product_info[9].replace("\"", "") else 0))
+    print("original image : " + (product_info[10].replace("\"", "")))
+    print("category : " + (product_info[11].replace("\"", "")))
+    print("file format : " + (product_info[12].replace("\"", "")))
+
+
+def checkRow(line):
+    if len(line) > 12:
+        print("Success for %s, %s" % (line[0],len(line)))
+        return True
+    else:
+        print("Error, missing information for %s, %s" % (line[0], len(line)))
+        return False
+        
+def checkRows(printInfo=False):
+    rows = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
+    firstLine = True
+    for row in rows:
+        if firstLine:
+            firstLine = False
+        else:
+            row = row.split(";")
+            checkRow(row)
+            if printInfo:
+                printLine(row)
+
+    rows.close()
+
+def setOriginalImage(print_line=False):
+    toImport = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
+    logfile = open(os.path.dirname(__file__) + "/log/set_original_image_import-log.csv", 'w')
+    i = 0
+    for line in toImport:
+        if i == 0:
+            #skip title
+            i = 1
+        else:
+            product_info = line.split(";")
+            product_slug = product_info[1].replace("\n", "").replace("\r", "").replace("/", "_").replace("\"", "").replace("(", "_").replace(")", "_").lower()
+            product_image = product_info[10]
+            
+            #print("line = %s" % product_info)
+            if print_line:        
+                printLine(product_info)
+                
+            try:
+                product = ProductPage.objects.get(slug=product_slug)
+            except:
+                product = False
+                
+            if product:
+                logfile.write("%s" % product_slug)
+                logfile.write(";Found")
+                            # ## IMAGE IMPORT
+                
+                logfile.write(";%s" % product_image)
+                try:
+                    product.original_image = Image.objects.get(name=product_image)
+                    product.save(reorder=False)
+                    logfile.write(";Found")
+                except:
+                    logfile.write(";Not found")
+                
+            else:
+                logfile.write("%s;Not Found" % product_slug)
+                logfile.write(";%s;None" % logfile.write(";%s" % product_image))
+            
+            logfile.write("\n")
+
+            
+def importProducts(printLine=False):
     toImport = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
     logfile = open(os.path.dirname(__file__) + "/log/product_import.log", 'w')
     i = 0
@@ -122,66 +207,52 @@ def importProducts():
             product_info = line.split(";")
             # create product only if needed
             try:
-                product = ProductPage.objects.get(slug=product_info[1].lower())
+                product = ProductPage.objects.get(slug=product_info[1].replace("\"", "").lower())
             except:
                 product = False
             if product:
-                logfile.write("Product %s already exist\n" % product_info[0])
+                logfile.write("Product %s already exist\n" % product_info[0].replace("\"", ""))
                 continue
             
-            if product_info[0] == "" or product_info[0] == " ":
-                if product_info[1] == "" or product_info[1] == " ":
+            if product_info[0].replace("\"", "") == "" or product_info[0].replace("\"", "") == " ":
+                if product_info[1].replace("\"", "") == "" or product_info[1].replace("\"", "") == " ":
                     print("Product with empty name can't be created!")
                     continue
                 else:
                     product_info[0] = product_info[1]
 
-            # print col assigment
-            print("Line === %s " % line)
-            print("Name : " + product_info[0].replace("\r", "").replace("\n", ""))
-            print("slug : " + product_info[1].replace("\n", "").replace("\r", "").lower())
-            print("description : " + product_info[2].replace("_", " "))
-            print("keywords : " + product_info[3].replace("_", " "))
-            print("status : " + (product_info[4] if product_info[4] else 0))
-            print("product_description : " + product_info[5].replace("_", " "))
-            print("product_id : " + str(product_info[6] if product_info[6] else 0))
-            print("polygon : " + str(int(product_info[7].replace(" ","")) if product_info[7] else 0))
-            print("texture_format : " + product_info[8])
-            print("texture_resolution : " + (product_info[9] if product_info[9] else 0))
-
-            print("category : " + (product_info[11]))
-            print("file format : " + (product_info[12]))
-            
+            if printLine:        
+                printLine(product_info)
             
             #image = product_info[14].split("\\")
             #print("original_image = %s " % image[len(image)-1:])
             #try:
             newProduct = ProductPage()
-            newProduct.name = product_info[0].replace("\r", "").replace("\n", "")
-            newProduct.slug = product_info[1].replace("\n", "").replace("\r", "").replace("/", "_").lower()
-            newProduct.description = product_info[2].replace("_", " ")
-            newProduct.keywords = product_info[3].replace("_", " ")
-            newProduct.status = (product_info[4] if product_info[4] else 0)
+            newProduct.name = product_info[0].replace("\r", "").replace("\n", "").replace("\"", "")
+            newProduct.slug = product_info[1].replace("\n", "").replace("\r", "").replace("/", "_").replace("\"", "").replace("(", "_").replace(")", "_").lower()
+            newProduct.description = product_info[2].replace("_", " ").replace("\"", "")
+            newProduct.keywords = product_info[3].replace("_", " ").replace("\"", "")
+            newProduct.status = (product_info[4].replace("\"", "") if product_info[4].replace("\"", "") else 0)
             newProduct.language = language
     
-            newProduct.product_description = product_info[5].replace("_", " ")
-            newProduct.product_id = (product_info[6] if product_info[6] else 0)
-            newProduct.polygon = (int(product_info[7].replace(" ","")) if int(product_info[7].replace(" ","")) else 0)
-            newProduct.texture_format = product_info[8]
-            newProduct.texture_resolution = (product_info[9] if product_info[9] else 0)
+            newProduct.product_description = product_info[5].replace("_", " ").replace("\"", "")
+            newProduct.product_id = (product_info[6].replace("\"", "") if product_info[6].replace("\"", "") else 0)
+            newProduct.polygon = (int(product_info[7].replace(" ","").replace("\"", "")) if int(product_info[7].replace(" ","").replace("\"", "")) else 0)
+            newProduct.texture_format = product_info[8].replace("\"", "")
+            newProduct.texture_resolution = (product_info[9].replace("\"", "") if product_info[9].replace("\"", "") else 0)
 
             #newProduct.image = product_info[10]
             
             # foreign key ->
             try:
-                c = product_info[11]
+                c = product_info[11].replace("\"", "")
                 category = Category.objects.filter(name=c)[0]
             except:
-                if product_info[11] == "":
+                if product_info[11].replace("\"", "") == "":
                     logfile.write("using default category !\n")
                     category = Category.objects.get(name="Other")
                 else:
-                    category = createCategory(product_info[11], "")
+                    category = createCategory(product_info[11].replace("\"", ""), "")
                     logfile.write("creating new category !\n")
             
             newProduct.category = category
@@ -192,15 +263,16 @@ def importProducts():
             #for ff in product_info[16].split(","):
             # newProduct.save()
             # FILEFORMAT
-            for fileformat in product_info[12].split(','):
+            for fileformat in product_info[12].replace("\"", "").split(','):
                 fileformat = fileformat.lower()
                 fileformat = fileformat.replace(" ", "")
                 try:
-                    ff = FileFormat.objects.filter(code=fileformat)[0]
+                    ff = FileFormat.objects.filter(code=fileformat[:3])[0]
                     print("Fileformat exist : %s" % fileformat)
                 except:
                     ff = createFileFormat(fileformat,fileformat)
                 newProduct.file_format = [ff]
+
 
             newProduct.save()
 
