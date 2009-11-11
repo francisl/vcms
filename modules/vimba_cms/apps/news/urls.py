@@ -4,19 +4,25 @@
 
 from django.conf.urls.defaults import *
 from django.conf import settings
-from vimba_cms.apps.news.feeds import LatestEntriesFeed
-from django.contrib import syndication
+from vimba_cms.apps.news.feeds import LatestNewsFeed, CategoryFeed
 
-feeds = { "entries" : LatestEntriesFeed }
+
+feeds = { "news" : LatestNewsFeed,
+          "categories" : CategoryFeed }
 
 urlpatterns = patterns('vimba_cms.apps.news.views',
     # Example:
     (r'^(\d+)/$', 'NewsSingle'),
     (r'^page/(?P<page>[-\w]+)/$', 'Generic'),
+    (r'^(?P<year>\d{4})/$', 'Generic'),
     #(r'^preview/$', 'Preview'),
     (r'^preview/(?P<category>[-\w]+)/$', 'Preview'),
     (r'^(?P<page>[-\w]+)/$', 'Generic'),
     (r'^(?P<year>\d{4})/$', 'Generic'),
-    (r'^feeds/?P<url>.*/$', 'syndication.views.feed', { 'feed_dict': feeds }),
+    (r'^all/$', 'Ge'),
     #(r'^$', 'Generic'),
 )
+
+urlpatterns += patterns('',
+                       (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
+                       )

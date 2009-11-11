@@ -1,8 +1,9 @@
-#Tue Nov 10 15:43:17 EST 2009
+#Wed Nov 11 11:23:43 EST 2009
 eclipse.preferences.version=1
 encoding//modules/vimba_cms/apps/news/__init__.py=utf-8
 encoding//modules/vimba_cms/apps/news/admin.py=utf-8
 encoding//modules/vimba_cms/apps/news/feeds.py=utf-8
+encoding//modules/vimba_cms/apps/news/managers.py=utf-8
 encoding//modules/vimba_cms/apps/news/models.py=utf-8
 encoding//modules/vimba_cms/apps/news/news_module.py=utf-8
 encoding//modules/vimba_cms/apps/news/urls.py=utf-8
