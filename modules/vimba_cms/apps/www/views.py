@@ -7,6 +7,9 @@ from django.template import Template, Context, RequestContext
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+# external requirement
+from captcha.fields import CaptchaField
+
 from vimba_cms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview
 from config import simthetiq_config 
 
@@ -71,8 +74,8 @@ def dashboardRegister(module, function):
     try:
         # loading requirements first
         mod = __import__(module, globals(), locals(), [function])
-        inline_mod = getattr(mod,function) 
-        DASHBOARD_MODULES.append(inline_mod)
+        html_function = getattr(mod,function) 
+        DASHBOARD_MODULES.append(html_function)
     except:
         pass
     #    #print("modules exception : %s" % module)
@@ -83,9 +86,11 @@ def Dashboard(request, context={}):
         Display a page with preview from other pages, summary, widgets or forms
     """
     #debugtrace("Dashboard", context["current_page"].id)
+    
     contents = { 'left': [], 'right': [] }
+    # load all modules that are registered at startup
     for mod in DASHBOARD_MODULES:
-        for content in mod(pageid=context["current_page"].id):
+        for content in mod(request, pageid=context["current_page"].id):
             contents[content["preview_position"]].append((content["preview_display_priority"], { "module": content["preview_content"]},))
 
     for content in DashboardElement.objects.get_Published(context['current_page']):
@@ -133,6 +138,7 @@ class ContactForm(forms.Form):
         email = forms.EmailField(required=True)
         email2 = forms.EmailField(required=True)
         message = forms.CharField(widget=forms.Textarea, required=True)
+        if simthetiq_config.CAPTCHA : captcha = CaptchaField()
     
       
 def Contact(request, context={}):

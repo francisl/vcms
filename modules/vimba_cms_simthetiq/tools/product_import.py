@@ -71,9 +71,16 @@ def createDomain(name, slug, description="", keywords="", status=1, language=lan
     return newDomain
 
 def importCategory():
-    toImport = open(os.path.dirname(__file__) + "/exportedcategories.csv", 'r')
+    try:
+        toImport = open(os.path.dirname(__file__) + "/datasource/categories.csv", 'r')
+    except:
+        print("data categories.csv file not found!")
+        
     logfile = open(os.path.dirname(__file__) + "/log/categories_import.log", 'w')
     logfile.close()
+    print("----------------------------------------------------------------------")
+    print("importing category ...")
+    
     for line in toImport:
         line_info = line.split(";")
         # create domain if needed
@@ -130,38 +137,64 @@ def printLine(line, printFullLine=False):
     print("file format : " + (product_info[12].replace("\"", "")))
 
 
-def checkRow(line):
-    if len(line) > 12:
-        print("Success for %s, %s" % (line[0],len(line)))
-        return True
-    else:
-        print("Error, missing information for %s, %s" % (line[0], len(line)))
+def _productFileValidation():
+    try:
+        toImport = open(os.path.dirname(__file__) + "/datasource/products.csv", 'r')
+    except:
+        print("data file products.csv not found!")
+        toImport = False
+    
+    return toImport
+
+def _checkRow(line, number):
+    if len(line) < 13 or len(line) > 13:
+        print("Failed | line %s | %s | %s" % (number, line[0], len(line)))
         return False
+    else:
+        print("Success | line %s | %s | %s" % (number, line[0], len(line)))
+        return True
         
 def checkRows(printInfo=False):
-    rows = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
-    firstLine = True
+    print("---------------------------------------")
+    print(" Products Validation ")
+    rows = _productFileValidation()
+    
+    Error = 0
+    i = 0
     for row in rows:
-        if firstLine:
-            firstLine = False
-        else:
+        if i != 0:
             row = row.split(";")
-            checkRow(row)
+            r = _checkRow(row, i)
             if printInfo:
                 printLine(row)
+            if r == False:
+                Error = Error + 1
+        i = i + 1
 
     rows.close()
 
-def setOriginalImage(print_line=False):
-    toImport = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
-    logfile = open(os.path.dirname(__file__) + "/log/set_original_image_import-log.csv", 'w')
+def setOriginalImage(print_line=False, debug=False):
+    toImport = _productFileValidation()
+        
+    logfile = open(os.path.dirname(__file__) + "/log/originalimage_import_log.csv", 'w')
     i = 0
+    logfile.write("Status;Description;Product;Image to be set;Image Status;\n")
+    print("----------------------------------------------------------------------")
+    print("linking original images ...")
     for line in toImport:
         if i == 0:
             #skip title
             i = 1
         else:
+            i = i+1
             product_info = line.split(";")
+
+            #check number of line
+            if len(product_info) < 13 or len(product_info) > 13:
+                if debug: print("Failed;# of Column Error on line %s;;" % str(i))
+                logfile.write("Failed;# of Column Error on line %s;;\n" % str(i))
+                continue
+            
             product_slug = product_info[1].replace("\n", "").replace("\r", "").replace("/", "_").replace("\"", "").replace("(", "_").replace(")", "_").lower()
             product_image = product_info[10]
             
@@ -175,85 +208,96 @@ def setOriginalImage(print_line=False):
                 product = False
                 
             if product:
-                logfile.write("%s" % product_slug)
-                logfile.write(";Found")
-                            # ## IMAGE IMPORT
-                
-                logfile.write(";%s" % product_image)
                 try:
-                    product.original_image = Image.objects.get(name=product_image)
+                    product.original_image = Image.objects.get(name__iexact=product_image)
                     product.save(reorder=False)
-                    logfile.write(";Found")
+                    logfile.write("Success;Found;%s\n" % product_slug)
+                    if debug: print("Success;;%s;%s;" % (product_slug, product_image))
                 except:
-                    logfile.write(";Not found")
+                    logfile.write("Failed;Image not found;%s;%s\n" % (product_slug, product_image))
+                    if debug: print("Failed;Image not found;%s;%s;" % (product_slug, product_image))
                 
             else:
-                logfile.write("%s;Not Found" % product_slug)
-                logfile.write(";%s;None" % logfile.write(";%s" % product_image))
-            
-            logfile.write("\n")
+                logfile.write("Failed;Product not Found;%s;%s;None\n" % (product_slug, product_image))
+                if debug: print("Failed;%s;Product not Found;%s;None" % (product_slug, product_image))
+        
+    toImport.close()
+    logfile.close()
 
             
-def importProducts(printLine=False):
-    toImport = open(os.path.dirname(__file__) + "/exportedproducts.csv", 'r')
-    logfile = open(os.path.dirname(__file__) + "/log/product_import.log", 'w')
+def importProducts(printLine=False, drop=False, debug=False, hasTitle=True):
+    
+    toImport = _productFileValidation()
+    logfile = open(os.path.dirname(__file__) + "/log/product_import_log.csv", 'w')
     i = 0
+    if debug: print("----------------------------------------------------------------------")
+    if debug: print("importing Product ...")
+    logfile.write("status;status;Product;description;category")
+    
+    if drop == True:
+        for p in ProductPage.objects.all():
+            if p.slug != "afghanistan_database":
+                if debug: print("deleting : %s " % p)
+                p.delete()
+                
     for line in toImport:
-        logfile.write("--------------------------------\n")
-        if i == 0:
+        if hasTitle and i == 0:
             #skip title
             i = 1
         else:
+            i = i + 1
             product_info = line.split(";")
-            # create product only if needed
-            try:
-                product = ProductPage.objects.get(slug=product_info[1].replace("\"", "").lower())
-            except:
-                product = False
-            if product:
-                logfile.write("Product %s already exist\n" % product_info[0].replace("\"", ""))
+            
+            #check number of line
+            if len(product_info) < 13 or len(product_info) > 13:
+                if debug: print("Failed;# of Column Error on line %s;;;" % str(i))
+                logfile.write("Failed;# of Column Error on line %s;;;\n" % str(i))
                 continue
             
             if product_info[0].replace("\"", "") == "" or product_info[0].replace("\"", "") == " ":
                 if product_info[1].replace("\"", "") == "" or product_info[1].replace("\"", "") == " ":
-                    print("Product with empty name can't be created!")
+                    if debug: print("Failed;No name supplied%s;;" % product_info[0].replace("\"", ""))
+                    logfile.write("Failed;No name supplied%s;;\n" % product_info[0].replace("\"", ""))
                     continue
                 else:
                     product_info[0] = product_info[1]
-
+                    
+            # create product only if needed
+            try:
+                newProduct = ProductPage.objects.get(slug=product_info[1].replace("\"", "").lower())
+                itIsNew = "Updating product"
+                product = True
+            except:
+                newProduct = ProductPage()
+                itIsNew = "New Product has been created"
+                product = False
+            
             if printLine:        
                 printLine(product_info)
             
-            #image = product_info[14].split("\\")
-            #print("original_image = %s " % image[len(image)-1:])
             #try:
-            newProduct = ProductPage()
             newProduct.name = product_info[0].replace("\r", "").replace("\n", "").replace("\"", "")
             newProduct.slug = product_info[1].replace("\n", "").replace("\r", "").replace("/", "_").replace("\"", "").replace("(", "_").replace(")", "_").lower()
             newProduct.description = product_info[2].replace("_", " ").replace("\"", "")
             newProduct.keywords = product_info[3].replace("_", " ").replace("\"", "")
             newProduct.status = (product_info[4].replace("\"", "") if product_info[4].replace("\"", "") else 0)
             newProduct.language = language
-    
             newProduct.product_description = product_info[5].replace("_", " ").replace("\"", "")
             newProduct.product_id = (product_info[6].replace("\"", "") if product_info[6].replace("\"", "") else 0)
             newProduct.polygon = (int(product_info[7].replace(" ","").replace("\"", "")) if int(product_info[7].replace(" ","").replace("\"", "")) else 0)
             newProduct.texture_format = product_info[8].replace("\"", "")
             newProduct.texture_resolution = (product_info[9].replace("\"", "") if product_info[9].replace("\"", "") else 0)
 
-            #newProduct.image = product_info[10]
-            
             # foreign key ->
             try:
                 c = product_info[11].replace("\"", "")
                 category = Category.objects.filter(name=c)[0]
             except:
                 if product_info[11].replace("\"", "") == "":
-                    logfile.write("using default category !\n")
                     category = Category.objects.get(name="Other")
                 else:
                     category = createCategory(product_info[11].replace("\"", ""), "")
-                    logfile.write("creating new category !\n")
+
             
             newProduct.category = category
             # save before assigning m2m key
@@ -268,23 +312,19 @@ def importProducts(printLine=False):
                 fileformat = fileformat.replace(" ", "")
                 try:
                     ff = FileFormat.objects.filter(code=fileformat[:3])[0]
-                    print("Fileformat exist : %s" % fileformat)
+                    #print("Fileformat exist : %s" % fileformat)
                 except:
                     ff = createFileFormat(fileformat,fileformat)
                 newProduct.file_format = [ff]
 
 
             newProduct.save()
-
-            logfile.write("Created product = %s \n" % newProduct.name)
-            logfile.write("     File Format = %s \n" % newProduct.file_format)
-            logfile.write("            Slug = %s \n" % newProduct.slug)
-            logfile.write("        Category = %s \n" % newProduct.category)
+            logfile.write("Success;;%s;%s;%s\n" % (newProduct.name, itIsNew, category))
+            if debug: print("Success;;%s;%s;%s" % (newProduct.name, itIsNew, category))
+    
+    toImport.close()
     logfile.close()
 
 def run():
-    print("import ")
-    print("importing category ...")
     importCategory()
-    print("importing Product ...")
     importProducts()

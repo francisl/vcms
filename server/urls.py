@@ -17,6 +17,11 @@ urlpatterns = patterns('',
     (r'^gestion/(.*)', admin.site.root),
 )
 
+# __ VIMBA CMS __
+urlpatterns += patterns('',
+    url(r'^captcha/', include('captcha.urls')),
+)
+
 # __ SIMTHETIQ __
 # ordering formular
 if 'vimba_cms_simthetiq.apps.order' in settings.INSTALLED_APPS:
@@ -26,7 +31,12 @@ if 'vimba_cms_simthetiq.apps.order' in settings.INSTALLED_APPS:
 # For simthetiq product management
 if 'vimba_cms_simthetiq.apps.products' in settings.INSTALLED_APPS:
     urlpatterns += patterns( '', url(r'^products/', include('vimba_cms_simthetiq.apps.products.urls')),)
-    
+
+# __ SIMTHETIQ __
+# For simthetiq importer
+if 'vimba_cms_simthetiq.apps.importer' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^importer/', include('vimba_cms_simthetiq.apps.importer.urls')),)
+   
         
 #print("INSTALLED APPS %s " % settings.INSTALLED_APPS)
 if 'rosetta' in settings.INSTALLED_APPS:

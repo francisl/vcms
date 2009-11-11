@@ -19,19 +19,39 @@ def UpdateMenu(request):
         json_pages = json.JSONDecoder().decode(postlist)
         #print("json pages = %s" % json_pages )
 
+        has_change = False
         for page in json_pages:
             db_page = Page.objects.get(id=json_pages[page]["Id"])
             #print("DB PAGE = %s" % db_page)
-            db_page.level = json_pages[page]["Level"]
+            if db_page.level != json_pages[page]["Level"]:
+                db_page.level = json_pages[page]["Level"]
+                has_change = True
+                
             if json_pages[page]["Parent"]:
-                db_page.parent = Page.objects.get(id=json_pages[page]["Parent"])
+                if db_page.parent != json_pages[page]["Parent"]:
+                    db_page.parent = Page.objects.get(id=json_pages[page]["Parent"])
+                    has_change = True
             else:
-                db_page.parent = None
-            db_page.tree_position = json_pages[page]["Position"]
-            db_page.display = json_pages[page]["Display"]
+                if db_page.parent != None:
+                    db_page.parent = None
+                    has_change = True
+                
+            if db_page.tree_position != json_pages[page]["Position"]:
+                db_page.tree_position = json_pages[page]["Position"]
+                has_change = True
+            
+            if db_page.display != json_pages[page]["Display"]:
+                db_page.display = json_pages[page]["Display"]
+                has_change = True
             #page.default = False
-            db_page.save()
-            response = HttpResponse("{returnvalue:0}")
+            #print("%s has change : %s" % (db_page, has_change))
+            if has_change:
+                db_page.save()
+            
+            has_change = False
+            
+        response = HttpResponse("{returnvalue:0}")
+            
     else:
         reponse = HttpResponse("{returnvalue:2}")
     

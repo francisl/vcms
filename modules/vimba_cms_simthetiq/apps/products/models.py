@@ -8,11 +8,12 @@ from django.db import models
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_delete
+
 
 #from tagging.fields import TagField
 from vimba_cms.apps.www.models import Page, Language
 from vimba_cms_simthetiq.apps.products.managers import ProductPageManager
-
 
 # -- variable
 PRODUCT_IMAGES = "uploadto/product_images/"
@@ -93,7 +94,7 @@ class Image(models.Model):
     name = models.CharField(max_length=150, unique=True)
     file = models.FileField(upload_to=PRODUCT_IMAGES)
     description = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(MediaTags)
+    tags = models.ManyToManyField(MediaTags, blank=True, null=True,)
     file_size = models.IntegerField(editable=False, blank=True, null=True, default=0)
     thumbnail = models.FileField(upload_to=PRODUCT_IMAGES, blank=True, null=True)
     show_in_gallery = models.BooleanField(default=True)
@@ -106,6 +107,22 @@ class Image(models.Model):
         #tumbnail = _save_thumbnail(self, self.file.path, url=PRODUCT_IMAGES)
         self.file_size = int(os.path.getsize(self.file.path))
         super(Image, self).save()
+    
+    def delete(self):
+        """ remove foreign object link
+            this prevent cascade deletion of pages when link to image
+            this 
+        """
+        
+        for p in self.original_image.all():
+            #print("Link original : %s" % p)
+            self.original_image.remove(p)
+        
+        for p in self.productpage_set.all():
+            #print("Link normal : %s" % p)
+            self.productpage_set.remove(p)
+        
+        super(Image, self).delete()
         
     def get_absolute_url(self):
         #return str(settings.MEDIA_URL) + str(self.file)
@@ -131,6 +148,15 @@ class Video(models.Model):
         self.file_size = int(os.path.getsize(self.file.path))
         super(Video, self).save()
 
+    def delete(self):
+        """ remove foreign object link
+            this prevent cascade deletion of pages when link to image
+            this 
+        """
+        self.domainpage_set.clear()
+        super(Video, self).delete()
+        
+
 class FileFormat(models.Model):
     name = models.CharField(max_length=50, unique=True)
     code = models.CharField(max_length=4, unique=True)
@@ -138,6 +164,14 @@ class FileFormat(models.Model):
     def __unicode__(self):
         return self.name
 
+    def delete(self):
+        """ remove foreign object link
+            this prevent cascade deletion of pages when link to image
+            this 
+        """
+        self.domainpage_set.clear()
+        super(FileFormat, self).delete()
+        
 class DomainPage(Page):
     content = models.TextField()
     video = models.ForeignKey(Video, null=True, blank=True)
@@ -153,7 +187,14 @@ class DomainPage(Page):
         self.module  = 'Domain'
         self.app_slug = APP_SLUGS
         super(DomainPage, self).save()
-        
+    
+    def delete(self):
+        """ remove foreign object link
+            this prevent cascade deletion of pages when link to image
+            this 
+        """
+        self.category_set.clear()
+        super(DomainPage, self).delete()
 
 class DomainElement(models.Model):
     name = models.CharField(max_length=36)
@@ -174,7 +215,7 @@ class DomainElement(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField()
-    domain = models.ForeignKey(DomainPage)
+    domain = models.ForeignKey(DomainPage, blank=True, null=True)
     
     class Meta:
         verbose_name_plural = "Domain - Categories"
@@ -183,7 +224,17 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def delete(self):
+        """ remove foreign object link
+            this prevent cascade deletion of pages when link to image
+            this 
+        """
+        print("clearing product link !")
+        print("linked to : %s " % self.productpage_set.all())
+        self.productpage_set.clear()
+        super(Category, self).delete()
 
+            
 class ProductPage(Page):
     #name = models.CharField(max_length=50, unique=True)
     product_description = models.TextField()
@@ -193,11 +244,11 @@ class ProductPage(Page):
     texture_resolution = models.CharField(max_length=50)
     #original_image = models.ImageField(upload_to=PRODUCT_IMAGES)
     original_image = models.ForeignKey(Image, related_name="original_image", null=True, blank=True)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, null=True, blank=True)
     file_format = models.ManyToManyField(FileFormat)
     similar_products = models.ManyToManyField('self', symmetrical=True, null=True, blank=True)
-    images = models.ManyToManyField(Image, blank=True)
-    videos = models.ManyToManyField(Video, blank=True)
+    images = models.ManyToManyField(Image, null=True, blank=True)
+    videos = models.ManyToManyField(Video, null=True, blank=True)
     previous = models.ForeignKey('self', related_name="previous_product", null=True, blank=True)
     next = models.ForeignKey('self', related_name="next_product", null=True, blank=True)
     
@@ -224,18 +275,54 @@ class ProductPage(Page):
         super(ProductPage, self).save()
         
     def delete(self):
-        #print("delete is getting called")
-        #ProductPage.objects.remove_product_position(self)
-
-        #print('-------------------------')
-        #print("Deleting! %s " % self)
+        #print("---------------------")
+        #print("deleting %s" % self)
+        try:
+            if self.previous == self:
+                #print("previous == self")
+                self.previous = None
+        except:
+            #print("previous product doesn't exist")
+            self.previous = None
+            
+        try:
+            if self.next == self:
+                #print("next == self")
+                self.next = None
+        except:
+            #print("next product doesn't exist")
+            self.next = None
+        #self.save(reorder=False)
+        
+        # set previous product next and next product previous
         ProductPage.objects.set_previous_next_product(self, self.previous, self.next)
+
+        try:
+            #print("self.previous %s" % self.previous)
+            #print("self.next %s" % self.next)    
+
+            #remove all next and previous including self
+            ProductPage.objects.remove_previous_link(self)
+            ProductPage.objects.remove_next_link(self)
+            
+        except:
+            pass
+        
+        
         self.next = None
         self.previous = None
-        #self.previous_set.clear()
-        
+        #self.save(reorder=False)
         super(ProductPage, self).delete()
-
+        
+#def pre_delete_action(sender, instance, **kwargs):
+    #print("instance = %s" % instance)
+    #print("instance previous = %s" % instance.previous)
+    #print("instance next = %s" % instance.next)
+    #if instance.mark_for_delete == True:
+    #    return True
+    
+#pre_delete.connect(pre_delete_action, sender=ProductPage, weak=False)
+    
 # -- CONTENT
 # ----------
 class ProductContent(models.Model):
@@ -259,7 +346,6 @@ class ProductContent(models.Model):
 
     def get_absolute_url(self):
         self.page.get_absolute_url()
-
 
 class GalleryPage(Page):
     class Meta:

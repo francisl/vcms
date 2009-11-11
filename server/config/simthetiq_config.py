@@ -14,5 +14,8 @@ simthetiq_email_from_order = "order@simthetiq.com"
 simthetiq_orderemail_to = "order@simthetiq.com"
 simthetiq_contactemail_to = "vcloutier@simthetiq.com"
 
-#simthetiq_orderemail_to = "info@vimba.ca"
-#simthetiq_contactemail_to = "info@vimba.ca"
+simthetiq_orderemail_to = "info@vimba.ca"
+simthetiq_contactemail_to = "info@vimba.ca"
+
+
+CAPTCHA = False

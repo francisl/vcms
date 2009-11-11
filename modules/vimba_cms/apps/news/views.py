@@ -3,6 +3,7 @@
 # programmer : Francis Lavoie
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 from django.template import Context, RequestContext, loader
 
 from vimba_cms.apps.news.models import News as m_News
@@ -49,18 +50,19 @@ def NewsSingle(request, id, template='news.html'):
     return render_to_response(template,
                               {'news':news}, context_instance=RequestContext(request))
 
-def Preview(pageid=None):
-    t = loader.get_template("news_module.html")
+def Preview(request, pageid=None):
     modules = []
     news_modules = m_NewsPageModule.objects.filter(page=pageid)
     for module in news_modules:
         news_categories = module.categories.all()
         news = m_News.objects.filter(categories__in=news_categories)[:3]
-        context = Context({"news": news,
-                            "title": module.title,
-                            "images": module.show_image_preview, 
-                            "videos": module.show_video_preview })
-        html_content = t.render(context)
+        context = {"news": news,
+                   "title": module.title,
+                   "images": module.show_image_preview, 
+                   "videos": module.show_video_preview,
+                  }
+
+        html_content = render_to_string("news_module.html", context, context_instance=RequestContext(request))
         modules.append({"preview_display_priority" : module.preview_display_priority,
                         "preview_position" : module.preview_position,
                         "preview_content": html_content
@@ -68,6 +70,3 @@ def Preview(pageid=None):
         
     return modules
     
-    #return render_to_response("news_module.html", 
-    #            { "news": news, "images": images, "videos": videos}, 
-    #            context_instance=RequestContext(request))

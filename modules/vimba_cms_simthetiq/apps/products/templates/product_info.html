@@ -46,7 +46,7 @@
         <div class="division_content">
 		    <div class="division_content" id="product_description">
 			  	<div class="product_nav" id="product_nav_left">
-	                <a href="{{ productpage.next.get_absolute_url }}"><img src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/left.gif" alt="Scroll left" /></a>
+	                <a href="{{ productpage.next.get_absolute_url }}"><img src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/gallery/left.gif" alt="Scroll left" /></a>
 	            </div>
 				<div class="product_content">
 					<div class="division_content media_holder">
@@ -78,7 +78,7 @@
 								<a href="{{ MEDIA_URL}}{{ video.file }}?width=560&amp;height=330&amp;" 
 									rel="prettyPhoto;width=600;height=430;flashvars=clip_id={{ video.id }}">
 									{% if video.thumbnail %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
-									{% else %}<img class="thumbnail" alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/default/media/video.png" />
+									{% else %}<img class="thumbnail" alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/default/media/video.png" />
 									{% endif %}
 								</a>
 							{% endfor %}
@@ -90,13 +90,13 @@
 	                <div class="clear"></div>
 	            </div>
 	            <div class="product_nav" id="product_nav_right">
-                        <a href="{{ productpage.previous.get_absolute_url }}"><img src ="{{ MEDIA_URL }}CustomThemes/simthetiq/images/gallery/right.gif" alt="Scroll right"  /></a>
+                        <a href="{{ productpage.previous.get_absolute_url }}"><img src ="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/gallery/right.gif" alt="Scroll right"  /></a>
                 </div>
             </div>
 		</div>
 		<div class="clear"></div>
 		<div id="technical_specification" class="division_header">TECHNICAL SPECIFICATION
-			<img id="technical_specification_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
+			<img id="technical_specification_image" class="image" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="technical_specification_content" class="division_content" style="display: block;">
 			<table cellspacing="0">
@@ -125,7 +125,7 @@
 		{% if product_contents %}
 		{% for c in product_contents %}
 		<div id="{{ c.id }}" class="division_header">{{ c.title|upper }}
-			<img id="{{c.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
+			<img id="{{c.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="{{ c.id }}_content" class="division_content" name="{{ c.id }}"  style="display: block;">
 				{{ c.content|safe }}
@@ -136,7 +136,7 @@
 		
 		{% if productpage.similar_products.all %}
 		<div id="similar_products" class="division_header">SIMILAR PRODUCT
-			<img id="similar_products_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
+			<img id="similar_products_image" class="image" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/content_header_arrow2.png" />
 		</div>
 		<div id="similar_products_content" class="division_content" style="display: block;">
 			<ul>

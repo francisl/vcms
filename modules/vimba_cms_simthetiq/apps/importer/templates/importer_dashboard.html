@@ -1,0 +1,72 @@
+{% extends "importer_master.html" %}
+
+{% block content %}
+	<div class="content">
+
+        <div class="division_content">
+            <h4>Jobs import</h4>
+            <table>
+                <tr>
+                    <th width="40%">Jobs</th><th>Last Update</th><th>Status</th><th>Action</th>
+                </tr>
+                {% for job in jobs%}
+                <tr>
+                    <td ><a href="log/{{ job.jobname }}">{{ job.name }}</a></td>
+                    <td>{{job.status.last_update}}</td>
+                    <td>{% ifequal job.status.status 0 %}
+                        Completed
+                        {% endifequal %}
+                        {% ifequal job.status.status 1 %}
+                        <img src="{{MEDIA_URL}}/CustomThemes/Simthetiq/uploader/loading.gif">
+                        {% endifequal %}
+                        {% ifequal job.status.status 2 %}
+                        Queued
+                        {% endifequal %}
+
+                    </td>
+                    <td><form name="import_{{ job.jobname }}" method="post" action="import/" >
+                        <input type="hidden" value="{{ job.jobname }}" name="job">
+                        <input style="width:45%; cursor: pointer;" type="submit" value="Import">
+                        </form>
+                        </td>            
+                 </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"><br /><hr></td>
+          
+                 </tr>
+                <tr>
+                    <td ></td>
+                    <td></td>
+                    <td></td>
+                    <td><form name="import_all" method="post" action="import/" >
+                        <input type="hidden" value="All" name="job">
+                        <input style="width:45%; cursor: pointer;" type="submit" value="Import All">
+                        </form></td>            
+                 </tr>
+            </table>
+        </div>
+
+        <div class="division_content">
+            <h4>Jobs source files</h4>
+            <table>
+                <tr>
+                    <th width="40%">Jobs</th><th>Last Upload</th><th>Action</th>
+                </tr>
+                {% for job in jobs%}
+                <tr>
+                    <td >{{ job.name }}</td>
+                    <td>{{job.status.last_update}}</td>
+                    <td><form name="upload_{{ job.jobname }}" method="post" action="upload/" >
+                        <input type="hidden" value="{{ job.jobname }}" name="job">
+                        <input style="width:60%; cursor: pointer;" type="submit" value="Upload Source">
+                        </form>
+                    </td>            
+                 </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br />
+	</div>
+
+{% endblock content %}

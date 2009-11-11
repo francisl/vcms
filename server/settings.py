@@ -1,5 +1,6 @@
 # encoding: utf-8
-# Django settings for simthetiq project.
+# copyright Vimba inc. 2009
+# programmer : Francis Lavoie
 # 
 import os
 from django.utils.translation import ugettext_lazy as _
@@ -65,7 +66,7 @@ MEDIA_URL = '/static/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/adminmedia/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')z=ki#(2ki!o7*@3-+9vrae)tq6^v(8#d)k76eo26%hz6v)nke'
@@ -121,45 +122,41 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     #'tagging',
+    'django_extensions',
     'sorl.thumbnail',
     'rosetta',
     'djapian',
     'mptt',
+    'captcha',              # http://code.google.com/p/django-simple-captcha/
     # VIMBA CMS APPS
     'vimba_cms.apps.www',
     'vimba_cms.apps.news',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
+    'vimba_cms_simthetiq.apps.importer',
 )
-THUMBNAIL_DEBUG = True
-# use to load dashboard module dynamically
+
+# ----------------------------
+# sorl-thumbnail config option
+THUMBNAIL_DEBUG = False
+
+# ----------------------------
+# use to load dashboard module/widget dynamically
 PAGE_MODULES = []
 
+# ----------------------------
 if DEBUG:
-    # Adding django debug toolbar if available
-    try:
-        import debug_toolbar
-        #INSTALLED_APPS += ('debug_toolbar',)
-        #MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-        #INTERNAL_IPS = ('127.0.0.1',)
-    except:
-        pass
-
-    # Adding django command extension if available
-
-    try:
-        import django_extensions
-        INSTALLED_APPS += ('django_extensions',)
-    except:
-        #print("no extensions!")
-        pass
+    import settings_debug
 
 # OPTIMISATION
 # CACHE 
 #CACHE_BACKEND = 'db://cms_opt_cache'
 #CACHE_MIDDLEWARE_SECONDS = 30
 #CACHE_MIDDLEWARE_KEY_PREFIX = ""
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 
 
 # CHANGE THIS ----------------------------------------------------

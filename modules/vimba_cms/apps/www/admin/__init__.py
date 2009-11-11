@@ -34,18 +34,21 @@ class DashboardPreviewInline(admin.TabularInline):
     extra = 2
 
 DASHBOARD_MODULES = [DashboardElementInline,DashboardPreviewInline]
+# now scan to cms apps module to see if something what what to register to dahsboard
 for module in settings.PAGE_MODULES:
     try:
         # loading requirements first
-        for requirement in module["requirements"]:
-            __import__(requirement["module"], globals(), locals(), [requirement["object"]])
-            # loading module into dashboard list
-            mod = __import__(module["module"], globals(), locals(), [module["object"]])
-            inline_mod = getattr(mod,module["object"]) 
-            DASHBOARD_MODULES.append(inline_mod)
+        __import__(module['models'], globals(), locals(), [module["model"]])
+        # loading module into dashboard list
+        mod = __import__(module["admin"], globals(), locals(), [module["model"]])
+        inline_mod = getattr(mod,module["inline"]) 
+        DASHBOARD_MODULES.append(inline_mod)
+
     except:
         pass
-        #print("modules exception : %s" % module)
+        print("modules exception : %s" % module)
+
+
 
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES

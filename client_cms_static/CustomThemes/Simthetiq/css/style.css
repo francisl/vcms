@@ -22,7 +22,7 @@ img { border-style: none;}
 hr { margin: 0 0 0.6em 0; border: 0; width: 100%; background-color: #ccc;  height: 1px;}
 
 input, textarea, select{ font-size: 1em; Arial, helvetica, sans-serif; color:#525252; padding:2px 0 0 2px; text-transform:none; border: 1px solid #5C5C5C;}
-input, select{ vertical-align:middle }
+input, select{ }
 button {color: rgb(155,255,39);}
 input#search_submit { background-color:#4b4b4b; color: #ddd; border: none; text-decoration:none; font-size: 1em;}
 div#vcms_search_form input { float: right ;}
@@ -38,6 +38,10 @@ table tr, th { border-bottom: 1px solid white; margin: 0; padding: 0;}
 .center { margin-right: auto; margin-left: auto; }
 .error { border: 0.2em solid #fb6a31; background-color: #fea886; width: 90%; margin: 0; padding: 0; clear: both; text-align: center; }
 .error h4 { margin: 1em 0;}
+
+/*=========================================Captcha==========================================*/
+img.captcha { }
+input#id_captcha_1 { width: 4em; margin: 0 0 0 1em; heigth: 1em; }
 
 /*=========================================Header==========================================*/
 
@@ -73,20 +77,22 @@ div#submenu li.submenu_selected a{ text-decoration: underline; }
 div#banner { width: 955px; heigth: 73px; margin: 0 auto 0 auto;}
 
 /*=========================================content==========================================*/
+
 .content { position: relative; clear: both; width: 955px;
 		margin: 0 auto 0 auto; padding: 0; border: 0; 
 		background-color: #4b4b4b;}
 /* .content_center { padding: 0 1em 1em 1em;} */
+.content div {}
 
 /* form order */
 .content form .submit { clear: both; top: 1em;  text-align: left; width: 100%; }
 .content button { font-size: 1.2em; border: none; background: none;}
 .content ul{list-style: none; padding: 0;}
-.content h4 {color: rgb(155,255,39); margin: 1em 1em 0 1em; font-size: 1.3em; font-weight: normal;}
+.content h4 {color: rgb(155,255,39); margin: 1em 1em 0 0; font-size: 1.3em; font-weight: normal;}
 .content hr { height: 2px;}
-.content label { margin: 1em;}
+.content label { margin-top 1em;}
 .content tr { padding-top: 2em; }
-.content input,textarea, select { margin: 0.1em auto 0.6em 1em; font-size: 1em; width: 80%; }
+.content input,textarea, select { margin: 0.1em auto 0.6em 0; font-size: 1em; width: 80%; }
 .content .separator { color: #303030; font-size: 1.3em; margin: 0.2em;}
 .content img { padding: 0; margin: 0; }
 .content img.floatleft { float: left; margin: 1em;}
@@ -120,6 +126,9 @@ div.ajax { margin: 1em; }
 /*=========================================NEWS==========================================*/
 span.newsdate { float: right; margin-right: 1em;}
 
+/*=======================================PREVIEW=========================================*/
+div.preview_content {}
+.link { heigth: 1em; margin: 1em 20px 1em auto; float: right; position: relative; text-align: right; }
 
 /*=======================================PRODUCTS=========================================*/
 div.division_header { background-color: #363636;
@@ -128,7 +137,7 @@ div.division_header { background-color: #363636;
 					padding: 6px 0 0 1em; height: 24px;
 					text-shadow: #111 2px 2px 3px;
 					cursor: pointer; clear: both;}
-div.division_content { padding : 4px 10px; clear: both; position: relative; display: table; vertical-align: middle;}
+div.division_content { padding : 4px 2em; clear: both; position: relative;vertical-align: middle; }
 
 div.division_header .image { position: absolute; right: 10px; top 0px;}
 div.floatleft { float: left;}

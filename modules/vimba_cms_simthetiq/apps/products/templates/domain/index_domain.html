@@ -60,7 +60,7 @@
 		{% endif %}
 		{% if categories %} <!-- TYPES -->
 		<div id="modellist" class="division_header">MODEL LIST
-			<img id="modellist_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />	
+			<img id="modellist_image" class="image" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/content_header_arrow2.png" />	
 		</div>
 		<div id="modellist_content" class="division_content" style="display: block;">
 		  <div id="category_nav">
@@ -90,7 +90,7 @@
         <!--  old style
 		<div id="modellist_content" class="division_content" style="display: block;">
 			<div class="media_holder">
-				<!--  <h4>CATEGORY {{ current_page.name|upper }} :</h4>--
+				<h4>CATEGORY {{ current_page.name|upper }} :</h4>
 				{% for category in categories %}
 				<div style="width: 33%; float: left; text-align: center;">
 					<br />
@@ -109,7 +109,7 @@
 		{% endif %}
 		{% for element in elements %}
 			<div id="{{element.id}}" class="division_header">{{element.name|upper }} 
-				<img id="{{element.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/content_header_arrow2.png" />
+				<img id="{{element.id}}_image" class="image" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/content_header_arrow2.png" />
 			</div>
 			<div id="{{element.id}}_content" class="division_content" style="display: {% if element.display %} block {% else %} none {% endif %};">
 				{% if element.images.all %} <!-- IMAGES -->
@@ -132,7 +132,7 @@
                             {% if video.thumbnail %}
                                 <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
                             {% else %}
-                                <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/simthetiq/images/default/media/video.png" />
+                                <img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/default/media/video.png" />
                             {% endif %}
                         </a>
                     {% endfor%}

@@ -19,13 +19,13 @@ APP_SLUGS = "www"
 
 class Language(models.Model):
     language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
-    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = engligh'))
+    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
     
     objects = LanguageManager()
     
     def __unicode__(self):
         return self.language
-
+    
 # -- Pages
 # -- -----
 class PageElementPosition(models.Model):

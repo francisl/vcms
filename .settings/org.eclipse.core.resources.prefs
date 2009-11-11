@@ -1,7 +1,8 @@
-#Sat Oct 17 01:05:16 EDT 2009
+#Tue Nov 10 15:43:17 EST 2009
 eclipse.preferences.version=1
 encoding//modules/vimba_cms/apps/news/__init__.py=utf-8
 encoding//modules/vimba_cms/apps/news/admin.py=utf-8
+encoding//modules/vimba_cms/apps/news/feeds.py=utf-8
 encoding//modules/vimba_cms/apps/news/models.py=utf-8
 encoding//modules/vimba_cms/apps/news/news_module.py=utf-8
 encoding//modules/vimba_cms/apps/news/urls.py=utf-8
@@ -12,6 +13,11 @@ encoding//modules/vimba_cms/apps/www/models.py=utf-8
 encoding//modules/vimba_cms/apps/www/templatetags/www_extras.py=utf-8
 encoding//modules/vimba_cms/apps/www/urls.py=utf-8
 encoding//modules/vimba_cms/apps/www/views.py=utf-8
+encoding//modules/vimba_cms_simthetiq/apps/importer/admin.py=utf-8
+encoding//modules/vimba_cms_simthetiq/apps/importer/managers.py=utf-8
+encoding//modules/vimba_cms_simthetiq/apps/importer/models.py=utf-8
+encoding//modules/vimba_cms_simthetiq/apps/importer/urls.py=utf-8
+encoding//modules/vimba_cms_simthetiq/apps/importer/views.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/order/list.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/order/views.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/admin.py=utf-8
@@ -20,9 +26,12 @@ encoding//modules/vimba_cms_simthetiq/apps/products/models.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/templates/admin/products/change_form.html=UTF-8
 encoding//modules/vimba_cms_simthetiq/apps/products/urls.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/views.py=utf-8
+encoding//modules/vimba_cms_simthetiq/tools/check_all.py=utf-8
+encoding//modules/vimba_cms_simthetiq/tools/create_test_productpage.py=utf-8
 encoding//modules/vimba_cms_simthetiq/tools/images_import.py=utf-8
-encoding//modules/vimba_cms_simthetiq/tools/originalimage_import.py=utf-8
+encoding//modules/vimba_cms_simthetiq/tools/import_all.py=utf-8
 encoding//modules/vimba_cms_simthetiq/tools/product_import.py=utf-8
 encoding//server/config/simthetiq_config.py=utf-8
 encoding//server/settings.py=utf-8
+encoding//server/settings_debug.py=utf-8
 encoding//server/urls.py=utf-8
