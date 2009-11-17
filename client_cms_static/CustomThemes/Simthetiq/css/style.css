@@ -137,7 +137,7 @@ div.division_header { background-color: #363636;
 					padding: 6px 0 0 1em; height: 24px;
 					text-shadow: #111 2px 2px 3px;
 					cursor: pointer; clear: both;}
-div.division_content { padding : 4px 2em; clear: both; position: relative;vertical-align: middle; }
+div.division_content { padding : 0.6em 1em 0.6em 1em; clear: both; position: relative;vertical-align: middle; }
 
 div.division_header .image { position: absolute; right: 10px; top 0px;}
 div.floatleft { float: left;}
