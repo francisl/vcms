@@ -1,3 +1,4 @@
 # ignore python compiled files
 *.py[co]
-
+# ignore editor backup files
+*~
