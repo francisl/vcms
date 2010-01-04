@@ -2,3 +2,5 @@
 *.py[co]
 # ignore editor backup files
 *~
+# ignore IDE project directories
+nbproject/
