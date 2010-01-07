@@ -19,7 +19,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'                 # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = '../database/djangodata'    # Or path to database file if using sqlite3.
+DATABASE_NAME = './database/djangodata'    # Or path to database file if using sqlite3.
 DATABASE_USER = ''                          # Not used with sqlite3.
 DATABASE_PASSWORD = ''                      # Not used with sqlite3.
 DATABASE_HOST = ''                          # Set to empty string for localhost. Not used with sqlite3.
@@ -101,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'vimba_cms.middleware.EnforceLoginMiddleware',
+    'vcms.middleware.EnforceLoginMiddleware',
 )
 
 
@@ -129,8 +129,9 @@ INSTALLED_APPS = (
     'mptt',
     'captcha',              # http://code.google.com/p/django-simple-captcha/
     # VIMBA CMS APPS
-    'vimba_cms.apps.www',
-    'vimba_cms.apps.news',
+    'vcms.apps.www',
+    'vcms.apps.news',
+    'vcms.apps.themes',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
