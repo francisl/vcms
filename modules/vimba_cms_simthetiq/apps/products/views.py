@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from config import simthetiq_config 
 from vimba_cms_simthetiq.apps.products import models as productmodels
-from vimba_cms.apps.www.views import InitPage
+from vcms.apps.www.views import InitPage
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
     context.update(InitPage(page=page))

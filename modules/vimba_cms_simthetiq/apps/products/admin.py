@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.contrib import admin
 from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, ProductContent, DomainElement, MediaTags, FileFormat, ProductPage, Image, Video, DomainPage, Category, GalleryPage
-#from vimba_cms.apps.www.models import Content
+#from vcms.apps.www.models import Content
 
 # -- PRODUCTS
 # -----------

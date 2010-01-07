@@ -18,7 +18,8 @@ class NewsCategoryAdmin(admin.ModelAdmin):
 
 class NewsAdmin(admin.ModelAdmin):
     try:
-        filter_horizontal = ["product_images", "product_videos"]
+        if News.product_images and News.product_videos:
+            filter_horizontal = ["product_images", "product_videos"]
     except:
         pass
         # if no product, dont filter
@@ -28,7 +29,7 @@ class NewsPageModuleInline(admin.TabularInline):
     model = NewsPageModule
     extra = 2
 
-admin.site.register(NewsPage, NewsPageAdmin)
+#admin.site.register(NewsPage, NewsPageAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(NewsCategory, NewsCategoryAdmin)
 
