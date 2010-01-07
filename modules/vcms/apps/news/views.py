@@ -1,10 +1,13 @@
 # encoding: utf-8
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
+#from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
-from django.template import Context, RequestContext, loader
+#from django.template import Context, 
+from django.template import RequestContext
+#from django.template import loader
 
 from vcms.apps.news.models import News as m_News
 from vcms.apps.news.models import NewsPage as m_NewsPage
