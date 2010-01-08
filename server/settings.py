@@ -25,7 +25,6 @@ DATABASE_PASSWORD = ''                      # Not used with sqlite3.
 DATABASE_HOST = ''                          # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''                          # Set to empty string for default. Not used with sqlite3.
 
-DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "/../database"
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -101,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
@@ -124,10 +124,9 @@ INSTALLED_APPS = (
     #'tagging',
     'django_extensions',
     'sorl.thumbnail',
-    'rosetta',
-    'djapian',
+    'rosetta',          
     'mptt',
-    'captcha',              # http://code.google.com/p/django-simple-captcha/
+    'captcha',                              # http://code.google.com/p/django-simple-captcha/
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.news',
@@ -137,6 +136,24 @@ INSTALLED_APPS = (
     'vimba_cms_simthetiq.apps.products',
     'vimba_cms_simthetiq.apps.importer',
 )
+
+# Search facilities
+search_engine = "haystack" 
+# DJAPIAN CONFIG
+if search_engine == "djapian":
+    DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "/../database"
+    INSTALLED_APPS += ('djapian',)
+
+# HAYSTACK
+if search_engine == "haystack":
+    HAYSTACK_SITECONF = 'haystacksearch'
+    HAYSTACK_SEARCH_ENGINE = 'whoosh'
+    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/../database/whoosh'
+    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/../database"
+
+    INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
+
+
 
 # ----------------------------
 # sorl-thumbnail config option

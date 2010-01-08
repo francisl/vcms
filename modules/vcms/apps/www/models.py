@@ -212,6 +212,9 @@ class DashboardPreview(PageElementPosition):
     def __unicode__(self):
         return self.preview.name
 
+
+"""
+TODO : remake djapian code to haystack code
 import djapian
 class PageIndexer(djapian.Indexer):
     fields=["text"]
@@ -233,3 +236,4 @@ class ContentIndexer(djapian.Indexer):
 
 djapian.add_index(Page, PageIndexer, attach_as="indexer")
 djapian.add_index(Content, ContentIndexer, attach_as="indexer")
+"""

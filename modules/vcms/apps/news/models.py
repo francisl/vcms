@@ -16,7 +16,6 @@ class NewsCategory(models.Model):
 
     # get live news
     def get_live_news(self):
-        from vcms.apps.news.models import News
         return self.news_set.filter(status=News.LIVE_STATUS)
     
     class Meta:
@@ -75,9 +74,9 @@ class News(models.Model):
     def get_videos_preview(self):
         return self.product_videos.all()[:3]
 
-from vcms.apps.www.models import PageElementPosition as PEP
+from vcms.apps.www.models import PageElementPosition
 
-class NewsPageModule(PEP):
+class NewsPageModule(PageElementPosition):
     from vcms.apps.www.models import DashboardPage as DP
     page = models.ForeignKey(DP)
     categories = models.ManyToManyField(NewsCategory)

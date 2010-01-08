@@ -19,7 +19,7 @@ urlpatterns = patterns('vcms.apps.news.views',
     (r'^preview/(?P<category>[-\w]+)/$', 'Preview'),
     (r'^(?P<page>[-\w]+)/$', 'Generic'),
     (r'^(?P<year>\d{4})/$', 'Generic'),
-    (r'^all/$', 'Ge'),
+    (r'^all/$', 'Generic'),
     #(r'^$', 'Generic'),
 )
 
