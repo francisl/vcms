@@ -141,15 +141,19 @@ INSTALLED_APPS = (
 search_engine = "haystack" 
 # DJAPIAN CONFIG
 if search_engine == "djapian":
-    DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "/../database"
+    DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "./database"
     INSTALLED_APPS += ('djapian',)
 
 # HAYSTACK
+"""
+To rebuild a new search index :
+    ./manage.py rebuild_index
+"""
 if search_engine == "haystack":
     HAYSTACK_SITECONF = 'haystacksearch'
     HAYSTACK_SEARCH_ENGINE = 'whoosh'
-    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/../database/whoosh'
-    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/../database"
+    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + './database/whoosh'
+    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "./database"
 
     INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
 
