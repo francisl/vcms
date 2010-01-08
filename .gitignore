@@ -1,3 +1,11 @@
 # ignore python compiled files
 *.py[co]
 
+# Mac OSX
+.DS_Store
+
+#Project file
+.project
+.pydevproject
+nbproject
+
