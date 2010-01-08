@@ -256,6 +256,7 @@ class ProductPage(Page):
     objects = ProductPageManager()
     
     class Meta:
+        verbose_name = "Product - Page"
         verbose_name_plural = "Product - Pages"
         ordering = ['category', 'name']
         

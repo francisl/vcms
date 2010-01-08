@@ -121,7 +121,8 @@ class Page(models.Model):
 
 class SimplePage(Page):
     class Meta:
-        verbose_name_plural = "Pages - Simple"
+        verbose_name = "Simple page"
+        verbose_name_plural = "Simple pages"
 
     def __unicode__(self):
         return self.name
@@ -184,7 +185,8 @@ class DashboardPage(Page):
     template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
     
     class Meta:
-        verbose_name_plural = "Pages - Dashboard"
+        verbose_name = "Dashboard"
+        verbose_name_plural = "Dashboards"
         
     def __unicode__(self):
         return self.name
