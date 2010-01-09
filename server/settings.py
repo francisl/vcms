@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     #'tagging',
     'django_extensions',
     'sorl.thumbnail',
-    'rosetta',          
+    #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
     # VIMBA CMS APPS
@@ -152,8 +152,8 @@ To rebuild a new search index :
 if search_engine == "haystack":
     HAYSTACK_SITECONF = 'haystacksearch'
     HAYSTACK_SEARCH_ENGINE = 'whoosh'
-    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + './database/whoosh'
-    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "./database"
+    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
+    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database"
 
     INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
 
