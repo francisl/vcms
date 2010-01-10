@@ -19,13 +19,12 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'                 # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = '../database/djangodata'    # Or path to database file if using sqlite3.
+DATABASE_NAME = './database/djangodata'    # Or path to database file if using sqlite3.
 DATABASE_USER = ''                          # Not used with sqlite3.
 DATABASE_PASSWORD = ''                      # Not used with sqlite3.
 DATABASE_HOST = ''                          # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''                          # Set to empty string for default. Not used with sqlite3.
 
-DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "/../database"
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -101,7 +100,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'vimba_cms.middleware.EnforceLoginMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
 
@@ -124,18 +124,40 @@ INSTALLED_APPS = (
     #'tagging',
     'django_extensions',
     'sorl.thumbnail',
-    'rosetta',
-    'djapian',
+    #'rosetta',       
     'mptt',
-    'captcha',              # http://code.google.com/p/django-simple-captcha/
+    'captcha',                              # http://code.google.com/p/django-simple-captcha/
     # VIMBA CMS APPS
-    'vimba_cms.apps.www',
-    'vimba_cms.apps.news',
+    'vcms.apps.www',
+    'vcms.apps.news',
+    'vcms.apps.themes',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
     'vimba_cms_simthetiq.apps.importer',
 )
+
+# Search facilities
+search_engine = "haystack" 
+# DJAPIAN CONFIG
+if search_engine == "djapian":
+    DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "./database"
+    INSTALLED_APPS += ('djapian',)
+
+# HAYSTACK
+"""
+To rebuild a new search index :
+    ./manage.py rebuild_index
+"""
+if search_engine == "haystack":
+    HAYSTACK_SITECONF = 'haystacksearch'
+    HAYSTACK_SEARCH_ENGINE = 'whoosh'
+    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
+    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database"
+
+    INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
+
+
 
 # ----------------------------
 # sorl-thumbnail config option

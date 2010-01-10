@@ -1,0 +1,121 @@
+{% load www_extras %}
+{% load search_widget %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="robots" content="noarchive">
+	<meta name="description" content="{% if current_page.description %}
+                                        {{ current_page.description|striptags }}
+										{% else %}High quality models for real-time 3D in Openflight format and more for the simulation and game industry{% endif%} {% block metadescription %} {% endblock metadescription %}">
+	<meta name="keywords" content="{{ current_page.keywords }}{% block keywords %} {% endblock keywords %}">
+	
+	<title>{% if current_page %} {{ current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
+	
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
+	
+	<style type="text/css" media="all">
+		@import "{{ MEDIA_URL }}CustomThemes/Simthetiq/css/style.css";
+		{% block stylesheet %}{% endblock stylesheet %}
+		@import "{{ MEDIA_URL }}CustomThemes/Simthetiq/css/prettyPhoto/css/prettyPhoto.css";
+	</style>
+	
+	{% block javascript-master %}
+    	<script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
+        <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+		{% block javascript-include %}{% endblock javascript-include%}
+		<script type="text/javascript">
+			{% block javascript %}
+			{% endblock javascript %}
+		</script> 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#menu_{{current_page.id}}").className="menu_selected";
+                {% block jquery %} {% endblock jquery %}
+				$("a[rel^='prettyPhoto']").prettyPhoto({
+					animationSpeed: 'normal', /* fast/slow/normal */
+					padding: 40, /* padding for each side of the picture */
+					opacity: 0.55, /* Value betwee 0 and 1 */
+					showTitle: true, /* true/false */
+					allowresize: true, /* true/false */
+					counter_separator_label: '/' /* The separator for the gallery counter 1 "of" 2 */
+					});
+                });
+    	</script>
+    {% endblock javascript-master %}
+	
+</head>
+<body id="vimba_cms_body">
+<!-- =========header=========== -->
+	<div id="cms_header">  
+		{% show_search_box %}
+		<div id="cms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
+			<a href="/" title="Home" ></a>
+		</div>
+
+	</div>
+
+<!-- =========MENU=========== -->
+{% if current_page %}
+{% show_main_menu current_page %}
+{% else %}
+{% show_main_menu %}
+{% endif %}
+{% if current_page %}
+    {% show_banner current_page MEDIA_URL %}
+{% endif %}
+<!-- banner -->
+{% if current_page %}
+{% show_sub_menu current_page %}
+{% endif %}
+<!--=========content=========== -->
+
+{% block ubercontent %}
+<div class="content">
+
+	
+    {% block content %}
+		<!-- Content -->
+		{% if contents %}
+		{% for c in contents %}
+		<div class="division_content" name="{{ c.id }}">
+			<br />
+			<h4>{{ c.name|upper }}</h4>
+			<hr />
+			<div class="division_content">
+				{{ c.content|safe }}
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+    {% endblock content %}
+</div>
+{% endblock ubercontent %}
+
+<!-- =========footer=========== -->
+<div class="footer" >
+	<div class="footer_content">
+        {% if current_page %}
+            {% show_footer_menu current_page %}
+         {% else%}
+            {% show_footer_menu %}
+        {% endif %}
+		<p>Simthetiq.Com &copy; 2008 | <a href="/privacy">Privacy Policy</a></p>
+	</div>
+</div>
+<!-- =========GOOGLE SCRIPT=========== -->
+<!--  
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3Cscript%3E"));
+	</script>
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-2190708-2");
+		pageTracker._initData();
+		pageTracker._trackPageview();
+	</script>
+ -->
+</body>
+</html>

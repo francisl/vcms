@@ -1,6 +1,13 @@
-# ignore python compiled files
+# Ignore python compiled files
 *.py[co]
-# ignore editor backup files
+
+# Editor backup files
 *~
-# ignore IDE project directories
-nbproject/
+
+# Mac OSX
+.DS_Store
+
+# Project file
+.project
+.pydevproject
+nbproject
