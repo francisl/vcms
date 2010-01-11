@@ -3,6 +3,7 @@
 from __future__ import division
 
 import Image as ImageLib
+import magic # http://hupp.org/adam/hg/python-magic
 import os
 from django.db import models
 from django.conf import settings
@@ -96,6 +97,7 @@ class Image(models.Model):
     description = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(MediaTags, blank=True, null=True,)
     file_size = models.IntegerField(editable=False, blank=True, null=True, default=0)
+    mime_type = models.CharField(editable=False, max_length=255) # http://stackoverflow.com/questions/643690/maximum-mimetype-length-when-storing-type-in-db
     thumbnail = models.FileField(upload_to=PRODUCT_IMAGES, blank=True, null=True)
     show_in_gallery = models.BooleanField(default=True)
     
@@ -103,9 +105,11 @@ class Image(models.Model):
         return self.name
     
     def save(self):
+        m = magic.Magic(mime=True)
         super(Image, self).save()
         #tumbnail = _save_thumbnail(self, self.file.path, url=PRODUCT_IMAGES)
         self.file_size = int(os.path.getsize(self.file.path))
+        self.mime_type = m.from_file(self.file.path)
         super(Image, self).save()
     
     def delete(self):
