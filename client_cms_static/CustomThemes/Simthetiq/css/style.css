@@ -191,4 +191,7 @@ div.gallery_display { position: relative; left: 45px; top: 0;
 
 
 /*=======================================SEARCH=============================================*/
+.search table { width: 100%; text-align: left;}
+input#id_q { }  // query input field
 .search li {float: left; width: 18em;}
+.search li input { margin: 0; width: 2em;} // for checkbox uses to filter query
