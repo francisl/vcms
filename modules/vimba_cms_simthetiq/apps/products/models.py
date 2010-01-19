@@ -146,8 +146,7 @@ class Image(models.Model):
 
 class Video(models.Model):
     # Warning: validate changes in supported MIME types list against the validate_video_mime_type validator
-    TEMPORARY_MIME_TYPE = 'FIRST_SAVE_TEMPORARY_MIMETYPE'
-    SUPPORTED_MIME_TYPES = [TEMPORARY_MIME_TYPE, 'application/x-shockwave-flash', 'video/quicktime', 'video/x-flv']
+    SUPPORTED_MIME_TYPES = ['application/x-shockwave-flash', 'video/quicktime', 'video/x-flv']
 
     default_image = "CustomThemes/Simthetiq/images/default/media/video.png"
     name = models.CharField(max_length=150, unique=True)
