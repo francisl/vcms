@@ -3,7 +3,7 @@
 from __future__ import division
 
 import Image as ImageLib
-import magic # http://hupp.org/adam/hg/python-magic
+#import magic # http://hupp.org/adam/hg/python-magic    -- BROKEN
 import os
 from django.db import models
 from django.conf import settings
@@ -166,8 +166,9 @@ class Video(models.Model):
         # then validate its MIME type against the list of supported MIME types
         if self.file:
             self.file_size = self.file.size
-            self.mime_type = magic.Magic(mime=True).from_buffer(self.file.read(1024))
-            validate_video_mime_type(self.mime_type)
+            # BROKEN
+            #self.mime_type = magic.Magic(mime=True).from_buffer(self.file.read(1024))
+            #validate_video_mime_type(self.mime_type)
     
     def delete(self):
         """ remove foreign object link

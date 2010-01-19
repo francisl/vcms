@@ -1,0 +1,6 @@
+Dependency
+
+
+treebeard	# http://code.tabo.pe/django-treebeard/src/		
+captcha 	# http://code.google.com/p/django-simple-captcha/
+magic 		# http://hupp.org/adam/hg/python-magic
