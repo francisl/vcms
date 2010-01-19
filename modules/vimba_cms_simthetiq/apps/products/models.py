@@ -3,9 +3,11 @@
 from __future__ import division
 
 import Image as ImageLib
+import magic # http://hupp.org/adam/hg/python-magic
 import os
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete
@@ -19,6 +21,19 @@ from vimba_cms_simthetiq.apps.products.managers import ProductPageManager
 PRODUCT_IMAGES = "uploadto/product_images/"
 PRODUCT_VIDEOS = "uploadto/product_videos/"
 APP_SLUGS = "products"
+
+
+# -- Validators
+# -- ----------------
+def validate_video_mime_type(value):
+    """
+        Validator that raises a ValidationError exception if the MIME type is not
+        contained within the list of supported video MIME types as specified in
+        the Video model.
+    """
+    if not value in Video.SUPPORTED_MIME_TYPES:
+        raise ValidationError("The video file supplied is not supported. Only MOV and flash videos are supported at the moment.")
+
 
 # -- GENERAL FUNCTION
 # -- ----------------
@@ -130,6 +145,9 @@ class Image(models.Model):
         return self.file
 
 class Video(models.Model):
+    # Warning: validate changes in supported MIME types list against the validate_video_mime_type validator
+    SUPPORTED_MIME_TYPES = ['application/x-shockwave-flash', 'video/quicktime', 'video/x-flv']
+
     default_image = "CustomThemes/Simthetiq/images/default/media/video.png"
     name = models.CharField(max_length=150, unique=True)
     #category = models.ForeignKey(Category)
@@ -137,17 +155,20 @@ class Video(models.Model):
     description = models.TextField(blank=True, null=True)
     tags = models.ManyToManyField(MediaTags)
     file_size = models.IntegerField(editable=False, blank=True, null=True, default=0)
+    mime_type = models.CharField(editable=False, max_length=255) # http://stackoverflow.com/questions/643690/maximum-mimetype-length-when-storing-type-in-db
     thumbnail = models.ImageField(upload_to=PRODUCT_VIDEOS, blank=True, null=True, default=default_image)
-    
+
     def __unicode__(self):
         return self.name
-    
-    def save(self):
-        super(Video, self).save()
-        #_save_thumbnail(self, url=PRODUCT_VIDEOS, genthumbnail=False)
-        self.file_size = int(os.path.getsize(self.file.path))
-        super(Video, self).save()
 
+    def clean(self):
+        # Set the video's filesize and its MIME type,
+        # then validate its MIME type against the list of supported MIME types
+        if self.file:
+            self.file_size = self.file.size
+            self.mime_type = magic.Magic(mime=True).from_buffer(self.file.read(1024))
+            validate_video_mime_type(self.mime_type)
+    
     def delete(self):
         """ remove foreign object link
             this prevent cascade deletion of pages when link to image
@@ -155,7 +176,6 @@ class Video(models.Model):
         """
         self.domainpage_set.clear()
         super(Video, self).delete()
-        
 
 class FileFormat(models.Model):
     name = models.CharField(max_length=50, unique=True)
