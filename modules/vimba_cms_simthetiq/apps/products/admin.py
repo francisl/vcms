@@ -27,6 +27,7 @@ class FileFormatAdmin(admin.ModelAdmin):
 
 class ImageAdminForm(forms.ModelForm):
     file = forms.FileField(widget=AdminImageWidget)
+    thumbnail = forms.FileField(widget=AdminImageWidget)
     class Meta:
         model = Image
 

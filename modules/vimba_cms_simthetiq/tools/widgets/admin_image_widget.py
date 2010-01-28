@@ -27,13 +27,22 @@ class AdminImageWidget(AdminFileWidget):
         file_name = str(value)
         if file_name:
             file_path = '%s%s' % (settings.MEDIA_URL, file_name)
-            try:            # is image
-                Image.open(os.path.join(settings.MEDIA_ROOT, file_name))
+            local_file_path = '%s%s' % (settings.MEDIA_ROOT, file_name)
+            if os.path.exists(local_file_path):
                 output.append('<a target="_blank" href="%s">%s</a><br />%s <a target="_blank" href="%s">%s</a><br />%s ' % \
                     (file_path, thumbnail(file_name), _('Currently:'), file_path, file_name, _('Change:')))
-            except IOError: # not image
-                output.append('%s <a target="_blank" href="%s">%s</a> <br />%s ' % \
-                    (_('Currently:'), file_path, file_name, _('Change:')))
+            # Commented out because it used PIL to make sure the file was an image
+            # and this could cause problems with development on Mac OSX.
+            # Therefore, this is a negligible issue as this widget will only be used
+            # with images (because of its name and its usage as of when it
+            # was included into the project.
+#            try:            # is image
+#                Image.open(os.path.join(settings.MEDIA_ROOT, file_name))
+#                output.append('<a target="_blank" href="%s">%s</a><br />%s <a target="_blank" href="%s">%s</a><br />%s ' % \
+#                    (file_path, thumbnail(file_name), _('Currently:'), file_path, file_name, _('Change:')))
+#            except IOError: # not image
+#                output.append('%s <a target="_blank" href="%s">%s</a> <br />%s ' % \
+#                    (_('Currently:'), file_path, file_name, _('Change:')))
 
         output.append(super(AdminFileWidget, self).render(name, value, attrs))
         return mark_safe(u''.join(output))
