@@ -1,5 +1,7 @@
 # encoding: utf-8
 from django.contrib import admin
+from django import forms
+from vimba_cms_simthetiq.tools.widgets.admin_image_widget import AdminImageWidget
 from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, ProductContent, DomainElement, MediaTags, FileFormat, ProductPage, Image, Video, DomainPage, Category, GalleryPage
 #from vcms.apps.www.models import Content
 
@@ -23,7 +25,13 @@ class FileFormatAdmin(admin.ModelAdmin):
     delete_selected.short_description = "Delete selected File format(s)"
     actions = [delete_selected]
 
+class ImageAdminForm(forms.ModelForm):
+    file = forms.FileField(widget=AdminImageWidget)
+    class Meta:
+        model = Image
+
 class ImageAdmin(admin.ModelAdmin):
+    form = ImageAdminForm
     search_fields = ['name']
     list_filter = ['tags']
     list_display = ['name', 'description']
@@ -36,7 +44,13 @@ class ImageAdmin(admin.ModelAdmin):
     delete_selected.short_description = "Delete selected images(s)"
     actions = [delete_selected]
 
+class VideoAdminForm(forms.ModelForm):
+    thumbnail = forms.ImageField(widget=AdminImageWidget)
+    class Meta:
+        model = Video
+
 class VideoAdmin(admin.ModelAdmin):
+    form = VideoAdminForm
     def delete_selected(self, request, queryset):
         for vid in queryset:
             selected_vid = Video.objects.get(id=vid.id)
