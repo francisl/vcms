@@ -1,6 +1,6 @@
-Dependency
+Dependencies
 
 
-treebeard	# http://code.tabo.pe/django-treebeard/src/		
-captcha 	# http://code.google.com/p/django-simple-captcha/
-magic 		# http://hupp.org/adam/hg/python-magic
+treebeard       # http://code.tabo.pe/django-treebeard/src/		
+captcha         # http://code.google.com/p/django-simple-captcha/
+zope.mimetype   # http://pypi.python.org/pypi/zope.mimetype/1.2.0
