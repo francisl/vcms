@@ -18,6 +18,8 @@ magic.py
                            'filename' contains.
 '''
 
+# Taken on 28-01-2010 from http://www.jsnp.net/code/magic.py
+
 import re
 import struct
 import string
@@ -1089,6 +1091,16 @@ def whatis(data):
   return 'ASCII text'
 
 
+def whatis_noguessing(data):
+  """
+    Variation of whatis() function that doesn't attempt at guessing the content of the file.
+    Added into the library by Francois Lebel on 28-01-2010.
+  """
+  for test in magicNumbers:
+     m = test.compare(data)
+     if m: return m
+
+
 def file(file):
   try:
     return whatis(open(file, 'r').read(8192))
@@ -1098,6 +1110,19 @@ def file(file):
     else:
       raise e
 
+
+def file_noguessing(file):
+  """
+    Variation of file() function that doesn't attempt at guessing the content of the file.
+    Added into the library by Francois Lebel on 28-01-2010.
+  """
+  try:
+    return whatis_noguess(open(file, 'r').read(8192))
+  except Exception, e:
+    if str(e) == '[Errno 21] Is a directory':
+      return 'directory'
+    else:
+      raise e
 
 #### BUILD DATA ####
 #load('mime-magic')

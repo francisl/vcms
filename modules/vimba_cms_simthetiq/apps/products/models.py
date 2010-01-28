@@ -3,11 +3,11 @@
 from __future__ import division
 
 import Image as ImageLib
-#import magic # http://hupp.org/adam/hg/python-magic    -- BROKEN
+from vimba_cms_simthetiq.tools import magic # http://www.jsnp.net/code/magic.py
+from zope.mimetype import typegetter # http://pypi.python.org/pypi/zope.mimetype/1.2.0
 import os
 from django.db import models
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete
@@ -32,6 +32,7 @@ def validate_video_mime_type(value):
         the Video model.
     """
     if not value in Video.SUPPORTED_MIME_TYPES:
+        from django.core.exceptions import ValidationError
         raise ValidationError("The video file supplied is not supported. Only MOV and flash videos are supported at the moment.")
 
 
@@ -166,9 +167,18 @@ class Video(models.Model):
         # then validate its MIME type against the list of supported MIME types
         if self.file:
             self.file_size = self.file.size
-            # BROKEN
-            #self.mime_type = magic.Magic(mime=True).from_buffer(self.file.read(1024))
-            #validate_video_mime_type(self.mime_type)
+            file_data = self.file.read(8192)
+            # Try to get the MIME type with magic as Zope doesn't seem to be able to recognize JPEG's magic number
+            # and magic fixes that problem but is an old library that may have an outdated MIME types/magic numbers collection
+            mimetype = magic.whatis_noguessing(file_data)
+            # If magic couldn't determine the MIME type, then try with Zope
+            # If smartMimeTypeGuesser can't find the MIME type according to the file's magic number, then it will use the file's extension
+            if not mimetype:
+                #print 'USING ZOPE'
+                mimetype = typegetter.smartMimeTypeGuesser(name=self.file.path, data=file_data)
+            #print 'FOUND MIMETYPE: ' + mimetype
+            self.mime_type = mimetype
+            validate_video_mime_type(self.mime_type)
     
     def delete(self):
         """ remove foreign object link
