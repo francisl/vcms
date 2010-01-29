@@ -84,6 +84,14 @@ PUBLIC_URLS = (
 
 ROOT_URLCONF = 'server.urls'
 
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',   # Add the request to the context
+    'django.core.context_processors.media',     # Add MEDIA_URL to every RequestContext
+    'django.core.context_processors.auth',      # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+)
+
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
@@ -127,6 +135,7 @@ INSTALLED_APPS = (
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
+    'djvideo',                               # http://git.participatoryculture.org/djvideo/
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.news',
