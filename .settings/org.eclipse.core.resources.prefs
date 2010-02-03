@@ -1,4 +1,4 @@
-#Fri Jan 08 15:45:18 EST 2010
+#Wed Jan 20 16:05:34 EST 2010
 eclipse.preferences.version=1
 encoding//modules/vcms/apps/news/admin.py=utf-8
 encoding//modules/vcms/apps/news/managers.py=utf-8
@@ -6,7 +6,11 @@ encoding//modules/vcms/apps/news/models.py=utf-8
 encoding//modules/vcms/apps/news/news_module.py=utf-8
 encoding//modules/vcms/apps/news/urls.py=utf-8
 encoding//modules/vcms/apps/news/views.py=utf-8
+encoding//modules/vcms/apps/www/admin/__init__.py=utf-8
+encoding//modules/vcms/apps/www/managers.py=utf-8
 encoding//modules/vcms/apps/www/models.py=utf-8
+encoding//modules/vcms/apps/www/templatetags/banner_widget.py=utf-8
+encoding//modules/vcms/apps/www/templatetags/www_extras.py=utf-8
 encoding//modules/vcms/apps/www/urls.py=utf-8
 encoding//modules/vcms/apps/www/views.py=utf-8
 encoding//modules/vimba_cms/apps/news/__init__.py=utf-8
