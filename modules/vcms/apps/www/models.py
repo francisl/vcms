@@ -109,14 +109,16 @@ class Page(models.Model):
         if self.default:
             Page.objects.reset_Default()
         super(Page, self).save()
-        self.indexer.update()
+        # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
+        #self.indexer.update()
 
     def delete(self):
         if self.default:
             Page.objects.deleted_Default()
         _delete_page(self)
         super(Page, self).delete()
-        self.indexer.update()
+        # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
+        #self.indexer.update()
 
 
 class SimplePage(Page):
