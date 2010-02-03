@@ -38,6 +38,7 @@ table tr, th { border-bottom: 1px solid white; margin: 0; padding: 0;}
 .center { margin-right: auto; margin-left: auto; }
 .error { border: 0.2em solid #fb6a31; background-color: #fea886; width: 90%; margin: 0; padding: 0; clear: both; text-align: center; }
 .error h4 { margin: 1em 0;}
+.hidden { display: none; }
 
 /*=========================================Captcha==========================================*/
 img.captcha { }
