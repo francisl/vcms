@@ -72,15 +72,18 @@
 						{% endif %}
 					
 						{% if productpage.videos.all %}
+                        {% load video %}
 						<div class="media_holder">
 							<h6>VIDEO : </h6>
 							{% for video in productpage.videos.all %}
-								<a href="{{ MEDIA_URL}}{{ video.file }}?width=560&amp;height=330&amp;" 
-									rel="prettyPhoto;width=600;height=430;flashvars=clip_id={{ video.id }}">
+								<a href="#video{{ video.id }}" rel="prettyPhoto">
 									{% if video.thumbnail %}<img alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}{{ video.thumbnail }}" />
 									{% else %}<img class="thumbnail" alt="{{video.description|striptags}}" src="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/default/media/video.png" />
 									{% endif %}
 								</a>
+                                <div id="video{{ video.id }}" class="hidden">
+                                    {% video video.file.url mime_type=video.mime_type %}
+                                </div>
 							{% endfor %}
 						</div>
 						{% endif %}
