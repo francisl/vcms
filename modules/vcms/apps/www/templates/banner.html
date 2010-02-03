@@ -1,12 +1,39 @@
 {% if has_banner %}
+
+{% ifequal style 0 %}
+
+<!-- Banner -->
+
+<div id='banner' class="division_menu">
+   <ul id="s3sliderContent">
+   {% for bimage in banner_images %}
+        <li class="s3sliderImage">
+            {% if bimage.url2 %}
+                <a class="imagelink" href="{{banner.url}}">
+                    <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+                </a>
+            {% else %}
+                <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+            {% endif %}
+                <span>{{ bimage.description }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+
+
+{% else %}
 <!-- Banner -->
 <div id="banner" class="division_menu">
     {% if banner.url %}
-	<a class="imagelink" href="{{banner.url}}">
-		<img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
-	</a>
-	{% else %}
-		<img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
-	{% endif %}
+    <a class="imagelink" href="{{banner.url}}">
+        <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+    </a>
+    {% else %}
+        <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+    {% endif %}
  </div>
+{% endifequal %}
+
 {% endif %}

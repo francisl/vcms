@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
-    'djvideo',                               # http://git.participatoryculture.org/djvideo/
+    #'djvideo',                               # http://git.participatoryculture.org/djvideo/
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.news',

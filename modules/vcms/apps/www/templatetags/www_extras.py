@@ -2,7 +2,7 @@
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
 from django import template
-from vcms.apps.www.models import Page, Banner
+from vcms.apps.www.models import Page
 
 register = template.Library()
 
@@ -30,12 +30,4 @@ def show_sub_menu(current_page=None):
         and the seleted_submenu
     """
     submenu, selected_submenu = Page.objects.get_SubMenu(current_page)
-    return locals()
-
-@register.inclusion_tag('banner.html')
-def show_banner(current_page, MEDIA_URL):
-    """ return main menu list
-        and return the menu currently selected
-    """
-    banner, has_banner = Banner.objects.banner(current_page)
     return locals()

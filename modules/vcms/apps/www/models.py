@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage, FileSystemStorage
-from vcms.apps.www.managers import PageManager, BannerManager, DashboardElementManager, LanguageManager
+from vcms.apps.www.managers import PageManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
 
 
 # -- variable
@@ -159,18 +159,35 @@ class Content(models.Model):
         self.page.get_absolute_url()
 
 class Banner(models.Model):
-    FILE_PATH = "static/uploadto/banners"
-    name = models.CharField(max_length=50)
-    file = models.FileField(upload_to=FILE_PATH)
+    SLIDESHOW = 0
+    RANDOM = 1
+    DISPLAY_CHOICES = ((SLIDESHOW, _("Slideshow")),(RANDOM, _("Random")))
+    name = models.CharField(max_length=90)
     description = models.TextField(blank=True, null=True)
-    url = models.URLField(max_length=200, null=True, blank=True)
     page = models.ManyToManyField(Page, null=True, blank=True)
+    style = models.IntegerField(choices=DISPLAY_CHOICES, default=SLIDESHOW)
     
     objects = BannerManager()
     
     def __unicode__(self):
-        return self.name    
+        return self.name
+    
+    def get_images(self):
+        return BannerImage.objects.get_banner_image_for_page(self)
 
+class BannerImage(models.Model):
+    FILE_PATH = "uploadto/banners"
+    name = models.CharField(max_length=90)
+    file = models.FileField(upload_to=FILE_PATH)
+    url = models.URLField(max_length=200, null=True, blank=True)
+    banner = models.ManyToManyField(Banner)
+
+    objects = BannerImageManager()
+    
+    def __unicode__(self):
+        return self.name
+    
+    
 # DASHBOARD
 # -- ------
 # Dashboard is an information page layout that display preview and modules

@@ -49,12 +49,14 @@ for module in settings.PAGE_MODULES:
         print("modules exception : %s" % module)
 
 
-
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES
 
-# -- CONTENTS
+# -- BANNER
 # -----------
+class BannerImageAdmin(admin.ModelAdmin):
+    filter_horizontal = ('banner',)
+    
 class BannerAdmin(admin.ModelAdmin):
     filter_horizontal = ('page',)
 
@@ -66,4 +68,5 @@ admin.site.register(SimplePage, SimplePageAdmin)
 # CONTENTS
 #admin.site.register(Content, ContentAdmin)
 admin.site.register(Banner, BannerAdmin)
+admin.site.register(BannerImage, BannerImageAdmin)
 admin.site.register(DashboardPage, DashboardPageAdmin)

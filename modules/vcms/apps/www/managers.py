@@ -89,12 +89,13 @@ class PageManager(models.Manager):
 
 
 class BannerManager(models.Manager):
-    def random(self, banners=None):
+    def get_random_banner_image(self, banner):
+        """ take a list of banners/images and select one randomly """
         import random
-        
-        banner = has_banner = False # set no banners to default to reduce check exception        
-        bannerqty = len(banners)
+        #banner = has_banner = False # set no banners to default to reduce check exception        
+        #bannerqty = len(banners)
         try:    # only one banner
+            randomnumber = random.randrange(0,len(banner))
             if bannerqty == 1:
                 banner = banners[0]
                 has_banner = True
@@ -106,24 +107,54 @@ class BannerManager(models.Manager):
         finally:
             return banner, has_banner
         
-    def banner(self, page):
-        banner = has_banner = False
+    def get_random_banner_image_number(self, images):
+        """ take size of image array, then give a random number"""
+        import random
+        if type(images) == type(0):
+            images_len = len(images) 
+            if images_len == 1 :
+                return images[0]
+            elif images_len > 1 :
+                return images[random.randrange(0, images_len-1)]
+        
+        return False
+         
+        randomnumber = random.randrange(0,)
+        
+    def get_banner(self, page):
+        banner_images = has_banner = banner_style = False
         try:
-            banners = self.filter(page=page.id)
-            lbanners = len(banners)
+            banner = self.filter(page=page.id)[0]
+            banner_images = banner.get_images() 
+            banner_style = banner.style
+                
+            if banner_style == self.model.RANDOM:
+                banner_images = self.get_random_banner_image_number(banner_images)
+                    
+            if len(banner_images) >= 1: 
+                has_banner = True
+                
+            """
             if lbanners >= 2:
                 # if only one banner is set
-                banner, has_banner = self.random(banners=banners)
+                banner, has_banner = self.get_random_banner(banners=banners)
                 has_banner = True
             elif lbanners == 1:
                 # otherwise select a random banners
                 banner = banners[0]
                 has_banner = True
+            """
         except:
-            banner, has_banner = False
+            banner_images = has_banner = False
 
-        return banner, has_banner
+        
+        #print("banner_images | %s\nhas_banner | %s\nbanner_style | %s" % (banner_images, has_banner, banner_style))
+        return self, banner_images, has_banner, banner_style
 
+class BannerImageManager(models.Manager):
+    def get_banner_image_for_page(self, Banner):
+        return self.filter(banner=Banner)
+        
 
 class DashboardElementManager(models.Manager):
     def get_PublishedAll(self):
