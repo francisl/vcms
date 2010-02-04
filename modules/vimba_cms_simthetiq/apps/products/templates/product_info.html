@@ -72,7 +72,7 @@
 						{% endif %}
 					
 						{% if productpage.videos.all %}
-                        {% load video %}
+                        {% load video %} {# http://git.participatoryculture.org/djvideo/ #}
 						<div class="media_holder">
 							<h6>VIDEO : </h6>
 							{% for video in productpage.videos.all %}
