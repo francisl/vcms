@@ -24,38 +24,7 @@
 	
 	</style>
 	
-	{% block javascript-master %}
-    	<script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
-        <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="{{ MEDIA_URL }}Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
-        <script src="{{ MEDIA_URL }}Library/banner/s3Slider.js" type="text/javascript"></script>
-        
-		{% block javascript-include %}{% endblock javascript-include%}
-		<script type="text/javascript">
-			{% block javascript %}
-			{% endblock javascript %}
-		</script> 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#menu_{{current_page.id}}").className="menu_selected";
-                
-				$("a[rel^='prettyPhoto']").prettyPhoto({
-					animationSpeed: 'normal',  /* fast/slow/normal */
-					padding: 40,               /* padding for each side of the picture */
-					opacity: 0.55,             /* Value betwee 0 and 1 */
-					showTitle: true,           /* true/false */
-					allowresize: true,         /* true/false */
-					counter_separator_label: '/' /* The separator for the gallery counter 1 "of" 2 */
-				});
-				
-				$('#banner').s3Slider({
-                    timeOut: 5000
-                });
-                {% block jquery %} {% endblock jquery %}
-            });
-    	</script>
- 
-    {% endblock javascript-master %}
+
 	
 </head>
 <body id="vimba_cms_body">
@@ -69,18 +38,24 @@
 	</div>
 
 <!-- =========MENU=========== -->
-{% if current_page %}
-{% show_main_menu current_page %}
-{% else %}
-{% show_main_menu %}
-{% endif %}
-{% if current_page %}
+{% ifequal menu_style 0 %}
+    {% show_dropdown_menu current_page %}
     {% show_banner current_page MEDIA_URL %}
-{% endif %}
-<!-- banner -->
-{% if current_page %}
-{% show_sub_menu current_page %}
-{% endif %}
+{% else %}
+	{% if current_page %}
+	   {% show_main_menu current_page %}
+	{% else %}
+	   {% show_main_menu %}
+	{% endif %}
+
+	{% if current_page %}
+	    <!-- BANNER -->
+	    
+	    {% show_banner current_page MEDIA_URL %}
+	    <!-- SUBMENU -->
+	    {% show_sub_menu current_page %}
+	{% endif %}
+{% endifequal %}
 <!--=========content=========== -->
 
 {% block ubercontent %}
@@ -128,5 +103,42 @@
 		pageTracker._trackPageview();
 	</script>
  -->
+    {% block javascript-master %}
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
+        <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="{{ MEDIA_URL }}Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
+        <script src="{{ MEDIA_URL }}Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>
+        <!--[if lt IE 7]> <!--  DROP DOWN MENU -->
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/menu/jquery.dropdown.js"></script>
+        <![endif]-->
+        
+        {% block javascript-include %}{% endblock javascript-include%}
+        
+        <script type="text/javascript">
+            {% block javascript %}
+            {% endblock javascript %}
+        </script> 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#menu_{{current_page.id}}").className="menu_selected";
+                
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    animationSpeed: 'normal',  /* fast/slow/normal */
+                    padding: 40,               /* padding for each side of the picture */
+                    opacity: 0.55,             /* Value betwee 0 and 1 */
+                    showTitle: true,           /* true/false */
+                    allowresize: true,         /* true/false */
+                    counter_separator_label: '/' /* The separator for the gallery counter 1 "of" 2 */
+                });
+                
+                $('#s3slider').s3Slider({
+                    timeOut: 4000
+                });
+                {% block jquery %} {% endblock jquery %}
+            });
+        </script>
+        
+ 
+    {% endblock javascript-master %}
 </body>
 </html>

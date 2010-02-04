@@ -6,7 +6,17 @@ from vcms.apps.www.models import Page
 
 register = template.Library()
 
-@register.inclusion_tag('menu.html')
+@register.inclusion_tag('menu/menu_dropdown.html')
+def show_dropdown_menu(current_page=None):
+    """ return main menu list
+        and return the menu currently selected
+    """
+    main_menu = Page.objects.get_RootMenu()
+    
+    selected_menu = Page.objects.get_RootSelectedMenu(current_page)
+    return locals()
+
+@register.inclusion_tag('menu/menu.html')
 def show_main_menu(current_page=None):
     """ return main menu list
         and return the menu currently selected

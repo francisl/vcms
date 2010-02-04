@@ -17,6 +17,7 @@ PRODUCT_IMAGES = "uploadto/prod_images"
 PRODUCT_VIDEOS = "uploadto/prod_videos"
 APP_SLUGS = "www"
 
+
 class Language(models.Model):
     language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
     language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
@@ -32,11 +33,11 @@ class PageElementPosition(models.Model):
     #PREVIEW
     LEFT = 'left'
     RIGHT = 'right'
-    FLOAT_TYPE = ((LEFT, 'Left'), (RIGHT, 'Right'),)
+    FLOAT_TYPE = ((LEFT, _('Left')), (RIGHT, _('Right')),)
     TOP = 1
     MIDDLE = 2
     BOTTOM = 3
-    PRIORITY = ((TOP,'Top'),(MIDDLE,'Middle'),(BOTTOM,'Bottom'),)
+    PRIORITY = ((TOP,_('Top')),(MIDDLE,_('Middle')),(BOTTOM,_('Bottom')),)
     preview_position = models.CharField(max_length=10, choices=FLOAT_TYPE)
     preview_display_priority = models.IntegerField(choices=PRIORITY)
     
@@ -168,6 +169,8 @@ class Banner(models.Model):
     description = models.TextField(blank=True, null=True)
     page = models.ManyToManyField(Page, null=True, blank=True)
     style = models.IntegerField(choices=DISPLAY_CHOICES, default=SLIDESHOW)
+    width = models.IntegerField(default=955)
+    height = models.IntegerField(default=300)
     
     objects = BannerManager()
     
@@ -180,6 +183,7 @@ class Banner(models.Model):
 class BannerImage(models.Model):
     FILE_PATH = "uploadto/banners"
     name = models.CharField(max_length=90)
+    description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to=FILE_PATH)
     url = models.URLField(max_length=200, null=True, blank=True)
     banner = models.ManyToManyField(Banner)
@@ -189,6 +193,12 @@ class BannerImage(models.Model):
     def __unicode__(self):
         return self.name
     
+    def save(self):
+        #from vcms.tools.image import image_resize as ir
+        #super(BannerImage, self).save()
+        #self.banner = ir.save_resized_image(self, self.file, self.file.path, tuple((955, 300)), False)
+        super(BannerImage, self).save()
+        
     
 # DASHBOARD
 # -- ------

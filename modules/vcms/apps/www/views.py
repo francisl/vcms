@@ -13,6 +13,10 @@ from captcha.fields import CaptchaField
 from vcms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview
 from config import simthetiq_config 
 
+DROPDOWN_MENU = 0
+SIMPLE_MENU = 1
+MENU_STYLE = ((DROPDOWN_MENU, _('Dropdown')),
+              (SIMPLE_MENU, _('Single line')))
 
 def debugtrace(view, current_page, **argd):
     print("------------- %s -------------" % view)
@@ -34,6 +38,7 @@ def InitPage(page):
             current_page = get_object_or_404(Page, slug=page)
         module = current_page.module
         #debugtrace("Initpage phase 2", current_page, **{'module':module})
+        menu_style = DROPDOWN_MENU
         return locals()
     except:
         raise Http404
