@@ -11,8 +11,13 @@ def show_dropdown_menu(current_page=None):
     """ return main menu list
         and return the menu currently selected
     """
-    main_menu = Page.objects.get_RootMenu()
+    menus = {}
+    for page in Page.objects.get_RootMenu():
+        menus[page] = {}
     
+    for page in menus:
+        menus[page] = Page.objects.get_SubMenu(page)
+        
     selected_menu = Page.objects.get_RootSelectedMenu(current_page)
     return locals()
 

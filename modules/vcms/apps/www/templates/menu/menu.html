@@ -1,5 +1,5 @@
-<div id="mainmenu">
-	<ul>
+<div id="mainnav">
+	<ul id="mainmenu">
 	{% for menu in main_menu %}
 		<li id="menu_{{menu.id}}" class="{% ifequal selected_menu.id menu.id %}menu_selected{% endifequal%}">
 		<a href="{{menu.get_absolute_url}}/">{{ menu.name|upper }}</a>

@@ -51,31 +51,6 @@ div#cms_header { background: url(../images/header/full_header.jpg) top left repe
 div#cms_header_logo { width: 320px; height: 110px; margin-left: -3px;}
 /* div#header_freemodel { position: absolute; background:url(../images/header_freemodel.png) top no-repeat; bottom: 20px; right: 13px; width: 387px; height: 35px;} */
 
-/*=========================================MENU==========================================*/
-div#mainmenu { position: relative; width:955px; margin: 0 auto; padding: 0;
-				background-color: #363636;}
-div#mainmenu ul { position: relative;  width: 100%;  height: 16px;
-				margin: 0 auto; padding: 5px 0 5px 0;}
-				
-div#mainmenu li { float: left; list-style: none; margin: 0 15px; padding: 0; display: block; font-size: 1.15em;  }
-div#mainmenu li a { text-decoration: none; 
-				color: white; text-shadow: #000 1px 2px 3px;}
-div#mainmenu li a:hover { color: #9bff27; text-decoration: underline; }
-div#mainmenu li.menu_selected a{ color: #9bff27; }
-
-/* -------------------SUBMENU ---------------------- */
-div#submenu { position: relative; width:955px;  margin: 0 auto; padding: 0; 
-				background-color: #363636; font-size: 1.15em;}
-div#submenu ul { position: relative; height: 16px;
-				 margin: 0; padding: 4px 0 4px 0; width: 100%;}
-div#submenu li { float: left; list-style: none; margin: 0 15px; padding: 0; }
-div#submenu li a {position: relative; color: rgb(155,255,39);
-					text-shadow: #111 2px 2px 3px; text-decoration: none; }
-div#submenu li a:hover { text-decoration: underline; }
-div#submenu li.submenu_selected a{ text-decoration: underline; }
-
-
-
 /*=========================================content==========================================*/
 
 .content { position: relative; clear: both; width: 955px;
@@ -258,6 +233,33 @@ div#s3sliderContent li {
     .clear {
        clear: both;
     }
+ 
+/*=========================================MENU==========================================*/
+
+div#mainnav { position: relative; width:955px;  margin: 0 auto; padding: 0;
+                background-color: #222;}
+                
+/*=========================================SINGLE MENU==========================================*/
+
+ul#mainmenu { position: relative;  width: 100%;  height: 16px;
+                margin: 0 auto; padding: 5px 0 5px 0;}
+                
+ul#mainmenu li { float: left; list-style: none; margin: 0 15px; padding: 0; display: block; font-size: 1.15em;  }
+ul#mainmenu li a { text-decoration: none; 
+                color: white; text-shadow: #000 1px 2px 3px;}
+ul#mainmenu li a:hover { color: #9bff27; text-decoration: underline; }
+ul#mainmenu li.menu_selected a{ color: #9bff27; }
+
+/* -------------------SUBMENU ---------------------- */
+div#submenu { position: relative; width:955px;  margin: 0 auto; padding: 0; 
+                background-color: #363636; font-size: 1.15em;}
+div#submenu ul { position: relative; height: 16px;
+                 margin: 0; padding: 4px 0 4px 0; width: 100%;}
+div#submenu li { float: left; list-style: none; margin: 0 15px; padding: 0; }
+div#submenu li a {position: relative; color: rgb(155,255,39);
+                    text-shadow: #111 2px 2px 3px; text-decoration: none; }
+div#submenu li a:hover { text-decoration: underline; }
+div#submenu li.submenu_selected a{ text-decoration: underline; }
    
 /*=======================================DROP DOWN MENU=============================================*/
  
@@ -271,21 +273,24 @@ ul.dropdown ul {
 
 ul.dropdown {
  position: relative;
- z-index: 597;
+ z-index: 40;
  float: left;
 }
 
 ul.dropdown li {
  float: left;
  line-height: 1.3em;
+ font-size: 1.1em;
  vertical-align: middle;
  zoom: 1;
+ padding: 0 1em;
+ 
 }
 
 ul.dropdown li.hover,
 ul.dropdown li:hover {
  position: relative;
- z-index: 599;
+ z-index: 40;
  cursor: default;
 }
 
@@ -294,12 +299,8 @@ ul.dropdown ul {
  position: absolute;
  top: 100%;
  left: 0;
- z-index: 598;
+ z-index: 40;
  width: 100%;
-}
-
-ul.dropdown ul li {
- float: none;
 }
 
 ul.dropdown ul ul {
@@ -307,7 +308,67 @@ ul.dropdown ul ul {
  left: 99%;
 }
 
+ul.dropdown ul li {
+ float: none;
+}
+
 ul.dropdown li:hover > ul {
  visibility: visible;
 }
 
+/* ----- ALL LEVELS (incl. first) */
+
+    ul.dropdown li {
+     padding: 7px 1em;
+     background-color: #222;
+     color: #fff;
+     line-height: normal;
+    }
+
+    ul.dropdown li.hover,
+    ul.dropdown li:hover {
+     
+    }
+
+    ul.dropdown a:link,
+    ul.dropdown a:visited { color: #fff; text-decoration: none; display : block;}
+    ul.dropdown a:hover { color: #76b900; text-decoration: none; }
+    ul.dropdown a:active { color: #fff; }
+    ul.dropdown li.menu_selected a { color: #76b900; }
+    ul.dropdown li.menu_selected a:visited { color: #76b900; text-decoration: none; display : block;}
+    
+/* ----- END LEVEL */
+
+/* ----- NON-FIRST LEVEL */
+
+ul.dropdown ul {
+	 width: 170px;
+	 background-color: #222;
+	 color: #fff;
+	 font-size: 0.8em;
+	 text-transform: none;
+	 filter: alpha(opacity=80);
+	 -moz-opacity: .8;
+	 KhtmlOpacity: .8;
+	 opacity: .8;
+}
+
+ul.dropdown ul li {
+	 background-color: transparent;
+	 color: #fff;
+	 filter: none;
+}
+
+ul.dropdown ul li.hover,
+ul.dropdown ul li:hover {
+	 background-color: transparent;
+ 
+}
+
+ul.dropdown ul a:link,
+ul.dropdown ul a:visited { color: #fff; }
+ul.dropdown ul a:hover { color: #76b900; text-decoration: none; }
+ul.dropdown ul a:active { color: #fff; }
+
+
+/* ----- END LEVEL */

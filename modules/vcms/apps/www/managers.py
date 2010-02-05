@@ -18,7 +18,7 @@ class PageManager(models.Manager):
             page.default = False
             page.save()
 
-    def reset_Default(self):
+    def reset_Default2(self):
         try:
             defaultpage = self.filter(status=self.model.PUBLISHED)[0]
             defaultpage.default = True
