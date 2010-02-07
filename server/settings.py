@@ -159,11 +159,13 @@ To rebuild a new search index :
     ./manage.py rebuild_index
 """
 if search_engine == "haystack":
+    if DEBUG:
+        HAYSTACK_SEARCH_ENGINE = 'whoosh'
+        HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
+    else:
+        HAYSTACK_SEARCH_ENGINE = 'xapian'
+        HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database/xapian"
     HAYSTACK_SITECONF = 'haystacksearch'
-    HAYSTACK_SEARCH_ENGINE = 'whoosh'
-    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
-    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database"
-
     INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
 
 
