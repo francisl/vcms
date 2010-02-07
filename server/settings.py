@@ -4,11 +4,13 @@
 # 
 import os
 from django.utils.translation import ugettext_lazy as _
+SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
+
 #Production
-#SITEPATH = sys.path[0] + "/simthetiq"
 #DEBUG = False
+#MEDIA_PATH = SERVER_PATH + "/../../webv2_static"
 #developpement
-#SITEPATH = sys.path[0]
+MEDIA_PATH = SERVER_PATH
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -46,7 +48,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.dirname(__file__) + "/../client_cms_static/"
+MEDIA_ROOT = MEDIA_PATH + "/client_cms_static/"
 #VIMBA_CMS_MEDIA_ROOT = os.path.dirname(__file__) + "/../vimba_cms_static/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -117,7 +119,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.dirname(__file__) + '/templates',
+    SERVER_PATH + '/templates',
     #os.path.dirname(__file__) + '/www/templates',
 )
 
@@ -135,7 +137,10 @@ INSTALLED_APPS = (
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
-    #'djvideo',                               # http://git.participatoryculture.org/djvideo/
+    # ## DJVIDEO
+    # djvideo_link | http://git.participatoryculture.org/djvideo/
+    # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
+    'djvideo',                              
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.news',
@@ -150,7 +155,7 @@ INSTALLED_APPS = (
 search_engine = "haystack" 
 # DJAPIAN CONFIG
 if search_engine == "djapian":
-    DJAPIAN_DATABASE_PATH = os.path.dirname(__file__) + "./database"
+    DJAPIAN_DATABASE_PATH = SERVER_PATH + "./database"
     INSTALLED_APPS += ('djapian',)
 
 # HAYSTACK
@@ -161,10 +166,14 @@ To rebuild a new search index :
 if search_engine == "haystack":
     HAYSTACK_SITECONF = 'haystacksearch'
     HAYSTACK_SEARCH_ENGINE = 'whoosh'
-    HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
-    HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database"
+    HAYSTACK_WHOOSH_PATH = SERVER_PATH + '/./database/whoosh'
+    HAYSTACK_XAPIAN_PATH = SERVER_PATH + "/./database"
 
-    INSTALLED_APPS += ('haystack',) # http://haystacksearch.org/docs/
+    INSTALLED_APPS += ('haystack',) 
+    # Haystack_link | http://haystacksearch.org/docs/
+    # haystack_file | git clone git://github.com/toastdriven/django-haystack.git
+    # Haystack_require_whoosh | svn co http://svn.whoosh.ca/projects/whoosh/trunk/
+ 
 
 
 
