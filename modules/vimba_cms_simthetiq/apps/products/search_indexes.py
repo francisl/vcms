@@ -4,7 +4,10 @@ from haystack import site
 from vimba_cms_simthetiq.apps.products.models import ProductPage
 
 
-class ProductPageIndex(settings.SEARCH_INDEX):
+# Get the search index according to the current environment
+search_index = getattr(indexes, settings.SEARCH_INDEX)
+
+class ProductPageIndex(search_index):
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField(model_attr='name')
     description = indexes.CharField(model_attr='description')
