@@ -5,12 +5,11 @@
 import os
 from django.utils.translation import ugettext_lazy as _
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
-
+MEDIA_PATH = SERVER_PATH + "/../"
 #Production
 #DEBUG = False
 #MEDIA_PATH = SERVER_PATH + "/../../webv2_static"
 #developpement
-MEDIA_PATH = SERVER_PATH
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 

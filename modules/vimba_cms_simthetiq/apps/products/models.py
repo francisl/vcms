@@ -242,6 +242,7 @@ class ProductPage(Page):
     videos = models.ManyToManyField(Video, null=True, blank=True)
     previous = models.ForeignKey('self', related_name="previous_product", null=True, blank=True)
     next = models.ForeignKey('self', related_name="next_product", null=True, blank=True)
+
     
     # Set customer manager
     objects = ProductPageManager()

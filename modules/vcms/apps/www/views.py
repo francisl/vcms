@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from captcha.fields import CaptchaField
 
 from vcms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview
-from serconfig import simthetiq_config 
+from config import simthetiq_config 
 
 DROPDOWN_MENU = 0
 SIMPLE_MENU = 1

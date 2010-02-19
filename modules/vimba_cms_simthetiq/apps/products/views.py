@@ -45,6 +45,46 @@ def Product(request, context={}):
                                   "product_contents": product_contents },
                                 context_instance=RequestContext(request))
 
+def ProductGallery(request, context={}):
+    
+    # create a list of dictionary binding type to product(s)
+    categories = []
+    #prodByCategories = {}
+    #product_paginator = getPageList()
+    for category in productmodels.Category.objects.filter(domain = domain_page.id):
+        #if not prodByCategories.has_key(category.name):
+        #    prodByCategories[category.name] = []
+        
+        products = productmodels.ProductPage.objects.filter(category=category.id)
+        pageproducts = []
+        for p in products:
+            pageproducts.append(p)
+        
+        #for p in product_paginator.page_range:
+        #    if product_paginator.object_list[p-1].category == category.name:
+        #        prodByCategories[category.name].append(product_paginator.object_list[p-1])
+                     
+        if len(products) != 0:
+            # only takes types that have product associated to them
+            categories.append({"category": category, "products": pageproducts}) 
+    context['categories'] = categories
+    
+    del categories
+    
+    # File Format
+    context['file_format'] = domain_page.file_format.all()
+    context['domain_page'] = domain_page
+    
+    if context["selected_category"] == None:
+        del context["selected_category"]
+    else:
+        # needed in order to make comparaison with ids in template
+        context["selected_category"] = int(context["selected_category"])
+    
+    return render_to_response('product_gallery.html',
+                              context,
+                              context_instance=RequestContext(request))
+
 
 def getPageList():
     return Paginator(productmodels.ProductPage.objects.all(), 1)
