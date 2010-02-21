@@ -122,6 +122,12 @@ class Video(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        # If the clean() method hasn't set the MIME type (ie. running in a test), then call it before saving
+        if not self.mime_type:
+            self.clean()
+        super(Video, self).save(*args, **kwargs)
+
     def clean(self):
         # Set the video's filesize and its MIME type,
         # then validate its MIME type against the list of supported MIME types
