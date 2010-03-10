@@ -34,11 +34,11 @@ echo "-----------PyYAML---------"
 easy_install PyYAML
 
 echo "-----------DJANGO-THREADED-MULTIHOST---------"
-hg clone https://bkroeze@bitbucket.org/bkroeze/django-threaded-multihost/ d-t-m
-cd d-t-m
+hg clone https://bkroeze@bitbucket.org/bkroeze/django-threaded-multihost/ django-threaded-multihost
+cd django-threaded-multihost
 $python_cmd setup.py install
 cd ..
-rm -rf d-t-m/
+rm -rf django-threaded-multihost/
 
 echo "-----------DJANGO-APP-PLUGINS---------"
 svn checkout http://django-app-plugins.googlecode.com/svn/trunk/ django-app-plugins-read-only
@@ -48,16 +48,16 @@ cd ..
 rm -rf django-app-plugins-read-only/
 
 echo "-----------DJANGO-SIGNALS-AHOY---------"
-hg clone http://bitbucket.org/bkroeze/django-signals-ahoy/ d-s-ahoy
-cd d-s-ahoy
+hg clone http://bitbucket.org/bkroeze/django-signals-ahoy/ django-signals-ahoy
+cd django-signals-ahoy
 $python_cmd setup.py install
 cd ..
-rm -rf d-s-ahoy/
+rm -rf django-signals-ahoy/
 
 echo "-----------SATCHMO---------"
 hg clone http://bitbucket.org/chris1610/satchmo/ satchmo-trunk
 cd satchmo-trunk
-python setup.py install
+$python_cmd setup.py install
 cd ..
 rm -rf satchmo-trunk
 
