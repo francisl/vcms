@@ -122,6 +122,8 @@ TEMPLATE_DIRS = (
     #os.path.dirname(__file__) + '/www/templates',
 )
 
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,6 +138,7 @@ INSTALLED_APPS = (
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
+    'registration',                         # http://bitbucket.org/ubernostrum/django-registration/
     # ## DJVIDEO
     # djvideo_link | http://git.participatoryculture.org/djvideo/
     # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
@@ -150,44 +153,6 @@ INSTALLED_APPS = (
     'vimba_cms_simthetiq.apps.importer',
 )
 
-# Search facilities
-search_engine = "haystack" 
-# DJAPIAN CONFIG
-if search_engine == "djapian":
-    DJAPIAN_DATABASE_PATH = SERVER_PATH + "./database"
-    INSTALLED_APPS += ('djapian',)
-
-# HAYSTACK
-"""
-To rebuild a new search index :
-    ./manage.py rebuild_index
-"""
-if search_engine == "haystack":
-	
-    WHOOSH_SEARCH_ENGINE = 'whoosh'
-    XAPIAN_SEARCH_ENGINE = 'xapian'
-    HAYSTACK_SEARCH_ENGINE = WHOOSH_SEARCH_ENGINE
-
-    if HAYSTACK_SEARCH_ENGINE == WHOOSH_SEARCH_ENGINE :
-        HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/./database/whoosh'
-        # Build the search index in real time when in development
-        SEARCH_INDEX = "RealTimeSearchIndex"
-    elif HAYSTACK_SEARCH_ENGINE == XAPIAN_SEARCH_ENGINE:
-        HAYSTACK_SEARCH_ENGINE = 'xapian'
-        HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database/xapian"
-        # Regular search index when in production, if needed, the index will have to be built or updated through the manage.py commands
-        SEARCH_INDEX = "SearchIndex"
-    else:
-        # no search engine define
-        pass
-    
-    HAYSTACK_SITECONF = 'haystacksearch'
-    INSTALLED_APPS += ('haystack',)
-    # Haystack_link | http://haystacksearch.org/docs/
-    # haystack_file | git clone git://github.com/toastdriven/django-haystack.git
-    # Haystack_require_whoosh | svn co http://svn.whoosh.ca/projects/whoosh/trunk/
-
-
 
 # ----------------------------
 # sorl-thumbnail config option
@@ -196,10 +161,6 @@ THUMBNAIL_DEBUG = False
 # ----------------------------
 # use to load dashboard module/widget dynamically
 PAGE_MODULES = []
-
-# ----------------------------
-if DEBUG:
-    import settings_debug
 
 # OPTIMISATION
 # CACHE 
@@ -211,11 +172,16 @@ CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 
 
-# CHANGE THIS ----------------------------------------------------
-EMAIL_HOST='smtp.webfaction.com'
-EMAIL_PORT=25   
-EMAIL_HOST_USER='simthetiq_noreply'
-EMAIL_HOST_PASSWORD='cfd6d14a'
-# secure
-#EMAIL_PORT=465
-EMAIL_USE_TLS=False
+# Load the local settings
+# ----------------------------
+if DEBUG:
+    from config.settings_debug import *
+    if DEBUG_INSTALLED_APPS: 
+        INSTALLED_APPS += DEBUG_INSTALLED_APPS
+
+from config.search_engine import *
+if SEARCH_ENGINE:
+    INSTALLED_APPS += (SEARCH_ENGINE,)
+    
+from config.email import *
+#from config.satchmo import *

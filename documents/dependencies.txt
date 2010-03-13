@@ -5,3 +5,8 @@ treebeard               # http://code.tabo.pe/django-treebeard/src/
 captcha                 # http://code.google.com/p/django-simple-captcha/
 zope.mimetype           # http://pypi.python.org/pypi/zope.mimetype/1.2.0
 "video" template tag    # http://git.participatoryculture.org/djvideo/
+
+satchmo
+
+see vcms/tools/instdall_dependencies.sh
+libssl for 2.5 		# http://pypi.python.org/pypi/ssl/

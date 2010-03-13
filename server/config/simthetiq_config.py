@@ -7,6 +7,9 @@
 #  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
 #
 
+
+# TODO : PUT these setting inside the database
+
 # EMAIL
 simthetiq_email_from = "no-reply@simthetiq.com"
 simthetiq_email_from_order = "order@simthetiq.com"
