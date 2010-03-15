@@ -9,4 +9,9 @@ zope.mimetype           # http://pypi.python.org/pypi/zope.mimetype/1.2.0
 satchmo
 
 see vcms/tools/instdall_dependencies.sh
-libssl for 2.5 		# http://pypi.python.org/pypi/ssl/
+libssl for 2.5 		    # http://pypi.python.org/pypi/ssl/
+
+beautiful-soup          # http://www.crummy.com/software/BeautifulSoup/
+django-css              # git://github.com/dziegler/django-css.git
+clevercss               # http://github.com/dziegler/clevercss
+

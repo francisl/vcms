@@ -1,6 +1,7 @@
 {% load www_extras %}
 {% load banner_widget %}
 {% load search_widget %}
+{% load compress %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -17,13 +18,13 @@
 	
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
 	
+	{% compress css %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/css/style.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
 	<style type="text/css" media="all">
-	   @import "{{ MEDIA_URL }}CustomThemes/Simthetiq/css/style.css";
 	   {% block stylesheet %}{% endblock stylesheet %}
-	   @import "{{ MEDIA_URL }}CustomThemes/Simthetiq/css/prettyPhoto/css/prettyPhoto.css";
-	
 	</style>
-	
+    {% endcompress %}	
 
 	
 </head>

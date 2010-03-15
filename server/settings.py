@@ -124,7 +124,9 @@ INSTALLED_APPS = (
     # ## DJVIDEO
     # djvideo_link | http://git.participatoryculture.org/djvideo/
     # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
-    'djvideo',                              
+    'djvideo',                           
+    'compressor',                           # git://github.com/dziegler/django-css.git
+    'clevercss',                            # http://github.com/dziegler/clevercss                   
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.news',
@@ -153,6 +155,20 @@ PAGE_MODULES = []
 # ## CAPTCHA CONFIGURATION
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
+
+# ## ###
+# ## COMPRESSOR (JS/CSS)
+COMPRESS = True
+COMPILER_FORMATS = {
+    '.sass': {
+        'binary_path':'sass',
+        'arguments': '*.sass *.css'
+    },
+    '.ccss': {
+        'binary_path':'clevercss',
+        'arguments': '*.ccss'
+    },
+}
 
 # ## ###
 # ## LOAD LOCAL SETTING
