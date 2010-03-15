@@ -25,7 +25,6 @@ if SEARCH_ENGINE == "haystack":
         # Build the search index in real time when in development
         SEARCH_INDEX = "RealTimeSearchIndex"
     elif HAYSTACK_SEARCH_ENGINE == XAPIAN_SEARCH_ENGINE:
-        HAYSTACK_SEARCH_ENGINE = 'xapian'
         HAYSTACK_XAPIAN_PATH = os.path.dirname(__file__) + "/./database/xapian"
         # Regular search index when in production, if needed, the index will have to be built or updated through the manage.py commands
         SEARCH_INDEX = "SearchIndex"

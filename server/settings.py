@@ -4,6 +4,7 @@
 # 
 import os
 from django.utils.translation import ugettext_lazy as _
+
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
 MEDIA_PATH = SERVER_PATH + "/../"
 #Production
@@ -13,19 +14,11 @@ MEDIA_PATH = SERVER_PATH + "/../"
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('simthetiq support', 'support@simthetiq.com'),
-)
+# ## EMAIL
+from config.email import *
 
-MANAGERS = ADMINS
-
-DATABASE_ENGINE = 'sqlite3'                 # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = './database/djangodata'    # Or path to database file if using sqlite3.
-DATABASE_USER = ''                          # Not used with sqlite3.
-DATABASE_PASSWORD = ''                      # Not used with sqlite3.
-DATABASE_HOST = ''                          # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''                          # Set to empty string for default. Not used with sqlite3.
-
+# ## DATABASE
+from config.database import *
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -48,20 +41,11 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = MEDIA_PATH + "/client_cms_static/"
-#VIMBA_CMS_MEDIA_ROOT = os.path.dirname(__file__) + "/../vimba_cms_static/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/static/'
-#VIMBA_CMS_MEDIA_URL = '/static/'
-#THEME = "Simthetiq"
-
-#TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.auth',
-#        'django.core.context_processors.debug',
-#        'django.core.context_processors.i18n',
-#        'django.core.context_processors.media'
-#) 
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -71,9 +55,9 @@ ADMIN_MEDIA_PREFIX = '/adminmedia/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')z=ki#(2ki!o7*@3-+9vrae)tq6^v(8#d)k76eo26%hz6v)nke'
 
-# LOGIN
+# ## ###
+# ## LOGIN
 LOGIN_URL = '/login/'
-
 #LOGIN_REDIRECT_URL = '/'
 # Set of URLs that does not require to be logged in.
 # Used by the EnforceLoginMiddleware middleware
@@ -85,11 +69,12 @@ PUBLIC_URLS = (
 
 ROOT_URLCONF = 'server.urls'
 
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',   # Add the request to the context
     'django.core.context_processors.media',     # Add MEDIA_URL to every RequestContext
     'django.core.context_processors.auth',      # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+#    'django.core.context_processors.debug',
+#    'django.core.context_processors.i18n',
 )
 
 
@@ -113,7 +98,6 @@ MIDDLEWARE_CLASSES = (
     'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
-
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -121,8 +105,6 @@ TEMPLATE_DIRS = (
     SERVER_PATH + '/templates',
     #os.path.dirname(__file__) + '/www/templates',
 )
-
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -153,8 +135,7 @@ INSTALLED_APPS = (
     'vimba_cms_simthetiq.apps.importer',
 )
 
-
-# ----------------------------
+# ## ###
 # sorl-thumbnail config option
 THUMBNAIL_DEBUG = False
 
@@ -168,20 +149,24 @@ PAGE_MODULES = []
 #CACHE_MIDDLEWARE_SECONDS = 30
 #CACHE_MIDDLEWARE_KEY_PREFIX = ""
 
+# ## ###
+# ## CAPTCHA CONFIGURATION
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
 
-
-# Load the local settings
-# ----------------------------
+# ## ###
+# ## LOAD LOCAL SETTING
+# ## DEBUG
 if DEBUG:
-    from config.settings_debug import *
+    from config.debug import *
     if DEBUG_INSTALLED_APPS: 
         INSTALLED_APPS += DEBUG_INSTALLED_APPS
+        MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 
+# ## SEARCH ENGINE
 from config.search_engine import *
 if SEARCH_ENGINE:
     INSTALLED_APPS += (SEARCH_ENGINE,)
-    
-from config.email import *
+
+# ## SATCHMO
 #from config.satchmo import *

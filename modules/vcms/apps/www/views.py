@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from captcha.fields import CaptchaField
 
 from vcms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview
-from config import simthetiq_config 
+from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
 SIMPLE_MENU = 1
@@ -143,7 +143,7 @@ class ContactForm(forms.Form):
         email = forms.EmailField(required=True)
         email2 = forms.EmailField(required=True)
         message = forms.CharField(widget=forms.Textarea, required=True)
-        if simthetiq_config.CAPTCHA : captcha = CaptchaField()
+        if EMAILS["CONTACT"]["CAPTCHA"] : captcha = CaptchaField()
     
       
 def Contact(request, context={}):
@@ -159,8 +159,8 @@ def Contact(request, context={}):
             #Email to simthetiq
             try:
                 subject = 'A message has been send through the contact form'
-                email_from = simthetiq_config.simthetiq_email_from
-                email_to = simthetiq_config.simthetiq_contactemail_to
+                email_from = EMAILS["CONTACT"]["FROM"]
+                email_to = EMAILS["CONTACT"]["TO"]
                 text_content = render_to_response('contact/email_internal.txt', { "orderinfo": form.cleaned_data  })
                 html_content = render_to_response('contact/email_internal.html', { "orderinfo": form.cleaned_data  })
                 msg = EmailMultiAlternatives(subject, text_content, email_from, [email_to])
@@ -168,7 +168,7 @@ def Contact(request, context={}):
                 cdr = msg.send()
                 #Email to customer
                 subject = 'Your message has been sent to Simthetiq'
-                email_from = simthetiq_config.simthetiq_email_from
+                email_from = EMAILS["CONTACT"]["FROM"]
                 email_to = form.data["email"]
                 text_content = render_to_response('contact/email_customer.txt', { "orderinfo": form.cleaned_data  })
                 html_content = render_to_response('contact/email_customer.html', { "orderinfo": form.cleaned_data  })
