@@ -5,8 +5,9 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.db import models
-from tagging.models import TagField
-from vcms.apps.www.models import PageElementPosition
+from django.utils.translation import ugettext, ugettext_lazy as _
+from tagging.fields import TagField
+from vcms.apps.www.models import Language, PageElementPosition
 
 
 class Article(models.Model):
