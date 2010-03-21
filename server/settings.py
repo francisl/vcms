@@ -193,5 +193,13 @@ for app in INSTALLED_APPS:
     if app.startswith(APPS_BASE_NAME):
         try:
             app_module = __import__(app, globals(), locals(), ["settings"])
+            app_settings = getattr(app_module, "settings", None)
+            for setting in dir(app_settings):
+                if setting == setting.upper():
+                    value = getattr(app_settings, setting)
+                    if isinstance(value, tuple):
+                        locals()[setting] += value
+                    else:
+                        locals()[setting] = value
         except ImportError:
             pass
