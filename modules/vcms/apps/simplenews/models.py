@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.db import models
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.apps.www.models import Language, PageElementPosition
 
