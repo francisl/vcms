@@ -19,79 +19,81 @@
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
 	
 	{% compress css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/css/style.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/style.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/dropdownmenu.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
 	<style type="text/css" media="all">
 	   {% block stylesheet %}{% endblock stylesheet %}
 	</style>
-    {% endcompress %}	
-
-	
+    {% endcompress %}
+    
 </head>
-<body id="vimba_cms_body">
+<body>
 <!-- =========header=========== -->
-	<div id="cms_header">  
-		{% show_search_box %}
-		<div id="cms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
-			<a href="/" title="Home" ></a>
-		</div>
-
-	</div>
-
-<!-- =========MENU=========== -->
-{% ifequal menu_style 0 %}
-    {% show_dropdown_menu current_page %}
-    {% show_banner current_page MEDIA_URL %}
-{% else %}
-	{% if current_page %}
-	   {% show_main_menu current_page %}
-	{% else %}
-	   {% show_main_menu %}
-	{% endif %}
-
-	{% if current_page %}
-	    <!-- BANNER -->
-	    
-	    {% show_banner current_page MEDIA_URL %}
-	    <!-- SUBMENU -->
-	    {% show_sub_menu current_page %}
-	{% endif %}
-{% endifequal %}
-<!--=========content=========== -->
-
-{% block ubercontent %}
-<div class="content">
-
-	
-    {% block content %}
-		<!-- Content -->
-		{% if contents %}
-		{% for c in contents %}
-		<div class="division_content" name="{{ c.id }}">
-			<br />
-			<h4>{{ c.name|upper }}</h4>
-			<hr />
-			<div class="division_content">
-				{{ c.content|safe }}
+    <div id="vcms_content_body">
+		<div id="vcms_header">  
+			<!-- {% show_search_box %} -->
+			<div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
+				<a href="/" title="Home" ></a>
 			</div>
 		</div>
-		{% endfor %}
-		{% endif %}
-    {% endblock content %}
-</div>
-{% endblock ubercontent %}
-
-<!-- =========footer=========== -->
-<div class="footer" >
-	<div class="footer_content">
-        {% if current_page %}
-            {% show_footer_menu current_page %}
-         {% else%}
-            {% show_footer_menu %}
-        {% endif %}
-		<p>Simthetiq.Com &copy; 2008 | <a href="/privacy">Privacy Policy</a></p>
-	</div>
-</div>
+	
+		<!-- =========MENU=========== -->
+		{% ifequal menu_style 0 %}
+		    {% show_dropdown_menu current_page %}
+		    {% show_banner current_page MEDIA_URL %}
+		{% else %}
+			{% if current_page %}
+			   {% show_main_menu current_page %}
+			{% else %}
+			   {% show_main_menu %}
+			{% endif %}
+		
+			{% if current_page %}
+			    <!-- BANNER -->
+			    
+			    {% show_banner current_page MEDIA_URL %}
+			    <!-- SUBMENU -->
+			    {% show_sub_menu current_page %}
+			{% endif %}
+		{% endifequal %}
+		<!--=========content=========== -->
+		
+		{% block ubercontent %}
+		<div class="content">
+		
+			
+		    {% block content %}
+				<!-- Content -->
+				{% if contents %}
+				{% for c in contents %}
+				<div class="division_content" name="{{ c.id }}">
+					<br />
+					<h4>{{ c.name|upper }}</h4>
+					<hr />
+					<div class="division_content">
+						{{ c.content|safe }}
+					</div>
+				</div>
+				{% endfor %}
+				{% endif %}
+		    {% endblock content %}
+		</div>
+		{% endblock ubercontent %}
+		
+		<!-- =========footer=========== -->
+		<div id="footing" >
+			<div class="footing_content">
+			     <span id="copyright">Simthetiq.Com &copy; 2010 |</span>
+		        {% if current_page %}
+		            {% show_footer_menu current_page %}
+		         {% else%}
+		            {% show_footer_menu %}
+		        {% endif %}
+				
+			</div>
+		</div>
+	</div><!-- vcms_content_body -->
 <!-- =========GOOGLE SCRIPT=========== -->
 <!--  
 	<script type="text/javascript">
@@ -106,6 +108,7 @@
  -->
     {% block javascript-master %}
         <script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery-ui-min.js"></script>
         <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
         <!--<script src="{{ MEDIA_URL }}Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
         <script src="{{ MEDIA_URL }}Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>

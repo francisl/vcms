@@ -4,7 +4,7 @@
     <li class="{% ifequal selected_menu.id menu.id %}menu_selected{% endifequal%}"><a href="{{menu.get_absolute_url}}/" class="dir">{{ menu|upper }}</a>
 		<ul>{% for submenu in submenus.0 %}
 		      <li id="menu_{{menu.id}}" class="{% ifequal selected_menu.id submenu.id %}menu_selected{% endifequal%}">
-		          <a href="{{submenu.get_absolute_url}}/" class="{% ifequal selected_menu.id menu.id %}menu_selected{% endifequal%}">{{ submenu }}</a>
+		          <a href="{{submenu.get_absolute_url}}/" class="{% ifequal selected_menu.id menu.id %}menu_selected{% endifequal%}">{{ submenu|upper }}</a>
 		      </li>{% endfor %}
 		</ul>
 	</li>

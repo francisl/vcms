@@ -1,4 +1,4 @@
-#Mon Mar 15 15:54:35 EDT 2010
+#Thu Mar 18 17:32:06 EDT 2010
 eclipse.preferences.version=1
 encoding//modules/vcms/apps/news/admin.py=utf-8
 encoding//modules/vcms/apps/news/managers.py=utf-8
@@ -38,6 +38,7 @@ encoding//modules/vimba_cms_simthetiq/apps/products/admin.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/managers.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/models.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/templates/admin/products/change_form.html=UTF-8
+encoding//modules/vimba_cms_simthetiq/apps/products/templatetags/product_navigation.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/urls.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/views.py=utf-8
 encoding//modules/vimba_cms_simthetiq/tools/check_all.py=utf-8

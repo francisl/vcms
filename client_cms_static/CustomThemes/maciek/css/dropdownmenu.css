@@ -1,0 +1,132 @@
+div#mainnav {
+  position: absolute;
+  height: 96px;
+  margin: -96px 0 96px auto;
+  padding: 0;
+  right: 0;
+}
+
+ul.dropdown {
+  position: relative;
+  z-index: 40;
+  float: left;
+  height: 96px;
+  margin: 0;
+}
+
+ul.dropdown ul,
+ul.dropdown li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.dropdown ul {
+  width: 100%;
+  top: 100%;
+  text-align: left;
+  right: 0px;
+  padding: 0.4em 0;
+  border-left: 1px solid #7b7b7a;
+  border-right: 1px solid #7b7b7a;
+  border-bottom: 1px solid #7b7b7a;
+  visibility: hidden;
+  position: absolute;
+  z-index: 40;
+  width: 140px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1em;
+  text-transform: none;
+  filter: alpha opacity=70;
+  -moz-opacity: .7;
+  KhtmlOpacity: .7;
+  opacity: .7;
+}
+
+ul.dropdown ul li {
+  font-size: 0.9em;
+  float: none;
+  color: #ffffff;
+  filter: none;
+  padding: 0;
+}
+
+ul.dropdown ul a {
+  color: #ffffff;
+  padding: 0.6em 0.8em;
+}
+
+ul.dropdown ul a .category {
+  color: #ffd83c;
+}
+
+ul.dropdown ul a:link,
+ul.dropdown ul a:active,
+ul.dropdown ul aa:visited {
+  color: #ffffff;
+}
+
+ul.dropdown ul a:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+ul.dropdown > li {
+  height: 96px;
+  background: url(../images/menu/main_menu_separator.jpg) left no-repeat;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+ul.dropdown > li > a {
+  color: #c2c2c2;
+  margin: auto 0 0 0;
+  padding-top: 60px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+ul.dropdown > li.menu_selected > a {
+  color: #b9ff3c;
+}
+
+ul.dropdown li {
+  float: left;
+  zoom: 1;
+  line-height: normal;
+}
+
+ul.dropdown li .hover {
+  position: relative;
+  z-index: 40;
+  cursor: default;
+}
+
+ul.dropdown li:hover {
+  position: relative;
+  z-index: 40;
+  cursor: default;
+}
+
+ul.dropdown li:hover > ul {
+  visibility: visible;
+}
+
+ul.dropdown a {
+  position: relative;
+  display: block;
+}
+
+ul.dropdown a:link,
+ul.dropdown a:visited {
+  text-decoration: none;
+  display: block;
+}
+
+ul.dropdown a:hover {
+  text-decoration: none;
+}
