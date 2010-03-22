@@ -9,7 +9,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('vcms.apps.simplenews.views',
     (r'^news/page-(?P<page>)/$', 'news_index'), # /news/page-1/
-    (r'^news/(?P<news_id>)/$', 'news_unique'), # /news/1/
+    (r'^news/(?P<news_slug>)/$', 'news_unique'), # /news/year-of-the-linux-desktop/
     (r'^news/category/(?P<category>\w)/$', 'news_category'), # /news/category/Technology/
     (r'^news/category/(?P<category>\w)/page-(?P<page>)/$', 'news_category'), # /news/category/Technology/page-1/
     #(r'^news/category/(?P<category>\w).atom$', 'TODO'), # /news/category/Technology.atom
