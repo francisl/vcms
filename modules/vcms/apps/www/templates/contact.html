@@ -13,6 +13,7 @@
 		</script>
 
 		<form  method="post" action="/forms/contact/" onsubmit="return checkifcompleted(document.orderform, requiredfield, errormess );">
+		{% csrf_token %}
 		<div class="division_content">
 			<h4>CONTACT FORM</h4>
 		</div>
