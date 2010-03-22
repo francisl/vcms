@@ -1,5 +1,6 @@
-#Thu Mar 18 17:32:06 EDT 2010
+#Mon Mar 22 11:29:50 EDT 2010
 eclipse.preferences.version=1
+encoding//modules/vcms/apps/news/__init__.py=utf-8
 encoding//modules/vcms/apps/news/admin.py=utf-8
 encoding//modules/vcms/apps/news/managers.py=utf-8
 encoding//modules/vcms/apps/news/models.py=utf-8

@@ -30,6 +30,14 @@ def show_main_menu(current_page=None):
     selected_menu = Page.objects.get_RootSelectedMenu(current_page)
     return locals()
 
+@register.inclusion_tag('submenu.html')
+def show_sub_menu(current_page=None):
+    """ return the submenu currently selected
+        and the seleted_submenu
+    """
+    submenu, selected_submenu = Page.objects.get_SubMenu(current_page)
+    return locals()
+
 @register.inclusion_tag('footer_menu.html')
 def show_footer_menu(current_page=None):
     """ return main menu list
@@ -37,12 +45,4 @@ def show_footer_menu(current_page=None):
     """
     main_menu = Page.objects.get_RootMenu()
     selected_menu = Page.objects.get_RootSelectedMenu(current_page)
-    return locals()
-
-@register.inclusion_tag('submenu.html')
-def show_sub_menu(current_page=None):
-    """ return the submenu currently selected
-        and the seleted_submenu
-    """
-    submenu, selected_submenu = Page.objects.get_SubMenu(current_page)
     return locals()

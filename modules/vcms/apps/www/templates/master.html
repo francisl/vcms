@@ -43,18 +43,14 @@
 		    {% show_dropdown_menu current_page %}
 		    {% show_banner current_page MEDIA_URL %}
 		{% else %}
+		menu style = {{ menu_style}}
 			{% if current_page %}
 			   {% show_main_menu current_page %}
+			   <!-- BANNER -->
+               {% show_banner current_page MEDIA_URL %}
+               {% show_sub_menu current_page %}
 			{% else %}
 			   {% show_main_menu %}
-			{% endif %}
-		
-			{% if current_page %}
-			    <!-- BANNER -->
-			    
-			    {% show_banner current_page MEDIA_URL %}
-			    <!-- SUBMENU -->
-			    {% show_sub_menu current_page %}
 			{% endif %}
 		{% endifequal %}
 		<!--=========content=========== -->
