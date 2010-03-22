@@ -11,8 +11,14 @@ from django.template import RequestContext
 def news_index(request, page=1):
     return render_to_response("", {}, context_instance=RequestContext(request))
 
-def news_unique(request, news_id=1):
-    return render_to_response("", {}, context_instance=RequestContext(request))
+def news_unique(request, news_slug):
+    context = {}
+    context.update(InitPage(page=news_slug))
+    context.update(locals())
+    if context["module"] in globals():
+        return render_to_response("", {}, context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect("/")
 
 def news_category(request, category, page=1):
     return render_to_response("", {}, context_instance=RequestContext(request))
