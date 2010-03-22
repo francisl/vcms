@@ -26,7 +26,17 @@ def debugtrace(view, current_page, **argd):
         print("%s : %s" % (v,argd[v]))
     
 def InitPage(page):
+    """ InitPage get a page slug and return an updated context with required information for the CMS pages
+    
+        returns: 
+            current_page : Page instance that is currently request
+            module : Page instance modules or function to call in the Views, 
+                    it use reflection to execute the appropriate views function
+            menu_style : Style used to display the menu in the master template
+    """
+    
     #debugtrace("Initpage", page)
+    
     try:
         # IF NOTHING SELECTED, GO FIRST MENU
         # ON ERROR RAISE 404

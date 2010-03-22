@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage, FileSystemStorage
-from vcms.apps.www.managers import PageManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
+from vcms.apps.www.managers import PageManager, ContentManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
 
 
 # -- variable
@@ -69,7 +69,7 @@ class Page(models.Model):
     slug = models.SlugField(max_length=150, unique=True, help_text="used for link, no space or special caracter")
     description = models.CharField(max_length=250, help_text="Page short description (Help for search engine optimisation)")
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text="Page keywords (Help for search engine optimisation)")
-    app_slug = models.SlugField(default=APP_SLUGS, editable=False)
+    app_slug = models.SlugField(default="", editable=False)
     status = models.IntegerField(choices=STATUSES, default=DRAFT)
     date_created = models.DateTimeField(default=datetime.datetime.today(), editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
@@ -87,7 +87,7 @@ class Page(models.Model):
     #                       default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
 
     # Controler for the pages
-    module = models.CharField(max_length=30, default='Simple', editable=False)
+    module = models.CharField(max_length=30, default='', editable=False)
     objects = PageManager()
 
     class Meta:
@@ -132,6 +132,7 @@ class SimplePage(Page):
 
     def save(self):
         self.module = 'Simple'
+        self.app_slug = APP_SLUGS
         super(SimplePage, self).save()
 
 
@@ -149,7 +150,9 @@ class Content(models.Model):
     #INFORMATION
     date = models.DateField(auto_now=True, editable=True)
     author = models.ForeignKey(User, editable=False, null=True, blank=True)
-    page = models.ForeignKey(SimplePage)
+    page = models.ForeignKey(Page)
+    
+    objects = ContentManager()
     
     class Meta:
         verbose_name_plural = "Page content"
@@ -222,6 +225,7 @@ class DashboardPage(Page):
     
     def save(self):
         self.module = 'Dashboard'
+        self.app_slug = APP_SLUGS
         super(DashboardPage, self).save()
 
 class DashboardElement(PageElementPosition):
