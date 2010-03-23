@@ -94,6 +94,10 @@ ul.dropdown > li.menu_selected > a {
   color: #b9ff3c;
 }
 
+.large ul.dropdown > li {
+  background: url(../images/menu_large/main_menu_separator.jpg) left no-repeat;
+}
+
 ul.dropdown li {
   float: left;
   zoom: 1;

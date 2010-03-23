@@ -47,8 +47,7 @@ ul.dropdown:
         -moz-opacity: .7;
         KhtmlOpacity: .7;
         opacity: .7;
-       
-
+        
         li:
             font-size: $SUB_MENU_FONT_SIZE;
             float: none;
@@ -86,6 +85,9 @@ ul.dropdown:
             
         &.menu_selected > a:
             color: #b9ff3c; //light green
+            
+    .large & > li:
+        background:url(../images/menu_large/main_menu_separator.jpg) left no-repeat;
     
     li:
         float: left;

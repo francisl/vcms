@@ -55,6 +55,7 @@ def InitPage(page):
     
 def Generic(request, page=None, context={}):
     context.update(InitPage(page=page))
+    print("page ==== %s" % page)
     context.update(locals())
     
     if context["module"] in globals():

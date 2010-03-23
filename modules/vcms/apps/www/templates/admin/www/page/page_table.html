@@ -1,15 +1,9 @@
 {% load i18n %}
-    <script language="javascript" type="text/javascript">
-            {% for page in all_pages %}
-                all_pages["{{ page.slug }}"] = new page({{ page.id }}, 
-										"{{ page.name}}",
-									{{ page.display|lower }},
-									{{ page.level }},
-									{% if page.parent_id %}{{ page.parent_id }}{% else %} null {% endif %},
-									{{ page.tree_position }},
-                    				"{{ page.module }}");
-            {% endfor %}
-    </script>
+<script language="javascript" type="text/javascript">
+{% for page in all_pages %}
+all_pages["{{ page.slug }}"] = new page({{ page.id }}, "{{ page.name}}", "{{ page.slug }}", {{ page.display|lower }}, {{ page.level }}, {% if page.parent_id %}{{ page.parent_id }}{% else %} null {% endif %}, {{ page.tree_position }}, "{{ page.module }}");
+{% endfor %}
+</script>
 
 	<div id="vimba_cms_body">
     <form id="updatemenu" method="post" action="#">

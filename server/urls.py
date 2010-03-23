@@ -84,6 +84,7 @@ urlpatterns += patterns('',
     url(r'^contact/', include('vcms.apps.contact.urls')),
     # url(r'^afghanistan/', 'www.),
     # CMS, catch every page
+    url(r'^www/', include('vcms.apps.www.urls')),
     url(r'', include('vcms.apps.www.urls')),
 )
 

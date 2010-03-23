@@ -33,7 +33,8 @@ class ContactForm(forms.Form):
 def Contact(request, page=None, context={}):
     context.update(InitPage(page=page))
     context.update(locals())
-    contact_page = ContactPage.objects.get(context["current_page"])
+    contact_page = ContactPage.objects.get(slug=context["current_page"].slug)
+    form = ContactForm()
     
     requiredfields = ["id_%s" % fieldname for fieldname,fieldobject in form.fields.items() if fieldobject.required]
     completed = False
@@ -77,9 +78,9 @@ def Contact(request, page=None, context={}):
             form.errors["email"] = ["Email don't match"]
             form.errors["email2"] = ["Email don't match"]
     
-    form = ContactForm()
-    contents = Content.get_content_for_page(context["currentpage"])
-    print("content for contant page %s : %s" % (context["currentpage"], contents))
+    
+    contents = Content.objects.get_contents_for_page(context["current_page"])
+    print("content for contant page %s : %s" % (context["current_page"], contents))
             
     context.update(locals())
     return render_to_response('contact.html', 

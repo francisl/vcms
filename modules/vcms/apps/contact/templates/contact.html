@@ -9,15 +9,16 @@
 			var requiredfield = new Array();
 			requiredfield = {{ requiredfields|safe }};
 			var errormess = new Array();
-			errormess = ["Please fill all required fields!","Please, enter a valid email address!", "Email address don't match!"	];				
+			errormess = ["Please fill all required fields!","Please, enter a valid email address!", "Email address don't match!"];				
 		</script>
 
 		<form  method="post" action="/contact/{{ current_page }}" onsubmit="return checkifcompleted(document.orderform, requiredfield, errormess );">
 		{% csrf_token %}
+		{{ form.as_p }}
 		<div class="division_content">
 			<h4>CONTACT FORM</h4>
 		</div>
-		<hr />	
+		<hr />
 		<div class="division_content">
 			<input id="default_input" type="hidden" />
 			<br />
@@ -49,11 +50,16 @@
             {{ form.captcha }}<br />
 
 				<div class="submit">
-						<button type="reset"><u>Clear</u></button>
-						<button type="submit" value="Submit"><u>Submit</u></button>
+					<!-- <button type="reset"><u>Clear</u></button>-->
+					<button type="submit" value="Submit"><u>Submit</u></button>
 				</div>
 			</div>
         </form>
+        {% for content in contents %}
+        <div>
+            {{ content.content|safe }}
+        </div>
+        {% endfor %}
     </div>
 </div>
 
