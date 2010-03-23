@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'vcms.apps.www',
     'vcms.apps.news',
     'vcms.apps.themes',
+    'vcms.apps.contact',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',

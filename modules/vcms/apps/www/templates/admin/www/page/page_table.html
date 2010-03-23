@@ -1,7 +1,7 @@
 {% load i18n %}
     <script language="javascript" type="text/javascript">
             {% for page in all_pages %}
-                all_pages["{{ page.name }}"] = new page({{ page.id }}, 
+                all_pages["{{ page.slug }}"] = new page({{ page.id }}, 
 										"{{ page.name}}",
 									{{ page.display|lower }},
 									{{ page.level }},
@@ -9,7 +9,6 @@
 									{{ page.tree_position }},
                     				"{{ page.module }}");
             {% endfor %}
-
     </script>
 
 	<div id="vimba_cms_body">
@@ -33,7 +32,6 @@
         	</ul>
 			<div class="clear"></div>
         </div>
-            
             <div id="pages_container" style=" width: 956px; margin: 1em auto auto auto; border: thin solid green" >
 				<div id="trash" class="dndContainer" style="float: left;" dojoType="dojo.dnd.Target" jsId="trash">
                 	<span style="font-size:1.4em; color: white;">{% trans "Remove menu" %}</span>

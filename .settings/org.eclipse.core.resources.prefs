@@ -1,6 +1,7 @@
-#Mon Mar 22 15:33:39 EDT 2010
+#Mon Mar 22 18:03:59 EDT 2010
 eclipse.preferences.version=1
 encoding//modules/vcms/apps/contact/admin.py=utf-8
+encoding//modules/vcms/apps/contact/managers.py=utf-8
 encoding//modules/vcms/apps/contact/models.py=utf-8
 encoding//modules/vcms/apps/contact/urls.py=utf-8
 encoding//modules/vcms/apps/contact/views.py=utf-8

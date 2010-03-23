@@ -321,7 +321,7 @@ function initDND(){
 dojo.addOnLoad(initDND);
 
 function submit_data(){
-	var json_pages = dojo.toJson( all_pages);
+	var json_pages = dojo.toJson(all_pages);
 	dojo.byId("savingmess").innerHTML = "Saving ...";
     //console.log(json_pages)
     dojo.xhrPost({

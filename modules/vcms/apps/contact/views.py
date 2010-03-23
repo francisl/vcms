@@ -11,11 +11,12 @@ from django import forms
 from django.core.mail import send_mail, EmailMultiAlternatives
 
 # from other aps
-from vcms.apps.www.model import Content
-from vcms.apps.www.urls import InitPage
+from vcms.apps.contact.models import ContactPage
+from vcms.apps.www.models import Content
+from vcms.apps.www.views import InitPage
 
 # external requirement
-from config.email import EMAILS 
+from config.email import EMAILS
 from captcha.fields import CaptchaField
 
 class ContactForm(forms.Form):
@@ -32,7 +33,7 @@ class ContactForm(forms.Form):
 def Contact(request, page=None, context={}):
     context.update(InitPage(page=page))
     context.update(locals())
-    context["current_page"]
+    contact_page = ContactPage.objects.get(context["current_page"])
     
     requiredfields = ["id_%s" % fieldname for fieldname,fieldobject in form.fields.items() if fieldobject.required]
     completed = False

@@ -5,12 +5,14 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from vcms.apps.www.models import Page
-
+from vcms.apps.contact.managers import ContactPageManager
 
 class ContactPage(Page):
     email_message = models.TextField(help_text=_("Message that will be displayed in the email"))
     reply_email = models.EmailField(help_text=_("Email address, could be your email or a robot email(ex: no-reply@yourbusiness.com"))
     confirmation_email = models.EmailField(help_text=_("Email address where you would like to receive the information"))
+    
+    objects = ContactPageManager()
     
     class Meta:
         verbose_name = "Contact page"
@@ -20,6 +22,7 @@ class ContactPage(Page):
         return self.name
 
     def save(self):
-        self.module = 'ContactForm'
+        self.module = 'ContactPAge'
+        self.app_slug = 'contact'
         super(ContactPage, self).save()
 
