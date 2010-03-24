@@ -84,7 +84,6 @@ class NewsPageModule(PageElementPosition):
     show_image_preview = models.BooleanField(default=False, help_text=_("Only if image are available to display"))
     show_video_preview = models.BooleanField(default=False, help_text=_("Only if video are available to display"))
     
-    
     def __unicode__(self):
         return self.page.name
 

@@ -10,15 +10,12 @@ from vcms.apps.www.models import Page
 
 @staff_member_required
 def UpdateMenu(request):
-    """
-        Switch the status of a page
+    """ Switch the status of a page
     """
     if request.method == 'POST':
         postlist = request.raw_post_data
-        #print("postlist = %s" % postlist)
         json_pages = json.JSONDecoder().decode(postlist)
-        #print("json pages = %s" % json_pages )
-
+            
         has_change = False
         for page in json_pages:
             db_page = Page.objects.get(id=json_pages[page]["Id"])

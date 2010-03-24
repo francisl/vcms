@@ -1,0 +1,123 @@
+// MENU
+MAIN_MENU_WIDTH = 650px;
+MAIN_MENU_HEIGHT = 96px;
+SUBMENU_BORDER = 1px solid #7b7b7a;
+MAIN_MENU_FONT_SIZE = 1em;
+SUB_MENU_FONT_SIZE = 0.9em;
+div#mainnav:
+    position: absolute; 
+    //width: $MAIN_MENU_WIDTH;
+    height: $MAIN_MENU_HEIGHT;
+    margin: -$MAIN_MENU_HEIGHT 0 $MAIN_MENU_HEIGHT auto;
+    padding: 0;
+    right: 0;
+    
+ul.dropdown:
+    position: relative;
+    z-index: 40;
+    float: left;
+    height: $MAIN_MENU_HEIGHT
+    margin: 0;
+ 
+    ul, li:
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    ul:
+        width: 100%;
+        top: 100%; 
+        //left: 0px;// align menu to main
+        text-align: left;
+        right: 0px;// align menu to main
+        //text-align: right;
+        padding: 0.4em 0;
+        border-left: $SUBMENU_BORDER;
+        border-right: $SUBMENU_BORDER;
+        border-bottom: $SUBMENU_BORDER;
+        visibility: hidden;
+        position: absolute;
+        z-index: 40;
+        width: 140px;
+        background-color: #000;
+        color: #fff;
+        font-size: $MAIN_MENU_FONT_SIZE;
+        text-transform: none;
+        filter: alpha(opacity=70);
+        -moz-opacity: .7;
+        KhtmlOpacity: .7;
+        opacity: .7;
+        
+        li:
+            font-size: $SUB_MENU_FONT_SIZE;
+            float: none;
+            color: #fff;
+            filter: none;
+            padding: 0;
+                
+        a:
+            color: #fff;
+            padding: 0.6em 0.8em;
+            .category:
+                color: #ffd83c; // orange
+            &:link, &:active, &a:visited:
+                color: #fff;
+            &:hover:
+                background-color: #4a4a4a;
+                color: #fff;
+                text-decoration: none;
+
+    // main menu item
+    & > li:
+        height: $MAIN_MENU_HEIGHT;
+        background:url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        
+        & > a:
+            color: #c2c2c2;
+            margin: auto 0 0 0;
+            padding-top: 60px;
+            padding-bottom: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            
+        &.menu_selected > a:
+            color: #b9ff3c; //light green
+            
+        &:hover:
+            background:url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
+            
+    .large & > li:
+        background:url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;
+        
+        &:hover:
+            background:url(../images/menu_large/main_bg_hover.jpg) left bottom no-repeat;
+        
+    
+    
+    li:
+        float: left;
+        zoom: 1;
+        line-height: normal;
+
+        &:hover, .hover:
+            position: relative;
+            z-index: 40;
+            cursor: default;
+        &:hover > ul:
+            visibility: visible;
+            
+
+    a:
+        position: relative;
+        display: block;
+        
+        &:link, &:visited:
+            text-decoration: none; 
+            display : block;
+        &:hover:
+            text-decoration: none;
+
+

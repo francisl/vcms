@@ -10,8 +10,13 @@ from vimba_cms_simthetiq.apps.products import models as productmodels
 from vcms.apps.www.views import InitPage
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
+    """ Is called first, then it calls the right view base on module name containt in the url
+    """
     context.update(InitPage(page=page))
     context.update(locals())
+    
+    print("menu style = %s" % context["menu_style"])
+    print("module = %s" % context["module"])
     
     if context["module"] in globals():
         return globals()[context["module"]](request, context)
@@ -20,7 +25,6 @@ def Generic(request, page=None, product=None, selected_category=None, slug=None,
     
 
 def Product(request, context={}):
-    #print("------------- product -------------")
     #get the product page, need to link to the product
     productpage = productmodels.ProductPage.objects.get(id=context["current_page"].id)
     # get product
@@ -44,9 +48,8 @@ def Product(request, context={}):
                                   "category":       category,
                                   "product_contents": product_contents },
                                 context_instance=RequestContext(request))
-
+"""
 def ProductGallery(request, context={}):
-    
     # create a list of dictionary binding type to product(s)
     categories = []
     #prodByCategories = {}
@@ -84,7 +87,7 @@ def ProductGallery(request, context={}):
     return render_to_response('product_gallery.html',
                               context,
                               context_instance=RequestContext(request))
-
+"""
 
 def getPageList():
     return Paginator(productmodels.ProductPage.objects.all(), 1)
@@ -152,38 +155,17 @@ def Domain(request, context={}):
 
 
 def GalleryPage(request, context={}):
-    #print("------------- Gallery -------------")
-    tags = productmodels.MediaTags.objects.all()
+    """ this page build a gallery with all the simthetiq product image
+        it is possible to filter the image by tags
+    """
+    context["tags"] = productmodels.MediaTags.objects.all()
     #get the product page, need to link to the product
     #gallery = productmodels.GalleryPage.objects.get(id=context["current_page"].id)
     # get product
     
-    media = productmodels.Image.objects.filter(show_in_gallery=True)
-    
-    """
-    media_array = []
-     
-    media_len = len(mediat)
-    cols = media_len/5
-    if media_len % 5: # add one row if necessary
-        cols = cols + 1
-
-    bdrange = [0,5]
-    for col in range(cols):
-        #sprint("range : %s" % range(cols))
-        media_array.append(mediat[bdrange[0]:bdrange[1]])
-        bdrange[0],bdrange[1] = bdrange[1], bdrange[1]+5
-    """
+    context["media_library"] = productmodels.Image.objects.filter(show_in_gallery=True)
     
     return render_to_response('gallery.html',
-                                { 
-                                "current_page":  context['current_page'],
-                                "tags": tags,
-                                #"media": mediat,
-                                "media_library": media,
-                                #"media_array": media_array,
-                                #"cols": range(cols),
-                                #"rows": range(5)
-                                },
+                                context,
                                 context_instance=RequestContext(request))
      

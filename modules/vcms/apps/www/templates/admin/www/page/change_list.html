@@ -122,14 +122,16 @@ dojo.require("dojo.dnd.Source");
 dojo.require("dijit.form.Button");
 
 // PAGE CONTRUCTOR
-function page(id, name, display, level, parent, tree_position, module){
+function page(id, name, slug, display, level, parent, tree_position, module){
 	this.Id = id;
     this.Name = name.toString();
+    this.Slug = slug
     this.Display = display; 
     this.Level = level;
     this.Parent = parent;
 	this.Position = tree_position;
     this.Module = module.toString();
+    this.hasBeenModified = false;
 }
 // Page object containing all pages available for this site
 var all_pages = {};
@@ -159,9 +161,11 @@ function initDND(){
 	
 	// Global variable for menu containers
 	var menucontainer = {};
+	// set main menu dragable/dropable
     menucontainer.mainmenu = new dojo.dnd.Source('mainmenu_container');
     menucontainer.mainmenu.horizontal = true;
 	var selected_mainmenu = 0;
+	// set submenu dragable/dropable
 	menucontainer.submenu = new dojo.dnd.Source("submenu_container");
     menucontainer.submenu.horizontal = true;
 	// var submenus = {};
@@ -246,6 +250,7 @@ function initDND(){
 	}
 	
    	function delete_menu_node(target, node){
+   	    console.log("deleting node = "+ node);
    		target.deleteSelectedNodes();
         var moved_page = all_pages[node.innerHTML];
         moved_page.Display = false;
@@ -269,13 +274,13 @@ function initDND(){
                	// Display in menus instead of section it belongs to
                	if (all_pages[page].Level === 0){
                   		// main menu
-                  		menucontainer.mainmenu.insertNodes(false, [all_pages[page].Name]);
+                  		menucontainer.mainmenu.insertNodes(false, [all_pages[page].Slug]);
 						// submenus[all_pages[page].Id] = []; // create a submenu for this page
                   		//console.log("Page " + all_pages[page].Name + " hab been added to mainmenu")
                	}
            	} else {
 				// add to available page container
-               	menucontainer[all_pages[page].Module].insertNodes(false, [all_pages[page].Name]);
+               	menucontainer[all_pages[page].Module].insertNodes(false, [all_pages[page].Slug]);
           		//console.log("Page " + all_pages[page].Name + " hab been added to " + all_pages[page].Module)
            	}
 		}
@@ -321,7 +326,7 @@ function initDND(){
 dojo.addOnLoad(initDND);
 
 function submit_data(){
-	var json_pages = dojo.toJson( all_pages);
+	var json_pages = dojo.toJson(all_pages);
 	dojo.byId("savingmess").innerHTML = "Saving ...";
     //console.log(json_pages)
     dojo.xhrPost({

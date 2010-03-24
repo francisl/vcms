@@ -127,6 +127,7 @@
                 $("#"+media[i].tagid).show("fast").animate({left: media[i].left + 'px', top: media[i].top + 'px'}, 'slow');
             }
         }else{
+            // search in media every tags that should be displayed
             for (var i = 0; i < media.length ; i++){
                 var tag_exist = false; // set to true when found, reduce loop cycling
                 for(t in media[i].tags){
@@ -179,9 +180,7 @@
 
 <!--=========CONTENT=========== -->
 {% block content %}
-		<!-- MENU -->
-		
-		
+    <div style="position: relative; margin: 1em;">		
         <div id="gallery_header" class="division_header">GALLERY :</div>
 		<div id="gallery_content" class="division_content" style="display: block;">
             <div id="gallery_container">
@@ -216,5 +215,5 @@
 			<div class="clear"></div>
 		</div>
 		{% endif %}
-
+    </div>
 {% endblock content %}

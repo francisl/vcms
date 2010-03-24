@@ -1,0 +1,24 @@
+{% extends "master.html" %}
+
+{% block content %}
+<div class="content">  
+	<div class="division_content" >
+			{% if completed %}
+			<br />
+			<h3>Your request has been sent!</h3>
+			<p>You will receive a confirmation email shortly</p>
+			<p>Thank you!</p>
+			{% else %}
+				<br />
+				<p>An error as occured!</p>
+				<p>It has been repport to simthetiq support. You may try later.</p>
+				<p>Thank you!</p>
+			{% endif %}
+						<br />
+	</div>	
+</div>
+<br />
+<div class="clear"></div>
+
+{% endblock content %}
+
