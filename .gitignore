@@ -1,6 +1,9 @@
 # Ignore python compiled files
 *.py[co]
 
+# Ignore cache
+client_cms_static/CACHE/*
+
 # Editor backup files
 *~
 
