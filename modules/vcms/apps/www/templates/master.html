@@ -28,7 +28,7 @@
     {% endcompress %}
     
 </head>
-<body {% if current_page.default %}class="large"{% endif %}>
+<body class="{% block bodyclass %}normal{% endblock bodyclass %}">
 <!-- =========header=========== -->
     <div id="vcms_content_body">
 		<div id="vcms_header">  
@@ -43,7 +43,6 @@
 		    {% show_dropdown_menu current_page %}
 		    {% show_banner current_page MEDIA_URL %}
 		{% else %}
-		menu style = {{ menu_style}}
 			{% if current_page %}
 			   {% show_main_menu current_page %}
 			   <!-- BANNER -->
