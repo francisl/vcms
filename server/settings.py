@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'clevercss',                            # http://github.com/dziegler/clevercss                   
     # VIMBA CMS APPS
     'vcms.apps.www',
-    'vcms.apps.news',
+    'vcms.apps.simplenews',
     'vcms.apps.themes',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
@@ -186,3 +186,20 @@ if SEARCH_ENGINE:
 
 # ## SATCHMO
 #from config.satchmo import *
+
+# Import applicaton-specific settings
+APPS_BASE_NAME = 'vcms'
+for app in INSTALLED_APPS:
+    if app.startswith(APPS_BASE_NAME):
+        try:
+            app_module = __import__(app, globals(), locals(), ["settings"])
+            app_settings = getattr(app_module, "settings", None)
+            for setting in dir(app_settings):
+                if setting == setting.upper():
+                    value = getattr(app_settings, setting)
+                    if isinstance(value, tuple):
+                        locals()[setting] += value
+                    else:
+                        locals()[setting] = value
+        except ImportError:
+            pass

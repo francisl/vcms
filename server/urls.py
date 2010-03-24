@@ -93,3 +93,15 @@ if settings.DEBUG:
     urlpatterns += patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../client_cms_static', 'show_indexes': True}),
 )
+
+# Import applicaton-specific urls
+for app in settings.INSTALLED_APPS:
+    if app.startswith(settings.APPS_BASE_NAME):
+        try:
+            app_module = __import__(app, globals(), locals(), ["urls"])
+            if hasattr(app_module, "urls"):
+                app_urls = getattr(app_module, "urls", None)
+                if hasattr(app_urls, "urlpatterns"):
+                    urlpatterns += getattr(app_urls, "urlpatterns")
+        except ImportError:
+            pass
