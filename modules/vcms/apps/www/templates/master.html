@@ -25,8 +25,8 @@
 	<style type="text/css" media="all">
 	   {% block stylesheet %}{% endblock stylesheet %}
 	</style>
-    {% endcompress %}	
-
+    {% endcompress %}
+    
 </head>
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
 <!-- =========header=========== -->
@@ -37,7 +37,7 @@
 				<a href="/" title="Home" ></a>
 			</div>
 		</div>
-	</div>	
+	
 		<!-- =========MENU=========== -->
 		{% ifequal menu_style 0 %}
 		    {% show_dropdown_menu current_page %}
@@ -85,6 +85,7 @@
 		         {% else%}
 		            {% show_footer_menu %}
 		        {% endif %}
+				
 			</div>
 		</div>
 	</div><!-- vcms_content_body -->
