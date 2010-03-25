@@ -142,7 +142,8 @@ def Dashboard(request, context={}):
     #elif page.template == DashboardPage.NEWS:
     #    return News(request, context, as_widget=True)
     else:
-        return render_to_response('dashboard.html',  context,
+        print page.template
+        return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
                                 context_instance=RequestContext(request))
 
 

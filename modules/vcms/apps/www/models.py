@@ -211,9 +211,12 @@ class DashboardPage(Page):
     EMPTY = 0
     NEWS = 1
     CONTACT = 2
+    SIMTHETIQ = 3
     TEMPLATES = ((EMPTY, 'Clean'),
-                        #(NEWS, 'News'),
-                        (CONTACT, 'Contact Form'),)
+                 (CONTACT, 'Contact Form'),
+                 (SIMTHETIQ, 'Simthetiq Home Page'),)
+    TEMPLATE_FILES = { EMPTY: 'dashboard.html',
+                      SIMTHETIQ: 'simthetiq_dashboard.html',}
     template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
     
     class Meta:
