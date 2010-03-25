@@ -87,6 +87,12 @@ class PageManager(models.Manager):
     def drafts(self):
         return self.filter(status=self.model.DRAFT)
 
+class ContentManager(models.Manager):
+    def get_contents_for_page(self, page=None):
+        if page == None or page == "":
+            return []
+        else:
+            return self.filter(page=page)
 
 class BannerManager(models.Manager):
     def get_random_banner_image(self, banner):

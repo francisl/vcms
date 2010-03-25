@@ -1,5 +1,3 @@
-<p class="first">
-    {% for menu in main_menu %}
-    <a id="menu_{{menu.id}}" href="{{menu.get_absolute_url}}">{{ menu.name|upper }}</a><span class="spacer">{% if not forloop.last %}|{% endif%}</span>
-    {% endfor %}
-</p>
+{% for menu in main_menu %}
+<a id="menu_{{menu.id}}" href="{{menu.get_absolute_url}}">{{ menu.name|upper }}</a><span class="spacer">{% if not forloop.last %}|{% endif%}</span>
+{% endfor %}

@@ -1,10 +1,6 @@
 {% extends "master.html" %}
 {% load thumbnail %}
 
-{% block javascript %}
-    {{ block.super }} 
-	<script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery-ui-min.js"></script>
-{% endblock %}
 
 {% block jquery%}
 
@@ -85,7 +81,7 @@
     // display every image in the media gallery
     function DisplayElement(holder) {
         for (var i = 0; i < media.length ; i++){
-            var link = '<a id="' + media[i].tagid + '" rel="prettyPhoto[\'test\']" \
+            var link = '<a id="' + media[i].tagid + '" rel="prettyPhoto" \
                         title="' + media[i].title + '" href="' + media[i].file + '" style="position:absolute;top:' + media[i].top + 'px;left:' + media[i].left + 'px;"><img src="' + media[i].thumbnail + '" alt="' + media[i].title + '" /></a>';
             $("#gallery").append(link);
         }

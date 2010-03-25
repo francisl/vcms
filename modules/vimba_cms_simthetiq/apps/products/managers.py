@@ -86,12 +86,34 @@ class ProductPageManager(models.Manager):
 
         next_product.save(reorder=False)
         selected_product.save(reorder=False)
-    
 
+
+    def set_previous_next_product(self, selected_product, previous_product, next_product):
+        """ This will set the previous.next object to the selected object next
+            and the next.previous to the selected object previous
+            It requires to make a query of the object, because the save() wont have an effect on it
+            since it's belong to the original function and it wont be committed
+        """
+        try:
+            previous_p = self.get(id=previous_product.id)
+            previous_p.next = next_product
+            previous_p.save(reorder=False)
+        except:
+            #print("error setting previous product -> next")
+            pass
+        
+        try:
+            next_p = self.get(id=next_product.id)
+            next_p.previous = previous_product
+            next_p.save(reorder=False)
+        except:
+            #print("error setting next product -> previous")
+            pass
+            
+           
     def remove_product_position(self, selected_product):
         """ LEGACY CODE
         """
-       
         try:
             previous = self.get(id=selected_product.previous.id)
         except:
@@ -157,30 +179,7 @@ class ProductPageManager(models.Manager):
             #print("delinking next %s" % product)
             product.next=None
             product.save(reorder=False)
-        
-    def set_previous_next_product(self, selected_product, previous_product, next_product):
-        """ This will set the previous.next object to the selected object next
-            and the next.previous to the selected object previous
-            It requires to make a query of the object, because the save() wont have an effect on it
-            since it's belong to the original function and it wont be committed
-        """
-        try:
-            previous_p = self.get(id=previous_product.id)
-            previous_p.next = next_product
-            previous_p.save(reorder=False)
-        except:
-            #print("error setting previous product -> next")
-            pass
-        
-        try:
-            next_p = self.get(id=next_product.id)
-            next_p.previous = previous_product
-            next_p.save(reorder=False)
-        except:
-            #print("error setting next product -> previous")
-            pass
-            
-       
+
     def get_available_products(self):
         #from vcms.apps.www.modelsimport Page
         return self.filter(status=self.PUBLISHED)
@@ -203,5 +202,16 @@ class ProductPageManager(models.Manager):
             #previous_product.save()
         #if next_product != None:
             #next_product.save()
+    """    
+    def get_product_per_category(self):
+        product_per_category = {}
         
-            
+        for product in self.get_available_products():
+            product_per_category[product.category] = product
+        
+        return product_per_category
+
+
+
+"""
+

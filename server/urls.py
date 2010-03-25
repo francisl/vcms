@@ -81,9 +81,10 @@ urlpatterns += patterns('',
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
     url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
-    url(r'^www/', include('vcms.apps.www.urls')),
+    url(r'^contact/', include('vcms.apps.contact.urls')),
     # url(r'^afghanistan/', 'www.),
     # CMS, catch every page
+    url(r'^www/', include('vcms.apps.www.urls')),
     url(r'', include('vcms.apps.www.urls')),
 )
 
