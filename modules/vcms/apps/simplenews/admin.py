@@ -5,13 +5,19 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.contrib import admin
-from vcms.apps.simplenews.models import News, NewsPageModule
+from vcms.apps.simplenews.models import News, NewsCategory, NewsPageModule
+
+
+class NewsCategoryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(NewsCategory, NewsCategoryAdmin)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(News, NewsAdmin)
 
 
 class NewsPageModuleAdmin(admin.ModelAdmin):
     pass
 admin.site.register(NewsPageModule, NewsPageModuleAdmin)
-
-class NewsAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(News, NewsAdmin)
