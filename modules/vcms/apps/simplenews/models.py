@@ -8,17 +8,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.apps.www.models import Language, Page, PageElementPosition
+from vcms.apps.simpleannouncements.models import Announcement
 
 
 APP_SLUGS = "simplenews"
 
 
-class Article(Page):
-    content = models.TextField()
-    tags = TagField()
-
-
-class News(Article):
+class News(Announcement):
     class Meta:
         verbose_name_plural = _("News")
         get_latest_by = ['-date_created']
