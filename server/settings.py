@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'clevercss',                            # http://github.com/dziegler/clevercss                   
     # VIMBA CMS APPS
     'vcms.apps.www',
+    'vcms.apps.simpleblogs',
     'vcms.apps.simplenews',
     'vcms.apps.themes',
     'vcms.apps.contact',
