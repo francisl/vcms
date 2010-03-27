@@ -66,9 +66,9 @@ class Page(models.Model):
         (PUBLISHED, _('Published')),
     )
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 40 characters.'))
-    slug = models.SlugField(max_length=150, unique=True, help_text="used for link, no space or special caracter")
-    description = models.CharField(max_length=250, help_text="Page short description (Help for search engine optimisation)")
-    keywords = models.CharField(max_length=250, null=True, blank=True, help_text="Page keywords (Help for search engine optimisation)")
+    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
+    description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
+    keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
     app_slug = models.SlugField(default="", editable=False)
     status = models.IntegerField(choices=STATUSES, default=DRAFT)
     date_created = models.DateTimeField(default=datetime.datetime.today(), editable=False)
@@ -79,7 +79,7 @@ class Page(models.Model):
     level = models.IntegerField(editable=False, default=0)
     tree_position = models.IntegerField(editable=False, default=0)
     display = models.BooleanField(editable=False, default=False)
-    default = models.BooleanField(default=False, help_text="Check this if you want this page as default home page")
+    default = models.BooleanField(default=False, help_text="Check this if you want this page as default home page.")
     
     # Parameteers
     language = models.ForeignKey(Language)
