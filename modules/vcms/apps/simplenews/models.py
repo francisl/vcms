@@ -4,17 +4,16 @@
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 20-03-2010.
 
-import datetime
 from django.db import models
 from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.apps.www.models import Language, PageElementPosition
 from vcms.apps.simpleannouncements.models import Announcement
+from vcms.apps.simplenews.managers import NewsManager
 
 
 APP_SLUGS = "simplenews"
-
 
 
 class NewsCategory(models.Model):
@@ -38,6 +37,8 @@ class NewsCategory(models.Model):
 
 class News(Announcement):
     category = models.ForeignKey(NewsCategory)
+
+    objects = NewsManager()
 
     class Meta:
         verbose_name_plural = _("News")
