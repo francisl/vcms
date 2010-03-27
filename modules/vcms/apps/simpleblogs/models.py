@@ -11,7 +11,7 @@ from vcms.apps.www.models import Language, Page, PageElementPosition
 from vcms.apps.simpleannouncements.models import Announcement
 
 
-APP_SLUGS = "simplenews"
+APP_SLUGS = "simpleblogs"
 
 
 class Blog(Announcement):
