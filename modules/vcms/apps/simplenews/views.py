@@ -8,10 +8,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 
-def news_index(request, page=1):
+def news_index(request, category_slug, page=1):
     return render_to_response("", {}, context_instance=RequestContext(request))
 
-def news_unique(request, news_slug):
+def news_unique(request, category_slug, news_slug):
     context = {}
     context.update(InitPage(page=news_slug))
     context.update(locals())
@@ -20,8 +20,8 @@ def news_unique(request, news_slug):
     else:
         return HttpResponseRedirect("/")
 
-def news_category(request, category, page=1):
+def news_category(request, category_slug, category, page=1):
     return render_to_response("", {}, context_instance=RequestContext(request))
 
-def news_archives(request, month, year, page=1):
+def news_archives(request, category_slug, month, year, page=1):
     return render_to_response("", {}, context_instance=RequestContext(request))
