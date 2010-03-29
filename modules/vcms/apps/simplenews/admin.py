@@ -23,6 +23,7 @@ class NewsAdmin(admin.ModelAdmin):
         has_class_permission = super(NewsAdmin, self).has_change_permission(request, obj)
         if not has_class_permission:
             return False
+        # _TODO: Make sure this gets cached, otherwise find a way to query the database only once per admin page instead of once per object
         if obj and obj not in News.objects.get_news_for_user(request.user):
             return False
         return True
