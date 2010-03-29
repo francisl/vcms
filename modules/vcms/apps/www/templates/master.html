@@ -54,27 +54,31 @@
 		{% endifequal %}
 		<!--=========content=========== -->
 		
-		{% block ubercontent %}
-		<div class="content">
-		
-			
-		    {% block content %}
-				<!-- Content -->
-				{% if contents %}
-				{% for c in contents %}
-				<div class="division_content" name="{{ c.id }}">
-					<br />
-					<h4>{{ c.name|upper }}</h4>
-					<hr />
-					<div class="division_content">
-						{{ c.content|safe }}
+		<div id="vcms_center">
+            {% block ubercontent %}
+			<div id="vcms_navigation">
+			{% block navigation %}
+	        {% endblock navigation %}
+	        </div>
+			<div class="content">
+			    {% block content %}
+					<!-- Content -->
+					{% if contents %}
+					{% for c in contents %}
+					<div class="division_content" name="{{ c.id }}">
+						<br />
+						<h4>{{ c.name|upper }}</h4>
+						<hr />
+						<div class="division_content">
+							{{ c.content|safe }}
+						</div>
 					</div>
-				</div>
-				{% endfor %}
-				{% endif %}
-		    {% endblock content %}
-		</div>
-		{% endblock ubercontent %}
+					{% endfor %}
+					{% endif %}
+			    {% endblock content %}
+			</div>
+			{% endblock ubercontent %}
+		</div><!-- vcms_center -->
 		
 		<!-- =========footer=========== -->
 		<div id="footing" >
