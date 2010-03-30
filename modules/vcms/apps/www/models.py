@@ -2,7 +2,7 @@
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
 
-import Image, os
+import datetime, Image, os
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 #from django.contrib import admin
@@ -73,6 +73,7 @@ class Page(models.Model):
     status = models.IntegerField(choices=STATUSES, default=DRAFT)
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
+    date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
 
     # menus
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children', editable=False)
@@ -109,6 +110,11 @@ class Page(models.Model):
     def save(self):
         if self.default:
             Page.objects.reset_Default()
+        # Access the current page at it is in the database
+        model_in_database = Page.objects.get(pk=self.pk)
+        # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
+        if self.status == self.PUBLISHED and model_in_database.status != self.PUBLISHED:
+            self.date_published = datetime.datetime.now()
         super(Page, self).save()
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
