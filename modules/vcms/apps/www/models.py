@@ -110,11 +110,16 @@ class Page(models.Model):
     def save(self):
         if self.default:
             Page.objects.reset_Default()
-        # Access the current page at it is in the database
-        model_in_database = Page.objects.get(pk=self.pk)
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
-        if self.status == self.PUBLISHED and model_in_database.status != self.PUBLISHED:
-            self.date_published = datetime.datetime.now()
+        if self.status == self.PUBLISHED:
+            # If the page is being created, set its published date
+            if not self.pk:
+                self.date_published = datetime.datetime.now()
+            # If the Page is being edited, check against the current version in the database and update if it hasn't been previously published
+            else:
+                model_in_db = Page.objects.get(pk=self.pk)
+                if model_in_db.status != self.PUBLISHED:
+                    self.date_published = datetime.datetime.now()
         super(Page, self).save()
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
