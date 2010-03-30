@@ -5,9 +5,9 @@ body:
     margin: 0
     padding: 0
     background-color: #888
-    font-size:10pt
+    font-size:11pt
     font-family: Arial, sans-serif
-    color: white 
+    color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
         font-weight: normal
@@ -136,8 +136,7 @@ FOOTING_HEIGHT = 38px
  
 // CLEAR 
 .clear:
-    clear: both
-    
+    clear: both;
     
 // CAPTCHA        
 input.id_captcha_1:
@@ -188,4 +187,41 @@ div.gallery_display:
 #gallery:
     position: relative;
     
+// CONTENT
+div#vcms_center:
+    width: $SITE_CONTENT_WIDTH;
+    background-color: #333333;
+    position: relative;
+  
+// NAVIGATION
+NAVIGATION_WIDTH = 180px;
+div#vcms_navigation:
+    width: $NAVIGATION_WIDTH;
+    height: 100%;
+    float: left;
+    ul:
+        width: 100%;
+        background-color: #dadada;
 
+// CONTENT
+div#vcms_content_container:
+    width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH;
+    background-color: #fff;
+    float: left;
+   
+div#vcms_content:
+    margin: 0 1em;
+    
+    table:
+        border: 1px solid grey;
+        padding: 0.4em 1em;
+            
+        label:
+            font-weight: bold;
+            float: right;
+            margin-right: 1em;
+
+        input:
+            width: 98%;
+        textarea:
+            width: 100%;

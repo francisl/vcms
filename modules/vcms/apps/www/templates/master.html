@@ -57,27 +57,33 @@
 		<div id="vcms_center">
             {% block ubercontent %}
 			<div id="vcms_navigation">
+			<div>&nbsp;
 			{% block navigation %}
 	        {% endblock navigation %}
 	        </div>
-			<div class="content">
-			    {% block content %}
-					<!-- Content -->
-					{% if contents %}
-					{% for c in contents %}
-					<div class="division_content" name="{{ c.id }}">
-						<br />
-						<h4>{{ c.name|upper }}</h4>
-						<hr />
-						<div class="division_content">
-							{{ c.content|safe }}
+	        </div>
+	        <div id="vcms_content_container">
+				<div id="vcms_content">
+				    {% block content %}
+						<!-- Content -->
+						{% if contents %}
+						{% for c in contents %}
+						<div class="division_content" name="{{ c.id }}">
+							<br />
+							<h4>{{ c.name|upper }}</h4>
+							<hr />
+							<div class="division_content">
+								{{ c.content|safe }}
+							</div>
 						</div>
-					</div>
-					{% endfor %}
-					{% endif %}
-			    {% endblock content %}
-			</div>
+						{% endfor %}
+						{% endif %}
+				    {% endblock content %}
+				</div>
+			</div><!-- vcms_content_container -->
+			<div class="clear"></div>
 			{% endblock ubercontent %}
+			
 		</div><!-- vcms_center -->
 		
 		<!-- =========footer=========== -->

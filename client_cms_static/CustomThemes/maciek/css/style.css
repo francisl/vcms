@@ -3,9 +3,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: #888888;
-  font-size: 10pt;
+  font-size: 11pt;
   font-family: Arial, sans-serif;
-  color: white;
+  color: #707070;
 }
 
 body h1,
@@ -200,4 +200,50 @@ div.gallery_display img {
 
 #gallery {
   position: relative;
+}
+
+div#vcms_center {
+  width: 955px;
+  background-color: #333333;
+  position: relative;
+}
+
+div#vcms_navigation {
+  width: 180px;
+  height: 100%;
+  float: left;
+}
+
+div#vcms_navigation ul {
+  width: 100%;
+  background-color: #dadada;
+}
+
+div#vcms_content_container {
+  width: 775px;
+  background-color: #ffffff;
+  float: left;
+}
+
+div#vcms_content {
+  margin: 0 1em;
+}
+
+div#vcms_content table {
+  border: 1px solid grey;
+  padding: 0.4em 1em;
+}
+
+div#vcms_content table label {
+  font-weight: bold;
+  float: right;
+  margin-right: 1em;
+}
+
+div#vcms_content table input {
+  width: 98%;
+}
+
+div#vcms_content table textarea {
+  width: 100%;
 }
