@@ -1,3 +1,9 @@
-{% for n in news %}
-{{n.name}}
-{% endfor %}
+{% extends "master.html" %}
+
+{% block navigation %}
+    <ul>
+    {% for category in categories %}
+        <li>{{ category.name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock navigation %}

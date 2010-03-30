@@ -7,12 +7,13 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from vcms.apps.simplenews import settings
-from vcms.apps.simplenews.models import News
+from vcms.apps.simplenews.models import News, NewsCategory
 
 
 def news_index(request, category_slug, page=1):
+    categories = NewsCategory.objects.all()
     news = News.objects.all()[:settings.MAX_NEWS_PER_PAGE]
-    return render_to_response("index.html", { "news": news }, context_instance=RequestContext(request))
+    return render_to_response("index.html", { "categories": categories, "news": news }, context_instance=RequestContext(request))
 
 def news_unique(request, category_slug, news_slug):
     context = {}
