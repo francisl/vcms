@@ -12,7 +12,11 @@ from vcms.apps.simplenews.models import News, NewsCategory
 
 def news_index(request, category_slug, page=1):
     categories = NewsCategory.objects.all()
-    news = News.objects.all()[:settings.MAX_NEWS_PER_PAGE]
+    if category_slug:
+        news = News.objects.filter(category__slug=category_slug)
+    else:
+        news = news = News.objects.all()
+    news = news[:settings.MAX_NEWS_PER_PAGE]
     return render_to_response("index.html", { "categories": categories, "news": news }, context_instance=RequestContext(request))
 
 def news_unique(request, category_slug, news_slug):

@@ -3,7 +3,14 @@
 {% block navigation %}
     <ul>
     {% for category in categories %}
-        <li>{{ category.name }}</li>
+    <li><a href="{% url vcms.apps.simplenews.views.news_index category_slug=category.slug %}">{{category.name}}</a></li>
     {% endfor %}
     </ul>
 {% endblock navigation %}
+
+{% block content %}
+    {% for n in news %}
+        <h2>{{n.name}}</h2>
+        <p>{{n.content}}</p>
+    {% endfor %}
+{% endblock content %}
