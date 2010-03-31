@@ -26,7 +26,8 @@ def debugtrace(view, current_page, **argd):
         print("%s : %s" % (v,argd[v]))
     
 def InitPage(page_slug, app_slug):
-    """ InitPage get a page slug and return an updated context with required information for the CMS pages
+    """ InitPage get a page slug and its corresponding app slug then return
+        an updated context containing the required information for the CMS pages
     
         returns: 
             current_page : Page instance that is currently request
