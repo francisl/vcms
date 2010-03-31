@@ -17,7 +17,7 @@ def news_index(request, category_slug, page=1):
     else:
         news = news = News.objects.all()
     news = news[:settings.MAX_NEWS_PER_PAGE]
-    return render_to_response("index.html", { "categories": categories, "news": news }, context_instance=RequestContext(request))
+    return render_to_response("index.html", { "categories": categories, "contents": news }, context_instance=RequestContext(request))
 
 def news_unique(request, category_slug, news_slug):
     context = {}
