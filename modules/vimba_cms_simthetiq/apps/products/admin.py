@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django import forms
 from vimba_cms_simthetiq.tools.widgets.admin_image_widget import AdminImageWidget
-from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, ProductContent, DomainElement, MediaTags, FileFormat, ProductPage, Image, Video, DomainPage, Category, GalleryPage
+from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, ProductContent, DomainElement, MediaTags, FileFormat, ProductPage, Image, Video, DomainPage, Kind, Domain, Category, GalleryPage
 #from vcms.apps.www.models import Content
 
 # -- PRODUCTS
@@ -101,7 +101,7 @@ class ProductPageAdmin(admin.ModelAdmin):
     fieldsets = (( 'Page information',
                    { 'fields': ('name', 'slug', 'status', 'description','language',  'keywords', 'default') }),
                  ('Product information ', 
-                    { 'fields': ('product_description', 'category', 'product_id', 'polygon',
+                    { 'fields': ('product_description', 'category', 'dis_subcategory_id', 'dis_specific_id', 'polygon',
                                 'texture_format', 'texture_resolution','file_format', 'similar_products','previous', 'next')}
                  ),
                  ('Product Media', 
@@ -141,7 +141,14 @@ class ProductPageAdmin(admin.ModelAdmin):
     
     actions = [delete_selected, reorder_all_product, reorder_selected_product]
 
-
+class KindAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'dis_id']
+    list_filter = ['dis_id', 'name']
+    
+class DomainAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'dis_id']
+    list_filter = ['dis_id', 'name']
+    
 class CategoryAdmin(admin.ModelAdmin):
     def delete_selected(self, request, queryset):
         for category in queryset:
@@ -177,6 +184,8 @@ admin.site.register(Video, VideoAdmin)
 admin.site.register(DomainPage, DomainPageAdmin)
 admin.site.register(ProductPage, ProductPageAdmin)
 #admin.site.register(Product, ProductAdmin)
+admin.site.register(Kind, KindAdmin)
+admin.site.register(Domain, DomainAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(GalleryPage, GalleryPageAdmin)
 

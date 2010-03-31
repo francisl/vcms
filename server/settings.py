@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
     'registration',                         # http://bitbucket.org/ubernostrum/django-registration/
+    'l10n',                                 
     # ## DJVIDEO
     # djvideo_link | http://git.participatoryculture.org/djvideo/
     # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
@@ -152,6 +153,7 @@ PAGE_MODULES = []
 #CACHE_BACKEND = 'db://cms_opt_cache'
 #CACHE_MIDDLEWARE_SECONDS = 30
 #CACHE_MIDDLEWARE_KEY_PREFIX = ""
+CACHE_TIMEOUT = 10
 
 # ## ###
 # ## CAPTCHA CONFIGURATION

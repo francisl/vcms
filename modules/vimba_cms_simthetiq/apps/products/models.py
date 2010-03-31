@@ -168,7 +168,7 @@ class FileFormat(models.Model):
         """
         self.domainpage_set.clear()
         super(FileFormat, self).delete()
-        
+
 class DomainPage(Page):
     content = models.TextField()
     video = models.ForeignKey(Video, null=True, blank=True)
@@ -209,17 +209,38 @@ class DomainElement(models.Model):
     class Meta:
         ordering = ['position']
 
+    
+def _unicode_DIS(name, id):
+    return  name + "(" + str(id) + ")"
+
+class Kind(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    dis_id = models.IntegerField(unique=True)
+    
+    def __unicode__(self):
+        return _unicode_DIS(self.name, self.dis_id)
+    
+class Domain(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    dis_id = models.IntegerField(unique=True)
+    
+    def __unicode__(self):
+        return _unicode_DIS(self.name, self.dis_id)
+       
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField()
-    domain = models.ForeignKey(DomainPage, blank=True, null=True)
+    dis_id = models.IntegerField()
+    kind = models.ForeignKey(Kind)
+    domain = models.ForeignKey(Domain)
     
     class Meta:
-        verbose_name_plural = "Domain - Categories"
+        verbose_name_plural = "Categories"
         ordering = ["name"]
+        unique_together = ("dis_id", "domain")
     
     def __unicode__(self):
-        return self.name
+        return str(self.kind) + " - " + str(self.domain) + " - " + _unicode_DIS(self.name, self.dis_id)
 
     def delete(self):
         """ remove foreign object link
@@ -235,7 +256,6 @@ class Category(models.Model):
 class ProductPage(Page):
     #name = models.CharField(max_length=50, unique=True)
     product_description = models.TextField()
-    product_id = models.IntegerField()
     polygon = models.IntegerField()
     texture_format = models.CharField(max_length=50)
     texture_resolution = models.CharField(max_length=50)
@@ -248,7 +268,8 @@ class ProductPage(Page):
     videos = models.ManyToManyField(Video, null=True, blank=True)
     previous = models.ForeignKey('self', related_name="previous_product", null=True, blank=True)
     next = models.ForeignKey('self', related_name="next_product", null=True, blank=True)
-
+    dis_subcategory_id = models.IntegerField()
+    dis_specific_id = models.IntegerField()
     
     # Set customer manager
     objects = ProductPageManager()
