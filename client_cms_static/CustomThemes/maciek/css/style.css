@@ -4,7 +4,7 @@ body {
   padding: 0;
   background-color: #888888;
   font-size: 11pt;
-  font-family: Arial, sans-serif;
+  font-family: futura, 'century gothic', sans-serif;
   color: #707070;
 }
 
@@ -14,18 +14,22 @@ body h3,
 body h4,
 body h5,
 body h6 {
-  font-weight: normal;
+  font-weight: bold;
+  color: #929292;
+  margin-bottom: 0.1em;
 }
 
 body a img {
   border: none;
 }
 
-#vcms_content_body {
+#vcms_body {
   position: relative;
   width: 955px;
   margin: 0 auto;
   padding: 0;
+  border-left: 1px solid #656565;
+  border-right: 1px solid #656565;
 }
 
 #vcms_header {
@@ -34,12 +38,12 @@ body a img {
   height: 52px;
   margin: 0 auto;
   padding: 0;
-  background: url(../images/heading/bg.jpg) top left repeat-x #131313;
+  background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
 }
 
 .large #vcms_header {
   height: 96px;
-  background: url(../images/heading_large/bg.jpg) top left repeat-x #131313;
+  background: url(../images/heading_large/bg.jpg) bottom left repeat-x #131313;
 }
 
 #vcms_header_logo {
@@ -109,15 +113,15 @@ div#banner .s3sliderImage span {
 
 #footing {
   width: 955px;
-  height: 38px;
-  background: url(../images/footing/bg.jpg) bottom repeat-x;
+  height: 37px;
+  background-color: #333333;
   color: #525252;
   clear: both;
 }
 
 #footing .footing_content {
   width: 955px;
-  height: 38px;
+  height: 37px;
   margin: auto;
   padding: 10px 0;
   text-align: center;
@@ -138,6 +142,11 @@ div#banner .s3sliderImage span {
 
 #footing #copyright {
   color: #787878;
+}
+
+.large #footing {
+  height: 38px;
+  border-top: 1px solid #b9ff3c;
 }
 
 .clear {
@@ -202,16 +211,22 @@ div.gallery_display img {
   position: relative;
 }
 
-div#vcms_center {
+div#vcms_content_body {
   width: 955px;
   background-color: #333333;
   position: relative;
 }
 
 div#vcms_navigation {
-  width: 180px;
-  height: 100%;
-  float: left;
+  width: 240px;
+  border-bottom: 1px solid #656565;
+  border-right: 1px solid #656565;
+  margin-bottom: 0px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
 }
 
 div#vcms_navigation ul {
@@ -220,24 +235,34 @@ div#vcms_navigation ul {
 }
 
 div#vcms_content_container {
-  width: 775px;
+  width: 715px;
   background-color: #ffffff;
-  float: left;
+  float: right;
 }
 
 div#vcms_content {
   margin: 0 1em;
 }
 
+div#vcms_content #page_title {
+  text-align: center;
+}
+
 div#vcms_content table {
   border: 1px solid grey;
   padding: 0.4em 1em;
+  background: url(../images/form/form_bg.jpg) bottom repeat-x;
+}
+
+div#vcms_content table td {
+  padding: 0.3em 0;
 }
 
 div#vcms_content table label {
   font-weight: bold;
   float: right;
   margin-right: 1em;
+  text-transform: uppercase;
 }
 
 div#vcms_content table input {
