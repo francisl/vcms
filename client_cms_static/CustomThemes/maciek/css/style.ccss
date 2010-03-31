@@ -225,3 +225,7 @@ div#vcms_content:
             width: 98%;
         textarea:
             width: 100%;
+
+// PAGINATION
+div#vcms_pagination:
+    text-align: center;

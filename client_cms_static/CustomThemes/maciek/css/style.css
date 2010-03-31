@@ -247,3 +247,7 @@ div#vcms_content table input {
 div#vcms_content table textarea {
   width: 100%;
 }
+
+div#vcms_pagination {
+  text-align: center;
+}

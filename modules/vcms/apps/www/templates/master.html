@@ -2,6 +2,7 @@
 {% load banner_widget %}
 {% load search_widget %}
 {% load compress %}
+{% load i18n %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -81,6 +82,23 @@
 				    {% endblock content %}
 				</div>
 			</div><!-- vcms_content_container -->
+            <div id="vcms_pagination">
+                {% block pagination %}
+                {% if paginator %}
+                <span class="step-links">
+                    <span class="current">
+                        Page {{paginator.number}} {% trans 'of' %} {{paginator.paginator.num_pages}}
+                    </span>
+                    {% if paginator.has_previous %}
+                        <a href="{{paginator_previous_url}}"> &lt;&lt; {% trans 'previous' %}</a>
+                    {% endif %}
+                    {% if paginator.has_next %}
+                        <a href="{{paginator_next_url}}">{% trans 'next' %} &gt;&gt;</a>
+                    {% endif %}
+                </span>
+                {% endif %}
+                {% endblock pagination %}
+                </div>
 			<div class="clear"></div>
 			{% endblock ubercontent %}
 			
