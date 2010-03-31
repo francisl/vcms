@@ -92,8 +92,9 @@ class Page(models.Model):
     objects = PageManager()
 
     class Meta:
-        verbose_name_plural = "Menu Administration"
         ordering = ['tree_position','name']
+        verbose_name_plural = "Menu Administration"
+        unique_together = ("slug", "app_slug")
 
     def __unicode__(self):
         return self.name

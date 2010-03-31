@@ -7,6 +7,10 @@ from django.db import models
 from vcms.apps.www.models import Page
 from vcms.apps.contact.managers import ContactPageManager
 
+
+APP_SLUGS = "contact"
+
+
 class ContactPage(Page):
     page_header = models.TextField(help_text=_("Title at the top of the page"))
     form_name = models.CharField(max_length=75)

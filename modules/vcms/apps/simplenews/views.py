@@ -10,6 +10,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from vcms.apps.simplenews import settings
 from vcms.apps.simplenews.models import News, NewsCategory
+from vcms.apps.simplenews.models import APP_SLUGS
 
 
 def news_index(request, category_slug, page=1):
@@ -36,7 +37,7 @@ def news_index(request, category_slug, page=1):
 
 def news_unique(request, category_slug, news_slug):
     context = {}
-    context.update(InitPage(page=news_slug))
+    context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
     context.update(locals())
     if context["module"] in globals():
         return render_to_response("", {}, context_instance=RequestContext(request))
