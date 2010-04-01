@@ -7,3 +7,4 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         """Load l10n fixtures"""
         call_command('loaddata', 'l10n_data.xml', interactive=True)
+        

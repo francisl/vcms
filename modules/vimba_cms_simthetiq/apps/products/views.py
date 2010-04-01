@@ -39,6 +39,11 @@ def Product(request, context={}):
         #print("CATEGORY = %s" % category.domain.get_absolute_url())
     except:
         category = None
+        
+    if context["menu_type"] == "dis":
+        menu = category.get_navigation_menu()
+    elif context["menu_type"] == "compact":
+        menu = CompactNavigationGroup.get_navigation()
     
     #print("PRODUCT INFORMATION %s " % product_information)
     return render_to_response('product_info.html',
@@ -46,8 +51,12 @@ def Product(request, context={}):
                                   "current_page":   context['current_page'],
                                   "productpage":    productpage,
                                   "category":       category,
-                                  "product_contents": product_contents },
+                                  "product_contents": product_contents,
+                                  "navigation_menu": menu },
                                 context_instance=RequestContext(request))
+
+    
+    
 """
 def ProductGallery(request, context={}):
     # create a list of dictionary binding type to product(s)

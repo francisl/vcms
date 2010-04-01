@@ -2,7 +2,9 @@
 from django.contrib import admin
 from django import forms
 from vimba_cms_simthetiq.tools.widgets.admin_image_widget import AdminImageWidget
-from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, ProductContent, DomainElement, MediaTags, FileFormat, ProductPage, Image, Video, DomainPage, Kind, Domain, Category, GalleryPage
+from vimba_cms_simthetiq.apps.products.models import Kind, Domain, DISCountry, Category, CompactNavigationGroup
+from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, MediaTags, FileFormat, ProductPage, ProductContent,Image, Video  
+    #DomainPage, DomainElement, GalleryPage
 #from vcms.apps.www.models import Content
 
 # -- PRODUCTS
@@ -60,6 +62,8 @@ class VideoAdmin(admin.ModelAdmin):
     delete_selected.short_description = "Delete selected video(s)"
     actions = [delete_selected]
 
+# DOMAIN PAGE 
+"""
 class DomainElementInline(admin.StackedInline):
     filter_horizontal = ["images"]
     model = DomainElement
@@ -81,7 +85,8 @@ class DomainPageAdmin(admin.ModelAdmin):
 
     delete_selected.short_description = "Delete selected Domain page(s)"
     actions = [delete_selected]
-
+admin.site.register(DomainPage, DomainPageAdmin)
+"""
 # PRODUCT PAGE
 
 class ProductContentInline(admin.StackedInline):
@@ -100,8 +105,11 @@ class ProductPageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = (( 'Page information',
                    { 'fields': ('name', 'slug', 'status', 'description','language',  'keywords', 'default') }),
+                 ('DIS',
+                    {'fields': ('category', 'used_in', 'dis_country', 'dis_subcategory_id', 'dis_specific_id',)}
+                  ),
                  ('Product information ', 
-                    { 'fields': ('product_description', 'category', 'dis_subcategory_id', 'dis_specific_id', 'polygon',
+                    { 'fields': ('product_description',  'polygon',
                                 'texture_format', 'texture_resolution','file_format', 'similar_products','previous', 'next')}
                  ),
                  ('Product Media', 
@@ -150,6 +158,8 @@ class DomainAdmin(admin.ModelAdmin):
     list_filter = ['dis_id', 'name']
     
 class CategoryAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'dis_id']
+    list_filter = ['kind', 'domain', 'compact_navigation']
     def delete_selected(self, request, queryset):
         for category in queryset:
             selected_category = Category.objects.get(id=category.id)
@@ -159,6 +169,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
     actions = [delete_selected]
 
+    
+class CompactNavigationGroupAdmin(admin.ModelAdmin):
+    search_fields = ['name',]
+admin.site.register(CompactNavigationGroup, CompactNavigationGroupAdmin)
 
 #class ProductInformationInline(admin.StackedInline):
     #filter_horizontal = ["images"]
@@ -171,23 +185,22 @@ class CategoryAdmin(admin.ModelAdmin):
  #   prepopulated_fields = {"slug": ("name",)}
 #    filter_horizontal = ('images', 'videos')
 
-
+"""
 class GalleryPageAdmin(admin.ModelAdmin):
     pass
-
+admin.site.register(GalleryPage, GalleryPageAdmin)
+"""
 
 # PRODUCTS
 admin.site.register(MediaTags, MediaTagsAdmin)
 admin.site.register(FileFormat, FileFormatAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Video, VideoAdmin)
-admin.site.register(DomainPage, DomainPageAdmin)
 admin.site.register(ProductPage, ProductPageAdmin)
 #admin.site.register(Product, ProductAdmin)
 admin.site.register(Kind, KindAdmin)
 admin.site.register(Domain, DomainAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(GalleryPage, GalleryPageAdmin)
 
 # LICENCES
 #class LicenceAdmin(admin.ModelAdmin):
