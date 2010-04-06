@@ -14,3 +14,6 @@ client_cms_static/CACHE/*
 .project
 .pydevproject
 nbproject
+
+# auto generated css
+client_cms_static/CustomThemes/*.css
