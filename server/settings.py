@@ -190,12 +190,38 @@ if SEARCH_ENGINE:
 #from config.satchmo import *
 
 # Import applicaton-specific settings
+def get_all_installed_apps(apps_base_name, installed_apps, module_name, modules_set=set()):
+    """Gives the list of installed apps recursively, looking in every
+    app's INSTALLED_APPS setting from their respective settings module."""
+    for app in installed_apps:
+        if app.startswith(apps_base_name):
+            try:
+                app_module = __import__(app, globals(), locals(), [module_name])
+                app_settings = getattr(app_module, module_name, None)
+                # Do not traverse through apps that have already been processed
+                if app_module.__name__ not in modules_set:
+                    if hasattr(app_settings, "INSTALLED_APPS"):
+                        value = getattr(app_settings, "INSTALLED_APPS")
+                        # Recursively go through every installed apps if they aren't already in modules_set
+                        modules_set.update(get_all_installed_apps(apps_base_name, value, module_name, modules_set))
+                        # Add the current app after recursively going into its dependencies to save us from infinite recursion
+                        modules_set.update(value)
+                        modules_set.add(app)
+            except ImportError:
+                pass
+    return modules_set
+
 APPS_BASE_NAME = 'vcms'
+SETTINGS_MODULE = 'settings'
+
+INSTALLED_APPS += tuple(get_all_installed_apps(APPS_BASE_NAME, INSTALLED_APPS, SETTINGS_MODULE))
+
+# Import the settings of every app into this module
 for app in INSTALLED_APPS:
     if app.startswith(APPS_BASE_NAME):
         try:
-            app_module = __import__(app, globals(), locals(), ["settings"])
-            app_settings = getattr(app_module, "settings", None)
+            app_module = __import__(app, globals(), locals(), [SETTINGS_MODULE])
+            app_settings = getattr(app_module, SETTINGS_MODULE, None)
             for setting in dir(app_settings):
                 if setting == setting.upper():
                     value = getattr(app_settings, setting)
@@ -205,7 +231,6 @@ for app in INSTALLED_APPS:
                         locals()[setting] = value
         except ImportError:
             pass
-
 
 if DEBUG:
     import socket

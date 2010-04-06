@@ -12,7 +12,7 @@ from vcms.apps.www.views import InitPage
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
     """ Is called first, then it calls the right view base on module name containt in the url
     """
-    context.update(InitPage(page=page))
+    context.update(InitPage(page_slug=page, app_slug=productmodels.APP_SLUGS))
     context.update(locals())
     
     print("menu style = %s" % context["menu_style"])

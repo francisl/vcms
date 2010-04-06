@@ -11,6 +11,7 @@ from django import forms
 from django.core.mail import send_mail, EmailMultiAlternatives
 
 # from other aps
+from vcms.apps.contact.models import APP_SLUGS
 from vcms.apps.contact.models import ContactPage
 from vcms.apps.www.models import Content
 from vcms.apps.www.views import InitPage
@@ -31,7 +32,7 @@ class ContactForm(forms.Form):
 
 
 def Contact(request, page=None, context={}):
-    context.update(InitPage(page=page))
+    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     contact_page = ContactPage.objects.get(slug=context["current_page"].slug)
     form = ContactForm()

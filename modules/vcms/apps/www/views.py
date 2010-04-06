@@ -25,8 +25,9 @@ def debugtrace(view, current_page, **argd):
     for v in argd:
         print("%s : %s" % (v,argd[v]))
     
-def InitPage(page):
-    """ InitPage get a page slug and return an updated context with required information for the CMS pages
+def InitPage(page_slug, app_slug):
+    """ InitPage get a page slug and its corresponding app slug then return
+        an updated context containing the required information for the CMS pages
     
         returns: 
             current_page : Page instance that is currently request
@@ -45,7 +46,7 @@ def InitPage(page):
             #print("NONE current page = %s" % current_page)
         # When Page IS SELECTED
         else:
-            current_page = get_object_or_404(Page, slug=page)
+            current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
         module = current_page.module
         #debugtrace("Initpage phase 2", current_page, **{'module':module})
         menu_style = DROPDOWN_MENU

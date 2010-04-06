@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.template import RequestContext
 #from django.template import loader
 
+from vcms.apps.news.models import APP_SLUGS
 from vcms.apps.news.models import News as m_News
 from vcms.apps.news.models import NewsPage as m_NewsPage
 from vcms.apps.news.models import NewsPageModule as m_NewsPageModule
@@ -16,7 +17,7 @@ from vcms.apps.news.models import NewsPageModule as m_NewsPageModule
 from vcms.apps.www.views import InitPage
 
 def Generic(request, page=None, slug=None, context={}):
-    context.update(InitPage(page=page))
+    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
     if context["module"] in globals():
