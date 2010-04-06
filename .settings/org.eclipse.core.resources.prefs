@@ -1,4 +1,4 @@
-#Thu Apr 01 11:57:15 EDT 2010
+#Thu Apr 01 12:00:05 EDT 2010
 eclipse.preferences.version=1
 encoding//modules/vcms/apps/contact/admin.py=utf-8
 encoding//modules/vcms/apps/contact/managers.py=utf-8
@@ -16,6 +16,7 @@ encoding//modules/vcms/apps/www/admin/__init__.py=utf-8
 encoding//modules/vcms/apps/www/managers.py=utf-8
 encoding//modules/vcms/apps/www/models.py=utf-8
 encoding//modules/vcms/apps/www/templatetags/banner_widget.py=utf-8
+encoding//modules/vcms/apps/www/templatetags/navigation.py=utf-8
 encoding//modules/vcms/apps/www/templatetags/www_extras.py=utf-8
 encoding//modules/vcms/apps/www/urls.py=utf-8
 encoding//modules/vcms/apps/www/views.py=utf-8
@@ -44,7 +45,6 @@ encoding//modules/vimba_cms_simthetiq/apps/products/admin.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/managers.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/models.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/templates/admin/products/change_form.html=UTF-8
-encoding//modules/vimba_cms_simthetiq/apps/products/templatetags/navigation.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/urls.py=utf-8
 encoding//modules/vimba_cms_simthetiq/apps/products/views.py=utf-8
 encoding//modules/vimba_cms_simthetiq/tools/check_all.py=utf-8

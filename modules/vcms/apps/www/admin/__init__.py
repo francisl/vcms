@@ -2,13 +2,14 @@
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
 
+import sys
+
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
 from vcms.apps.www.models import *
 
-import sys
 
 class LanguageAdmin(admin.ModelAdmin):
     pass
@@ -16,14 +17,23 @@ class LanguageAdmin(admin.ModelAdmin):
 class PageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('name','module','status','language',)
+admin.site.register(Page, PageAdmin)
+
+class MenuSeparatorAdmin(admin.ModelAdmin):
+    fieldsets = (( 'Separator',
+                   { 'fields': ('name',) }
+                   ),
+                 )
+admin.site.register(MenuSeparator, MenuSeparatorAdmin)
 
 class ContentInline(admin.StackedInline):
     model = Content
     extra = 1
-
+    
 class SimplePageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [ContentInline]
+admin.site.register(SimplePage, SimplePageAdmin)
 
 class DashboardElementInline(admin.StackedInline):
     model = DashboardElement
@@ -48,7 +58,6 @@ for module in settings.PAGE_MODULES:
         pass
         print("modules exception : %s" % module)
 
-
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES
 
@@ -59,11 +68,6 @@ class BannerImageAdmin(admin.ModelAdmin):
     
 class BannerAdmin(admin.ModelAdmin):
     filter_horizontal = ('page',)
-
-
-#admin.site.register(Language, LanguageAdmin)
-admin.site.register(Page, PageAdmin)
-admin.site.register(SimplePage, SimplePageAdmin)
 
 # CONTENTS
 #admin.site.register(Content, ContentAdmin)

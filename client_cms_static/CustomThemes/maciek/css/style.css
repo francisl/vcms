@@ -217,6 +217,7 @@ div#vcms_content_body {
   position: relative;
 }
 
+<<<<<<< HEAD
 div#vcms_content_body div#item_navigation div.left {
   float: left;
 }
@@ -230,6 +231,9 @@ div#vcms_content_body div#vcms_pagination {
 }
 
 div#vcms_navigation {
+=======
+div#vcms_navigation_container {
+>>>>>>> add structure for dis or standard navigation
   width: 240px;
   border-bottom: 1px solid #656565;
   border-right: 1px solid #656565;
@@ -241,7 +245,7 @@ div#vcms_navigation {
   background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
 }
 
-div#vcms_navigation ul {
+div#vcms_navigation_container ul {
   width: 100%;
   background-color: #dadada;
 }

@@ -215,13 +215,14 @@ class DomainElement(models.Model):
 def _unicode_DIS(name, id):
     return  name + "(" + str(id) + ")"
 
-class CompactNavigationGroup(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    
+class CompactNavigationGroup(Page):
     objects = CompactNavigationGroupManager()
     
     def __unicode__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return "/standard/" +  self.slug
     
 class Kind(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -246,7 +247,6 @@ class DISCountry(models.Model):
     
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    #description = models.TextField()
     dis_id = models.PositiveIntegerField()
     kind = models.ForeignKey(Kind)
     domain = models.ForeignKey(Domain)
@@ -268,9 +268,8 @@ class Category(models.Model):
         print("clearing product link !")
         print("linked to : %s " % self.productpage_set.all())
         self.productpage_set.clear()
-        super(Category, self).delete()
-
-            
+        super(Category, self).delete()  
+    
 class ProductPage(Page):
     #name = models.CharField(max_length=50, unique=True)
     product_description = models.TextField()
@@ -353,16 +352,7 @@ class ProductPage(Page):
         self.previous = None
         #self.save(reorder=False)
         super(ProductPage, self).delete()
-        
-#def pre_delete_action(sender, instance, **kwargs):
-    #print("instance = %s" % instance)
-    #print("instance previous = %s" % instance.previous)
-    #print("instance next = %s" % instance.next)
-    #if instance.mark_for_delete == True:
-    #    return True
-    
-#pre_delete.connect(pre_delete_action, sender=ProductPage, weak=False)
-    
+         
 # -- CONTENT
 # ----------
 class ProductContent(models.Model):

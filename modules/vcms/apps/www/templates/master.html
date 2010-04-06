@@ -3,6 +3,7 @@
 {% load search_widget %}
 {% load compress %}
 {% load i18n %}
+{% load navigation %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -22,6 +23,7 @@
 	{% compress css %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/style.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/dropdownmenu.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/navigation.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
@@ -58,11 +60,12 @@
 		
 		<div id="vcms_content_body">
             {% block ubercontent %}
-			<div id="vcms_navigation">
-				<div>&nbsp;
+			<div id="vcms_navigation_container">
 				{% block navigation %}
+				    {% if navigation_menu %}
+				        {% show_product_navigation navigation_menu%}
+				    {% endif %}
 		        {% endblock navigation %}
-		        </div>
 	        </div>
 	        <div id="vcms_content_container">
 				<div id="vcms_content">
@@ -107,7 +110,6 @@
 			{% endblock ubercontent %}
 			
 		</div><!-- vcms_center -->
-		
 		<!-- =========footer=========== -->
 		<div id="footing" >
 			<div class="footing_content">
@@ -117,7 +119,6 @@
 		         {% else%}
 		            {% show_footer_menu %}
 		        {% endif %}
-				
 			</div>
 		</div>
 	</div><!-- vcms_content_body -->

@@ -15,9 +15,6 @@ def Generic(request, page=None, product=None, selected_category=None, slug=None,
     context.update(InitPage(page_slug=page, app_slug=productmodels.APP_SLUGS))
     context.update(locals())
     
-    print("menu style = %s" % context["menu_style"])
-    print("module = %s" % context["module"])
-    
     if context["module"] in globals():
         return globals()[context["module"]](request, context)
     else:
@@ -39,10 +36,14 @@ def Product(request, context={}):
         #print("CATEGORY = %s" % category.domain.get_absolute_url())
     except:
         category = None
+    
+    # set navigation type if not set
+    if request.session.get('navigation_type') == "":
+        request.session['navigation_type'] = "compact"
         
-    if context["menu_type"] == "dis":
+    if request.session.get('navigation_type') == "DIS":
         menu = category.get_navigation_menu()
-    elif context["menu_type"] == "compact":
+    elif request.session.get('navigation_type') == "compact":
         menu = CompactNavigationGroup.get_navigation()
     
     #print("PRODUCT INFORMATION %s " % product_information)
@@ -55,54 +56,36 @@ def Product(request, context={}):
                                   "navigation_menu": menu },
                                 context_instance=RequestContext(request))
 
+def set_DIS_navigation(request, page):
+    request.session['navigation_type'] = "DIS"
+    return Product(request, InitPage(page=page))
     
-    
-"""
-def ProductGallery(request, context={}):
-    # create a list of dictionary binding type to product(s)
-    categories = []
-    #prodByCategories = {}
-    #product_paginator = getPageList()
-    for category in productmodels.Category.objects.filter(domain = domain_page.id):
-        #if not prodByCategories.has_key(category.name):
-        #    prodByCategories[category.name] = []
-        
-        products = productmodels.ProductPage.objects.filter(category=category.id)
-        pageproducts = []
-        for p in products:
-            pageproducts.append(p)
-        
-        #for p in product_paginator.page_range:
-        #    if product_paginator.object_list[p-1].category == category.name:
-        #        prodByCategories[category.name].append(product_paginator.object_list[p-1])
-                     
-        if len(products) != 0:
-            # only takes types that have product associated to them
-            categories.append({"category": category, "products": pageproducts}) 
-    context['categories'] = categories
-    
-    del categories
-    
-    # File Format
-    context['file_format'] = domain_page.file_format.all()
-    context['domain_page'] = domain_page
-    
-    if context["selected_category"] == None:
-        del context["selected_category"]
-    else:
-        # needed in order to make comparaison with ids in template
-        context["selected_category"] = int(context["selected_category"])
-    
-    return render_to_response('product_gallery.html',
-                              context,
-                              context_instance=RequestContext(request))
-"""
 
-def getPageList():
-    return Paginator(productmodels.ProductPage.objects.all(), 1)
+def set_compact_navigation(request, page):
+    request.session['navigation_type'] = "compact"
+    return Product(request, InitPage(page=page))
 
+
+def productList(request):
+    # set navigation type if not set
+    if request.session.get('navigation_type') == "":
+        request.session['navigation_type'] = "compact"
+        
+    if request.session.get('navigation_type') == "DIS":
+        menu = category.get_navigation_menu()
+    elif request.session.get('navigation_type') == "compact":
+        menu = CompactNavigationGroup.get_navigation()
+
+    return render_to_response('product_info.html',
+                                { "menuselected":  "menu_products",
+                                  "current_page":   context['current_page'],
+                                  "product_contents": product_contents,
+                                  "navigation_menu": menu },
+                                context_instance=RequestContext(request))
+    
+
+"""
 def Domain(request, context={}):
-    #print("------------- Domain -------------")
     #print("selected_category is set : %s " % type(context["selected_category"]))
     # selected the domain page to retreive information not in www.models.page
     try:
@@ -161,7 +144,7 @@ def Domain(request, context={}):
     return render_to_response('domain/index_domain.html',
                               context,
                               context_instance=RequestContext(request))
-
+"""
 
 def GalleryPage(request, context={}):
     """ this page build a gallery with all the simthetiq product image
@@ -177,4 +160,45 @@ def GalleryPage(request, context={}):
     return render_to_response('gallery.html',
                                 context,
                                 context_instance=RequestContext(request))
-     
+
+  
+"""
+def ProductGallery(request, context={}):
+    # create a list of dictionary binding type to product(s)
+    categories = []
+    #prodByCategories = {}
+    #product_paginator = getPageList()
+    for category in productmodels.Category.objects.filter(domain = domain_page.id):
+        #if not prodByCategories.has_key(category.name):
+        #    prodByCategories[category.name] = []
+        
+        products = productmodels.ProductPage.objects.filter(category=category.id)
+        pageproducts = []
+        for p in products:
+            pageproducts.append(p)
+        
+        #for p in product_paginator.page_range:
+        #    if product_paginator.object_list[p-1].category == category.name:
+        #        prodByCategories[category.name].append(product_paginator.object_list[p-1])
+                     
+        if len(products) != 0:
+            # only takes types that have product associated to them
+            categories.append({"category": category, "products": pageproducts}) 
+    context['categories'] = categories
+    
+    del categories
+    
+    # File Format
+    context['file_format'] = domain_page.file_format.all()
+    context['domain_page'] = domain_page
+    
+    if context["selected_category"] == None:
+        del context["selected_category"]
+    else:
+        # needed in order to make comparaison with ids in template
+        context["selected_category"] = int(context["selected_category"])
+    
+    return render_to_response('product_gallery.html',
+                              context,
+                              context_instance=RequestContext(request))
+"""
