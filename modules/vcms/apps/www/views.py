@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 # external requirement
 from captcha.fields import CaptchaField
 
-from vcms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview
+from vcms.apps.www.models import Page, PageElementPosition, Content, DashboardPage, DashboardElement, DashboardPreview, APP_SLUGS
 from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
@@ -41,10 +41,9 @@ def InitPage(page_slug, app_slug):
     try:
         # IF NOTHING SELECTED, GO FIRST MENU
         # ON ERROR RAISE 404
-        if page == None:
+        if page_slug == None:
             current_page = Page.objects.get_Default()
-            #print("NONE current page = %s" % current_page)
-        # When Page IS SELECTED
+        # When Page slug i
         else:
             current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
         module = current_page.module
@@ -52,11 +51,11 @@ def InitPage(page_slug, app_slug):
         menu_style = DROPDOWN_MENU
         return locals()
     except:
+        print("get default %s" % "error")
         raise Http404
     
 def Generic(request, page=None, context={}):
-    context.update(InitPage(page=page))
-    print("page ==== %s" % page)
+    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
     if context["module"] in globals():
@@ -117,16 +116,16 @@ def Dashboard(request, context={}):
                                                         "link": content.link},
                                                     ))
 
-    for content in DashboardPreview.objects.filter(page=context['current_page'].id):
-        contents[content.preview_position].append((content.preview_display_priority, { "title": content.preview.name, 
-                                                                                        "content": content.preview.content, 
-                                                                                        "link": content.preview.get_absolute_url()
-                                                                                        },))
+    for content in DashboardPreview.objects.filter(page=context['current_page']):
+        contents[content.preview_position].append((content.preview_display_priority, 
+                                                   { "title": content.preview.name,
+                                                    "content": content.preview.content, 
+                                                    "link": content.preview.get_absolute_url()},
+                                                    ))
 
     context["contents"] = contents
     #news = News.objects.all()
     
-
     # sorting content
     context["contents"]['left'].sort()
     context["contents"]['right'].sort()
