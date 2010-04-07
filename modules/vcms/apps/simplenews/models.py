@@ -42,6 +42,11 @@ class News(Announcement):
 
     objects = NewsManager()
 
+    def save(self):
+        self.app_slug = APP_SLUGS
+        self.module = 'SimpleNews'
+        super(News, self).save()
+
     class Meta:
         verbose_name_plural = _("News")
         get_latest_by = ['-date_created']
