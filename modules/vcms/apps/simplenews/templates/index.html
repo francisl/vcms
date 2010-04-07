@@ -1,9 +1,46 @@
 {% extends "master.html" %}
+{% load comments %}
+{% load i18n %}
+
+{% block content %}
+    <!-- Content -->
+    {% if contents %}
+    {% for c in contents %}
+    <div class="division_content" name="{{ c.id }}">
+        <br />
+        <h4>{{ c.name|upper }}</h4>
+        <hr />
+        <div class="division_content">
+            {{ c.content|truncatewords:50|safe }}
+        </div>
+    </div>
+    {% if c.comments_allowed %}
+    <div class="comments">
+        {% get_comment_list for c as comments_list %}
+        <h4>
+            {% if not comments_list %}
+                {% trans "There are no comments for this news." %}
+            {% else %}
+                {% blocktrans count comments_list|length as counter %}
+                    There is one comment for this news.
+                {% plural %}
+                    There are {{counter}} comments for this news.
+                {% endblocktrans %}
+            {% endif %}
+        </h4>
+    </div>
+    {% endif %}
+    <br/>
+    <a href="{% url vcms.apps.simplenews.views.news_unique category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
+    <br/><br/>
+    {% endfor %}
+    {% endif %}
+{% endblock content %}
 
 {% block navigation %}
     <ul>
     {% for category in categories %}
-    <li><a href="{% url vcms.apps.simplenews.views.news_index category_slug=category.slug %}">{{category.name}}</a></li>
+        <li><a href="{% url vcms.apps.simplenews.views.news_index category_slug=category.slug %}">{{category.name}}</a></li>
     {% endfor %}
     </ul>
 {% endblock navigation %}
