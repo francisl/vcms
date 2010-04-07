@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/style.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/dropdownmenu.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+    {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
 	   {% block stylesheet %}{% endblock stylesheet %}
 	</style>
@@ -31,7 +32,7 @@
 </head>
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
 <!-- =========header=========== -->
-    <div id="vcms_content_body">
+    <div id="vcms_body">
 		<div id="vcms_header">  
 			<!-- {% show_search_box %} -->
 			<div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
@@ -55,16 +56,19 @@
 		{% endifequal %}
 		<!--=========content=========== -->
 		
-		<div id="vcms_center">
+		<div id="vcms_content_body">
             {% block ubercontent %}
 			<div id="vcms_navigation">
-			<div>&nbsp;
-			{% block navigation %}
-	        {% endblock navigation %}
-	        </div>
+				<div>&nbsp;
+				{% block navigation %}
+		        {% endblock navigation %}
+		        </div>
 	        </div>
 	        <div id="vcms_content_container">
 				<div id="vcms_content">
+				    <div id="page_title">
+                        {{ contact_page.page_header|safe }}
+                    </div>
 				    {% block content %}
 						<!-- Content -->
 						{% if contents %}

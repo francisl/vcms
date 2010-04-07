@@ -244,6 +244,8 @@ class DashboardPage(Page):
         super(DashboardPage, self).save()
 
 class DashboardElement(PageElementPosition):
+    """ Text holder that are display in a dashboard element 
+    """
     name = models.CharField(max_length=36)
     page = models.ForeignKey(DashboardPage)
     text = models.TextField()

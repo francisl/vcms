@@ -1,0 +1,12 @@
+
+// NAVIGATION
+NAVIGATION_WIDTH = 200px;
+div#vcms_navigation:
+    width: $NAVIGATION_WIDTH;
+    height: 100%;
+    float: left;
+    border: thin solid grey;
+    
+    ul:
+        width: 100%;
+        background-color: #dadada;
