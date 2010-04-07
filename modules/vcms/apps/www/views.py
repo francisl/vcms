@@ -41,7 +41,7 @@ def InitPage(page_slug, app_slug):
     try:
         # IF NOTHING SELECTED, GO FIRST MENU
         # ON ERROR RAISE 404
-        if page == None:
+        if page_slug == None:
             current_page = Page.objects.get_Default()
             #print("NONE current page = %s" % current_page)
         # When Page IS SELECTED
