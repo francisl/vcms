@@ -85,24 +85,24 @@
 						{% endif %}
 				    {% endblock content %}
 				</div>
-			</div><!-- vcms_content_container -->
-            <div id="vcms_pagination">
-                {% block pagination %}
-                {% if paginator %}
-                <span class="step-links">
-                    <span class="current">
-                        Page {{paginator.number}} {% trans 'of' %} {{paginator.paginator.num_pages}}
+                <div id="vcms_pagination">
+                    {% block pagination %}
+                    {% if paginator %}
+                    <span class="step-links">
+                        <span class="current">
+                            Page {{paginator.number}} {% trans 'of' %} {{paginator.paginator.num_pages}}
+                        </span>
+                        {% if paginator.has_previous %}
+                            <a href="{{paginator_previous_url}}"> &lt;&lt; {% trans 'previous' %}</a>
+                        {% endif %}
+                        {% if paginator.has_next %}
+                            <a href="{{paginator_next_url}}">{% trans 'next' %} &gt;&gt;</a>
+                        {% endif %}
                     </span>
-                    {% if paginator.has_previous %}
-                        <a href="{{paginator_previous_url}}"> &lt;&lt; {% trans 'previous' %}</a>
                     {% endif %}
-                    {% if paginator.has_next %}
-                        <a href="{{paginator_next_url}}">{% trans 'next' %} &gt;&gt;</a>
-                    {% endif %}
-                </span>
-                {% endif %}
-                {% endblock pagination %}
+                    {% endblock pagination %}
                 </div>
+			</div><!-- vcms_content_container -->
 			<div class="clear"></div>
 			{% endblock ubercontent %}
 			
