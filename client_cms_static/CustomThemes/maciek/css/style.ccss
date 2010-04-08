@@ -1,12 +1,12 @@
 
 BODY_WIDTH = 100%
 body:
-    width: $BODY_WIDTH
-    margin: 0
-    padding: 0
-    background-color: #888
-    font-size:11pt
-    font-family: futura, "century gothic", sans-serif
+    width: $BODY_WIDTH;
+    margin: 0;
+    padding: 0;
+    background-color: #888;
+    font-size: 11pt;
+    font-family: futura, "century gothic", sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
