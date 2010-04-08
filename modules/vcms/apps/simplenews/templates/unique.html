@@ -38,8 +38,8 @@
                 {% endblocktrans %}
             {% endif %}
         </h4>
-        <hr/>
         {% if comments_list %}
+            <hr/>
             {% render_comment_list for content %}
         {% endif %}
         {% if content.comments_allowed %}
