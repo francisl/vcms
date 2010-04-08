@@ -16,3 +16,9 @@ class Announcement(Page):
     content = models.TextField()
     comments_allowed = models.BooleanField(default=True)
     tags = TagField()
+
+    def get_next_announcement(self):
+        return self.get_next_by_date_published(status=Page.PUBLISHED)
+
+    def get_previous_announcement(self):
+        return self.get_previous_by_date_published(status=Page.PUBLISHED)

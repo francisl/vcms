@@ -11,6 +11,18 @@
         <div class="division_content">
             {{ content.content|safe }}
         </div>
+        <div id="item_navigation">
+            <div class="left">
+                {% if previous_news %}
+                    <a href="{% url vcms.apps.simplenews.views.news_unique category_slug=previous_news.category.slug news_slug=previous_news.slug %}">{{previous_news.name}}</a>
+                {% endif %}
+            </div>
+            <div class="right">
+                {% if next_news %}
+                    <a href="{% url vcms.apps.simplenews.views.news_unique category_slug=next_news.category.slug news_slug=next_news.slug %}">{{next_news.name}}</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
     {% get_comment_list for content as comments_list %}
     {% if content.comments_allowed or comments_list %}

@@ -44,7 +44,15 @@ def news_unique(request, category_slug, news_slug, context={}):
     categories = NewsCategory.objects.all()
     #content = context["current_page"]
     content = News.objects.get(category__slug=category_slug, slug=news_slug)
-    context.update({ "categories": categories, "content": content })
+    try:
+        previous_news = content.get_previous_announcement()
+    except News.DoesNotExist:
+        previous_news = None
+    try:
+        next_news = content.get_next_announcement()
+    except News.DoesNotExist:
+        next_news = None
+    context.update({ "categories": categories, "content": content, "previous_news": previous_news, "next_news": next_news })
     return render_to_response("unique.html", context, context_instance=RequestContext(request))
 
 def news_category(request, category_slug, category, page=1, context={}):

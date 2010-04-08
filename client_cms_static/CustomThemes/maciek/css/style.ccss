@@ -200,7 +200,13 @@ div#vcms_content_body:
     width: $SITE_CONTENT_WIDTH;
     background-color: #333333;
     position: relative;
-  
+
+    div#item_navigation:
+        div.left:
+            float: left;
+        div.right:
+            float:right;
+
 // NAVIGATION
 NAVIGATION_WIDTH = 240px;
 NAV_BORDER_STYLE = 1px solid #656565;
@@ -255,4 +261,3 @@ div#vcms_content:
 // PAGINATION
 div#vcms_pagination:
     text-align: center;
-

@@ -217,6 +217,14 @@ div#vcms_content_body {
   position: relative;
 }
 
+div#vcms_content_body div#item_navigation div.left {
+  float: left;
+}
+
+div#vcms_content_body div#item_navigation div.right {
+  float: right;
+}
+
 div#vcms_navigation {
   width: 240px;
   border-bottom: 1px solid #656565;
