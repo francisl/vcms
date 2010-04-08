@@ -14,5 +14,5 @@ APP_SLUGS = "simpleannouncements"
 
 class Announcement(Page):
     content = models.TextField()
-    comments_allowed = models.BooleanField()
+    comments_allowed = models.BooleanField(default=True)
     tags = TagField()
