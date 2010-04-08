@@ -12,9 +12,9 @@
             {{ content.content|safe }}
         </div>
     </div>
-    {% if content.comments_allowed %}
+    {% get_comment_list for content as comments_list %}
+    {% if content.comments_allowed or comments_list %}
     <div class="comments">
-        {% get_comment_list for content as comments_list %}
         <h4>
             {% if not comments_list %}
                 {% trans "There are no comments for this news." %}
@@ -30,9 +30,11 @@
         {% if comments_list %}
             {% render_comment_list for content %}
         {% endif %}
+        {% if content.comments_allowed %}
         <hr/>
         <h4>{% trans "Add a comment" %}</h4>
         {% render_comment_form for content %}
+        {% endif %}
     </div>
     {% endif %}
 {% endblock content %}

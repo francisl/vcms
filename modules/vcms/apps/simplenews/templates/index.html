@@ -14,9 +14,9 @@
             {{ c.content|truncatewords:50|safe }}
         </div>
     </div>
-    {% if c.comments_allowed %}
+    {% get_comment_list for c as comments_list %}
+    {% if c.comments_allowed or comments_list %}
     <div class="comments">
-        {% get_comment_list for c as comments_list %}
         <h4>
             {% if not comments_list %}
                 {% trans "There are no comments for this news." %}
