@@ -18,9 +18,9 @@ def news_index(request, category_slug, page=1, context={}):
     context.update(locals())
     categories = NewsCategory.objects.all()
     if category_slug:
-        news = News.objects.filter(category__slug=category_slug)
+        news = News.published.filter(category__slug=category_slug)
     else:
-        news = News.objects.all()
+        news = News.published.all()
     # Paginate the results
     paginator = Paginator(news, settings.MAX_NEWS_PER_PAGE)
     try:
@@ -43,7 +43,7 @@ def news_unique(request, category_slug, news_slug, context={}):
     context.update(locals())
     categories = NewsCategory.objects.all()
     #content = context["current_page"]
-    content = News.objects.get(category__slug=category_slug, slug=news_slug)
+    content = News.published.get(category__slug=category_slug, slug=news_slug)
     try:
         previous_news = content.get_previous_announcement()
     except News.DoesNotExist:

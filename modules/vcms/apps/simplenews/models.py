@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.apps.www.models import Language, PageElementPosition
 from vcms.apps.simpleannouncements.models import Announcement
-from vcms.apps.simplenews.managers import NewsManager
+from vcms.apps.simplenews.managers import NewsManager, PublishedNewsManager
 
 
 APP_SLUGS = "simplenews"
@@ -41,6 +41,7 @@ class News(Announcement):
     category = models.ForeignKey(NewsCategory)
 
     objects = NewsManager()
+    published = PublishedNewsManager()
 
     def save(self):
         self.app_slug = APP_SLUGS
