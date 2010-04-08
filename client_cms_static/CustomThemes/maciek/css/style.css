@@ -225,6 +225,10 @@ div#vcms_content_body div#item_navigation div.right {
   float: right;
 }
 
+div#vcms_content_body div#vcms_pagination {
+  text-align: center;
+}
+
 div#vcms_navigation {
   width: 240px;
   border-bottom: 1px solid #656565;
@@ -279,8 +283,4 @@ div#vcms_content table input {
 
 div#vcms_content table textarea {
   width: 100%;
-}
-
-div#vcms_pagination {
-  text-align: center;
 }
