@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+{% load comments %}
+{% load i18n %}
+
+{% block content %}
+    <!-- Content -->
+    <div class="division_content" name="{{ c.id }}">
+        <br />
+        <h4>{{ content.name|upper }}</h4>
+        <hr />
+        <div class="division_content">
+            {{ content.content|safe }}
+        </div>
+    </div>
+    {% if content.comments_allowed %}
+    <div class="comments">
+        {% get_comment_list for content as comments_list %}
+        <h4>
+            {% if not comments_list %}
+                {% trans "There are no comments for this news." %}
+            {% else %}
+                {% blocktrans count comments_list|length as counter %}
+                    There is one comment for this news.
+                {% plural %}
+                    There are {{counter}} comments for this news.
+                {% endblocktrans %}
+            {% endif %}
+        </h4>
+        <hr/>
+        {% if comments_list %}
+            {% render_comment_list for content %}
+        {% endif %}
+        <hr/>
+        <h4>{% trans "Add a comment" %}</h4>
+        {% render_comment_form for content %}
+    </div>
+    {% endif %}
+{% endblock content %}
+
+{% block navigation %}
+    <ul>
+    {% for category in categories %}
+        <li><a href="{% url vcms.apps.simplenews.views.news_index category_slug=category.slug %}">{{category.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock navigation %}

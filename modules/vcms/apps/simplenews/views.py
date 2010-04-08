@@ -39,10 +39,13 @@ def news_index(request, category_slug, page=1, context={}):
     return render_to_response("index.html", context, context_instance=RequestContext(request))
 
 def news_unique(request, category_slug, news_slug, context={}):
-    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
+    context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
     context.update(locals())
-    context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-    return render_to_response("index.html", context, context_instance=RequestContext(request))
+    categories = NewsCategory.objects.all()
+    #content = context["current_page"]
+    content = News.objects.get(category__slug=category_slug, slug=news_slug)
+    context.update({ "categories": categories, "content": content })
+    return render_to_response("unique.html", context, context_instance=RequestContext(request))
 
 def news_category(request, category_slug, category, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
