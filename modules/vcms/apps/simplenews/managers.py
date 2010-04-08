@@ -24,3 +24,12 @@ class PublishedNewsManager(models.Manager):
     def get_query_set(self):
         """Filters the results to display the published news."""
         return super(PublishedNewsManager, self).get_query_set().filter(status=Page.PUBLISHED)
+
+class NewsCategoryManager(models.Manager):
+    def get_categories_in_use(self):
+        """
+            Returns the NewsCategory instances which are associated
+            to published news instances.
+        """
+        from vcms.apps.simplenews.models import News
+        return self.filter(pk__in=News.published.all().values("category__pk"))

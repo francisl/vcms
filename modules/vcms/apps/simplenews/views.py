@@ -16,7 +16,7 @@ from vcms.apps.www.views import InitPage
 
 def news_index(request, category_slug, page=1, context={}):
     context.update(locals())
-    categories = NewsCategory.objects.all()
+    categories = NewsCategory.objects.get_categories_in_use()
     if category_slug:
         news = News.published.filter(category__slug=category_slug)
     else:
@@ -41,7 +41,7 @@ def news_index(request, category_slug, page=1, context={}):
 def news_unique(request, category_slug, news_slug, context={}):
     context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
     context.update(locals())
-    categories = NewsCategory.objects.all()
+    categories = NewsCategory.objects.get_categories_in_use()
     #content = context["current_page"]
     content = News.published.get(category__slug=category_slug, slug=news_slug)
     try:
