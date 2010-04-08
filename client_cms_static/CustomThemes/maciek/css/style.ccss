@@ -1,7 +1,7 @@
 
 BODY_WIDTH = 100%
 body:
-    width: %BODY_WIDTH
+    width: $BODY_WIDTH
     margin: 0
     padding: 0
     background-color: #888
