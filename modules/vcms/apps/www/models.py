@@ -30,7 +30,6 @@ class Language(models.Model):
 # -- Pages
 # -- -----
 
-
 #class MenuGroup(models.Model):
 #    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
  
@@ -65,6 +64,25 @@ def _delete_page(page2delete):
             _delete_page(page)
 
 class Page(models.Model):
+    """ A page is a placeholder accessible by the user that represents a section content
+        Like a news page, a forum page with multiple sub-section, a contact page ...
+        A page can have multiple sub-section define in the application urls
+        
+        -- Link
+        The CMS generate links to make these placeholder accessible in menus
+        it uses the follow pattern : /{APP_SLUGS}/page/{page_slug}/
+        ex: A basic Page model will be accessible at : /www/page/examplepage
+            A news page model will be accessible at : /news/page/newspage
+    
+        --Menu
+        The models keep a ordered tree that represents the structure and ordering
+        of the pages. This is used to generate main/sub menu.
+        
+        -- Language
+        Page can be classified by language - NOTE not yet working
+        # TODO : add multi-language fonctionnality
+         
+    """
     DRAFT = 0
     PUBLISHED = 1
     STATUSES = (
