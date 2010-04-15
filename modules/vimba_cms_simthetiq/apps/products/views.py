@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from config import simthetiq_config 
 from vimba_cms_simthetiq.apps.products import models as productmodels
-from vcms.apps.www.views import InitPage
+from vcms.apps.www.views import InitPage, setPageParameters
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
     """ Is called first, then it calls the right view base on module name containt in the url
@@ -65,8 +65,9 @@ def set_navigation_type(request, page=None, type="compact"):
 
 def productHome(request, context={}):
     from vcms.apps.vwm.tree import generator
-    
-    context.update(InitPage(page_slug=None, app_slug=productmodels.APP_SLUGS))
+    from vcms.apps.www.models import MenuLocalLink
+    page = MenuLocalLink.objects.get(local_link="/products/home")
+    context.update(setPageParameters(page))
     context.update(locals())
     
     # set navigation type if not set
@@ -78,10 +79,13 @@ def productHome(request, context={}):
     else: #if request.session.get('navigation_type') == "compact":
         nav = generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
 
-    print("navigation = %s" % nav)
-    return render_to_response('product_info.html',
+    print("navigation = %s" % str(nav))
+    print("context menustyle = %s" % str(context["menu_style"]))
+    print("context current_page = %s" % str(context["current_page"]))
+    return render_to_response('product_home.html',
                                 { "menuselected":  "menu_products",
-                                  "current_page":   context['current_page'],
+                                  "menu_style" : context['menu_style'],
+                                  "current_page":   page,
                                   "navigation_menu": nav },
                                 context_instance=RequestContext(request))
     

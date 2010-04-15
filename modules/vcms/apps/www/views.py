@@ -24,7 +24,14 @@ def debugtrace(view, current_page, **argd):
 
     for v in argd:
         print("%s : %s" % (v,argd[v]))
-    
+
+
+def setPageParameters(page):
+    module = page.module
+    menu_style = DROPDOWN_MENU
+    current_page = page
+    return locals()
+
 def InitPage(page_slug, app_slug):
     """ InitPage get a page slug and its corresponding app slug then return
         an updated context containing the required information for the CMS pages
@@ -46,10 +53,9 @@ def InitPage(page_slug, app_slug):
         # When Page slug i
         else:
             current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
-        module = current_page.module
-        #debugtrace("Initpage phase 2", current_page, **{'module':module})
-        menu_style = DROPDOWN_MENU
-        return locals()
+        print("set -- %s" % setPageParameters(current_page))
+        context = setPageParameters(current_page)
+        return context 
     except:
         print("get default %s" % "error")
         raise Http404
