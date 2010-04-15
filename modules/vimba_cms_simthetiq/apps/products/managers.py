@@ -187,10 +187,10 @@ class ProductPageManager(models.Manager):
 
 class CompactNavigationGroupManager(models.Manager): 
     def get_navigation(self):
-        from vcms.apps.vwm import tree
+        from vcms.apps.vwm.tree import helper
         """ return navigation tree in a dictionary structure """ 
         menu = []
         for navgroup in self.all():
-            menu.append(tree.helper.create_tree_structure(navgroup.name, navgroup.get_absolute_url()))
+            menu.append(helper.create_tree_structure(navgroup.name, navgroup.get_absolute_url()))
         return menu
 
