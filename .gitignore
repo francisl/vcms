@@ -3,6 +3,7 @@
 
 # Ignore cache
 client_cms_static/CACHE/*
+server/database/whoosh/*
 
 # Editor backup files
 *~
@@ -16,6 +17,7 @@ client_cms_static/CACHE/*
 .project
 .pydevproject
 nbproject
+.settings/*
 
 # auto generated css
 client_cms_static/CustomThemes/*/css/*.css
