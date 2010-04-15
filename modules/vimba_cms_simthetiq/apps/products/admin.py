@@ -106,8 +106,7 @@ class ProductPageAdmin(admin.ModelAdmin):
     fieldsets = (( 'Page information',
                    { 'fields': ('name', 'slug', 'status', 'description','language',  'keywords', 'default') }),
                  ('DIS',
-                    {'fields': ('category', 'used_in', 'dis_country', 'dis_subcategory_id', 'dis_specific_id',)}
-                  ),
+                    {'fields': ('category', 'used_in', 'dis_country', 'dis_subcategory_id', 'dis_specific_id',)}),
                  ('Product information ', 
                     { 'fields': ('product_description',  'polygon',
                                 'texture_format', 'texture_resolution','file_format', 'similar_products','previous', 'next')}
@@ -160,19 +159,29 @@ class DomainAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name', 'dis_id']
     list_filter = ['kind', 'domain', 'compact_navigation']
+    fieldsets = (( 'DIS',
+                   { 'fields': ('kind', 'domain','name', 'dis_id', ) }),
+                 ('Compact',
+                    {'fields': ('compact_navigation',)}
+                  ),)
+
     def delete_selected(self, request, queryset):
         for category in queryset:
             selected_category = Category.objects.get(id=category.id)
             selected_category.delete()
 
     delete_selected.short_description = "Delete selected Category(ies)"
-
     actions = [delete_selected]
 
     
 class CompactNavigationGroupAdmin(admin.ModelAdmin):
     search_fields = ['name',]
 admin.site.register(CompactNavigationGroup, CompactNavigationGroupAdmin)
+
+class DISCountryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(DISCountry, DISCountryAdmin)
+
 
 #class ProductInformationInline(admin.StackedInline):
     #filter_horizontal = ["images"]

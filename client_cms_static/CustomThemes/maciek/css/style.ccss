@@ -6,17 +6,33 @@ body:
     padding: 0;
     background-color: #888;
     font-size: 11pt;
-    font-family: futura, "century gothic", sans-serif;
+    font-family: "century gothic",futura, sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
         font-weight: bold;
         color: #929292;
-        margin-bottom: 0.1em;
+        font-size: 1.3em;
+        margin: 0 0.1em 0 0;
+        
+    h1,h2:
+        font-size: 1.6em;
+        margin-top: 0.8em;
+        
+    h3:
+        padding-top: 0.8em;
+        
+    h4:
+        font-weight: normal;
+        padding-bottom: 0.4em;
         
     a:
         img:
             border: none;
+            
+    p:
+        margin: 0.1em 0;
+        padding: 0.1em 0;
 
 // CONTENT_BODY
 SITE_CONTENT_WIDTH = 955px
@@ -236,10 +252,10 @@ div#vcms_content_container:
     width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH;
     background-color: #fff;
     float: right;
+    padding-bottom: 2em;
     
 div#vcms_content:
-    margin: 0 1em;
-    
+    margin: 0 3em;
     
     #page_title:
         text-align: center;
@@ -254,7 +270,7 @@ div#vcms_content:
             
         label:
             font-weight: bold;
-            //font-size: 1.1em;
+            font-size: 0.9em;
             float: right;
             margin-right: 1em;
             text-transform:uppercase;

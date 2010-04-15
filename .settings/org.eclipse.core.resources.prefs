@@ -1,4 +1,4 @@
-#Wed Apr 14 14:57:37 EDT 2010
+#Wed Apr 14 16:24:58 EDT 2010
 eclipse.preferences.version=1
 encoding//modules/vcms/apps/contact/admin.py=utf-8
 encoding//modules/vcms/apps/contact/managers.py=utf-8
@@ -12,7 +12,8 @@ encoding//modules/vcms/apps/news/models.py=utf-8
 encoding//modules/vcms/apps/news/news_module.py=utf-8
 encoding//modules/vcms/apps/news/urls.py=utf-8
 encoding//modules/vcms/apps/news/views.py=utf-8
-encoding//modules/vcms/apps/vwm/www_extras.py=utf-8
+encoding//modules/vcms/apps/vwm/tree/generator.py=utf-8
+encoding//modules/vcms/apps/vwm/tree/helper.py=utf-8
 encoding//modules/vcms/apps/www/admin/__init__.py=utf-8
 encoding//modules/vcms/apps/www/managers.py=utf-8
 encoding//modules/vcms/apps/www/models.py=utf-8

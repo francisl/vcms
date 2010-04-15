@@ -56,31 +56,33 @@ def Product(request, context={}):
                                   "navigation_menu": menu },
                                 context_instance=RequestContext(request))
 
-def set_DIS_navigation(request, page):
-    request.session['navigation_type'] = "DIS"
+def set_navigation_type(request, page=None, type="compact"):
+    """ Set the naviation type into the user's session
+    """
+    request.session['navigation_type'] = type # compact or DIS
     return Product(request, InitPage(page=page))
     
 
-def set_compact_navigation(request, page):
-    request.session['navigation_type'] = "compact"
-    return Product(request, InitPage(page=page))
-
-
-def productList(request):
+def productHome(request, context={}):
+    from vcms.apps.vwm.tree import generator
+    
+    context.update(InitPage(page_slug=None, app_slug=productmodels.APP_SLUGS))
+    context.update(locals())
+    
     # set navigation type if not set
     if request.session.get('navigation_type') == "":
         request.session['navigation_type'] = "compact"
         
     if request.session.get('navigation_type') == "DIS":
-        menu = category.get_navigation_menu()
-    elif request.session.get('navigation_type') == "compact":
-        menu = CompactNavigationGroup.get_navigation()
+        nav = category.get_navigation_menu()
+    else: #if request.session.get('navigation_type') == "compact":
+        nav = generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
 
+    print("navigation = %s" % nav)
     return render_to_response('product_info.html',
                                 { "menuselected":  "menu_products",
                                   "current_page":   context['current_page'],
-                                  "product_contents": product_contents,
-                                  "navigation_menu": menu },
+                                  "navigation_menu": nav },
                                 context_instance=RequestContext(request))
     
 

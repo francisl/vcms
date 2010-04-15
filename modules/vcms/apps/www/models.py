@@ -157,17 +157,36 @@ class Page(models.Model):
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
-class MenuSeparator(Page):  
+class MenuSeparator(Page):
+    external_link = models.URLField(max_length=200, null=True, blank=True)
     def save(self):
-        self.slug = self.name
+        self.slug = self.get_absolute_url()
         self.status = self.PUBLISHED
         self.language = Language.objects.getDefault()
         self.module = "Separator"
         super(MenuSeparator, self).save()
         
     def get_absolute_url(self):
-        return False
-            
+        return "/" + self.external_link
+
+class MenuLocalLink(Page):
+    """ MenuLocalLink is to link static page dynamicaly into the menu
+        Let sta
+    """
+    local_link = models.CharField(max_length=200, null=True, blank=True, 
+                                  help_text="Link on this web site. ex. /www/page/")
+    def save(self):
+        self.slug = self.get_absolute_url()
+        self.status = self.PUBLISHED
+        self.language = Language.objects.getDefault()
+        self.module = "LocalLink"
+        super(MenuLocalLink, self).save()
+        
+    def get_absolute_url(self):
+        if self.local_link[0] != "/":
+            return self.local_link
+        else:
+            return self.local_link[1:]
     
 class SimplePage(Page):
     class Meta:

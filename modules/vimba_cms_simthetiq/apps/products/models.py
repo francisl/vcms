@@ -243,7 +243,7 @@ class DISCountry(models.Model):
     dis_id = models.PositiveIntegerField(unique=True)
     
     def __unicode__(self):
-        return _unicode_DIS(self.country_name, self.dis_id)
+        return _unicode_DIS(self.country.printable_name, self.dis_id)
     
 class Category(models.Model):
     name = models.CharField(max_length=150, unique=True)

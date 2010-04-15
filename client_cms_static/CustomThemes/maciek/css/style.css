@@ -4,7 +4,7 @@ body {
   padding: 0;
   background-color: #888888;
   font-size: 11pt;
-  font-family: futura, 'century gothic', sans-serif;
+  font-family: 'century gothic', futura, sans-serif;
   color: #707070;
 }
 
@@ -16,11 +16,32 @@ body h5,
 body h6 {
   font-weight: bold;
   color: #929292;
-  margin-bottom: 0.1em;
+  font-size: 1.3em;
+  margin: 0 0.1em 0 0;
+}
+
+body h1,
+body h2 {
+  font-size: 1.6em;
+  margin-top: 0.8em;
+}
+
+body h3 {
+  padding-top: 0.8em;
+}
+
+body h4 {
+  font-weight: normal;
+  padding-bottom: 0.4em;
 }
 
 body a img {
   border: none;
+}
+
+body p {
+  margin: 0.1em 0;
+  padding: 0.1em 0;
 }
 
 #vcms_body {
@@ -250,10 +271,11 @@ div#vcms_content_container {
   width: 715px;
   background-color: #ffffff;
   float: right;
+  padding-bottom: 2em;
 }
 
 div#vcms_content {
-  margin: 0 1em;
+  margin: 0 3em;
 }
 
 div#vcms_content #page_title {
@@ -272,6 +294,7 @@ div#vcms_content table td {
 
 div#vcms_content table label {
   font-weight: bold;
+  font-size: 0.9em;
   float: right;
   margin-right: 1em;
   text-transform: uppercase;

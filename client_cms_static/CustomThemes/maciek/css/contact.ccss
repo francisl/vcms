@@ -4,8 +4,7 @@ div#vcms_content:
         text-align: justify;
         
     .form:
-        width: 48%;
+        width: 52%;
         float: left;
         margin-right: 2em;
         margin-bottom: 1em;
-        font-size: 0.9em;

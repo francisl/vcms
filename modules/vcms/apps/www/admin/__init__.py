@@ -21,10 +21,17 @@ admin.site.register(Page, PageAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',
-                   { 'fields': ('name',) }
+                   { 'fields': ('name','external_link') }
                    ),
                  )
 admin.site.register(MenuSeparator, MenuSeparatorAdmin)
+
+class MenuLocalLinkAdmin(admin.ModelAdmin):
+    fieldsets = (( 'Separator',
+                   { 'fields': ('name','local_link') }
+                   ),
+                 )
+admin.site.register(MenuLocalLink, MenuLocalLinkAdmin)
 
 class ContentInline(admin.StackedInline):
     model = Content
