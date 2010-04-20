@@ -43,5 +43,7 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
     if type == "dl":
         return _generetate_dl_tree(data, cssid, cssclass)
     if type == "li":
-        return _generetate_li_tree(data, cssid, cssclass)
+        return _generetate_dl_tree(data, cssid, cssclass)
+        # TODO: add generate_li_tree code
+        #return _generetate_li_tree(data, cssid, cssclass)
         
