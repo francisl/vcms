@@ -90,68 +90,6 @@ def productHome(request, context={}):
                                 context_instance=RequestContext(request))
     
 
-"""
-def Domain(request, context={}):
-    #print("selected_category is set : %s " % type(context["selected_category"]))
-    # selected the domain page to retreive information not in www.models.page
-    try:
-        #print("context['current_page'].id = %s" % context['current_page'].id)
-        domain_page = productmodels.DomainPage.objects.get(id=context['current_page'].id)
-    except:
-        domain_page  = None
-        return render_to_response('master.html', 
-                              context,
-                              context_instance=RequestContext(request))
-    
-    try:
-        context['elements'] = productmodels.DomainElement.objects.filter(page=domain_page , published=True)
-    except productmodels.ObjectDoesNotExist: 
-        context['elements'] = []
-    #print("context elements : %s " % context['elements'])
-    
-    # create a list of dictionary binding type to product(s)
-    categories = []
-    #prodByCategories = {}
-    #product_paginator = getPageList()
-    for category in productmodels.Category.objects.filter(domain = domain_page.id):
-        #if not prodByCategories.has_key(category.name):
-        #    prodByCategories[category.name] = []
-        
-        products = productmodels.ProductPage.objects.filter(category=category.id)
-        pageproducts = []
-        for p in products:
-            pageproducts.append(p)
-        
-        #for p in product_paginator.page_range:
-        #    if product_paginator.object_list[p-1].category == category.name:
-        #        prodByCategories[category.name].append(product_paginator.object_list[p-1])
-                     
-        if len(products) != 0:
-            # only takes types that have product associated to them
-            categories.append({"category": category, "products": pageproducts}) 
-    context['categories'] = categories
-    #context['product_paginator'] = product_paginator
-    #print prodByCategories
-    #print "------------------"
-    #print product_paginator.num_pages
-    
-    del categories
-    
-    # File Format
-    context['file_format'] = domain_page.file_format.all()
-    context['domain_page'] = domain_page
-    
-    if context["selected_category"] == None:
-        del context["selected_category"]
-    else:
-        # needed in order to make comparaison with ids in template
-        context["selected_category"] = int(context["selected_category"])
-    
-    return render_to_response('domain/index_domain.html',
-                              context,
-                              context_instance=RequestContext(request))
-"""
-
 def GalleryPage(request, context={}):
     """ this page build a gallery with all the simthetiq product image
         it is possible to filter the image by tags
