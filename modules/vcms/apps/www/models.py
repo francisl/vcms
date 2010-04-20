@@ -89,6 +89,9 @@ class Page(models.Model):
         (DRAFT, _('Draft')),
         (PUBLISHED, _('Published')),
     )
+    EMPTY = 0
+    TEMPLATES = ((EMPTY, 'Defautl'),)
+    TEMPLATE_FILES = { EMPTY: 'master.html'}
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
@@ -98,6 +101,7 @@ class Page(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
+    template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
 
     # menus
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children', editable=False)
@@ -276,14 +280,11 @@ class BannerImage(models.Model):
 class DashboardPage(Page):
     EMPTY = 0
     NEWS = 1
-    CONTACT = 2
-    SIMTHETIQ = 3
+    SIMTHETIQ = 2
     TEMPLATES = ((EMPTY, 'Clean'),
-                 (CONTACT, 'Contact Form'),
                  (SIMTHETIQ, 'Simthetiq Home Page'),)
     TEMPLATE_FILES = { EMPTY: 'dashboard.html',
                       SIMTHETIQ: 'simthetiq_dashboard.html',}
-    template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
     
     class Meta:
         verbose_name = "Dashboard"

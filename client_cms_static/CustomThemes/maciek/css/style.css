@@ -254,11 +254,7 @@ div#vcms_navigation_container {
   width: 240px;
   border-bottom: 1px solid #656565;
   border-right: 1px solid #656565;
-  margin-bottom: 0px;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
+  float: left;
   background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
 }
 
@@ -268,7 +264,7 @@ div#vcms_navigation_container ul {
 }
 
 div#vcms_content_container {
-  width: 715px;
+  width: 714px;
   background-color: #ffffff;
   float: right;
   padding-bottom: 2em;
@@ -282,17 +278,20 @@ div#vcms_content #page_title {
   text-align: center;
 }
 
-div#vcms_content table {
+div#vcms_content table,
+div#vcms_content .content_box {
   border: 1px solid grey;
   padding: 0.4em 1em;
   background: url(../images/form/form_bg.jpg) bottom repeat-x;
 }
 
-div#vcms_content table td {
+div#vcms_content table td,
+div#vcms_content .content_box td {
   padding: 0.3em 0;
 }
 
-div#vcms_content table label {
+div#vcms_content table label,
+div#vcms_content .content_box label {
   font-weight: bold;
   font-size: 0.9em;
   float: right;
@@ -300,10 +299,12 @@ div#vcms_content table label {
   text-transform: uppercase;
 }
 
-div#vcms_content table input {
+div#vcms_content table input,
+div#vcms_content .content_box input {
   width: 98%;
 }
 
-div#vcms_content table textarea {
+div#vcms_content table textarea,
+div#vcms_content .content_box textarea {
   width: 100%;
 }

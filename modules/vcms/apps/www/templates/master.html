@@ -70,7 +70,9 @@
 	        <div id="vcms_content_container">
 				<div id="vcms_content">
 				    <div id="page_title">
+				        {% block content_title %}
                         {{ contact_page.page_header|safe }}
+                        {% endblock content_title %}
                     </div>
 				    {% block content %}
 						<!-- Content -->
@@ -87,7 +89,7 @@
 						{% endfor %}
 						{% endif %}
 				    {% endblock content %}
-				</div>
+				</div><!-- vcms_content -->
                 <div id="vcms_pagination">
                     {% block pagination %}
                     {% if paginator %}
@@ -104,12 +106,13 @@
                     </span>
                     {% endif %}
                     {% endblock pagination %}
-                </div>
+                </div><!-- vcms_pagination -->
 			</div><!-- vcms_content_container -->
 			<div class="clear"></div>
 			{% endblock ubercontent %}
 			
 		</div><!-- vcms_center -->
+		<div class="clear"></div>
 		<!-- =========footer=========== -->
 		<div id="footing" >
 			<div class="footing_content">

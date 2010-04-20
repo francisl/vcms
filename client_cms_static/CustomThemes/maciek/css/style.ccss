@@ -236,11 +236,7 @@ div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
     border-bottom: $NAV_BORDER_STYLE;
     border-right: $NAV_BORDER_STYLE;
-    margin-bottom: 0px;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
+    float: left;
     background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
     
     ul:
@@ -249,7 +245,7 @@ div#vcms_navigation_container:
 
 // CONTENT
 div#vcms_content_container:
-    width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH;
+    width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH-1;
     background-color: #fff;
     float: right;
     padding-bottom: 2em;
@@ -260,7 +256,7 @@ div#vcms_content:
     #page_title:
         text-align: center;
     
-    table:
+    table, .content_box:
         border: 1px solid grey;
         padding: 0.4em 1em;
         background: url(../images/form/form_bg.jpg) bottom repeat-x;

@@ -3,17 +3,25 @@
 # programmer : Francis Lavoie
 
 from django import template
+from django.template.loader import render_to_string
 
 register = template.Library()
 
-@register.inclusion_tag('tree_dl.html')
-def _generetate_dl_tree(data, cssid, cssclass):
-    return data, cssid, cssclass
+@register.inclusion_tag('tree/tree_dl.html')
+def generetate_dl_tree(data, cssid, cssclass):
+    return {"data":data, "cssid":cssid, "cssclass": cssclass}
 
 @register.inclusion_tag('tree_li.html')
-def _generetate_li_tree(data, cssid, cssclass):
+def generetate_li_tree(data, cssid, cssclass):
     return data, cssid, cssclass
 
+def _generetate_dl_tree(data, cssid, cssclass):
+    """ When called from a function instead of a template tag
+    """
+    return render_to_string('tree/tree_dl.html', {"data":data, "cssid":cssid, "cssclass": cssclass}) 
+
+def _generetate_li_tree(data, cssid, cssclass):
+    return data, cssid, cssclass
 
 def generate_tree(data, cssid="", cssclass="", type="dl"):
     """ Take a list and generate a html tree

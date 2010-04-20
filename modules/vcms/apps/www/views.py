@@ -130,7 +130,6 @@ def Dashboard(request, context={}):
                                                     ))
 
     context["contents"] = contents
-    #news = News.objects.all()
     
     # sorting content
     context["contents"]['left'].sort()
@@ -143,16 +142,16 @@ def Dashboard(request, context={}):
     page = DashboardPage.objects.get(id=context['current_page'].id)
     template = [t for t in DashboardPage.TEMPLATES if t[0] == page.template]
 
-    if page.template == DashboardPage.CONTACT:
-        return Contact(request, context)
+    #if page.template == DashboardPage.CONTACT:
+    #    return Contact(request, context)
     #elif page.template == DashboardPage.NEWS:
     #    return News(request, context, as_widget=True)
-    else:
-        print page.template
-        return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
+    #else:
+    print page.template
+    return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
                                 context_instance=RequestContext(request))
 
-
+"""
 class ContactForm(forms.Form):
         cie_name = forms.CharField(required=True)
         firstname = forms.CharField(required=True)
@@ -213,7 +212,7 @@ def Contact(request, context={}):
                               context,
                               context_instance=RequestContext(request))
 
-
+"""
 #from django.contrib.sitemaps import Sitemap
 
 def mlogin(request):
