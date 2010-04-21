@@ -11,3 +11,10 @@ div#vcms_navigation_container:
     dt, dd, li:
         &:hover:
             background-color: #7e7e7e;
+            
+    a:
+        font-decoration: none;
+        color: #2e2e2e;
+        display: block;
+        &:hover:
+            color: white;

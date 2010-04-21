@@ -1,0 +1,31 @@
+div#product_page_button_nav:
+    float: right;
+    font-size: 0.9em;
+    font-variant: small-cap;
+    margin-right: 0px;
+    padding-right: 0px;
+    
+    & > div:
+        float: left;
+        height: 20px;
+        padding: 0 6px 0 12px;
+        background-image: url(../images/product_page_button/button_sep_backslash.jpg);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        
+        &:hover:
+            background-image: url(../images/product_page_button/button_sep_backslash_selected.jpg);
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+    
+    .first:
+        background-image: url(../images/product_page_button/button_sep_backslash_first.jpg);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        
+        &:hover:
+            background-image: url(../images/product_page_button/button_sep_backslash_first_selected.jpg);
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            
+        

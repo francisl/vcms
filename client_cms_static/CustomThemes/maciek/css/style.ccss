@@ -35,7 +35,7 @@ body:
         padding: 0.1em 0;
 
 // CONTENT_BODY
-SITE_CONTENT_WIDTH = 955px
+SITE_CONTENT_WIDTH = 956px
 #vcms_body:
     position: relative;
     width: $SITE_CONTENT_WIDTH;
@@ -44,6 +44,15 @@ SITE_CONTENT_WIDTH = 955px
     border-left: 1px solid #656565;
     border-right: 1px solid #656565;
     //overflow: hidden;
+    // SHADOW
+    -moz-box-shadow: 0px 2px 12px #111; // orientation x, orientation x, blur, color
+    -webkit-box-shadow: 3px 3px 4px #111;
+    box-shadow: 3px 3px 4px #111;
+    // /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')";
+    // /* For IE 5.5 - 7 */
+    filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')";
+    
 
 // HEADING
 HEADING_WIDTH = 100%

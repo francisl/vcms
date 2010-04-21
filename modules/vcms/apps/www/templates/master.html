@@ -3,7 +3,6 @@
 {% load search_widget %}
 {% load compress %}
 {% load i18n %}
-{% load navigation %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -24,6 +23,7 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/style.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/dropdownmenu.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/navigation.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/product.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
@@ -62,12 +62,11 @@
             {% block ubercontent %}
 			<div id="vcms_navigation_container">
 				{% block navigation %}
-				    {% if navigation_menu %}
-				        {% show_product_navigation navigation_menu%}
-				    {% endif %}
 		        {% endblock navigation %}
 	        </div>
 	        <div id="vcms_content_container">
+	           {% block page_button_navigation %}
+	           {% endblock page_button_navigation %}
 				<div id="vcms_content">
 				    <div id="page_title">
 				        {% block content_title %}
