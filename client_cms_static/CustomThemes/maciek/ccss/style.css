@@ -46,11 +46,16 @@ body p {
 
 #vcms_body {
   position: relative;
-  width: 955px;
+  width: 956px;
   margin: 0 auto;
   padding: 0;
   border-left: 1px solid #656565;
   border-right: 1px solid #656565;
+  -moz-box-shadow: 0px 2px 12px #111111;
+  -webkit-box-shadow: 3px 3px 4px #111111;
+  box-shadow: 3px 3px 4px #111111;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'#111111\')';
+  filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'#111111\')';
 }
 
 #vcms_header {
@@ -133,7 +138,7 @@ div#banner .s3sliderImage span {
 }
 
 #footing {
-  width: 955px;
+  width: 956px;
   height: 37px;
   background-color: #333333;
   color: #525252;
@@ -141,7 +146,7 @@ div#banner .s3sliderImage span {
 }
 
 #footing .footing_content {
-  width: 955px;
+  width: 956px;
   height: 37px;
   margin: auto;
   padding: 10px 0;
@@ -233,7 +238,7 @@ div.gallery_display img {
 }
 
 div#vcms_content_body {
-  width: 955px;
+  width: 956px;
   background-color: #333333;
   position: relative;
 }
@@ -264,7 +269,7 @@ div#vcms_navigation_container ul {
 }
 
 div#vcms_content_container {
-  width: 714px;
+  width: 715px;
   background-color: #ffffff;
   float: right;
   padding-bottom: 2em;
