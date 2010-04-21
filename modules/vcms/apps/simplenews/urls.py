@@ -11,14 +11,14 @@ urlpatterns = patterns('vcms.apps.simplenews.views',
     (r'^simplenews/(?P<category_slug>.+)/page-(?P<page>\d+)/$', 'list_news'), # /news/finances/page-1/
     url(r'^simplenews/page-(?P<page>\d+)/$', 'list_news', { "category_slug": None }), # /news/page-1/
     (r'^simplenews/(?P<category_slug>.+)/(?P<news_slug>.+)/$', 'single_news'), # /news/finances/year-of-the-linux-desktop/
-    (r'^simplenews/(?P<category_slug>.+)/category/(?P<category>.+)/$', 'news_category'), # /news/finances/category/Technology/
-    url(r'^simplenews/category/(?P<category>.)/$', 'news_category', { "category_slug": None }), # /news/category/Technology/
-    (r'^simplenews/(?P<category_slug>.+)/category/(?P<category>.+)/page-(?P<page>\d+)/$', 'news_category'), # /news/finances/category/Technology/page-1/
-    url(r'^simplenews/category/(?P<category>.)/page-(?P<page>\d+)/$', 'news_category', { "category_slug": None }), # /news/category/Technology/page-1/
-    #(r'^simplenews/(?P<category_slug>.+)/category/(?P<category>.+).atom$', 'TODO'), # /news/finances/category/Technology.atom
-    #url(r'^simplenews/category/(?P<category>.+).atom$', 'TODO', { "category_slug": None }), # /news/category/Technology.atom
-    #(r'^simplenews/(?P<category_slug>.+)/category/(?P<category>.+).rss$', 'TODO'), # /news/finances/category/Technology.rss
-    #url(r'^simplenews/category/(?P<category>.+).rss$', 'TODO', { "category_slug": None }), # /news/category/Technology.rss
+    (r'^simplenews/(?P<category_slug>.+)/tag/(?P<category>.+)/$', 'news_category'), # /news/finances/tag/Technology/
+    url(r'^simplenews/tag/(?P<category>.)/$', 'news_category', { "category_slug": None }), # /news/tag/Technology/
+    (r'^simplenews/(?P<category_slug>.+)/tag/(?P<category>.+)/page-(?P<page>\d+)/$', 'news_category'), # /news/finances/tag/Technology/page-1/
+    url(r'^simplenews/tag/(?P<category>.)/page-(?P<page>\d+)/$', 'news_category', { "category_slug": None }), # /news/tag/Technology/page-1/
+    #(r'^simplenews/(?P<category_slug>.+)/tag/(?P<category>.+).atom$', 'TODO'), # /news/finances/tag/Technology.atom
+    #url(r'^simplenews/tag/(?P<category>.+).atom$', 'TODO', { "category_slug": None }), # /news/tag/Technology.atom
+    #(r'^simplenews/(?P<category_slug>.+)/tag/(?P<category>.+).rss$', 'TODO'), # /news/finances/tag/Technology.rss
+    #url(r'^simplenews/tag/(?P<category>.+).rss$', 'TODO', { "category_slug": None }), # /news/tag/Technology.rss
     (r'^simplenews/(?P<category_slug>.+)/archives/(?P<month>\d{2})-(?P<year>\d{4})/$', 'news_archives'), # /news/finances/archives/12-2010/
     url(r'^simplenews/archives/(?P<month>\d{2})-(?P<year>\d{4})/$', 'news_archives', { "category_slug": None }), # /news/archives/12-2010/
     (r'^simplenews/(?P<category_slug>.+)/archives/(?P<month>\d{2})-(?P<year>\d{4})/page-(?P<page>\d+)/$', 'news_archives'), # /news/finances/archives/12-2010/page-1/
