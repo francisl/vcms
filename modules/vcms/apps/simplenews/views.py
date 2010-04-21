@@ -14,7 +14,7 @@ from vcms.apps.simplenews.models import APP_SLUGS
 from vcms.apps.www.views import InitPage
 
 
-def news_index(request, category_slug, page=1, context={}):
+def list_news(request, category_slug, page=1, context={}):
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     if category_slug:
@@ -30,15 +30,15 @@ def news_index(request, category_slug, page=1, context={}):
     contents = news_paginator.object_list
     # _TODO: Make the following generic
     if category_slug:
-        paginator_previous_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "category_slug": category_slug, "page": news_paginator.previous_page_number() })
-        paginator_next_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "category_slug": category_slug, "page": news_paginator.next_page_number() })
+        paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.previous_page_number() })
+        paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.next_page_number() })
     else: # Remove category_slug from the dict, otherwise "None" will be used at the category
-        paginator_previous_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "page": news_paginator.previous_page_number() })
-        paginator_next_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "page": news_paginator.next_page_number() })
+        paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
+        paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
     return render_to_response("list_news.html", context, context_instance=RequestContext(request))
 
-def news_unique(request, category_slug, news_slug, context={}):
+def single_news(request, category_slug, news_slug, context={}):
     context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
