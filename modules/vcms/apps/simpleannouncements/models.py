@@ -12,7 +12,7 @@ from vcms.apps.www.models import Page
 APP_SLUGS = "simpleannouncements"
 
 
-class Announcement(Page):
+class Announcement(models.Model):
     content = models.TextField()
     comments_allowed = models.BooleanField(default=True)
     tags = TagField()

@@ -8,7 +8,7 @@ from django.db import models
 from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
-from vcms.apps.www.models import Language, PageElementPosition
+from vcms.apps.www.models import Language, Page, PageElementPosition
 from vcms.apps.simpleannouncements.models import Announcement
 from vcms.apps.simplenews.managers import NewsManager, PublishedNewsManager, NewsCategoryManager
 
@@ -16,17 +16,10 @@ from vcms.apps.simplenews.managers import NewsManager, PublishedNewsManager, New
 APP_SLUGS = "simplenews"
 
 
-class NewsCategory(models.Model):
-    name = models.CharField(max_length=100, unique=True, help_text=_('Max 40 characters.'))
-    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
-    description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
+class NewsCategory(Page):
+    comments_allowed = models.BooleanField(default=True, help_text=_("This will be the default value when adding a news."))
     authorized_users = models.ManyToManyField(User, related_name="news", blank=True, null=True)
     authorized_groups = models.ManyToManyField(Group, related_name="news", blank=True, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, editable=False)
-    date_modified = models.DateTimeField(auto_now=True, editable=False)
-
-    # Parameters
-    language = models.ForeignKey(Language)
 
     objects = NewsCategoryManager()
 
@@ -41,6 +34,8 @@ class NewsCategory(models.Model):
 
 class News(Announcement):
     category = models.ForeignKey(NewsCategory)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
+    date_modified = models.DateTimeField(auto_now=True, editable=False)
 
     objects = NewsManager()
     published = PublishedNewsManager()
