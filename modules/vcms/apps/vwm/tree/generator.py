@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 
 register = template.Library()
 
-@register.inclusion_tag('tree/tree_dl.html')
+@register.inclusion_tag('tree_dl.html')
 def generetate_dl_tree(data, cssid, cssclass):
     return {"data":data, "cssid":cssid, "cssclass": cssclass}
 
@@ -18,14 +18,15 @@ def generetate_li_tree(data, cssid, cssclass):
 def _generetate_dl_tree(data, cssid, cssclass):
     """ When called from a function instead of a template tag
     """
-    return render_to_string('tree/tree_dl.html', {"data":data, "cssid":cssid, "cssclass": cssclass}) 
+    return render_to_string('tree_dl.html', 
+                            {"data":data, "cssid":cssid, "cssclass": cssclass}) 
 
 def _generetate_li_tree(data, cssid, cssclass):
     return data, cssid, cssclass
 
 def generate_tree(data, cssid="", cssclass="", type="dl"):
     """ Take a list and generate a html tree
-        
+        ˙
         data : a list containing a dictionary
             List item dictionary required field :
             - url : used to generate <a> tag (default="#")

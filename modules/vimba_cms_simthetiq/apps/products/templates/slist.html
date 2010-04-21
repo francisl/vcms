@@ -1,0 +1,11 @@
+{% extends "product_master.html" %}
+
+{% block product_list %}
+    
+    {% for product in products %}
+        <div class="product"><b>{{ product.name }}</b>
+            <span class="float: right;">{{ product.get_absolute_url }}</span>
+        </div>
+	{% endfor %}
+		
+{% endblock product_list %}

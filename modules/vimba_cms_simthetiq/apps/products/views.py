@@ -63,8 +63,17 @@ def set_navigation_type(request, page=None, type="compact"):
     return Product(request, InitPage(page=page))
     
 
-def productHome(request, context={}):
+def get_navigation_type(request):
+    """ Take a request and return the html navigation
+    """
     from vcms.apps.vwm.tree import generator
+    if request.session.get('navigation_type') == "DIS":
+        return category.get_navigation_menu()
+    else: #if request.session.get('navigation_type') == "compact":
+        return generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
+
+def productHome(request, context={}):
+    
     from vcms.apps.www.models import MenuLocalLink
     page = MenuLocalLink.objects.get(local_link="/products/home")
     context.update(setPageParameters(page))
@@ -74,10 +83,7 @@ def productHome(request, context={}):
     if request.session.get('navigation_type') == "":
         request.session['navigation_type'] = "compact"
         
-    if request.session.get('navigation_type') == "DIS":
-        nav = category.get_navigation_menu()
-    else: #if request.session.get('navigation_type') == "compact":
-        nav = generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
+    nav = get_navigation_type(request)
 
     print("navigation = %s" % str(nav))
     print("context menustyle = %s" % str(context["menu_style"]))
@@ -89,6 +95,34 @@ def productHome(request, context={}):
                                   "navigation_menu": nav },
                                 context_instance=RequestContext(request))
     
+
+def ProductSList(request, context={}):
+    """ generate a page of products as a small list
+        @param : page_number - index for paginator
+    """
+    context.update(setPageParameters())
+    context.update(locals())
+    page = None
+    nav = get_navigation_type(request)
+    return render_to_response('slist.html',
+                                { "menuselected":  "menu_products",
+                                  "menu_style" : context['menu_style'],
+                                  "current_page":   page,
+                                  "navigation_menu": nav },
+                                context_instance=RequestContext(request))
+
+def ProductList(request, context={}):
+    """ generate a page of all the products as a list 
+        with a short description and the product image
+        @param : page_number - index for paginator
+    """
+    pass
+
+def ProductGrid(request, context={}):
+    """ generate a page of products as as grid of product image 
+        @param : page_number - index for paginator
+    """
+    pass
 
 def GalleryPage(request, context={}):
     """ this page build a gallery with all the simthetiq product image

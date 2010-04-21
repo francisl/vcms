@@ -20,4 +20,4 @@ nbproject
 .settings/*
 
 # auto generated css
-client_cms_static/CustomThemes/*/css/*.css
+*/ccss/*.css
