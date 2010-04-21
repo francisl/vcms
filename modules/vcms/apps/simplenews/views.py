@@ -36,7 +36,7 @@ def news_index(request, category_slug, page=1, context={}):
         paginator_previous_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.news_index", kwargs={ "page": news_paginator.next_page_number() })
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-    return render_to_response("index.html", context, context_instance=RequestContext(request))
+    return render_to_response("list_news.html", context, context_instance=RequestContext(request))
 
 def news_unique(request, category_slug, news_slug, context={}):
     context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
@@ -53,7 +53,7 @@ def news_unique(request, category_slug, news_slug, context={}):
     except News.DoesNotExist:
         next_news = None
     context.update({ "categories": categories, "content": content, "previous_news": previous_news, "next_news": next_news })
-    return render_to_response("unique.html", context, context_instance=RequestContext(request))
+    return render_to_response("single_news.html", context, context_instance=RequestContext(request))
 
 def news_category(request, category_slug, category, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
