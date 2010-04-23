@@ -5,6 +5,7 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.conf.urls.defaults import *
+from vcms.apps.simplenews.feeds import NewsCategoryRssFeed
 from vcms.apps.simplenews.models import APP_SLUGS
 
 urlpatterns_prefix = r'^%s/' % APP_SLUGS
@@ -32,7 +33,7 @@ urlpatterns = patterns('vcms.apps.simplenews.views',
     #url(r'^recent.atom$', 'TODO', { "category_slug": None }), # /news/recent.atom
     #(r'^(?P<category_slug>.+)/recent.atom$', 'TODO'), # /news/finances/recent.atom
     #url(r'^recent.rss$', 'TODO', { "category_slug": None }), # /news/recent.rss
-    #(r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed()), # /news/finances/recent.rss
+    (r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed()), # /news/finances/recent.rss
     (r'^(?P<category_slug>.+)/', 'list_news'), # Catchall index page for a category
     url(r'^', 'list_news', { "category_slug": None }), # Catchall index page
 )
