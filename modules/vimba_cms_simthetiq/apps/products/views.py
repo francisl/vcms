@@ -5,7 +5,6 @@ from django.template import Template, Context, RequestContext
 from django import forms
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from config import simthetiq_config 
 from vimba_cms_simthetiq.apps.products import models as productmodels
 from vcms.apps.www.views import InitPage
 

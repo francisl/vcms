@@ -3,7 +3,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import Template, Context, RequestContext 
-from config import simthetiq_config
+#from config import simthetiq_config # __TODO: Doesn't exist but is used in this module
 from django import forms
 from vimba_cms_simthetiq.apps.order.list import *
 from vimba_cms_simthetiq.apps.products.models import FileFormat, ProductPage
