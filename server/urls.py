@@ -73,22 +73,6 @@ if 'vcms.apps.news' in settings.INSTALLED_APPS:
         # now news module availlable
         pass
 
-    
-#catch all, keep at the end
-urlpatterns += patterns('',
-    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-    (r'^robots.txt$', 'vcms.apps.www.views.robots'),
-    (r'^login/$', 'django.contrib.auth.views.login'),
-    (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-    url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
-    url(r'^contact/', include('vcms.apps.contact.urls')),
-    # url(r'^afghanistan/', 'www.),
-    # CMS, catch every page
-    url(r'^www/', include('vcms.apps.www.urls')),
-    url(r'', include('vcms.apps.www.urls')),
-)
-
-
 if settings.DEBUG:
     import os
     urlpatterns += patterns('',
@@ -106,3 +90,18 @@ for app in settings.INSTALLED_APPS:
                     urlpatterns += getattr(app_urls, "urlpatterns")
         except ImportError:
             pass
+
+#catch all, keep at the end
+urlpatterns += patterns('',
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    (r'^robots.txt$', 'vcms.apps.www.views.robots'),
+    (r'^login/$', 'django.contrib.auth.views.login'),
+    (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
+    url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
+    url(r'^contact/', include('vcms.apps.contact.urls')),
+    # url(r'^afghanistan/', 'www.),
+    # CMS, catch every page
+    (r'^tinymce/', include('tinymce.urls')),
+    url(r'^www/', include('vcms.apps.www.urls')),
+    url(r'', include('vcms.apps.www.urls')),
+)
