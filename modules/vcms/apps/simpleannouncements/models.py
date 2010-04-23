@@ -33,6 +33,7 @@ class Announcement(models.Model):
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
 
+    objects = models.Manager()
     published = PublishedAnnouncementManager()
 
     def get_next_announcement(self):
@@ -52,7 +53,7 @@ class Announcement(models.Model):
                 self.date_published = datetime.datetime.now()
             # If the Announcement is being edited, check against the current version in the database and update if it hasn't been previously published
             else:
-                model_in_db = Page.objects.get(pk=self.pk)
+                model_in_db = Announcement.objects.get(pk=self.pk)
                 if model_in_db.status != self.PUBLISHED:
                     self.date_published = datetime.datetime.now()
         super(Announcement, self).save()
