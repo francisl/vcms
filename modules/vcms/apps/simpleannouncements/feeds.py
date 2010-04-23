@@ -7,6 +7,7 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from vcms.apps.simpleannouncements.models import Announcement
+from vcms.apps.simpleannouncements.settings import ANNOUNCEMENTS_PER_FEED
 
 
 class AnnouncementRssFeed(Feed):
@@ -22,7 +23,7 @@ class AnnouncementRssFeed(Feed):
         return obj.get_absolute_url()
 
     def items(self, obj):
-        return obj[:5] # __TODO: Put into settings module
+        return obj[:ANNOUNCEMENTS_PER_FEED]
 
 
 class AnnouncementAtomFeed(AnnouncementRssFeed):
