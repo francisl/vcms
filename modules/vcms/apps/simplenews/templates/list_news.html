@@ -29,7 +29,7 @@
         </h5>
     </div>
     {% endif %}
-    <a href="{% url vcms.apps.simplenews.views.news_unique category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
+    <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
     {% endfor %}
     {% endif %}
 {% endblock content %}
@@ -37,7 +37,7 @@
 {% block navigation %}
     <ul>
     {% for category in categories %}
-        <li><a href="{% url vcms.apps.simplenews.views.news_index category_slug=category.slug %}">{{category.name}}</a></li>
+        <li><a href="{% url vcms.apps.simplenews.views.list_news category_slug=category.slug %}">{{category.name}}</a></li>
     {% endfor %}
     </ul>
 {% endblock navigation %}
