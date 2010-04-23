@@ -86,8 +86,10 @@ for app in settings.INSTALLED_APPS:
             app_module = __import__(app, globals(), locals(), ["urls"])
             if hasattr(app_module, "urls"):
                 app_urls = getattr(app_module, "urls", None)
-                if hasattr(app_urls, "urlpatterns"):
-                    urlpatterns += getattr(app_urls, "urlpatterns")
+                if hasattr(app_urls, "urlpatterns") and hasattr(app_urls, "urlpatterns_prefix"):
+                    app_urlpatterns = getattr(app_urls, "urlpatterns")
+                    app_urlpatterns_prefix = getattr(app_urls, "urlpatterns_prefix")
+                    urlpatterns += patterns(app_urlpatterns[0], (app_urlpatterns_prefix, include(app_urls)))
         except ImportError:
             pass
 
