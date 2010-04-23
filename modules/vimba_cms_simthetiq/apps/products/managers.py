@@ -182,7 +182,7 @@ class ProductPageManager(models.Manager):
 
     def get_available_products(self):
         #from vcms.apps.www.modelsimport Page
-        return self.filter(status=self.PUBLISHED)
+        return self.filter(status=self.model.PUBLISHED)
        
 
 class CompactNavigationGroupManager(models.Manager): 

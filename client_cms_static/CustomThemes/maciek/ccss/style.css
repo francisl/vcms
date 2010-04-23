@@ -35,6 +35,10 @@ body h4 {
   padding-bottom: 0.4em;
 }
 
+body a {
+  text-decoration: none;
+}
+
 body a img {
   border: none;
 }
@@ -52,10 +56,10 @@ body p {
   border-left: 1px solid #656565;
   border-right: 1px solid #656565;
   -moz-box-shadow: 0px 2px 12px #111111;
-  -webkit-box-shadow: 3px 3px 4px #111111;
-  box-shadow: 3px 3px 4px #111111;
-  -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'#111111\')';
-  filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'#111111\')';
+  -webkit-box-shadow: 0px 2px 12px #111111;
+  box-shadow: 0px 2px 12px #111111;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR\')';
+  filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR\')';
 }
 
 #vcms_header {
@@ -276,26 +280,29 @@ div#vcms_content_container {
 }
 
 div#vcms_content {
-  margin: 0 3em;
+  margin: 3em;
 }
 
 div#vcms_content #page_title {
   text-align: center;
 }
 
-div#vcms_content table,
+div#vcms_content table {
+  border: 1px solid #b1b1b1;
+}
+
+div#vcms_content table.standard,
 div#vcms_content .content_box {
-  border: 1px solid grey;
   padding: 0.4em 1em;
   background: url(../images/form/form_bg.jpg) bottom repeat-x;
 }
 
-div#vcms_content table td,
+div#vcms_content table.standard td,
 div#vcms_content .content_box td {
   padding: 0.3em 0;
 }
 
-div#vcms_content table label,
+div#vcms_content table.standard label,
 div#vcms_content .content_box label {
   font-weight: bold;
   font-size: 0.9em;
@@ -304,12 +311,41 @@ div#vcms_content .content_box label {
   text-transform: uppercase;
 }
 
-div#vcms_content table input,
+div#vcms_content table.standard input,
 div#vcms_content .content_box input {
   width: 98%;
 }
 
-div#vcms_content table textarea,
+div#vcms_content table.standard textarea,
 div#vcms_content .content_box textarea {
   width: 100%;
+}
+
+div.paginator_item_information {
+  float: left;
+}
+
+div.paginator_nav {
+  width: 20%;
+  margin-left: 45%;
+}
+
+div.paginator_text {
+  vertical-align: center;
+}
+
+div.pagination_next {
+  float: right;
+  width: 10px;
+  height: 12px;
+  vertical-align: center;
+  background: url("../images/pagination/pagination.jpg") top right;
+}
+
+div.pagination_previous {
+  float: left;
+  width: 10px;
+  height: 12px;
+  vertical-align: center;
+  background: url("../images/pagination/pagination.jpg") top left;
 }

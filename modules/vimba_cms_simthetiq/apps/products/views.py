@@ -94,9 +94,32 @@ def productHome(request, context={}):
                                   "current_page":   page,
                                   "navigation_menu": nav },
                                 context_instance=RequestContext(request))
-    
 
-def ProductSList(request, context={}):
+def getProductPaginator(products, page_num=1, item_per_page=10):
+    """ getProducts is a wrapper that take a model list
+        to return full paginator functionnality
+        @return : dict{} with paginator information
+                    page_num : current paginator page
+                    items : current paginator items list
+                    page_total : total paginator page 
+    """
+    print("products = %s" % products)
+    page_num = int(page_num)
+    paginator = Paginator(products, item_per_page)
+    if type(page_num) != type(0):
+        print("page_num condition!!!!")
+        print(type(page_num))
+        print(type(0))
+        page_num = 1
+        
+    print("page num = %s" % page_num)
+    try: # make sure the page number is not off
+        return paginator.page(page_num)
+    except:
+        return paginator.page(paginator.num_pages)
+        
+
+def ProductSList(request, paginator_page_number=1, slug='', context={}):
     """ generate a page of products as a small list
         @param : page_number - index for paginator
     """
@@ -104,11 +127,19 @@ def ProductSList(request, context={}):
     context.update(locals())
     page = None
     nav = get_navigation_type(request)
+    print("paginator_page_number = %s" % paginator_page_number)
+
+    products = getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
+                                   page_num=paginator_page_number,
+                                   item_per_page=20)
+     
     return render_to_response('slist.html',
                                 { "menuselected":  "menu_products",
                                   "menu_style" : context['menu_style'],
                                   "current_page":   page,
-                                  "navigation_menu": nav },
+                                  "navigation_menu": nav,
+                                  'paginator_slug': slug,
+                                  "products": products },
                                 context_instance=RequestContext(request))
 
 def ProductList(request, context={}):
@@ -128,7 +159,7 @@ def GalleryPage(request, context={}):
     """ this page build a gallery with all the simthetiq product image
         it is possible to filter the image by tags
     """
-    context["tags"] = productmodels.MediaTags.objects.all()
+    context["tags"] = productmodels.ProductPage.MediaTags.objects.all()
     #get the product page, need to link to the product
     #gallery = productmodels.GalleryPage.objects.get(id=context["current_page"].id)
     # get product

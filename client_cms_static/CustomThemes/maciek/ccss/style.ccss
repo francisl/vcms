@@ -27,15 +27,17 @@ body:
         padding-bottom: 0.4em;
         
     a:
+        text-decoration: none;
         img:
             border: none;
-            
+        
     p:
         margin: 0.1em 0;
         padding: 0.1em 0;
 
 // CONTENT_BODY
 SITE_CONTENT_WIDTH = 956px
+SHADOW_COLOR = #111111;
 #vcms_body:
     position: relative;
     width: $SITE_CONTENT_WIDTH;
@@ -45,13 +47,13 @@ SITE_CONTENT_WIDTH = 956px
     border-right: 1px solid #656565;
     //overflow: hidden;
     // SHADOW
-    -moz-box-shadow: 0px 2px 12px #111; // orientation x, orientation x, blur, color
-    -webkit-box-shadow: 3px 3px 4px #111;
-    box-shadow: 3px 3px 4px #111;
+    -moz-box-shadow: 0px 2px 12px $SHADOW_COLOR; // orientation x, orientation x, blur, color
+    -webkit-box-shadow: 0px 2px 12px $SHADOW_COLOR;
+    box-shadow: 0px 2px 12px $SHADOW_COLOR;
     // /* For IE 8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')";
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR')";
     // /* For IE 5.5 - 7 */
-    filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#111111')";
+    filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR')";
     
 
 // HEADING
@@ -260,13 +262,15 @@ div#vcms_content_container:
     padding-bottom: 2em;
     
 div#vcms_content:
-    margin: 0 3em;
+    margin: 3em;
     
     #page_title:
         text-align: center;
     
-    table, .content_box:
-        border: 1px solid grey;
+    table:
+        border: 1px solid #b1b1b1;
+    
+    table.standard, .content_box:
         padding: 0.4em 1em;
         background: url(../images/form/form_bg.jpg) bottom repeat-x;
         
@@ -284,3 +288,31 @@ div#vcms_content:
             width: 98%;
         textarea:
             width: 100%;
+
+// PAGINATION
+div.paginator_item_information:
+    float: left;
+
+div.paginator_nav:
+    width: 20%;
+    margin-left: 45%;
+    
+div.paginator_text:
+    vertical-align: center;
+//    width: 14%;
+    
+div.pagination_next:
+    float: right;
+    width: 10px;
+    height: 12px;
+    vertical-align: center;
+    background: url("../images/pagination/pagination.jpg") top right;
+
+div.pagination_previous:
+    float: left;
+    width: 10px;
+    height: 12px;
+    vertical-align: center;
+    background: url("../images/pagination/pagination.jpg") top left;
+
+    

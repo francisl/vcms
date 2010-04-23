@@ -17,4 +17,4 @@ div#vcms_navigation_container:
         color: #2e2e2e;
         display: block;
         &:hover:
-            color: white;
+            color: #AAF82E;

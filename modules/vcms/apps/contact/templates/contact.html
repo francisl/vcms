@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 
 {% block stylesheetlink %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/contact.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
 {% endblock stylesheetlink %}
        
 {% block content %}
@@ -17,7 +17,7 @@
 		   {% csrf_token %}
 		   <div class="form_input">
 				<input id="default_input" type="hidden" />
-				<table>
+				<table class="standard">
 		            <tr><td><label id="cie_name" for="cie_name">Business Name
 		                    <span style="color: red;"> {{ form.cie_name.errors.0 }}</span></label></td>
 		                <td>{{form.cie_name}}</td>

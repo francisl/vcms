@@ -7,17 +7,17 @@ import sys
 urlpatterns = patterns('vimba_cms_simthetiq.apps.products.views',
     # TODO - add pagination for product
     #(r'productlist/$', 'productList'),
-    (r'$', 'ProductSList'),
-    (r'slist/$', 'ProductSList'),
-    (r'slist/(?P<page_number>(\d+))$', 'ProductSList'),
+    
+    (r'slist/(?P<paginator_page_number>(\d+))$', 'ProductSList', {'slug': ''}),
+    (r'slist/$', 'ProductSList', {'slug': 'slist'}),
     (r'list/$', 'ProductList'),
-    (r'list/(?P<page_number>(\d+))$', 'ProductList'),
+    (r'list/(?P<paginator_page_number>(\d+))$', 'ProductList'),
     (r'grid/$', 'ProductGrid'),
-    (r'grid/(?P<page_number>(\d+))$', 'ProductGrid'),
+    (r'grid/(?P<paginator_page_number>(\d+))$', 'ProductGrid'),
     (r'home/$', 'productHome'),
     (r'page/(?P<page>[-\w]+)/category/(?P<selected_category>(\d+))$', 'Generic'),
     (r'page/(?P<page>[-\w]+)/$', 'Generic'),
-        
+    
     # product
     (r'set_DIS_navigation/$', 'set_navigation_type', {'type':'DIS'}),
     (r'set_compact_navigation/$', 'set_navigation_type', {'type':'compact'}),
@@ -30,5 +30,5 @@ urlpatterns = patterns('vimba_cms_simthetiq.apps.products.views',
     
     #(r'^(?P<page>(\d+))/(?P<product>[-\w]+)/$', 'ProductByPage'),
     #(r'^preview/(?P<page>[-\w]+)/$', 'Preview'),
-    #(r'^$', 'Generic'),
+    (r'$', 'ProductSList'),
 )

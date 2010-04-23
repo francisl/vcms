@@ -4,20 +4,17 @@
     {{ navigation_menu }}
 {% endblock navigation %}
 
-{% block page_button_navigation %}
-<div id="product_page_button_nav">
-            <div id="" class="product_page_button first">My Account</div>
-            <div id="" class="product_page_button">Cart</div>
-            <div id="" class="product_page_button">DIS Database</div>
-            <div id="" class="product_page_button">Email Page</div>
-            <div id="" class="product_page_button">Print Page</div>
+{% block page_absolute_content %}
+        <div id="widget_button_list">
+            <div id="" class="product_page_button first"><a href="">My Account</a></div>
+            <div id="" class="product_page_button"><a href="">Cart</a></div>
+            <div id="" class="product_page_button"><a href=""><b>DIS</b> Database</a></div>
+            <div id="" class="product_page_button"><a href="">Email Page</a></div>
+            <div id="" class="product_page_button"><a href="">Print Page</a></div>
         </div>
-{% endblock page_button_navigation %}
+{% endblock page_absolute_content %}
 
 {% block content %}
-    
-        
-    
         {% block product_list %}
         {% endblock %}
 {% endblock content %}

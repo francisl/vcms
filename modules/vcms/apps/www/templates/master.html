@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
@@ -65,8 +66,8 @@
 		        {% endblock navigation %}
 	        </div>
 	        <div id="vcms_content_container">
-	           {% block page_button_navigation %}
-	           {% endblock page_button_navigation %}
+	           {% block page_absolute_content %}
+	           {% endblock page_absolute_content %}
 				<div id="vcms_content">
 				    <div id="page_title">
 				        {% block content_title %}
