@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.conf.urls.defaults import *
-from vcms.apps.simplenews.feeds import NewsCategoryRssFeed
+from vcms.apps.simplenews.feeds import NewsRssFeed, NewsCategoryRssFeed
 from vcms.apps.simplenews.models import APP_SLUGS
 
 urlpatterns_prefix = r'^%s/' % APP_SLUGS
@@ -32,8 +32,8 @@ urlpatterns = patterns('vcms.apps.simplenews.views',
     #url(r'^archives/(?P<month>\d{2})-(?P<year>\d{4}).rss$', 'TODO', { "category_slug": None }), # /simplenews/archives/12-2010.rss
     #url(r'^recent.atom$', 'TODO', { "category_slug": None }), # /simplenews/recent.atom
     #(r'^(?P<category_slug>.+)/recent.atom$', 'TODO'), # /simplenews/finances/recent.atom
-    #url(r'^recent.rss$', 'TODO', { "category_slug": None }), # /simplenews/recent.rss
-    (r'^(?P<category_slug>.+).rss$', NewsCategoryRssFeed()), # /simplenews/finances/recent.rss
+    url(r'^recent.rss$', NewsRssFeed()), # /simplenews/recent.rss
+    (r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed()), # /simplenews/finances/recent.rss
     (r'^(?P<category_slug>.+)/', 'list_news'), # Catchall index page for a category
     url(r'^', 'list_news', { "category_slug": None }), # Catchall index page
 )
