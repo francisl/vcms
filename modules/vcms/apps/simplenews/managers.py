@@ -19,12 +19,6 @@ class NewsManager(models.Manager):
         return self.filter(Q(category__authorized_users=user) | Q(category__authorized_groups__in=user.groups.all())).distinct()
 
 
-class PublishedNewsManager(models.Manager):
-    def get_query_set(self):
-        """Filters the results to display the published news."""
-        from vcms.apps.www.models import Page
-        return super(PublishedNewsManager, self).get_query_set().filter(status=Page.PUBLISHED)
-
 class NewsCategoryManager(models.Manager):
     def get_categories_in_use(self):
         """

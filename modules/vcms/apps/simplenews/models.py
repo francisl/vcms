@@ -6,39 +6,34 @@
 
 from django.db import models
 from django.contrib.auth.models import Group, User
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.apps.www.models import Language, Page, PageElementPosition
-from vcms.apps.simpleannouncements.models import Announcement
-from vcms.apps.simplenews.managers import NewsManager, PublishedNewsManager, NewsCategoryManager
+from vcms.apps.simpleannouncements.models import Announcement, AnnouncementCategory
+from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
+from vcms.apps.simplenews.managers import NewsManager, NewsCategoryManager
 
 
 APP_SLUGS = "simplenews"
 
 
-class NewsCategory(Page):
-    comments_allowed = models.BooleanField(default=True, help_text=_("This will be the default value when adding a news."))
-    authorized_users = models.ManyToManyField(User, related_name="news", blank=True, null=True)
-    authorized_groups = models.ManyToManyField(Group, related_name="news", blank=True, null=True)
-
+class NewsCategory(AnnouncementCategory):
     objects = NewsCategoryManager()
-
-    def __unicode__(self):
-        return self.name
+    published = PublishedAnnouncementCategoryManager()
 
     class Meta:
         verbose_name_plural = _("News categories")
-        get_latest_by = ['-date_created']
-        ordering = ['name']
 
 
 class News(Announcement):
     category = models.ForeignKey(NewsCategory)
-    date_created = models.DateTimeField(auto_now_add=True, editable=False)
-    date_modified = models.DateTimeField(auto_now=True, editable=False)
 
     objects = NewsManager()
-    published = PublishedNewsManager()
+    published = PublishedAnnouncementManager()
+
+    def get_absolute_url(self):
+        return reverse("vcms.apps.simplenews.views.single_news", args=[self.slug, self.category.slug])
 
     def save(self):
         self.app_slug = APP_SLUGS
