@@ -10,7 +10,7 @@ from vcms.apps.simpleannouncements.models import Announcement
 from vcms.apps.simpleannouncements.settings import ANNOUNCEMENTS_PER_FEED
 
 
-class AnnouncementRssFeed(Feed):
+class AnnouncementCategoryRssFeed(Feed):
     model = Announcement
     title = ""
     link = ""
@@ -19,6 +19,9 @@ class AnnouncementRssFeed(Feed):
     def get_object(self, request, category_slug):
         return self.model.published.get_latest().filter(category__slug=category_slug)
 
+    def item_description(self, obj):
+        return obj.content
+
     def item_link(self, obj):
         return obj.get_absolute_url()
 
@@ -26,6 +29,6 @@ class AnnouncementRssFeed(Feed):
         return obj[:ANNOUNCEMENTS_PER_FEED]
 
 
-class AnnouncementAtomFeed(AnnouncementRssFeed):
+class AnnouncementCategoryAtomFeed(AnnouncementCategoryRssFeed):
     feed_type = Atom1Feed
-    subtitle = AnnouncementRssFeed.description
+    subtitle = AnnouncementCategoryRssFeed.description
