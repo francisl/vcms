@@ -1,0 +1,10 @@
+div#vcms_content>div {
+  text-align: justify;
+}
+
+div#vcms_content .form {
+  width: 52%;
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+}

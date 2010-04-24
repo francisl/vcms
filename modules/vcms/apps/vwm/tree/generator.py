@@ -3,21 +3,30 @@
 # programmer : Francis Lavoie
 
 from django import template
+from django.template.loader import render_to_string
 
 register = template.Library()
 
 @register.inclusion_tag('tree_dl.html')
-def _generetate_dl_tree(data, cssid, cssclass):
-    return data, cssid, cssclass
+def generetate_dl_tree(data, cssid, cssclass):
+    return {"data":data, "cssid":cssid, "cssclass": cssclass}
 
 @register.inclusion_tag('tree_li.html')
+def generetate_li_tree(data, cssid, cssclass):
+    return data, cssid, cssclass
+
+def _generetate_dl_tree(data, cssid, cssclass):
+    """ When called from a function instead of a template tag
+    """
+    return render_to_string('tree_dl.html', 
+                            {"data":data, "cssid":cssid, "cssclass": cssclass}) 
+
 def _generetate_li_tree(data, cssid, cssclass):
     return data, cssid, cssclass
 
-
 def generate_tree(data, cssid="", cssclass="", type="dl"):
     """ Take a list and generate a html tree
-        
+        ˙
         data : a list containing a dictionary
             List item dictionary required field :
             - url : used to generate <a> tag (default="#")
@@ -35,5 +44,7 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
     if type == "dl":
         return _generetate_dl_tree(data, cssid, cssclass)
     if type == "li":
-        return _generetate_li_tree(data, cssid, cssclass)
+        return _generetate_dl_tree(data, cssid, cssclass)
+        # TODO: add generate_li_tree code
+        #return _generetate_li_tree(data, cssid, cssclass)
         

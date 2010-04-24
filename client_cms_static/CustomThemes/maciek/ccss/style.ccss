@@ -6,20 +6,38 @@ body:
     padding: 0;
     background-color: #888;
     font-size: 11pt;
-    font-family: futura, "century gothic", sans-serif;
+    font-family: "century gothic",futura, sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
         font-weight: bold;
         color: #929292;
-        margin-bottom: 0.1em;
+        font-size: 1.3em;
+        margin: 0 0.1em 0 0;
+        
+    h1,h2:
+        font-size: 1.6em;
+        margin-top: 0.8em;
+        
+    h3:
+        padding-top: 0.8em;
+        
+    h4:
+        font-weight: normal;
+        padding-bottom: 0.4em;
         
     a:
+        text-decoration: none;
         img:
             border: none;
+        
+    p:
+        margin: 0.1em 0;
+        padding: 0.1em 0;
 
 // CONTENT_BODY
-SITE_CONTENT_WIDTH = 955px
+SITE_CONTENT_WIDTH = 956px
+SHADOW_COLOR = #111111;
 #vcms_body:
     position: relative;
     width: $SITE_CONTENT_WIDTH;
@@ -28,6 +46,15 @@ SITE_CONTENT_WIDTH = 955px
     border-left: 1px solid #656565;
     border-right: 1px solid #656565;
     //overflow: hidden;
+    // SHADOW
+    -moz-box-shadow: 0px 2px 12px $SHADOW_COLOR; // orientation x, orientation x, blur, color
+    -webkit-box-shadow: 0px 2px 12px $SHADOW_COLOR;
+    box-shadow: 0px 2px 12px $SHADOW_COLOR;
+    // /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR')";
+    // /* For IE 5.5 - 7 */
+    filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR')";
+    
 
 // HEADING
 HEADING_WIDTH = 100%
@@ -212,18 +239,15 @@ div#vcms_content_body:
     div#vcms_pagination:
         text-align: center;
 
+
 // NAVIGATION
 NAVIGATION_WIDTH = 240px;
 NAV_BORDER_STYLE = 1px solid #656565;
-div#vcms_navigation:
+div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
     border-bottom: $NAV_BORDER_STYLE;
     border-right: $NAV_BORDER_STYLE;
-    margin-bottom: 0px;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
+    float: left;
     background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
     
     ul:
@@ -232,19 +256,21 @@ div#vcms_navigation:
 
 // CONTENT
 div#vcms_content_container:
-    width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH;
+    width: $SITE_CONTENT_WIDTH-$NAVIGATION_WIDTH-1;
     background-color: #fff;
     float: right;
+    padding-bottom: 2em;
     
 div#vcms_content:
-    margin: 0 1em;
-    
+    margin: 3em;
     
     #page_title:
         text-align: center;
     
     table:
-        border: 1px solid grey;
+        border: 1px solid #b1b1b1;
+    
+    table.standard, .content_box:
         padding: 0.4em 1em;
         background: url(../images/form/form_bg.jpg) bottom repeat-x;
         
@@ -253,7 +279,7 @@ div#vcms_content:
             
         label:
             font-weight: bold;
-            //font-size: 1.1em;
+            font-size: 0.9em;
             float: right;
             margin-right: 1em;
             text-transform:uppercase;
@@ -262,3 +288,31 @@ div#vcms_content:
             width: 98%;
         textarea:
             width: 100%;
+
+// PAGINATION
+div.paginator_item_information:
+    float: left;
+
+div.paginator_nav:
+    width: 20%;
+    margin-left: 45%;
+    
+div.paginator_text:
+    vertical-align: center;
+//    width: 14%;
+    
+div.pagination_next:
+    float: right;
+    width: 10px;
+    height: 12px;
+    vertical-align: center;
+    background: url("../images/pagination/pagination.jpg") top right;
+
+div.pagination_previous:
+    float: left;
+    width: 10px;
+    height: 12px;
+    vertical-align: center;
+    background: url("../images/pagination/pagination.jpg") top left;
+
+    

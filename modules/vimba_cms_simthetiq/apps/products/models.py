@@ -8,11 +8,12 @@ import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete
-
+#from l10n.models import country as l10n_country
+import l10n.models as l10n
 
 #from tagging.fields import TagField
 from vcms.apps.www.models import Page, Language
-from vimba_cms_simthetiq.apps.products.managers import ProductPageManager
+from vimba_cms_simthetiq.apps.products.managers import ProductPageManager, CompactNavigationGroupManager
 
 # -- variable
 PRODUCT_IMAGES = "uploadto/product_images/"
@@ -38,13 +39,14 @@ def validate_video_mime_type(value):
 
 # -- LICENCES
 # -- --------
+"""
 class Licence(models.Model):
     display_name = models.CharField(max_length=50)
     term = models.TextField()
     language = models.ForeignKey(Language)
     #lang = models.IntegerField(max_length=2,choices=settings.LANGUAGES, 
     #                           default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
-
+"""
 # -- TAGS
 # -------
 class MediaTags(models.Model):
@@ -168,7 +170,7 @@ class FileFormat(models.Model):
         """
         self.domainpage_set.clear()
         super(FileFormat, self).delete()
-        
+"""
 class DomainPage(Page):
     content = models.TextField()
     video = models.ForeignKey(Video, null=True, blank=True)
@@ -186,10 +188,10 @@ class DomainPage(Page):
         super(DomainPage, self).save()
     
     def delete(self):
-        """ remove foreign object link
+        "" remove foreign object link
             this prevent cascade deletion of pages when link to image
             this 
-        """
+        ""
         self.category_set.clear()
         super(DomainPage, self).delete()
 
@@ -208,18 +210,55 @@ class DomainElement(models.Model):
 
     class Meta:
         ordering = ['position']
-
-class Category(models.Model):
-    name = models.CharField(max_length=150, unique=True)
-    description = models.TextField()
-    domain = models.ForeignKey(DomainPage, blank=True, null=True)
+"""
     
-    class Meta:
-        verbose_name_plural = "Domain - Categories"
-        ordering = ["name"]
+def _unicode_DIS(name, id):
+    return  name + "(" + str(id) + ")"
+
+class CompactNavigationGroup(Page):
+    objects = CompactNavigationGroupManager()
     
     def __unicode__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return "/standard/" +  self.slug
+    
+class Kind(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    dis_id = models.PositiveIntegerField(unique=True)
+    
+    def __unicode__(self):
+        return _unicode_DIS(self.name, self.dis_id)
+    
+class Domain(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    dis_id = models.PositiveIntegerField(unique=True)
+    
+    def __unicode__(self):
+        return _unicode_DIS(self.name, self.dis_id)
+
+class DISCountry(models.Model):
+    country = models.ForeignKey(l10n.Country)
+    dis_id = models.PositiveIntegerField(unique=True)
+    
+    def __unicode__(self):
+        return _unicode_DIS(self.country.printable_name, self.dis_id)
+    
+class Category(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    dis_id = models.PositiveIntegerField()
+    kind = models.ForeignKey(Kind)
+    domain = models.ForeignKey(Domain)
+    compact_navigation = models.ForeignKey(CompactNavigationGroup)
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+        ordering = ["name"]
+        unique_together = ("dis_id", "domain")
+    
+    def __unicode__(self):
+        return str(self.kind) + " - " + str(self.domain) + " - " + _unicode_DIS(self.name, self.dis_id)
 
     def delete(self):
         """ remove foreign object link
@@ -229,26 +268,33 @@ class Category(models.Model):
         print("clearing product link !")
         print("linked to : %s " % self.productpage_set.all())
         self.productpage_set.clear()
-        super(Category, self).delete()
-
-            
+        super(Category, self).delete()  
+    
 class ProductPage(Page):
     #name = models.CharField(max_length=50, unique=True)
     product_description = models.TextField()
-    product_id = models.IntegerField()
     polygon = models.IntegerField()
     texture_format = models.CharField(max_length=50)
     texture_resolution = models.CharField(max_length=50)
     #original_image = models.ImageField(upload_to=PRODUCT_IMAGES)
     original_image = models.ForeignKey(Image, related_name="original_image", null=True, blank=True)
-    category = models.ForeignKey(Category, null=True, blank=True)
+    
     file_format = models.ManyToManyField(FileFormat)
     similar_products = models.ManyToManyField('self', symmetrical=True, null=True, blank=True)
     images = models.ManyToManyField(Image, null=True, blank=True)
     videos = models.ManyToManyField(Video, null=True, blank=True)
+    # ordering
     previous = models.ForeignKey('self', related_name="previous_product", null=True, blank=True)
     next = models.ForeignKey('self', related_name="next_product", null=True, blank=True)
-
+    
+    # Country
+    used_in =  models.ForeignKey(l10n.Country)
+    
+    # DIS information
+    category = models.ForeignKey(Category)
+    dis_country = models.ForeignKey(DISCountry)
+    dis_subcategory_id = models.PositiveIntegerField()
+    dis_specific_id = models.PositiveIntegerField()
     
     # Set customer manager
     objects = ProductPageManager()
@@ -274,8 +320,6 @@ class ProductPage(Page):
         super(ProductPage, self).save()
         
     def delete(self):
-        #print("---------------------")
-        #print("deleting %s" % self)
         try:
             if self.previous == self:
                 #print("previous == self")
@@ -291,15 +335,11 @@ class ProductPage(Page):
         except:
             #print("next product doesn't exist")
             self.next = None
-        #self.save(reorder=False)
         
         # set previous product next and next product previous
         ProductPage.objects.set_previous_next_product(self, self.previous, self.next)
 
         try:
-            #print("self.previous %s" % self.previous)
-            #print("self.next %s" % self.next)    
-
             #remove all next and previous including self
             ProductPage.objects.remove_previous_link(self)
             ProductPage.objects.remove_next_link(self)
@@ -312,16 +352,7 @@ class ProductPage(Page):
         self.previous = None
         #self.save(reorder=False)
         super(ProductPage, self).delete()
-        
-#def pre_delete_action(sender, instance, **kwargs):
-    #print("instance = %s" % instance)
-    #print("instance previous = %s" % instance.previous)
-    #print("instance next = %s" % instance.next)
-    #if instance.mark_for_delete == True:
-    #    return True
-    
-#pre_delete.connect(pre_delete_action, sender=ProductPage, weak=False)
-    
+         
 # -- CONTENT
 # ----------
 class ProductContent(models.Model):
@@ -346,6 +377,8 @@ class ProductContent(models.Model):
     def get_absolute_url(self):
         self.page.get_absolute_url()
 
+"""
+
 class GalleryPage(Page):
     class Meta:
         verbose_name_plural = "Gallery - Gallery"
@@ -361,7 +394,6 @@ class GalleryPage(Page):
     def get_absolute_url(self):
         return self.app_slug + "/" + self.slug
     
-"""
 import djapian
 class ProductInformationIndexer(djapian.Indexer):
     fields=["text"]

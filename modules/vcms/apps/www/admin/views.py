@@ -15,6 +15,8 @@ def UpdateMenu(request):
     if request.method == 'POST':
         postlist = request.raw_post_data
         json_pages = json.JSONDecoder().decode(postlist)
+        #for page in json_pages:
+        #    print("%s\t\t\t%s" % (page, json_pages[page]))
             
         has_change = False
         for page in json_pages:
@@ -57,8 +59,7 @@ def UpdateMenu(request):
 """
 @staff_member_required
 def UpdateMenu2(request):
-    ""
-        Switch the status of a page
+    "" Switch the status of a page
     ""
     if request.method == 'POST':
         menulist = request.POST.lists()
@@ -105,7 +106,6 @@ def UpdateMenu2(request):
                     save_menu(menu[1], mparent=parentq)
                 except:
                     pass
-                
 
     #return serializers.serialize('xml', Menu.objects.all())
     raise Http404

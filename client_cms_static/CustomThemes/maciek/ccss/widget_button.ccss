@@ -1,0 +1,65 @@
+HOVER_TEXT_COLOR = #c2c2c2;
+HOVER_BG_COLOR = #363636;
+TABLE_BORDER_COLOR = #b1b1b1;
+
+#widget_button_list:
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    //float: right;
+    font-size: 0.9em;
+    text-transform: capitalize;
+    margin-right: 0px;
+    padding-right: 0px;
+    
+    & > div:
+        float: left;
+        height: 20px;
+        margin-left: -10px;
+        display: block;
+        
+        padding: 0 22px 0 16px;
+        background-image: url(../images/product_page_button/button_sep_backslash2.png);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        
+        &:hover:
+            background-color: $HOVER_BG_COLOR;
+            background-image: url(../images/product_page_button/button_sep_backslash_selected2.png);
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+    
+    .first:
+        background-image: url(../images/product_page_button/button_sep_backslash_first.jpg);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        
+        &:hover:
+            background-image: url(../images/product_page_button/button_sep_backslash_first_selected.jpg);
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+    
+    a:
+        height: 20px;
+        margin-right: -4px;
+        display: block;
+        color: $HOVER_TEXT_COLOR;
+        
+        
+        
+#button_widget:
+    padding: 0 1em;
+    text-transform: capitalize;
+    &:hover:
+        background-color: $HOVER_BG_COLOR;
+        color: $HOVER_TEXT_COLOR;
+
+    a:
+        color: inherit;
+        display: block;
+        padding: 0 1em;
+            
+    a:hover:
+        color: $HOVER_TEXT_COLOR;
+    

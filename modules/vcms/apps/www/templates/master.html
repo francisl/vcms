@@ -20,9 +20,12 @@
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
 	
 	{% compress css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/style.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/dropdownmenu.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/css/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/style.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
 	   {% block stylesheet %}{% endblock stylesheet %}
@@ -58,16 +61,18 @@
 		
 		<div id="vcms_content_body">
             {% block ubercontent %}
-			<div id="vcms_navigation">
-				<div>&nbsp;
+			<div id="vcms_navigation_container">
 				{% block navigation %}
 		        {% endblock navigation %}
-		        </div>
 	        </div>
 	        <div id="vcms_content_container">
+	           {% block page_absolute_content %}
+	           {% endblock page_absolute_content %}
 				<div id="vcms_content">
 				    <div id="page_title">
+				        {% block content_title %}
                         {{ contact_page.page_header|safe }}
+                        {% endblock content_title %}
                     </div>
 				    {% block content %}
 						<!-- Content -->
@@ -84,7 +89,7 @@
 						{% endfor %}
 						{% endif %}
 				    {% endblock content %}
-				</div>
+				</div><!-- vcms_content -->
                 <div id="vcms_pagination">
                     {% block pagination %}
                     {% if paginator %}
@@ -101,13 +106,13 @@
                     </span>
                     {% endif %}
                     {% endblock pagination %}
-                </div>
+                </div><!-- vcms_pagination -->
 			</div><!-- vcms_content_container -->
 			<div class="clear"></div>
 			{% endblock ubercontent %}
 			
 		</div><!-- vcms_center -->
-		
+		<div class="clear"></div>
 		<!-- =========footer=========== -->
 		<div id="footing" >
 			<div class="footing_content">
@@ -117,7 +122,6 @@
 		         {% else%}
 		            {% show_footer_menu %}
 		        {% endif %}
-				
 			</div>
 		</div>
 	</div><!-- vcms_content_body -->
