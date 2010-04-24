@@ -99,11 +99,11 @@ urlpatterns += patterns('',
     (r'^robots.txt$', 'vcms.apps.www.views.robots'),
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-    url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
+    #url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
     url(r'^contact/', include('vcms.apps.contact.urls')),
     # url(r'^afghanistan/', 'www.),
     # CMS, catch every page
-    (r'^tinymce/', include('tinymce.urls')),
+    #(r'^tinymce/', include('tinymce.urls')),
     url(r'^www/', include('vcms.apps.www.urls')),
     url(r'', include('vcms.apps.www.urls')),
 )
