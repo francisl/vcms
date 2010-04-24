@@ -182,36 +182,17 @@ class ProductPageManager(models.Manager):
 
     def get_available_products(self):
         #from vcms.apps.www.modelsimport Page
-        return self.filter(status=self.PUBLISHED)
-        
-        """
-        products = self.all()
-        for product in products:
-            if product.next == selected_product:
-                #print("found next product : %s->%s " % (product, product.next))
-                product.next = selected_product.next
-                product.save(reorder=False)
-            if product.previous == selected_product:
-                #print("found previous product : %s<-%s " % (product.previous, product))
-                product.previous = selected_product.previous
-                product.save(reorder=False)
+        return self.filter(status=self.model.PUBLISHED)
+       
 
-        """
-        
-        #if previous_product != None:
-            #previous_product.save()
-        #if next_product != None:
-            #next_product.save()
-    """    
-    def get_product_per_category(self):
-        product_per_category = {}
-        
-        for product in self.get_available_products():
-            product_per_category[product.category] = product
-        
-        return product_per_category
-
-
-
-"""
+class CompactNavigationGroupManager(models.Manager): 
+    def get_navigation(self):
+        from vcms.apps.vwm.tree import helper
+        """ return navigation tree as a list containin tree node dictionary """ 
+        nav = []
+        for navgroup in self.all():
+            nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
+        print("compact nav data = %s" % nav)
+        print("all data = %s" % self.all())
+        return nav
 

@@ -28,7 +28,7 @@ class ContactPage(Page):
         return self.name
 
     def save(self):
-        self.module = 'ContactPAge'
+        self.module = 'Contact'
         self.app_slug = 'contact'
         super(ContactPage, self).save()
 

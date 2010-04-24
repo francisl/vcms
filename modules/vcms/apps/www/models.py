@@ -29,6 +29,11 @@ class Language(models.Model):
     
 # -- Pages
 # -- -----
+
+#class MenuGroup(models.Model):
+#    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
+ 
+    
 class PageElementPosition(models.Model):
     #PREVIEW
     LEFT = 'left'
@@ -59,13 +64,35 @@ def _delete_page(page2delete):
             _delete_page(page)
 
 class Page(models.Model):
+    """ A page is a placeholder accessible by the user that represents a section content
+        Like a news page, a forum page with multiple sub-section, a contact page ...
+        A page can have multiple sub-section define in the application urls
+        
+        -- Link
+        The CMS generate links to make these placeholder accessible in menus
+        it uses the follow pattern : /{APP_SLUGS}/page/{page_slug}/
+        ex: A basic Page model will be accessible at : /www/page/examplepage
+            A news page model will be accessible at : /news/page/newspage
+    
+        --Menu
+        The models keep a ordered tree that represents the structure and ordering
+        of the pages. This is used to generate main/sub menu.
+        
+        -- Language
+        Page can be classified by language - NOTE not yet working
+        # TODO : add multi-language fonctionnality
+         
+    """
     DRAFT = 0
     PUBLISHED = 1
     STATUSES = (
         (DRAFT, _('Draft')),
         (PUBLISHED, _('Published')),
     )
-    name = models.CharField(max_length=100, unique=True, help_text=_('Max 40 characters.'))
+    EMPTY = 0
+    TEMPLATES = ((EMPTY, 'Defautl'),)
+    TEMPLATE_FILES = { EMPTY: 'master.html'}
+    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
@@ -74,13 +101,14 @@ class Page(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
+    template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
 
     # menus
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children', editable=False)
     level = models.IntegerField(editable=False, default=0)
     tree_position = models.IntegerField(editable=False, default=0)
     display = models.BooleanField(editable=False, default=False)
-    default = models.BooleanField(default=False, help_text="Check this if you want this page as default home page.")
+    default = models.BooleanField(default=False, help_text=_("Check this if you want this page as default home page."))
     
     # Parameteers
     language = models.ForeignKey(Language)
@@ -133,7 +161,37 @@ class Page(models.Model):
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
+class MenuSeparator(Page):
+    external_link = models.URLField(max_length=200, null=True, blank=True)
+    def save(self):
+        self.slug = self.get_absolute_url()
+        self.status = self.PUBLISHED
+        self.language = Language.objects.getDefault()
+        self.module = "Separator"
+        super(MenuSeparator, self).save()
+        
+    def get_absolute_url(self):
+        return "/" + self.external_link
 
+class MenuLocalLink(Page):
+    """ MenuLocalLink is to link static page dynamicaly into the menu
+        Let sta
+    """
+    local_link = models.CharField(max_length=200, null=True, blank=True, 
+                                  help_text="Link on this web site. ex. /www/page/")
+    def save(self):
+        self.slug = self.get_absolute_url()
+        self.status = self.PUBLISHED
+        self.language = Language.objects.getDefault()
+        self.module = "LocalLink"
+        super(MenuLocalLink, self).save()
+        
+    def get_absolute_url(self):
+        if self.local_link[0] != "/":
+            return self.local_link
+        else:
+            return self.local_link[1:]
+    
 class SimplePage(Page):
     class Meta:
         verbose_name = "Simple page"
@@ -222,14 +280,11 @@ class BannerImage(models.Model):
 class DashboardPage(Page):
     EMPTY = 0
     NEWS = 1
-    CONTACT = 2
-    SIMTHETIQ = 3
+    SIMTHETIQ = 2
     TEMPLATES = ((EMPTY, 'Clean'),
-                 (CONTACT, 'Contact Form'),
                  (SIMTHETIQ, 'Simthetiq Home Page'),)
     TEMPLATE_FILES = { EMPTY: 'dashboard.html',
                       SIMTHETIQ: 'simthetiq_dashboard.html',}
-    template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
     
     class Meta:
         verbose_name = "Dashboard"

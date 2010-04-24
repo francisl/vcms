@@ -1,0 +1,22 @@
+{% extends "product_master.html" %}
+{% load i18n %}
+
+{% block product_list %}
+    <div class="paginator_item_information">
+        {{ products.paginator.count }}{% trans ' Models Available ' %}</div>
+        <div class="paginator_nav">
+	    {% if products.has_previous %}<a href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{products.previous_page_number}}"><div class="pagination_previous"></div></a>{%endif%}
+	    <div class="paginator_text">{{ products.number }}{% trans ' of ' %}{{ products.paginator.num_pages }}</div>
+	    {% if products.has_next %}<a href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{products.next_page_number}}"><div class="pagination_next"></div></a>{%endif%}
+	    </div>
+	    <table id="product_list" cellpadding="0" cellspacing="0">
+	    {% for product in products.object_list %}
+	        <tr>
+	        <td class="col1"><b>{{ product.name }}</b>
+	        <span style="float: right;">{{ product.id }}</span></td>
+	        <td class="action"><a href="{{ product.get_absolute_url }}">{% trans 'Info' %}</a></td>
+	        <td class="action"><a href="">{% trans 'Add' %}</a></td>
+	        </tr>
+		{% endfor %}
+	</table>
+{% endblock product_list %}

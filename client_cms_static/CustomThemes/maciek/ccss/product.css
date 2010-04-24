@@ -1,0 +1,45 @@
+table#product_list {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+table#product_list tr {
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #b1b1b1;
+}
+
+table#product_list td.col1 {
+  width: 86%;
+  text-align: left;
+}
+
+table#product_list td {
+  border-left: 1px solid #b1b1b1;
+  text-align: center;
+  padding: 0 1em;
+}
+
+table#product_list td.action {
+  padding: 0;
+  text-transform: capitalize;
+}
+
+table#product_list td.action:hover {
+  background-color: #363636;
+  color: #c2c2c2;
+}
+
+table#product_list td.action a {
+  color: inherit;
+  display: block;
+  padding: 0 1em;
+}
+
+table#product_list td.action a:hover {
+  color: #c2c2c2;
+}

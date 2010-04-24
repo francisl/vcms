@@ -1,0 +1,40 @@
+HOVER_TEXT_COLOR = #c2c2c2;
+HOVER_BG_COLOR = #363636;
+TABLE_BORDER_COLOR = #b1b1b1;
+
+table#product_list:
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+    border-collapse:collapse;
+    border-spacing:0px;
+    
+    tr:
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid $TABLE_BORDER_COLOR;
+
+    td.col1:
+        width: 86%;
+        text-align: left;
+        
+    td:
+        border-left: 1px solid $TABLE_BORDER_COLOR;
+        text-align: center;
+        padding: 0 1em;
+    
+    td.action:
+        padding: 0;
+        text-transform: capitalize;
+        &:hover:
+            background-color: $HOVER_BG_COLOR;
+            color: $HOVER_TEXT_COLOR;
+
+        a:
+            color: inherit;
+            display: block;
+            padding: 0 1em;
+            
+        a:hover:
+            color: $HOVER_TEXT_COLOR;
