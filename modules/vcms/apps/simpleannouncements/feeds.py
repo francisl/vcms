@@ -13,9 +13,15 @@ from vcms.apps.simpleannouncements.settings import ANNOUNCEMENTS_PER_FEED
 
 class AnnouncementRssFeed(Feed):
     model = Announcement
-    title = ""
-    link = ""
-    description = ""
+
+    def title(self, obj):
+        raise NotImplementedError
+
+    def link(self):
+        raise NotImplementedError
+
+    def description(self, obj):
+        raise NotImplementedError
 
     def get_object(self, request):
         return self.model.published.get_latest()
@@ -28,6 +34,11 @@ class AnnouncementRssFeed(Feed):
 
     def items(self, obj):
         return obj[:ANNOUNCEMENTS_PER_FEED]
+
+
+class AnnouncementAtomFeed(AnnouncementRssFeed):
+    feed_type = Atom1Feed
+    subtitle = AnnouncementRssFeed.description
 
 
 class AnnouncementCategoryRssFeed(AnnouncementRssFeed):
