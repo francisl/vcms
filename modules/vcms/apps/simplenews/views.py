@@ -39,7 +39,7 @@ def list_news(request, category_slug, page=1, context={}):
     return render_to_response("list_news.html", context, context_instance=RequestContext(request))
 
 def single_news(request, category_slug, news_slug, context={}):
-    context.update(InitPage(page_slug=news_slug, app_slug=APP_SLUGS))
+    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     #content = context["current_page"]
