@@ -22,6 +22,11 @@ class NewsCategory(AnnouncementCategory):
     objects = NewsCategoryManager()
     published = PublishedAnnouncementCategoryManager()
 
+    def save(self):
+        self.app_slug = APP_SLUGS
+        self.module = 'SimpleNews'
+        super(NewsCategory, self).save()
+
     class Meta:
         verbose_name_plural = _("News categories")
 
@@ -34,11 +39,6 @@ class News(Announcement):
 
     def get_absolute_url(self):
         return reverse("vcms.apps.simplenews.views.single_news", args=[self.slug, self.category.slug])
-
-    def save(self):
-        self.app_slug = APP_SLUGS
-        self.module = 'SimpleNews'
-        super(News, self).save()
 
     class Meta:
         verbose_name_plural = _("News")
