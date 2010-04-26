@@ -4,6 +4,7 @@
 
 from django.db import models
 from django.contrib.sites.managers import CurrentSiteManager
+from vcms.apps.www.fields import StatusField
 
 
 class PageManager(models.Manager):
@@ -20,13 +21,13 @@ class PageManager(models.Manager):
 
     def reset_Default2(self):
         try:
-            defaultpage = self.filter(status=self.model.PUBLISHED)[0]
+            defaultpage = self.filter(status=StatusField.PUBLISHED)[0]
             defaultpage.default = True
         except:
             pass
                     
     def get_RootMenu(self):
-        menu = self.filter(level=0).filter(status=self.model.PUBLISHED).filter(display=True)
+        menu = self.filter(level=0).filter(status=StatusField.PUBLISHED).filter(display=True)
         return menu
 
     def get_RootSelectedMenu(self, current_page):
@@ -59,16 +60,16 @@ class PageManager(models.Manager):
         return children, selected
 
     def get_AllBasic(self):
-        return self.filter(status=self.model.PUBLISHED).filter(module__in=["Basic", 'Dashboard'])
+        return self.filter(status=StatusField.PUBLISHED).filter(module__in=["Basic", 'Dashboard'])
 
     def get_MainPublished(self):
-        return self.filter(status=self.model.PUBLISHED).filter(level=0)
+        return self.filter(status=StatusField.PUBLISHED).filter(level=0)
 
     def get_Published(self):
-        return self.filter(status=self.model.PUBLISHED)
+        return self.filter(status=StatusField.PUBLISHED)
 
     def get_NotDisplay(self, lang='en'):
-        return self.filter(status=self.model.PUBLISHED).filter(display=False).filter(language='en')
+        return self.filter(status=StatusField.PUBLISHED).filter(display=False).filter(language='en')
 
     def get_PageFirstChild(self, current_page, lang='en'):
         try:
@@ -80,12 +81,12 @@ class PageManager(models.Manager):
 
     def get_PageChildren(self, parent=None):
         if parent:
-            return self.filter(parent=parent).filter(status=self.model.PUBLISHED).filter(display=True)
+            return self.filter(parent=parent).filter(status=StatusField.PUBLISHED).filter(display=True)
         else:
             return None
 
     def drafts(self):
-        return self.filter(status=self.model.DRAFT)
+        return self.filter(status=StatusField.DRAFT)
 
 class ContentManager(models.Manager):
     def get_contents_for_page(self, page=None):

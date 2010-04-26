@@ -8,6 +8,7 @@ from django.db import models
 from tagging.fields import TagField
 from vcms.apps.www.models import Page
 from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
+from vcms.apps.www.fields import StatusField
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group, User
 import datetime
@@ -17,16 +18,10 @@ APP_SLUGS = "simpleannouncements"
 
 
 class Announcement(models.Model):
-    DRAFT = 0
-    PUBLISHED = 1
-    STATUSES = (
-        (DRAFT, _('Draft')),
-        (PUBLISHED, _('Published')),
-    )
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 40 characters.'))
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     content = models.TextField()
-    status = models.IntegerField(choices=STATUSES, default=DRAFT)
+    status = StatusField()
     comments_allowed = models.BooleanField(default=True)
     tags = TagField()
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
@@ -37,24 +32,24 @@ class Announcement(models.Model):
     published = PublishedAnnouncementManager()
 
     def get_next_announcement(self):
-        return self.get_next_by_date_published(status=Page.PUBLISHED)
+        return self.get_next_by_date_published(status=StatusField.PUBLISHED)
 
     def get_previous_announcement(self):
-        return self.get_previous_by_date_published(status=Page.PUBLISHED)
+        return self.get_previous_by_date_published(status=StatusField.PUBLISHED)
 
     def __unicode__(self):
         return self.name
 
     def save(self):
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
-        if self.status == self.PUBLISHED:
+        if self.status == StatusField.PUBLISHED:
             # If the page is being created, set its published date
             if not self.pk:
                 self.date_published = datetime.datetime.now()
             # If the Announcement is being edited, check against the current version in the database and update if it hasn't been previously published
             else:
                 model_in_db = Announcement.objects.get(pk=self.pk)
-                if model_in_db.status != self.PUBLISHED:
+                if model_in_db.status != StatusField.PUBLISHED:
                     self.date_published = datetime.datetime.now()
         super(Announcement, self).save()
 

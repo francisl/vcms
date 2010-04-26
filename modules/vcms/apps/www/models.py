@@ -10,6 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage, FileSystemStorage
 from vcms.apps.www.managers import PageManager, ContentManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
+from vcms.apps.www.fields import StatusField
 
 
 # -- variable
@@ -83,12 +84,6 @@ class Page(models.Model):
         # TODO : add multi-language fonctionnality
          
     """
-    DRAFT = 0
-    PUBLISHED = 1
-    STATUSES = (
-        (DRAFT, _('Draft')),
-        (PUBLISHED, _('Published')),
-    )
     EMPTY = 0
     TEMPLATES = ((EMPTY, 'Defautl'),)
     TEMPLATE_FILES = { EMPTY: 'master.html'}
@@ -97,7 +92,7 @@ class Page(models.Model):
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
     app_slug = models.SlugField(default="", editable=False)
-    status = models.IntegerField(choices=STATUSES, default=DRAFT)
+    status = StatusField()
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
@@ -140,14 +135,14 @@ class Page(models.Model):
         if self.default:
             Page.objects.reset_Default()
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
-        if self.status == self.PUBLISHED:
+        if self.status == StatusField.PUBLISHED:
             # If the page is being created, set its published date
             if not self.pk:
                 self.date_published = datetime.datetime.now()
             # If the Page is being edited, check against the current version in the database and update if it hasn't been previously published
             else:
                 model_in_db = Page.objects.get(pk=self.pk)
-                if model_in_db.status != self.PUBLISHED:
+                if model_in_db.status != StatusField.PUBLISHED:
                     self.date_published = datetime.datetime.now()
         super(Page, self).save()
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
@@ -165,7 +160,7 @@ class MenuSeparator(Page):
     external_link = models.URLField(max_length=200, null=True, blank=True)
     def save(self):
         self.slug = self.get_absolute_url()
-        self.status = self.PUBLISHED
+        self.status = StatusField.PUBLISHED
         self.language = Language.objects.getDefault()
         self.module = "Separator"
         super(MenuSeparator, self).save()
@@ -181,7 +176,7 @@ class MenuLocalLink(Page):
                                   help_text="Link on this web site. ex. /www/page/")
     def save(self):
         self.slug = self.get_absolute_url()
-        self.status = self.PUBLISHED
+        self.status = StatusField.PUBLISHED
         self.language = Language.objects.getDefault()
         self.module = "LocalLink"
         super(MenuLocalLink, self).save()
@@ -330,7 +325,7 @@ class PageIndexer(djapian.Indexer):
         ("description",   "description"),
         ("keywords",    "keywords"  )
          ]
-    trigger=lambda indexer, obj: obj.status == Page.PUBLISHED
+    trigger=lambda indexer, obj: obj.status == StatusField.PUBLISHED
 
 class ContentIndexer(djapian.Indexer):
     fields=["text"]
@@ -338,7 +333,7 @@ class ContentIndexer(djapian.Indexer):
         ("name",  "name" ),
         ("content",   "content")
          ]
-    trigger=lambda indexer, obj: obj.page.status == Page.PUBLISHED
+    trigger=lambda indexer, obj: obj.page.status == StatusField.PUBLISHED
 
 
 djapian.add_index(Page, PageIndexer, attach_as="indexer")

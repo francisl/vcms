@@ -4,6 +4,8 @@
 
 from django.db import models
 from django.contrib.sites.managers import CurrentSiteManager
+from vcms.apps.www.fields import StatusField
+
 
 class ProductPageManager(models.Manager):
     def reorder_product_position(self):
@@ -182,7 +184,7 @@ class ProductPageManager(models.Manager):
 
     def get_available_products(self):
         #from vcms.apps.www.modelsimport Page
-        return self.filter(status=self.model.PUBLISHED)
+        return self.filter(status=StatusField.PUBLISHED)
        
 
 class CompactNavigationGroupManager(models.Manager): 
