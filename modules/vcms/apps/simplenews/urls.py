@@ -29,12 +29,14 @@ urlpatterns = patterns('vcms.apps.simplenews.views',
     url(r'^archives/(?P<month>\d{2})-(?P<year>\d{4})/page-(?P<page>\d+)/$', 'news_archives', { "category_slug": None }), # /simplenews/archives/12-2010/page-1/
     #(r'^(?P<category_slug>.+)/archives/(?P<month>\d{2})-(?P<year>\d{4}).atom$', 'TODO'), # /simplenews/finances/archives/12-2010.atom
     #url(r'^archives/(?P<month>\d{2})-(?P<year>\d{4}).atom$', 'TODO', { "category_slug": None }), # /simplenews/archives/12-2010.atom
-    #(r'^(?P<category_slug>.+)/archives/(?P<month>\d{2})-(?P<year>\d{4}).rss$', 'TODO'), # /simplenews/finances/archives/12-2010.rss
-    #url(r'^archives/(?P<month>\d{2})-(?P<year>\d{4}).rss$', 'TODO', { "category_slug": None }), # /simplenews/archives/12-2010.rss
     #url(r'^recent.atom$', 'TODO', { "category_slug": None }), # /simplenews/recent.atom
     #(r'^(?P<category_slug>.+)/recent.atom$', 'TODO'), # /simplenews/finances/recent.atom
     url(r'^recent.rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # /simplenews/recent.rss
+    url(r'^(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # /simplenews/01-2010.rss
+    url(r'^(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # /simplenews/2010.rss
     url(r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # /simplenews/finances/recent.rss
+    url(r'^(?P<category_slug>.+)/(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # /simplenews/finances/01-2010.rss
+    url(r'^(?P<category_slug>.+)/(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # /simplenews/finances/2010.rss
     (r'^(?P<category_slug>.+)/', 'list_news'), # Catchall index page for a category
     url(r'^', 'list_news', { "category_slug": None }), # Catchall index page
 )

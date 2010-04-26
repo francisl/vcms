@@ -22,6 +22,15 @@ class NewsRssFeed(AnnouncementRssFeed):
     def link(self):
         return reverse("vcms.apps.simplenews.views.news.recent.rss")
 
+    def get_object(self, request, month=None, year=None):
+        obj = self.model.published.get_latest()
+        if month:
+            obj = obj.filter(date_published__month=month)
+        if year:
+            obj = obj.filter(date_published__year=year)
+        return obj
+
+
 class NewsCategoryRssFeed(AnnouncementCategoryRssFeed):
     model = News
 
@@ -41,6 +50,14 @@ class NewsCategoryRssFeed(AnnouncementCategoryRssFeed):
             return reverse("vcms.apps.simplenews.views.newscategory.recent.rss", kwargs={ "category_slug": slug })
         else:
             return ""
+
+    def get_object(self, request, category_slug, month=None, year=None):
+        obj = super(NewsCategoryRssFeed, self).get_object(request, category_slug)
+        if month:
+            obj = obj.filter(date_published__month=month)
+        if year:
+            obj = obj.filter(date_published__year=year)
+        return obj
 
 
 #class NewsCategoryAtomFeed(NewsCategoryRssFeed):
