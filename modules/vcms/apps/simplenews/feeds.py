@@ -23,7 +23,7 @@ class NewsRssFeed(AnnouncementRssFeed):
         return reverse("vcms.apps.simplenews.views.news.recent.rss")
 
     def get_object(self, request, month=None, year=None):
-        obj = self.model.published.get_latest()
+        obj = super(NewsRssFeed, self).get_object(request)
         if month:
             obj = obj.filter(date_published__month=month)
         if year:
