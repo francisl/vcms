@@ -15,6 +15,7 @@ from vcms.apps.www.views import InitPage
 
 
 def list_news(request, category_slug, page=1, context={}):
+    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     if category_slug:
