@@ -15,6 +15,7 @@ from vcms.apps.www.views import InitPage
 
 
 def list_news(request, category_slug, page=1, context={}):
+    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     if category_slug:
@@ -36,7 +37,16 @@ def list_news(request, category_slug, page=1, context={}):
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-    return render_to_response("list_news.html", context, context_instance=RequestContext(request))
+    return render_to_response("list_news.html", {"categories": categories, 
+                                                 "contents": contents, 
+                                                 "paginator": news_paginator, 
+                                                 "paginator_previous_url": paginator_previous_url, 
+                                                 "paginator_next_url": paginator_next_url,
+                                                 "current_page": context['current_page'],
+                                                 "menu_style": context['menu_style'],
+                                                 },
+                                                 
+                               context_instance=RequestContext(request))
 
 def single_news(request, category_slug, news_slug, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
