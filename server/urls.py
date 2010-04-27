@@ -10,7 +10,10 @@ from django.contrib.sitemaps import GenericSitemap
 
 #subdir_path = ""
 
-urlpatterns = patterns('',
+# Import Satchmo URLs
+from satchmo_store.urls import urlpatterns
+
+urlpatterns += patterns('',
     # Uncomment this for admin:
     #(r'admin/', include('mptt.admin.urls')),
     (r'^gestion/www/update_menu', 'vcms.apps.www.admin.views.UpdateMenu'),
