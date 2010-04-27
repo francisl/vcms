@@ -69,14 +69,19 @@ PUBLIC_URLS = (
 
 ROOT_URLCONF = 'server.urls'
 
+AUTHENTICATION_BACKENDS = (
+    'satchmo_store.accounts.email-auth.EmailBackend',   # Required by Satchmo
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',   # Add the request to the context
-    'django.core.context_processors.media',     # Add MEDIA_URL to every RequestContext
-    'django.core.context_processors.auth',      # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+    'satchmo_store.shop.context_processors.settings',   # Required by Satchmo
+    'django.core.context_processors.auth',                  # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+    'django.core.context_processors.request',               # Add the request to the context
+    'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
 #    'django.core.context_processors.debug',
 #    'django.core.context_processors.i18n',
 )
-
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -99,19 +104,23 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.cache.UpdateCacheMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware", # Required by Satchmo
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'threaded_multihost.middleware.ThreadLocalMiddleware', # Required by Satchmo
+    'satchmo_store.shop.SSLMiddleware.SSLRedirect', # Required by Satchmo
     'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
 INSTALLED_APPS = (
+    'django.contrib.sites',
+    'satchmo_store.shop',   # Satchmo, must preceed django.contrib.admin
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
     'django.contrib.sitemaps',
-    'django.contrib.admin',
     'django.contrib.humanize',
     #'tagging',
     'django_extensions',
@@ -134,6 +143,7 @@ INSTALLED_APPS = (
     'vcms.apps.vwm',
     'vcms.apps.themes',
     'vcms.apps.contact',
+    'vcms.apps.store',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
@@ -233,6 +243,9 @@ for app in INSTALLED_APPS:
                         locals()[setting] = value
         except ImportError:
             pass
+
+# Load the local Satchmo settings
+from local_settings import *
 
 if DEBUG:
     import socket

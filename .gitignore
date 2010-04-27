@@ -19,5 +19,9 @@ server/database/whoosh/*
 nbproject
 .settings/*
 
-# auto generated css
+# Auto generated css
 */ccss/*.css
+
+# Log files
+server/satchmo.log
+
