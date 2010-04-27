@@ -61,11 +61,11 @@ LOGIN_URL = '/login/'
 #LOGIN_REDIRECT_URL = '/'
 # Set of URLs that does not require to be logged in.
 # Used by the EnforceLoginMiddleware middleware
-PUBLIC_URLS = (
-    r'admin/',
-    r'login/',
-    r'logout/',
-)
+#PUBLIC_URLS = (
+#    r'admin/',
+#    r'login/',
+#    r'logout/',
+#)
 
 ROOT_URLCONF = 'server.urls'
 
@@ -110,7 +110,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'threaded_multihost.middleware.ThreadLocalMiddleware', # Required by Satchmo
     'satchmo_store.shop.SSLMiddleware.SSLRedirect', # Required by Satchmo
-    'vcms.apps.www.middleware.EnforceLoginMiddleware',
+    #'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
 INSTALLED_APPS = (
