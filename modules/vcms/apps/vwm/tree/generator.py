@@ -38,7 +38,28 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
         cssid : string, id of the list container
         cssclass : string, class name of thelist container
         type : string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
-    
+        
+        @example - Without helper:
+            from vcms.apps.vwm.tree import generator
+            # create one item 
+            item = {}
+            item["name"] = "item_name"
+            item["url"] = "item_url"
+            item["child_selected"] = True|False
+            item["selected"] = True|False
+            item["items"] = [] # List of subitem
+            # generate the html
+            generated_navigation = generator.generate_tree()
+            # then add the generated code to the navigation section {% block navigation %}
+            
+        @example - Using the helper:
+            from vcms.apps.vwm.tree import helper
+            # create the item
+            item = helper.create_tree_node([item_name], url=item.get_absolute_url()))
+            # generate the html
+            generated_navigation = generator.generate_tree()
+            # then add the generated code to the navigation section {% block navigation %}
+            
     """
     
     if type == "dl":

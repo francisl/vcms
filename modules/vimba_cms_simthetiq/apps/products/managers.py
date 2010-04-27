@@ -194,7 +194,5 @@ class CompactNavigationGroupManager(models.Manager):
         nav = []
         for navgroup in self.all():
             nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
-        print("compact nav data = %s" % nav)
-        print("all data = %s" % self.all())
         return nav
 
