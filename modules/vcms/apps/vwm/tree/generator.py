@@ -49,15 +49,16 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
             item["selected"] = True|False
             item["items"] = [] # List of subitem
             # generate the html
-            generated_navigation = generator.generate_tree()
+            generated_navigation = generator.generate_tree([item,])
             # then add the generated code to the navigation section {% block navigation %}
             
         @example - Using the helper:
+            from vcms.apps.vwm.tree import generator
             from vcms.apps.vwm.tree import helper
             # create the item
             item = helper.create_tree_node([item_name], url=item.get_absolute_url()))
             # generate the html
-            generated_navigation = generator.generate_tree()
+            generated_navigation = generator.generate_tree([item,])
             # then add the generated code to the navigation section {% block navigation %}
             
     """
