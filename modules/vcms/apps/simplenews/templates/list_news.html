@@ -6,30 +6,30 @@
     <!-- Content -->
     {% if contents %}
     {% for c in contents %}
-    <div class="division_content" name="{{ c.id }}">
-        <h4>{{ c.name|upper }}</h4>
-        <hr />
-        <div class="division_content">
-            {{ c.content|truncatewords:50|safe }}
-        </div>
-    </div>
-    {% get_comment_list for c as comments_list %}
-    {% if c.comments_allowed or comments_list %}
-    <div class="comments">
-        <h5>
-            {% if not comments_list %}
-                {% trans "There are no comments for this news." %}
-            {% else %}
-                {% blocktrans count comments_list|length as counter %}
-                    There is one comment for this news.
-                {% plural %}
-                    There are {{counter}} comments for this news.
-                {% endblocktrans %}
-            {% endif %}
-        </h5>
-    </div>
-    {% endif %}
-    <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
+	    <div class="division_content" name="{{ c.id }}">
+	        <h4>{{ c.name|upper }}</h4>
+	        <hr />
+	        <div class="division_content">
+	            {{ c.content|truncatewords:50|safe }}
+	        </div>
+	    </div>
+	    {% get_comment_list for c as comments_list %}
+	    {% if c.comments_allowed or comments_list %}
+	    <div class="comments">
+	        <h5>
+	            {% if not comments_list %}
+	                {% trans "There are no comments for this news." %}
+	            {% else %}
+	                {% blocktrans count comments_list|length as counter %}
+	                    There is one comment for this news.
+	                {% plural %}
+	                    There are {{counter}} comments for this news.
+	                {% endblocktrans %}
+	            {% endif %}
+	        </h5>
+	    </div>
+	    {% endif %}
+        <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
     {% endfor %}
     {% endif %}
 {% endblock content %}
