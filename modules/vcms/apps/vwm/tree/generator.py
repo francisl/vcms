@@ -29,11 +29,11 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
         ˙
         data : a list containing a dictionary
             List item dictionary required field :
-            - url : used to generate <a> tag (default="#")
-            - name : name used to identified to item (default="Undefined")
-            - child_selected : boolean, if one of its childs is selected (default=False)
-            - selected : boolean, if the items is selected (default=False)
-            - items : list of items (recursive data structure for multi-level tree) (default=[])
+            - url : string - used to generate <a> tag (default="#")
+            - name : string - name used to identified to item (default="Undefined")
+            - child_selected : boolean - if one of its childs is selected (default=False)
+            - selected : boolean - if the items is selected (default=False)
+            - items : list - list of items (recursive data structure for multi-level tree) (default=[])
         
         cssid : string, id of the list container
         cssclass : string, class name of thelist container
