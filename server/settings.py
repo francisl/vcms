@@ -16,6 +16,8 @@ TEMPLATE_DEBUG = DEBUG
 
 # ## EMAIL
 from config.email import *
+DEFAULT_FROM_EMAIL = "noreply@exemple.com"
+EMAIL_SUBJECT_PREFIX = ""
 
 # ## DATABASE
 from config.database import *

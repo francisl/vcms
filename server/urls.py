@@ -13,6 +13,17 @@ from django.contrib.sitemaps import GenericSitemap
 # Import Satchmo URLs
 from satchmo_store.urls import urlpatterns
 
+# Set a specific django-registration backend for the client
+# __TODO: This should be located in a client-specific configuration file
+from satchmo_utils import urlhelper
+urlhelper.replace_urlpatterns(
+    urlpatterns,
+    [
+        url(r'^activate/(?P<activation_key>\w+)/$', 'satchmo_store.accounts.views.activate', {'backend': 'vcms.apps.www.registration.backends.AdminActivationBackend'}, 'registration_activate'),
+        url(r'^register/$', 'satchmo_store.accounts.views.register', {'backend': 'vcms.apps.www.registration.backends.AdminActivationBackend'}, 'registration_register'),
+    ]
+)
+
 urlpatterns += patterns('',
     # Uncomment this for admin:
     #(r'admin/', include('mptt.admin.urls')),
