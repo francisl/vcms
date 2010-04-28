@@ -48,3 +48,7 @@ table#product_list td.action a:hover {
   float: left;
   position: absolute;
 }
+
+.light_gray {
+  color: #c6c6c6;
+}

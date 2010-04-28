@@ -131,7 +131,7 @@ def ProductSList(request, paginator_page_number=1, slug='', context={}):
                                    page_num=paginator_page_number,
                                    item_per_page=20)
     
-    paginator_html = pgenerator.get_page_naviation(products, "slist")
+    paginator_html = pgenerator.get_page_navigation(products, "slist")
     print("paginator_html = %s" % paginator_html)
 
     return render_to_response('slist.html',

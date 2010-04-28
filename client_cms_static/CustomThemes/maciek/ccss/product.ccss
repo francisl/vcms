@@ -42,3 +42,6 @@ table#product_list:
 .search_count:
     float: left;
     position: absolute;
+    
+.light_gray:
+    color: #c6c6c6;

@@ -8,26 +8,26 @@ from django.template.loader import render_to_string
 register = template.Library()
 
 @register.inclusion_tag('tree_dl.html')
-def generetate_dl_tree(data, css_id, css_class):
+def generate_dl_tree(data, css_id, css_class):
     return {"data":data, "cssid":cssid, "cssclass": cssclass}
 
 @register.inclusion_tag('tree_li.html')
-def generetate_li_tree(data, css_id, css_class):
+def generate_li_tree(data, css_id, css_class):
     return data, css_id, css_class
 
-def _generetate_dl_tree(data, css_id, css_class):
+def _generate_dl_tree(data, css_id, css_class):
     """ When called from a function instead of a template tag
     """
     return render_to_string('tree_dl.html', 
                             {"data":data, "css_id":css_id, "css_class": css_class}) 
 
-def _generetate_li_tree(data, css_id, css_class):
+def _generate_li_tree(data, css_id, css_class):
     return data, css_id, css_class
 
 def generate_tree(data, css_id="", css_class="", type="dl"):
     """ Take a list and generate a html tree
         ˙
-        data : a list containing a dictionary
+        @param data: a list containing a dictionary
             List item dictionary required field :
             - url : string - used to generate <a> tag (default="#")
             - name : string - name used to identified to item (default="Undefined")
@@ -35,9 +35,9 @@ def generate_tree(data, css_id="", css_class="", type="dl"):
             - selected : boolean - if the items is selected (default=False)
             - items : list - list of items (recursive data structure for multi-level tree) (default=[])
         
-        css_id : string id of the list container
-        css_class : string, class name of thelist container
-        type : string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
+        @param css_id: string id of the list container
+        @param css_class: string, class name of thelist container
+        @param type: string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
         
         @example - Without helper:
             >>> from vcms.apps.vwm.tree import generator
@@ -70,9 +70,9 @@ def generate_tree(data, css_id="", css_class="", type="dl"):
     """
     
     if type == "dl":
-        return _generetate_dl_tree(data, css_id, css_class)
+        return _generate_dl_tree(data, css_id, css_class)
     if type == "li":
-        return _generetate_dl_tree(data, css_id, css_class)
+        return _generate_dl_tree(data, css_id, css_class)
         # TODO: add generate_li_tree code
-        #return _generetate_li_tree(data, css_id, css_class)
+        #return _generate_li_tree(data, css_id, css_class)
         
