@@ -5,28 +5,31 @@
 from django.template.loader import render_to_string
 
 
-def _generetate_dl_tree(data, cssid, cssclass):
-    """ When called from a function instead of a template tag
-    """
-    return render_to_string('tree_dl.html', 
-                            {"data":data, "cssid":cssid, "cssclass": cssclass}) 
-
-
-def get_page_naviation(data, cssid="", cssclass=""):
-    """ Take a list and generate a html tree
+def get_page_naviation(paginator, paginator_slug=False, cssid="", cssclass=""):
+    """ generate a paginator naviation
+        With previous, next page link, the current page and the total amount of page
         ˙
-        data : a list containing a dictionary
-            List item dictionary required field :
-            - url : used to generate <a> tag (default="#")
-            - name : name used to identified to item (default="Undefined")
-            - child_selected : boolean, if one of its childs is selected (default=False)
-            - selected : boolean, if the items is selected (default=False)
-            - items : list of items (recursive data structure for multi-level tree) (default=[])
+        @type paginator: paginator object
+        @param paginator: The page paginator
+        @type paginator_slug: string
+        @param paginator_slug : to append to the previous/next URL
+
+        @param cssid : string, id of the list container
+        @param cssclass : string, class name of thelist container
+        @return: string containting a html page navigation
         
-        cssid : string, id of the list container
-        cssclass : string, class name of thelist container
-        type : string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
-    
+        @exemple - using product:
+            >>> from vimba_cms_simthetiq.apps.products import models as productmodels
+            >>> from django.core.paginator import Paginator
+            >>> products = productmodels.ProductPage.objects.get_available_products()
+            >>> paginator = Paginator(products, 5)
+            >>> paginator_html = pgenerator.get_page_naviation(products, "slist")
+            >>> # test
+            >>> type(paginator_html)
+            <type 'str'>
     """
     
-    return _generetate_dl_tree(data, cssid, cssclass)
+    return render_to_string('paginator/paginator_nav.html', 
+                            {"paginator": paginator, 
+                             "paginator_slug": paginator_slug,
+                             "cssid":cssid, "cssclass": cssclass}) 

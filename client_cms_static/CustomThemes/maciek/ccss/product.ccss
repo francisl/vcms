@@ -38,3 +38,7 @@ table#product_list:
             
         a:hover:
             color: $HOVER_TEXT_COLOR;
+            
+.search_count:
+    float: left;
+    position: absolute;

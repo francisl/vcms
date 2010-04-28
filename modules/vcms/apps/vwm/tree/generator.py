@@ -8,23 +8,23 @@ from django.template.loader import render_to_string
 register = template.Library()
 
 @register.inclusion_tag('tree_dl.html')
-def generetate_dl_tree(data, cssid, cssclass):
+def generetate_dl_tree(data, css_id, css_class):
     return {"data":data, "cssid":cssid, "cssclass": cssclass}
 
 @register.inclusion_tag('tree_li.html')
-def generetate_li_tree(data, cssid, cssclass):
-    return data, cssid, cssclass
+def generetate_li_tree(data, css_id, css_class):
+    return data, css_id, css_class
 
-def _generetate_dl_tree(data, cssid, cssclass):
+def _generetate_dl_tree(data, css_id, css_class):
     """ When called from a function instead of a template tag
     """
     return render_to_string('tree_dl.html', 
-                            {"data":data, "cssid":cssid, "cssclass": cssclass}) 
+                            {"data":data, "css_id":css_id, "css_class": css_class}) 
 
-def _generetate_li_tree(data, cssid, cssclass):
-    return data, cssid, cssclass
+def _generetate_li_tree(data, css_id, css_class):
+    return data, css_id, css_class
 
-def generate_tree(data, cssid="", cssclass="", type="dl"):
+def generate_tree(data, css_id="", css_class="", type="dl"):
     """ Take a list and generate a html tree
         ˙
         data : a list containing a dictionary
@@ -35,8 +35,8 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
             - selected : boolean - if the items is selected (default=False)
             - items : list - list of items (recursive data structure for multi-level tree) (default=[])
         
-        id : string id of the list container
-        cssclass : string, class name of thelist container
+        css_id : string id of the list container
+        css_class : string, class name of thelist container
         type : string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
         
         @example - Without helper:
@@ -70,12 +70,9 @@ def generate_tree(data, cssid="", cssclass="", type="dl"):
     """
     
     if type == "dl":
-        return _generetate_dl_tree(data, cssid, cssclass)
+        return _generetate_dl_tree(data, css_id, css_class)
     if type == "li":
-        return _generetate_dl_tree(data, cssid, cssclass)
+        return _generetate_dl_tree(data, css_id, css_class)
         # TODO: add generate_li_tree code
-        #return _generetate_li_tree(data, cssid, cssclass)
+        #return _generetate_li_tree(data, css_id, css_class)
         
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()

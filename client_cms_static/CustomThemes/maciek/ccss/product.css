@@ -43,3 +43,8 @@ table#product_list td.action a {
 table#product_list td.action a:hover {
   color: #c2c2c2;
 }
+
+.search_count {
+  float: left;
+  position: absolute;
+}

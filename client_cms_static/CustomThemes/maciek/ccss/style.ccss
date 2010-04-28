@@ -235,10 +235,6 @@ div#vcms_content_body:
         div.right:
             float:right;
 
-    // PAGINATION
-    div#vcms_pagination:
-        text-align: center;
-
 
 // NAVIGATION
 NAVIGATION_WIDTH = 240px;
@@ -260,6 +256,7 @@ div#vcms_content_container:
     background-color: #fff;
     float: right;
     padding-bottom: 2em;
+    position: relative;
     
 div#vcms_content:
     margin: 3em;
@@ -288,31 +285,4 @@ div#vcms_content:
             width: 98%;
         textarea:
             width: 100%;
-
-// PAGINATION
-div.paginator_item_information:
-    float: left;
-
-div.paginator_nav:
-    width: 20%;
-    margin-left: 45%;
-    
-div.paginator_text:
-    vertical-align: center;
-//    width: 14%;
-    
-div.pagination_next:
-    float: right;
-    width: 10px;
-    height: 12px;
-    vertical-align: center;
-    background: url("../images/pagination/pagination.jpg") top right;
-
-div.pagination_previous:
-    float: left;
-    width: 10px;
-    height: 12px;
-    vertical-align: center;
-    background: url("../images/pagination/pagination.jpg") top left;
-
     

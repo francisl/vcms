@@ -255,10 +255,6 @@ div#vcms_content_body div#item_navigation div.right {
   float: right;
 }
 
-div#vcms_content_body div#vcms_pagination {
-  text-align: center;
-}
-
 div#vcms_navigation_container {
   width: 240px;
   border-bottom: 1px solid #656565;
@@ -277,6 +273,7 @@ div#vcms_content_container {
   background-color: #ffffff;
   float: right;
   padding-bottom: 2em;
+  position: relative;
 }
 
 div#vcms_content {
@@ -319,33 +316,4 @@ div#vcms_content .content_box input {
 div#vcms_content table.standard textarea,
 div#vcms_content .content_box textarea {
   width: 100%;
-}
-
-div.paginator_item_information {
-  float: left;
-}
-
-div.paginator_nav {
-  width: 20%;
-  margin-left: 45%;
-}
-
-div.paginator_text {
-  vertical-align: center;
-}
-
-div.pagination_next {
-  float: right;
-  width: 10px;
-  height: 12px;
-  vertical-align: center;
-  background: url("../images/pagination/pagination.jpg") top right;
-}
-
-div.pagination_previous {
-  float: left;
-  width: 10px;
-  height: 12px;
-  vertical-align: center;
-  background: url("../images/pagination/pagination.jpg") top left;
 }

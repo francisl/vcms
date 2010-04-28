@@ -59,10 +59,10 @@ def set_navigation_type(request, page=None, type="compact"):
     """ Set the naviation type into the user's session
     """
     request.session['navigation_type'] = type # compact or DIS
-    return Product(request, InitPage(page=page))
+    return productHome(request, InitPage(page=page))
     
 
-def get_navigation_type(request):
+def get_navigation(request):
     """ Take a request and return the html navigation
     """
     from vcms.apps.vwm.tree import generator
@@ -72,8 +72,8 @@ def get_navigation_type(request):
         return generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
 
 def productHome(request, context={}):
-    
     from vcms.apps.www.models import MenuLocalLink
+    
     page = MenuLocalLink.objects.get(local_link="/products/home")
     context.update(setPageParameters(page))
     context.update(locals())
@@ -82,11 +82,8 @@ def productHome(request, context={}):
     if request.session.get('navigation_type') == "":
         request.session['navigation_type'] = "compact"
         
-    nav = get_navigation_type(request)
+    nav = get_navigation(request)
 
-    print("navigation = %s" % str(nav))
-    print("context menustyle = %s" % str(context["menu_style"]))
-    print("context current_page = %s" % str(context["current_page"]))
     return render_to_response('product_home.html',
                                 { "menuselected":  "menu_products",
                                   "menu_style" : context['menu_style'],
@@ -95,14 +92,14 @@ def productHome(request, context={}):
                                 context_instance=RequestContext(request))
 
 def getProductPaginator(products, page_num=1, item_per_page=10):
-    """ getProducts is a wrapper that take a model list
+    """ getProductPaginator is a wrapper that take a model list
         to return full paginator functionnality
         @return : dict{} with paginator information
                     page_num : current paginator page
                     items : current paginator items list
                     page_total : total paginator page 
     """
-    print("products = %s" % products)
+    #print("products = %s" % products)
     page_num = int(page_num)
     paginator = Paginator(products, item_per_page)
     if type(page_num) != type(0):
@@ -120,24 +117,29 @@ def getProductPaginator(products, page_num=1, item_per_page=10):
 
 def ProductSList(request, paginator_page_number=1, slug='', context={}):
     """ generate a page of products as a small list
-        @param : page_number - index for paginator
+        @param paginator_page_number: int - index for paginator
     """
+    from vcms.apps.vwm.paginator import generator as pgenerator
     context.update(setPageParameters())
     context.update(locals())
     page = None
-    nav = get_navigation_type(request)
+    nav = get_navigation(request)
+    #paginator_html = pgenerator()
     print("paginator_page_number = %s" % paginator_page_number)
 
     products = getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
                                    page_num=paginator_page_number,
                                    item_per_page=20)
-     
+    
+    paginator_html = pgenerator.get_page_naviation(products, "slist")
+    print("paginator_html = %s" % paginator_html)
+
     return render_to_response('slist.html',
                                 { "menuselected":  "menu_products",
                                   "menu_style" : context['menu_style'],
                                   "current_page":   page,
                                   "navigation_menu": nav,
-                                  'paginator_slug': slug,
+                                  'paginator_html': paginator_html,
                                   "products": products },
                                 context_instance=RequestContext(request))
 
