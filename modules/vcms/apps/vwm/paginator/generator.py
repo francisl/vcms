@@ -5,7 +5,7 @@
 from django.template.loader import render_to_string
 
 
-def get_page_naviation(paginator, paginator_slug=False, cssid="", cssclass=""):
+def get_page_naviation(paginator, paginator_slug=False, css_id="", css_class=""):
     """ generate a paginator naviation
         With previous, next page link, the current page and the total amount of page
         ˙
@@ -14,8 +14,8 @@ def get_page_naviation(paginator, paginator_slug=False, cssid="", cssclass=""):
         @type paginator_slug: string
         @param paginator_slug : to append to the previous/next URL
 
-        @param cssid : string, id of the list container
-        @param cssclass : string, class name of thelist container
+        @param css_id : string, id of the list container
+        @param css_class : string, class name of thelist container
         @return: string containting a html page navigation
         
         @exemple - using product:
@@ -32,4 +32,4 @@ def get_page_naviation(paginator, paginator_slug=False, cssid="", cssclass=""):
     return render_to_string('paginator/paginator_nav.html', 
                             {"paginator": paginator, 
                              "paginator_slug": paginator_slug,
-                             "cssid":cssid, "cssclass": cssclass}) 
+                             "css_id":css_id, "css_class": css_class}) 
