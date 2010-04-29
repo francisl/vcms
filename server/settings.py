@@ -5,6 +5,10 @@
 import os
 from django.utils.translation import ugettext_lazy as _
 
+ADMINS = (
+    ('Francois Lebel', 'lebel.francois@vimba.ca'),
+)
+
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
 MEDIA_PATH = SERVER_PATH + "/../"
 #Production
