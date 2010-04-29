@@ -26,6 +26,10 @@ body:
         font-weight: normal;
         padding-bottom: 0.4em;
         
+    h5: // used in content_box
+        color: #484848
+        font-size: 1; 
+        
     a:
         text-decoration: none;
         img:
@@ -34,6 +38,12 @@ body:
     p:
         margin: 0.1em 0;
         padding: 0.1em 0;
+        
+    hr:
+        height: 1px;
+        size: 1px;
+        background: #b1b1b1;
+        border: none;
 
 // CONTENT_BODY
 SITE_CONTENT_WIDTH = 956px
@@ -273,7 +283,7 @@ div#vcms_content:
     table:
         border: 1px solid #b1b1b1;
     
-    table.standard, .content_box:
+    table.standard:
         padding: 0.4em 1em;
         background: url(../images/form/form_bg.jpg) bottom repeat-x;
         
@@ -296,4 +306,34 @@ div#vcms_content:
             width: 98%;
         textarea:
             width: 100%;
+            
+    table:
+        border: 1px solid #b1b1b1;
     
+    .content_box:
+        padding: 0.4em 1em 24px 1em;
+        border: 1px solid #b1b1b1;
+        position: relative;
+        min-height: 70px;
+        background: url(../images/content_box/background.jpg) bottom repeat-x #ffffff;
+        
+    .content_box_link:
+        text-align: right;
+        position: absolute;
+        bottom: 6px;
+        right: 0px;
+                
+        a:
+            font-size: 0.9em;
+            color: #ffffff;
+            padding-right: 1em;
+            background-image: url(../images/content_box/content_box_link4.jpg);
+            background-repeat: no-repeat;
+            background-position: right "-19px"; 
+        
+        a:hover:
+            color: #426e0f;
+            background-image: url(../images/content_box/content_box_link4.jpg);
+            background-repeat: no-repeat;
+            background-position: right 4px;
+            

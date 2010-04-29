@@ -6,11 +6,16 @@
     <!-- Content -->
     {% if contents %}
     {% for c in contents %}
-	    <div class="division_content" name="{{ c.id }}">
-	        <h4>{{ c.name|upper }}</h4>
-	        <hr />
+	    
+	    <div class="division_content content_box" name="{{ c.id }}">
+	        <h5>{{ c.name }}</h5>
 	        <div class="division_content">
 	            {{ c.content|truncatewords:50|safe }}
+	        </div>
+	        <div class="content_box_link">
+	        <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">
+	           {% trans "Full Story" %}
+	        </a>
 	        </div>
 	    </div>
 	    {% get_comment_list for c as comments_list %}
@@ -29,7 +34,7 @@
 	        </h5>
 	    </div>
 	    {% endif %}
-        <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">{% trans "Read more" %}</a>
+        
     {% endfor %}
     {% endif %}
 {% endblock content %}
