@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from satchmo_store.accounts.forms import RegistrationForm
+from satchmo_store.accounts.mail import send_welcome_email
 from satchmo_store.contact.models import Contact, ContactRole
 from satchmo_utils.unique_id import generate_id
 from livesettings import config_value
@@ -70,7 +71,7 @@ class StoreRegistrationForm(RegistrationForm):
         if not verify:
             user = authenticate(username=username, password=password)
             login(request, user)
-            #send_welcome_email(email, first_name, last_name)
+            send_welcome_email(email, first_name, last_name)
             signals.satchmo_registration_verified.send(self, contact=contact)
         else:
             site = Site.objects.get_current()
