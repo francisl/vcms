@@ -19,8 +19,8 @@ from satchmo_utils import urlhelper
 urlhelper.replace_urlpatterns(
     urlpatterns,
     [
-        url(r'^activate/(?P<activation_key>\w+)/$', 'satchmo_store.accounts.views.activate', {'backend': 'vcms.apps.www.registration.backends.AdminActivationBackend'}, 'registration_activate'),
-        url(r'^register/$', 'satchmo_store.accounts.views.register', {'backend': 'vcms.apps.www.registration.backends.AdminActivationBackend'}, 'registration_register'),
+        url(r'^activate/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
+        url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
     ]
 )
 

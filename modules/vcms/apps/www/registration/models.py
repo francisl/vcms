@@ -48,16 +48,16 @@ class AdminRegistrationManager(RegistrationManager):
                 profile.activation_key = self.model.ACTIVATED
                 profile.save()
                 # Send an email to the user
-                ctx_dict = {'activation_key': self.activation_key,
-                            'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
-                            'site': site}
-                subject = render_to_string('registration/activation_email_subject.txt',
-                                           ctx_dict)
+                #ctx_dict = {'activation_key': self.activation_key,
+                #            'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
+                #            'site': site}
+                #subject = render_to_string('registration/activation_email_subject.txt',
+                #                           ctx_dict)
                 # Email subject *must not* contain newlines
-                subject = ''.join(subject.splitlines())
-                message = render_to_string('registration/activation_email.txt',
-                                           ctx_dict)
-                user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+                #subject = ''.join(subject.splitlines())
+                #message = render_to_string('registration/activation_email.txt',
+                #                           ctx_dict)
+                #user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
                 return user
         return False
 
@@ -134,3 +134,44 @@ class AdminRegistrationProfile(RegistrationProfile):
                                    ctx_dict)
 
         mail_admins(subject, message)
+
+    def send_welcome_email(self, site):
+        """
+        Send a welcome email to the user.
+
+        The welcome email will make use of two templates:
+
+        ``registration/welcome_email_subject.txt``
+            This template will be used for the subject line of the
+            email. Because it is used as the subject line of an email,
+            this template's output **must** be only a single line of
+            text; output longer than one line will be forcibly joined
+            into only a single line.
+
+        ``registration/welcome_email.txt``
+            This template will be used for the body of the email.
+
+        These templates will each receive the following context
+        variable:
+
+        ``site``
+            An object representing the site on which the user
+            registered; depending on whether ``django.contrib.sites``
+            is installed, this may be an instance of either
+            ``django.contrib.sites.models.Site`` (if the sites
+            application is installed) or
+            ``django.contrib.sites.models.RequestSite`` (if
+            not). Consult the documentation for the Django sites
+            framework for details regarding these objects' interfaces.
+
+        """
+        ctx_dict = {'site': site}
+        subject = render_to_string('registration/welcome_email_subject.txt',
+                                   ctx_dict)
+        # Email subject *must not* contain newlines
+        subject = ''.join(subject.splitlines())
+
+        message = render_to_string('registration/welcome_email.txt',
+                                   ctx_dict)
+
+        self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
