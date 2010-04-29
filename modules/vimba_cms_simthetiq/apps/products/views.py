@@ -136,7 +136,7 @@ def ProductSList(request, paginator_page_number=1, slug='', context={}):
 
     return render_to_response('slist.html',
                                 { "menuselected":  "menu_products",
-                                  "menu_style" : context['menu_style'],
+                                  "menu_style": context['menu_style'],
                                   "current_page":   page,
                                   "navigation_menu": nav,
                                   'paginator_html': paginator_html,

@@ -280,6 +280,13 @@ div#vcms_content {
   margin: 3em;
 }
 
+div#vcms_content .form {
+  width: 52%;
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+}
+
 div#vcms_content #page_title {
   text-align: center;
 }
@@ -292,6 +299,13 @@ div#vcms_content table.standard,
 div#vcms_content .content_box {
   padding: 0.4em 1em;
   background: url(../images/form/form_bg.jpg) bottom repeat-x;
+}
+
+div#vcms_content table.standard th,
+div#vcms_content .content_box th {
+  width: 46%;
+  vertical-align: top;
+  padding-top: 6px;
 }
 
 div#vcms_content table.standard td,

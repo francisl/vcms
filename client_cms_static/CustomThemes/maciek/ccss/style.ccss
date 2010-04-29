@@ -260,7 +260,13 @@ div#vcms_content_container:
     
 div#vcms_content:
     margin: 3em;
-    
+        
+    .form:
+        width: 52%;
+        float: left;
+        margin-right: 2em;
+        margin-bottom: 1em;
+        
     #page_title:
         text-align: center;
     
@@ -271,6 +277,11 @@ div#vcms_content:
         padding: 0.4em 1em;
         background: url(../images/form/form_bg.jpg) bottom repeat-x;
         
+        th:
+            width: 46%;
+            vertical-align: top;
+            padding-top: 6px;
+            
         td:
             padding: 0.3em 0;
             

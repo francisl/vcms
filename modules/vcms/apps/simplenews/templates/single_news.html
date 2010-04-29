@@ -44,8 +44,19 @@
         {% endif %}
         {% if content.comments_allowed %}
         <hr/>
-        <h4>{% trans "Add a comment" %}</h4>
-        {% render_comment_form for content %}
+        <div class="form" >
+                <h3>{% trans "Add a comment" %}</h3>
+                {% get_comment_form for content as form %}
+                <form method="post" action="{% comment_form_target %}">
+                {% csrf_token %}
+                    <table class="standard">
+                        {{ form }}
+                    </table>
+                    <div class="form_input">
+                        <input type="submit" name="preview" class="submit-post" value="Preview">
+                    </div>
+				</form>
+        </div>
         {% endif %}
     </div>
     {% endif %}

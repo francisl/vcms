@@ -8,10 +8,7 @@
 <!--=========content=========== -->
 
 <div class="form" >
-
-        <h3>{{ contact_page.form_name }}</h3>
-
-    <div class="form_content">
+    <h3>{{ contact_page.form_name }}</h3>
         <form method="post" action="/contact/{{ current_page }}" 
                 onsubmit="return checkifcompleted(document.orderform, requiredfield, errormess );">
 		   {% csrf_token %}
@@ -58,13 +55,11 @@
 			        </tr>
 		        </table>
 		    </div>
-
 			<div class="submit">
 	            <!-- <button type="reset"><u>Clear</u></button>-->
 	            <button type="submit" value="Submit"><u>Submit</u></button>
 	        </div>
 	    </form>
-	</div>
 </div>
 
 {% for content in contents %}
