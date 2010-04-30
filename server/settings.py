@@ -113,7 +113,7 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.locale.LocaleMiddleware", # Required by Satchmo
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware', # __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
     'threaded_multihost.middleware.ThreadLocalMiddleware', # Required by Satchmo
     'satchmo_store.shop.SSLMiddleware.SSLRedirect', # Required by Satchmo
     #'vcms.apps.www.middleware.EnforceLoginMiddleware',
