@@ -28,7 +28,7 @@ urlpatterns += patterns('',
     # Uncomment this for admin:
     #(r'admin/', include('mptt.admin.urls')),
     (r'^gestion/www/update_menu', 'vcms.apps.www.admin.views.UpdateMenu'),
-    (r'^gestion/(.*)', include(admin.site.urls)),
+    (r'^gestion/', include(admin.site.urls)),
 )
 
 # __ VIMBA CMS __
