@@ -7,6 +7,7 @@ from satchmo_store.contact.models import Contact, ContactRole
 from satchmo_utils.unique_id import generate_id
 from livesettings import config_value
 from satchmo_store.accounts import signals
+from vcms.apps.www.registration.models import AdminRegistrationProfile
 
 
 import logging
@@ -23,11 +24,18 @@ class StoreRegistrationForm(RegistrationForm):
         last_name = data['last_name']
         username = generate_id(first_name, last_name, email)
 
-        verify = (config_value('SHOP', 'ACCOUNT_VERIFICATION') == 'EMAIL')
+        account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
 
-        if verify:
+        if account_verification == "ADMINISTRATOR":
+            user = AdminRegistrationProfile.objects.create_inactive_user(username,
+                    password, email, False) # Make sure we don't send the email
+            # Manually send the activation email, AdminRegistrationProfile
+            # sends the email to the Administrators, instead of the default
+            # that sends to the user.
             site = Site.objects.get_current()
-            from vcms.apps.www.registration.models import AdminRegistrationProfile
+            profile = AdminRegistrationProfile.objects.get(user=user)
+            profile.send_activation_email(site)
+        elif account_verification == 'EMAIL':
             # TODO:
             # In django-registration trunk this signature has changed.
             # Satchmo is going to stick with the latest release so I'm changing
@@ -38,7 +46,8 @@ class StoreRegistrationForm(RegistrationForm):
             # See ticket #1028 where we checked in the above line prematurely
             user = AdminRegistrationProfile.objects.create_inactive_user(username,
                     password, email)
-        else:
+        elif account_verification == "IMMEDIATE":
+            # Create the user without further validation
             user = User.objects.create_user(username, email, password)
 
         user.first_name = first_name
@@ -49,7 +58,6 @@ class StoreRegistrationForm(RegistrationForm):
         # Otherwise, create a new one.
         try:
             contact = Contact.objects.from_request(request, create=False)
-
         except Contact.DoesNotExist:
             contact = Contact()
 
@@ -68,14 +76,12 @@ class StoreRegistrationForm(RegistrationForm):
 
         signals.satchmo_registration.send(self, contact=contact, subscribed=subscribed, data=data)
 
-        if not verify:
+        # The action activation is set to IMMEDIATE, therefore we shall login the user
+        if account_verification == 'IMMEDIATE':
             user = authenticate(username=username, password=password)
             login(request, user)
             send_welcome_email(email, first_name, last_name)
             signals.satchmo_registration_verified.send(self, contact=contact)
-        else:
-            site = Site.objects.get_current()
-            user.send_activation_email(site)
 
         self.contact = contact
 
