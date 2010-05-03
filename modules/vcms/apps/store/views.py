@@ -65,7 +65,7 @@ def register_handle_form(request, redirect=None):
     return (False, form)
 
 
-def activate(request, activation_key):
+def activate(request, activation_key, template = 'registration/activate.html'):
     """
     Activates a user's account, if their key is valid and hasn't
     expired.
@@ -78,22 +78,26 @@ def activate(request, activation_key):
         # when the login form is posted, user = authenticate(username=data['username'], password=data['password'])
         # ...but we cannot authenticate without password... so we work-around authentication
         account.backend = settings.AUTHENTICATION_BACKENDS[0]
-        _login(request, account)
         contact = Contact.objects.get(user=account)
-        request.session[CUSTOMER_ID] = contact.id
         #send_welcome_email(contact.email, contact.first_name, contact.last_name)
         # Send an email to the user if an Administrator has activated his/her account
         if config_value('SHOP', 'ACCOUNT_VERIFICATION') == "ADMINISTRATOR":
             site = Site.objects.get_current()
             profile = AdminRegistrationProfile.objects.get(user=account)
             profile.send_welcome_email(site)
+            template = 'registration/administrator_activate.html'
+        else:
+            # Otherwise login the user as he/she is the one activating his/her account
+            _login(request, account)
+            request.session[CUSTOMER_ID] = contact.id
+
         signals.satchmo_registration_verified.send(contact, contact=contact)
 
     context = RequestContext(request, {
         'account': account,
         'expiration_days': config_value('SHOP', 'ACCOUNT_ACTIVATION_DAYS'),
     })
-    return render_to_response('registration/activate.html',
+    return render_to_response(template,
                               context_instance=context)
 
 
