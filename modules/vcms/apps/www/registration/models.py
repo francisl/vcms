@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.mail import mail_admins
 from django.template.loader import render_to_string
-from registration.models import RegistrationManager, RegistrationProfile
+from registration.models import RegistrationManager, RegistrationProfile, SHA1_RE
 
 
 class AdminRegistrationManager(RegistrationManager):
