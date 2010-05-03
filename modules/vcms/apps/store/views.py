@@ -1,10 +1,13 @@
 from django.core import urlresolvers
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
+from satchmo_store.contact import CUSTOMER_ID
 from satchmo_store.contact.models import Contact
+from satchmo_store.accounts.views import _login
 from livesettings import config_get_group, config_value
 from vcms.apps.store.forms import StoreRegistrationForm
 from vcms.apps.www.registration.models import AdminRegistrationProfile
@@ -79,8 +82,11 @@ def activate(request, activation_key):
         contact = Contact.objects.get(user=account)
         request.session[CUSTOMER_ID] = contact.id
         #send_welcome_email(contact.email, contact.first_name, contact.last_name)
-        site = Site.objects.get_current()
-        account.send_welcome_email(site)
+        # Send an email to the user if an Administrator has activated his/her account
+        if config_value('SHOP', 'ACCOUNT_VERIFICATION') == "ADMINISTRATOR":
+            site = Site.objects.get_current()
+            profile = AdminRegistrationProfile.objects.get(user=account)
+            profile.send_welcome_email(site)
         signals.satchmo_registration_verified.send(contact, contact=contact)
 
     context = RequestContext(request, {
