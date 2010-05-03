@@ -19,7 +19,11 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # ## EMAIL
-from config.email import *
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+else:
+    from config.email import *
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
 
