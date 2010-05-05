@@ -37,7 +37,12 @@ body h4 {
 
 body h5 {
   color: #484848;
-  font-size: 1;
+  font-size: 1.1em;
+}
+
+body h6 {
+  font-size: 1em;
+  color: #b7b7b7;
 }
 
 body a {
@@ -348,6 +353,11 @@ div#vcms_content .content_box {
   position: relative;
   min-height: 70px;
   background: url(../images/content_box/background.jpg) bottom repeat-x #ffffff;
+}
+
+div#vcms_content .content_box p {
+  font-size: 0.9em;
+  color: #000000;
 }
 
 div#vcms_content .content_box_link {

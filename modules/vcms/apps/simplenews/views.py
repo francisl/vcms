@@ -15,9 +15,18 @@ from vcms.apps.www.views import InitPage
 
 
 def list_news(request, category_slug, page=1, context={}):
+    from vcms.apps.vwm.tree import generator
+    from vcms.apps.vwm.tree import helper 
+
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
+    nav = []
+    for navgroup in categories:
+        nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
+        
+    navigation_menu = generator.generate_tree(nav)
+    print("navigation_menu %s " % navigation_menu)
     if category_slug:
         news = News.published.filter(category__slug=category_slug)
     else:
@@ -37,7 +46,7 @@ def list_news(request, category_slug, page=1, context={}):
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-    return render_to_response("list_news.html", {"categories": categories, 
+    return render_to_response("list_news.html", {"navigation_menu": navigation_menu, 
                                                  "contents": contents, 
                                                  "paginator": news_paginator, 
                                                  "paginator_previous_url": paginator_previous_url, 

@@ -28,7 +28,11 @@ body:
         
     h5: // used in content_box
         color: #484848
-        font-size: 1; 
+        font-size: 1.1em;
+        
+    h6: // date header
+        font-size: 1em;
+        color: #b7b7b7;
         
     a:
         text-decoration: none;
@@ -316,6 +320,10 @@ div#vcms_content:
         position: relative;
         min-height: 70px;
         background: url(../images/content_box/background.jpg) bottom repeat-x #ffffff;
+        
+        p:
+            font-size: 0.9em;
+            color: #000;
         
     .content_box_link:
         text-align: right;

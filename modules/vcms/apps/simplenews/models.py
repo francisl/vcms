@@ -15,7 +15,7 @@ from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager,
 from vcms.apps.simplenews.managers import NewsManager, NewsCategoryManager
 
 
-APP_SLUGS = "simplenews"
+APP_SLUGS = "news"
 
 
 class NewsCategory(AnnouncementCategory):
