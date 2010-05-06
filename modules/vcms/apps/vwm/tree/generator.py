@@ -18,7 +18,7 @@ def generate_li_tree(data, css_id, css_class):
 def _generate_dl_tree(data, css_id, css_class):
     """ When called from a function instead of a template tag
     """
-    return render_to_string('tree/tree_dl.html', 
+    return render_to_string('tree_dl.html', 
                             {"data":data, "css_id":css_id, "css_class": css_class}) 
 
 def _generate_li_tree(data, css_id, css_class):
