@@ -4,11 +4,29 @@ div#vcms_navigation_container:
         padding: 0;
         margin: 0;
         background-color: #dadada;
+    
+    dt:
+        background-color: #333333;
+        border-top: 1px solid #656565;
+        border-bottom: 1px solid #000000;
+        color: #cecece;
+        
+        a:
+            color: #cecece;
+            
+        a:hover, &.selected:
+            background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+    
     dt:
         padding: 0 0.8em;
         margin: 0;
+        text-transform: capitalize;
         
-    dt, dd, li:
+    dd:
+        padding: 0 1.3em;
+        margin: 0;
+        
+    dd, li:
         &:hover:
             background-color: #7e7e7e;
             

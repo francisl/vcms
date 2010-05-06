@@ -1,15 +1,19 @@
 <div>
+    <div class="navigation_title">{{ navigation_title }}</div>
     <dl id="{{ cssid }}">
-    {% for item in data %}
-        <dt id="{{ item.cssid }}" class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
-            <a href="{{ item.url}}/">{{ item.name }}</a>
+    {% for category in data %}
+        <dt class="{% if category.selected %}selected{% endif %} {% if category.child_selected %}child_selected{% endif %}">
+            {% if category.url %}
+                <a href="{{ category.url}}/">{{ category.name }}</a>
+            {% else %}
+                {{ category.name }}
+            {% endif %}
         </dt>
-        {% for item in item.items %}
-            <dl class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
-            <a href="{{ item.url }}/">{{ item.name }}</a>
+        {% for item in category.items %}
+            <dd class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
+            <a href="{{ item.url }}/">{{ item.name }}</a></dd>
         {% endfor %}
     {% endfor %}
     </dl>
     <div style="clear: both; height: 0px;"></div>
-    </ul>
 </div>

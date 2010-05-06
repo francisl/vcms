@@ -5,11 +5,35 @@ div#vcms_navigation_container dl {
 }
 
 div#vcms_navigation_container dt {
+  background-color: #333333;
+  border-top: 1px solid #656565;
+  border-bottom: 1px solid #000000;
+  color: #cecece;
+}
+
+div#vcms_navigation_container dt a {
+  color: #cecece;
+}
+
+div#vcms_navigation_container dt a:hover {
+  background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+}
+
+div#vcms_navigation_container dt.selected {
+  background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+}
+
+div#vcms_navigation_container dt {
   padding: 0 0.8em;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+div#vcms_navigation_container dd {
+  padding: 0 1.3em;
   margin: 0;
 }
 
-div#vcms_navigation_container dt:hover,
 div#vcms_navigation_container dd:hover,
 div#vcms_navigation_container li:hover {
   background-color: #7e7e7e;

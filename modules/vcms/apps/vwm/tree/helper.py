@@ -6,7 +6,8 @@ def create_tree_node(name, items=[], child_selected=False, selected=False, url="
     """ Take required parameters and return a valid dictionary tree node 
     """
     return { "name": name, 
-            "items": items, 
             "child_selected":child_selected, 
             "selected":selected, 
-            "url":url }
+            "url":url,
+            "items": items, 
+             }
