@@ -1,4 +1,5 @@
 <div>
+    <div class="navigation_title">{{ navigation_title }}</div>
     <dl id="{{ cssid }}">
     {% for item in data %}
         <dt id="{{ item.cssid }}" class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
@@ -11,5 +12,4 @@
     {% endfor %}
     </dl>
     <div style="clear: both; height: 0px;"></div>
-    </ul>
 </div>
