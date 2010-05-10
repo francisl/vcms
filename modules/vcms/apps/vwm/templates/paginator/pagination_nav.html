@@ -1,0 +1,10 @@
+
+<div class="paginator_nav_container {{ cssclass }}">
+{% if previous_url %}
+    <a href="{{previous_url}}">
+    <span class="pagination_previous"></span></a>{%endif%}
+{{ current_page_number }} / {{ number_of_page }}
+{% if next_url %}
+    <a href="{{ next_url }}">
+    <span class="pagination_next"></span></a>{%endif%}
+</div>

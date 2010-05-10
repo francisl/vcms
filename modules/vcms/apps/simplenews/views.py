@@ -14,8 +14,9 @@ from vcms.apps.simplenews import settings
 from vcms.apps.simplenews.models import News, NewsCategory
 from vcms.apps.simplenews.models import APP_SLUGS
 from vcms.apps.www.views import InitPage
-from vcms.apps.vwm.tree import generator
+from vcms.apps.vwm.tree import generator as generator
 from vcms.apps.vwm.tree import helper 
+from vcms.apps.vwm.paginator import generator as pgenerator
 
 def list_news(request, category_slug, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
@@ -34,7 +35,6 @@ def list_news(request, category_slug, page=1, context={}):
 
     navigation_menu = generator.generate_tree(nav)
     
-    print("navigation_menu %s " % navigation_menu)
     if category_slug:
         news = News.published.filter(category__slug=category_slug)
     else:
@@ -47,6 +47,7 @@ def list_news(request, category_slug, page=1, context={}):
         news_paginator = paginator.page(paginator.num_pages)
     contents = news_paginator.object_list
     # _TODO: Make the following generic
+
     if category_slug:
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.next_page_number() })
@@ -54,9 +55,15 @@ def list_news(request, category_slug, page=1, context={}):
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
+
+    paginator_html = pgenerator.get_page_navigation(news_paginator.number, 
+                                                    news_paginator.paginator.num_pages, 
+                                                    paginator_previous_url, 
+                                                    paginator_next_url)
+    
     return render_to_response("list_news.html", {"navigation_menu": navigation_menu, 
                                                  "contents": contents, 
-                                                 "paginator": news_paginator, 
+                                                 "paginator_html": paginator_html, 
                                                  "paginator_previous_url": paginator_previous_url, 
                                                  "paginator_next_url": paginator_next_url,
                                                  "current_page": context['current_page'],
