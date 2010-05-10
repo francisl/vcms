@@ -48,14 +48,27 @@ def list_news(request, category_slug, page=1, context={}):
     contents = news_paginator.object_list
     # _TODO: Make the following generic
 
+    pre_kwargs = {"page": news_paginator.previous_page_number() }
+    next_kwargs = { "page": news_paginator.next_page_number() }
+    
+    if category_slug: # add category if necessary
+        pre_kwargs.update(category_slug=category_slug)
+        next_kwargs.update(category_slug=category_slug)
+    
+    paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs=pre_kwargs)
+    paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs=next_kwargs) 
+    
+    """
     if category_slug:
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.next_page_number() })
     else: # Remove category_slug from the dict, otherwise "None" will be used at the category
         paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
         paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
+    
+    """
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-
+    
     paginator_html = pgenerator.get_page_navigation(news_paginator.number, 
                                                     news_paginator.paginator.num_pages, 
                                                     paginator_previous_url, 
