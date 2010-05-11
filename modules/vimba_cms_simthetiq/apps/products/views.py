@@ -103,12 +103,8 @@ def getProductPaginator(products, page_num=1, item_per_page=10):
     page_num = int(page_num)
     paginator = Paginator(products, item_per_page)
     if type(page_num) != type(0):
-        print("page_num condition!!!!")
-        print(type(page_num))
-        print(type(0))
         page_num = 1
         
-    print("page num = %s" % page_num)
     try: # make sure the page number is not off
         return paginator.page(page_num)
     except:
@@ -131,7 +127,7 @@ def ProductSList(request, paginator_page_number=1, slug='', context={}):
                                    page_num=paginator_page_number,
                                    item_per_page=20)
     
-    paginator_html = pgenerator.get_page_navigation(products, "slist")
+    paginator_html = pgenerator.get_navigation_from_paginator(products, "slist")
     print("paginator_html = %s" % paginator_html)
 
     return render_to_response('slist.html',

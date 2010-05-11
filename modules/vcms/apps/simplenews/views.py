@@ -5,9 +5,9 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from vcms.apps.simplenews import settings
@@ -17,6 +17,7 @@ from vcms.apps.www.views import InitPage
 from vcms.apps.vwm.tree import generator as generator
 from vcms.apps.vwm.tree import helper 
 from vcms.apps.vwm.paginator import generator as pgenerator
+
 
 def list_news(request, category_slug, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
@@ -29,11 +30,27 @@ def list_news(request, category_slug, page=1, context={}):
     category_items = []
     for navgroup in categories:
         category_items.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
+        print("... %s" % navgroup.get_absolute_url())
     
     category_nav["items"] = category_items
     nav.append(category_nav)
 
+    #get archives
+    archive_years = [d.year for d in News.objects.dates('date_created', 'month')]
+    archive_years.reverse()
+    
+    archive_nav = helper.create_tree_node("Archives", selected=True) 
+    archive_items = []
+    for year in archive_years:
+        archive_items.append(helper.create_tree_node(year, url=reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year })))
+        print(".... %s " % reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year }))
+    
+    archive_nav["items"] = archive_items
+    nav.append(archive_nav)
+
+    # generate navigation
     navigation_menu = generator.generate_tree(nav)
+
     
     if category_slug:
         news = News.published.filter(category__slug=category_slug)
@@ -46,39 +63,19 @@ def list_news(request, category_slug, page=1, context={}):
     except (EmptyPage, InvalidPage):
         news_paginator = paginator.page(paginator.num_pages)
     contents = news_paginator.object_list
-    # _TODO: Make the following generic
 
-    pre_kwargs = {"page": news_paginator.previous_page_number() }
-    next_kwargs = { "page": news_paginator.next_page_number() }
-    
+    reverse_url = "vcms.apps.simplenews.views.list_news"
+    url_args = {}
     if category_slug: # add category if necessary
-        pre_kwargs.update(category_slug=category_slug)
-        next_kwargs.update(category_slug=category_slug)
+        url_args.update(category_slug = category_slug)
     
-    paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs=pre_kwargs)
-    paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs=next_kwargs) 
-    
-    """
-    if category_slug:
-        paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.previous_page_number() })
-        paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "category_slug": category_slug, "page": news_paginator.next_page_number() })
-    else: # Remove category_slug from the dict, otherwise "None" will be used at the category
-        paginator_previous_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.previous_page_number() })
-        paginator_next_url = reverse("vcms.apps.simplenews.views.list_news", kwargs={ "page": news_paginator.next_page_number() })
-    
-    """
-    context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
-    
-    paginator_html = pgenerator.get_page_navigation(news_paginator.number, 
-                                                    news_paginator.paginator.num_pages, 
-                                                    paginator_previous_url, 
-                                                    paginator_next_url)
+    paginator_html = pgenerator.get_page_navigation(news_paginator,
+                                                    pgenerator.get_paginator_previous_url(news_paginator, reverse_url, kwargs=url_args), 
+                                                    pgenerator.get_paginator_next_url(news_paginator, reverse_url, kwargs=url_args))
     
     return render_to_response("list_news.html", {"navigation_menu": navigation_menu, 
                                                  "contents": contents, 
                                                  "paginator_html": paginator_html, 
-                                                 "paginator_previous_url": paginator_previous_url, 
-                                                 "paginator_next_url": paginator_next_url,
                                                  "current_page": context['current_page'],
                                                  "menu_style": context['menu_style'],
                                                  },
@@ -108,7 +105,7 @@ def news_category(request, category_slug, category, page=1, context={}):
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
     return render_to_response("", context, context_instance=RequestContext(request))
 
-def news_archives(request, category_slug, month, year, page=1, context={}):
+def news_archives(request, category_slug, year, month=0, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })

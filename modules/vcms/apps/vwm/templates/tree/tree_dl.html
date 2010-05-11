@@ -4,7 +4,7 @@
     {% for category in data %}
         <dt class="{% if category.selected %}selected{% endif %} {% if category.child_selected %}child_selected{% endif %}">
             {% if category.url %}
-                <a href="{{ category.url}}/">{{ category.name }}</a>
+                <a href="{{ category.url }}/">{{ category.name }}</a>
             {% else %}
                 {{ category.name }}
             {% endif %}
