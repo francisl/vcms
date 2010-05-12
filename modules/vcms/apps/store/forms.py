@@ -247,15 +247,9 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         if not isinstance(country, Country):
             country = Country.objects.get(pk=country)
             data['country'] = country
+            data['ship_country'] = country
         data['country_id'] = country.id
-
-        #shipcountry = data['ship_country']
-        shipcountry = country
-        if not isinstance(shipcountry, Country):
-            shipcountry = Country.objects.get(pk=shipcountry)
-            data['ship_country'] = shipcountry
-
-        data['ship_country_id'] = shipcountry.id
+        data['ship_country_id'] = country.id
 
         organization_name = data.pop('organization', None)
         if organization_name:
