@@ -1,10 +1,21 @@
 div#vcms_content>div {
-  text-align: justify;
+  text-align: center;
+}
+
+div#vcms_content h1 {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+div#vcms_content h3 {
+  font-weight: normal;
+  padding: 0;
 }
 
 div#vcms_content .form {
-  width: 52%;
+  width: 100%;
   float: left;
   margin-right: 2em;
   margin-bottom: 1em;
+  text-align: center;
 }

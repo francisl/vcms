@@ -13,8 +13,8 @@
 {% block content %}
 <div class="form">
     <h1>{% trans "Register" %}</h1>
-    <br/>
     <h3>{% trans "Register to get access to our premium content." %}</h3>
+    <br/>
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
