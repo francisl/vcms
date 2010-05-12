@@ -6,64 +6,17 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from satchmo_store.accounts import signals
-from satchmo_store.accounts.views import _login, RegistrationForm, RegistrationAddressForm
+from satchmo_store.accounts.views import _login, RegistrationAddressForm
 from satchmo_store.contact import CUSTOMER_ID
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Config
 from livesettings import config_get_group, config_value
-from vcms.apps.store.forms import StoreRegistrationForm
 from vcms.apps.www.registration.models import AdminRegistrationProfile
+from vcms.apps.store.forms import CustomStoreRegistrationForm
 
 
 import logging
 log = logging.getLogger('vcms.apps.store.views')
-
-
-def register_handle_form(request, redirect=None):
-    """
-    Handle all registration logic.  This is broken out from "register" to allow easy overriding/hooks
-    such as a combined login/register page.
-
-    This method only presents a typical login or register form, not a full address form
-    (see register_handle_address_form for that one.)
-
-    Returns:
-    - Success flag
-    - HTTPResponseRedirect (success) or form (fail)
-    """
-
-    if request.method == 'POST':
-        form = StoreRegistrationForm(request.POST)
-        if form.is_valid():
-            contact = form.save(request)
-
-            # look for explicit "next"
-            next = request.POST.get('next', '')
-            if not next:
-                if redirect:
-                    next = redirect
-                else:
-                    next = urlresolvers.reverse('registration_complete')
-            return (True, HttpResponseRedirect(next))
-
-    else:
-        initial_data = {}
-        try:
-            contact = Contact.objects.from_request(request, create=False)
-            initial_data = {
-                'email': contact.email,
-                'first_name': contact.first_name,
-                'last_name': contact.last_name,
-            }
-        except Contact.DoesNotExist:
-            log.debug("No contact in request")
-            contact = None
-
-        initial_data['next'] = request.GET.get('next', '')
-
-        form = StoreRegistrationForm(initial=initial_data)
-
-    return (False, form)
 
 
 def custom_register_handle_form(request, redirect=None, registration_form=RegistrationAddressForm):
@@ -156,7 +109,7 @@ def activate(request, activation_key, template = 'registration/activate.html'):
                               context_instance=context)
 
 
-def register(request, redirect=None, template='registration/registration_form.html', form_handler=register_handle_form, registration_form=RegistrationForm):
+def register(request, redirect=None, template='registration/registration_form.html', form_handler=custom_register_handle_form, registration_form=CustomStoreRegistrationForm):
     """
     Allows a new user to register an account.
     """

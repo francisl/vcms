@@ -3,111 +3,23 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import ugettext_lazy as _
 from l10n.models import Country
-from satchmo_store.accounts.forms import RegistrationForm, RegistrationAddressForm
 from satchmo_store.accounts.mail import send_welcome_email
 from satchmo_store.contact.models import AddressBook, Contact, ContactRole, Organization
 from satchmo_store.contact.forms import ContactInfoForm, ProxyContactForm
 from satchmo_store.shop.models import Config
 from satchmo_store.shop.utils import clean_field
-from satchmo_utils.unique_id import generate_id
 from signals_ahoy.signals import form_postsave
 from livesettings import config_value
-from satchmo_store.accounts import signals
 from vcms.apps.www.registration.models import AdminRegistrationProfile
-from satchmo_store.contact import signals
+from satchmo_store.contact import signals as contact_signals
+from satchmo_store.accounts import signals as accounts_signals
 
 
 import logging
 log = logging.getLogger('vcms.apps.store.forms')
 
-
-class StoreRegistrationForm(RegistrationForm):
-    def save_contact(self, request):
-        log.debug("Saving contact")
-        data = self.cleaned_data
-        password = data['password1']
-        email = data['email']
-        first_name = data['first_name']
-        last_name = data['last_name']
-        username = generate_id(first_name, last_name, email)
-
-        account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
-
-        if account_verification == "ADMINISTRATOR":
-            user = AdminRegistrationProfile.objects.create_inactive_user(username,
-                    password, email, False) # Make sure we don't send the email
-            # Manually send the activation email, AdminRegistrationProfile
-            # sends the email to the Administrators, instead of the default
-            # that sends to the user.
-            site = Site.objects.get_current()
-            profile = AdminRegistrationProfile.objects.get(user=user)
-            profile.send_activation_email(site)
-        elif account_verification == 'EMAIL':
-            # TODO:
-            # In django-registration trunk this signature has changed.
-            # Satchmo is going to stick with the latest release so I'm changing
-            # this to work with 0.7
-            # When 0.8 comes out we're going to have to refactor to this:
-            #user = RegistrationProfile.objects.create_inactive_user(
-            #    username, email, password, site)
-            # See ticket #1028 where we checked in the above line prematurely
-            user = AdminRegistrationProfile.objects.create_inactive_user(username,
-                    password, email)
-        elif account_verification == "IMMEDIATE":
-            # Create the user without further validation
-            user = User.objects.create_user(username, email, password)
-
-        user.first_name = first_name
-        user.last_name = last_name
-        user.save()
-
-        # If the user already has a contact, retrieve it.
-        # Otherwise, create a new one.
-        try:
-            contact = Contact.objects.from_request(request, create=False)
-        except Contact.DoesNotExist:
-            contact = Contact()
-
-        contact.user = user
-        contact.first_name = first_name
-        contact.last_name = last_name
-        contact.email = email
-        contact.role = ContactRole.objects.get(pk='Customer')
-        contact.title = data.get('title', '')
-        contact.save()
-
-        if 'newsletter' not in data:
-            subscribed = False
-        else:
-            subscribed = data['newsletter']
-
-        signals.satchmo_registration.send(self, contact=contact, subscribed=subscribed, data=data)
-
-        # The action activation is set to IMMEDIATE, therefore we shall login the user
-        if account_verification == 'IMMEDIATE':
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            send_welcome_email(email, first_name, last_name)
-            signals.satchmo_registration_verified.send(self, contact=contact)
-
-        self.contact = contact
-
-        return contact
-
-
-#class CustomStoreRegistrationForm(RegistrationAddressForm):
-#    username = forms.CharField(label=_('Username'), max_length=30, required=True)
-#    first_last_name = forms.CharField(label=_('First & last name'), max_length=60, required=True)
-#    country = models.ForeignKey(Country, blank=False, null=False, verbose_name=_('Country'))
-#    state = forms.CharField(_("State"), max_length=30, blank=True, null=True)
-#    city = forms.CharField(_("City"), max_length=50, blank=True, null=True)
-#    postal_code = forms.CharField(_("Zip / Postal code"), blank=True, null=True, max_length=9)
-
-#    def __init__(self, *args, **kwargs):
-#        super(CustomStoreRegistrationForm, self).__init__()
-#        self.fields.keyOrder = ['username', 'password1', 'password2', 'organization', 'first_last_name', 'country', 'state', 'city', 'postal_code']
 
 selection = ''
 
@@ -194,6 +106,15 @@ class CustomStoreRegistrationForm(ProxyContactForm):
                 del self.cleaned_data['password_confirm']
         return self.cleaned_data
 
+    def clean_country(self):
+        if self._local_only:
+            return self._default_country
+        else:
+            if not self.cleaned_data.get('country'):
+                log.error("No country! Got '%s'" % self.cleaned_data.get('country'))
+                raise forms.ValidationError(_('This field is required.'))
+        return self.cleaned_data['country']
+
     def clean_postal_code(self):
         postcode = self.cleaned_data.get('postal_code')
         if not postcode and 'postal_code' not in self.required_billing_data:
@@ -225,14 +146,15 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         self._check_state(data, country)
         return data
 
-    def clean_country(self):
-        if self._local_only:
-            return self._default_country
+    def clean_username(self):
+        username = self.cleaned_data.get('username', None)
+        if username:
+            users_with_username = User.objects.filter(username=username)
+            if len(users_with_username) > 0:
+                raise forms.ValidationError(_('This username is already taken.'))
         else:
-            if not self.cleaned_data.get('country'):
-                log.error("No country! Got '%s'" % self.cleaned_data.get('country'))
                 raise forms.ValidationError(_('This field is required.'))
-        return self.cleaned_data['country']
+        return username
 
     def save(self, **kwargs):
         if not kwargs.has_key('contact'):
@@ -248,6 +170,49 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         log.debug('creating new contact')
 
         data = self.cleaned_data.copy()
+
+        # Create the account for the user
+        account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
+
+        if account_verification == "ADMINISTRATOR":
+            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
+                    data['password'], data['email'], False) # Make sure we don't send the email
+            # Manually send the activation email, AdminRegistrationProfile
+            # sends the email to the Administrators, instead of the default
+            # that sends to the user.
+            site = Site.objects.get_current()
+            profile = AdminRegistrationProfile.objects.get(user=user)
+            profile.send_activation_email(site)
+        elif account_verification == 'EMAIL':
+            # TODO:
+            # In django-registration trunk this signature has changed.
+            # Satchmo is going to stick with the latest release so I'm changing
+            # this to work with 0.7
+            # When 0.8 comes out we're going to have to refactor to this:
+            #user = RegistrationProfile.objects.create_inactive_user(
+            #    username, email, password, site)
+            # See ticket #1028 where we checked in the above line prematurely
+            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
+                    data['password'], data['email'])
+        elif account_verification == "IMMEDIATE":
+            # Create the user without further validation
+            user = User.objects.create_user(data['username'], data['email'], data['password'])
+
+        if 'newsletter' not in data:
+            subscribed = False
+        else:
+            subscribed = data['newsletter']
+
+        accounts_signals.satchmo_registration.send(self, contact=contact, subscribed=subscribed, data=data)
+
+        customer.user_id = user.pk
+
+        # The action activation is set to IMMEDIATE, therefore we shall login the user
+        if account_verification == 'IMMEDIATE':
+            user = authenticate(username=data['username'], password=data['password'])
+            login(request, user)
+            send_welcome_email(data['email'], data['first_name'], data['last_name'])
+            accounts_signals.satchmo_registration_verified.send(self, contact=contact)
 
         country = data['country']
         if not isinstance(country, Country):
@@ -303,12 +268,12 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         form_postsave.send(ContactInfoForm, object=customer, formdata=data, form=self)
 
         if changed_location:
-            signals.satchmo_contact_location_changed.send(self, contact=customer)
+            contact_signals.satchmo_contact_location_changed.send(self, contact=customer)
 
         return customer.id
 
     def validate_postcode_by_country(self, postcode, country):
-        responses = signals.validate_postcode.send(self, postcode=postcode, country=country)
+        responses = contact_signals.validate_postcode.send(self, postcode=postcode, country=country)
         # allow responders to reformat the code, but if they don't return
         # anything, then just use the existing code
         for responder, response in responses:
