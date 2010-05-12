@@ -19,3 +19,7 @@ div#vcms_content .form {
   margin-bottom: 1em;
   text-align: center;
 }
+
+div#vcms_content .form table {
+  border-spacing: 0;
+}
