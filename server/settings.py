@@ -5,6 +5,10 @@
 import os
 from django.utils.translation import ugettext_lazy as _
 
+ADMINS = (
+    ('Francois Lebel', 'lebel.francois@vimba.ca'),
+)
+
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
 MEDIA_PATH = SERVER_PATH + "/../"
 #Production
@@ -15,7 +19,13 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # ## EMAIL
-from config.email import *
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+else:
+    from config.email import *
+DEFAULT_FROM_EMAIL = "noreply@exemple.com"
+EMAIL_SUBJECT_PREFIX = ""
 
 # ## DATABASE
 from config.database import *
@@ -61,22 +71,27 @@ LOGIN_URL = '/login/'
 #LOGIN_REDIRECT_URL = '/'
 # Set of URLs that does not require to be logged in.
 # Used by the EnforceLoginMiddleware middleware
-PUBLIC_URLS = (
-    r'admin/',
-    r'login/',
-    r'logout/',
-)
+#PUBLIC_URLS = (
+#    r'admin/',
+#    r'login/',
+#    r'logout/',
+#)
 
 ROOT_URLCONF = 'server.urls'
 
+AUTHENTICATION_BACKENDS = (
+    'satchmo_store.accounts.email-auth.EmailBackend',   # Required by Satchmo
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',   # Add the request to the context
-    'django.core.context_processors.media',     # Add MEDIA_URL to every RequestContext
-    'django.core.context_processors.auth',      # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+    'satchmo_store.shop.context_processors.settings',   # Required by Satchmo
+    'django.core.context_processors.auth',                  # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+    'django.core.context_processors.request',               # Add the request to the context
+    'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
 #    'django.core.context_processors.debug',
 #    'django.core.context_processors.i18n',
 )
-
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -99,19 +114,23 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.cache.UpdateCacheMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware", # Required by Satchmo
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'vcms.apps.www.middleware.EnforceLoginMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware', # __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
+    'threaded_multihost.middleware.ThreadLocalMiddleware', # Required by Satchmo
+    'satchmo_store.shop.SSLMiddleware.SSLRedirect', # Required by Satchmo
+    #'vcms.apps.www.middleware.EnforceLoginMiddleware',
 )
 
 INSTALLED_APPS = (
+    'django.contrib.sites',
+    'satchmo_store.shop',   # Satchmo, must preceed django.contrib.admin
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
     'django.contrib.sitemaps',
-    'django.contrib.admin',
     'django.contrib.humanize',
     #'tagging',
     'django_extensions',
@@ -134,6 +153,7 @@ INSTALLED_APPS = (
     'vcms.apps.vwm',
     'vcms.apps.themes',
     'vcms.apps.contact',
+    'vcms.apps.store',
     # Custom apps for cms
     'vimba_cms_simthetiq.apps.order',
     'vimba_cms_simthetiq.apps.products',
@@ -233,6 +253,9 @@ for app in INSTALLED_APPS:
                         locals()[setting] = value
         except ImportError:
             pass
+
+# Load the local Satchmo settings
+from local_settings import *
 
 if DEBUG:
     import socket

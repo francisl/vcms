@@ -54,6 +54,20 @@ $python_cmd setup.py install
 cd ..
 rm -rf django-signals-ahoy/
 
+echo "-----------DJANGO-LIVESETTINGS---------"
+hg clone http://bitbucket.org/bkroeze/django-livesettings django-livesettings
+cd django-livesettings
+$python_cmd setup.py install
+cd ..
+rm -rf django-livesettings/
+
+echo "-----------DJANGO-KEYEDCACHE---------"
+hg clone http://bitbucket.org/mmarshall/django-keyedcache django-keyedcache
+cd django-keyedcache
+$python_cmd setup.py install
+cd ..
+rm -rf django-keyedcache/
+
 echo "-----------SATCHMO---------"
 hg clone http://bitbucket.org/chris1610/satchmo/ satchmo-trunk
 cd satchmo-trunk
