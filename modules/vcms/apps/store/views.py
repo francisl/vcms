@@ -18,6 +18,13 @@ from vcms.apps.store.forms import CustomStoreRegistrationForm
 import logging
 log = logging.getLogger('vcms.apps.store.views')
 
+# Add the Administrator verification method to the
+# site settings "Account Verification" option.
+from livesettings import config_get
+from satchmo_store.shop.config import SHOP_GROUP
+ACCOUNT_VERIFICATION = config_get(SHOP_GROUP, 'ACCOUNT_VERIFICATION')
+ACCOUNT_VERIFICATION.add_choice(('ADMINISTRATOR', _('Administrator')))
+
 
 def custom_register_handle_form(request, redirect=None, registration_form=RegistrationAddressForm):
     """
