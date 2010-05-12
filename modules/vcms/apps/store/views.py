@@ -1,3 +1,9 @@
+# -*- coding: UTF-8 -*-
+# Application: Vimba - CMS
+# Module: Store
+# Copyright (c) 2010 Vimba inc. All rights reserved.
+# Created by Francois Lebel on 12-05-2010.
+
 from django.core import urlresolvers
 from django.conf import settings
 from django.contrib.sites.models import Site

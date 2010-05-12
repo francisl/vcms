@@ -1,3 +1,8 @@
+# -*- coding: UTF-8 -*-
+# Application: Vimba - CMS
+# Module: Store
+# Copyright (c) 2010 Vimba inc. All rights reserved.
+# Created by Francois Lebel on 12-05-2010.
 
 INSTALLED_APPS = (
         'django.contrib.auth',

@@ -1,3 +1,9 @@
+# -*- coding: UTF-8 -*-
+# Application: Vimba - CMS
+# Module: Store
+# Copyright (c) 2010 Vimba inc. All rights reserved.
+# Created by Francois Lebel on 12-05-2010.
+
 from django import forms
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
