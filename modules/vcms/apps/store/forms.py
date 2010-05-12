@@ -298,35 +298,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         bill_address.is_default_billing = True
         bill_address.is_default_shipping = True
 
-        #copy_address = data['copy_address']
-
-        #ship_address = customer.shipping_address
-
-        #if copy_address:
-            # make sure we don't have any other default shipping address
-        #    if ship_address and ship_address.id != bill_address.id:
-        #        ship_address.delete()
-        #    bill_address.is_default_shipping = True
-
         bill_address.save()
-
-        #if not copy_address:
-        #if not ship_address or ship_address.id == bill_address.id:
-        #    ship_address = AddressBook()
-
-        #for field in address_keys:
-        #    ship_field = 'ship_' + field
-        #    if (not changed_location) and field in ('state', 'country_id', 'city'):
-        #        if getattr(ship_address, field) != data[ship_field]:
-        #            changed_location = True
-        #    try:
-        #        setattr(ship_address, field, data[ship_field])
-        #    except KeyError:
-        #        pass
-        #ship_address.is_default_shipping = True
-        #ship_address.is_default_billing = False
-        #ship_address.contact = customer
-        #ship_address.save()
 
         form_postsave.send(ContactInfoForm, object=customer, formdata=data, form=self)
 
