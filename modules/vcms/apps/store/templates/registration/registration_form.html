@@ -18,7 +18,7 @@
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
-        <table class="standard" width="500px">
+        <table class="standard" width="600px">
             <tr><td>{{ form.username.label_tag }}</td><td>{{ form.username }}</td></tr>
             <tr><td></td><td>{% if form.username.errors %}<span style="color: red;">{{ form.username.errors|join:", " }}</span>{% endif %}</td></tr>
 
@@ -62,7 +62,7 @@
             <input type='hidden' name='newsletter' value="False" />
             {% endif %}
         </table>
-        <div class="submit" style="text-align: right; width:500px"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
+        <div class="submit" style="text-align: right; width:600px"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
     </form>
 </div>
 {% endblock %}
