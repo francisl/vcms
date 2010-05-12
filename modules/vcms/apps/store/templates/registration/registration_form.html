@@ -1,0 +1,63 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block navbar %}
+   <li class="first"><a href="{{shop_base}}/">{% trans "Home" %}</a></li>
+   <li>{% trans "Registration" %}</li>
+{% endblock %}
+
+{% block content %}
+<h3>{% trans "Please Enter Your Account Information" %}</h3>
+
+<form method="post" action=".">
+    {{ form.next }}
+    {% csrf_token %}
+    <table>
+
+    <tr><td>{{ form.username.label_tag }}:</td><td>{{ form.username }}</td></tr>
+    <tr><td></td><td>{% if form.username.errors %}*** {{ form.username.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.password.label_tag }}:</td><td>{{ form.password }}</td></tr>
+    <tr><td></td><td>{% if form.password.errors %}*** {{ form.password.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.password_confirm.label_tag }}:</td><td>{{ form.password_confirm }}</td></tr>
+    <tr><td></td><td>{% if form.password_confirm.errors %}*** {{ form.password_confirm.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.organization.label_tag }}:</td><td>{{ form.organization }}</td></tr>
+    <tr><td></td><td>{% if form.organization.errors %}*** {{ form.organization.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.first_name.label_tag }}:</td><td>{{ form.first_name }}</td></tr>
+    <tr><td></td><td>{% if form.first_name.errors %}*** {{ form.first_name.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.last_name.label_tag }}:</td><td>{{ form.last_name }}</td></tr>
+    <tr><td></td><td>{% if form.last_name.errors %}*** {{ form.last_name.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.country.label_tag }}:</td><td>{{ form.country }}</td></tr>
+    <tr><td></td><td>{% if form.country.errors %}*** {{ form.country.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.state.label_tag }}:</td><td>{{ form.state }}</td></tr>
+    <tr><td></td><td>{% if form.state.errors %}*** {{ form.state.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.city.label_tag }}:</td><td>{{ form.city }}</td></tr>
+    <tr><td></td><td>{% if form.city.errors %}*** {{ form.city.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.postal_code.label_tag }}:</td><td>{{ form.postal_code }}</td></tr>
+    <tr><td></td><td>{% if form.postal_code.errors %}*** {{ form.postal_code.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.email.label_tag }}:</td><td>{{ form.email }}</td></tr>
+    <tr><td></td><td>{% if form.email.errors %}*** {{ form.email.errors|join:", " }}{% endif %}</td></tr>
+
+    <tr><td>{{ form.email_confirm.label_tag }}:</td><td>{{ form.email_confirm }}</td></tr>
+    <tr><td></td><td>{% if form.email_confirm.errors %}*** {{ form.email_confirm.errors|join:", " }}{% endif %}</td></tr>
+
+    {% if show_newsletter %}
+    <tr><td>{{ form.newsletter.label_tag }}:</td><td>{{ form.newsletter }}</td></tr>
+    <tr><td></td><td>{% if form.newsletter.errors %}*** {{ form.newsletter.errors|join:", " }}{% endif %}</td></tr>
+    {% else %}
+    <input type='hidden' name='newsletter' value="False" />
+    {% endif %}
+
+<tr><td></td><td><input type="submit" value="{% trans "Create Account" %}"/></td></tr>
+</table>
+</form>
+{% endblock %}
