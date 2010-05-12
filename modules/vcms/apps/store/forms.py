@@ -181,11 +181,17 @@ class CustomStoreRegistrationForm(ProxyContactForm):
                     del self.cleaned_data['email']
                     del self.cleaned_data['email_confirm']
             else:
-                self._errors["email"] = self.error_class([_("Your email addresses does not match.")])
+                self._errors["email"] = self.error_class([_("Your email addresses do not match.")])
                 del self.cleaned_data['email']
                 del self.cleaned_data['email_confirm']
-        else:
-            self._errors["email_confirm"] = self.error_class([_("Your email address is required and must be confirmed.")])
+
+        password1 = self.cleaned_data.get('password', None)
+        password2 = self.cleaned_data.get('password_confirm', None)
+        if password1 and password2:
+            if not password1 == password2:
+                self._errors["password"] = self.error_class([_("Your passwords do not match.")])
+                del self.cleaned_data['password']
+                del self.cleaned_data['password_confirm']
         return self.cleaned_data
 
     def clean_postal_code(self):
