@@ -1,10 +1,11 @@
 table#product_list {
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0.4em 0;
   border-bottom: none;
   border-collapse: collapse;
   border-spacing: 0px;
+  font-size: 0.8em;
 }
 
 table#product_list tr {
@@ -21,12 +22,13 @@ table#product_list td.col1 {
 table#product_list td {
   border-left: 1px solid #b1b1b1;
   text-align: center;
-  padding: 0 1em;
+  padding: 0.15em 1em;
 }
 
 table#product_list td.action {
   padding: 0;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 table#product_list td.action:hover {
@@ -35,7 +37,7 @@ table#product_list td.action:hover {
 }
 
 table#product_list td.action a {
-  color: inherit;
+  color: #898989;
   display: block;
   padding: 0 1em;
 }

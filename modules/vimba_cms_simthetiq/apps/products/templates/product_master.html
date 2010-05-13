@@ -1,8 +1,6 @@
 {% extends "master.html" %}
 
-{% block navigation %}
-    {{ navigation_menu }}
-{% endblock navigation %}
+{% block navigation %}{{ navigation_menu }}{% endblock navigation %}
 
 {% block page_absolute_content %}
         <div id="widget_button_list">
@@ -15,6 +13,6 @@
 {% endblock page_absolute_content %}
 
 {% block content %}
-        {% block product_list %}
-        {% endblock %}
+    <div id="product_view_style"> </div>
+    {% block product_list %}{% endblock %}
 {% endblock content %}

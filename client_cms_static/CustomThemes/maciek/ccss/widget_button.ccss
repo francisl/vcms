@@ -8,7 +8,7 @@ TABLE_BORDER_COLOR = #b1b1b1;
     right: 0;
     
     //float: right;
-    font-size: 0.9em;
+    font-size: 0.8em;
     text-transform: capitalize;
     margin-right: 0px;
     padding-right: 0px;
@@ -20,23 +20,23 @@ TABLE_BORDER_COLOR = #b1b1b1;
         display: block;
         
         padding: 0 22px 0 16px;
-        background-image: url(../images/product_page_button/button_sep_backslash2.png);
+        background-image: url(../images/products/page_button/button_sep_backslash2.png);
         background-repeat: no-repeat;
         background-position: 0px 0px;
         
         &:hover:
             background-color: $HOVER_BG_COLOR;
-            background-image: url(../images/product_page_button/button_sep_backslash_selected2.png);
+            background-image: url(../images/products/page_button/button_sep_backslash_selected2.png);
             background-repeat: no-repeat;
             background-position: 0px 0px;
     
     .first:
-        background-image: url(../images/product_page_button/button_sep_backslash_first.jpg);
+        background-image: url(../images/products/page_button/button_sep_backslash_first.jpg);
         background-repeat: no-repeat;
         background-position: 0px 0px;
         
         &:hover:
-            background-image: url(../images/product_page_button/button_sep_backslash_first_selected.jpg);
+            background-image: url(../images/products/page_button/button_sep_backslash_first_selected.jpg);
             background-repeat: no-repeat;
             background-position: 0px 0px;
     

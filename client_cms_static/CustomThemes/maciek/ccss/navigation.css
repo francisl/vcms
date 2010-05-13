@@ -23,6 +23,10 @@ div#vcms_navigation_container dt.selected {
   background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
 }
 
+div#vcms_navigation_container dt:hover {
+  background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+}
+
 div#vcms_navigation_container dt {
   padding: 0 0.8em;
   margin: 0;

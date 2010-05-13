@@ -16,6 +16,9 @@ div#vcms_navigation_container:
             
         a:hover, &.selected:
             background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+            
+    dt:hover:
+        background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
     
     dt:
         padding: 0 0.8em;
