@@ -47,3 +47,79 @@ table#product_list:
     
 .light_gray:
     color: #c6c6c6;
+    
+div#product_view_style:
+    width: 100%;
+    
+    a:
+        display: block;
+        float: left;
+        height: 16px;
+        width: 16px;
+       
+    ul:
+        margin-right: 0px;
+        height: 16px;
+        list-style: none;
+        padding: 0px 4px 4px 4px;
+        margin: 0px;
+        float: right;
+        
+    li:
+        float: left;
+        height: 16px;
+        width: 16px;
+        margin-left: 6px;
+        padding: 0px;
+        background-position: top left;
+        
+    li#list_view:
+        background-image: url(../images/products/views/list.jpg);
+        
+    li.selected, li#list_view:hover:
+        background-position: bottom left;
+    
+    li#detailed_list_view:
+        background-image: url(../images/products/views/detailed_list.jpg);
+        
+    li#detailed_list_view:hover, li.selected:
+        background-position: bottom left;
+        
+    li#grid_view:
+        background-image: url(../images/products/views/grid.jpg);
+        
+    li#grid_view:hover, li.selected:
+        background-position: bottom left;
+    
+        
+div#product_grid:
+    width: 100%;
+    border: thin solid pink;
+    
+    div.product:
+        float: left;
+        width: 140px;
+        
+        img:
+            width: 140px;
+            heigth: 140px;
+            border: none;
+            
+            
+        ul.action:
+            margin-right: 0px;
+            
+            li:
+                float: right;
+                background: url(../images/button/others.jpg) top right;
+            
+            li:
+                float: right;
+                background: url(../images/button/others_hover.jpg) top right;
+                
+            li.first:
+                background: url(../images/button/first.jpg) top right;
+            
+            li.first:hover:
+                background: url(../images/button/first_hover.jpg) top right;
+

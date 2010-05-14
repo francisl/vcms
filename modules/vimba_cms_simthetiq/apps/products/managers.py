@@ -187,7 +187,7 @@ class ProductPageManager(models.Manager):
         return self.filter(status=StatusField.PUBLISHED)
        
 
-class CompactNavigationGroupManager(models.Manager): 
+class StandardNavigationGroupManager(models.Manager): 
     def get_navigation(self):
         from vcms.apps.vwm.tree import helper
         """ return navigation tree as a list containin tree node dictionary """ 

@@ -13,6 +13,12 @@
 {% endblock page_absolute_content %}
 
 {% block content %}
-    <div id="product_view_style"> </div>
+    <div id="product_view_style"><ul>
+        <li id="list_view" {% ifequal display_type 0 %}class="selected"{% endifequal %}><a href="{{ display_list_url }}"></a></li>
+        <li id="detailed_list_view" {% ifequal display_type 1 %}class="selected"{% endifequal %}><a href="{{ display_detailed_list_url }}"></a></li>
+        <li id="grid_view" {% ifequal display_type 2 %}class="selected"{% endifequal %}><a href="{{ display_grid_url }}"></a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
     {% block product_list %}{% endblock %}
 {% endblock content %}

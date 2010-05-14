@@ -4,9 +4,12 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import Template, Context, RequestContext 
 from django import forms
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.urlresolvers import reverse
 
 from vimba_cms_simthetiq.apps.products import models as productmodels
 from vcms.apps.www.views import InitPage, setPageParameters
+from vcms.apps.vwm.paginator import generator as pgenerator
+
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
     """ Is called first, then it calls the right view base on module name containt in the url
@@ -38,12 +41,12 @@ def Product(request, context={}):
     
     # set navigation type if not set
     if request.session.get('navigation_type') == "":
-        request.session['navigation_type'] = "compact"
+        request.session['navigation_type'] = "standard"
         
     if request.session.get('navigation_type') == "DIS":
         menu = category.get_navigation_menu()
-    elif request.session.get('navigation_type') == "compact":
-        menu = CompactNavigationGroup.get_navigation()
+    elif request.session.get('navigation_type') == "standard":
+        menu = StandardNavigationGroup.get_navigation()
     
     #print("PRODUCT INFORMATION %s " % product_information)
     return render_to_response('product_info.html',
@@ -55,21 +58,21 @@ def Product(request, context={}):
                                   "navigation_menu": menu },
                                 context_instance=RequestContext(request))
 
-def set_navigation_type(request, page=None, type="compact"):
+def set_navigation_type(request, page=None, type="standard"):
     """ Set the naviation type into the user's session
     """
-    request.session['navigation_type'] = type # compact or DIS
+    request.session['navigation_type'] = type # standard or DIS
     return productHome(request, InitPage(page=page))
     
 
-def get_navigation(request):
+def get_navigation(request, navigation_type):
     """ Take a request and return the html navigation
     """
     from vcms.apps.vwm.tree import generator
-    if request.session.get('navigation_type') == "DIS":
+    if request.session.get('navigation_type') == "DIS" or navigation_type.upper() == "DIS":
         return category.get_navigation_menu()
-    else: #if request.session.get('navigation_type') == "compact":
-        return generator.generate_tree(productmodels.CompactNavigationGroup.objects.get_navigation())
+    else: #if request.session.get('navigation_type') == "standard" :
+        return generator.generate_tree(productmodels.StandardNavigationGroup.objects.get_navigation())
 
 def productHome(request, context={}):
     from vcms.apps.www.models import MenuLocalLink
@@ -80,7 +83,7 @@ def productHome(request, context={}):
     
     # set navigation type if not set
     if request.session.get('navigation_type') == "":
-        request.session['navigation_type'] = "compact"
+        request.session['navigation_type'] = "standard"
         
     nav = get_navigation(request)
 
@@ -111,24 +114,35 @@ def getProductPaginator(products, page_num=1, item_per_page=10):
         return paginator.page(paginator.num_pages)
         
 
-def ProductSList(request, paginator_page_number=1, slug='', context={}):
+_DISPLAY_TYPE = { 0: 'list'
+                 ,1: 'detailed_list'
+                 ,2: 'grid'
+                 }
+
+def get_display_type_url(nav_type, nav_selection, display_type):
+    return reverse(str("vimba_cms_simthetiq.apps.products.views.product_" + _DISPLAY_TYPE[display_type]), 
+                    kwargs={"nav_type":nav_type
+                            , "nav_selection":nav_selection
+                            })
+
+
+def product_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of products as a small list
         @param paginator_page_number: int - index for paginator
     """
-    from vcms.apps.vwm.paginator import generator as pgenerator
     context.update(setPageParameters())
     context.update(locals())
     page = None
-    nav = get_navigation(request)
+    nav = get_navigation(request, nav_type)
     #paginator_html = pgenerator()
-    print("paginator_page_number = %s" % paginator_page_number)
+    print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
 
     products = getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
                                    page_num=paginator_page_number,
                                    item_per_page=20)
     
     paginator_html = pgenerator.get_navigation_from_paginator(products, "slist")
-    print("paginator_html = %s" % paginator_html)
+    print("diplay_type_url = %s" % paginator_html)
 
     return render_to_response('slist.html',
                                 { "menuselected":  "menu_products",
@@ -136,17 +150,23 @@ def ProductSList(request, paginator_page_number=1, slug='', context={}):
                                   "current_page":   page,
                                   "navigation_menu": nav,
                                   'paginator_html': paginator_html,
+                                  'nav_type': nav_type,
+                                  'nav_selection': nav_selection,
+                                  'display_type': 0,
+                                  'display_list_url': get_display_type_url(nav_type, nav_selection, 0),
+                                  'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1),
+                                  'display_grid_url': get_display_type_url(nav_type, nav_selection, 2),
                                   "products": products },
                                 context_instance=RequestContext(request))
 
-def ProductList(request, context={}):
+def product_detailed_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of all the products as a list 
         with a short description and the product image
         @param : page_number - index for paginator
     """
     pass
 
-def ProductGrid(request, context={}):
+def product_grid(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of products as as grid of product image 
         @param : page_number - index for paginator
     """

@@ -27,6 +27,9 @@ def debugtrace(view, current_page, **argd):
 
 
 def setPageParameters(page=None):
+    """ Set the default parameter for a CMS page 
+        module , menu_style, current_page, page
+    """
     if page:
         module = page.module
         menu_style = DROPDOWN_MENU

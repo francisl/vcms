@@ -54,3 +54,97 @@ table#product_list td.action a:hover {
 .light_gray {
   color: #c6c6c6;
 }
+
+div#product_view_style {
+  width: 100%;
+}
+
+div#product_view_style a {
+  display: block;
+  float: left;
+  height: 16px;
+  width: 16px;
+}
+
+div#product_view_style ul {
+  margin-right: 0px;
+  height: 16px;
+  list-style: none;
+  padding: 0px 4px 4px 4px;
+  margin: 0px;
+  float: right;
+}
+
+div#product_view_style li {
+  float: left;
+  height: 16px;
+  width: 16px;
+  margin-left: 6px;
+  padding: 0px;
+  background-position: top left;
+}
+
+div#product_view_style li#list_view {
+  background-image: url(../images/products/views/list.jpg);
+}
+
+div#product_view_style li.selected,
+div#product_view_style li#list_view:hover {
+  background-position: bottom left;
+}
+
+div#product_view_style li#detailed_list_view {
+  background-image: url(../images/products/views/detailed_list.jpg);
+}
+
+div#product_view_style li#detailed_list_view:hover,
+div#product_view_style li.selected {
+  background-position: bottom left;
+}
+
+div#product_view_style li#grid_view {
+  background-image: url(../images/products/views/grid.jpg);
+}
+
+div#product_view_style li#grid_view:hover,
+div#product_view_style li.selected {
+  background-position: bottom left;
+}
+
+div#product_grid {
+  width: 100%;
+  border: thin solid pink;
+}
+
+div#product_grid div.product {
+  float: left;
+  width: 140px;
+}
+
+div#product_grid div.product img {
+  width: 140px;
+  heigth: 140px;
+  border: none;
+}
+
+div#product_grid div.product ul.action {
+  margin-right: 0px;
+}
+
+div#product_grid div.product ul.action li {
+  float: right;
+  background: url(../images/button/others.jpg) top right;
+}
+
+div#product_grid div.product ul.action li {
+  float: right;
+  background: url(../images/button/others_hover.jpg) top right;
+}
+
+div#product_grid div.product ul.action li.first {
+  background: url(../images/button/first.jpg) top right;
+}
+
+div#product_grid div.product ul.action li.first:hover {
+  background: url(../images/button/first_hover.jpg) top right;
+}

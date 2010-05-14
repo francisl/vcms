@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django import forms
 from vimba_cms_simthetiq.tools.widgets.admin_image_widget import AdminImageWidget
-from vimba_cms_simthetiq.apps.products.models import Kind, Domain, DISCountry, Category, CompactNavigationGroup
+from vimba_cms_simthetiq.apps.products.models import Kind, Domain, DISCountry, Category, StandardNavigationGroup
 from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, MediaTags, FileFormat, ProductPage, ProductContent,Image, Video  
     #DomainPage, DomainElement, GalleryPage
 #from vcms.apps.www.models import Content
@@ -174,9 +174,9 @@ class CategoryAdmin(admin.ModelAdmin):
     actions = [delete_selected]
 
     
-class CompactNavigationGroupAdmin(admin.ModelAdmin):
+class StandardNavigationGroupAdmin(admin.ModelAdmin):
     search_fields = ['name',]
-admin.site.register(CompactNavigationGroup, CompactNavigationGroupAdmin)
+admin.site.register(StandardNavigationGroup, StandardNavigationGroupAdmin)
 
 class DISCountryAdmin(admin.ModelAdmin):
     pass

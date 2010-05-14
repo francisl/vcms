@@ -273,7 +273,7 @@ div#vcms_content_container:
     position: relative;
     
 div#vcms_content:
-    margin: 3em 2em;
+    margin: 2em 2em;
         
     .form:
         width: 52%;

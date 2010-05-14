@@ -13,7 +13,7 @@ import l10n.models as l10n
 
 #from tagging.fields import TagField
 from vcms.apps.www.models import Page, Language
-from vimba_cms_simthetiq.apps.products.managers import ProductPageManager, CompactNavigationGroupManager
+from vimba_cms_simthetiq.apps.products.managers import ProductPageManager, StandardNavigationGroupManager
 
 # -- variable
 PRODUCT_IMAGES = "uploadto/product_images/"
@@ -215,8 +215,8 @@ class DomainElement(models.Model):
 def _unicode_DIS(name, id):
     return  name + "(" + str(id) + ")"
 
-class CompactNavigationGroup(Page):
-    objects = CompactNavigationGroupManager()
+class StandardNavigationGroup(Page):
+    objects = StandardNavigationGroupManager()
     
     def __unicode__(self):
         return self.name
@@ -250,7 +250,7 @@ class Category(models.Model):
     dis_id = models.PositiveIntegerField()
     kind = models.ForeignKey(Kind)
     domain = models.ForeignKey(Domain)
-    compact_navigation = models.ForeignKey(CompactNavigationGroup)
+    compact_navigation = models.ForeignKey(StandardNavigationGroup)
     
     class Meta:
         verbose_name_plural = "Categories"
