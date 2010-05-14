@@ -5,6 +5,7 @@
 # Created by Francois Lebel on 12-05-2010.
 
 from django import forms
+from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -41,7 +42,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
     first_name = forms.CharField(max_length=30, label=_('First Name'), required=True)
     last_name = forms.CharField(max_length=30, label=_('Last Name'), required=True)
     # country, added in constructor
-    state = forms.TypedChoiceField(choices=[], coerce=int, required=True, label=_('State / Province')) # choices are set in constructor
+    state = forms.ChoiceField(choices=[], required=True, label=_('State / Province')) # choices are set in constructor
     city = forms.CharField(max_length=30, label=_('City'), required=True)
     postal_code = forms.CharField(max_length=10, label=_('ZIP / Postal code'), required=True)
     email = forms.EmailField(max_length=75, label=_('Email'), required=True)
@@ -81,7 +82,9 @@ class CustomStoreRegistrationForm(ProxyContactForm):
                 raise forms.ValidationError(
                     self._local_only and _('This field is required.') \
                                or _('State is required for your country.'))
-            if not country.adminarea_set.filter(active=True).filter(pk=data).exists():
+            # Validate the state with the country, some states
+            # do not have an abbreviation, thus validate with their full name
+            if not country.adminarea_set.filter(active=True).filter(Q(abbrev__iexact=data)|Q(name__iexact=data)).exists():
                 raise forms.ValidationError(_('Invalid state or province.'))
         return data
 
@@ -91,7 +94,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
             the active states/provinces for the specified country.
         """
         try:
-            self.fields['state'].choices = [(aa.pk, _(aa.name)) for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
+            self.fields['state'].choices = [(aa.abbrev or aa.name, _(aa.name)) for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
         except Country.DoesNotExist: pass
 
     def clean(self):

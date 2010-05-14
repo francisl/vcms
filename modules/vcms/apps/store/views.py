@@ -44,7 +44,7 @@ def get_states_provinces(request, country_id):
     if not request.is_ajax():
         return HttpResponse(status=501)
     try:
-        states = [{"optionValue": aa.pk, "optionDisplay": gettext(aa.name)} for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
+        states = [{"optionValue": aa.abbrev or aa.name, "optionDisplay": gettext(aa.name)} for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
         return HttpResponse(simplejson.dumps(states), mimetype='application/javascript')
     except Country.DoesNotExist:
         return HttpResponse(status=404)
