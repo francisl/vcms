@@ -5,6 +5,28 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
 {% endblock stylesheetlink %}
 
+{% block javascript %}
+$('select#id_country').change(function() {
+    var country_id =$('select#id_country').val();
+    $.ajax({
+          type: "GET",
+          url: "/getStatesProvinces/" + country_id + "/",
+          dataType: "json",
+          timeout: 5000,
+          success: function(msg){
+            var options = '';
+            for (var i = 0, n = msg.length; i < n; i++) {
+                options += '<option value="' + msg[i].optionValue + '">' + msg[i].optionDisplay + '</option>';
+            }
+            $("select#id_state").html(options);
+          },
+          error: function(msg){
+            // There has been an error (country does not exist?)... do nothing
+          }
+        });
+});
+{% endblock javascript %}
+
 {% block navbar %}
    <li class="first"><a href="{{shop_base}}/">{% trans "Home" %}</a></li>
    <li>{% trans "Registration" %}</li>

@@ -5,7 +5,6 @@
 # Created by Francois Lebel on 12-05-2010.
 
 from django import forms
-from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -33,7 +32,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
     """
         Custom registration form for a store. This form has been
         mostly copied from satchmo_store.contact.forms.ContactInfoForm
-        with minimal changes made to it.
+        with a few changes made to it, such as the dynamic states.
     """
     username = forms.CharField(label=_('Username'), max_length=30, required=True)
     password = forms.CharField(label=_('Password'), max_length=30, widget=forms.PasswordInput(), required=True)
@@ -41,8 +40,8 @@ class CustomStoreRegistrationForm(ProxyContactForm):
     organization = forms.CharField(max_length=50, label=_('Company name'), required=True)
     first_name = forms.CharField(max_length=30, label=_('First Name'), required=True)
     last_name = forms.CharField(max_length=30, label=_('Last Name'), required=True)
-    #country, added in constructor
-    state = forms.CharField(max_length=30, label=_('State / Province'), required=True)
+    # country, added in constructor
+    state = forms.TypedChoiceField(choices=[], coerce=int, required=True, label=_('State / Province')) # choices are set in constructor
     city = forms.CharField(max_length=30, label=_('City'), required=True)
     postal_code = forms.CharField(max_length=10, label=_('ZIP / Postal code'), required=True)
     email = forms.EmailField(max_length=75, label=_('Email'), required=True)
@@ -59,7 +58,9 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         self._default_country = shop.sales_country
         self._local_only = shop.in_country_only
         billing_country = (self._contact and getattr(self._contact.billing_address, 'country', None)) or self._default_country
-        self.fields['country'] = forms.ModelChoiceField(shop.countries(), required=False, label=_('Country'), empty_label=None, initial=billing_country.pk)
+        self.fields['country'] = forms.ModelChoiceField(shop.countries(), required=True, label=_('Country'), empty_label=None, initial=billing_country.pk)
+        # Update the states to reflect the initial country
+        self.update_state_choices(self.fields['country'].initial)
         self.fields.keyOrder = [
             'username',
             'password',
@@ -80,12 +81,18 @@ class CustomStoreRegistrationForm(ProxyContactForm):
                 raise forms.ValidationError(
                     self._local_only and _('This field is required.') \
                                or _('State is required for your country.'))
-            if (country.adminarea_set
-                        .filter(active=True)
-                        .filter(Q(name__iexact=data)|Q(abbrev__iexact=data))
-                        .count() != 1):
+            if not country.adminarea_set.filter(active=True).filter(pk=data).exists():
                 raise forms.ValidationError(_('Invalid state or province.'))
         return data
+
+    def update_state_choices(self, country_id):
+        """
+            Updates the choices attributes of the state field with
+            the active states/provinces for the specified country.
+        """
+        try:
+            self.fields['state'].choices = [(aa.pk, _(aa.name)) for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
+        except Country.DoesNotExist: pass
 
     def clean(self):
         # Prevent account hijacking by disallowing duplicate emails.
@@ -103,6 +110,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
                 del self.cleaned_data['email']
                 del self.cleaned_data['email_confirm']
 
+        # Validate passwords to make sure they match
         password1 = self.cleaned_data.get('password', None)
         password2 = self.cleaned_data.get('password_confirm', None)
         if password1 and password2:

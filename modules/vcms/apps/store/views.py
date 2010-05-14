@@ -7,16 +7,18 @@
 from django.core import urlresolvers
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext_lazy as _
+from django.utils import simplejson
+from django.utils.translation import gettext, ugettext_lazy as _
 from satchmo_store.accounts import signals
-from satchmo_store.accounts.views import _login, RegistrationAddressForm
+from satchmo_store.accounts.views import _login
 from satchmo_store.contact import CUSTOMER_ID
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Config
 from livesettings import config_get_group, config_value
+from l10n.models import Country
 from vcms.apps.www.registration.models import AdminRegistrationProfile
 from vcms.apps.store.forms import CustomStoreRegistrationForm
 
@@ -32,7 +34,23 @@ ACCOUNT_VERIFICATION = config_get(SHOP_GROUP, 'ACCOUNT_VERIFICATION')
 ACCOUNT_VERIFICATION.add_choice(('ADMINISTRATOR', _('Administrator')))
 
 
-def custom_register_handle_form(request, redirect=None, registration_form=RegistrationAddressForm):
+def get_states_provinces(request, country_id):
+    """
+        Returns the active states/provinces for the given country.
+        Returns an empty HTTP response with response code 404
+        if the country does not exist, or status code 501 if the
+        request isn't made through AJAX".
+    """
+    if not request.is_ajax():
+        return HttpResponse(status=501)
+    try:
+        states = [{"optionValue": aa.pk, "optionDisplay": gettext(aa.name)} for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
+        return HttpResponse(simplejson.dumps(states), mimetype='application/javascript')
+    except Country.DoesNotExist:
+        return HttpResponse(status=404)
+
+
+def register_handle_form(request, redirect=None):
     """
     Handle all registration logic.  This is broken out from "register" to allow easy overriding/hooks
     such as a combined login/register page.
@@ -52,7 +70,11 @@ def custom_register_handle_form(request, redirect=None, registration_form=Regist
         contact = None
 
     if request.method == 'POST':
-        form = registration_form(request.POST)
+        form = CustomStoreRegistrationForm(request.POST)
+
+        # Make sure the states/provinces available match
+        # the selected country
+        form.update_state_choices(request.POST['country'])
 
         if form.is_valid():
             contact = form.save()
@@ -81,7 +103,7 @@ def custom_register_handle_form(request, redirect=None, registration_form=Regist
                     USA = Country.objects.get(iso2_code__exact="US")
                     initial_data['country'] = USA
 
-        form = registration_form(initial=initial_data)
+        form = CustomStoreRegistrationForm(initial=initial_data)
 
     return (False, form, {'country' : shop.in_country_only})
 
@@ -122,11 +144,11 @@ def activate(request, activation_key, template = 'registration/activate.html'):
                               context_instance=context)
 
 
-def register(request, redirect=None, template='registration/registration_form.html', form_handler=custom_register_handle_form, registration_form=CustomStoreRegistrationForm):
+def register(request, redirect=None, template='registration/registration_form.html'):
     """
     Allows a new user to register an account.
     """
-    ret = form_handler(request, redirect, registration_form)
+    ret = register_handle_form(request, redirect)
     success = ret[0]
     todo = ret[1]
     if len(ret) > 2:

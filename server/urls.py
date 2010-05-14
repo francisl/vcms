@@ -17,13 +17,11 @@ from satchmo_store.urls import urlpatterns
 # __TODO: This should be located in a client-specific configuration file
 from livesettings import config_value
 from satchmo_utils import urlhelper
-from vcms.apps.store.views import custom_register_handle_form
-from vcms.apps.store.forms import CustomStoreRegistrationForm
 urlhelper.replace_urlpatterns(
     urlpatterns,
     [
         url(r'^activate/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
-        url(r'^register/$', 'vcms.apps.store.views.register', {"form_handler": custom_register_handle_form, "registration_form": CustomStoreRegistrationForm}, 'registration_register'),
+        url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
         url(r'^register/complete/$', 'django.views.generic.simple.direct_to_template',
             {'template': 'registration/registration_complete.html',
             'extra_context': { 'verification': config_value('SHOP', 'ACCOUNT_VERIFICATION') }},
