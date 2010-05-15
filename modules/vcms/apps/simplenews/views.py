@@ -36,7 +36,7 @@ def list_news(request, category_slug, page=1, context={}):
     nav.append(category_nav)
 
     #get archives
-    archive_years = [d.year for d in News.objects.dates('date_created', 'month')]
+    archive_years = [d.year for d in News.objects.dates('date_published', 'month')]
     archive_years.reverse()
     
     archive_nav = helper.create_tree_node("Archives", selected=True) 
