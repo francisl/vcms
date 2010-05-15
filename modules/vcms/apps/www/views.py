@@ -30,16 +30,18 @@ def setPageParameters(page=None):
     """ Set the default parameter for a CMS page 
         module , menu_style, current_page, page
     """
+    page_info = {}
     if page:
-        module = page.module
-        menu_style = DROPDOWN_MENU
-        current_page = page
+        page_info.update(module = page.module)
+        page_info.update(menu_style = DROPDOWN_MENU)
+        page_info.update(current_page = page)
+        page_info.update(page = page)
     else:
-        module = None
-        menu_style = DROPDOWN_MENU
-        current_page = None
-        page = None
-    return locals()
+        page_info.update(module = None)
+        page_info.update(menu_style = DROPDOWN_MENU)
+        page_info.update(current_page = None)
+        page_info.update(page = None)
+    return { 'page_info' : page_info }
 
 def InitPage(page_slug, app_slug):
     """ InitPage get a page slug and its corresponding app slug then return
@@ -63,8 +65,7 @@ def InitPage(page_slug, app_slug):
         else:
             current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
         print("set -- %s" % setPageParameters(current_page))
-        context = setPageParameters(current_page)
-        return context 
+        return setPageParameters(current_page)
     except:
         print("get default %s" % "error")
         raise Http404
@@ -72,6 +73,8 @@ def InitPage(page_slug, app_slug):
 def Generic(request, page=None, context={}):
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
+    
+    print("context page_info ==== %s" % context["page_info"])
     
     if context["module"] in globals():
         """ Transfert the view specified by the model module name """

@@ -125,38 +125,35 @@ def get_display_type_url(nav_type, nav_selection, display_type):
                             , "nav_selection":nav_selection
                             })
 
+def get_avail_products_for_page(page_number, item_per_page=20):
+    return getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
+                                   page_num=page_number,
+                                   item_per_page=item_per_page)
 
 def product_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of products as a small list
         @param paginator_page_number: int - index for paginator
     """
-    context.update(setPageParameters())
-    context.update(locals())
-    page = None
     nav = get_navigation(request, nav_type)
     #paginator_html = pgenerator()
-    print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
-
-    products = getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
-                                   page_num=paginator_page_number,
-                                   item_per_page=20)
     
+    products = get_avail_products_for_page(paginator_page_number)
     paginator_html = pgenerator.get_navigation_from_paginator(products, "slist")
-    print("diplay_type_url = %s" % paginator_html)
+    #print("paginator html = %s" % paginator_html)
+    #print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
 
     return render_to_response('slist.html',
-                                { "menuselected":  "menu_products",
-                                  "menu_style": context['menu_style'],
-                                  "current_page":   page,
-                                  "navigation_menu": nav,
-                                  'paginator_html': paginator_html,
-                                  'nav_type': nav_type,
-                                  'nav_selection': nav_selection,
-                                  'display_type': 0,
-                                  'display_list_url': get_display_type_url(nav_type, nav_selection, 0),
-                                  'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1),
-                                  'display_grid_url': get_display_type_url(nav_type, nav_selection, 2),
-                                  "products": products },
+                                {"menuselected":  "menu_products"
+                                 ,"page_info": setPageParameters()["page_info"] # set basic page information
+                                 ,'nav_type': nav_type
+                                 ,"navigation_menu": nav
+                                 ,'nav_selection': nav_selection
+                                 ,'display_type': 0
+                                 ,'display_list_url': get_display_type_url(nav_type, nav_selection, 0)
+                                 ,'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1)
+                                 ,'display_grid_url': get_display_type_url(nav_type, nav_selection, 2)
+                                 ,'paginator_html': paginator_html
+                                 ,"products": products },
                                 context_instance=RequestContext(request))
 
 def product_detailed_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):

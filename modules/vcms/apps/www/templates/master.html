@@ -10,12 +10,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="ROBOTS" content="ALL" />
 	<meta name="robots" content="noarchive">
-	<meta name="description" content="{% if current_page.description %}
-                                        {{ current_page.description|striptags }}
+	<meta name="description" content="{% if page_info.current_page.description %}
+                                        {{ page_info.current_page.description|striptags }}
 										{% else %}High quality models for real-time 3D in Openflight format and more for the simulation and game industry{% endif%} {% block metadescription %} {% endblock metadescription %}">
-	<meta name="keywords" content="{{ current_page.keywords }}{% block keywords %} {% endblock keywords %}">
+	<meta name="keywords" content="{{ page_info.current_page.keywords }}{% block keywords %} {% endblock keywords %}">
 	
-	<title>{% if current_page %} {{ current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
+	<title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
 	
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
 	
@@ -45,15 +45,15 @@
 		</div>
 	
 		<!-- =========MENU=========== -->
-		{% ifequal menu_style 0 %}
-		    {% show_dropdown_menu current_page %}
-		    {% show_banner current_page MEDIA_URL %}
+		{% ifequal page_info.menu_style 0 %}
+		    {% show_dropdown_menu page_info.current_page %}
+		    {% show_banner page_info.current_page MEDIA_URL %}
 		{% else %}
-			{% if current_page %}
-			   {% show_main_menu current_page %}
+			{% if page_info.current_page %}
+			   {% show_main_menu page_info.current_page %}
 			   <!-- BANNER -->
-               {% show_banner current_page MEDIA_URL %}
-               {% show_sub_menu current_page %}
+               {% show_banner page_info.current_page MEDIA_URL %}
+               {% show_sub_menu page_info.current_page %}
 			{% else %}
 			   {% show_main_menu %}
 			{% endif %}
@@ -118,8 +118,8 @@
 		<div id="footing" >
 			<div class="footing_content">
 			     <span id="copyright">Simthetiq.Com &copy; 2010 |</span>
-		        {% if current_page %}
-		            {% show_footer_menu current_page %}
+		        {% if page_info.current_page %}
+		            {% show_footer_menu page_info.current_page %}
 		         {% else%}
 		            {% show_footer_menu %}
 		        {% endif %}
@@ -156,7 +156,7 @@
         </script> 
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#menu_{{current_page.id}}").className="menu_selected";
+                $("#menu_{{page_info.current_page.id}}").className="menu_selected";
                 
                 $("a[rel^='prettyPhoto']").prettyPhoto({
                     animationSpeed: 'normal',  /* fast/slow/normal */

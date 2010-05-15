@@ -6,7 +6,11 @@
         <div id="widget_button_list">
             <div id="" class="product_page_button first"><a href="">My Account</a></div>
             <div id="" class="product_page_button"><a href="">Cart</a></div>
+            {% ifequal nav_type "standard" %}
             <div id="" class="product_page_button"><a href=""><b>DIS</b> Database</a></div>
+            {% else %}
+            <div id="" class="product_page_button"><a href="">Standard Database</a></div>
+            {% endifequal%}
             <div id="" class="product_page_button"><a href="">Email Page</a></div>
             <div id="" class="product_page_button"><a href="">Print Page</a></div>
         </div>
