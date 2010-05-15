@@ -84,7 +84,10 @@ $('select#id_country').change(function() {
             <input type='hidden' name='newsletter' value="False" />
             {% endif %}
         </table>
-        <div class="submit" style="text-align: right; width:600px"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
+        <div style="width:600px;">
+            <div class="notice">All fields are required.</div>
+            <div class="submit"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
+        </div>
     </form>
 </div>
 {% endblock %}
