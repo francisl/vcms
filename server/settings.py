@@ -145,7 +145,6 @@ INSTALLED_APPS = (
     # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
     'djvideo',                           
     'compressor',                           # git://github.com/dziegler/django-css.git
-    'clevercss',                            # http://github.com/dziegler/clevercss                   
     # VIMBA CMS APPS
     'vcms.apps.www',
     'vcms.apps.simpleblogs',
