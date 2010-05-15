@@ -20,7 +20,7 @@ from satchmo_store.shop.models import Config
 from livesettings import config_get_group, config_value
 from l10n.models import Country
 from vcms.apps.www.registration.models import AdminRegistrationProfile
-from vcms.apps.store.forms import CustomStoreRegistrationForm
+from vcms.apps.store.forms import StoreRegistrationForm
 
 
 import logging
@@ -34,17 +34,27 @@ ACCOUNT_VERIFICATION = config_get(SHOP_GROUP, 'ACCOUNT_VERIFICATION')
 ACCOUNT_VERIFICATION.add_choice(('ADMINISTRATOR', _('Administrator')))
 
 
+def get_queryset_states_provinces(country_id):
+    """
+        Returns a queryset containing the active states/provinces for the given country.
+        An empty QuerySet will be returned in the case where the country does not exist.
+    """
+    try:
+        return Country.objects.get(pk=country_id).adminarea_set.filter(active=True)
+    except Country.DoesNotExist:
+        return Country.objects.none()
+
 def get_states_provinces(request, country_id):
     """
-        Returns the active states/provinces for the given country.
+        Returns a dictionary of states/provinces for the given country.
         Returns an empty HTTP response with response code 404
         if the country does not exist, or status code 501 if the
-        request isn't made through AJAX".
+        it isn't an AJAX request..
     """
     if not request.is_ajax():
         return HttpResponse(status=501)
     try:
-        states = [{"optionValue": aa.abbrev or aa.name, "optionDisplay": gettext(aa.name)} for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
+        states = [{"optionValue": aa.abbrev or aa.name, "optionDisplay": gettext(aa.name)} for aa in get_queryset_states_provinces(country_id)]
         return HttpResponse(simplejson.dumps(states), mimetype='application/javascript')
     except Country.DoesNotExist:
         return HttpResponse(status=404)
@@ -70,7 +80,7 @@ def register_handle_form(request, redirect=None):
         contact = None
 
     if request.method == 'POST':
-        form = CustomStoreRegistrationForm(request.POST)
+        form = StoreRegistrationForm(request.POST)
 
         # Make sure the states/provinces available match
         # the selected country
@@ -103,7 +113,7 @@ def register_handle_form(request, redirect=None):
                     USA = Country.objects.get(iso2_code__exact="US")
                     initial_data['country'] = USA
 
-        form = CustomStoreRegistrationForm(initial=initial_data)
+        form = StoreRegistrationForm(initial=initial_data)
 
     return (False, form, {'country' : shop.in_country_only})
 

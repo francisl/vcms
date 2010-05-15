@@ -29,7 +29,7 @@ log = logging.getLogger('vcms.apps.store.forms')
 
 selection = ''
 
-class CustomStoreRegistrationForm(ProxyContactForm):
+class StoreRegistrationForm(ProxyContactForm):
     """
         Custom registration form for a store. This form has been
         mostly copied from satchmo_store.contact.forms.ContactInfoForm
@@ -49,7 +49,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
     email_confirm = forms.EmailField(max_length=75, label=_('Confirm email'), required=True)
 
     def __init__(self, *args, **kwargs):
-        super(CustomStoreRegistrationForm, self).__init__(*args, **kwargs)
+        super(StoreRegistrationForm, self).__init__(*args, **kwargs)
         shop = kwargs.pop('shop', None)
         if not shop:
             shop = Config.objects.get_current()
@@ -62,6 +62,7 @@ class CustomStoreRegistrationForm(ProxyContactForm):
         self.fields['country'] = forms.ModelChoiceField(shop.countries(), required=True, label=_('Country'), empty_label=None, initial=billing_country.pk)
         # Update the states to reflect the initial country
         self.update_state_choices(self.fields['country'].initial)
+        # Must specify the fields order because we have a dynamically-added field
         self.fields.keyOrder = [
             'username',
             'password',
@@ -93,9 +94,8 @@ class CustomStoreRegistrationForm(ProxyContactForm):
             Updates the choices attributes of the state field with
             the active states/provinces for the specified country.
         """
-        try:
-            self.fields['state'].choices = [(aa.abbrev or aa.name, _(aa.name)) for aa in Country.objects.get(pk=country_id).adminarea_set.filter(active=True)]
-        except Country.DoesNotExist: pass
+        from vcms.apps.store.views import get_queryset_states_provinces
+        self.fields['state'].choices = [(aa.abbrev or aa.name, _(aa.name)) for aa in get_queryset_states_provinces(country_id)]
 
     def clean(self):
         # Prevent account hijacking by disallowing duplicate emails.
