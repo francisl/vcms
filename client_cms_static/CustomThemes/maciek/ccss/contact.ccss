@@ -16,3 +16,7 @@ div#vcms_content:
         text-align: center;
         table:
             border-spacing: 0;
+    .submit:
+        float: right;
+    .notice:
+        float: left;

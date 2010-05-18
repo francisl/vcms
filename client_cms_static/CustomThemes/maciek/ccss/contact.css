@@ -23,3 +23,11 @@ div#vcms_content .form {
 div#vcms_content .form table {
   border-spacing: 0;
 }
+
+div#vcms_content .submit {
+  float: right;
+}
+
+div#vcms_content .notice {
+  float: left;
+}
