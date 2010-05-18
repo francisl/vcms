@@ -21,6 +21,7 @@ from livesettings import config_get_group, config_value
 from l10n.models import Country
 from vcms.apps.www.registration.models import AdminRegistrationProfile
 from vcms.apps.store.forms import StoreRegistrationForm
+from vcms.apps.www.views import setPageParameters
 
 
 import logging
@@ -118,6 +119,15 @@ def register_handle_form(request, redirect=None):
     return (False, form, {'country' : shop.in_country_only})
 
 
+def complete(request):
+    context = { 'verification': config_value('SHOP', 'ACCOUNT_VERIFICATION')
+                    ,"page_info": setPageParameters()["page_info"] }
+
+    return render_to_response('registration/registration_complete.html',
+                                context,
+                                context_instance=RequestContext(request))
+
+
 def activate(request, activation_key, template = 'registration/activate.html'):
     """
     Activates a user's account, if their key is valid and hasn't
@@ -149,6 +159,7 @@ def activate(request, activation_key, template = 'registration/activate.html'):
     context = RequestContext(request, {
         'account': account,
         'expiration_days': config_value('SHOP', 'ACCOUNT_ACTIVATION_DAYS'),
+        "page_info": setPageParameters()["page_info"],
     })
     return render_to_response(template,
                               context_instance=context)
@@ -156,7 +167,7 @@ def activate(request, activation_key, template = 'registration/activate.html'):
 
 def register(request, redirect=None, template='registration/registration_form.html'):
     """
-    Allows a new user to register an account.
+        Allows a new user to register an account.
     """
     ret = register_handle_form(request, redirect)
     success = ret[0]
@@ -174,14 +185,16 @@ def register(request, redirect=None, template='registration/registration_form.ht
         else:
             show_newsletter = False
 
-        ctx = {
+        context = {
             'form': todo,
-            'title' : _('Registration Form'),
             'show_newsletter' : show_newsletter
         }
 
         if extra_context:
-            ctx.update(extra_context)
+            context.update(extra_context)
 
-        context = RequestContext(request, ctx)
-        return render_to_response(template, context_instance=context)
+        context.update({"page_info": setPageParameters()["page_info"]})
+
+        return render_to_response(template,
+                                    context,
+                                    context_instance=RequestContext(request))

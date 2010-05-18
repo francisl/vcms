@@ -20,12 +20,9 @@ from satchmo_utils import urlhelper
 urlhelper.replace_urlpatterns(
     urlpatterns,
     [
-        url(r'^activate/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
+        url(r'^register/complete/$', 'vcms.apps.store.views.complete', {}, 'registration_complete'),
+        url(r'^register/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
         url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
-        url(r'^register/complete/$', 'django.views.generic.simple.direct_to_template',
-            {'template': 'registration/registration_complete.html',
-            'extra_context': { 'verification': config_value('SHOP', 'ACCOUNT_VERIFICATION') }},
-            'registration_complete'),
     ]
 )
 
