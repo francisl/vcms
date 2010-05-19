@@ -23,6 +23,9 @@ urlhelper.replace_urlpatterns(
         url(r'^register/complete/$', 'vcms.apps.store.views.complete', {}, 'registration_complete'),
         url(r'^register/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
         url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
+        url(r'^login/$', 'vcms.apps.store.views.emaillogin', {}, 'auth_login'),
+        url(r'^secure/login/$', 'vcms.apps.store.views.emaillogin', {'SSL' : True}, 'auth_secure_login'),
+        url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', {}, 'auth_logout'),
     ]
 )
 
@@ -113,8 +116,6 @@ for app in settings.INSTALLED_APPS:
 urlpatterns += patterns('',
     (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     (r'^robots.txt$', 'vcms.apps.www.views.robots'),
-    (r'^login/$', 'django.contrib.auth.views.login'),
-    (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
     #url(r'^forms/contact/', 'vcms.apps.www.views.Contact'),
     url(r'^contact/', include('vcms.apps.contact.urls')),
     # url(r'^afghanistan/', 'www.),

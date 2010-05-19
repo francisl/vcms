@@ -9,6 +9,6 @@ from django.conf.urls.defaults import *
 
 urlpatterns_prefix = r''
 
-urlpatterns = patterns('vcms.apps.store.views',
-    (r'^getStatesProvinces/(?P<country_id>\d+)/$', 'get_states_provinces'), # ^/getStatesProvinces/39/
+urlpatterns = patterns('',
+    (r'^getStatesProvinces/(?P<country_id>\d+)/$', 'vcms.apps.store.views.get_states_provinces'), # ^/getStatesProvinces/39/
 )

@@ -8,6 +8,8 @@ div#vcms_content:
     h3:
         font-weight: normal;
         padding: 0;
+    span.black:
+        color: #000;
     .form:
         width: 100%;
         float: left;

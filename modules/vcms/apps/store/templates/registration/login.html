@@ -1,0 +1,58 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block stylesheetlink %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
+{% endblock stylesheetlink %}
+
+{% block content %}
+
+{% if form.non_field_errors %}
+<p class="error">{% for err in form.non_field_errors %}{{ err }}{% if not forloop.last %}<br/>{% endif %}
+{% endfor %}</p>
+{% endif %}
+
+<div class="form">
+    <h1>{% trans "LOG" %}<span class="black">{% trans "IN" %}</span></h1>
+    <br/>
+    <form method="post" action=".">
+        <table class="standard">
+            <tr><td><label for="id_username">{% trans 'Email address' %}:</label></td><td>{{ form.username }}</td></tr>
+            {% if form.username.errors %}<tr><td class="error" colspan="2">***{{ form.username.errors|join:", " }}</td></tr>{% endif %}
+            <tr><td><label for="id_password">{% trans 'Password' %}:</label></td><td>{{ form.password }}</td></tr>
+            {% if form.password.errors %}<tr><td class="error" colspan="2">***{{ form.password.errors|join:", " }}</td></tr>{% endif %}
+        </table>
+
+        <input type="hidden" name="next"
+        {% if next %}
+            value={{ next }} />
+        {% else %}
+            value="{% url satchmo_account_info %}" />
+        {% endif %}
+        <div style="width:600px;">
+            <div class="notice"><a href="{% url auth_password_reset %}">{% trans "FORGOT" %} <span class="black">{% trans "USERNAME" %}</span> {% trans "OR" %} <span class="black">{% trans "PASSWORD" %}</span></a></div>
+            <div class="submit"><button type="submit" value="{% trans "Login" %}"><u>{% trans "Login" %}</u></button></div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <div>{% trans "Don't have an account?" %}</div>
+    <div><a href="{% url registration_register %}">{% trans "REGISTER" %}</a></div>
+</div>
+
+<div>
+    <div>
+        <div>{% trans "Why Register?" %}</div>
+        <div>TODO: full text.</div>
+    </div>
+    <div>
+        <h3>{% trans "BENEFITS" %}</h3>
+        <ul>
+            <li>Access to the free model database</li>
+            <li>Receive news and product updates</li>
+            <li>Request product quotes</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

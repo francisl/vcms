@@ -6,14 +6,17 @@
 
 from django.core import urlresolvers
 from django.conf import settings
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.sites.models import Site
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import simplejson
 from django.utils.translation import gettext, ugettext_lazy as _
+from django.views.decorators.cache import never_cache
 from satchmo_store.accounts import signals
 from satchmo_store.accounts.views import _login
+from satchmo_store.accounts.forms import EmailAuthenticationForm
 from satchmo_store.contact import CUSTOMER_ID
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Config
@@ -198,3 +201,36 @@ def register(request, redirect=None, template='registration/registration_form.ht
         return render_to_response(template,
                                     context,
                                     context_instance=RequestContext(request))
+
+
+def emaillogin(request, template_name='registration/login.html',
+    auth_form=EmailAuthenticationForm, redirect_field_name=REDIRECT_FIELD_NAME):
+    "Displays the login form and handles the login action. Altered to use the EmailAuthenticationForm"
+
+    redirect_to = request.REQUEST.get(redirect_field_name, '')
+
+    # Avoid redirecting to logout if the user clicked on login after logout
+    if redirect_to == urlresolvers.reverse('auth_logout'):
+        redirect_to = None
+
+    success, todo = _login(request, redirect_to)
+    if success:
+        # return the response redirect
+        return todo
+    else:
+        # continue with the login form
+        form = todo
+
+    request.session.set_test_cookie()
+    if Site._meta.installed:
+        current_site = Site.objects.get_current()
+    else:
+        current_site = RequestSite(request)
+
+    return render_to_response(template_name, {
+        'form': form,
+        redirect_field_name: redirect_to,
+        'site_name': current_site.name,
+        "page_info": setPageParameters()["page_info"],
+    }, context_instance=RequestContext(request))
+emaillogin = never_cache(emaillogin)

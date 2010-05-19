@@ -67,7 +67,7 @@ SECRET_KEY = ')z=ki#(2ki!o7*@3-+9vrae)tq6^v(8#d)k76eo26%hz6v)nke'
 
 # ## ###
 # ## LOGIN
-LOGIN_URL = '/login/'
+LOGIN_URL = '/accounts/login/'
 #LOGIN_REDIRECT_URL = '/'
 # Set of URLs that does not require to be logged in.
 # Used by the EnforceLoginMiddleware middleware

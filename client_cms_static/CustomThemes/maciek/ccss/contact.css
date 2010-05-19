@@ -12,6 +12,10 @@ div#vcms_content h3 {
   padding: 0;
 }
 
+div#vcms_content span.black {
+  color: #000000;
+}
+
 div#vcms_content .form {
   width: 100%;
   float: left;
