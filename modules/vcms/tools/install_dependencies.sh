@@ -19,7 +19,7 @@ esac
 
 homedir='/home/simuser'
 
-python_cmd=python$python_version setup.py install --home=$homedir
+python_cmd="python$python_version setup.py install --home=$homedir"
 easy_install_cmd=easy_install-$python_version
 
 
