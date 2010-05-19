@@ -1,8 +1,10 @@
 . ./dep_config.sh
 
-echo "-----------DJANGO-APP-PLUGINS---------"
+echo "----------- DJVIDEO ---------"
+mkdir insttemp
+cd insttemp
 git clone http://git.participatoryculture.org/djvideo/
 cd djvideo
 cp -rf djvideo/ $INSTALL_PATH
-cd ..
+cd ../..
 rm -rf djvideo/
