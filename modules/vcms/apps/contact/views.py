@@ -81,7 +81,7 @@ def Contact(request, page=None, context={}):
     
     
     contents = Content.objects.get_contents_for_page(context["current_page"])
-    print("content for contant page %s : %s" % (context["current_page"], contents))
+    #print("content for contant page %s : %s" % (context["current_page"], contents))
             
     context.update(locals())
     return render_to_response('contact.html', 

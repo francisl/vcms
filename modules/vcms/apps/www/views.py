@@ -64,17 +64,15 @@ def InitPage(page_slug, app_slug):
         # When Page slug i
         else:
             current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
-        print("set -- %s" % setPageParameters(current_page))
         return setPageParameters(current_page)
     except:
-        print("get default %s" % "error")
         raise Http404
     
 def Generic(request, page=None, context={}):
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
-    print("context page_info ==== %s" % context["page_info"])
+    #print("context page_info ==== %s" % context["page_info"])
     
     if context["module"] in globals():
         """ Transfert the view specified by the model module name """

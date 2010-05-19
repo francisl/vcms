@@ -63,7 +63,7 @@ for module in settings.PAGE_MODULES:
 
     except:
         pass
-        print("modules exception : %s" % module)
+        #print("modules exception : %s" % module)
 
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES

@@ -29,7 +29,7 @@ def list_news(request, category_slug, page=1, context={}):
     category_items = []
     for navgroup in categories:
         category_items.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
-        print("... %s" % navgroup.get_absolute_url())
+        #print("... %s" % navgroup.get_absolute_url())
     
     category_nav["items"] = category_items
     nav.append(category_nav)
@@ -42,7 +42,7 @@ def list_news(request, category_slug, page=1, context={}):
     archive_items = []
     for year in archive_years:
         archive_items.append(helper.create_tree_node(year, url=reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year })))
-        print(".... %s " % reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year }))
+        #print(".... %s " % reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year }))
     
     archive_nav["items"] = archive_items
     nav.append(archive_nav)

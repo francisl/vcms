@@ -66,7 +66,7 @@ rm -rf django-livesettings/
 echo "-----------DJANGO-KEYEDCACHE---------"
 hg clone http://bitbucket.org/mmarshall/django-keyedcache django-keyedcache
 cd django-keyedcache
-$python_cmd setup.py install
+$python_cmd
 cd ..
 rm -rf django-keyedcache/
 

@@ -64,7 +64,7 @@ def get_page_navigation(paginator, previous_url=None, next_url=None, css_id=None
             <class 'django.utils.safestring.SafeUnicode'>
             
     """
-    print("paginator_previous_url %s - %s" % (previous_url, next_url) )
+    #print("paginator_previous_url %s - %s" % (previous_url, next_url) )
     return render_to_string('paginator/pagination_nav.html', 
                             { "paginator": paginator,
                              "previous_url": previous_url,

@@ -16,6 +16,8 @@ django-css              # git://github.com/dziegler/django-css.git
 clevercss               # http://github.com/dziegler/clevercss
 
 
+
 # OPTIONNEL
 
 djgnao-debug-toolbar    # git://github.com/robhudson/django-debug-toolbar.git
+
