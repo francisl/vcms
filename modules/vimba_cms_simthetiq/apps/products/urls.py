@@ -7,7 +7,7 @@ import sys
 urlpatterns = patterns('vimba_cms_simthetiq.apps.products.views',
     # TODO - add pagination for product
     #(r'productlist/$', 'productList'),
-    (r'home/$', 'productHome'),
+    (r'home/$', 'product_list'),
     
     (r'(?P<nav_type>[-\w]+)/(?P<nav_selection>[-\w]+)/list/(?P<paginator_page_number>(\d+))$', 'product_list'),
     (r'(?P<nav_type>[-\w]+)/(?P<nav_selection>[-\w]+)/list/$', 'product_list', {}),

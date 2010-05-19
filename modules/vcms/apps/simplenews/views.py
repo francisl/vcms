@@ -13,11 +13,10 @@ from django.utils.translation import ugettext_lazy as _
 from vcms.apps.simplenews import settings
 from vcms.apps.simplenews.models import News, NewsCategory
 from vcms.apps.simplenews.models import APP_SLUGS
-from vcms.apps.www.views import InitPage
+from vcms.apps.www.views import InitPage, setPageParameters
 from vcms.apps.vwm.tree import generator as generator
 from vcms.apps.vwm.tree import helper 
 from vcms.apps.vwm.paginator import generator as pgenerator
-
 
 def list_news(request, category_slug, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
@@ -51,7 +50,6 @@ def list_news(request, category_slug, page=1, context={}):
     # generate navigation
     navigation_menu = generator.generate_tree(nav)
 
-    
     if category_slug:
         news = News.published.filter(category__slug=category_slug)
     else:
@@ -76,8 +74,7 @@ def list_news(request, category_slug, page=1, context={}):
     return render_to_response("list_news.html", {"navigation_menu": navigation_menu, 
                                                  "contents": contents, 
                                                  "paginator_html": paginator_html, 
-                                                 "current_page": context['current_page'],
-                                                 "menu_style": context['menu_style'],
+                                                 "page_info": setPageParameters()["page_info"],
                                                  },
                                                  
                                context_instance=RequestContext(request))

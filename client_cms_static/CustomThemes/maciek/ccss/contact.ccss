@@ -16,8 +16,10 @@ div#vcms_content:
         margin-right: 2em;
         margin-bottom: 1em;
         text-align: center;
+        
         table:
-            border-spacing: 0;
+		    border-spacing: 0;
+
     .submit:
         float: right;
     .notice:

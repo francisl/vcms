@@ -111,6 +111,23 @@ div#product_view_style li.selected {
   background-position: bottom left;
 }
 
+div.detailed_product_item {
+  width: 100%;
+  height: 100px;
+  margin-top: 1em;
+}
+
+div.detailed_product_item img {
+  float: left;
+  width: 130px;
+  height: 100px;
+}
+
+div.detailed_product_item .item_header {
+  text-align: right;
+  position: relative;
+}
+
 div#product_grid {
   width: 100%;
   border: thin solid pink;

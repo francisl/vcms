@@ -100,7 +100,7 @@ class ProductPageAdmin(admin.ModelAdmin):
     # for debug 
     # list_display = ['name', 'previous', 'next', 'category', 'status']
     # production
-    list_display = ['id', 'name', 'previous','next', 'category', 'status', 'original_image']
+    list_display = ['id', 'name', 'previous','next', 'category', 'status']
     filter_horizontal = ["images", "videos"]
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = (( 'Page information',
@@ -112,7 +112,7 @@ class ProductPageAdmin(admin.ModelAdmin):
                                 'texture_format', 'texture_resolution','file_format', 'similar_products','previous', 'next')}
                  ),
                  ('Product Media', 
-                    { 'fields': ('original_image', 'images', 'videos',)}
+                    { 'fields': ('images', 'videos',)}
                  ),
                 )
 

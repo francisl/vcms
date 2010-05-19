@@ -382,3 +382,7 @@ div#vcms_content .content_box_link a:hover {
   background-repeat: no-repeat;
   background-position: right 4px;
 }
+
+.bordered_content {
+  border: 1px solid #b1b1b1;
+}

@@ -1,0 +1,21 @@
+{% extends "product_master.html" %}
+{% load i18n %}
+
+{% block product_list %}
+	{% for product in products.object_list %}
+    	<div class="detailed_product_item bordered_content">
+            <img src="{{ product.image }}" />
+            <div class="item_header">
+				<div id="widget_button_list">
+					<div class="light_gray">#{{ product.id }}</div>
+					<div class="wgt_button_first"><a href="{{ product.get_absolute_url }}">{% trans 'Info' %}</a></div>
+					<div class="wgt_button"><a href="{{ product.get_absolute_url }}">{% trans 'Add' %}</a></div>
+				</div>
+			</div>
+			<div><h3>{{ product.name }}</h3>
+				<p>{{ product.description }}</p>
+			</div>
+			<div class="clear"></div>
+       </div>
+       {% endfor %}
+{% endblock product_list %}

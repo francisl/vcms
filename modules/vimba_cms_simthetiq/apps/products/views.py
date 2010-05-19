@@ -5,6 +5,9 @@ from django.template import Template, Context, RequestContext
 from django import forms
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
+
+import settings
 
 from vimba_cms_simthetiq.apps.products import models as productmodels
 from vcms.apps.www.views import InitPage, setPageParameters
@@ -119,11 +122,16 @@ _DISPLAY_TYPE = { 0: 'list'
                  ,2: 'grid'
                  }
 
-def get_display_type_url(nav_type, nav_selection, display_type):
-    return reverse(str("vimba_cms_simthetiq.apps.products.views.product_" + _DISPLAY_TYPE[display_type]), 
+
+def get_display_type_url(nav_type, nav_selection, display_type, full=False):
+    reverse_url = reverse(str("vimba_cms_simthetiq.apps.products.views.product_" + _DISPLAY_TYPE[display_type]), 
                     kwargs={"nav_type":nav_type
                             , "nav_selection":nav_selection
                             })
+    if full == True:
+        reverse_url = "http://" + str(Site.objects.get(id__exact=settings.SITE_ID)) + reverse_url
+        
+    return reverse_url
 
 def get_avail_products_for_page(page_number, item_per_page=20):
     return getProductPaginator(productmodels.ProductPage.objects.get_available_products(), 
@@ -142,6 +150,8 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
     #print("paginator html = %s" % paginator_html)
     #print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
 
+
+
     return render_to_response('slist.html',
                                 {"menuselected":  "menu_products"
                                  ,"page_info": setPageParameters()["page_info"] # set basic page information
@@ -153,15 +163,37 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
                                  ,'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1)
                                  ,'display_grid_url': get_display_type_url(nav_type, nav_selection, 2)
                                  ,'paginator_html': paginator_html
-                                 ,"products": products },
+                                 ,"products": products
+                                 ,"emailto": {'subject': 'Simthetiq Products', 'body': get_display_type_url(nav_type, nav_selection, 0, True)} },
                                 context_instance=RequestContext(request))
+
 
 def product_detailed_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of all the products as a list 
         with a short description and the product image
         @param : page_number - index for paginator
     """
-    pass
+    nav = get_navigation(request, nav_type)
+    
+    products = get_avail_products_for_page(paginator_page_number, 10)
+    paginator_html = pgenerator.get_navigation_from_paginator(products, "slist")
+    #print("paginator html = %s" % paginator_html)
+    #print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
+
+    return render_to_response('detailed_list.html',
+                                {"menuselected":  "menu_products"
+                                 ,"page_info": setPageParameters()["page_info"] # set basic page information
+                                 ,'nav_type': nav_type
+                                 ,"navigation_menu": nav
+                                 ,'nav_selection': nav_selection
+                                 ,'display_type': 0
+                                 ,'display_list_url': get_display_type_url(nav_type, nav_selection, 0)
+                                 ,'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1)
+                                 ,'display_grid_url': get_display_type_url(nav_type, nav_selection, 2)
+                                 ,'paginator_html': paginator_html
+                                 ,"products": products
+                                 ,"emailto": {'subject': 'Simthetiq Products', 'body': get_display_type_url(nav_type, nav_selection, 0, True)} },
+                                context_instance=RequestContext(request))
 
 def product_grid(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of products as as grid of product image 

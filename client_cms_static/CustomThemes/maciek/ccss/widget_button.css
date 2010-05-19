@@ -14,25 +14,28 @@
   margin-left: -10px;
   display: block;
   padding: 0 22px 0 16px;
-  background-image: url(../images/products/page_button/button_sep_backslash2.png);
+}
+
+#widget_button_list > div.wgt_button {
+  background-image: url(../images/products/page_button/button_sep_backslash.png);
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
 
-#widget_button_list > div:hover {
+#widget_button_list > div.wgt_button:hover {
   background-color: #363636;
-  background-image: url(../images/products/page_button/button_sep_backslash_selected2.png);
+  background-image: url(../images/products/page_button/button_sep_backslash_selected.png);
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
 
-#widget_button_list .first {
+#widget_button_list .wgt_button_first {
   background-image: url(../images/products/page_button/button_sep_backslash_first.jpg);
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
 
-#widget_button_list .first:hover {
+#widget_button_list .wgt_button_first:hover {
   background-image: url(../images/products/page_button/button_sep_backslash_first_selected.jpg);
   background-repeat: no-repeat;
   background-position: 0px 0px;
