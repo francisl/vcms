@@ -143,7 +143,6 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
         @param paginator_page_number: int - index for paginator
     """
     nav = get_navigation(request, nav_type)
-    print("nav = %s" % nav)
     #paginator_html = pgenerator()
     
     products = get_avail_products_for_page(paginator_page_number)

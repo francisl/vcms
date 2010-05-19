@@ -191,7 +191,6 @@ class StandardNavigationGroupManager(models.Manager):
         from vcms.apps.vwm.tree import helper
         """ return navigation tree as a list containin tree node dictionary """ 
         nav = []
-        print(""" return navigation tree as a list containin tree node dictionary %s """ % self.all())
         for navgroup in self.all():
             nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
         return nav

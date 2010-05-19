@@ -134,7 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     #'tagging',
     'django_extensions',
-    'sorl.thumbnail',
+    'easy_thumbnails',
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/
