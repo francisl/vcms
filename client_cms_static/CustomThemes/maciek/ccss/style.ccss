@@ -42,6 +42,8 @@ body:
     p:
         margin: 0.1em 0;
         padding: 0.1em 0;
+        font-size: 0.9em;
+        color: #000000;
         
     hr:
         height: 1px;

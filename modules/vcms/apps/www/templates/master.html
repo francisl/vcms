@@ -38,7 +38,7 @@
 <!-- =========header=========== -->
     <div id="vcms_body">
 		<div id="vcms_header">  
-			<!-- {% show_search_box %} -->
+			
 			<div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
 				<a href="/" title="Home" ></a>
 			</div>
@@ -61,6 +61,11 @@
 		<!--=========content=========== -->
 		
 		<div id="vcms_content_body">
+		    <div id="widget_header_container">
+		      {% show_search_box %}
+		      {% show_banner page_info.current_page MEDIA_URL %}
+		      
+		    </div>
             {% block ubercontent %}
 			<div id="vcms_navigation_container">
 				{% block navigation %}

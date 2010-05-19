@@ -4,7 +4,11 @@
 {% block product_list %}
 	{% for product in products.object_list %}
     	<div class="detailed_product_item bordered_content">
-            <img src="{{ product.image }}" />
+    	    {% if product.images.all.0.get_absolute_url %}
+                <img src="{{ MEDIA_URL }}{{ product.images.all.0.get_absolute_url }}" />
+            {% else %}
+                <img src="{{ MEDIA_URL }}CustomThemes/maciek/images/products/default_product_image.jpg" />
+            {% endif %}
             <div class="item_header">
 				<div id="widget_button_list">
 					<div class="light_gray">#{{ product.id }}</div>

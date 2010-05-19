@@ -113,14 +113,15 @@ div#product_view_style li.selected {
 
 div.detailed_product_item {
   width: 100%;
-  height: 100px;
+  height: 105px;
   margin-top: 1em;
 }
 
 div.detailed_product_item img {
   float: left;
-  width: 130px;
-  height: 100px;
+  width: 160px;
+  height: 105px;
+  margin-right: 10px;
 }
 
 div.detailed_product_item .item_header {

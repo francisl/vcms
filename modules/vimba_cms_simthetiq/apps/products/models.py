@@ -215,14 +215,15 @@ class DomainElement(models.Model):
 def _unicode_DIS(name, id):
     return  name + "(" + str(id) + ")"
 
-class StandardNavigationGroup(Page):
+class StandardNavigationGroup(models.Model):
+    name = models.CharField(max_length=50, unique=True)
     objects = StandardNavigationGroupManager()
     
     def __unicode__(self):
         return self.name
     
     def get_absolute_url(self):
-        return "/standard/" +  self.slug
+        return "/standard/" +  self.name
     
 class Kind(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -386,7 +387,7 @@ class GalleryPage(Page):
     
     def save(self):
         self.module  = 'GalleryPage'
-        self.app_slug = APP_SLUGS
+        self.app_slug = APP_SLUGSS
         super(GalleryPage, self).save()
         
     def get_absolute_url(self):

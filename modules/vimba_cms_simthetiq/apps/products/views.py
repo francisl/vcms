@@ -110,7 +110,7 @@ def getProductPaginator(products, page_num=1, item_per_page=10):
     paginator = Paginator(products, item_per_page)
     if type(page_num) != type(0):
         page_num = 1
-        
+    
     try: # make sure the page number is not off
         return paginator.page(page_num)
     except:
@@ -143,6 +143,7 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
         @param paginator_page_number: int - index for paginator
     """
     nav = get_navigation(request, nav_type)
+    print("nav = %s" % nav)
     #paginator_html = pgenerator()
     
     products = get_avail_products_for_page(paginator_page_number)
@@ -186,7 +187,7 @@ def product_detailed_list(request, nav_type="standard", nav_selection='all', pag
                                  ,'nav_type': nav_type
                                  ,"navigation_menu": nav
                                  ,'nav_selection': nav_selection
-                                 ,'display_type': 0
+                                 ,'display_type': 1
                                  ,'display_list_url': get_display_type_url(nav_type, nav_selection, 0)
                                  ,'display_detailed_list_url': get_display_type_url(nav_type, nav_selection, 1)
                                  ,'display_grid_url': get_display_type_url(nav_type, nav_selection, 2)
