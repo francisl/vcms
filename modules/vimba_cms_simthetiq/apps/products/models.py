@@ -276,8 +276,6 @@ class ProductPage(Page):
     polygon = models.IntegerField()
     texture_format = models.CharField(max_length=50)
     texture_resolution = models.CharField(max_length=50)
-    #original_image = models.ImageField(upload_to=PRODUCT_IMAGES)
-    original_image = models.ForeignKey(Image, related_name="original_image", null=True, blank=True)
     
     file_format = models.ManyToManyField(FileFormat)
     similar_products = models.ManyToManyField('self', symmetrical=True, null=True, blank=True)

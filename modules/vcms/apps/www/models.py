@@ -12,12 +12,10 @@ from django.core.files.storage import default_storage, FileSystemStorage
 from vcms.apps.www.managers import PageManager, ContentManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
 from vcms.apps.www.fields import StatusField
 
-
 # -- variable
 PRODUCT_IMAGES = "uploadto/prod_images"
 PRODUCT_VIDEOS = "uploadto/prod_videos"
 APP_SLUGS = "www"
-
 
 class Language(models.Model):
     language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))

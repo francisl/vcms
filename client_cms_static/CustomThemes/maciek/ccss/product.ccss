@@ -48,6 +48,7 @@ table#product_list:
 .light_gray:
     color: #c6c6c6;
     
+// icon use to change display style
 div#product_view_style:
     width: 100%;
     
@@ -90,8 +91,23 @@ div#product_view_style:
         
     li#grid_view:hover, li.selected:
         background-position: bottom left;
+
     
-        
+div.detailed_product_item:
+	width: 100%;
+	height: 100px;
+	margin-top: 1em;
+
+	img:
+		float: left;
+		width: 130px;
+		height: 100px;
+		
+	.item_header:
+		text-align: right;
+		position: relative;
+
+
 div#product_grid:
     width: 100%;
     border: thin solid pink;

@@ -7,7 +7,6 @@ TABLE_BORDER_COLOR = #b1b1b1;
     top: 0;
     right: 0;
     
-    //float: right;
     font-size: 0.8em;
     text-transform: capitalize;
     margin-right: 0px;
@@ -18,19 +17,20 @@ TABLE_BORDER_COLOR = #b1b1b1;
         height: 20px;
         margin-left: -10px;
         display: block;
-        
         padding: 0 22px 0 16px;
-        background-image: url(../images/products/page_button/button_sep_backslash2.png);
+	    
+    & > div.wgt_button:
+        background-image: url(../images/products/page_button/button_sep_backslash.png);
         background-repeat: no-repeat;
         background-position: 0px 0px;
         
         &:hover:
             background-color: $HOVER_BG_COLOR;
-            background-image: url(../images/products/page_button/button_sep_backslash_selected2.png);
+            background-image: url(../images/products/page_button/button_sep_backslash_selected.png);
             background-repeat: no-repeat;
             background-position: 0px 0px;
     
-    .first:
+    .wgt_button_first:
         background-image: url(../images/products/page_button/button_sep_backslash_first.jpg);
         background-repeat: no-repeat;
         background-position: 0px 0px;
@@ -47,19 +47,19 @@ TABLE_BORDER_COLOR = #b1b1b1;
         color: $HOVER_TEXT_COLOR;
         
         
-        
+
 #button_widget:
     padding: 0 1em;
     text-transform: capitalize;
     &:hover:
         background-color: $HOVER_BG_COLOR;
         color: $HOVER_TEXT_COLOR;
-
+    
     a:
         color: inherit;
         display: block;
         padding: 0 1em;
-            
+    
     a:hover:
         color: $HOVER_TEXT_COLOR;
     

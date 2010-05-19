@@ -271,7 +271,8 @@ div#vcms_content_container:
     float: right;
     padding-bottom: 2em;
     position: relative;
-    
+
+BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div#vcms_content:
     margin: 2em 2em;
         
@@ -284,8 +285,9 @@ div#vcms_content:
     #page_title:
         text-align: center;
     
+	
     table:
-        border: 1px solid #b1b1b1;
+        border: $BOX_CONTENT_BORDER;
     
     table.standard:
         padding: 0.4em 1em;
@@ -312,11 +314,11 @@ div#vcms_content:
             width: 100%;
             
     table:
-        border: 1px solid #b1b1b1;
+        border: $BOX_CONTENT_BORDER;
     
     .content_box:
         padding: 0.4em 1em 24px 1em;
-        border: 1px solid #b1b1b1;
+        border: $BOX_CONTENT_BORDER;
         position: relative;
         min-height: 70px;
         background: url(../images/content_box/background.jpg) bottom repeat-x #ffffff;
@@ -344,4 +346,7 @@ div#vcms_content:
             background-image: url(../images/content_box/content_box_link4.jpg);
             background-repeat: no-repeat;
             background-position: right 4px;
-            
+
+.bordered_content:
+	border: $BOX_CONTENT_BORDER;
+	
