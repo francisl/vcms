@@ -1,5 +1,4 @@
 {% load thumbnail %}
-
 {% if has_banner %}
 
 {% ifequal banner_style 0 %} <!-- Banner with effect/rotation -->
@@ -10,7 +9,7 @@
 	        <li class="s3sliderImage">
 	            {% if bimage.url %}
 	                <a class="imagelink" href="{{banner.url}}">
-	                    <!-- <img src="{% thumbnail bimage.file 955x300 crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
+	                    <!-- <img src="{{ MEDIA_URL }}{% thumbnail bimage.file 716x112 crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
 	                    <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
 	                </a>
 	            {% else %}
@@ -20,7 +19,7 @@
 	                <span>{{ bimage.description|safe }}</span>
 	            {% else %}
 	               <span></span>
-	            {% endif %}
+	            {% endif %} 
 	        </li>
 	    {% endfor %}
 	    </ul>

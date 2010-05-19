@@ -1,9 +1,0 @@
-2010-03-09 09:56:56,869 root        : INFO     Satchmo Started
-2010-03-09 09:56:58,367 shop.listeners: DEBUG    Added default shop listeners
-2010-03-09 09:56:58,618 sslurllib   : DEBUG    Installing SSLv2 HTTPS Methods into urllib2
-2010-03-09 09:56:58,975 satchmo_toolbar: DEBUG    Satchmo toolbar ready
-2010-03-09 09:58:24,713 satchmo_store.urls: DEBUG    Adding local serving of static files at: /Users/sanctus/Downloads/satchmo/mystore/static/
-2010-03-09 09:58:25,206 satchmo_store.accounts.views: DEBUG    No contact in request
-2010-03-09 16:54:57,163 satchmo_store.accounts.views: DEBUG    No contact in request
-3 satchmo_store.accounts.views: DEBUG    No contact in request
-request

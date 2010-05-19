@@ -1,5 +1,7 @@
 // see stle for navigation_container layout
 div#vcms_navigation_container:
+    z-index: 15;
+    
     dl:
         padding: 0;
         margin: 0;

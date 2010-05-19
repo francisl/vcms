@@ -2,3 +2,9 @@
 // div#search_widget:
     
 // Search page
+
+div#vcms_search_form:
+    background-color: #dddddd;
+    position: absolute;
+    top: 0px;
+    left: 0px;

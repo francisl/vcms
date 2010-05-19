@@ -63,7 +63,11 @@
 		<div id="vcms_content_body">
 		    <div id="widget_header_container">
 		      {% show_search_box %}
-		      {% show_banner page_info.current_page MEDIA_URL %}
+		      {% ifequal page_info.current_page 'None' %}
+		        {% show_banner page_info.current_page MEDIA_URL %}
+		      {% else %}
+		        {% show_banner_generic %}
+		      {% endifequal %}
 		      
 		    </div>
             {% block ubercontent %}
