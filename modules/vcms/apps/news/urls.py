@@ -12,14 +12,14 @@ feeds = { "news" : LatestNewsFeed,
 
 urlpatterns = patterns('vcms.apps.news.views',
     # Example:
-    (r'^(\d+)/$', 'NewsSingle'),
-    (r'^page/(?P<page>[-\w]+)/$', 'Generic'),
-    (r'^(?P<year>\d{4})/$', 'Generic'),
+    #(r'^(\d+)/$', 'NewsSingle'),
+    #(r'^page/(?P<page>[-\w]+)/$', 'Generic'),
+    #(r'^(?P<year>\d{4})/$', 'Generic'),
     #(r'^preview/$', 'Preview'),
-    (r'^preview/(?P<category>[-\w]+)/$', 'Preview'),
-    (r'^(?P<page>[-\w]+)/$', 'Generic'),
-    (r'^(?P<year>\d{4})/$', 'Generic'),
-    (r'^all/$', 'Generic'),
+    #(r'^preview/(?P<category>[-\w]+)/$', 'Preview'),
+    #(r'^(?P<page>[-\w]+)/$', 'Generic'),
+    #(r'^(?P<year>\d{4})/$', 'Generic'),
+    #(r'^all/$', 'Generic'),
     #(r'^$', 'Generic'),
 )
 
