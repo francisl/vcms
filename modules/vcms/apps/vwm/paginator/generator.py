@@ -7,8 +7,8 @@ from django.core.urlresolvers import reverse
 
 def get_navigation_from_paginator(paginator, paginator_slug=False, css_id=None, css_class=None):
     """ generate a paginator naviation from a paginator object
-        With previous, next page link, the current page and the total amount of page
-        ˙
+        Use a slug to generate the next/previous URL
+                ˙
         @type paginator: paginator object
         @param paginator: The page paginator
         @type paginator_slug: string

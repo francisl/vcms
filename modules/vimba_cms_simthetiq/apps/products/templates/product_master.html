@@ -1,11 +1,13 @@
 {% extends "master.html" %}
 {% load i18n %}
+{% load vwm_button %}
 
 {% block navigation %}
 	{{ navigation_menu }}
 {% endblock navigation %}
 
 {% block page_absolute_content %}
+        <!-- 
         <div id="widget_button_list">
             <div id="" class="wgt_button_first"><a href="">My Account</a></div>
             <div id="" class="wgt_button"><a href="">Cart</a></div>
@@ -17,7 +19,9 @@
             <div id="" class="wgt_button">
                 <a href="mailto:?subject={{emailto.subject}}&body={% trans 'I think you should check that link : '%} {{emailto.body}}">Email Page</a></div>
             <div id="" class="wgt_button"><a href="">Print Page</a></div>
-        </div>
+        </div> -->
+        {% generate_buttons buttons_list %}
+        
 {% endblock page_absolute_content %}
 
 {% block content %}

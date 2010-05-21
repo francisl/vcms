@@ -122,7 +122,6 @@ _DISPLAY_TYPE = { 0: 'list'
                  ,2: 'grid'
                  }
 
-
 def get_display_type_url(nav_type, nav_selection, display_type, full=False):
     reverse_url = reverse(str("vimba_cms_simthetiq.apps.products.views.product_" + _DISPLAY_TYPE[display_type]), 
                     kwargs={"nav_type":nav_type
@@ -138,6 +137,19 @@ def get_avail_products_for_page(page_number, item_per_page=20):
                                    page_num=page_number,
                                    item_per_page=item_per_page)
 
+def get_products_top_button_list(nav_type):
+    from vcms.apps.vwm.button import generator as button
+    buttons_list = []
+    buttons_list.append(button.create_button('My Account', '/accounts/register', 'text'))
+    buttons_list.append(button.create_button('Cart', '', 'text'))
+    if nav_type == 'standard':
+        buttons_list.append(button.create_button('Standard Database', '', 'text'))
+    else:
+        buttons_list.append(button.create_button('<b>DIS</b> Database</a>', '', 'text'))
+    buttons_list.append(button.create_button('Email Page', 'mailto:?subject={{emailto.subject}}&body={% trans "I think you should check that link : " %} {{emailto.body}}', 'text'))
+    buttons_list.append(button.create_button('Print Page', '', 'text'))
+    return buttons_list
+
 def product_list(request, nav_type="standard", nav_selection='all', paginator_page_number=1, context={}):
     """ generate a page of products as a small list
         @param paginator_page_number: int - index for paginator
@@ -150,7 +162,7 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
     #print("paginator html = %s" % paginator_html)
     #print("diplay_type_url = %s" % get_display_type_url(nav_type, nav_selection, 0))
 
-
+    
 
     return render_to_response('slist.html',
                                 {"menuselected":  "menu_products"
@@ -164,6 +176,7 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
                                  ,'display_grid_url': get_display_type_url(nav_type, nav_selection, 2)
                                  ,'paginator_html': paginator_html
                                  ,"products": products
+                                 ,'buttons_list': get_products_top_button_list(nav_type)
                                  ,"emailto": {'subject': 'Simthetiq Products', 'body': get_display_type_url(nav_type, nav_selection, 0, True)} },
                                 context_instance=RequestContext(request))
 

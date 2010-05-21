@@ -1,0 +1,10 @@
+
+<div id="{{ css_id }}" class="widget_button_list {{ css_class }}">
+{% for button in buttons %}
+    {% ifequal button.type 'text' %}
+    <div id="" class="wgt_button{% if forloop.first %}_first{% endif %}"><a href="{{ button.url }}">{{ button.name|safe }}</a></div>
+    {% else %}
+    <button type="submit" value="Submit" class="wgt_button{% if forloop.first %}_first{% endif %}">{{ button.name }}</button>
+    {% endifequal %}
+{% endfor %}
+</div>

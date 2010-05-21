@@ -2,7 +2,7 @@ HOVER_TEXT_COLOR = #c2c2c2;
 HOVER_BG_COLOR = #363636;
 TABLE_BORDER_COLOR = #b1b1b1;
 
-#widget_button_list:
+.widget_button_list:
     position: absolute;
     top: 0;
     right: 0;
@@ -50,7 +50,7 @@ TABLE_BORDER_COLOR = #b1b1b1;
         
         
 
-#button_widget:
+.button_widget:
     padding: 0 1em;
     text-transform: capitalize;
     &:hover:
