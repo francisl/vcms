@@ -8,15 +8,17 @@ TABLE_BORDER_COLOR = #b1b1b1;
     right: 0;
     
     font-size: 0.8em;
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin-right: 0px;
     padding-right: 0px;
+    height: 28px;
     
     & > div:
         float: left;
-        margin-left: -10px;
+        margin-left: -16px;
         display: block;
-        padding: 0 22px 0 16px;
+        padding: 0 2px 0 10px;
+        height: 100%;
 	    
     & > div.wgt_button:
         background-image: url(../images/products/page_button/button_sep_backslash.png);
@@ -30,18 +32,19 @@ TABLE_BORDER_COLOR = #b1b1b1;
             background-position: 0px 0px;
     
     .wgt_button_first:
-        background-image: url(../images/products/page_button/button_sep_backslash_first.jpg);
+        background-image: url(../images/products/page_button/button_sep_backslash_first.png);
         background-repeat: no-repeat;
         background-position: 0px 0px;
         
         &:hover:
-            background-image: url(../images/products/page_button/button_sep_backslash_first_selected.jpg);
+            background-color: $HOVER_BG_COLOR;
+            background-image: url(../images/products/page_button/button_sep_backslash_first_selected.png);
             background-repeat: no-repeat;
             background-position: 0px 0px;
     
     a:
-        height: 20px;
-        margin-right: -4px;
+        height: 22px;
+        padding: 6px 20px 0 16px;
         display: block;
         color: $HOVER_TEXT_COLOR;
         
