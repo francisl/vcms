@@ -22,6 +22,11 @@ div#vcms_content .form table {
   margin-right: auto;
 }
 
+div#vcms_content .form div.underform {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 div#vcms_content div.noaccount {
   margin-left: auto;
   margin-right: auto;
