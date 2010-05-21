@@ -16,11 +16,25 @@
     <h1>{% trans "LOG" %}<span class="black">{% trans "IN" %}</span></h1>
     <br/>
     <form method="post" action=".">
-        <table class="standard">
-            <tr><td><label for="id_username">{% trans 'Email address' %}:</label></td><td>{{ form.username }}</td></tr>
-            {% if form.username.errors %}<tr><td class="error" colspan="2">***{{ form.username.errors|join:", " }}</td></tr>{% endif %}
-            <tr><td><label for="id_password">{% trans 'Password' %}:</label></td><td>{{ form.password }}</td></tr>
-            {% if form.password.errors %}<tr><td class="error" colspan="2">***{{ form.password.errors|join:", " }}</td></tr>{% endif %}
+        <table class="standard" style="width: 400px;">
+            <tr>
+                <td><label for="id_username">{% trans 'Username' %}</label></td>
+                <td>{{ form.username }}</td>
+            </tr>
+            {% if form.username.errors %}
+                <tr>
+                    <td class="error" colspan="2">***{{ form.username.errors|join:", " }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td><label for="id_password">{% trans 'Password' %}</label></td>
+                <td>{{ form.password }}</td>
+            </tr>
+            {% if form.password.errors %}
+                <tr>
+                    <td class="error" colspan="2">***{{ form.password.errors|join:", " }}</td>
+                </tr>
+            {% endif %}
         </table>
 
         <input type="hidden" name="next"
@@ -29,30 +43,38 @@
         {% else %}
             value="{% url satchmo_account_info %}" />
         {% endif %}
-        <div style="width:600px;">
+        <div style="width: 400px;">
             <div class="notice"><a href="{% url auth_password_reset %}">{% trans "FORGOT" %} <span class="black">{% trans "USERNAME" %}</span> {% trans "OR" %} <span class="black">{% trans "PASSWORD" %}</span></a></div>
             <div class="submit"><button type="submit" value="{% trans "Login" %}"><u>{% trans "Login" %}</u></button></div>
         </div>
     </form>
 </div>
 
-<div>
-    <div>{% trans "Don't have an account?" %}</div>
-    <div><a href="{% url registration_register %}">{% trans "REGISTER" %}</a></div>
+<div class="clear"></div>
+
+<div class="noaccount">
+    <div class="left">{% trans "Don't have an account?" %}</div>
+    <div class="right"><a href="{% url registration_register %}">{% trans "REGISTER" %}</a></div>
 </div>
 
-<div>
-    <div>
-        <div>{% trans "Why Register?" %}</div>
-        <div>TODO: full text.</div>
+<div class="clear"></div>
+
+<div class="whyregister">
+    <div class="left">
+        <h3>{% trans "Why Register?" %}</h3>
+        <p>TODO: full text.</p>
     </div>
-    <div>
-        <h3>{% trans "BENEFITS" %}</h3>
-        <ul>
-            <li>Access to the free model database</li>
-            <li>Receive news and product updates</li>
-            <li>Request product quotes</li>
-        </ul>
+    <div class="right standard">
+        <div>
+            <h2>{% trans "BENEFITS" %}</h2>
+        </div>
+        <div class="list">
+            <ul>
+                <li>Access to the free model database</li>
+                <li>Receive news and product updates</li>
+                <li>Request product quotes</li>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

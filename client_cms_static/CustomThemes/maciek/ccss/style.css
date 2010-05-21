@@ -300,13 +300,6 @@ div#vcms_content {
   margin: 2em 2em;
 }
 
-div#vcms_content .form {
-  width: 52%;
-  float: left;
-  margin-right: 2em;
-  margin-bottom: 1em;
-}
-
 div#vcms_content #page_title {
   text-align: center;
 }
@@ -315,22 +308,22 @@ div#vcms_content table {
   border: 1px solid #b1b1b1;
 }
 
-div#vcms_content table.standard {
-  padding: 0.4em 1em;
+div#vcms_content .standard {
   background: url(../images/form/form_bg.jpg) bottom repeat-x;
+  border: 1px solid #b1b1b1;
 }
 
-div#vcms_content table.standard th {
+div#vcms_content .standard th {
   width: 46%;
   vertical-align: top;
   padding-top: 6px;
 }
 
-div#vcms_content table.standard td {
+div#vcms_content .standard td {
   padding: 0.3em 0;
 }
 
-div#vcms_content table.standard label {
+div#vcms_content .standard label {
   font-weight: bold;
   font-size: 0.9em;
   float: right;
@@ -338,11 +331,11 @@ div#vcms_content table.standard label {
   text-transform: uppercase;
 }
 
-div#vcms_content table.standard input {
+div#vcms_content .standard input {
   width: 98%;
 }
 
-div#vcms_content table.standard textarea {
+div#vcms_content .standard textarea {
   width: 100%;
 }
 
