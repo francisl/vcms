@@ -40,7 +40,7 @@ $('select#id_country').change(function() {
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
-        <table class="standard" width="600px">
+        <table class="standard" style="width: 600px;">
             <tr><td>{{ form.username.label_tag }}</td><td>{{ form.username }}</td></tr>
             <tr><td></td><td>{% if form.username.errors %}<span style="color: red;">{{ form.username.errors|join:", " }}</span>{% endif %}</td></tr>
 
@@ -84,7 +84,7 @@ $('select#id_country').change(function() {
             <input type='hidden' name='newsletter' value="False" />
             {% endif %}
         </table>
-        <div style="width:600px;">
+        <div class="underform" style="width:600px;">
             <div class="notice">All fields are required.</div>
             <div class="submit"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
         </div>

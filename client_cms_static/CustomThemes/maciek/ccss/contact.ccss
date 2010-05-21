@@ -11,14 +11,34 @@ div#vcms_content:
     span.black:
         color: #000;
     .form:
-        width: 100%;
-        float: left;
-        margin-right: 2em;
-        margin-bottom: 1em;
-        text-align: center;
-        
         table:
-		    border-spacing: 0;
+            border-spacing: 0;
+            margin-left: auto;
+            margin-right: auto;
+        div.underform:
+            margin-left: auto;
+            margin-right: auto;
+
+    div.noaccount:
+        margin-left: auto;
+        margin-right: auto;
+        padding: 30px 0 45px 0;
+        width: 300px;
+        div.left:
+            float: left;
+        div.right:
+            color: gray;
+            float: right;
+    div.whyregister:
+        margin-left: auto;
+        margin-right: auto;
+        width: 600px;
+        div.left:
+            float: left;
+        div.right:
+            float: right;
+            div.list:
+                text-align: left;
 
     .submit:
         float: right;

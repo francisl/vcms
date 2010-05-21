@@ -16,16 +16,49 @@ div#vcms_content span.black {
   color: #000000;
 }
 
-div#vcms_content .form {
-  width: 100%;
-  float: left;
-  margin-right: 2em;
-  margin-bottom: 1em;
-  text-align: center;
-}
-
 div#vcms_content .form table {
   border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#vcms_content .form div.underform {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#vcms_content div.noaccount {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 0 45px 0;
+  width: 300px;
+}
+
+div#vcms_content div.noaccount div.left {
+  float: left;
+}
+
+div#vcms_content div.noaccount div.right {
+  color: gray;
+  float: right;
+}
+
+div#vcms_content div.whyregister {
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+
+div#vcms_content div.whyregister div.left {
+  float: left;
+}
+
+div#vcms_content div.whyregister div.right {
+  float: right;
+}
+
+div#vcms_content div.whyregister div.right div.list {
+  text-align: left;
 }
 
 div#vcms_content .submit {

@@ -278,23 +278,16 @@ div#vcms_content_container:
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div#vcms_content:
     margin: 2em 2em;
-        
-    .form:
-        width: 52%;
-        float: left;
-        margin-right: 2em;
-        margin-bottom: 1em;
-        
+
     #page_title:
         text-align: center;
-    
-	
+
     table:
         border: $BOX_CONTENT_BORDER;
     
-    table.standard:
-        padding: 0.4em 1em;
+    .standard:
         background: url(../images/form/form_bg.jpg) bottom repeat-x;
+        border: $BOX_CONTENT_BORDER;
         
         th:
             width: 46%;
