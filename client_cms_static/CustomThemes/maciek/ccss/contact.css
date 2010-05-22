@@ -27,6 +27,10 @@ div#vcms_content .form div.underform {
   margin-right: auto;
 }
 
+div#vcms_content .benefits {
+  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
+}
+
 div#vcms_content .login {
   background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
   width: 400px;
