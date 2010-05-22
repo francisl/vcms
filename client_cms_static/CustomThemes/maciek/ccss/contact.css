@@ -27,6 +27,11 @@ div#vcms_content .form div.underform {
   margin-right: auto;
 }
 
+div#vcms_content .login {
+  background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
+  width: 400px;
+}
+
 div#vcms_content div.noaccount {
   margin-left: auto;
   margin-right: auto;
