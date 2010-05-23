@@ -43,7 +43,7 @@
         {% else %}
             value="{% url satchmo_account_info %}" />
         {% endif %}
-        <div style="width: 400px;">
+        <div class="underform login">
             <div class="notice"><a href="{% url auth_password_reset %}">{% trans "FORGOT" %} <span class="black">{% trans "USERNAME" %}</span> {% trans "OR" %} <span class="black">{% trans "PASSWORD" %}</span></a></div>
             <div class="submit"><button type="submit" value="{% trans "Login" %}"><u>{% trans "Login" %}</u></button></div>
         </div>

@@ -19,11 +19,14 @@ div#vcms_content:
         div.underform:
             margin-left: auto;
             margin-right: auto;
+    table.login:
+        background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
     .benefits:
         background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
     .login:
-        background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
         width: 400px;
+    .register:
+        width: 600px;
     div.noaccount:
         padding: 30px 0 45px 0;
         margin-left: auto;
