@@ -1,3 +1,4 @@
+BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 // CONTENT
 div#vcms_content:
     &>div:
@@ -24,15 +25,19 @@ div#vcms_content:
         background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
         width: 400px;
     div.noaccount:
+        padding: 30px 0 45px 0;
         margin-left: auto;
         margin-right: auto;
-        padding: 30px 0 45px 0;
-        width: 300px;
+        width: 350px;
         div.left:
+            border: $BOX_CONTENT_BORDER;
             float: left;
+            padding: 3px 20px 3px 20px;
         div.right:
-            color: gray;
+            background: #555;
+            border: $BOX_CONTENT_BORDER;
             float: right;
+            padding: 3px 30px 3px 30px;
     div.whyregister:
         margin-left: auto;
         margin-right: auto;

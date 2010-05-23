@@ -37,19 +37,23 @@ div#vcms_content .login {
 }
 
 div#vcms_content div.noaccount {
+  padding: 30px 0 45px 0;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px 0 45px 0;
-  width: 300px;
+  width: 350px;
 }
 
 div#vcms_content div.noaccount div.left {
+  border: 1px solid #b1b1b1;
   float: left;
+  padding: 3px 20px 3px 20px;
 }
 
 div#vcms_content div.noaccount div.right {
-  color: gray;
+  background: #555555;
+  border: 1px solid #b1b1b1;
   float: right;
+  padding: 3px 30px 3px 30px;
 }
 
 div#vcms_content div.whyregister {
