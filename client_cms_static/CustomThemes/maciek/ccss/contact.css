@@ -44,10 +44,15 @@ div#vcms_content .register {
 }
 
 div#vcms_content div.noaccount {
+  font-weight: bold;
   padding: 30px 0 45px 0;
   margin-left: auto;
   margin-right: auto;
-  width: 350px;
+  width: 380px;
+}
+
+div#vcms_content div.noaccount a {
+  color: #c0c0c0;
 }
 
 div#vcms_content div.noaccount div.left {

@@ -28,10 +28,13 @@ div#vcms_content:
     .register:
         width: 600px;
     div.noaccount:
+        a:
+            color: #c0c0c0;
+        font-weight: bold;
         padding: 30px 0 45px 0;
         margin-left: auto;
         margin-right: auto;
-        width: 350px;
+        width: 380px;
         div.left:
             border: $BOX_CONTENT_BORDER;
             float: left;
