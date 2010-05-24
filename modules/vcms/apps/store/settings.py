@@ -16,7 +16,6 @@ INSTALLED_APPS = (
         'livesettings',
         'l10n',
         'sorl.thumbnail',
-        'satchmo_store.contact',
         'tax',
         'tax.modules.no',
         'tax.modules.area',
