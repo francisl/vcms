@@ -131,7 +131,8 @@ class BannerManager(models.Manager):
         randomnumber = random.randrange(0,)
         
     def get_banner(self, page):
-        banner = banner_images = has_banner = banner_style = False
+        banner = banner_images = banner_style = None
+        has_banner = False
         try:
             if page==None:
                 banner = self.all()[0]
@@ -147,7 +148,6 @@ class BannerManager(models.Manager):
                 has_banner = True
         except:
             has_banner = False
-        
         return banner, banner_images, has_banner
 
 class BannerImageManager(models.Manager):

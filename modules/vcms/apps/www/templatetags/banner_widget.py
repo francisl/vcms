@@ -22,7 +22,8 @@ def show_banner(current_page, MEDIA_URL):
     """
     
     banner, banner_images, has_banner = Banner.objects.get_banner(current_page)
-    banner_size = banner.get_size()
+    if has_banner:
+        banner_size = banner.get_size()
     MEDIA_URL = settings.MEDIA_URL
         
     return locals()
