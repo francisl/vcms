@@ -51,6 +51,7 @@ table#product_list:
 // icon use to change display style
 div#product_view_style:
     width: 100%;
+    padding-top: 0.5em;
     
     a:
         display: block;

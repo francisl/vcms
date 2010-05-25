@@ -57,6 +57,7 @@ table#product_list td.action a:hover {
 
 div#product_view_style {
   width: 100%;
+  padding-top: 0.5em;
 }
 
 div#product_view_style a {
