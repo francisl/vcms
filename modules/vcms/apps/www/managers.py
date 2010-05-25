@@ -9,8 +9,10 @@ from vcms.apps.www.fields import StatusField
 
 class PageManager(models.Manager):
     def get_Default(self):
-        defaultpage = self.filter(default=True)[0]
-        #print("RETuRN DEFAULT = %s" % defaultpage)
+        try:
+            defaultpage = self.filter(default=True)[0]
+        except:
+            defaultpage = self.all()[0]
         return defaultpage
 
     def reset_Default(self):

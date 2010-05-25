@@ -7,6 +7,7 @@ from django.template import Template, Context, RequestContext
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+import inspect
 # external requirement
 from captcha.fields import CaptchaField
 
@@ -24,7 +25,6 @@ def debugtrace(view, current_page, **argd):
 
     for v in argd:
         print("%s : %s" % (v,argd[v]))
-
 
 def setPageParameters(page=None):
     """ Set the default parameter for a CMS page 
@@ -53,43 +53,54 @@ def InitPage(page_slug, app_slug):
                     it use reflection to execute the appropriate views function
             menu_style : Style used to display the menu in the master template
     """
-    
-    #debugtrace("Initpage", page)
+
+    debugtrace("Initpage - entry", page_slug)
+    current_page = Page.objects.get_Default()
+    debugtrace("Initpage - current page", current_page)
+    #frm = inspect.stack()[1]
+    #mod = inspect.getmodule(frm[0])
+    #print '[%s] %s' % (mod.__name__, 'traceback')
     
     try:
         # IF NOTHING SELECTED, GO FIRST MENU
         # ON ERROR RAISE 404
         if page_slug == None:
+            debugtrace("Initpage - get default", page_slug)
             current_page = Page.objects.get_Default()
         # When Page slug i
         else:
+            debugtrace("Initpage - query", page_slug)
+            debugtrace("Initpage - query app_slug", app_slug)
             current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
+            debugtrace("Initpage - current page", current_page)
+
         return setPageParameters(current_page)
     except:
         raise Http404
     
 def Generic(request, page=None, context={}):
+    #debugtrace("Generic", page)
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
-    #print("context page_info ==== %s" % context["page_info"])
+    print("context page_info ==== %s" % context["page_info"])
     
-    if context["module"] in globals():
+    if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
         #debugtrace("Generic in Globals", context["current_page"], **{'module':context["module"]})
-        return globals()[context["module"]](request, context)
+        return globals()[context["page_info"]['page'].module](request, context)
     else:
         return Simple(request, context)
     
 
 def Simple(request, context={}):
-    context['contents'] = Content.objects.filter(page=context['current_page'])
+    context['contents'] = Content.objects.filter(page=context["page_info"]['page'])
     #debugtrace("basic", context["current_page"], **{'basic content':context['contents']})
 
-    content = Content.objects.filter(page=context["current_page"].id)
+    content = Content.objects.filter(page=context["page_info"]['page'].id)
     if len(content) == 0 :
         """ When page has no content, it redirect to the first child """
-        subpage = Page.objects.get_PageFirstChild(context["current_page"])
+        subpage = Page.objects.get_PageFirstChild(context["page_info"]['page'])
 
         if subpage:
             #debugtrace("Generic", context["current_page"],
@@ -176,7 +187,7 @@ def Search(request):
             # no products
             pass
                     
-        return render_to_response('search.html', 
+        return render_to_response('search_temp_registration.html', 
                                   {'query': query, 'results': results },
                                   context_instance=RequestContext(request))
 
