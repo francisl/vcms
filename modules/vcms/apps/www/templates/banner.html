@@ -1,19 +1,20 @@
 {% load thumbnail %}
 {% if has_banner %}
-
-{% ifequal banner_style 0 %} <!-- Banner with effect/rotation -->
-<div id="banner" class="division_menu">
-   <div id="s3slider">
+	
+	{% ifequal banner.style 0 %} <!-- Banner with effect/rotation -->
+	<div id="banner" class="division_menu">
+	   <div id="s3slider">
 	   <ul id="s3sliderContent">
 	   {% for bimage in banner_images %}
 	        <li class="s3sliderImage">
 	            {% if bimage.url %}
 	                <a class="imagelink" href="{{banner.url}}">
-	                    <!-- <img src="{{ MEDIA_URL }}{% thumbnail bimage.file 716x112 crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
-	                    <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+	                    <img src="{% thumbnail bimage.file banner_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+	                    <!-- <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
 	                </a>
 	            {% else %}
-	                <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+		            <img src="{% thumbnail bimage.file banner_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+	                <!-- <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
 	            {% endif %}
 	            {% if bimage.description %}
 	                <span>{{ bimage.description|safe }}</span>
@@ -23,18 +24,18 @@
 	        </li>
 	    {% endfor %}
 	    </ul>
-    </div>
-</div>
-{% else %} <!-- Banner random -->
-<div id="banner" class="division_menu">
-    {% if banner.url %}
-    <a class="imagelink" href="{{banner.url}}">
-        <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
-    </a>
-    {% else %}
-        <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
-    {% endif %}
- </div>
-{% endifequal %}
+	   </div>
+	</div>
+	{% else %} <!-- Banner random -->
+		<div id="banner" class="division_menu">
+		{% if banner.url %}
+		<a class="imagelink" href="{{banner.url}}">
+		    <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+		</a>
+		{% else %}
+		    <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+		{% endif %}
+		 </div>
+	{% endifequal %}
 
 {% endif %}

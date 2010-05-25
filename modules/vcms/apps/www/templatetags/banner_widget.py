@@ -6,6 +6,14 @@ from vcms.apps.www.models import Banner
 import settings
 register = template.Library()
 
+
+def print_log(banner, has_banner):
+    print("banner | %s" % banner)
+    print("banner_images | %s" % banner.get_images())
+    print("has_banner | %s" % has_banner) 
+    print("banner_style | %s" % banner.style)
+    
+    
 # TODO: Make banner more dynamic - Size, page position
 @register.inclusion_tag('banner.html')
 def show_banner(current_page, MEDIA_URL):
@@ -13,15 +21,8 @@ def show_banner(current_page, MEDIA_URL):
         and return the menu currently selected
     """
     
-    #print("STyle. - %s" % style)
-    banner, banner_images, has_banner, banner_style = Banner.objects.get_banner(current_page)
-    #banner_size = str(banner.width) + str('x') + str(banner.height)
-    
-    #print("banner_images | %s\nhas_banner | %s\nbanner_style | %s" % (banner, has_banner, banner_style))
-    banner_obj = Banner.objects.all()[0]
-    #print("banner width | %s\nbanner heigth | %s" % (banner_obj.width, banner_obj.height))
-    banner_size = str(banner_obj.width) + str('x') + str(banner_obj.height)
-    #print("banner size = %s" % banner_size)
+    banner, banner_images, has_banner = Banner.objects.get_banner(current_page)
+    banner_size = banner.get_size()
     MEDIA_URL = settings.MEDIA_URL
         
     return locals()
@@ -32,15 +33,12 @@ def show_banner_generic():
     """ return main menu list
         and return the menu currently selected
     """
-
-    #print("STyle. - %s" % style)
-    #try:
-    banner_obj = Banner.objects.all()[0]
-    banner, banner_images, has_banner, banner_style = banner_obj, banner_obj.get_images(), True, banner_obj.style
-    #except:
-    #    has_banner = False
+    try:
+        banner, banner_images, has_banner = Banner.objects.get_banner(None)
+        banner_size = banner.get_size()
+    except:
+        has_banner = False
     
     MEDIA_URL = settings.MEDIA_URL
-    banner_size = str(banner_obj.width) + str('x') + str(banner_obj.height)
-    
+   
     return locals()

@@ -11,8 +11,9 @@ div#mainnav:
     margin: -$MAIN_MENU_HEIGHT 0 $MAIN_MENU_HEIGHT auto;
     padding: 0;
     right: 0;
+    z-index: 20;
     
-ul.dropdown:
+ul#mainmenu, ul.dropdown:
     position: relative;
     z-index: 40;
     float: left;

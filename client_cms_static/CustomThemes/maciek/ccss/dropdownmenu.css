@@ -4,8 +4,10 @@ div#mainnav {
   margin: -96px 0 96px auto;
   padding: 0;
   right: 0;
+  z-index: 20;
 }
 
+ul#mainmenu,
 ul.dropdown {
   position: relative;
   z-index: 40;
@@ -14,13 +16,16 @@ ul.dropdown {
   margin: 0;
 }
 
+ul#mainmenu ul,
 ul.dropdown ul,
+ul#mainmenu li,
 ul.dropdown li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+ul#mainmenu ul,
 ul.dropdown ul {
   width: 100%;
   top: 100%;
@@ -44,6 +49,7 @@ ul.dropdown ul {
   opacity: .7;
 }
 
+ul#mainmenu ul li,
 ul.dropdown ul li {
   font-size: 0.9em;
   float: none;
@@ -52,27 +58,34 @@ ul.dropdown ul li {
   padding: 0;
 }
 
+ul#mainmenu ul a,
 ul.dropdown ul a {
   color: #ffffff;
   padding: 0.6em 0.8em;
 }
 
+ul#mainmenu ul a .category,
 ul.dropdown ul a .category {
   color: #ffd83c;
 }
 
+ul#mainmenu ul a:link,
 ul.dropdown ul a:link,
+ul#mainmenu ul a:active,
 ul.dropdown ul a:active,
+ul#mainmenu ul aa:visited,
 ul.dropdown ul aa:visited {
   color: #ffffff;
 }
 
+ul#mainmenu ul a:hover,
 ul.dropdown ul a:hover {
   background-color: #4a4a4a;
   color: #ffffff;
   text-decoration: none;
 }
 
+ul#mainmenu > li,
 ul.dropdown > li {
   height: 96px;
   background: url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
@@ -81,6 +94,7 @@ ul.dropdown > li {
   cursor: pointer;
 }
 
+ul#mainmenu > li > a,
 ul.dropdown > li > a {
   color: #c2c2c2;
   margin: auto 0 0 0;
@@ -90,55 +104,67 @@ ul.dropdown > li > a {
   padding-right: 12px;
 }
 
+ul#mainmenu > li.menu_selected > a,
 ul.dropdown > li.menu_selected > a {
   color: #b9ff3c;
 }
 
+ul#mainmenu > li:hover,
 ul.dropdown > li:hover {
   background: url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
 }
 
+.large ul#mainmenu > li,
 .large ul.dropdown > li {
   background: url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;
 }
 
+.large ul#mainmenu > li:hover,
 .large ul.dropdown > li:hover {
   background: url(../images/menu_large/main_bg_hover.jpg) left bottom no-repeat;
 }
 
+ul#mainmenu li,
 ul.dropdown li {
   float: left;
   zoom: 1;
   line-height: normal;
 }
 
+ul#mainmenu li .hover,
 ul.dropdown li .hover {
   position: relative;
   z-index: 40;
   cursor: default;
 }
 
+ul#mainmenu li:hover,
 ul.dropdown li:hover {
   position: relative;
   z-index: 40;
   cursor: default;
 }
 
+ul#mainmenu li:hover > ul,
 ul.dropdown li:hover > ul {
   visibility: visible;
 }
 
+ul#mainmenu a,
 ul.dropdown a {
   position: relative;
   display: block;
 }
 
+ul#mainmenu a:link,
 ul.dropdown a:link,
+ul#mainmenu a:visited,
 ul.dropdown a:visited {
   text-decoration: none;
   display: block;
 }
 
+ul#mainmenu a:hover,
 ul.dropdown a:hover {
   text-decoration: none;
 }

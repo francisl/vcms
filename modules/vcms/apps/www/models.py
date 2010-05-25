@@ -244,7 +244,10 @@ class Banner(models.Model):
         return self.name
     
     def get_images(self):
-        return BannerImage.objects.get_banner_image_for_page(self)
+        return BannerImage.objects.get_banner_images(self)
+    
+    def get_size(self):
+        return (self.width, self.height)
 
 class BannerImage(models.Model):
     FILE_PATH = "uploadto/banners"
