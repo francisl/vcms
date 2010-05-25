@@ -27,20 +27,45 @@ div#vcms_content .form div.underform {
   margin-right: auto;
 }
 
+div#vcms_content table.login {
+  background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
+}
+
+div#vcms_content .benefits {
+  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
+}
+
+div#vcms_content .login {
+  width: 400px;
+}
+
+div#vcms_content .register {
+  width: 600px;
+}
+
 div#vcms_content div.noaccount {
+  font-weight: bold;
+  padding: 30px 0 60px 0;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px 0 45px 0;
-  width: 300px;
+  width: 380px;
+}
+
+div#vcms_content div.noaccount a {
+  color: #c0c0c0;
 }
 
 div#vcms_content div.noaccount div.left {
+  border: 1px solid #b1b1b1;
   float: left;
+  padding: 3px 20px 3px 20px;
 }
 
 div#vcms_content div.noaccount div.right {
-  color: gray;
+  background: #555555;
+  border: 1px solid #b1b1b1;
   float: right;
+  padding: 3px 30px 3px 30px;
 }
 
 div#vcms_content div.whyregister {

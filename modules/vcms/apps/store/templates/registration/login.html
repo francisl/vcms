@@ -7,16 +7,19 @@
 
 {% block content %}
 
-{% if form.non_field_errors %}
-<p class="error">{% for err in form.non_field_errors %}{{ err }}{% if not forloop.last %}<br/>{% endif %}
-{% endfor %}</p>
-{% endif %}
-
 <div class="form">
     <h1>{% trans "LOG" %}<span class="black">{% trans "IN" %}</span></h1>
+    {% if form.non_field_errors %}
+    <p class="error">
+        {% for err in form.non_field_errors %}
+            {{ err }}
+            {% if not forloop.last %}<br/>{% endif %}
+        {% endfor %}
+        </p>
+    {% endif %}
     <br/>
     <form method="post" action=".">
-        <table class="standard" style="width: 400px;">
+        <table class="standard login">
             <tr>
                 <td><label for="id_username">{% trans 'Username' %}</label></td>
                 <td>{{ form.username }}</td>
@@ -43,7 +46,7 @@
         {% else %}
             value="{% url satchmo_account_info %}" />
         {% endif %}
-        <div style="width: 400px;">
+        <div class="underform login">
             <div class="notice"><a href="{% url auth_password_reset %}">{% trans "FORGOT" %} <span class="black">{% trans "USERNAME" %}</span> {% trans "OR" %} <span class="black">{% trans "PASSWORD" %}</span></a></div>
             <div class="submit"><button type="submit" value="{% trans "Login" %}"><u>{% trans "Login" %}</u></button></div>
         </div>
@@ -64,7 +67,7 @@
         <h3>{% trans "Why Register?" %}</h3>
         <p>TODO: full text.</p>
     </div>
-    <div class="right standard">
+    <div class="right standard benefits">
         <div>
             <h2>{% trans "BENEFITS" %}</h2>
         </div>
