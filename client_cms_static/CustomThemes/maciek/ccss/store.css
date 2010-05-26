@@ -1,52 +1,46 @@
+.registration_form,
+#login_form,
+.noaccount {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .registration_form {
-  width: 66%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 62%;
 }
 
-span.black {
-  color: #000000;
+#login_form {
+  width: 50%;
 }
 
-.form table {
-  border-spacing: 0;
-  margin-left: auto;
-  margin-right: auto;
-  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
+#login_form table {
+  background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
 }
 
-.form div.underform {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.form input {
+#login_form input {
   margin-right: 3em;
 }
 
 div.noaccount {
+  width: 50%;
   font-weight: bold;
-  padding: 30px 0 60px 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 380px;
+  padding: 0;
+  margin: 1em auto;
+  border: 1px solid #b1b1b1;
 }
 
 div.noaccount a {
   color: #c0c0c0;
 }
 
-div.noaccount div.left {
-  border: 1px solid #b1b1b1;
+div.noaccount .noaccount_info {
   float: left;
   padding: 3px 20px 3px 20px;
 }
 
-div.noaccount div.right {
+div.noaccount .register_button {
   background: #555555;
-  border: 1px solid #b1b1b1;
   float: right;
-  padding: 3px 30px 3px 30px;
 }
 
 div.whyregister {
@@ -67,10 +61,11 @@ div.whyregister div.right div.list {
   text-align: left;
 }
 
-.submit {
-  float: right;
-}
-
 .notice {
   float: left;
+  font-size: 0.8em;
+}
+
+.benefits {
+  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
 }
