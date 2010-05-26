@@ -1,4 +1,3 @@
-BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 // CONTENT
 div.contact_form:
     width: 49%;
@@ -16,56 +15,3 @@ div.contact_form:
         font-weight: normal;
         padding: 0;
     
-    span.black:
-        color: #000;
-    
-    .form:
-        table:
-            border-spacing: 0;
-            margin-left: auto;
-            margin-right: auto;
-            background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
-        div.underform:
-            margin-left: auto;
-            margin-right: auto;
-            
-        input:
-            margin-right: 3em;
-
-            
-    .register:
-        width: 600px;
-    
-    div.noaccount:
-        a:
-            color: #c0c0c0;
-        font-weight: bold;
-        padding: 30px 0 60px 0;
-        margin-left: auto;
-        margin-right: auto;
-        width: 380px;
-        div.left:
-            border: $BOX_CONTENT_BORDER;
-            float: left;
-            padding: 3px 20px 3px 20px;
-        div.right:
-            background: #555;
-            border: $BOX_CONTENT_BORDER;
-            float: right;
-            padding: 3px 30px 3px 30px;
-    
-    div.whyregister:
-        margin-left: auto;
-        margin-right: auto;
-        width: 600px;
-        div.left:
-            float: left;
-        div.right:
-            float: right;
-            div.list:
-                text-align: left;
-
-    .submit:
-        float: right;
-    .notice:
-        float: left;

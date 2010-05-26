@@ -3,3 +3,74 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+span.black {
+  color: #000000;
+}
+
+.form table {
+  border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
+}
+
+.form div.underform {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form input {
+  margin-right: 3em;
+}
+
+div.noaccount {
+  font-weight: bold;
+  padding: 30px 0 60px 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 380px;
+}
+
+div.noaccount a {
+  color: #c0c0c0;
+}
+
+div.noaccount div.left {
+  border: 1px solid #b1b1b1;
+  float: left;
+  padding: 3px 20px 3px 20px;
+}
+
+div.noaccount div.right {
+  background: #555555;
+  border: 1px solid #b1b1b1;
+  float: right;
+  padding: 3px 30px 3px 30px;
+}
+
+div.whyregister {
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+
+div.whyregister div.left {
+  float: left;
+}
+
+div.whyregister div.right {
+  float: right;
+}
+
+div.whyregister div.right div.list {
+  text-align: left;
+}
+
+.submit {
+  float: right;
+}
+
+.notice {
+  float: left;
+}
