@@ -127,27 +127,29 @@ class BannerManager(models.Manager):
                 return images[random.randrange(0, images_len-1)]
         
         return False
-         
-        randomnumber = random.randrange(0,)
         
     def get_banner(self, page):
         banner = banner_images = banner_style = None
         has_banner = False
-        try:
-            if page==None:
-                banner = self.all()[0]
-            else:
-                banner = self.filter(page=page.id)[0]
+        #try:
+        if page==None:
+            banner = self.all()[0]
+        else:
+            banner = self.filter(page=page.id)[0]
+                
+        if banner.style == self.model.RANDOM:
+            banner_images = banner.get_random_image()
+        else:
             banner_images = banner.get_images() 
-            banner_style = banner.style
-                    
-            if banner_style == self.model.RANDOM:
-                banner_images = self.get_random_banner_image_number(len(banner_images))
-                        
-            if len(banner_images) >= 1: 
-                has_banner = True
-        except:
-            has_banner = False
+        
+        print("banner after query = %s" % banner)
+        print("banner after query = %s" % str(banner_images))
+        
+        if len(banner_images) >= 1: 
+            has_banner = True
+        #except:
+        #    has_banner = False
+        print("get banner = %s" % banner)
         return banner, banner_images, has_banner
 
 class BannerImageManager(models.Manager):

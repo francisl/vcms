@@ -123,6 +123,8 @@ class Page(models.Model):
     def get_absolute_url(self):
         if self.app_slug:
             return "/" + self.app_slug + "/page/" + self.slug
+        elif self.slug == '/':
+            return ''
         else:
             return "/" + self.slug
 
@@ -173,10 +175,15 @@ class MenuLocalLink(Page):
     local_link = models.CharField(max_length=200, null=True, blank=True, 
                                   help_text="Link on this web site. ex. /www/page/")
     def save(self):
-        self.slug = self.get_absolute_url()
         self.status = StatusField.PUBLISHED
         self.language = Language.objects.getDefault()
         self.module = "LocalLink"
+        try:
+            if self.local_link[-1:] == '/' and len(self.local_link) > 1:
+                self.local_link = self.local_link[:-1]
+        except:
+             self.local_link = ''
+        self.slug = self.get_absolute_url()
         super(MenuLocalLink, self).save()
         
     def get_absolute_url(self):
@@ -246,6 +253,19 @@ class Banner(models.Model):
     def get_images(self):
         return BannerImage.objects.get_banner_images(self)
     
+    def get_random_image(self):
+        import random
+        images = BannerImage.objects.get_banner_images(self)
+        images_len = len(images)
+        if images_len == 0 or images_len == 1:
+            return images
+        else:
+            random = random.randrange(0,images_len)
+            rimage = images[random]
+            print("RIMAGE URL = %s" % rimage.file)
+            return [rimage]
+            
+        
     def get_size(self):
         return (self.width, self.height)
 

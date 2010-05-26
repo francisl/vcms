@@ -1,19 +1,18 @@
 {% load thumbnail %}
 {% if has_banner %}
-	
 	{% ifequal banner.style 0 %} <!-- Banner with effect/rotation -->
-	<div id="banner" class="division_menu">
+	<div id="banner">
 	   <div id="s3slider">
 	   <ul id="s3sliderContent">
 	   {% for bimage in banner_images %}
 	        <li class="s3sliderImage">
 	            {% if bimage.url %}
 	                <a class="imagelink" href="{{banner.url}}">
-	                    <img src="{% thumbnail bimage.file banner_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+	                    <img src="{% thumbnail bimage.file banner.get_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
 	                    <!-- <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
 	                </a>
 	            {% else %}
-		            <img src="{% thumbnail bimage.file banner_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
+		            <img src="{% thumbnail bimage.file banner.get_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
 	                <!-- <img src="{{ MEDIA_URL }}{{ bimage.file }}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" /> -->
 	            {% endif %}
 	            {% if bimage.description %}
@@ -27,13 +26,13 @@
 	   </div>
 	</div>
 	{% else %} <!-- Banner random -->
-		<div id="banner" class="division_menu">
-		{% if banner.url %}
+		<div id="banner">
+		{% if banner_images.0.url %}
 		<a class="imagelink" href="{{banner.url}}">
-		    <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+            <img src="{% thumbnail banner_images.0.file banner.get_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
 		</a>
 		{% else %}
-		    <img src="{{ MEDIA_URL }}{{ banner.file }}" alt="{{banner.description|striptags}}" title="{{banner.name}}" />
+		  <img src="{% thumbnail banner_images.0.file banner.get_size crop %}" alt="{{banner.description|striptags}}" title="{{bimage.name}}" />
 		{% endif %}
 		 </div>
 	{% endifequal %}

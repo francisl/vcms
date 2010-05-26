@@ -87,7 +87,7 @@ def Generic(request, page=None, context={}):
     
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
-        #debugtrace("Generic in Globals", context["current_page"], **{'module':context["module"]})
+        #debugtrace("Generic in Globals", context["page_info"]['page'], **{'module':context["module"]})
         return globals()[context["page_info"]['page'].module](request, context)
     else:
         return Simple(request, context)
@@ -95,7 +95,7 @@ def Generic(request, page=None, context={}):
 
 def Simple(request, context={}):
     context['contents'] = Content.objects.filter(page=context["page_info"]['page'])
-    #debugtrace("basic", context["current_page"], **{'basic content':context['contents']})
+    #debugtrace("basic", context["page_info"]['page'], **{'basic content':context['contents']})
 
     content = Content.objects.filter(page=context["page_info"]['page'].id)
     if len(content) == 0 :
@@ -103,7 +103,7 @@ def Simple(request, context={}):
         subpage = Page.objects.get_PageFirstChild(context["page_info"]['page'])
 
         if subpage:
-            #debugtrace("Generic", context["current_page"],
+            #debugtrace("Generic", context["page_info"]['page'],
             #        **{'len content': len(content), 'First subpage': subpage[0].slug})
             return HttpResponseRedirect("/"+subpage[0].app_slug+"/"+subpage[0].slug)
 
@@ -128,12 +128,12 @@ def Dashboard(request, context={}):
     """
         Display a page with preview from other pages, summary, widgets or forms
     """
-    #debugtrace("Dashboard", context["current_page"].id)
+    #debugtrace("Dashboard", context["page_info"]['page'].id)
     
     contents = { 'left': [], 'right': [] }
     # load all modules that are registered at startup
     for mod in DASHBOARD_MODULES:
-        for content in mod(request, pageid=context["current_page"].id):
+        for content in mod(request, pageid=context["page_info"]['page'].id):
             contents[content["preview_position"]].append((content["preview_display_priority"], { "module": content["preview_content"]},))
 
     for content in DashboardElement.objects.get_Published(context['current_page']):
@@ -156,7 +156,7 @@ def Dashboard(request, context={}):
     context["contents"]['left'].sort()
     context["contents"]['right'].sort()
 
-    #debugtrace("Dashboard", context["current_page"],
+    #debugtrace("Dashboard", context["page_info"]['page'],
     #        **{'contents':context['contents']})
 
     #get the dashboard page

@@ -1,0 +1,51 @@
+form:
+    &>table, &>div:
+        padding: 0.8em;
+
+.standard_form:
+    text-align: center;
+    table:
+        background: url(../images/form/form_bg.jpg) bottom repeat-x;
+        width: 100%;
+        
+    label:
+        width: 10em;
+    select:
+        width: 100%;
+    
+        
+label:
+    font-weight: bold;
+    font-size: 0.9em;
+    float: right;
+    margin-right: 1em;
+    text-transform:uppercase;
+    text-align: right;
+
+input:
+    width: 94%;
+
+textarea:
+    width: 92%;
+        
+.login_form:
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+        
+    table:
+        width: 100%;
+        border-spacing: 0;
+        
+        background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
+    div.underform:
+        margin-left: auto;
+        margin-right: auto;
+        
+    input:
+        margin-right: 3em;
+
+.benefits:
+    background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
+        
+        

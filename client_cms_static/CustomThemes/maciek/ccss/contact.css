@@ -1,49 +1,48 @@
-div#vcms_content>div {
+div.contact_form {
+  width: 49%;
+  float: left;
+  margin-right: 2em;
+}
+
+div.contact_form>div {
   text-align: center;
 }
 
-div#vcms_content h1 {
+div.contact_form h1 {
   font-weight: bolder;
   text-transform: uppercase;
 }
 
-div#vcms_content h3 {
+div.contact_form h3 {
   font-weight: normal;
   padding: 0;
 }
 
-div#vcms_content span.black {
+div.contact_form span.black {
   color: #000000;
 }
 
-div#vcms_content .form table {
+div.contact_form .form table {
   border-spacing: 0;
   margin-left: auto;
   margin-right: auto;
+  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
 }
 
-div#vcms_content .form div.underform {
+div.contact_form .form div.underform {
   margin-left: auto;
   margin-right: auto;
 }
 
-div#vcms_content table.login {
-  background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
+div.contact_form .form input {
+  margin-right: 3em;
 }
 
-div#vcms_content .benefits {
-  background: url(../images/form/form_bg_170px.jpg) bottom repeat-x;
-}
-
-div#vcms_content .login {
-  width: 400px;
-}
-
-div#vcms_content .register {
+div.contact_form .register {
   width: 600px;
 }
 
-div#vcms_content div.noaccount {
+div.contact_form div.noaccount {
   font-weight: bold;
   padding: 30px 0 60px 0;
   margin-left: auto;
@@ -51,45 +50,45 @@ div#vcms_content div.noaccount {
   width: 380px;
 }
 
-div#vcms_content div.noaccount a {
+div.contact_form div.noaccount a {
   color: #c0c0c0;
 }
 
-div#vcms_content div.noaccount div.left {
+div.contact_form div.noaccount div.left {
   border: 1px solid #b1b1b1;
   float: left;
   padding: 3px 20px 3px 20px;
 }
 
-div#vcms_content div.noaccount div.right {
+div.contact_form div.noaccount div.right {
   background: #555555;
   border: 1px solid #b1b1b1;
   float: right;
   padding: 3px 30px 3px 30px;
 }
 
-div#vcms_content div.whyregister {
+div.contact_form div.whyregister {
   margin-left: auto;
   margin-right: auto;
   width: 600px;
 }
 
-div#vcms_content div.whyregister div.left {
+div.contact_form div.whyregister div.left {
   float: left;
 }
 
-div#vcms_content div.whyregister div.right {
+div.contact_form div.whyregister div.right {
   float: right;
 }
 
-div#vcms_content div.whyregister div.right div.list {
+div.contact_form div.whyregister div.right div.list {
   text-align: left;
 }
 
-div#vcms_content .submit {
+div.contact_form .submit {
   float: right;
 }
 
-div#vcms_content .notice {
+div.contact_form .notice {
   float: left;
 }

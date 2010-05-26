@@ -24,8 +24,11 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/store.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/search.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/forms.ccss" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
 	<style type="text/css" media="all">
@@ -47,7 +50,7 @@
 		<!-- =========MENU=========== -->
 		{% ifequal page_info.menu_style 0 %}
 		    {% show_dropdown_menu page_info.current_page %}
-		    {% show_banner page_info.current_page MEDIA_URL %}
+		    
 		{% else %}
 			{% if page_info.current_page %}
 			   {% show_main_menu page_info.current_page %}
@@ -63,11 +66,9 @@
 		<div id="vcms_content_body">
 		    <div id="widget_header_container">
 		      {% show_search_box %}
-		      {% ifequal page_info.current_page 'None' %}
-		        {% show_banner page_info.current_page MEDIA_URL %}
-		      {% else %}
-		        {% show_banner_generic %}
-		      {% endifequal %}
+		      {% if page_info %}
+		          {% show_banner page_info.current_page MEDIA_URL %}
+		      {% endif %}
 		      
 		    </div>
             {% block ubercontent %}

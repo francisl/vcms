@@ -2,9 +2,43 @@
 // div#search_widget:
     
 // Search page
-
-div#vcms_search_form:
+PADDING = 0px;
+NAVIGATION_WIDTH = 240px-(2*$PADDING);
+HEIGHT = 112px-(2*$PADDING);
+div#search_form:
     background-color: #dddddd;
-    position: absolute;
+    float: left;
     top: 0px;
     left: 0px;
+    width: $NAVIGATION_WIDTH;
+    height: $HEIGHT;
+    padding: $PADDING;
+    
+    p:
+        font-family: Verdana, Arial;
+        
+    form:
+        margin: 10px;
+
+    input:
+        width: 60%;
+        margin: 0;
+        margin-top: -5px;
+        padding: 0;
+        height: 20px;
+        
+    #search_submit:
+        background-color: #333;
+        background-image: url(../images/button/input_bg.jpg)
+        background-repeat: repeat-x;
+        background-position: top left;
+        color: #b9ff3c;
+        border: none;
+        height: 23px;
+        margin: 0;
+        margin-top: 2px;
+        margin-left: -4px;
+        width: 38%;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        text-transform: uppercase;

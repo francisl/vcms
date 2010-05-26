@@ -27,6 +27,7 @@ class MenuSeparatorAdmin(admin.ModelAdmin):
 admin.site.register(MenuSeparator, MenuSeparatorAdmin)
 
 class MenuLocalLinkAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
     fieldsets = (( 'Separator',
                    { 'fields': ('name','local_link') }
                    ),

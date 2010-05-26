@@ -11,7 +11,6 @@ from django import forms
 from django.core.mail import send_mail, EmailMultiAlternatives
 
 # from other aps
-from vcms.apps.contact.models import APP_SLUGS
 from vcms.apps.contact.models import ContactPage
 from vcms.apps.www.models import Content
 from vcms.apps.www.views import InitPage
@@ -32,9 +31,9 @@ class ContactForm(forms.Form):
 
 
 def Contact(request, page=None, context={}):
-    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
+    context.update(InitPage(page_slug=page, app_slug='contact'))
     context.update(locals())
-    contact_page = ContactPage.objects.get(slug=context["current_page"].slug)
+    contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
     form = ContactForm()
     
     requiredfields = ["id_%s" % fieldname for fieldname,fieldobject in form.fields.items() if fieldobject.required]
@@ -80,8 +79,8 @@ def Contact(request, page=None, context={}):
             form.errors["email2"] = ["Email don't match"]
     
     
-    contents = Content.objects.get_contents_for_page(context["current_page"])
-    #print("content for contant page %s : %s" % (context["current_page"], contents))
+    contents = Content.objects.get_contents_for_page(context["page_info"]['page'])
+    print("content for contant page %s : %s" % (context["page_info"]['page'], contents))
             
     context.update(locals())
     return render_to_response('contact.html', 

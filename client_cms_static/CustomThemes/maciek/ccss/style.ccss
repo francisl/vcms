@@ -269,7 +269,7 @@ div#vcms_navigation_container:
 
 // CONTENT
 div#vcms_content_container:
-    width: $SITE_WIDTH-$NAVIGATION_WIDTH-1;
+    width: $SITE_WIDTH-$NAVIGATION_WIDTH;
     background-color: #fff;
     float: right;
     padding-bottom: 2em;
@@ -284,34 +284,7 @@ div#vcms_content:
 
     table:
         border: $BOX_CONTENT_BORDER;
-    
-    .standard:
-        background: url(../images/form/form_bg.jpg) bottom repeat-x;
-        border: $BOX_CONTENT_BORDER;
-        
-        th:
-            width: 46%;
-            vertical-align: top;
-            padding-top: 6px;
             
-        td:
-            padding: 0.3em 0;
-            
-        label:
-            font-weight: bold;
-            font-size: 0.9em;
-            float: right;
-            margin-right: 1em;
-            text-transform:uppercase;
-
-        input:
-            width: 98%;
-        textarea:
-            width: 100%;
-            
-    table:
-        border: $BOX_CONTENT_BORDER;
-    
     .content_box:
         padding: 0.4em 1em 24px 1em;
         border: $BOX_CONTENT_BORDER;
@@ -382,20 +355,5 @@ div#vcms_search_form:
         height: 20px;
         font-size: 1.1em;
 
-    #search_text_input:
-        width: 60%;
-        margin: 0;
-        margin-top: 4px;
-        padding: 0;
 
-    #search_submit:
-        background-color: #333;
-        background-image: url(../images/heading/bg.jpg)
-        background-repeat: repeat-x;
-        color: #b9ff3c;
-        border: none;
-        height: 25px;
-        margin: 0;
-        margin-top: 4px;
-        margin-left: -3px;
-        padding: 0 0.2em;
+

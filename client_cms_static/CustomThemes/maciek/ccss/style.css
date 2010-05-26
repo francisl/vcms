@@ -289,7 +289,7 @@ div#vcms_navigation_container ul {
 }
 
 div#vcms_content_container {
-  width: 715px;
+  width: 716px;
   background-color: #ffffff;
   float: right;
   padding-bottom: 2em;
@@ -302,41 +302,6 @@ div#vcms_content {
 
 div#vcms_content #page_title {
   text-align: center;
-}
-
-div#vcms_content table {
-  border: 1px solid #b1b1b1;
-}
-
-div#vcms_content .standard {
-  background: url(../images/form/form_bg.jpg) bottom repeat-x;
-  border: 1px solid #b1b1b1;
-}
-
-div#vcms_content .standard th {
-  width: 46%;
-  vertical-align: top;
-  padding-top: 6px;
-}
-
-div#vcms_content .standard td {
-  padding: 0.3em 0;
-}
-
-div#vcms_content .standard label {
-  font-weight: bold;
-  font-size: 0.9em;
-  float: right;
-  margin-right: 1em;
-  text-transform: uppercase;
-}
-
-div#vcms_content .standard input {
-  width: 98%;
-}
-
-div#vcms_content .standard textarea {
-  width: 100%;
 }
 
 div#vcms_content table {
@@ -414,24 +379,4 @@ div#vcms_search_form #search_text_input,
 div#vcms_search_form #search_submit {
   height: 20px;
   font-size: 1.1em;
-}
-
-div#vcms_search_form #search_text_input {
-  width: 60%;
-  margin: 0;
-  margin-top: 4px;
-  padding: 0;
-}
-
-div#vcms_search_form #search_submit {
-  background-color: #333333;
-  background-image: url(../images/heading/bg.jpg);
-  background-repeat: repeat-x;
-  color: #b9ff3c;
-  border: none;
-  height: 25px;
-  margin: 0;
-  margin-top: 4px;
-  margin-left: -3px;
-  padding: 0 0.2em;
 }
