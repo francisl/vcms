@@ -34,6 +34,11 @@ class MenuLocalLinkAdmin(admin.ModelAdmin):
                  )
 admin.site.register(MenuLocalLink, MenuLocalLinkAdmin)
 
+class QuickLinksAdmin(admin.ModelAdmin):
+    list_display = ('name', 'local_link', 'position')
+    
+admin.site.register(QuickLinks, QuickLinksAdmin)
+
 class ContentInline(admin.StackedInline):
     model = Content
     extra = 1

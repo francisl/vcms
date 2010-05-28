@@ -168,3 +168,8 @@ class LanguageManager(models.Manager):
     def getDefault(self):
         from settings import LANGUAGE_CODE
         return self.get(language_code=LANGUAGE_CODE[:2])
+
+class QuickLinksManager(models.Manager):
+    def get_quicklinks(self):
+        return self.all()
+    

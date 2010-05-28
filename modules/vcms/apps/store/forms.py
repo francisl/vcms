@@ -22,10 +22,8 @@ from vcms.apps.www.registration.models import AdminRegistrationProfile
 from satchmo_store.contact import signals as contact_signals
 from satchmo_store.accounts import signals as accounts_signals
 
-
 import logging
 log = logging.getLogger('vcms.apps.store.forms')
-
 
 selection = ''
 

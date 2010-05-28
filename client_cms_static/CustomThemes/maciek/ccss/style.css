@@ -209,6 +209,55 @@ input.id_captcha_1 {
   heigth: 1em;
 }
 
+div#quicklinks {
+  position: absolute;
+  width: 30px;
+  height: 400px;
+  top: 0px;
+  left: 956px;
+  margin: 0;
+  margin-top: 0em;
+  padding: 0;
+}
+
+div#quicklinks>div {
+  position: relative;
+  width: 30px;
+  height: 300px;
+  list-style: none;
+  margin: 0;
+  margin-left: 0px;
+  padding: 0;
+}
+
+div#quicklinks>div div {
+  background-color: #eeeeee;
+  border: 1px solid grey;
+  height: 80px;
+  margin-left: -48px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  filter: 'progid: DXImageTransform.Microsoft.BasicImage(rotation=3)';
+  -ms-filter: 'progid: DXImageTransform.Microsoft.BasicImage(rotation=3)';
+  writing-mode: tb-rl;
+  -moz-box-shadow: 0px 2px 8px #666666;
+  -webkit-box-shadow: 0px 2px 8px #666666;
+  box-shadow: 0px 2px 8px #666666;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
+  filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
+}
+
+div#quicklinks span {
+  display: block;
+}
+
+div#quicklinks span a {
+  display: block;
+  height: 24px;
+  margin-top: 6px;
+  padding-left: 8px;
+}
+
 div.gallery_nav {
   position: absolute;
   top: 0;
@@ -293,7 +342,6 @@ div#vcms_content_container {
   background-color: #ffffff;
   float: right;
   padding-bottom: 2em;
-  position: relative;
 }
 
 div#vcms_content {
@@ -348,35 +396,42 @@ div#vcms_content .content_box_link a:hover {
   border: 1px solid #b1b1b1;
 }
 
-div#widget_header_container {
+div.container_absolute {
+  position: relative;
+}
+
+div.container_absolute > div {
+  position: absolute;
+}
+
+div.container_relative {
+  position: relative;
+}
+
+div.container_relative > div {
+  position: relative;
+}
+
+div.container_float {
+  position: relative;
+}
+
+div.container_float > div {
+  position: relative;
+  float: left;
+}
+
+div#container_header_widget {
   position: relative;
   height: 112px;
   width: 100%;
   border-bottom: thin solid #b9ff3c;
   font-size: 0.8em;
   z-index: 10;
+  overflow: hidden;
   -moz-box-shadow: 0px 2px 8px #666666;
   -webkit-box-shadow: 0px 2px 8px #666666;
   box-shadow: 0px 2px 8px #666666;
   -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
   filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
-}
-
-div#widget_header_container > div {
-  float: left;
-}
-
-div#vcms_search_form {
-  height: 92px;
-  width: 200px;
-  padding: 10px 20px;
-  background-color: #dddddd;
-  background-image: url(../images/search/search_bg.jpg);
-  background-repeat: repeat-x;
-}
-
-div#vcms_search_form #search_text_input,
-div#vcms_search_form #search_submit {
-  height: 20px;
-  font-size: 1.1em;
 }

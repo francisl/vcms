@@ -29,8 +29,8 @@ ul#mainmenu ul,
 ul.dropdown ul {
   width: 100%;
   top: 100%;
+  left: 0px;
   text-align: left;
-  right: 0px;
   padding: 0.4em 0;
   border-left: 1px solid #7b7b7a;
   border-right: 1px solid #7b7b7a;

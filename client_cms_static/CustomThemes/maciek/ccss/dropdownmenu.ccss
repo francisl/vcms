@@ -28,9 +28,9 @@ ul#mainmenu, ul.dropdown:
     ul:
         width: 100%;
         top: 100%; 
-        //left: 0px;// align menu to main
+        left: 0px;// align menu to main
         text-align: left;
-        right: 0px;// align menu to main
+        //right: 0px;// align menu to main
         //text-align: right;
         padding: 0.4em 0;
         border-left: $SUBMENU_BORDER;

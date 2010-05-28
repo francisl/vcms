@@ -9,7 +9,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage, FileSystemStorage
-from vcms.apps.www.managers import PageManager, ContentManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager
+from vcms.apps.www.managers import PageManager, ContentManager, BannerManager, BannerImageManager, DashboardElementManager, LanguageManager, QuickLinksManager
 from vcms.apps.www.fields import StatusField
 
 # -- variable
@@ -83,7 +83,7 @@ class Page(models.Model):
          
     """
     EMPTY = 0
-    TEMPLATES = ((EMPTY, 'Defautl'),)
+    TEMPLATES = ((EMPTY, 'Default'),)
     TEMPLATE_FILES = { EMPTY: 'master.html'}
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
@@ -186,11 +186,35 @@ class MenuLocalLink(Page):
         self.slug = self.get_absolute_url()
         super(MenuLocalLink, self).save()
         
+class QuickLinks(models.Model):
+    """ Like bookmark, enable to put side links to local webpage
+    """
+    name = models.CharField(max_length="40", help_text="Max 40 characters")
+    local_link = models.CharField(max_length=200, help_text="Link on this web site. ex. /www/page/")
+    position = models.IntegerField()
+    
+    objects = QuickLinksManager()
+        
+    def __unicode__(self):
+        return self.name
+    
+    def save(self):
+        try:
+            if self.local_link[-1:] == '/' and len(self.local_link) > 1:
+                self.local_link = self.local_link[:-1]
+        except:
+             self.local_link = ''
+        super(QuickLinks, self).save()
+        
     def get_absolute_url(self):
         if self.local_link[0] != "/":
             return self.local_link
         else:
-            return self.local_link[1:]
+            return self.local_link
+        
+    class Meta:
+        verbose_name_plural = "Quicklinks"
+        ordering = [ 'position' ]
     
 class SimplePage(Page):
     class Meta:
@@ -214,8 +238,25 @@ class Content(models.Model):
     excerpt = models.TextField(verbose_name="Preview")
     content = models.TextField()
     published = models.BooleanField(default=False)
-    display = models.BooleanField(default=True, choices=((True, 'Show'),(False, 'Hide')))
+    
+    #position
+    POSITION_HELP_TEXT = _("Supported value are 'Default', px, em or %")
+    width = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
+    height = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
+    margin_top = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
+    margin_left = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
     position = models.IntegerField(default=5, help_text="Priority to display. 0=top, 9=bottom")
+
+    #appearance
+    TEXT_ONLY = 0
+    BOXED = 1
+    DARK = 2
+    AVAILABLE_STYLES = ((TEXT_ONLY, _('Text only'))
+                 ,(BOXED, _('Box'))
+                 ,(DARK, _('Bright text on dark background'))
+                 )
+    style = models.IntegerField(default=TEXT_ONLY, choices=AVAILABLE_STYLES)
+    minimized = models.BooleanField(default=False, choices=((True, _('Minimized')),(False, _('Show'))))
     
     #INFORMATION
     date = models.DateField(auto_now=True, editable=True)
@@ -226,7 +267,7 @@ class Content(models.Model):
     
     class Meta:
         verbose_name_plural = "Page content"
-        ordering = ['position', 'date']
+        ordering = [ 'position', 'date']
     
     def __unicode__(self):
         return self.name

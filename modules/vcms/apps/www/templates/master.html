@@ -3,6 +3,7 @@
 {% load search_widget %}
 {% load compress %}
 {% load i18n %}
+{% load quicklinks %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -40,6 +41,7 @@
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
 <!-- =========header=========== -->
     <div id="vcms_body">
+        {% show_quicklinks %}
 		<div id="vcms_header">  
 			
 			<div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
@@ -64,7 +66,7 @@
 		<!--=========content=========== -->
 		
 		<div id="vcms_content_body">
-		    <div id="widget_header_container">
+		    <div id="container_header_widget" class="container_absolute">
 		      {% show_search_box %}
 		      {% if page_info %}
 		          {% show_banner page_info.current_page MEDIA_URL %}
@@ -72,7 +74,7 @@
 		      
 		    </div>
             {% block ubercontent %}
-			<div id="vcms_navigation_container">
+			<div id="vcms_navigation_container" class="container_relative">
 				{% block navigation %}
 		        {% endblock navigation %}
 	        </div>
