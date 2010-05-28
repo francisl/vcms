@@ -220,7 +220,6 @@ div#quicklinks:
         padding: 0;
         //margin-top: 1em;
         //border: thin solid blue;
-
         
         div:
             background-color: #eeeeee;
