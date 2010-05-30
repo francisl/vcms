@@ -4,6 +4,10 @@
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 30-05-2010.
 
+from django.db import models
+from vcms.apps.www.fields import StatusField
+from vcms.apps.www.models import Language
+from vcms.apps.www.managers import PageManager, DashboardElementManager
 
 class Page(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content

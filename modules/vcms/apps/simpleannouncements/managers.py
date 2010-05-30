@@ -11,7 +11,7 @@ from vcms.apps.www.fields import StatusField
 class PublishedAnnouncementManager(models.Manager):
     def get_query_set(self):
         """Filters the results to display the published announcements."""
-        from vcms.apps.www.models import Page
+        from vcms.apps.www.models.page import Page
         return super(PublishedAnnouncementManager, self).get_query_set().filter(status=StatusField.PUBLISHED)
 
     def get_latest(self):
@@ -24,7 +24,7 @@ class PublishedAnnouncementManager(models.Manager):
 class PublishedAnnouncementCategoryManager(models.Manager):
     def get_query_set(self):
         """Filters the results to display the published category announcements."""
-        from vcms.apps.www.models import Page
+        from vcms.apps.www.models.page import Page
         return super(PublishedAnnouncementCategoryManager, self).get_query_set().filter(status=StatusField.PUBLISHED)
 
     def get_latest(self):

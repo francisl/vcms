@@ -1,7 +1,7 @@
 
 from haystack import indexes
 from haystack import site
-from vcms.apps.www.models import SimplePage, DashboardPage
+from vcms.apps.www.models.page import SimplePage, DashboardPage
 
 
 class SimplePageIndex(indexes.SearchIndex):

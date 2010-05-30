@@ -5,7 +5,8 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
-from vcms.apps.www.models import Page, Language
+from vcms.apps.www.models.page import Page
+from vcms.apps.www.models import Language
 #from vcms.apps.news.managers import NewsCategoryManager
 
 # Application connection to CMS
@@ -77,7 +78,7 @@ class News(models.Model):
 from vcms.apps.www.models import PageElementPosition
 
 class NewsPageModule(PageElementPosition):
-    from vcms.apps.www.models import DashboardPage as DP
+    from vcms.apps.www.models.page import DashboardPage as DP
     page = models.ForeignKey(DP)
     categories = models.ManyToManyField(NewsCategory)
     title = models.CharField(max_length="60")
