@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _, ugettext_lazy
 from django.core import serializers
 from django.utils import simplejson as json
 
-from vcms.apps.www.models import Page
+from vcms.apps.www.models.page import Page
 
 @staff_member_required
 def UpdateMenu(request):

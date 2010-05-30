@@ -9,6 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
 from vcms.apps.www.models import *
+from vcms.apps.www.models.page import *
 
 
 class LanguageAdmin(admin.ModelAdmin):

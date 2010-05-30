@@ -183,7 +183,7 @@ class ProductPageManager(models.Manager):
             product.save(reorder=False)
 
     def get_available_products(self):
-        #from vcms.apps.www.modelsimport Page
+        #from vcms.apps.www.models.page import Page
         return self.filter(status=StatusField.PUBLISHED)
        
 class StandardNavigationGroupManager(models.Manager): 

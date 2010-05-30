@@ -1,5 +1,5 @@
 from django import template
-from vcms.apps.www.models import Page
+from vcms.apps.www.models.page import Page
 
 register = template.Library()
 

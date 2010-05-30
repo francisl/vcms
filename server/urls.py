@@ -66,7 +66,7 @@ if 'rosetta' in settings.INSTALLED_APPS:
 sitemaps = {}
 if 'vcms.apps.www' in settings.INSTALLED_APPS:
     try: 
-        from www.models import Page
+        from www.models.page import Page
         info_page = {
             'queryset': Page.objects.get_Published(),
             'date_field': 'date_modified'
