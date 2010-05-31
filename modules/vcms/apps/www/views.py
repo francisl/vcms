@@ -11,8 +11,12 @@ import inspect
 # external requirement
 from captcha.fields import CaptchaField
 
-from vcms.apps.www.models import PageElementPosition, Content, APP_SLUGS
-from vcms.apps.www.models.page import Page, DashboardPage, DashboardElement, DashboardPreview
+from vcms.apps.www.models import PageElementPosition
+from vcms.apps.www.models import Content, APP_SLUGS
+from vcms.apps.www.models.page import BasicPage as Page
+from vcms.apps.www.models.page import DashboardPage
+from vcms.apps.www.models.page import DashboardElement
+from vcms.apps.www.models.page import DashboardPreview
 from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
