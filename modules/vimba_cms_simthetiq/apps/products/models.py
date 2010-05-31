@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 from __future__ import division
 
 from vimba_cms_simthetiq.tools import magic # http://www.jsnp.net/code/magic.py
@@ -12,7 +11,7 @@ from django.db.models.signals import pre_delete
 import l10n.models as l10n
 
 #from tagging.fields import TagField
-from vcms.apps.www.models import Language
+from vcms.apps.www.models.page import Language
 from vcms.apps.www.models.page import Page
 from vimba_cms_simthetiq.apps.products.managers import ProductPageManager, StandardNavigationGroupManager
 
@@ -21,12 +20,10 @@ PRODUCT_IMAGES = "uploadto/product_images/"
 PRODUCT_VIDEOS = "uploadto/product_videos/"
 APP_SLUGS = "products"
 
-
 # -- Validators
 # -- ----------------
 def validate_video_mime_type(value):
-    """
-        Validator that raises a ValidationError exception if the MIME type is not
+    """ Validator that raises a ValidationError exception if the MIME type is not
         contained within the list of supported video MIME types as specified in
         the Video model.
     """

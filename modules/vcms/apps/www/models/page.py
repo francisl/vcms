@@ -3,13 +3,44 @@
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 30-05-2010.
+import datetime
 
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 from vcms.apps.www.fields import StatusField
-from vcms.apps.www.models import Language
-from vcms.apps.www.managers.page import BasicPageManager, DashboardElementManager
+#from vcms.apps.www.models import Language
+from vcms.apps.www.managers.containers import DashboardElementManager
+from vcms.apps.www.managers.page import BasicPageManager
+from vcms.apps.www.managers.page import LanguageManager
+#from vcms.apps.www.managers.page import PageManager
 
 
+class Language(models.Model):
+    language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
+    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
+
+    objects = LanguageManager()
+
+    def __unicode__(self):
+        return self.language
+
+class PageElementPosition(models.Model):
+    #PREVIEW
+    LEFT = 'left'
+    RIGHT = 'right'
+    FLOAT_TYPE = ((LEFT, _('Left')), (RIGHT, _('Right')),)
+    TOP = 1
+    MIDDLE = 2
+    BOTTOM = 3
+    PRIORITY = ((TOP,_('Top')),(MIDDLE,_('Middle')),(BOTTOM,_('Bottom')),)
+    preview_position = models.CharField(max_length=10, choices=FLOAT_TYPE)
+    preview_display_priority = models.IntegerField(choices=PRIORITY)
+
+    class Meta:
+        abstract = True
+        
+        
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
@@ -84,12 +115,12 @@ class Page(BasicPage):
 
     # Controler for the pages
     module = models.CharField(max_length=30, default='', editable=False)
-    objects = PageManager()
+    #objects = PageManager()
 
     class Meta:
         ordering = ['tree_position', 'name']
         verbose_name_plural = "Menu Administration"
-        unique_together = ("slug", "app_slug")
+        #unique_together = ("slug", "app_slug")
 
     def get_absolute_url(self):
         if self.app_slug:
@@ -164,6 +195,7 @@ class DashboardElement(PageElementPosition):
 
 
 class DashboardPreview(PageElementPosition):
+    from vcms.apps.www.models.widget import Content
     page = models.ForeignKey(DashboardPage)
     preview = models.ForeignKey(Content)
 
