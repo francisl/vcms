@@ -1,5 +1,5 @@
 # encoding: utf-8
-# copyright Vimba inc. 2009
+# copyright Vimba inc. 2010
 # programmer : Francis Lavoie
 
 import datetime, Image, os
