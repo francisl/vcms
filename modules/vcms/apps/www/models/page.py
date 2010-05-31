@@ -9,37 +9,12 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from vcms.apps.www.fields import StatusField
-#from vcms.apps.www.models import Language
+from vcms.apps.www.models import Language
+from vcms.apps.www.models import PageElementPosition
 from vcms.apps.www.managers.containers import DashboardElementManager
 from vcms.apps.www.managers.page import BasicPageManager
 from vcms.apps.www.managers.page import LanguageManager
-#from vcms.apps.www.managers.page import PageManager
 
-
-class Language(models.Model):
-    language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
-    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
-
-    objects = LanguageManager()
-
-    def __unicode__(self):
-        return self.language
-
-class PageElementPosition(models.Model):
-    #PREVIEW
-    LEFT = 'left'
-    RIGHT = 'right'
-    FLOAT_TYPE = ((LEFT, _('Left')), (RIGHT, _('Right')),)
-    TOP = 1
-    MIDDLE = 2
-    BOTTOM = 3
-    PRIORITY = ((TOP,_('Top')),(MIDDLE,_('Middle')),(BOTTOM,_('Bottom')),)
-    preview_position = models.CharField(max_length=10, choices=FLOAT_TYPE)
-    preview_display_priority = models.IntegerField(choices=PRIORITY)
-
-    class Meta:
-        abstract = True
-        
         
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
@@ -55,7 +30,6 @@ class BasicPage(models.Model):
         -- Language
         Page can be classified by language - NOTE not yet working
         # TODO : add multi-language fonctionnality
-
     """
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     status = StatusField()
@@ -153,7 +127,6 @@ class SimplePage(Page):
         self.module = 'Simple'
         self.app_slug = APP_SLUGS
         super(SimplePage, self).save()
-
 
 #
 # DASHBOARD

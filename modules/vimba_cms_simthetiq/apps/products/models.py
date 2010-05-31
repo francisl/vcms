@@ -11,7 +11,7 @@ from django.db.models.signals import pre_delete
 import l10n.models as l10n
 
 #from tagging.fields import TagField
-from vcms.apps.www.models.page import Language
+from vcms.apps.www.models import Language
 from vcms.apps.www.models.page import Page
 from vimba_cms_simthetiq.apps.products.managers import ProductPageManager, StandardNavigationGroupManager
 
