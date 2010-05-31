@@ -5,8 +5,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
-from vcms.apps.www.managers import BannerManager, BannerImageManager, LanguageManager, QuickLinksManager
-from vcms.apps.www.managers.widget import ContentManager
+from vcms.apps.www.managers import BannerManager, BannerImageManager, ContentManager, LanguageManager, QuickLinksManager
 from vcms.apps.www.fields import StatusField
 from vcms.apps.www.models.page import Page
 
