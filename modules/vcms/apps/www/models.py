@@ -32,7 +32,6 @@ class Language(models.Model):
 #class MenuGroup(models.Model):
 #    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
  
-    
 class PageElementPosition(models.Model):
     #PREVIEW
     LEFT = 'left'
@@ -229,51 +228,6 @@ class SimplePage(Page):
         self.app_slug = APP_SLUGS
         super(SimplePage, self).save()
 
-
-# -- CONTENT
-# ----------
-class Content(models.Model):
-    #CONTENT
-    name = models.CharField(max_length="40", help_text="Max 40 characters")
-    excerpt = models.TextField(verbose_name="Preview")
-    content = models.TextField()
-    published = models.BooleanField(default=False)
-    
-    #position
-    POSITION_HELP_TEXT = _("Supported value are 'Default', px, em or %")
-    width = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
-    height = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
-    margin_top = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
-    margin_left = models.CharField(max_length="40", default='Default', help_text=POSITION_HELP_TEXT)
-    position = models.IntegerField(default=5, help_text="Priority to display. 0=top, 9=bottom")
-
-    #appearance
-    TEXT_ONLY = 0
-    BOXED = 1
-    DARK = 2
-    AVAILABLE_STYLES = ((TEXT_ONLY, _('Text only'))
-                 ,(BOXED, _('Box'))
-                 ,(DARK, _('Bright text on dark background'))
-                 )
-    style = models.IntegerField(default=TEXT_ONLY, choices=AVAILABLE_STYLES)
-    minimized = models.BooleanField(default=False, choices=((True, _('Minimized')),(False, _('Show'))))
-    
-    #INFORMATION
-    date = models.DateField(auto_now=True, editable=True)
-    author = models.ForeignKey(User, editable=False, null=True, blank=True)
-    page = models.ForeignKey(Page)
-    
-    objects = ContentManager()
-    
-    class Meta:
-        verbose_name_plural = "Page content"
-        ordering = [ 'position', 'date']
-    
-    def __unicode__(self):
-        return self.name
-        
-    def get_absolute_url(self):
-        self.page.get_absolute_url()
 
 class Banner(models.Model):
     SLIDESHOW = 0
