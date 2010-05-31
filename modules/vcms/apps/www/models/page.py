@@ -8,6 +8,8 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from treebeard.ns_tree import NS_Node
+
 from vcms.apps.www.fields import StatusField
 from vcms.apps.www.models import Language
 from vcms.apps.www.models import PageElementPosition
@@ -15,7 +17,7 @@ from vcms.apps.www.managers.containers import DashboardElementManager
 from vcms.apps.www.managers.page import BasicPageManager
 from vcms.apps.www.managers.page import LanguageManager
 
-        
+ 
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
