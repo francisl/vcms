@@ -10,6 +10,8 @@ from django.core.files.storage import default_storage, FileSystemStorage
 from django.shortcuts import render_to_response
 
 from vcms.apps.www.managers import WidgetManager
+from vcms.apps.www.managers.widget import ContentManager
+
 
 class Widget(models.Model):
     """ Widgets Parent class
