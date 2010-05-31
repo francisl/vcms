@@ -1,13 +1,14 @@
-# encoding: utf-8
-# copyright Vimba inc. 2009
-# programmer : Francis Lavoie
+# -*- coding: UTF-8 -*-
+# Application: Vimba - CMS
+# Module: www
+# Copyright (c) 2010 Vimba inc. All rights reserved.
+# Created by Francois Lebel on 30-05-2010.
 
 from django.db import models
-from django.contrib.sites.managers import CurrentSiteManager
 from vcms.apps.www.fields import StatusField
 
 
-class PageManager(models.Manager):
+class BasicPageManager(models.Manager):
     def get_Default(self):
         try:
             defaultpage = self.filter(default=True)[0]
@@ -27,7 +28,7 @@ class PageManager(models.Manager):
             defaultpage.default = True
         except:
             pass
-                    
+
     def get_RootMenu(self):
         menu = self.filter(level=0).filter(status=StatusField.PUBLISHED).filter(display=True)
         return menu
@@ -90,11 +91,15 @@ class PageManager(models.Manager):
     def drafts(self):
         return self.filter(status=StatusField.DRAFT)
 
+    def get_containers(self):
+        raise NotImplementedError
+
+
 class BannerManager(models.Manager):
     def get_random_banner_image(self, banner):
         """ take a list of banners/images and select one randomly """
         import random
-        #banner = has_banner = False # set no banners to default to reduce check exception        
+        #banner = has_banner = False # set no banners to default to reduce check exception
         #bannerqty = len(banners)
         try:    # only one banner
             randomnumber = random.randrange(0,len(banner))
@@ -108,19 +113,19 @@ class BannerManager(models.Manager):
                 has_banner = True
         finally:
             return banner, has_banner
-        
+
     def get_random_banner_image_number(self, images):
         """ take size of image array, then give a random number"""
         import random
         if type(images) == type(0):
-            images_len = len(images) 
+            images_len = len(images)
             if images_len == 1 :
                 return images[0]
             elif images_len > 1 :
                 return images[random.randrange(0, images_len-1)]
-        
+
         return False
-        
+
     def get_banner(self, page):
         banner = banner_images = banner_style = None
         has_banner = False
@@ -129,40 +134,34 @@ class BannerManager(models.Manager):
             banner = self.all()[0]
         else:
             banner = self.filter(page=page.id)[0]
-                
+
         if banner.style == self.model.RANDOM:
             banner_images = banner.get_random_image()
         else:
-            banner_images = banner.get_images() 
-        
+            banner_images = banner.get_images()
+
         print("banner after query = %s" % banner)
         print("banner after query = %s" % str(banner_images))
-        
-        if len(banner_images) >= 1: 
+
+        if len(banner_images) >= 1:
             has_banner = True
         #except:
         #    has_banner = False
         print("get banner = %s" % banner)
         return banner, banner_images, has_banner
 
+
 class BannerImageManager(models.Manager):
     def get_banner_images(self, Banner):
         return self.filter(banner=Banner)
-        
 
-class DashboardElementManager(models.Manager):
-    def get_PublishedAll(self):
-        return self.filter(published=True)
-
-    def get_Published(self, current_page):
-        return self.filter(published=True).filter(page=current_page)
 
 class LanguageManager(models.Manager):
     def getDefault(self):
         from settings import LANGUAGE_CODE
         return self.get(language_code=LANGUAGE_CODE[:2])
 
+
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):
         return self.all()
-    

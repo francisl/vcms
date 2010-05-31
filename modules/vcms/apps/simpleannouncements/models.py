@@ -6,7 +6,7 @@
 
 from django.db import models
 from tagging.fields import TagField
-from vcms.apps.www.models import Page
+from vcms.apps.www.models.page import Page
 from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
 from vcms.apps.www.fields import StatusField
 from django.utils.translation import ugettext_lazy as _

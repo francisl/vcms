@@ -4,7 +4,7 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from vcms.apps.www.models import Page
+from vcms.apps.www.models.page import Page
 from vcms.apps.contact.managers import ContactPageManager
 
 class ContactPage(Page):

@@ -5,11 +5,10 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.db import models
-from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
-from vcms.apps.www.models import Language, Page, PageElementPosition
+from vcms.apps.www.models import PageElementPosition
 from vcms.apps.simpleannouncements.models import Announcement, AnnouncementCategory
 from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
 from vcms.apps.simplenews.managers import NewsManager, NewsCategoryManager
@@ -46,7 +45,7 @@ class News(Announcement):
 
 
 class NewsPageModule(PageElementPosition):
-    from vcms.apps.www.models import DashboardPage as DP
+    from vcms.apps.www.models.page import DashboardPage as DP
     page = models.ForeignKey(DP)
     tags = TagField()
     title = models.CharField(max_length="60", help_text=_("Max 60 characters"), verbose_name=_("Title"))
