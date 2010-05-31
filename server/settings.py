@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     #'tagging',
     'django_extensions',
     'easy_thumbnails',
+    'haystack',
     #'rosetta',       
     'mptt',
     'captcha',                              # http://code.google.com/p/django-simple-captcha/

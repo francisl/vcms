@@ -10,7 +10,7 @@ from django.core.files.storage import default_storage, FileSystemStorage
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 
-from vcms.apps.www.managers.widget import WidgetManager
+from vcms.apps.www.managers.widget import ContentManager
 
 class Widget(models.Model):
     """ Widgets Parent class
@@ -24,9 +24,6 @@ class Widget(models.Model):
     name = models.CharField(max_length="40", help_text="Max 40 characters")
     width = models.FloatField()
     width_mesure = models.IntegerField(default=0, choices=WIDTH_CHOICES)
-    
-    class Meta:
-        abstract = True
 
     def __unicode__(self):
         return self.id
@@ -76,7 +73,7 @@ class Content(Widget):
     
     #INFORMATION
     date = models.DateField(auto_now=True, editable=True)
-    author = models.ForeignKey(User, editable=False, null=True, blank=True)
+    author = models.ForeignKey(User, related_name='content_author', editable=False, null=True, blank=True)
     
     objects = ContentManager()
     
@@ -90,7 +87,7 @@ class Content(Widget):
     
     class Meta:
         verbose_name_plural = "Page content"
-        ordering = [ 'position', 'date']
+        ordering = [ 'date']
     
     def __unicode__(self):
         return self.name
