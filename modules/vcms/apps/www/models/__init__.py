@@ -5,10 +5,17 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
-from vcms.apps.www.managers import BannerManager, BannerImageManager, ContentManager, LanguageManager, QuickLinksManager
-from vcms.apps.www.fields import StatusField
-from vcms.apps.www.models.page import Page
 
+from vcms.apps.www.managers import BannerManager#, BannerImageManager, ContentManager, QuickLinksManager
+from vcms.apps.www.managers import BannerImageManager
+from vcms.apps.www.managers import ContentManager
+from vcms.apps.www.managers import QuickLinksManager
+from vcms.apps.www.managers.page import LanguageManager
+
+
+
+
+#from vcms.apps.www.fields import StatusField
 
 # -- variable
 PRODUCT_IMAGES = "uploadto/prod_images"
@@ -24,13 +31,6 @@ class Language(models.Model):
     def __unicode__(self):
         return self.language
 
-# -- Pages
-# -- -----
-
-#class MenuGroup(models.Model):
-#    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
-
-
 class PageElementPosition(models.Model):
     #PREVIEW
     LEFT = 'left'
@@ -45,6 +45,10 @@ class PageElementPosition(models.Model):
 
     class Meta:
         abstract = True
+
+from vcms.apps.www.models.page import Page
+from vcms.apps.www.models.page import BasicPage
+#from vcms.apps.www.models.page import SimplePage
 
 def _delete_page(page2delete):
     """ Move submenu up one level """

@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 from vcms.apps.www.models.page import Page
-from vcms.apps.www.models.page import Language
+from vcms.apps.www.models import Language
 #from vcms.apps.news.managers import NewsCategoryManager
 
 # Application connection to CMS

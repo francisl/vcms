@@ -12,10 +12,18 @@ class BasicContainer(models.Model):
 
     objects = BasicContainerManager()
 
+    class Meta:
+        app_label = 'www'
 
 class FloatContainer(BasicContainer):
     pass
 
+    class Meta:
+        app_label = 'www'
+
 
 class GridContainer(BasicContainer):
     pass
+
+    class Meta:
+        app_label = 'www'

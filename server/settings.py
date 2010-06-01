@@ -108,57 +108,56 @@ TEMPLATE_DIRS = (
     #os.path.dirname(__file__) + '/www/templates',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    # cache system
-    #'django.middleware.cache.UpdateCacheMiddleware',
-    #'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    "django.middleware.locale.LocaleMiddleware", # Required by Satchmo
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.doc.XViewMiddleware',
-#    'django.middleware.csrf.CsrfViewMiddleware', # __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
-    'threaded_multihost.middleware.ThreadLocalMiddleware', # Required by Satchmo
-    'satchmo_store.shop.SSLMiddleware.SSLRedirect', # Required by Satchmo
-    #'vcms.apps.www.middleware.EnforceLoginMiddleware',
-)
+MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
+                      # cache system
+                      #'django.middleware.cache.UpdateCacheMiddleware',
+                      #'django.middleware.cache.FetchFromCacheMiddleware',
+                      ,'django.contrib.sessions.middleware.SessionMiddleware'
+                      ,"django.middleware.locale.LocaleMiddleware" # Required by Satchmo
+                      ,'django.contrib.auth.middleware.AuthenticationMiddleware'
+                      ,'django.middleware.doc.XViewMiddleware'
+                      #'django.middleware.csrf.CsrfViewMiddleware' __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
+                      ,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
+                      ,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
+                      #'vcms.apps.www.middleware.EnforceLoginMiddleware',
+                      )
 
-INSTALLED_APPS = (
-    'django.contrib.sites',
-    'satchmo_store.shop',   # Satchmo, must preceed django.contrib.admin
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sitemaps',
-    'django.contrib.humanize',
-    #'tagging',
-    'django_extensions',
-    'easy_thumbnails',
-    'haystack',
-    #'rosetta',       
-    'mptt',
-    'captcha',                              # http://code.google.com/p/django-simple-captcha/
-    'registration',                         # http://bitbucket.org/ubernostrum/django-registration/
-    'l10n',                                 
-    # ## DJVIDEO
-    # djvideo_link | http://git.participatoryculture.org/djvideo/
-    # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
-    'djvideo',                           
-    'compressor',                           # git://github.com/dziegler/django-css.git
-    # VIMBA CMS APPS
-    'vcms.apps.www',
-    'vcms.apps.simpleblogs',
-    'vcms.apps.simplenews',
-    'vcms.apps.vwm',
-    'vcms.apps.themes',
-    'vcms.apps.contact',
-    'vcms.apps.store',
-    # Custom apps for cms
-    'vimba_cms_simthetiq.apps.order',
-    'vimba_cms_simthetiq.apps.products',
-    'vimba_cms_simthetiq.apps.importer',
-)
+INSTALLED_APPS = ('django.contrib.sites'
+                  ,'satchmo_store.shop' # Satchmo, must preceed django.contrib.admin
+                  ,'django.contrib.admin'
+                  ,'django.contrib.auth'
+                  ,'django.contrib.contenttypes'
+                  ,'django.contrib.sessions'
+                  ,'django.contrib.sitemaps'
+                  ,'django.contrib.humanize'
+                  #'tagging'
+                  ,'django_extensions'
+                  ,'easy_thumbnails'
+                  ,'haystack'
+                  ,'treebeard'
+                  #'rosetta'
+                  ,'mptt'
+                  ,'captcha'                              # http://code.google.com/p/django-simple-captcha/
+                  ,'registration'                         # http://bitbucket.org/ubernostrum/django-registration/
+                  ,'l10n'
+                  # ## DJVIDEO
+                  # djvideo_link | http://git.participatoryculture.org/djvideo/
+                  # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
+                  ,'djvideo'
+                  ,'compressor'                           # git://github.com/dziegler/django-css.git
+                  # VIMBA CMS APPS
+                  ,'vcms.apps.www'
+                  ,'vcms.apps.simpleblogs'
+                  ,'vcms.apps.simplenews'
+                  ,'vcms.apps.vwm'
+                  ,'vcms.apps.themes'
+                  ,'vcms.apps.contact'
+                  ,'vcms.apps.store'
+                  # Custom apps for cms
+                  ,'vimba_cms_simthetiq.apps.order'
+                  ,'vimba_cms_simthetiq.apps.products'
+                  ,'vimba_cms_simthetiq.apps.importer'
+                  )
 
 # ## ###
 # sorl-thumbnail config option
