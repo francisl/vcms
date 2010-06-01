@@ -13,8 +13,6 @@ from vcms.apps.www.managers import QuickLinksManager
 from vcms.apps.www.managers.page import LanguageManager
 
 
-
-
 #from vcms.apps.www.fields import StatusField
 
 # -- variable
@@ -48,6 +46,7 @@ class PageElementPosition(models.Model):
 
 from vcms.apps.www.models.page import Page
 from vcms.apps.www.models.page import BasicPage
+from vcms.apps.www.models.menu import PageMenu
 #from vcms.apps.www.models.page import SimplePage
 
 def _delete_page(page2delete):
@@ -69,7 +68,7 @@ class MenuSeparator(Page):
     def save(self):
         self.slug = self.get_absolute_url()
         self.status = StatusField.PUBLISHED
-        self.language = Language.objects.getDefault()
+        self.language = Language.objects.get_default()
         self.module = "Separator"
         super(MenuSeparator, self).save()
 
@@ -84,7 +83,7 @@ class MenuLocalLink(Page):
                                   help_text="Link on this web site. ex. /www/page/")
     def save(self):
         self.status = StatusField.PUBLISHED
-        self.language = Language.objects.getDefault()
+        self.language = Language.objects.get_default()
         self.module = "LocalLink"
         try:
             if self.local_link[-1:] == '/' and len(self.local_link) > 1:

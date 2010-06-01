@@ -12,6 +12,11 @@ class BasicContainerManager(models.Manager):
         raise NotImplementedError
 
 
+class GridContainerManager(BasicContainerManager):
+    def get_widgets(self):
+        return self.grid_widget.all()
+
+
 class DashboardElementManager(models.Manager):
     def get_PublishedAll(self):
         return self.filter(published=True)

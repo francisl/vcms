@@ -4,6 +4,8 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage, FileSystemStorage
@@ -24,6 +26,10 @@ class Widget(models.Model):
     name = models.CharField(max_length="40", help_text="Max 40 characters")
     width = models.FloatField()
     width_mesure = models.IntegerField(default=0, choices=WIDTH_CHOICES)
+    # link to all possible Widgets type
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     class Meta:
         app_label = 'www'
@@ -57,6 +63,7 @@ class FloatWidget(models.Model):
     def __unicode__(self):
         return widget.name
     
+
 # -----------------
 # WIDGETS
 # -----------------
