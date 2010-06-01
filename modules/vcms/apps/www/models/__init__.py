@@ -12,6 +12,9 @@ from vcms.apps.www.managers import ContentManager
 from vcms.apps.www.managers import QuickLinksManager
 from vcms.apps.www.managers.page import LanguageManager
 
+
+
+
 #from vcms.apps.www.fields import StatusField
 
 # -- variable
@@ -44,6 +47,8 @@ class PageElementPosition(models.Model):
         abstract = True
 
 from vcms.apps.www.models.page import Page
+from vcms.apps.www.models.page import BasicPage
+#from vcms.apps.www.models.page import SimplePage
 
 def _delete_page(page2delete):
     """ Move submenu up one level """

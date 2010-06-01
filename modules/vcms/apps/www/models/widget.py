@@ -25,6 +25,9 @@ class Widget(models.Model):
     width = models.FloatField()
     width_mesure = models.IntegerField(default=0, choices=WIDTH_CHOICES)
 
+    class Meta:
+        app_label = 'www'
+        
     def __unicode__(self):
         return self.id
 
@@ -38,6 +41,9 @@ class GridWidget(models.Model):
     row_span = models.IntegerField()
     col_span = models.IntegerField()
     
+    class Meta:
+        app_label = 'www'
+        
     def __unicode__(self):
         return widget.name
     
@@ -45,6 +51,9 @@ class FloatWidget(models.Model):
     widget = models.OneToOneField(Widget)
     position = models.IntegerField(unique=True)
     
+    class Meta:
+        app_label = 'www'
+        
     def __unicode__(self):
         return widget.name
     

@@ -10,15 +10,21 @@ from django.conf import settings
 
 from vcms.apps.www.models import *
 from vcms.apps.www.models.page import *
+#from vcms.apps.www.models.menu import PageMenu
 
 
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
-class PageAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ('name','module','status','language',)
-admin.site.register(Page, PageAdmin)
+class PageMenuAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PageMenu, PageMenuAdmin)
+
+class BasicPageAdmin(admin.ModelAdmin):
+    pass
+    #prepopulated_fields = {"slug": ("name",)}
+    #list_display = ('name','module','status','language',)
+admin.site.register(BasicPage, BasicPageAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',
@@ -49,6 +55,8 @@ class SimplePageAdmin(admin.ModelAdmin):
     inlines = [ContentInline]
 admin.site.register(SimplePage, SimplePageAdmin)
 
+"""
+NEED TO BE REDONE
 class DashboardElementInline(admin.StackedInline):
     model = DashboardElement
     extra = 1
@@ -58,7 +66,7 @@ class DashboardPreviewInline(admin.TabularInline):
     extra = 2
 
 DASHBOARD_MODULES = [DashboardElementInline,DashboardPreviewInline]
-# now scan to cms apps module to see if something what what to register to dahsboard
+# now scan to cms apps module to see if something wants to register to dahsboard
 for module in settings.PAGE_MODULES:
     try:
         # loading requirements first
@@ -74,17 +82,17 @@ for module in settings.PAGE_MODULES:
 
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES
+admin.site.register(DashboardPage, DashboardPageAdmin)
+"""
 
 # -- BANNER
 # -----------
 class BannerImageAdmin(admin.ModelAdmin):
     filter_horizontal = ('banner',)
+admin.site.register(BannerImage, BannerImageAdmin)
     
 class BannerAdmin(admin.ModelAdmin):
     filter_horizontal = ('page',)
-
-# CONTENTS
-#admin.site.register(Content, ContentAdmin)
 admin.site.register(Banner, BannerAdmin)
-admin.site.register(BannerImage, BannerImageAdmin)
-admin.site.register(DashboardPage, DashboardPageAdmin)
+
+
