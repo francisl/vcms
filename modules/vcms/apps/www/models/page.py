@@ -13,13 +13,13 @@ from treebeard.ns_tree import NS_Node
 from vcms.apps.www.fields import StatusField
 from vcms.apps.www.models import Language
 from vcms.apps.www.models import PageElementPosition
-from vcms.apps.www.models.menu import PageMenu
+#from vcms.apps.www.models.menu import PageMenu
 from vcms.apps.www.managers.containers import DashboardElementManager
 from vcms.apps.www.managers.page import BasicPageManager
 from vcms.apps.www.managers.page import LanguageManager
 
  
-class BasicPage(PageMenu):
+class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
         A page can have multiple sub-section define in the application urls
@@ -40,6 +40,7 @@ class BasicPage(PageMenu):
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
+    default = models.BooleanField(default=False)
     
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
@@ -60,6 +61,7 @@ class BasicPage(PageMenu):
         return self.name
 
     def save(self):
+        from vcms.apps.www.models.menu import PageMenu
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
         if self.status == StatusField.PUBLISHED:
             # If the page is being created, set its published date
@@ -70,7 +72,19 @@ class BasicPage(PageMenu):
                 model_in_db = Page.objects.get(pk=self.pk)
                 if model_in_db.status != StatusField.PUBLISHED:
                     self.date_published = datetime.datetime.now()
+          
         super(BasicPage, self).save()
+                  
+        if self.default == True:
+            PageMenu.add_root(page=self)
+        else:
+            try:
+                root = PageMenu.get_first_root_node()
+                root.add_child(page=self)
+            except:
+                PageMenu.add_root(page=self)
+        
+        
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
@@ -86,7 +100,6 @@ class Page(BasicPage):
     level = models.IntegerField(editable=False, default=0)
     tree_position = models.IntegerField(editable=False, default=0)
     display = models.BooleanField(editable=False, default=False)
-    default = models.BooleanField(default=False, help_text=_("Check this if you want this page as default home page."))
 
     # Parameteers
     
@@ -110,6 +123,9 @@ class Page(BasicPage):
         else:
             return "/" + self.slug
 
+    def __unicode__(self):
+        return self.name
+    
     def save(self):
         if self.default:
             Page.objects.reset_Default()
@@ -124,7 +140,11 @@ class Page(BasicPage):
         #self.indexer.update()
 
 class MainPage(BasicPage):
-    pass
+    def get_test(self):
+        print("yes!")
+        
+    class Meta:
+        app_label = 'www'
 
 class SimplePage(BasicPage):
     class Meta:

@@ -165,7 +165,7 @@ class BannerImageManager(models.Manager):
 
 
 class LanguageManager(models.Manager):
-    def getDefault(self):
+    def get_default(self):
         from settings import LANGUAGE_CODE
         return self.get(language_code=LANGUAGE_CODE[:2])
 
