@@ -30,7 +30,12 @@ class Widget(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
+    widget_type = models.ForeignKey(ContentType)
+    widget_id = models.PositiveIntegerField()
+    widget = generic.GenericForeignKey('widget_type', 'widget_id')
+
     class Meta:
+        abstract = True
         app_label = 'www'
         
     def __unicode__(self):
@@ -41,7 +46,6 @@ class Widget(models.Model):
     
 class GridWidget(models.Model):
     container = models.ForeignKey(GridContainer)
-    widget = models.OneToOneField(Widget)
     row = models.IntegerField()
     col = models.IntegerField()
     row_span = models.IntegerField()
@@ -55,7 +59,6 @@ class GridWidget(models.Model):
     
 class FloatWidget(models.Model):
     container = models.ForeignKey(FloatContainer)
-    widget = models.OneToOneField(Widget)
     position = models.IntegerField(unique=True)
     
     class Meta:
