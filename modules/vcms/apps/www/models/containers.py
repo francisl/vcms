@@ -22,11 +22,8 @@ class FloatContainer(BasicContainer):
     pass
 
 
-
 class GridContainer(BasicContainer):
     gird_widget = models.ManyToManyField(GridWidget)
     
     objects = GridContainerManager()
-    
-    
     
