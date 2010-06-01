@@ -8,12 +8,21 @@ from django.utils.translation import ugettext_lazy as _
 
 from treebeard.ns_tree import NS_Node
 
+from vcms.apps.www.managers.menu import PageMenuManager
+
 class PageMenu(NS_Node):
     display = models.BooleanField(default=True)
     default = models.IntegerField(default=False)
-    
-    def __unicode__(self):
-        return 'Category: %s' % self.name    
 
+    objects = PageMenuManager()
+    
     class Meta:
         app_label = 'www'
+
+    def __unicode__(self):
+        return 'Category: %s' % self.name    
+    
+    def save(self):
+        if self.default == True:
+            self.set_root(self)
+        super(PageMenu, self).save()

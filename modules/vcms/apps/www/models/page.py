@@ -36,7 +36,11 @@ class BasicPage(PageMenu):
     """
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     status = StatusField()
+    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
+    description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
+    keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
+    
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
@@ -75,9 +79,6 @@ class Page(BasicPage):
     EMPTY = 0
     TEMPLATES = ((EMPTY, 'Default'),)
     TEMPLATE_FILES = { EMPTY: 'master.html'}
-    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
-    description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
-    keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
     template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
 
     # menus
