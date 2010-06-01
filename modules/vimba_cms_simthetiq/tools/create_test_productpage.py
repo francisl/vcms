@@ -3,7 +3,7 @@
 
 from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Video, Category, DomainPage, FileFormat, Language
 
-language = Language.objects.getDefault()
+language = Language.objects.get_default()
  
 num_product=10
 for i in range(num_product):
