@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 30-05-2010.
 
 from django.db import models
-from django.contrib.contenttypes import generic
+from django.utils.translation import ugettext_lazy as _
 
 from vcms.apps.www.managers.containers import BasicContainerManager
 from vcms.apps.www.managers.containers import GridContainerManager
