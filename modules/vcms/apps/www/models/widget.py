@@ -25,15 +25,7 @@ class Widget(models.Model):
     name = models.CharField(max_length="40", help_text="Max 40 characters")
     width = models.FloatField()
     width_mesure = models.IntegerField(default=0, choices=WIDTH_CHOICES)
-    # link to all possible Widgets type
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    widget_type = models.ForeignKey(ContentType)
-    widget_id = models.PositiveIntegerField()
-    widget = generic.GenericForeignKey('widget_type', 'widget_id')
-
+    
     class Meta:
         abstract = True
         app_label = 'www'
@@ -42,9 +34,20 @@ class Widget(models.Model):
         return self.id
 
     def render(self):
-        raise NotImplementedError() 
-    
-class GridWidget(models.Model):
+        raise NotImplementedError()
+
+
+class ContainerWidget(models.Model):
+    # Generic FK to the widget, used as an inheritance workaround
+    widget_type = models.ForeignKey(ContentType)
+    widget_id = models.PositiveIntegerField()
+    widget = generic.GenericForeignKey('widget_type', 'widget_id')
+
+    class Meta:
+        abstract = True
+
+
+class GridWidget(ContainerWidget):
     container = models.ForeignKey(GridContainer)
     row = models.IntegerField()
     col = models.IntegerField()
@@ -56,8 +59,9 @@ class GridWidget(models.Model):
         
     def __unicode__(self):
         return widget.name
-    
-class FloatWidget(models.Model):
+
+
+class FloatWidget(ContainerWidget):
     container = models.ForeignKey(FloatContainer)
     position = models.IntegerField(unique=True)
     
