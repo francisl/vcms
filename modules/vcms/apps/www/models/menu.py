@@ -14,7 +14,7 @@ class PageMenu(NS_Node):
     page = models.OneToOneField(BasicPage)
     display = models.BooleanField(default=True)
     default = models.BooleanField(default=False)
-
+    
     objects = PageMenuManager()
     
     class Meta:
@@ -53,3 +53,4 @@ class PageMenu(NS_Node):
         
         super(PageMenu, self).save()
         """
+        

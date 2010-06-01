@@ -47,6 +47,7 @@ class PageElementPosition(models.Model):
 from vcms.apps.www.models.page import Page
 from vcms.apps.www.models.page import BasicPage
 from vcms.apps.www.models.menu import PageMenu
+
 #from vcms.apps.www.models.page import SimplePage
 
 def _delete_page(page2delete):

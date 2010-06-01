@@ -62,6 +62,8 @@ class BasicPage(models.Model):
 
     def save(self):
         from vcms.apps.www.models.menu import PageMenu
+        def set_new_menu_root():
+            PageMenu.add_root(page=self)
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
         if self.status == StatusField.PUBLISHED:
             # If the page is being created, set its published date
@@ -76,14 +78,22 @@ class BasicPage(models.Model):
         super(BasicPage, self).save()
                   
         if self.default == True:
-            PageMenu.add_root(page=self)
+            print("self defaut == True")
+            root_menu = PageMenu.get_first_root_node()
+            if root_menu.page == self.id:
+                print("root menu page == self.id")
+            else:
+                print("root menu page != self.id, add new root")
+                set_new_menu_root()
         else:
-            try:
-                root = PageMenu.get_first_root_node()
-                root.add_child(page=self)
-            except:
-                PageMenu.add_root(page=self)
-        
+            print('self not default')
+            root_menu = PageMenu.get_first_root_node()
+            if root_menu == None:
+                print('root menu == None')
+                set_new_menu_root()
+            else:
+                print('root_menu != None | adding child')
+                root_menu.add_child(page=self)
         
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()

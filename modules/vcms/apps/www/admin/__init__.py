@@ -12,7 +12,6 @@ from vcms.apps.www.models import *
 from vcms.apps.www.models.page import *
 #from vcms.apps.www.models.menu import PageMenu
 
-
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
@@ -94,5 +93,3 @@ admin.site.register(BannerImage, BannerImageAdmin)
 class BannerAdmin(admin.ModelAdmin):
     filter_horizontal = ('page',)
 admin.site.register(Banner, BannerAdmin)
-
-
