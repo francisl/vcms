@@ -13,12 +13,13 @@ from treebeard.ns_tree import NS_Node
 from vcms.apps.www.fields import StatusField
 from vcms.apps.www.models import Language
 from vcms.apps.www.models import PageElementPosition
+from vcms.apps.www.models.menu import PageMenu
 from vcms.apps.www.managers.containers import DashboardElementManager
 from vcms.apps.www.managers.page import BasicPageManager
 from vcms.apps.www.managers.page import LanguageManager
 
  
-class BasicPage(models.Model):
+class BasicPage(PageMenu):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
         A page can have multiple sub-section define in the application urls
@@ -35,16 +36,18 @@ class BasicPage(models.Model):
     """
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     status = StatusField()
-    app_slug = models.SlugField(default="", editable=False)
+    app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
-
+    language = models.ForeignKey(Language)
+    
     objects = BasicPageManager()
 
     class Meta:
         verbose_name = _("Basic page")
         verbose_name_plural = _("Basic pages")
+        app_label = 'www'
 
     def __unicode__(self):
         return self.name
@@ -85,7 +88,7 @@ class Page(BasicPage):
     default = models.BooleanField(default=False, help_text=_("Check this if you want this page as default home page."))
 
     # Parameteers
-    language = models.ForeignKey(Language)
+    
     # lang = models.IntegerField(max_length=2,choices=settings.LANGUAGES,
     #                       default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
 
@@ -119,8 +122,10 @@ class Page(BasicPage):
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
+class MainPage(BasicPage):
+    pass
 
-class SimplePage(Page):
+class SimplePage(BasicPage):
     class Meta:
         verbose_name = "Simple page"
         verbose_name_plural = "Simple pages"
@@ -135,7 +140,7 @@ class SimplePage(Page):
 # Dashboard is an information page layout that display preview and modules
 #
 
-class DashboardPage(Page):
+class DashboardPage(BasicPage):
     EMPTY = 0
     NEWS = 1
     SIMTHETIQ = 2
@@ -147,6 +152,7 @@ class DashboardPage(Page):
     class Meta:
         verbose_name = "Dashboard"
         verbose_name_plural = "Dashboards"
+        app_label = 'www'
 
     def save(self):
         self.module = 'Dashboard'
@@ -165,6 +171,9 @@ class DashboardElement(PageElementPosition):
 
     objects = DashboardElementManager()
 
+    class Meta:
+        app_label = 'www'
+        
     def __unicode__(self):
         return self.name
 
@@ -174,5 +183,8 @@ class DashboardPreview(PageElementPosition):
     page = models.ForeignKey(DashboardPage)
     preview = models.ForeignKey(Content)
 
+    class Meta:
+        app_label = 'www'
+        
     def __unicode__(self):
         return self.preview.name
