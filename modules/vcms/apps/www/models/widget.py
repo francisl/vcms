@@ -6,13 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.files.storage import default_storage, FileSystemStorage
 from django.shortcuts import render_to_response
-from django.contrib.auth.models import User
 
 from vcms.apps.www.managers.widget import ContentManager
+from vcms.apps.www.models.containers import FloatContainer, GridContainer
+
 
 class Widget(models.Model):
     """ Widgets Parent class
@@ -41,6 +40,7 @@ class Widget(models.Model):
         raise NotImplementedError() 
     
 class GridWidget(models.Model):
+    container = models.ForeignKey(GridContainer)
     widget = models.OneToOneField(Widget)
     row = models.IntegerField()
     col = models.IntegerField()
@@ -54,6 +54,7 @@ class GridWidget(models.Model):
         return widget.name
     
 class FloatWidget(models.Model):
+    container = models.ForeignKey(FloatContainer)
     widget = models.OneToOneField(Widget)
     position = models.IntegerField(unique=True)
     
