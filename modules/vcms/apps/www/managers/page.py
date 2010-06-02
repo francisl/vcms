@@ -7,7 +7,6 @@
 from django.db import models
 from vcms.apps.www.fields import StatusField
 
-
 class BasicPageManager(models.Manager):
     def get_Default(self):
         try:

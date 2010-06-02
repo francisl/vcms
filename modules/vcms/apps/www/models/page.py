@@ -11,14 +11,22 @@ from django.utils.translation import ugettext_lazy as _
 from treebeard.ns_tree import NS_Node
 
 from vcms.apps.www.fields import StatusField
-from vcms.apps.www.models import Language
-from vcms.apps.www.models import PageElementPosition
-#from vcms.apps.www.models.menu import PageMenu
-from vcms.apps.www.managers.containers import DashboardElementManager
+from vcms.apps.www.models.menu import MainMenu
 from vcms.apps.www.managers.page import BasicPageManager
 from vcms.apps.www.managers.page import LanguageManager
 
- 
+class Language(models.Model):
+    language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
+    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
+
+    objects = LanguageManager()
+
+    class Meta:
+        app_label = "www"
+        
+    def __unicode__(self):
+        return self.language
+    
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
@@ -40,7 +48,6 @@ class BasicPage(models.Model):
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
-    default = models.BooleanField(default=False)
     
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
@@ -48,6 +55,12 @@ class BasicPage(models.Model):
     language = models.ForeignKey(Language)
     
     objects = BasicPageManager()
+
+    # Generic FK to the container, used as an inheritance workaround
+    #widget_type = models.ForeignKey(ContentType)
+    #widget_id = models.PositiveIntegerField()
+    #widget = generic.GenericForeignKey('widget_type', 'widget_id')
+    
 
     class Meta:
         verbose_name = _("Basic page")
@@ -60,41 +73,42 @@ class BasicPage(models.Model):
     def get_name(self):
         return self.name
 
-    def save(self):
-        from vcms.apps.www.models.menu import PageMenu
-        def set_new_menu_root():
-            PageMenu.add_root(page=self)
-        # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
-        if self.status == StatusField.PUBLISHED:
-            # If the page is being created, set its published date
-            if not self.pk:
-                self.date_published = datetime.datetime.now()
-            # If the Page is being edited, check against the current version in the database and update if it hasn't been previously published
-            else:
-                model_in_db = Page.objects.get(pk=self.pk)
-                if model_in_db.status != StatusField.PUBLISHED:
-                    self.date_published = datetime.datetime.now()
-          
-        super(BasicPage, self).save()
-                  
-        if self.default == True:
-            print("self defaut == True")
-            root_menu = PageMenu.get_first_root_node()
-            if root_menu.page == self.id:
-                print("root menu page == self.id")
-            else:
-                print("root menu page != self.id, add new root")
-                set_new_menu_root()
-        else:
-            print('self not default')
-            root_menu = PageMenu.get_first_root_node()
-            if root_menu == None:
-                print('root menu == None')
-                set_new_menu_root()
-            else:
-                print('root_menu != None | adding child')
-                root_menu.add_child(page=self)
+    def _add_to_main_menu(self, root):
+        root.add_child(menu_name=self.name, content_object=self)
         
+    def save(self):
+        from vcms.apps.www.models.menu import MainMenu as PageMenu
+        first_root = MainMenu.get_first_root_node()
+        root = None
+        
+        if type(first_root) != type(None):
+            if first_root.menu_name == str(self.language).lower():
+                root = first_root
+                del first_root
+            else:
+                for sibling in root.get_siblings():
+                    if sibling.menu_name == str(self.language).lower():
+                        root = sibling
+                        break
+        
+        super(BasicPage, self).save()
+        
+        if root == None:
+            # root menu not found
+            root = MainMenu.add_root(menu_name=str(self.language))
+            self._add_to_main_menu(root)
+        else:
+            # root already exist
+            # check if already insert in menu
+            exist = False
+            for child in root.get_children():
+                if child.menu_name == self.name:
+                    exist = True
+                    break
+            if not exist:
+                self._add_to_main_menu(root)
+            
+                            
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
@@ -124,6 +138,8 @@ class Page(BasicPage):
         ordering = ['tree_position', 'name']
         verbose_name_plural = "Menu Administration"
         #unique_together = ("slug", "app_slug")
+        app_label = "www"
+        
 
     def get_absolute_url(self):
         if self.app_slug:
@@ -150,9 +166,6 @@ class Page(BasicPage):
         #self.indexer.update()
 
 class MainPage(BasicPage):
-    def get_test(self):
-        print("yes!")
-        
     class Meta:
         app_label = 'www'
 
@@ -160,17 +173,41 @@ class SimplePage(BasicPage):
     class Meta:
         verbose_name = "Simple page"
         verbose_name_plural = "Simple pages"
+        app_label = 'www'
 
     def save(self):
         self.module = 'Simple'
         self.app_slug = APP_SLUGS
         super(SimplePage, self).save()
 
+
+# -----
+# OLD
+
+
 #
 # DASHBOARD
 # Dashboard is an information page layout that display preview and modules
 #
+from vcms.apps.www.managers.containers import DashboardElementManager
 
+class PageElementPosition(models.Model):
+    #PREVIEW
+    LEFT = 'left'
+    RIGHT = 'right'
+    FLOAT_TYPE = ((LEFT, _('Left')), (RIGHT, _('Right')),)
+    TOP = 1
+    MIDDLE = 2
+    BOTTOM = 3
+    PRIORITY = ((TOP,_('Top')),(MIDDLE,_('Middle')),(BOTTOM,_('Bottom')),)
+    preview_position = models.CharField(max_length=10, choices=FLOAT_TYPE)
+    preview_display_priority = models.IntegerField(choices=PRIORITY)
+
+    class Meta:
+        abstract = True
+        app_label = "www"
+        
+        
 class DashboardPage(BasicPage):
     EMPTY = 0
     NEWS = 1
@@ -210,7 +247,7 @@ class DashboardElement(PageElementPosition):
 
 
 class DashboardPreview(PageElementPosition):
-    from vcms.apps.www.models.widget import Content
+    from vcms.apps.www.models.old import Content
     page = models.ForeignKey(DashboardPage)
     preview = models.ForeignKey(Content)
 
@@ -219,3 +256,5 @@ class DashboardPreview(PageElementPosition):
         
     def __unicode__(self):
         return self.preview.name
+
+

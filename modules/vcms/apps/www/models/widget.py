@@ -9,7 +9,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 
-from vcms.apps.www.managers.widget import ContentManager
+#from vcms.apps.www.managers.widget import ContentManager
 from vcms.apps.www.models.containers import FloatContainer, GridContainer
 
 
@@ -98,7 +98,7 @@ class ContentWidget(Widget):
     date = models.DateField(auto_now=True, editable=True)
     author = models.ForeignKey(User, related_name='content_author', editable=False, null=True, blank=True)
     
-    objects = ContentManager()
+    #objects = ContentManager()
     
     def render(self):
         content = { 'name': self.name

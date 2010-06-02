@@ -9,7 +9,7 @@ from treebeard.models import Node
 #from vcms.apps.www.models.menu import PageMenu
 
 
-class PageMenuManager(models.Manager):
+class MainMenuManager(models.Manager):
     #def set_menu_root(self, page):
     #    PageMenu.add_root(page=page)
     

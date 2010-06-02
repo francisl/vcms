@@ -5,17 +5,22 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 
 from treebeard.ns_tree import NS_Node
-from vcms.apps.www.models.page import BasicPage
-from vcms.apps.www.managers.menu import PageMenuManager
+#from vcms.apps.www.models.page import BasicPage
+from vcms.apps.www.managers.menu import MainMenuManager
 
-class PageMenu(NS_Node):
-    page = models.OneToOneField(BasicPage)
-    display = models.BooleanField(default=True)
+class MainMenu(NS_Node):
+    menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters")
+    display = models.BooleanField(default=True, help_text="Display in menu")
     default = models.BooleanField(default=False)
+    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    object_id = models.PositiveIntegerField(blank=True, null=True)
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
     
-    objects = PageMenuManager()
+    objects = MainMenuManager()
     
     class Meta:
         app_label = 'www'
@@ -23,16 +28,17 @@ class PageMenu(NS_Node):
     def __unicode__(self):
         to_print = """
             id         : %s
-            page       : %s
+            menu_name  : %s
             lft        : %s
             rgt        : %s
             tree_id    : %s
             depth      : %s
             display    : %s
             default    : %s
-        """ % (self.id, self.page, self.lft, self.rgt, self.tree_id, self.depth, self.display, self.default)
+        """ % (self.id, self.menu_name, self.lft, self.rgt, self.tree_id, self.depth, self.display, self.default)
         
         return to_print
+    
     """
     def save(self):
         
@@ -55,10 +61,7 @@ class PageMenu(NS_Node):
         """
 
 class DummyPageMenu(NS_Node):
-    display = models.BooleanField(default=True)
-    default = models.BooleanField(default=False)
-    
-    objects = PageMenuManager()
+    name = models.CharField(max_length=100)
     
     class Meta:
         app_label = 'www'
