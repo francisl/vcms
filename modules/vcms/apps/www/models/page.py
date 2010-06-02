@@ -7,6 +7,7 @@ import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes import generic
 
 from treebeard.ns_tree import NS_Node
 
@@ -46,6 +47,7 @@ class BasicPage(models.Model):
     status = StatusField()
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
+    module = models.CharField(max_length=30, default='', editable=False)
     description = models.CharField(max_length=250, help_text=_("Short description of the page (helps with search engine optimization.)"))
     keywords = models.CharField(max_length=250, null=True, blank=True, help_text=_("Page keywords (Help for search engine optimization.)"))
     
@@ -53,6 +55,8 @@ class BasicPage(models.Model):
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
     language = models.ForeignKey(Language)
+    
+    menu = generic.GenericRelation(MainMenu)
     
     objects = BasicPageManager()
 
@@ -73,10 +77,14 @@ class BasicPage(models.Model):
     def get_name(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/www/page/" + self.slug
+
     def _add_to_main_menu(self, root):
         root.add_child(menu_name=self.name, content_object=self)
         
     def save(self):
+        self.app_slug='www'
         from vcms.apps.www.models.menu import MainMenu as PageMenu
         first_root = MainMenu.get_first_root_node()
         root = None
@@ -131,7 +139,6 @@ class Page(BasicPage):
     #                       default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
 
     # Controler for the pages
-    module = models.CharField(max_length=30, default='', editable=False)
     #objects = PageManager()
 
     class Meta:

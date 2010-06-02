@@ -109,7 +109,6 @@ body hr {
 }
 
 div#banner {
-  width: 716px;
   margin: 0 auto;
   padding: 0;
 }
@@ -423,7 +422,6 @@ div.container_float > div {
 
 div#container_header_widget {
   position: relative;
-  height: 112px;
   width: 100%;
   border-bottom: thin solid #b9ff3c;
   font-size: 0.8em;

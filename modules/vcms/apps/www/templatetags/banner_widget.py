@@ -20,9 +20,9 @@ def show_banner(current_page=None, MEDIA_URL=''):
     """ return main menu list
         and return the menu currently selected
     """
-    print("current page = %s" % current_page)
+    #print("current page = %s" % current_page)
     banner, banner_images, has_banner = Banner.objects.get_banner(current_page)
-    print_log(banner, has_banner)
+    #print_log(banner, has_banner)
     return locals()
 
 # TODO: Make banner more dynamic - Size, page position

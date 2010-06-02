@@ -22,3 +22,7 @@ class MainMenuManager(models.Manager):
         #root.add_child(node)
         pass
         
+    def get_default_page(self):
+        default_menu = self.filter(default=True)[0]
+        return default_menu.content_object
+        

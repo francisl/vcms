@@ -8,6 +8,7 @@ from django.db import models
 from vcms.apps.www.fields import StatusField
 
 class BasicPageManager(models.Manager):
+    """
     def get_Default(self):
         try:
             defaultpage = self.filter(default=True)[0]
@@ -61,15 +62,6 @@ class BasicPageManager(models.Manager):
         #print("SubMenu returning : %s, %s" % (children, selected))
         return children, selected
 
-    def get_AllBasic(self):
-        return self.filter(status=StatusField.PUBLISHED).filter(module__in=["Basic", 'Dashboard'])
-
-    def get_MainPublished(self):
-        return self.filter(status=StatusField.PUBLISHED).filter(level=0)
-
-    def get_Published(self):
-        return self.filter(status=StatusField.PUBLISHED)
-
     def get_NotDisplay(self, lang='en'):
         return self.filter(status=StatusField.PUBLISHED).filter(display=False).filter(language='en')
 
@@ -86,6 +78,17 @@ class BasicPageManager(models.Manager):
             return self.filter(parent=parent).filter(status=StatusField.PUBLISHED).filter(display=True)
         else:
             return None
+
+    """
+    def get_AllBasic(self):
+        return self.filter(status=StatusField.PUBLISHED).filter(module__in=["Basic", 'Dashboard'])
+
+    def get_MainPublished(self):
+        return self.filter(status=StatusField.PUBLISHED).filter(level=0)
+
+    def get_Published(self):
+        return self.filter(status=StatusField.PUBLISHED)
+
 
     def drafts(self):
         return self.filter(status=StatusField.DRAFT)
@@ -140,18 +143,21 @@ class BannerManager(models.Manager):
         if page==None:
             banner = self.all()[0]
         else:
-            banner = self.filter(page=page.id)[0]
-
-        if banner.style == self.model.RANDOM:
-            banner_images = banner.get_random_image()
-        else:
-            banner_images = banner.get_images()
-
-        print("banner after query = %s" % banner)
-        print("banner after query = %s" % str(banner_images))
-
-        if len(banner_images) >= 1:
-            has_banner = True
+            banners = self.filter(page=page.id)
+            if len(banners) >= 1:
+                banner = banners[0]
+            else:
+                banner = None
+                
+        if banner != None:
+            if banner.style == self.model.RANDOM:
+                banner_images = banner.get_random_image()
+            else:
+                banner_images = banner.get_images()
+    
+            if len(banner_images) >= 1:
+                has_banner = True
+        
         #except:
         #    has_banner = False
         print("get banner = %s" % banner)

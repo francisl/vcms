@@ -50,23 +50,26 @@
 		</div>
 	
 		<!-- =========MENU=========== -->
-		{% ifequal page_info.menu_style 0 %}
-		    {% show_dropdown_menu page_info.current_page %}
-		    
-		{% else %}
-			{% if page_info.current_page %}
-			   {% show_main_menu page_info.current_page %}
-			   <!-- BANNER -->
+		{% ifequal page_info.menu_style 1 %}
+            {% if page_info.current_page %}
+               {% show_main_menu page_info.current_page %}
+               <!-- BANNER -->
                {% show_banner page_info.current_page MEDIA_URL %}
                {% show_sub_menu page_info.current_page %}
-			{% else %}
-			   {% show_main_menu %}
-			{% endif %}
+            {% else %}
+               {% show_main_menu %}
+            {% endif %}
+		{% else %}
+		  {% if page_info.current_page %}
+            {% show_dropdown_menu page_info.current_page %}
+          {% else %}
+            {% show_dropdown_menu %}
+          {% endif %}
 		{% endifequal %}
 		<!--=========content=========== -->
 		
 		<div id="vcms_content_body">
-		    <div id="container_header_widget" class="container_absolute">
+		    <div id="container_header_widget">
 		      {% show_search_box %}
 		      {% if page_info %}
 		          {% show_banner page_info.current_page MEDIA_URL %}
@@ -130,11 +133,13 @@
 		<div id="footing" >
 			<div class="footing_content">
 			     <span id="copyright">Simthetiq.Com &copy; 2010 |</span>
+			    {% comment %}
 		        {% if page_info.current_page %}
 		            {% show_footer_menu page_info.current_page %}
 		         {% else%}
 		            {% show_footer_menu %}
 		        {% endif %}
+		        {% endcomment %}
 			</div>
 		</div>
 	</div><!-- vcms_content_body -->

@@ -3,7 +3,7 @@
     
     {% for menu, submenus in menus.items %}
     <li class="{% ifequal selected_menu.id menu.id %}menu_selected{% endifequal%}">
-        <a href="{{menu.get_absolute_url}}" class="dir">{{ menu|upper }}</a>
+        <a href="{{menu.content_object.get_absolute_url}}" class="dir">{{ menu.menu_name|upper }}</a>
         
         {% if submenus.0 %}{% comment %} dont display empty menu{% endcomment %}
 		<ul>{% for submenu in submenus.0 %}
