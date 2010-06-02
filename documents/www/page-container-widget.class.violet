@@ -396,14 +396,16 @@ Probleme, à chaque page,
 nous devons manuellement (ou en mthod) ajouté les container
 C&apos;est container devraient être fixe pour le model de page.
 ex: Tout les News page devrais avoir les même container(nav+floatcontainer)
-</string> 
+
+---- Cette solution a des problème
+elle ne permet pas de configurer les propriété du container</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>839.0</double> 
-     <double>386.0</double> 
+     <double>834.0</double> 
+     <double>353.0</double> 
     </void> 
    </object> 
   </void> 
