@@ -15,15 +15,9 @@ from vcms.apps.www.models.page import *
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
-class PageMenuAdmin(admin.ModelAdmin):
+class MainMenuAdmin(admin.ModelAdmin):
     pass
-admin.site.register(PageMenu, PageMenuAdmin)
-
-class BasicPageAdmin(admin.ModelAdmin):
-    pass
-    #prepopulated_fields = {"slug": ("name",)}
-    #list_display = ('name','module','status','language',)
-admin.site.register(BasicPage, BasicPageAdmin)
+admin.site.register(MainMenu, MainMenuAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',
@@ -44,6 +38,19 @@ class QuickLinksAdmin(admin.ModelAdmin):
     list_display = ('name', 'local_link', 'position')
     
 admin.site.register(QuickLinks, QuickLinksAdmin)
+
+
+class BasicPageAdmin(admin.ModelAdmin):
+    pass
+    #prepopulated_fields = {"slug": ("name",)}
+    #list_display = ('name','module','status','language',)
+admin.site.register(BasicPage, BasicPageAdmin)
+
+class MainPageAdmin(admin.ModelAdmin):
+    pass
+    #prepopulated_fields = {"slug": ("name",)}
+    #list_display = ('name','module','status','language',)
+admin.site.register(MainPage, MainPageAdmin)
 
 class ContentInline(admin.StackedInline):
     model = Content
