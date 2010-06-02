@@ -103,7 +103,7 @@ HEADING_HEIGHT_LARGE = 96px
 BANNER_WIDTH = $SITE_WIDTH-$NAVIGATION_WIDTH;
 BANNER_HEIGHT = 112px;
 div#banner:
-    width: $BANNER_WIDTH
+    //width: $BANNER_WIDTH
     margin: 0 auto
     padding: 0
 
@@ -410,7 +410,7 @@ div.container_float:
         
 div#container_header_widget:
     position: relative;
-    height: 112px;
+    //height: 112px;
     width: 100%;
     border-bottom: thin solid #b9ff3c;
     font-size: 0.8em;

@@ -2,7 +2,7 @@
 {% if has_banner %}
 	{% ifequal banner.style 0 %} <!-- Banner with effect/rotation -->
 	<div id="banner">
-	   <div id="s3slider">
+	   <div id="s3slider" style="width: {{banner.get_size.0 }}px; height: {{ banner.get_size.1 }}px">
 	   <ul id="s3sliderContent">
 	   {% for bimage in banner_images %}
 	        <li class="s3sliderImage">

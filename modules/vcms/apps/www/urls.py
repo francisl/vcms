@@ -9,7 +9,6 @@ urlpatterns = patterns('vcms.apps.www.views',
     # Example:
     # (r'^search/$', 'Search'),
     (r'^search/', include('haystack.urls')),
-
     (r'^page/(?P<page>[-\w]+)/$', 'Generic'),
     (r'^$', 'Generic'),
 )

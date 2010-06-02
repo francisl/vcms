@@ -12,8 +12,10 @@ import inspect
 from captcha.fields import CaptchaField
 
 from vcms.apps.www.models import PageElementPosition
-from vcms.apps.www.models import Content, APP_SLUGS
+from vcms.apps.www.models.old import Content, APP_SLUGS
 from vcms.apps.www.models.page import BasicPage as Page
+from vcms.apps.www.models.page import BasicPage
+from vcms.apps.www.models.menu import MainMenu
 from vcms.apps.www.models.page import DashboardPage
 from vcms.apps.www.models.page import DashboardElement
 from vcms.apps.www.models.page import DashboardPreview
@@ -60,31 +62,33 @@ def InitPage(page_slug, app_slug):
     """
 
     debugtrace("Initpage - entry", page_slug)
-    current_page = Page.objects.get_Default()
+    current_page = MainMenu.objects.get_default_page()
     debugtrace("Initpage - current page", current_page)
     #frm = inspect.stack()[1]
     #mod = inspect.getmodule(frm[0])
     #print '[%s] %s' % (mod.__name__, 'traceback')
     
-    try:
-        # IF NOTHING SELECTED, GO FIRST MENU
-        # ON ERROR RAISE 404
-        if page_slug == None:
-            debugtrace("Initpage - get default", page_slug)
-            current_page = Page.objects.get_Default()
-        # When Page slug i
-        else:
-            debugtrace("Initpage - query", page_slug)
-            debugtrace("Initpage - query app_slug", app_slug)
-            current_page = get_object_or_404(Page, slug=page_slug, app_slug=app_slug)
-            debugtrace("Initpage - current page", current_page)
+    #try:
+    # IF NOTHING SELECTED, GO FIRST MENU
+    # ON ERROR RAISE 404
+    if page_slug == None:
+        debugtrace("Initpage - get default", page_slug)
+        current_page = MainMenu.objects.get_default_page()
+    # When Page slug i
+    else:
+        debugtrace("Initpage - query page_slug", page_slug)
+        debugtrace("Initpage - query app_slug", app_slug)
+        current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
+        current_page = BasicPage.objects.get(slug=page_slug, app_slug=app_slug)
+        debugtrace("Initpage - current page", current_page)
 
-        return setPageParameters(current_page)
-    except:
-        raise Http404
+    return setPageParameters(current_page)
+    #except:
+    #    raise Http404
     
 def Generic(request, page=None, context={}):
     #debugtrace("Generic", page)
+    print("APP_SLUGS = %s" % APP_SLUGS)
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
@@ -98,6 +102,12 @@ def Generic(request, page=None, context={}):
         return Simple(request, context)
     
 
+def MainPage(request, context={}):
+    return render_to_response('master_large.html',
+                              context,
+                              context_instance=RequestContext(request))
+    
+    
 def Simple(request, context={}):
     context['contents'] = Content.objects.filter(page=context["page_info"]['page'])
     #debugtrace("basic", context["page_info"]['page'], **{'basic content':context['contents']})
