@@ -35,6 +35,7 @@ urlpatterns += patterns('',
 
 # __ VIMBA CMS __
 urlpatterns += patterns('',
+    url(r'^www/', include('vcms.apps.www.urls')),
     url(r'^captcha/', include('captcha.urls')),
 )
 
@@ -120,6 +121,10 @@ urlpatterns += patterns('',
     # url(r'^afghanistan/', 'www.),
     # CMS, catch every page
     #(r'^tinymce/', include('tinymce.urls')),
-    url(r'^www/', include('vcms.apps.www.urls')),
+    
     url(r'', include('vcms.apps.www.urls')),
 )
+
+print("------URL PATTERNS : ---------")
+for i in urlpatterns:
+    print("%s" % i)
