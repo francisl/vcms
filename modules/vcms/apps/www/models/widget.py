@@ -13,6 +13,44 @@ from vcms.apps.www.managers.widget import ContentManager
 from vcms.apps.www.models.containers import FloatContainer, GridContainer
 
 
+class WidgetWrapper(models.Model):
+    # Generic FK to the widget, used as an inheritance workaround
+    widget_type = models.ForeignKey(ContentType)
+    widget_id = models.PositiveIntegerField()
+    widget = generic.GenericForeignKey('widget_type', 'widget_id')
+
+    class Meta:
+        abstract = True
+
+
+class GridWidgetWrapper(WidgetWrapper):
+    container = models.ForeignKey(GridContainer)
+    row = models.IntegerField()
+    col = models.IntegerField()
+    row_span = models.IntegerField()
+    col_span = models.IntegerField()
+    
+    class Meta:
+        app_label = 'www'
+        
+    def __unicode__(self):
+        return widget.name
+
+
+class FloatWidgetWrapper(WidgetWrapper):
+    container = models.ForeignKey(FloatContainer)
+    position = models.IntegerField(unique=True)
+    
+    class Meta:
+        app_label = 'www'
+        
+    def __unicode__(self):
+        return widget.name
+    
+
+# -----------------
+# WIDGETS
+# -----------------
 class Widget(models.Model):
     """ Widgets Parent class
         Contain all information required for all widget
@@ -37,48 +75,9 @@ class Widget(models.Model):
         raise NotImplementedError()
 
 
-class ContainerWidget(models.Model):
-    # Generic FK to the widget, used as an inheritance workaround
-    widget_type = models.ForeignKey(ContentType)
-    widget_id = models.PositiveIntegerField()
-    widget = generic.GenericForeignKey('widget_type', 'widget_id')
-
-    class Meta:
-        abstract = True
-
-
-class GridWidget(ContainerWidget):
-    container = models.ForeignKey(GridContainer)
-    row = models.IntegerField()
-    col = models.IntegerField()
-    row_span = models.IntegerField()
-    col_span = models.IntegerField()
-    
-    class Meta:
-        app_label = 'www'
-        
-    def __unicode__(self):
-        return widget.name
-
-
-class FloatWidget(ContainerWidget):
-    container = models.ForeignKey(FloatContainer)
-    position = models.IntegerField(unique=True)
-    
-    class Meta:
-        app_label = 'www'
-        
-    def __unicode__(self):
-        return widget.name
-    
-
-# -----------------
-# WIDGETS
-# -----------------
-
 # -- CONTENT
 # ----------
-class Content(Widget):
+class ContentWidget(Widget):
     #CONTENT
     excerpt = models.TextField(verbose_name="Preview")
     content = models.TextField()
@@ -112,6 +111,7 @@ class Content(Widget):
     class Meta:
         verbose_name_plural = "Page content"
         ordering = [ 'date']
+        app_label = 'www'
     
     def __unicode__(self):
         return self.name
