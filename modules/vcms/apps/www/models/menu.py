@@ -53,4 +53,14 @@ class PageMenu(NS_Node):
         
         super(PageMenu, self).save()
         """
+
+class DummyPageMenu(NS_Node):
+    display = models.BooleanField(default=True)
+    default = models.BooleanField(default=False)
+    
+    objects = PageMenuManager()
+    
+    class Meta:
+        app_label = 'www'
+        
         
