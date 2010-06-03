@@ -1,0 +1,140 @@
+{% load www_extras %}
+{% load banner_widget %}
+{% load search_widget %}
+{% load compress %}
+{% load i18n %}
+{% load quicklinks %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="ROBOTS" content="ALL" />
+    <meta name="robots" content="noarchive">
+    <meta name="description" content="{% if page_info.current_page.description %}
+                                        {{ page_info.current_page.description|striptags }}
+                                        {% else %}High quality models for real-time 3D in Openflight format and more for the simulation and game industry{% endif%} {% block metadescription %} {% endblock metadescription %}">
+    <meta name="keywords" content="{{ page_info.current_page.keywords }}{% block keywords %} {% endblock keywords %}">
+    
+    <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
+    
+    <link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
+    
+    {% compress css %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/style.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/store.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/search.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/forms.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+    {% block stylesheetlink %}{% endblock stylesheetlink %}
+    <style type="text/css" media="all">
+       {% block stylesheet %}{% endblock stylesheet %}
+    </style>
+    {% endcompress %}
+</head>
+<body class="{% block bodyclass %}normal{% endblock bodyclass %}">
+<!-- =========header=========== -->
+    <div id="vcms_body">
+        {% show_quicklinks %}
+        <div id="vcms_header">  
+            <div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">
+                <a href="/" title="Home" ></a>
+            </div>
+        </div>
+    
+        <!-- =========MENU=========== -->
+        {% ifequal page_info.menu_style 1 %}
+            {% if page_info.current_page %}
+               {% show_main_menu page_info.current_page %}
+               <!-- BANNER -->
+               {% show_banner page_info.current_page MEDIA_URL %}
+               {% show_sub_menu page_info.current_page %}
+            {% else %}
+               {% show_main_menu %}
+            {% endif %}
+        {% else %}
+          {% if page_info.current_page %}
+            {% show_dropdown_menu page_info.current_page %}
+          {% else %}
+            {% show_dropdown_menu %}
+          {% endif %}
+        {% endifequal %}
+        
+        <!--=========content=========== -->
+        <div id="vcms_content_body">
+            <div id="container_header_widget">
+            {% block vcms_content_header %}
+              {% show_search_box %}
+              {% if page_info %}
+                  {% show_banner page_info.current_page MEDIA_URL %}
+              {% endif %}
+            {% endblock vcms_content_header%}
+            </div>
+            
+            {% block vcms_content %}
+            {% endblock vcms_content %}
+        </div><!-- vcms_content_body -->
+        
+        <!-- =========footer=========== -->
+        <div id="footing" >
+            <div class="footing_content">
+            {% block vcms_footer %}
+            {% endblock vcms_footer %}
+            </div>
+        </div>
+    </div><!-- vcms_body -->
+<!-- =========GOOGLE SCRIPT=========== -->
+<!--  
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3Cscript%3E"));
+    </script>
+    <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-2190708-2");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+    </script>
+ -->
+    {% block javascript-master %}
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery-ui-min.js"></script>
+        <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="{{ MEDIA_URL }}Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
+        <script src="{{ MEDIA_URL }}Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>
+        <!--[if lt IE 7]> <!--  DROP DOWN MENU -->
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/menu/jquery.dropdown.js"></script>
+        <![endif]-->
+        
+        {% block javascript-include %}{% endblock javascript-include%}
+        
+        <script type="text/javascript">
+        {% block javascript %}
+        {% endblock javascript %}
+        </script> 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#menu_{{page_info.current_page.id}}").className="menu_selected";
+                
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    animationSpeed: 'normal',  /* fast/slow/normal */
+                    padding: 40,               /* padding for each side of the picture */
+                    opacity: 0.55,             /* Value betwee 0 and 1 */
+                    showTitle: true,           /* true/false */
+                    allowresize: true,         /* true/false */
+                    counter_separator_label: '/' /* The separator for the gallery counter 1 "of" 2 */
+                });
+                
+                $('#s3slider').s3Slider({
+                    timeOut: 4000
+                });
+                {% block jquery %} {% endblock jquery %}
+            });
+        </script>
+    {% endblock javascript-master %}
+</body>
+</html>

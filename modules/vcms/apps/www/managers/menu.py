@@ -25,4 +25,4 @@ class MainMenuManager(models.Manager):
     def get_default_page(self):
         default_menu = self.filter(default=True)[0]
         return default_menu.content_object
-        
+
