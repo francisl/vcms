@@ -47,12 +47,18 @@ div#vcms_navigation_container li:hover {
   background-color: #7e7e7e;
 }
 
-div#vcms_navigation_container a {
+div#vcms_navigation_container dl,
+div#vcms_navigation_container dt,
+div#vcms_navigation_container dd,
+div#vcms_navigation_container li a {
   font-decoration: none;
   color: #2e2e2e;
   display: block;
 }
 
-div#vcms_navigation_container a:hover {
+div#vcms_navigation_container dl:hover,
+div#vcms_navigation_container dt:hover,
+div#vcms_navigation_container dd:hover,
+div#vcms_navigation_container li a:hover {
   color: #aaf82e;
 }

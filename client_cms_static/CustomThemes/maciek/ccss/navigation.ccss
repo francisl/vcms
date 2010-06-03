@@ -35,7 +35,7 @@ div#vcms_navigation_container:
         &:hover:
             background-color: #7e7e7e;
             
-    a:
+    dl, dt, dd, li a:
         font-decoration: none;
         color: #2e2e2e;
         display: block;

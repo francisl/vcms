@@ -67,17 +67,23 @@
         
         <!--=========content=========== -->
         <div id="vcms_content_body">
-            <div id="container_header_widget">
+            <div id="header_content_container">
             {% block vcms_content_header %}
               {% show_search_box %}
               {% if page_info %}
                   {% show_banner page_info.current_page MEDIA_URL %}
               {% endif %}
-            {% endblock vcms_content_header%}
+            {% endblock vcms_content_header %}
             </div>
-            
-            {% block vcms_content %}
-            {% endblock vcms_content %}
+            <div>
+                <div id="vcms_navigation_container">
+                    {% block navigation %}nav{% endblock navigation %}
+                </div>
+                <div id="vcms_content_container">
+                    {% block vcms_main_content %}
+                    {% endblock vcms_main_content %}
+                </div>
+            </div>
         </div><!-- vcms_content_body -->
         
         <!-- =========footer=========== -->
@@ -106,6 +112,7 @@
         <script src="{{ MEDIA_URL }}Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
         <!--<script src="{{ MEDIA_URL }}Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
         <script src="{{ MEDIA_URL }}Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}Library/search/inputbox_manager.js"></script>
         <!--[if lt IE 7]> <!--  DROP DOWN MENU -->
         <script type="text/javascript" src="{{ MEDIA_URL }}Library/menu/jquery.dropdown.js"></script>
         <![endif]-->
@@ -113,6 +120,7 @@
         {% block javascript-include %}{% endblock javascript-include%}
         
         <script type="text/javascript">
+           
         {% block javascript %}
         {% endblock javascript %}
         </script> 
