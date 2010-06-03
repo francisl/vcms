@@ -1,22 +1,21 @@
 {% extends "master_frame.html" %}
-
+{% load www_extras %}
+{% load banner_widget %}
+{% load search_widget %}
+{% load i18n %}
 
 {% block vcms_content_header %}
     {% show_search_box %}
     {% if page_info %}
         {% show_banner page_info.current_page MEDIA_URL %}
     {% endif %}
-{% block vcms_content_header %}
+{% endblock vcms_content_header %}
 
-{% block vcms_content %}
-	<div id="vcms_navigation_container" class="container_relative">
-		{% block navigation %}
-        {% endblock navigation %}
-    </div>
-    <div id="vcms_content_container">
+{% block vcms_main_content %}
+    <div class="float_container">
        {% block page_absolute_content %}
        {% endblock page_absolute_content %}
-		<div id="vcms_content">
+		<div>
 		    <div id="page_title">
 		        {% block content_title %}
                 {{ contact_page.page_header|safe }}
@@ -57,7 +56,7 @@
         </div><!-- vcms_pagination -->
 	</div><!-- vcms_content_container -->
 	<div class="clear"></div>
-	{% endblock vcms_content %}
+{% endblock vcms_main_content %}
 	
 
 {% block vcms_footer %}

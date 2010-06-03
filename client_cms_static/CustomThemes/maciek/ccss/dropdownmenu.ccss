@@ -71,10 +71,10 @@ ul#mainmenu, ul.dropdown:
     // main menu item
     & > li:
         height: $MAIN_MENU_HEIGHT;
-        
         padding: 0;
         margin: 0;
         cursor: pointer;
+        background:url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
         
         & > a:
             color: #c2c2c2;
@@ -86,12 +86,9 @@ ul#mainmenu, ul.dropdown:
             
         &.menu_selected > a:
             color: #b9ff3c; //light green
-        
-        .normal & > li:
-	        background:url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
-	        
-	        //&:hover:
-	        //    background:url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
+       
+    & > li:hover:
+        background:url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
             
     .large & > li:
         background:url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;

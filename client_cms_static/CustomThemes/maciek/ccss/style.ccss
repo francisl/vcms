@@ -40,7 +40,7 @@ body:
             border: none;
         
     p:
-        margin: 0.1em 0;
+        margin: 0.3em 0;
         padding: 0.1em 0;
         font-size: 0.9em;
         color: #000000;
@@ -83,9 +83,7 @@ HEADING_HEIGHT_LARGE = 96px
     margin: 0 auto;
     padding: 0;
     z-index: 20;
-    .normal:
-        background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
-    
+    background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
     
     .large &:
         height: $HEADING_HEIGHT_LARGE; 
@@ -313,30 +311,11 @@ div#vcms_content_body:
             float:right;
 
 
-// NAVIGATION
-NAVIGATION_WIDTH = 240px;
-NAV_BORDER_STYLE = 1px solid #656565;
-div#vcms_navigation_container:
-    width: $NAVIGATION_WIDTH;
-    border-bottom: $NAV_BORDER_STYLE;
-    border-right: $NAV_BORDER_STYLE;
-    float: left;
-    background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
-    
-    ul:
-        width: 100%;
-        background-color: #dadada;
-
 // CONTENT
-div#vcms_content_container:
-    width: $SITE_WIDTH-$NAVIGATION_WIDTH;
-    background-color: #fff;
-    float: right;
-    padding-bottom: 2em;
-
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div#vcms_content:
     margin: 2em 2em;
+    background-color: #fff;
 
     #page_title:
         text-align: center;
@@ -375,11 +354,60 @@ div#vcms_content:
             background-repeat: no-repeat;
             background-position: right 4px;
 
-.bordered_content:
-	border: $BOX_CONTENT_BORDER;
-	
+div#vcms_content_container:
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 100%;
+    background-color: #fff;
+    float: right;
+    padding-bottom: 2em;
+    
 	
 // CONTAINER
+
+// NAVIGATION
+NAVIGATION_WIDTH = 240px;
+LARGE_NAVIGATION_WIDTH = 320px;
+NAV_BORDER_STYLE = 1px solid #656565;
+body.large div#vcms_navigation_container:
+    width: $LARGE_NAVIGATION_WIDTH;
+
+body.normal div#vcms_navigation_container:
+    width: $NAVIGATION_WIDTH;
+
+div#vcms_navigation_container:
+    border-bottom: $NAV_BORDER_STYLE;
+    border-right: $NAV_BORDER_STYLE;
+    float: left;
+    background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
+    background-color: #333; 
+    
+    ul:
+        width: 100%;
+        background-color: #dadada;
+        
+    p:
+        margin: 1em;
+        color: #cccccc;
+        
+    p.bottom_link:
+        text-align: right;
+        text-transform: uppercase;
+        
+        a:
+            color: #cccccc;
+
+body.large div#vcms_content_container:
+    width: $SITE_WIDTH-$LARGE_NAVIGATION_WIDTH-1;
+    
+body.normal div#vcms_content_container:
+    width: $SITE_WIDTH-$NAVIGATION_WIDTH-1;
+
+
+.bordered_content:
+    border: $BOX_CONTENT_BORDER;
+    
+      
 div.container_absolute:
     position: relative;
     
@@ -392,7 +420,7 @@ div.container_relative:
     & > div:
         position: relative;
 
-div.container_float:
+div.vcms_float_container:
     position: relative;
     
     & > div:
@@ -400,7 +428,7 @@ div.container_float:
         float: left;
         
         
-div#container_header_widget:
+div#header_content_container:
     position: relative;
     //height: 112px;
     width: 100%;
@@ -418,5 +446,47 @@ div#container_header_widget:
     // /* For IE 5.5 - 7 */
     filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
 
+div.vcms_column_container:
+    background-image: url(../images/containers/grid/bg.jpg);
+    background-repeat: repeat-x;
+    background-position: right bottom;
+    
+    background-color: #fff;
+    table:
+        td:
+            padding: 0.8em;
+            width: 33%;
+        td.col2:
+            background-image: url(../images/containers/column/separator.jpg);
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            
+div.vcms_grid_container:
+    background-image: url(../images/containers/grid/bg.jpg);
+    background-repeat: repeat-x;
+    background-position: right bottom;
+    
+    background-color: #fff;
+    table:
+        td:
+            padding: 1.2em;
+            width: 33%;
 
 
+//CONTENT element
+
+div.content_title:
+    background-color: #333;
+    width: 100%;
+    padding: 0.8em 0;
+    
+    h6, p:
+        margin-left: 1em;
+        
+    h6:
+        text-transform: uppercase;
+    
+    p:
+        color: #B7B7B7;
+        
+    
