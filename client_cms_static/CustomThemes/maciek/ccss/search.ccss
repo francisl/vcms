@@ -10,9 +10,9 @@ div#search_form:
     position: absolute;
     top: 0px;
     left: 0px;
-    width: $NAVIGATION_WIDTH;
-    height: $HEIGHT;
-    padding: $PADDING;
+    width: $NAVIGATION_WIDTH-40px;
+    height: 46px;
+    padding: 0;
     filter: alpha(opacity=80);
     -moz-opacity: .8;
     KhtmlOpacity: .8;
@@ -23,18 +23,22 @@ div#search_form:
         font-family: Verdana, Arial;
         
     form:
-        margin: 10px;
+        position: relative;
+        margin: 12px 10px;
 
     input:
-        width: 50%;
+        position: relative;
+        width: 76%;
         margin: 0;
-        margin-top: -5px;
+        margin-top: 0px;
         padding: 0;
         height: 20px;
         filter: alpha(opacity=100);
         -moz-opacity: 1;
         KhtmlOpacity: 1;
         opacity: 1;
+        color: gray;
+        float: left;
         
     #search_submit:
         background-color: #333;
@@ -43,11 +47,11 @@ div#search_form:
         background-position: top left;
         color: #b9ff3c;
         border: none;
-        height: 23px;
+        height: 24px;
         margin: 0;
-        margin-top: 2px;
-        margin-left: -4px;
-        width: 38%;
+        margin-top: 0px;
+        margin-left: 0px;
+        width: 18%;
         border-left: 1px solid gray;
         border-right: 1px solid gray;
         text-transform: uppercase;
@@ -55,3 +59,18 @@ div#search_form:
         -moz-opacity: 1;
         KhtmlOpacity: 1;
         opacity: 1;
+        float: left;
+
+        &:hover:
+            cursor: pointer;        
+
+    #search_submit_img:
+        width: 10px;
+        height: 12px;
+        display: block;
+        margin: 0 auto;
+        background-image : url(../images/search/button.png);
+        
+
+        
+        

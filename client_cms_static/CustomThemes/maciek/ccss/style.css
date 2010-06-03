@@ -4,7 +4,7 @@ body {
   padding: 0;
   background-color: #888888;
   font-size: 11pt;
-  font-family: 'century gothic', futura, sans-serif;
+  font-family: Arial, futura, sans-serif;
   color: #707070;
 }
 
@@ -87,8 +87,11 @@ body hr {
   height: 52px;
   margin: 0 auto;
   padding: 0;
-  background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
   z-index: 20;
+}
+
+#vcms_header .normal {
+  background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
 }
 
 .large #vcms_header {
@@ -97,7 +100,7 @@ body hr {
 }
 
 #vcms_header_logo {
-  width: 320px;
+  width: 346px;
   height: 52px;
   margin-left: 2em;
   background: url(../images/logo/logo.jpg) top left no-repeat;

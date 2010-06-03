@@ -6,7 +6,7 @@ body:
     padding: 0;
     background-color: #888;
     font-size: 11pt;
-    font-family: "century gothic",futura, sans-serif;
+    font-family: Arial, futura, sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
@@ -82,15 +82,17 @@ HEADING_HEIGHT_LARGE = 96px
     height: $HEADING_HEIGHT; 
     margin: 0 auto;
     padding: 0;
-    background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
     z-index: 20;
+    .normal:
+        background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
+    
     
     .large &:
         height: $HEADING_HEIGHT_LARGE; 
         background: url(../images/heading_large/bg.jpg) bottom left repeat-x #131313; 
 
 #vcms_header_logo:
-    width: 320px; 
+    width: 346px; 
     height: $HEADING_HEIGHT;
     margin-left: 2em;
     background: url(../images/logo/logo.jpg) top left no-repeat;
@@ -243,7 +245,6 @@ div#quicklinks:
             // /* For IE 5.5 - 7 */
             filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
 	        
-             
     span:
         //border: thin solid pink;
         //float: left;
@@ -255,15 +256,6 @@ div#quicklinks:
             margin-top: 6px;
             padding-left: 8px;
             
-
-
-
-
-
-
-        
-        
-        
 // GALLERY
 div.gallery_nav:
     position: absolute; 
