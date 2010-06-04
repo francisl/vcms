@@ -41,7 +41,7 @@ class AdminRegistrationManager(RegistrationManager):
             except self.model.DoesNotExist:
                 return False
             if not profile.activation_key_expired():
-                print "DEBUG: Envoit email a partir de AdminRegistrationManager"
+                #print "DEBUG: Envoit email a partir de AdminRegistrationManager"
                 user = profile.user
                 user.is_active = True
                 user.save()
@@ -121,7 +121,7 @@ class AdminRegistrationProfile(RegistrationProfile):
             framework for details regarding these objects' interfaces.
 
         """
-        print "DEBUG: Envoit email a partir de AdminRegistrationProfile"
+        #print "DEBUG: Envoit email a partir de AdminRegistrationProfile"
         ctx_dict = {'activation_key': self.activation_key,
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
                     'site': site}

@@ -126,6 +126,6 @@ urlpatterns += patterns('',
     url(r'', include('vcms.apps.www.urls')),
 )
 
-print("------URL PATTERNS : ---------")
-for i in urlpatterns:
-    print("%s" % i)
+#print("------URL PATTERNS : ---------")
+#for i in urlpatterns:
+#    print("%s" % i)

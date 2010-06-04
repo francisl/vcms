@@ -88,11 +88,10 @@ def InitPage(page_slug, app_slug):
     
 def Generic(request, page=None, context={}):
     #debugtrace("Generic", page)
-    print("APP_SLUGS = %s" % APP_SLUGS)
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
-    print("context page_info ==== %s" % context["page_info"])
+    #print("context page_info ==== %s" % context["page_info"])
     
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
@@ -178,7 +177,7 @@ def Dashboard(request, context={}):
     page = DashboardPage.objects.get(id=context['current_page'].id)
     template = [t for t in DashboardPage.TEMPLATES if t[0] == page.template]
 
-    print page.template
+    #print page.template
     return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
                                 context_instance=RequestContext(request))
 

@@ -194,7 +194,7 @@ class Banner(models.Model):
         else:
             random = random.randrange(0,images_len)
             rimage = images[random]
-            print("RIMAGE URL = %s" % rimage.file)
+            #print("RIMAGE URL = %s" % rimage.file)
             return [rimage]
 
     def get_size(self):

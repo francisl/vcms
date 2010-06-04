@@ -264,8 +264,8 @@ class Category(models.Model):
             this prevent cascade deletion of pages when link to image
             this 
         """
-        print("clearing product link !")
-        print("linked to : %s " % self.productpage_set.all())
+        #print("clearing product link !")
+        #print("linked to : %s " % self.productpage_set.all())
         self.productpage_set.clear()
         super(Category, self).delete()  
     
