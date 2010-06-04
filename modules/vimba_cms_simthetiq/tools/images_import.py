@@ -65,10 +65,10 @@ def createNewImage(name, file_name=None, description=None, tags=None, show_in_ga
 
 def _checkRow(line, number):
     if len(line) < 6 or len(line) > 6:
-        print("Failed | line %s | %s | %s" % (number, line[0], len(line)))
+        #print("Failed | line %s | %s | %s" % (number, line[0], len(line)))
         return False
     else:
-        print("Success | line %s | %s | %s" % (number, line[0], len(line)))
+        #print("Success | line %s | %s | %s" % (number, line[0], len(line)))
         return True
 
         

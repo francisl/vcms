@@ -139,7 +139,7 @@ class BannerManager(models.Manager):
     def get_banner(self, page):
         banner = banner_images = banner_style = None
         has_banner = False
-        #try:
+        
         if page==None:
             banner = self.all()[0]
         else:
@@ -157,10 +157,7 @@ class BannerManager(models.Manager):
     
             if len(banner_images) >= 1:
                 has_banner = True
-        
-        #except:
-        #    has_banner = False
-        print("get banner = %s" % banner)
+
         return banner, banner_images, has_banner
 
 
