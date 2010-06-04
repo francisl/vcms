@@ -5,7 +5,7 @@ body:
     margin: 0;
     padding: 0;
     background-color: #888;
-    font-size: 11pt;
+    font-size: 10pt;
     font-family: Arial, futura, sans-serif;
     color: #707070; 
     
@@ -52,7 +52,7 @@ body:
         border: none;
 
 // CONTENT_BODY
-SITE_WIDTH = 956px
+SITE_WIDTH = 1000px
 SHADOW_COLOR = #111111;
 #vcms_body:
     position: relative;
@@ -183,7 +183,7 @@ FOOTING_HEIGHT = 37px
         
     .large &:
         height: $FOOTING_HEIGHT+1;
-        border-top: 1px solid #b9ff3c;
+        //border-top: 1px solid #b9ff3c;
  
  
 // CLEAR 
@@ -203,7 +203,7 @@ div#quicklinks:
     width: 30px;
     height: 400px;
     top: 0px;
-    left: 956px;
+    left: $SITE_WIDTH;
     margin: 0;
     margin-top: 0em;
     padding: 0;
@@ -360,14 +360,22 @@ div#vcms_content_container:
     height: 100%;
     background-color: #fff;
     float: right;
-    padding-bottom: 2em;
     
-	
+    p:
+        line-height: 1.4em;
+        margin-top: 0.8em;
+        margin-left: 1em; 
+    
+    h5:
+        line-height: 1.4em;
+        margin-top: 1.2em;
+        margin-left: 1em;
+    
 // CONTAINER
 
 // NAVIGATION
 NAVIGATION_WIDTH = 240px;
-LARGE_NAVIGATION_WIDTH = 320px;
+LARGE_NAVIGATION_WIDTH = 274px;
 NAV_BORDER_STYLE = 1px solid #656565;
 body.large div#vcms_navigation_container:
     width: $LARGE_NAVIGATION_WIDTH;
@@ -375,27 +383,56 @@ body.large div#vcms_navigation_container:
 body.normal div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
 
+TEXTCOLOR_ONDARK=#cccccc;
+TEXTCOLOR_ONLIGHT=#707070;
 div#vcms_navigation_container:
     border-bottom: $NAV_BORDER_STYLE;
     border-right: $NAV_BORDER_STYLE;
-    float: left;
+    //float: left;
     background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
     background-color: #333; 
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    overflow-y: auto;
     
     ul:
         width: 100%;
         background-color: #dadada;
         
-    p:
+    h1,h2,h3,h4,h5,h6,span,p:
         margin: 1em;
-        color: #cccccc;
+        color: $TEXTCOLOR_ONDARK;
         
-    p.bottom_link:
-        text-align: right;
-        text-transform: uppercase;
+    h6:
+        color: $TEXTCOLOR_ONDARK;
+        line-height: 1.2em;
+        margin-top: 2.2em;
+
+p.bottom_link:
+    text-align: right;
+    text-transform: uppercase;
+    
+    a:
+        //display: block;
+        padding-right: 10px;
+        margin-top: 1em;
+        background-position: 3px right;
+        background-repeat: no-repeat;
         
+    &.onwhite:
         a:
-            color: #cccccc;
+            background-image: url(../images/link/arrow_onwhite.png);
+            color: $TEXTCOLOR_ONLIGHT;
+    &.onmedium:
+        a:
+            background-image: url(../images/link/arrow_onmedium.png);
+            color: #fff;
+    &.ondark:
+        a:
+            background-image: url(../images/link/arrow_ondark.png);
+            color: $TEXTCOLOR_ONDARK; 
+
 
 body.large div#vcms_content_container:
     width: $SITE_WIDTH-$LARGE_NAVIGATION_WIDTH-1;
@@ -453,24 +490,29 @@ div.vcms_column_container:
     
     background-color: #fff;
     table:
+        
         td:
             padding: 0.8em;
             width: 33%;
+        
         td.col2:
             background-image: url(../images/containers/column/separator.jpg);
             background-position: bottom right;
             background-repeat: no-repeat;
             
-div.vcms_grid_container:
+div.grid_container:
     background-image: url(../images/containers/grid/bg.jpg);
     background-repeat: repeat-x;
-    background-position: right bottom;
-    
-    background-color: #fff;
+    background-position: left bottom;
+    background-color: #ffffff;
+        
     table:
         td:
+            vertical-align: top;
             padding: 1.2em;
-            width: 33%;
+            width: 64%;
+        td.col2:
+            width: 35%;
 
 
 //CONTENT element
@@ -478,15 +520,39 @@ div.vcms_grid_container:
 div.content_title:
     background-color: #333;
     width: 100%;
-    padding: 0.8em 0;
+    padding: 0.4em 0;
     
-    h6, p:
-        margin-left: 1em;
-        
     h6:
+        margin: 0.1em 1.1em 0.1em 1.1em;
         text-transform: uppercase;
     
-    p:
+    span:
         color: #B7B7B7;
-        
+        margin-left: 1.1em;
+        margin-top: 0px;
+        font-size: 0.8em;
+     
+div.small_media_preview:
+    float: right;
+    width:226px;
+    margin-bottom: 1em;
     
+    div.video_container:
+        margin: 1em 0 16px 16px;
+        width:210px;
+        height: 139px;
+        float: left;
+    
+        object, embed:
+            width: 210px;
+            height: 139px;
+    
+    div.thumbnail:
+        float: left;
+        
+        img:
+            margin-left: 16px;
+            width: 97px;
+            height: 77px;
+            float: left;
+            

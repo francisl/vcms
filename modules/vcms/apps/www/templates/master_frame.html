@@ -75,14 +75,15 @@
               {% endif %}
             {% endblock vcms_content_header %}
             </div>
-            <div>
-                <div id="vcms_navigation_container">
+            <div style="position: relative;">
+                <div id="vcms_navigation_container" class="clear_on_dark">
                     {% block navigation %}nav{% endblock navigation %}
                 </div>
-                <div id="vcms_content_container">
+                <div id="vcms_content_container" class="dark_on_clear">
                     {% block vcms_main_content %}
                     {% endblock vcms_main_content %}
                 </div>
+                <div class="clear"></div>
             </div>
         </div><!-- vcms_content_body -->
         
