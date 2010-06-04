@@ -377,6 +377,7 @@ div#vcms_content_container:
 NAVIGATION_WIDTH = 240px;
 LARGE_NAVIGATION_WIDTH = 274px;
 NAV_BORDER_STYLE = 1px solid #656565;
+NAV_BG_COLOR = #333333;
 body.large div#vcms_navigation_container:
     width: $LARGE_NAVIGATION_WIDTH;
 
@@ -390,7 +391,7 @@ div#vcms_navigation_container:
     border-right: $NAV_BORDER_STYLE;
     //float: left;
     background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
-    background-color: #333; 
+    background-color: $NAV_BG_COLOR; 
     position: absolute;
     top: 0px;
     bottom: 0px;
@@ -414,24 +415,13 @@ p.bottom_link:
     text-transform: uppercase;
     
     a:
-        //display: block;
+        width: 30%;
+        display: block;
+        background-color: $NAV_BG_COLOR;
         padding-right: 10px;
         margin-top: 1em;
-        background-position: 3px right;
-        background-repeat: no-repeat;
-        
-    &.onwhite:
-        a:
-            background-image: url(../images/link/arrow_onwhite.png);
-            color: $TEXTCOLOR_ONLIGHT;
-    &.onmedium:
-        a:
-            background-image: url(../images/link/arrow_onmedium.png);
-            color: #fff;
-    &.ondark:
-        a:
-            background-image: url(../images/link/arrow_ondark.png);
-            color: $TEXTCOLOR_ONDARK; 
+        background: url(../images/link/arrow_onmedium.png) 3px right no-repeat;
+        color: $TEXTCOLOR_ONDARK;
 
 
 body.large div#vcms_content_container:

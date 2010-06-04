@@ -439,24 +439,12 @@ p.bottom_link {
 }
 
 p.bottom_link a {
+  width: 30%;
+  display: block;
+  background-color: #333333;
   padding-right: 10px;
   margin-top: 1em;
-  background-position: 3px right;
-  background-repeat: no-repeat;
-}
-
-p.bottom_link.onwhite a {
-  background-image: url(../images/link/arrow_onwhite.png);
-  color: #707070;
-}
-
-p.bottom_link.onmedium a {
-  background-image: url(../images/link/arrow_onmedium.png);
-  color: #ffffff;
-}
-
-p.bottom_link.ondark a {
-  background-image: url(../images/link/arrow_ondark.png);
+  background: url(../images/link/arrow_onmedium.png) 3px right no-repeat;
   color: #cccccc;
 }
 
