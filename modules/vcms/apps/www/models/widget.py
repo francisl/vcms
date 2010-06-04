@@ -22,6 +22,9 @@ class WidgetWrapper(models.Model):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return widget.name
+
 
 class GridWidgetWrapper(WidgetWrapper):
     container = models.ForeignKey(GridContainer)
@@ -32,9 +35,6 @@ class GridWidgetWrapper(WidgetWrapper):
     
     class Meta:
         app_label = 'www'
-        
-    def __unicode__(self):
-        return widget.name
 
 
 class FloatWidgetWrapper(WidgetWrapper):
@@ -43,10 +43,7 @@ class FloatWidgetWrapper(WidgetWrapper):
     
     class Meta:
         app_label = 'www'
-        
-    def __unicode__(self):
-        return widget.name
-    
+
 
 # -----------------
 # WIDGETS
