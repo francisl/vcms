@@ -61,9 +61,9 @@ def InitPage(page_slug, app_slug):
             menu_style : Style used to display the menu in the master template
     """
 
-    debugtrace("Initpage - entry", page_slug)
+    #debugtrace("Initpage - entry", page_slug)
     current_page = MainMenu.objects.get_default_page()
-    debugtrace("Initpage - current page", current_page)
+    #debugtrace("Initpage - current page", current_page)
     #frm = inspect.stack()[1]
     #mod = inspect.getmodule(frm[0])
     #print '[%s] %s' % (mod.__name__, 'traceback')
@@ -72,15 +72,15 @@ def InitPage(page_slug, app_slug):
     # IF NOTHING SELECTED, GO FIRST MENU
     # ON ERROR RAISE 404
     if page_slug == None:
-        debugtrace("Initpage - get default", page_slug)
+        #debugtrace("Initpage - get default", page_slug)
         current_page = MainMenu.objects.get_default_page()
     # When Page slug i
     else:
-        debugtrace("Initpage - query page_slug", page_slug)
-        debugtrace("Initpage - query app_slug", app_slug)
+        #debugtrace("Initpage - query page_slug", page_slug)
+        #debugtrace("Initpage - query app_slug", app_slug)
         current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
         current_page = BasicPage.objects.get(slug=page_slug, app_slug=app_slug)
-        debugtrace("Initpage - current page", current_page)
+        #debugtrace("Initpage - current page", current_page)
 
     return setPageParameters(current_page)
     #except:
