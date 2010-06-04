@@ -413,17 +413,19 @@ div#vcms_navigation_container:
 p.bottom_link:
     text-align: right;
     text-transform: uppercase;
+
     
     a:
-        width: 30%;
-        display: block;
-        background-color: $NAV_BG_COLOR;
-        padding-right: 10px;
-        margin-top: 1em;
-        background: url(../images/link/arrow_onmedium.png) 3px right no-repeat;
+        //display: block;
+        padding: 0.4em;
         color: $TEXTCOLOR_ONDARK;
-
-
+        padding-right: 20px;
+        margin-top: 1em;
+        background: url(../images/link/arrow_onmedium.png);
+        background-position: 94% 50%;
+        background-repeat: no-repeat;
+        background-color: $NAV_BG_COLOR;
+        
 body.large div#vcms_content_container:
     width: $SITE_WIDTH-$LARGE_NAVIGATION_WIDTH-1;
     
