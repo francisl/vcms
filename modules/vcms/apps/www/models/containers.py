@@ -38,3 +38,12 @@ class GridContainer(BasicContainer):
     
     class Meta:
         app_label = 'www'
+
+
+class RelativeContainer(BasicContainer):
+    class Meta:
+        app_label = 'www'
+
+    def render(self):
+        content = { 'widgets': self.widgets }
+        render_to_response("containers/relative.html", content)
