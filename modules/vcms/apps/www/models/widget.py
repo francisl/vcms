@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 
 #from vcms.apps.www.managers.widget import ContentManager
-from vcms.apps.www.models.containers import FloatContainer, GridContainer
+from vcms.apps.www.models.containers import FloatContainer, GridContainer, RelativeContainer
 
 
 class WidgetWrapper(models.Model):
@@ -27,7 +27,7 @@ class WidgetWrapper(models.Model):
 
 
 class GridWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(GridContainer)
+    container = models.ForeignKey(GridContainer, related_name="widgets")
     row = models.IntegerField()
     col = models.IntegerField()
     row_span = models.IntegerField()
@@ -38,9 +38,17 @@ class GridWidgetWrapper(WidgetWrapper):
 
 
 class FloatWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(FloatContainer)
+    container = models.ForeignKey(FloatContainer, related_name="widgets")
     position = models.IntegerField(unique=True)
-    
+
+    class Meta:
+        app_label = 'www'
+
+
+class RelativeWidgetWrapper(WidgetWrapper):
+    container = models.ForeignKey(RelativeContainer, related_name="widgets")
+    position = models.IntegerField(unique=True)
+
     class Meta:
         app_label = 'www'
 
