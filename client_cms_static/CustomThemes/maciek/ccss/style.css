@@ -439,13 +439,14 @@ p.bottom_link {
 }
 
 p.bottom_link a {
-  width: 30%;
-  display: block;
-  background-color: #333333;
-  padding-right: 10px;
-  margin-top: 1em;
-  background: url(../images/link/arrow_onmedium.png) 3px right no-repeat;
+  padding: 0.4em;
   color: #cccccc;
+  padding-right: 20px;
+  margin-top: 1em;
+  background: url(../images/link/arrow_onmedium.png);
+  background-position: 94% 50%;
+  background-repeat: no-repeat;
+  background-color: #333333;
 }
 
 body.large div#vcms_content_container {
