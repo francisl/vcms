@@ -82,6 +82,10 @@ class BasicPage(models.Model):
 
     def _add_to_main_menu(self, root):
         root.add_child(menu_name=self.name, content_object=self)
+
+    @staticmethod
+    def get_containers():
+        raise NotImplementedError()
         
     def save(self):
         self.app_slug='www'
@@ -172,9 +176,17 @@ class Page(BasicPage):
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
+
 class MainPage(BasicPage):
     class Meta:
         app_label = 'www'
+
+    @staticmethod
+    def get_containers():
+        from vcms.apps.www.models.containers import GridContainer, FloatContainer, RelativeContainer
+        return { "navigation_container": RelativeContainer
+                    ,"main_content": GridContainer }
+
 
 class SimplePage(BasicPage):
     class Meta:

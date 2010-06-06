@@ -19,6 +19,7 @@ from vcms.apps.www.models.menu import MainMenu
 from vcms.apps.www.models.page import DashboardPage
 from vcms.apps.www.models.page import DashboardElement
 from vcms.apps.www.models.page import DashboardPreview
+from django.core.exceptions import ObjectDoesNotExist
 from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
@@ -79,7 +80,7 @@ def InitPage(page_slug, app_slug):
         #debugtrace("Initpage - query page_slug", page_slug)
         #debugtrace("Initpage - query app_slug", app_slug)
         current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
-        current_page = BasicPage.objects.get(slug=page_slug, app_slug=app_slug)
+        #current_page = BasicPage.objects.get(slug=page_slug, app_slug=app_slug)
         #debugtrace("Initpage - current page", current_page)
 
     return setPageParameters(current_page)
@@ -90,7 +91,21 @@ def Generic(request, page=None, context={}):
     #debugtrace("Generic", page)
     context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
-    
+
+    # Get the instance of the current page
+    current_page = context["page_info"]["current_page"]
+    page_instance = getattr(current_page, current_page.module.lower())
+
+    # Get the instance of the containers contained in the page
+    containers_types = page_instance.__class__.get_containers()
+    containers = dict()
+    for container_name, container_type in containers_types.items():
+        try:
+            containers.update((container_name, container_type.objects.get(page=current_page).render()))
+        except ObjectDoesNotExist:
+            pass
+    context.update({ "containers": containers })
+
     #print("context page_info ==== %s" % context["page_info"])
     
     if context["page_info"]['page'].module in globals():
