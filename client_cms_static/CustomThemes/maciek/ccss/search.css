@@ -3,7 +3,7 @@ div#search_form {
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 200px;
+  width: 240px;
   height: 50px;
   padding: 0;
   filter: alpha opacity=80;
@@ -24,10 +24,10 @@ div#search_form form {
 
 div#search_form input {
   position: relative;
-  width: 76%;
+  width: 72%;
   margin: 0;
   margin-top: 0px;
-  padding: 0;
+  padding: 0 0.6em;
   height: 20px;
   filter: alpha opacity=100;
   -moz-opacity: 1;
@@ -35,6 +35,7 @@ div#search_form input {
   opacity: 1;
   color: gray;
   float: left;
+  font-size: 1.2em;
 }
 
 div#search_form #search_submit {

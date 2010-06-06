@@ -8,7 +8,7 @@ div#mainnav:
     position: absolute; 
     //width: $MAIN_MENU_WIDTH;
     height: $MAIN_MENU_HEIGHT;
-    margin: -$MAIN_MENU_HEIGHT 0 $MAIN_MENU_HEIGHT auto;
+    margin: -$MAIN_MENU_HEIGHT-1 0 $MAIN_MENU_HEIGHT auto;
     padding: 0;
     right: 0;
     z-index: 20;
@@ -74,7 +74,9 @@ ul#mainmenu, ul.dropdown:
         padding: 0;
         margin: 0;
         cursor: pointer;
-        background:url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
+        background-image: url(../images/menu/main_menu_separator.jpg);
+        background-position: 0px "0px";
+        background-repeat: no-repeat;
         
         & > a:
             color: #c2c2c2;
@@ -88,15 +90,15 @@ ul#mainmenu, ul.dropdown:
             color: #b9ff3c; //light green
        
     & > li:hover:
-        background:url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
+        background-image: url(../images/menu/main_bg_hover.jpg);
             
     .large & > li:
-        background:url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;
+        background-image: url(../images/menu_large/main_menu_separator.jpg);
         
         &:hover a:
             color: #99ca3c;
         &:hover:
-            background:url(../images/menu_large/main_bg_hover.jpg) top left no-repeat;
+            background-image: url(../images/menu_large/main_bg_hover.jpg);
         
     
     
