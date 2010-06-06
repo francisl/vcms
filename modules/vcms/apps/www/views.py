@@ -19,6 +19,7 @@ from vcms.apps.www.models.menu import MainMenu
 from vcms.apps.www.models.page import DashboardPage
 from vcms.apps.www.models.page import DashboardElement
 from vcms.apps.www.models.page import DashboardPreview
+from django.core.exceptions import ObjectDoesNotExist
 from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
@@ -97,7 +98,12 @@ def Generic(request, page=None, context={}):
 
     # Get the instance of the containers contained in the page
     containers_types = page_instance.__class__.get_containers()
-    containers = [container_type.objects.get(page=page_instance) for container_type in containers_types]
+    containers = []
+    for container_type in containers_types:
+        try:
+            containers.append(container_type.objects.get(page=current_page))
+        except ObjectDoesNotExist:
+            pass
     context.update({ "containers": containers })
 
     #print("context page_info ==== %s" % context["page_info"])
