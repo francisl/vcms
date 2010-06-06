@@ -184,7 +184,8 @@ class MainPage(BasicPage):
     @staticmethod
     def get_containers():
         from vcms.apps.www.models.containers import GridContainer, FloatContainer, RelativeContainer
-        return (RelativeContainer, GridContainer, )
+        return { "navigation_container": RelativeContainer
+                    ,"main_content": GridContainer }
 
 
 class SimplePage(BasicPage):
