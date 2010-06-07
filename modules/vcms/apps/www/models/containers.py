@@ -25,7 +25,7 @@ class BasicContainer(models.Model):
 
 class ContainerDefinition:
     """ Defines the human name associated to a container type. """
-    name = _("BasicContainer")
+    name = _("Basic container")
     type = BasicContainer
 
     def __init__(self, name, type):
