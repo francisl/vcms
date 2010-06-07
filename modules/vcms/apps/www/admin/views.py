@@ -52,7 +52,7 @@ def UpdateMenu(request):
         response = HttpResponse("{returnvalue:0}")
             
     else:
-        reponse = HttpResponse("{returnvalue:2}")
+        response = HttpResponse("{returnvalue:2}")
     
     return response
 
