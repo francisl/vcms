@@ -2,5 +2,22 @@
 {% load i18n admin_modify adminmedia %}
 
 {% block after_related_objects %}
-CONTENT
+
+{% if opts.local_fields.0.model.get_containers %}
+    <h3>{% trans "Containers" %}</h3>
+    {% for container_name, container_definition in opts.local_fields.0.model.get_containers.items %}
+        <div>
+          <fieldset class="module aligned ">
+                <div class="form-row {{container_name}}">
+                        <div>
+                                <label for="id_name" class="required">{{container_definition.name}}</label>
+                                    <input name="name" value="Home" class="vTextField" maxlength="100" type="text" id="id_name" />
+                                <!--<p class="help">Help text.</p>-->
+                        </div>
+                </div>
+          </fieldset>
+        </div>
+    {% endfor %}
+{% endif %}
+
 {% endblock %}
