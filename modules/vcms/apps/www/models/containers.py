@@ -11,6 +11,7 @@ from vcms.apps.www.models.page import BasicPage
 from vcms.apps.www.managers.containers import BasicContainerManager
 from vcms.apps.www.managers.containers import GridContainerManager
 
+
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     page = models.ForeignKey(BasicPage)
@@ -20,6 +21,16 @@ class BasicContainer(models.Model):
     class Meta:
         abstract = True
         app_label = 'www'
+
+
+class ContainerDefinition:
+    """ Defines the human name associated to a container type. """
+    name = _("BasicContainer")
+    type = BasicContainer
+
+    def __init__(self, name, type):
+        self.name = name
+        self.type = type
 
 
 class FloatContainer(BasicContainer):
