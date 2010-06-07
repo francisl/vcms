@@ -80,6 +80,7 @@ HEADING_HEIGHT_LARGE = 96px
 body.large #vcms_header:
     height: $HEADING_HEIGHT_LARGE; 
     background: url(../images/heading/large/bg.jpg) bottom left repeat-x #131313;
+    border-bottom: 1px solid #b9ff3c;
 
 body.normal #vcms_header:
     height: $HEADING_HEIGHT;
@@ -91,7 +92,7 @@ body.normal #vcms_header:
     margin: 0 auto;
     padding: 0;
     z-index: 20;
-    border-bottom: 1px solid #b9ff3c;
+    //border-bottom: 1px solid #b9ff3c;
 
 body.large #vcms_header_logo:
     height: $HEADING_HEIGHT_LARGE;
