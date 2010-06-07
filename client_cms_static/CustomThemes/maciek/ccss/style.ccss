@@ -484,7 +484,7 @@ div.vcms_column_container:
             background-position: bottom right;
             background-repeat: no-repeat;
             
-div.grid_container:
+div.table_container:
     background-color: #ffffff;
         
     table:
@@ -541,15 +541,24 @@ div.small_media_preview:
 p.bottom_link:
     text-align: right;
     text-transform: uppercase;
-    
+
     a:
         //display: block;
         padding: 0.4em;
-        color: $TEXTCOLOR_ONDARK;
         padding-right: 20px;
         padding-left: 1em;
         margin-top: 1em;
-        background: url(../images/link/arrow_onmedium.png);
         background-position: 94% 50%;
         background-repeat: no-repeat;
-        background-color: $NAV_BG_COLOR;
+        //background-color: $NAV_BG_COLOR;
+        
+    .dark_bg &:
+        a:
+            color: $TEXTCOLOR_ONDARK;
+            background-image: url(../images/link/arrow_clear.png);
+    
+    .clear_bg &:
+        a:
+            color: $TEXTCOLOR_ONLIGHT;
+            background-image: url(../images/link/arrow_dark.png);
+            
