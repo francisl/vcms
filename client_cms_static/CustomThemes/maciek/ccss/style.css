@@ -84,6 +84,7 @@ body hr {
 body.large #vcms_header {
   height: 96px;
   background: url(../images/heading/large/bg.jpg) bottom left repeat-x #131313;
+  border-bottom: 1px solid #b9ff3c;
 }
 
 body.normal #vcms_header {
@@ -97,7 +98,6 @@ body.normal #vcms_header {
   margin: 0 auto;
   padding: 0;
   z-index: 20;
-  border-bottom: 1px solid #b9ff3c;
 }
 
 body.large #vcms_header_logo {
@@ -509,17 +509,17 @@ div.vcms_column_container table td.col2 {
   background-repeat: no-repeat;
 }
 
-div.grid_container {
+div.table_container {
   background-color: #ffffff;
 }
 
-div.grid_container table td {
+div.table_container table td {
   vertical-align: top;
   padding: 1.2em;
   width: 64%;
 }
 
-div.grid_container table td.col2 {
+div.table_container table td.col2 {
   width: 35%;
 }
 
@@ -579,12 +579,19 @@ p.bottom_link {
 
 p.bottom_link a {
   padding: 0.4em;
-  color: #cccccc;
   padding-right: 20px;
   padding-left: 1em;
   margin-top: 1em;
-  background: url(../images/link/arrow_onmedium.png);
   background-position: 94% 50%;
   background-repeat: no-repeat;
-  background-color: #333333;
+}
+
+.dark_bg p.bottom_link a {
+  color: #cccccc;
+  background-image: url(../images/link/arrow_clear.png);
+}
+
+.clear_bg p.bottom_link a {
+  color: #707070;
+  background-image: url(../images/link/arrow_dark.png);
 }
