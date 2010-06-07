@@ -99,9 +99,9 @@ def Generic(request, page=None, context={}):
     # Get the instance of the containers contained in the page
     containers_types = page_instance.__class__.get_containers()
     containers = dict()
-    for container_name, container_type in containers_types.items():
+    for container_name, container_definition in containers_types.items():
         try:
-            containers.update((container_name, container_type.objects.get(page=current_page).render()))
+            containers.update((container_name, container_definition.type.objects.get(page=current_page).render()))
         except ObjectDoesNotExist:
             pass
     context.update({ "containers": containers })
