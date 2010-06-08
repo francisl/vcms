@@ -394,7 +394,7 @@ body.normal div#vcms_navigation_container:
 
 TEXTCOLOR_ONDARK=#cccccc;
 TEXTCOLOR_ONLIGHT=#707070;
-div#vcms_navigation_container:
+div#vcms_navigation_container, div.vcms_navigation_container:
     border-bottom: $NAV_BORDER_STYLE;
     border-right: $NAV_BORDER_STYLE;
     //float: left;
