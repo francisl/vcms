@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 
 #from vcms.apps.www.managers.widget import ContentManager
-from vcms.apps.www.models.containers import FloatContainer, GridContainer, RelativeContainer
+from vcms.apps.www.models.containers import TableContainer, GridContainer, RelativeContainer
 
 
 class WidgetWrapper(models.Model):
@@ -21,13 +21,15 @@ class WidgetWrapper(models.Model):
 
     class Meta:
         abstract = True
+        verbose_name = "Widget Wrapper"
+        verbose_name_plural = "Widget Wrappers"
 
     def __unicode__(self):
-        return widget.name
+        return 'Widget - ' + widget.name
 
 
-class GridWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(GridContainer, related_name="widgets")
+class TableWidgetWrapper(WidgetWrapper):
+    container = models.ForeignKey(TableContainer, related_name="widgets")
     row = models.IntegerField()
     col = models.IntegerField()
     row_span = models.IntegerField()
@@ -35,14 +37,17 @@ class GridWidgetWrapper(WidgetWrapper):
     
     class Meta:
         app_label = 'www'
+        verbose_name = "Widget Wrapper - Table"
+        verbose_name_plural = "Widget Wrapper - Table"
 
-
-class FloatWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(FloatContainer, related_name="widgets")
+class GridWidgetWrapper(WidgetWrapper):
+    container = models.ForeignKey(GridContainer, related_name="widgets")
     position = models.IntegerField(unique=True)
 
     class Meta:
         app_label = 'www'
+        verbose_name = "Widget Wrapper - Grid"
+        verbose_name_plural = "Widget Wrapper - Grid"
 
 
 class RelativeWidgetWrapper(WidgetWrapper):
@@ -51,6 +56,8 @@ class RelativeWidgetWrapper(WidgetWrapper):
 
     class Meta:
         app_label = 'www'
+        verbose_name = "Widget Wrapper - Relative"
+        verbose_name_plural = "Widget Wrapper - Relative"
 
 
 # -----------------
@@ -82,7 +89,7 @@ class Widget(models.Model):
 
 # -- CONTENT
 # ----------
-class ContentWidget(Widget):
+class TextWidget(Widget):
     #CONTENT
     excerpt = models.TextField(verbose_name="Preview")
     content = models.TextField()
@@ -114,7 +121,8 @@ class ContentWidget(Widget):
         render_to_response("widget/content.html", content)
     
     class Meta:
-        verbose_name_plural = "Page content"
+        verbose_name= "Widget - Text"
+        verbose_name_plural = "Widget - Text"
         ordering = [ 'date']
         app_label = 'www'
     

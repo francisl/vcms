@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from vcms.apps.www.models.page import BasicPage
 from vcms.apps.www.managers.containers import BasicContainerManager
-from vcms.apps.www.managers.containers import GridContainerManager
+from vcms.apps.www.managers.containers import TableContainerManager
 
 
 class BasicContainer(models.Model):
@@ -21,7 +21,8 @@ class BasicContainer(models.Model):
     class Meta:
         abstract = True
         app_label = 'www'
-
+        verbose_name = "Container - Basic"
+        verbose_name_plural = "Container - Basic"
 
 class ContainerDefinition:
     """ Defines the human name associated to a container type. """
@@ -32,27 +33,31 @@ class ContainerDefinition:
         self.name = name
         self.type = type
 
-
-class FloatContainer(BasicContainer):
+class GridContainer(BasicContainer):
     ORIENTATION_CHOICES = (('left', _('Left'))
                            ,('right', _('Right'))
                            )
     float_orientation = models.CharField(max_length=10, default=ORIENTATION_CHOICES[0], choices=ORIENTATION_CHOICES)
     class Meta:
         app_label = 'www'
+        verbose_name = "Container - Grid"
+        verbose_name_plural = "Container - Grid"
 
-
-class GridContainer(BasicContainer):
+class TableContainer(BasicContainer):
     maximum_column = models.PositiveIntegerField(default=3, help_text="How many column are available")
     
-    objects = GridContainerManager()
+    objects = TableContainerManager()
     class Meta:
         app_label = 'www'
+        verbose_name = "Container - Table"
+        verbose_name_plural = "Container - Table"
 
 
 class RelativeContainer(BasicContainer):
     class Meta:
         app_label = 'www'
+        verbose_name = "Container - Relative"
+        verbose_name_plural = "Container - Relative"
 
     def render(self):
         content = { 'widgets': self.widgets }

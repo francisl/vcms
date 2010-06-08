@@ -12,6 +12,10 @@ class BasicContainerManager(models.Manager):
         raise NotImplementedError
 
 
+class TableContainerManager(BasicContainerManager):
+    def get_widgets(self):
+        return self.grid_widget.all()
+    
 class GridContainerManager(BasicContainerManager):
     def get_widgets(self):
         return self.grid_widget.all()

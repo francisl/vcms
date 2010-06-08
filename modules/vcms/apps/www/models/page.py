@@ -8,6 +8,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
+from django.db.models import signals
 
 from treebeard.ns_tree import NS_Node
 
@@ -187,6 +188,13 @@ class MainPage(BasicPage):
         return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
                     ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
 
+def pre_MainPage(instance, **kargs):
+    print("!!! entering PRE_SAVE for MainPage")
+    print("instance = %s" % instance)
+    print("**kargs = %s" % kargs)
+    print("**kargs = %s" % kargs['signal'])
+
+signals.pre_save.connect(pre_MainPage, sender=MainPage)
 
 class SimplePage(BasicPage):
     class Meta:

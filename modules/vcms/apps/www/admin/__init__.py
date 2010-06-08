@@ -10,6 +10,7 @@ from django.conf import settings
 
 from vcms.apps.www.models import *
 from vcms.apps.www.models.page import *
+from vcms.apps.www.models.containers import *
 #from vcms.apps.www.models.menu import PageMenu
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -60,6 +61,54 @@ class SimplePageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [ContentInline]
 admin.site.register(SimplePage, SimplePageAdmin)
+
+
+## ################
+## CONTAINERS
+#class BasicContainerAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(BasicContainer, BasicContainerAdmin)
+
+class GridContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(GridContainer, GridContainerAdmin)
+
+class TableContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TableContainer, TableContainerAdmin)
+
+class RelativeContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(RelativeContainer, RelativeContainerAdmin)
+
+
+## ################
+## WIDGETS
+class WidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
+
+class GridWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(GridWidgetWrapper, GridWidgetWrapperAdmin)
+
+class TableWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
+
+class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
+
+class WidgetAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Widget, WidgetAdmin)
+
+class TextWidgetAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TextWidget, TextWidgetAdmin)
+
+
 
 """
 NEED TO BE REDONE
