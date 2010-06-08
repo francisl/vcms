@@ -1,4 +1,5 @@
 from django import template
+from django.template import Node
 from vcms.apps.www.models.page import Page
 
 register = template.Library()
@@ -30,3 +31,53 @@ def show_menu_table(lang='en'):
     """
     
     return locals()
+
+
+class get_fields_for_class_node(Node):
+    def __init__(self, type, args, kwargs, asvar):
+        self.type = type
+        self.args = args
+        self.kwargs = kwargs
+        self.asvar = asvar
+
+    def render(self, context):
+        from django.core.urlresolvers import reverse, NoReverseMatch
+        args = [arg.resolve(context) for arg in self.args]
+        kwargs = dict([(smart_str(k,'ascii'), v.resolve(context))
+                       for k, v in self.kwargs.items()])
+        fields = context[self.type]._meta.fields
+        if self.asvar:
+            context[self.asvar] = fields
+            return ''
+        else:
+            return fields
+
+
+def get_fields_for_class(parser, token):
+    """ Returns the list of fields contained in the specified class. """
+    bits = token.split_contents()
+    if len(bits) < 2:
+        raise TemplateSyntaxError("'%s' takes at least one argument"
+                                  " (path to a view)" % bits[0])
+    type = bits[1]
+    args = []
+    kwargs = {}
+    asvar = None
+    bits = bits[2:]
+    if len(bits) >= 2 and bits[-2] == 'as':
+        asvar = bits[-1]
+        bits = bits[:-2]
+    # Now all the bits are parsed into new format,
+    # process them as template vars
+    if len(bits):
+        for bit in bits:
+            match = kwarg_re.match(bit)
+            if not match:
+                raise TemplateSyntaxError("Malformed arguments to get_fields_for_class tag")
+            name, value = match.groups()
+            if name:
+                kwargs[name] = parser.compile_filter(value)
+            else:
+                args.append(parser.compile_filter(value))
+    return get_fields_for_class_node(type, args, kwargs, asvar)
+get_fields_for_class = register.tag(get_fields_for_class)

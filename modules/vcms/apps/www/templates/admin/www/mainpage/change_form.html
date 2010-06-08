@@ -1,5 +1,6 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_modify adminmedia %}
+{% load admin_extras %}
 
 {% block after_related_objects %}
 
@@ -8,13 +9,25 @@
     {% for container_name, container_definition in opts.local_fields.0.model.get_containers.items %}
         <div>
           <fieldset class="module aligned ">
-                <div class="form-row {{container_name}}">
-                        <div>
-                                <label for="id_name" class="required">{{container_definition.name}}</label>
-                                    <input name="name" value="Home" class="vTextField" maxlength="100" type="text" id="id_name" />
+            <div class="form-row {{container_name}}">
+                <div>
+                  <label for="id_name" class="required">{{container_definition.name}}</label>
+                  <fieldset class="module aligned ">
+                    {% with container_definition.type as container_type %}
+                        {% get_fields_for_class container_type as fields %}
+                        {% for field in fields %}
+                          <div class="form-row {{field.name}}">
+                            <div>
+                              <label for="id_name" class="required">{{field.name}}:</label>
+                                <input name="name" value="Home" class="vTextField" maxlength="100" type="text" id="id_name" />
                                 <!--<p class="help">Help text.</p>-->
-                        </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                    {% endwith %}
+                  </fieldset>
                 </div>
+            </div>
           </fieldset>
         </div>
     {% endfor %}
