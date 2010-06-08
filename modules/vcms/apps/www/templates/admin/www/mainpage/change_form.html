@@ -1,6 +1,14 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_modify adminmedia %}
+{% load compress %}
 {% load admin_extras %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% compress css %}
+        <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/admin.ccss" type="text/css" charset="utf-8">
+    {% endcompress %}
+{% endblock %}
 
 {% block after_related_objects %}
 
@@ -12,20 +20,31 @@
             <div class="form-row {{container_name}}">
                 <div>
                   <label for="id_name" class="required">{{container_definition.name}}</label>
-                  <fieldset class="module aligned ">
                     {% with container_definition.type as container_type %}
-                        {% get_fields_for_class container_type as fields %}
-                        {% for field in fields %}
-                          <div class="form-row {{field.name}}">
-                            <div>
-                              <label for="id_name" class="required">{{field.name}}:</label>
-                                <input name="name" value="Home" class="vTextField" maxlength="100" type="text" id="id_name" />
-                                <!--<p class="help">Help text.</p>-->
-                            </div>
-                          </div>
-                        {% endfor %}
+                        {% get_editable_container_fields container_type as fields %}
+                        {% if fields %}
+                          <fieldset class="container_attributes module aligned ">
+                            {% for field in fields %}
+                              <div class="form-row {{field.name}}">
+                                <div>
+                                  <label for="id_name" class="required">{{field.name}}:</label>
+                                    <input name="name" value="Home" class="vTextField" maxlength="100" type="text" id="id_name" />
+                                    <!--<p class="help">Help text.</p>-->
+                                </div>
+                              </div>
+                            {% endfor %}
+                          </fieldset>
+                        {% endif %}
                     {% endwith %}
-                  </fieldset>
+                    <fieldset class="widgets_attributes module aligned ">
+                        <div class="addwidget form-row ">
+                            <div>
+                                <select name="widgets">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
           </fieldset>
