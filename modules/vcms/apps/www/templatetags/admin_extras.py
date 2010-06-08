@@ -33,7 +33,7 @@ def show_menu_table(lang='en'):
     return locals()
 
 
-class get_fields_for_class_node(Node):
+class get_editable_container_fields_node(Node):
     def __init__(self, type, args, kwargs, asvar):
         self.type = type
         self.args = args
@@ -45,7 +45,10 @@ class get_fields_for_class_node(Node):
         args = [arg.resolve(context) for arg in self.args]
         kwargs = dict([(smart_str(k,'ascii'), v.resolve(context))
                        for k, v in self.kwargs.items()])
-        fields = context[self.type]._meta.fields
+        # Hide the field if it is not editable, is auto created or is one of the fields inherited from BasicPage
+        from vcms.apps.www.models.page import BasicPage
+        basicpage_fields = [field.attname for field in BasicPage._meta.fields]
+        fields = [field for field in context[self.type]._meta.fields if field.editable and not field.auto_created and field.attname != "page_id" and field.attname not in basicpage_fields]
         if self.asvar:
             context[self.asvar] = fields
             return ''
@@ -53,7 +56,7 @@ class get_fields_for_class_node(Node):
             return fields
 
 
-def get_fields_for_class(parser, token):
+def get_editable_container_fields(parser, token):
     """ Returns the list of fields contained in the specified class. """
     bits = token.split_contents()
     if len(bits) < 2:
@@ -73,11 +76,11 @@ def get_fields_for_class(parser, token):
         for bit in bits:
             match = kwarg_re.match(bit)
             if not match:
-                raise TemplateSyntaxError("Malformed arguments to get_fields_for_class tag")
+                raise TemplateSyntaxError("Malformed arguments to get_editable_container_fields tag")
             name, value = match.groups()
             if name:
                 kwargs[name] = parser.compile_filter(value)
             else:
                 args.append(parser.compile_filter(value))
-    return get_fields_for_class_node(type, args, kwargs, asvar)
-get_fields_for_class = register.tag(get_fields_for_class)
+    return get_editable_container_fields_node(type, args, kwargs, asvar)
+get_editable_container_fields = register.tag(get_editable_container_fields)
