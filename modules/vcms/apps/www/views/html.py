@@ -95,16 +95,16 @@ def Generic(request, page=None, context={}):
     # Get the instance of the current page
     current_page = context["page_info"]["current_page"]
     page_instance = getattr(current_page, current_page.module.lower())
-
+    print("page instance : %s " % page_instance)
     # Get the instance of the containers contained in the page
-    containers_types = page_instance.__class__.get_containers()
-    containers = dict()
-    for container_name, container_definition in containers_types.items():
-        try:
-            containers.update((container_name, container_definition.type.objects.get(page=current_page).render()))
-        except ObjectDoesNotExist:
-            pass
-    context.update({ "containers": containers })
+    containers_types = page_instance.get_containers()
+    #containers = dict()
+    #for container_name, container_definition in containers_types.items():
+    #    try:
+    #        containers.update((container_name, container_definition.type.objects.get(page=current_page).render()))
+    #    except ObjectDoesNotExist:
+    #        pass
+    context.update({ "containers": containers_types })
 
     #print("context page_info ==== %s" % context["page_info"])
     
@@ -120,7 +120,13 @@ def MainPage(request, context={}):
     return render_to_response('master_large.html',
                               context,
                               context_instance=RequestContext(request))
+
+def BlankPage(request, context={}):
+    return render_to_response('master.html',
+                              context,
+                              context_instance=RequestContext(request))
     
+        
     
 def Simple(request, context={}):
     print("simple page context : %s" % context["page_info"]['page'])

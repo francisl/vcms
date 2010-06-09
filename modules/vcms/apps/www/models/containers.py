@@ -46,7 +46,6 @@ class GridContainer(BasicContainer):
 class TableContainer(BasicContainer):
     maximum_column = models.PositiveIntegerField(default=3, help_text="How many column are available")
     
-    
     objects = TableContainerManager()
     
     class Meta:

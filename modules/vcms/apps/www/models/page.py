@@ -182,6 +182,10 @@ class MainPage(BasicPage):
     class Meta:
         app_label = 'www'
 
+    def save(self):
+        self.module = 'MainPage'
+        super(BlankPage, self).save()
+        
     @staticmethod
     def get_containers():
         from vcms.apps.www.models.containers import ContainerDefinition
@@ -197,12 +201,30 @@ def pre_MainPage(instance, **kargs):
     print("**kargs = %s" % kargs)
     print("**kargs = %s" % kargs['signal'])
 
-signals.pre_save.connect(pre_MainPage, sender=MainPage)
+#signals.pre_save.connect(pre_MainPage, sender=MainPage)
+
+class BlankPage(BasicPage):
+    class Meta:
+        verbose_name = "Page - Blank page"
+        verbose_name_plural = "Page - Blank pages"
+        app_label = 'www'
+
+    def save(self):
+        self.module = 'BlankPage'
+        super(BlankPage, self).save()
+        
+    def get_containers(self):
+        from vcms.apps.www.models.containers import RelativeContainer
+        my_rel_cont = {} 
+        for container in RelativeContainer.objects.filter(page=self): 
+            my_rel_cont[container.name] = container
+        return my_rel_cont
+        
 
 class SimplePage(BasicPage):
     class Meta:
-        verbose_name = "Simple page"
-        verbose_name_plural = "Simple pages"
+        verbose_name = "Page - Simple page"
+        verbose_name_plural = "Page - Simple pages"
         app_label = 'www'
 
     def save(self):

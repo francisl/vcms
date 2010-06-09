@@ -49,18 +49,23 @@ admin.site.register(BasicPage, BasicPageAdmin)
 
 class MainPageAdmin(admin.ModelAdmin):
     pass
-    #prepopulated_fields = {"slug": ("name",)}
-    #list_display = ('name','module','status','language',)
+    
 admin.site.register(MainPage, MainPageAdmin)
+
+class BlankPageAdmin(admin.ModelAdmin):
+    pass
+    
+admin.site.register(BlankPage, BlankPageAdmin)
+
 
 class ContentInline(admin.StackedInline):
     model = Content
     extra = 1
     
-class SimplePageAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    inlines = [ContentInline]
-admin.site.register(SimplePage, SimplePageAdmin)
+#class SimplePageAdmin(admin.ModelAdmin):
+#    prepopulated_fields = {"slug": ("name",)}
+#    inlines = [ContentInline]
+#admin.site.register(SimplePage, SimplePageAdmin)
 
 
 ## ################
