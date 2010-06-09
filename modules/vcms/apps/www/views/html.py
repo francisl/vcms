@@ -95,9 +95,10 @@ def Generic(request, page=None, context={}):
     # Get the instance of the current page
     current_page = context["page_info"]["current_page"]
     page_instance = getattr(current_page, current_page.module.lower())
-    print("page instance : %s " % page_instance)
+    
     # Get the instance of the containers contained in the page
     containers_types = page_instance.get_containers()
+    
     #containers = dict()
     #for container_name, container_definition in containers_types.items():
     #    try:
@@ -122,6 +123,8 @@ def MainPage(request, context={}):
                               context_instance=RequestContext(request))
 
 def BlankPage(request, context={}):
+    content_container = context["containers"]["Content"]
+    #content_container
     return render_to_response('master.html',
                               context,
                               context_instance=RequestContext(request))

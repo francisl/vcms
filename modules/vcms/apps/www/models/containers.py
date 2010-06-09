@@ -23,6 +23,9 @@ class BasicContainer(models.Model):
         app_label = 'www'
         verbose_name = "Container - Basic"
         verbose_name_plural = "Container - Basic"
+        
+    def __unicode__(self):
+        return self.name
 
 class ContainerDefinition:
     """ Defines the human name associated to a container type. """

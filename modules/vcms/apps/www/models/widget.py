@@ -25,7 +25,7 @@ class WidgetWrapper(models.Model):
         verbose_name_plural = "Widget Wrappers"
 
     def __unicode__(self):
-        return 'Widget - ' + widget.name
+        return 'Widget - ' + self.widget.name
 
 
 class TableWidgetWrapper(WidgetWrapper):

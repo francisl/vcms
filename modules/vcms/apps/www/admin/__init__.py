@@ -110,7 +110,7 @@ class WidgetAdmin(admin.ModelAdmin):
 admin.site.register(Widget, WidgetAdmin)
 
 class TextWidgetAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'id')
 admin.site.register(TextWidget, TextWidgetAdmin)
 
 
