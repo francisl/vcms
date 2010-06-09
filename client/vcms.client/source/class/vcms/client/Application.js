@@ -65,8 +65,16 @@ qx.Class.define("vcms.client.Application",
       // Left container
       var left_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 300 });
       main_container.add(left_container);
+      var buttons_groupbox = new qx.ui.groupbox.GroupBox("Pages");
+      buttons_groupbox.setLayout(new qx.ui.layout.VBox());
+      left_container.add(buttons_groupbox);
+      var radiogroup = new qx.ui.form.RadioGroup();
       for (i = 0, n = 15; i < n; i++)
-        left_container.add(new qx.ui.form.Button("Button #" + i));
+      {
+        var radiobutton = new qx.ui.form.RadioButton("Button #" + i);
+        radiogroup.add(radiobutton);
+        buttons_groupbox.add(radiobutton);
+      }
       var buttons_left_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 5 }));
       left_container.add(buttons_left_container);
       buttons_left_container.add(new qx.ui.form.Button("Add a simple page"));
