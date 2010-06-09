@@ -1,0 +1,16 @@
+<div id="search_form" class="detailed_search_form">
+    <form method="get" action="/www/search/" >
+	   <input id="search_text_input" type="text" name="q" value="Search" onfocus="inputbox_manager.clear_input_on_focus(this)" onblur="inputbox_manager.reset_input_when_unfocus(this)" />
+	   <button type="submit" name="search" id="search_submit" value="">
+	       <span id="search_submit_img" /></span></button>
+	       
+	  <div class="search_scope">
+	   <input type="radio" name="search_scope" id="site">
+        <label for="site">Entire Site</label>
+        <input type="radio" name="search_scope" id="library">
+        <label for="library">Library</label>
+        <div class="clear"></div>
+      </div>
+    </form>
+</div>
+
