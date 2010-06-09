@@ -115,10 +115,8 @@ class TextWidget(Widget):
     #objects = ContentManager()
     
     def render(self):
-        print('width %s' % str(self.WIDTH_CHOICES[self.width_mesure][1]))
         content = { 'name': self.name
                    ,'content' : self.content
-                   #self.WIDTH_CHOICES[self.width_mesure][1]
                    ,'width': str(self.width)+str(self.WIDTH_CHOICES[self.width_mesure][1])
                    ,'style': self.style
                    }
