@@ -56,20 +56,38 @@ qx.Class.define("vcms.client.Application",
         Below is your actual application code...
       -------------------------------------------------------------------------
       */
-
-      // Create a button
-      var button1 = new qx.ui.form.Button("First Button", "vcms/client/test.png");
-
-      // Document is the application root
+      
       var doc = this.getRoot();
-			
-      // Add button to document at fixed coordinates
-      doc.add(button1, {left: 100, top: 50});
-
-      // Add an event listener
-      button1.addListener("execute", function(e) {
-        alert("Hello World!");
-      });
+      
+      var main_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 10 }));
+      doc.add(main_container);
+      
+      // Left container
+      var left_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 300 });
+      main_container.add(left_container);
+      for (i = 0, n = 15; i < n; i++)
+          left_container.add(new qx.ui.form.Button("Button #" + i));
+      var buttons_left_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 5 }));
+      left_container.add(buttons_left_container);
+      buttons_left_container.add(new qx.ui.form.Button("Add a simple page"));
+      buttons_left_container.add(new qx.ui.form.Button("Add a main page"));
+      buttons_left_container.add(new qx.ui.form.Button("Add a news page"));
+      
+      // Center container
+      var center_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 400 });
+      main_container.add(center_container);
+      center_container.add(new qx.ui.form.List());
+      center_container.add(new qx.ui.form.Button("Remove widget from page"));
+      
+      // Right container
+      var right_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 150 });
+      main_container.add(right_container);
+      right_container.add(new qx.ui.form.List());
+      right_container.add(new qx.ui.form.Button("Add widget to page"));
+    },
+    members :
+    {
+      
     }
   }
 });
