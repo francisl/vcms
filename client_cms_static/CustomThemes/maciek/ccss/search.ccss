@@ -6,51 +6,34 @@ PADDING = 0px;
 NAVIGATION_WIDTH = 280px-(2*$PADDING);
 HEIGHT = 52px-(2*$PADDING);
 div#search_form:
-    background-color: #111111;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: $NAVIGATION_WIDTH-40px;
-    height: 50px;
     padding: 0;
-    filter: alpha(opacity=80);
-    -moz-opacity: .8;
-    KhtmlOpacity: .8;
-    opacity: .8;
     z-index: 15;
-    
-        
+
     p:
         font-family: Verdana, Arial;
         
     form:
         position: relative;
-        margin: 12px 10px;
+        margin: 12px 10px 04px 10px;
 
-    input:
+    input#search_text_input:
         position: relative;
         width: 72%;
         margin: 0;
         margin-top: 0px;
         padding: 0 0.6em;
         height: 20px;
-        filter: alpha(opacity=100);
-        -moz-opacity: 1;
-        KhtmlOpacity: 1;
-        opacity: 1;
         color: gray;
         float: left;
-        font-size: 1.2em;
-        
         
     #search_submit:
         background-color: #333;
         background-image: url(../images/button/input_bg.jpg)
         background-repeat: repeat-x;
-        background-position: top left;
+        background-position: 0px 0px;
         color: #b9ff3c;
         border: none;
-        height: 24px;
+        height: 26px;
         margin: 0;
         margin-top: 0px;
         margin-left: 0px;
@@ -73,7 +56,42 @@ div#search_form:
         display: block;
         margin: 0 auto;
         background-image : url(../images/search/button.png);
-        
+
+NAV_BORDER_STYLE = 1px solid #656565;
+div.simple_search_form:
+    background-color: #111111;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: $NAVIGATION_WIDTH-40px;
+    height: 50px;
+    filter: alpha(opacity=80);
+    -moz-opacity: .8;
+    KhtmlOpacity: .8;
+    opacity: .8;
+    
+    input#search_text_input:
+        font-size: 1.2em;
+    
+div.detailed_search_form:
+    input#search_text_input:
+        font-size: 1em;
+            
+    div.search_scope:
+        text-align: left;
+        margin: 0;
+        padding: 0 0.4em 0 0.6em;
 
         
+        input, label:
+            float: left;
+            margin-top: 1em;
+            font-weight: normal;
+            font-size: 0.8em; 
+        input:
+            width: 6%;
+    
+    background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
+    border-bottom: $NAV_BORDER_STYLE; 
+
         

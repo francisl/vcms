@@ -1,6 +1,12 @@
 {% extends "master_frame.html" %}
+{% load search_widget %}
 
 {% block bodyclass %}large{% endblock bodyclass %}
+
+{% block vcms_content_header %}
+    {% show_search_box %}
+    {{ block.super }}
+{% endblock vcms_content_header %}
 
 <!--=========NAVIGATION=========== -->
 {% block navigation %}
@@ -16,7 +22,7 @@
 {% endblock navigation %}
 
 {% block vcms_main_content %}
-    <div class="table_container clear_bg">
+    <div class="vcms_container_table clear_bg">
 	    <table>
 		   <tr><td>
 		      <div>

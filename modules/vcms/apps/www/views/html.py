@@ -123,9 +123,11 @@ def MainPage(request, context={}):
                               context_instance=RequestContext(request))
 
 def BlankPage(request, context={}):
+    from vcms.apps.www.models.widget import RelativeWidgetWrapper
     content_container = context["containers"]["Content"]
-    #content_container
-    return render_to_response('master.html',
+    ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
+    context.update(content_widgets = ContentWidgets)
+    return render_to_response('simple.html',
                               context,
                               context_instance=RequestContext(request))
     

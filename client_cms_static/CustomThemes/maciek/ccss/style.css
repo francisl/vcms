@@ -471,24 +471,16 @@ div.container_absolute > div {
   position: absolute;
 }
 
-div.container_relative {
+div.vcms_container_grid {
   position: relative;
 }
 
-div.container_relative > div {
-  position: relative;
-}
-
-div.vcms_float_container {
-  position: relative;
-}
-
-div.vcms_float_container > div {
+div.vcms_container_grid > div {
   position: relative;
   float: left;
 }
 
-div#header_content_container {
+div#vcms_container_header_content {
   position: relative;
   width: 100%;
   border-bottom: thin solid #b9ff3c;
@@ -520,17 +512,25 @@ div.vcms_column_container table td.col2 {
   background-repeat: no-repeat;
 }
 
-div.table_container {
+div.vcms_container_relative {
+  margin: 3.2em;
+}
+
+div.vcms_container_relative p {
+  margin-left: 0px;
+}
+
+div.vcms_container_table {
   background-color: #ffffff;
 }
 
-div.table_container table td {
+div.vcms_container_table table td {
   vertical-align: top;
   padding: 1.2em;
   width: 64%;
 }
 
-div.table_container table td.col2 {
+div.vcms_container_table table td.col2 {
   width: 35%;
 }
 
@@ -581,6 +581,39 @@ div.small_media_preview div.thumbnail img {
   width: 97px;
   height: 77px;
   float: left;
+}
+
+dl.content_def_link {
+  width: 200px;
+}
+
+dl.content_def_link dt {
+  margin-bottom: 0.6em;
+  font-style: italic;
+}
+
+dl.content_def_link dt,
+dl.content_def_link a {
+  font-size: 1em;
+  color: #929292;
+}
+
+dl.content_def_link dd {
+  border-left: 1px solid #929292;
+  border-top: 1px solid #929292;
+  border-bottom: 1px solid #929292;
+  text-align: right;
+  margin: 0;
+  background-image: url(../images/link/arrow_dark.png);
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  margin-top: -1px;
+  padding: 0.2em 0;
+}
+
+dl.content_def_link a {
+  display: block;
+  padding-right: 20px;
 }
 
 p.bottom_link {

@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from vcms.apps.www.models.page import BasicPage
 from vcms.apps.www.managers.containers import BasicContainerManager
 from vcms.apps.www.managers.containers import TableContainerManager
-
+from vcms.apps.www.managers.containers import RelativeContainerManager
+from vcms.apps.www.managers.containers import GridContainerManager
 
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
@@ -58,6 +59,8 @@ class TableContainer(BasicContainer):
 
 
 class RelativeContainer(BasicContainer):
+    objects = RelativeContainerManager()
+    
     class Meta:
         app_label = 'www'
         verbose_name = "Container - Relative"

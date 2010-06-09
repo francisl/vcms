@@ -1,6 +1,6 @@
 {% load www_extras %}
 {% load banner_widget %}
-{% load search_widget %}
+
 {% load compress %}
 {% load i18n %}
 {% load quicklinks %}
@@ -66,25 +66,31 @@
         {% endifequal %}
         
         <!--=========content=========== -->
+        
         <div id="vcms_content_body">
-            <div id="header_content_container">
+        {% block vcms_content_body %}
+            <div id="vcms_container_header_content">
             {% block vcms_content_header %}
-              {% show_search_box %}
               {% if page_info %}
                   {% show_banner page_info.current_page MEDIA_URL %}
               {% endif %}
             {% endblock vcms_content_header %}
             </div>
             <div style="position: relative;">
+                {% block remove_navigation %}
                 <div id="vcms_navigation_container" class="dark_bg">
-                    {% block navigation %}nav{% endblock navigation %}
+                    {% block navigation %}
+                    
+                    {% endblock navigation %}
                 </div>
+                {% endblock remove_navigation %}
                 <div id="vcms_content_container" class="dark_on_clear">
                     {% block vcms_main_content %}
                     {% endblock vcms_main_content %}
                 </div>
                 <div class="clear"></div>
             </div>
+        {% endblock vcms_content_body %}
         </div><!-- vcms_content_body -->
         
         <!-- =========footer=========== -->

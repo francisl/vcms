@@ -6,15 +6,17 @@
 
 from django.db import models
 
-
 class BasicContainerManager(models.Manager):
     def get_widgets(self):
         raise NotImplementedError
 
-
+class RelativeContainerManager(BasicContainerManager):
+    def get_widgets(self):
+        return self.relative_widget.all()
+    
 class TableContainerManager(BasicContainerManager):
     def get_widgets(self):
-        return self.grid_widget.all()
+        return self.table_widget.all()
     
 class GridContainerManager(BasicContainerManager):
     def get_widgets(self):

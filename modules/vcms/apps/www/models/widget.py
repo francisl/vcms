@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 
 #from vcms.apps.www.managers.widget import ContentManager
 from vcms.apps.www.models.containers import TableContainer, GridContainer, RelativeContainer
@@ -68,10 +69,11 @@ class Widget(models.Model):
         Contain all information required for all widget
         Make sure that a render method is override (to provide html)
     """
-    WIDTH_CHOICES = ((0, _("px"))
-                     ,(1, _("em"))
-                     ,(2, _("%"))
+    WIDTH_CHOICES = ((0, "px")
+                     ,(1, "em")
+                     ,(2, "%")
                      )
+    
     name = models.CharField(max_length="40", help_text="Max 40 characters")
     width = models.FloatField()
     width_mesure = models.IntegerField(default=0, choices=WIDTH_CHOICES)
@@ -113,12 +115,14 @@ class TextWidget(Widget):
     #objects = ContentManager()
     
     def render(self):
+        print('width %s' % str(self.WIDTH_CHOICES[self.width_mesure][1]))
         content = { 'name': self.name
                    ,'content' : self.content
-                   ,'width': self.width
+                   #self.WIDTH_CHOICES[self.width_mesure][1]
+                   ,'width': str(self.width)+str(self.WIDTH_CHOICES[self.width_mesure][1])
                    ,'style': self.style
                    }
-        render_to_response("widget/content.html", content)
+        return render_to_string("widget/content.html", content)
     
     class Meta:
         verbose_name= "Widget - Text"

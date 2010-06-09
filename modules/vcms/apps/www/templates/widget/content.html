@@ -1,8 +1,3 @@
-
-<div class="division_content" name="{{ c.id }}">
-    <h4>{{ content.name|upper }}</h4>
-    <hr />
-    <div class="division_content">
-        {{ content.content|safe }}
-    </div>
+<div class="division_content" name="{{ name }}" style="width: {{ width }}">
+        {{ content|safe }}
 </div>

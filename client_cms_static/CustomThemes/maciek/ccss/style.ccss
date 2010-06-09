@@ -435,13 +435,7 @@ div.container_absolute:
     & > div:
         position: absolute;
 
-div.container_relative:
-    position: relative;
-    
-    & > div:
-        position: relative;
-
-div.vcms_float_container:
+div.vcms_container_grid:
     position: relative;
     
     & > div:
@@ -449,7 +443,7 @@ div.vcms_float_container:
         float: left;
         
         
-div#header_content_container:
+div#vcms_container_header_content:
     position: relative;
     //height: 112px;
     width: 100%;
@@ -483,8 +477,14 @@ div.vcms_column_container:
             background-image: url(../images/containers/column/separator.jpg);
             background-position: bottom right;
             background-repeat: no-repeat;
+     
+div.vcms_container_relative:
+    margin: 3.2em;
+    
+    p:
+        margin-left: 0px;
             
-div.table_container:
+div.vcms_container_table:
     background-color: #ffffff;
         
     table:
@@ -537,6 +537,32 @@ div.small_media_preview:
             width: 97px;
             height: 77px;
             float: left;
+
+dl.content_def_link:
+    width: 200px;
+    dt:
+        margin-bottom: 0.6em;
+        font-style:italic;
+    dt,a:
+        font-size: 1em;
+        color: #929292;
+    
+    dd:
+        border-left: 1px solid #929292;
+        border-top: 1px solid #929292;
+        border-bottom: 1px solid #929292;
+        text-align: right;
+        margin:0;
+        background-image: url(../images/link/arrow_dark.png);
+        background-repeat: no-repeat;
+        background-position: 95% 50%;
+        margin-top: -1px;
+        padding: 0.2em 0;
+            
+    a:
+        display: block;
+        padding-right: 20px;
+        
 
 p.bottom_link:
     text-align: right;
