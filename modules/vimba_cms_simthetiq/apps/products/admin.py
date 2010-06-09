@@ -104,7 +104,7 @@ class ProductPageAdmin(admin.ModelAdmin):
     filter_horizontal = ["images", "videos"]
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = (( 'Page information',
-                   { 'fields': ('name', 'slug', 'status', 'description','language',  'keywords', 'default') }),
+                   { 'fields': ('name', 'slug', 'status', 'description','language',  'keywords') }),
                  ('DIS',
                     {'fields': ('category', 'used_in', 'dis_country', 'dis_subcategory_id', 'dis_specific_id',)}),
                  ('Product information ', 

@@ -14,7 +14,7 @@ from django.core.files import File
 
 from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Language, MediaTags
 
-language = Language.objects.getDefault()
+language = Language.objects.get_default()
 
 
 def createNewImage(name, file_name=None, description=None, tags=None, show_in_gallery=False):
@@ -65,10 +65,10 @@ def createNewImage(name, file_name=None, description=None, tags=None, show_in_ga
 
 def _checkRow(line, number):
     if len(line) < 6 or len(line) > 6:
-        print("Failed | line %s | %s | %s" % (number, line[0], len(line)))
+        #print("Failed | line %s | %s | %s" % (number, line[0], len(line)))
         return False
     else:
-        print("Success | line %s | %s | %s" % (number, line[0], len(line)))
+        #print("Success | line %s | %s | %s" % (number, line[0], len(line)))
         return True
 
         

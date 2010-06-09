@@ -29,12 +29,14 @@ urlhelper.replace_urlpatterns(
 urlpatterns += patterns('',
     # Uncomment this for admin:
     #(r'admin/', include('mptt.admin.urls')),
+    (r'^gestion/style', 'vcms.apps.www.admin.views.show_style'),
     (r'^gestion/www/update_menu', 'vcms.apps.www.admin.views.UpdateMenu'),
     (r'^gestion/', include(admin.site.urls)),
 )
 
 # __ VIMBA CMS __
 urlpatterns += patterns('',
+    url(r'^www/', include('vcms.apps.www.urls')),
     url(r'^captcha/', include('captcha.urls')),
 )
 
@@ -66,7 +68,7 @@ if 'rosetta' in settings.INSTALLED_APPS:
 sitemaps = {}
 if 'vcms.apps.www' in settings.INSTALLED_APPS:
     try: 
-        from www.models import Page
+        from www.models.page import Page
         info_page = {
             'queryset': Page.objects.get_Published(),
             'date_field': 'date_modified'
@@ -120,6 +122,10 @@ urlpatterns += patterns('',
     # url(r'^afghanistan/', 'www.),
     # CMS, catch every page
     #(r'^tinymce/', include('tinymce.urls')),
-    url(r'^www/', include('vcms.apps.www.urls')),
+    
     url(r'', include('vcms.apps.www.urls')),
 )
+
+#print("------URL PATTERNS : ---------")
+#for i in urlpatterns:
+#    print("%s" % i)

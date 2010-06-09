@@ -14,7 +14,7 @@ from django.core.files import File
 
 from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Video, Category, DomainPage, FileFormat, Language
 
-language = Language.objects.getDefault()
+language = Language.objects.get_default()
 
 def createCategory(name, description, domain=False):
     logfile = open(os.path.dirname(__file__) + "/log/categories_import.log", 'w')

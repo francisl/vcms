@@ -9,15 +9,16 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
 from vcms.apps.www.models import *
-
+from vcms.apps.www.models.page import *
+from vcms.apps.www.models.containers import *
+#from vcms.apps.www.models.menu import PageMenu
 
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
-class PageAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ('name','module','status','language',)
-admin.site.register(Page, PageAdmin)
+class MainMenuAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(MainMenu, MainMenuAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',
@@ -39,6 +40,19 @@ class QuickLinksAdmin(admin.ModelAdmin):
     
 admin.site.register(QuickLinks, QuickLinksAdmin)
 
+
+class BasicPageAdmin(admin.ModelAdmin):
+    pass
+    #prepopulated_fields = {"slug": ("name",)}
+    #list_display = ('name','module','status','language',)
+admin.site.register(BasicPage, BasicPageAdmin)
+
+class MainPageAdmin(admin.ModelAdmin):
+    pass
+    #prepopulated_fields = {"slug": ("name",)}
+    #list_display = ('name','module','status','language',)
+admin.site.register(MainPage, MainPageAdmin)
+
 class ContentInline(admin.StackedInline):
     model = Content
     extra = 1
@@ -48,6 +62,56 @@ class SimplePageAdmin(admin.ModelAdmin):
     inlines = [ContentInline]
 admin.site.register(SimplePage, SimplePageAdmin)
 
+
+## ################
+## CONTAINERS
+#class BasicContainerAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(BasicContainer, BasicContainerAdmin)
+
+class GridContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(GridContainer, GridContainerAdmin)
+
+class TableContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TableContainer, TableContainerAdmin)
+
+class RelativeContainerAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(RelativeContainer, RelativeContainerAdmin)
+
+
+## ################
+## WIDGETS
+class WidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
+
+class GridWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(GridWidgetWrapper, GridWidgetWrapperAdmin)
+
+class TableWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
+
+class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
+
+class WidgetAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Widget, WidgetAdmin)
+
+class TextWidgetAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TextWidget, TextWidgetAdmin)
+
+
+
+"""
+NEED TO BE REDONE
 class DashboardElementInline(admin.StackedInline):
     model = DashboardElement
     extra = 1
@@ -57,7 +121,7 @@ class DashboardPreviewInline(admin.TabularInline):
     extra = 2
 
 DASHBOARD_MODULES = [DashboardElementInline,DashboardPreviewInline]
-# now scan to cms apps module to see if something what what to register to dahsboard
+# now scan to cms apps module to see if something wants to register to dahsboard
 for module in settings.PAGE_MODULES:
     try:
         # loading requirements first
@@ -73,17 +137,15 @@ for module in settings.PAGE_MODULES:
 
 class DashboardPageAdmin(admin.ModelAdmin):
     inlines = DASHBOARD_MODULES
+admin.site.register(DashboardPage, DashboardPageAdmin)
+"""
 
 # -- BANNER
 # -----------
 class BannerImageAdmin(admin.ModelAdmin):
     filter_horizontal = ('banner',)
+admin.site.register(BannerImage, BannerImageAdmin)
     
 class BannerAdmin(admin.ModelAdmin):
     filter_horizontal = ('page',)
-
-# CONTENTS
-#admin.site.register(Content, ContentAdmin)
 admin.site.register(Banner, BannerAdmin)
-admin.site.register(BannerImage, BannerImageAdmin)
-admin.site.register(DashboardPage, DashboardPageAdmin)

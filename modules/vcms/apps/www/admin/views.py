@@ -5,8 +5,10 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.core import serializers
 from django.utils import simplejson as json
+from django.shortcuts import render_to_response
+from django.template import RequestContext 
 
-from vcms.apps.www.models import Page
+from vcms.apps.www.models.page import Page
 
 @staff_member_required
 def UpdateMenu(request):
@@ -111,3 +113,8 @@ def UpdateMenu2(request):
     raise Http404
 """
 
+@staff_member_required
+def show_style(request):
+    return render_to_response('style.html', {}, context_instance=RequestContext(request))
+    
+    

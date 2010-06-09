@@ -1,7 +1,25 @@
+.normal div#mainnav {
+  height: 52px;
+  margin: -52px 0 52px auto;
+}
+
+.large div#mainnav {
+  height: 95px;
+  margin: -97px 0 96px auto;
+}
+
+.normal ul#mainmenu,
+.normal ul.dropdown {
+  height: 52px;
+}
+
+.large ul#mainmenu,
+.large ul.dropdown {
+  height: 95px;
+}
+
 div#mainnav {
   position: absolute;
-  height: 96px;
-  margin: -96px 0 96px auto;
   padding: 0;
   right: 0;
   z-index: 20;
@@ -12,7 +30,6 @@ ul.dropdown {
   position: relative;
   z-index: 40;
   float: left;
-  height: 96px;
   margin: 0;
 }
 
@@ -20,7 +37,6 @@ ul#mainmenu ul,
 ul.dropdown ul,
 ul#mainmenu li,
 ul.dropdown li {
-  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -51,6 +67,7 @@ ul.dropdown ul {
 
 ul#mainmenu ul li,
 ul.dropdown ul li {
+  height: 100%;
   font-size: 0.9em;
   float: none;
   color: #ffffff;
@@ -87,18 +104,18 @@ ul.dropdown ul a:hover {
 
 ul#mainmenu > li,
 ul.dropdown > li {
-  height: 96px;
-  background: url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
   padding: 0;
   margin: 0;
   cursor: pointer;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  display: block;
 }
 
 ul#mainmenu > li > a,
 ul.dropdown > li > a {
   color: #c2c2c2;
   margin: auto 0 0 0;
-  padding-top: 70px;
   padding-bottom: 12px;
   padding-left: 12px;
   padding-right: 12px;
@@ -109,19 +126,41 @@ ul.dropdown > li.menu_selected > a {
   color: #b9ff3c;
 }
 
-ul#mainmenu > li:hover,
-ul.dropdown > li:hover {
-  background: url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
+.normal ul#mainmenu > li,
+.normal ul.dropdown > li {
+  height: 52px;
+  background-image: url(../images/menu/main_menu_separator.jpg);
+}
+
+.normal ul#mainmenu > li a,
+.normal ul.dropdown > li a {
+  padding-top: 28px;
+}
+
+.normal ul#mainmenu > li:hover,
+.normal ul.dropdown > li:hover {
+  background-image: url(../images/menu/main_bg_hover.jpg);
 }
 
 .large ul#mainmenu > li,
 .large ul.dropdown > li {
-  background: url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;
+  height: 96px;
+  background-image: url(../images/menu_large/main_menu_separator.jpg);
+}
+
+.large ul#mainmenu > li a,
+.large ul.dropdown > li a {
+  padding-top: 72px;
+}
+
+.large ul#mainmenu > li:hover a,
+.large ul.dropdown > li:hover a {
+  color: #99ca3c;
 }
 
 .large ul#mainmenu > li:hover,
 .large ul.dropdown > li:hover {
-  background: url(../images/menu_large/main_bg_hover.jpg) left bottom no-repeat;
+  background-image: url(../images/menu_large/main_bg_hover.jpg);
 }
 
 ul#mainmenu li,

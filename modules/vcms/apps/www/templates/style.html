@@ -1,0 +1,42 @@
+{% extends "master_frame.html" %}
+{% block navigation %} Current Style
+{% endblock navigation %}
+
+{% block vcms_main_content %}
+
+    <table border="1">
+        <tr><td width="20%">h1</td><td width="30%"><h1>Lorem ipsum</h1></td><td width="30%"><xmp><h1>Lorem ipsum</h1></xmp></td></tr>
+        <tr><td>h2</td><td><h2>Lorem ipsum</h2></td><td><xmp><h2>Lorem ipsum</h2></xmp></td></tr>
+        <tr><td>h3</td><td><h3>Lorem ipsum</h3></td><td><xmp><h3>Lorem ipsum</h3></xmp></td></tr>
+        <tr><td>h4</td><td><h4>Lorem ipsum</h4></td><td><xmp><h4>Lorem ipsum</h4></xmp></td></tr>
+        <tr><td>h5</td><td><h5>Lorem ipsum</h5></td><td><xmp><h5>Lorem ipsum</h5></xmp></td></tr>
+        <tr><td>h6</td><td><h6>Lorem ipsum</h6></td><td><xmp><h6>Lorem ipsum</h6></xmp></td></tr>
+        <tr><td>class content_title</td>
+            <td><div class="content_title">
+                        <h6>Lorem ipsum</h6>
+                        <p>Date 2010</p>
+                </div>
+            </td>
+            <td><xmp><h6>Lorem ipsum</h6></xmp></td>
+        </tr>
+        <tr>
+            <td>class p.bottom_link dark_bg</td>
+            <td><div style="position:relative; height: 50px;"><div class="vcms_navigation_container dark_bg"><p class="bottom_link"><a href="#">Link here</a></div></div></p>
+            </td>
+            <td><xmp>
+<div class="dark_bg">
+    <p class="bottom_link">
+        <a href="#">Link here</a></p>
+</div></xmp></td>   
+        </tr>
+        <tr class="clear_bg">
+            <td>class p.bottom_link clear_bg</td>
+            <td><p class="bottom_link"><a href="#">Link here</a></p>
+            </td>
+            <td><xmp>
+<p class="bottom_link">
+    <a href="#">Link here</a></p></xmp></td>   
+        </tr>
+    </table>
+
+{% endblock vcms_main_content %}

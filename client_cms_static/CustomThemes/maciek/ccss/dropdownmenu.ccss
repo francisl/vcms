@@ -1,14 +1,31 @@
 // MENU
 MAIN_MENU_WIDTH = 650px;
-MAIN_MENU_HEIGHT = 96px;
+
+MAIN_MENU_HEIGHT = 52px;
+MAIN_MENU_HEIGHT_LARGE = 96px;
+
 SUBMENU_BORDER = 1px solid #7b7b7a;
 MAIN_MENU_FONT_SIZE = 1em;
 SUB_MENU_FONT_SIZE = 0.9em;
+
+div#mainnav:
+    .normal &:  
+        height: $MAIN_MENU_HEIGHT;
+        margin: -$MAIN_MENU_HEIGHT 0 $MAIN_MENU_HEIGHT auto;
+
+    .large &: 
+        height: $MAIN_MENU_HEIGHT_LARGE-1;
+        margin: -$MAIN_MENU_HEIGHT_LARGE-1 0 $MAIN_MENU_HEIGHT_LARGE auto;
+
+ul#mainmenu,ul.dropdown:
+    .normal &:
+        height: $MAIN_MENU_HEIGHT;
+            
+    .large &:
+        height: $MAIN_MENU_HEIGHT_LARGE-1;
+        
 div#mainnav:
     position: absolute; 
-    //width: $MAIN_MENU_WIDTH;
-    height: $MAIN_MENU_HEIGHT;
-    margin: -$MAIN_MENU_HEIGHT 0 $MAIN_MENU_HEIGHT auto;
     padding: 0;
     right: 0;
     z-index: 20;
@@ -17,11 +34,10 @@ ul#mainmenu, ul.dropdown:
     position: relative;
     z-index: 40;
     float: left;
-    height: $MAIN_MENU_HEIGHT
     margin: 0;
  
     ul, li:
-        margin: 0;
+        //margin: 0;
         padding: 0;
         list-style: none;
 
@@ -50,6 +66,7 @@ ul#mainmenu, ul.dropdown:
         opacity: .7;
         
         li:
+            height: 100%;
             font-size: $SUB_MENU_FONT_SIZE;
             float: none;
             color: #fff;
@@ -70,31 +87,44 @@ ul#mainmenu, ul.dropdown:
 
     // main menu item
     & > li:
-        height: $MAIN_MENU_HEIGHT;
-        background:url(../images/menu/main_menu_separator.jpg) left bottom no-repeat;
+        //height: $MAIN_MENU_HEIGHT;
         padding: 0;
         margin: 0;
         cursor: pointer;
+        background-position: 0px "0px";
+        background-repeat: no-repeat;
+        display: block;
         
         & > a:
             color: #c2c2c2;
             margin: auto 0 0 0;
-            padding-top: 70px;
             padding-bottom: 12px;
             padding-left: 12px;
             padding-right: 12px;
             
         &.menu_selected > a:
             color: #b9ff3c; //light green
-            
-        &:hover:
-            background:url(../images/menu/main_bg_hover.jpg) left bottom no-repeat;
+       
+       
+    .normal & > li:
+        height: $MAIN_MENU_HEIGHT;
+        background-image: url(../images/menu/main_menu_separator.jpg);
+        a:
+            padding-top: $MAIN_MENU_HEIGHT-24px;
+    
+    .normal & > li:hover:
+        background-image: url(../images/menu/main_bg_hover.jpg);
             
     .large & > li:
-        background:url(../images/menu_large/main_menu_separator.jpg) left bottom no-repeat;
-        
+        height: $MAIN_MENU_HEIGHT_LARGE;
+        background-image: url(../images/menu_large/main_menu_separator.jpg);
+        a:
+            padding-top: $MAIN_MENU_HEIGHT_LARGE-24px;
+            
+        &:hover a:
+            color: #99ca3c;
         &:hover:
-            background:url(../images/menu_large/main_bg_hover.jpg) left bottom no-repeat;
+            background-image: url(../images/menu_large/main_bg_hover.jpg);
         
     
     

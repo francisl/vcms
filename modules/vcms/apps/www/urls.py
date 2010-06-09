@@ -5,11 +5,16 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 import haystack
 
-urlpatterns = patterns('vcms.apps.www.views',
+urlpatterns = patterns('vcms.apps.www.views'
     # Example:
     # (r'^search/$', 'Search'),
-    (r'^search/', include('haystack.urls')),
-
-    (r'^page/(?P<page>[-\w]+)/$', 'Generic'),
-    (r'^$', 'Generic'),
+    ,(r'^search/', include('haystack.urls'))
+    ,(r'^page/(?P<page>[-\w]+)/$', 'Generic')
+        
+    # AJAX
+    ,(r'^ajax/page/list/$', 'get_page_list')
+    ,(r'^ajax/page/add/$', 'add_new_page')
+    ,(r'^ajax/page/update/$', 'update_page')
+    ,(r'^$', 'Generic')
+    ,
 )

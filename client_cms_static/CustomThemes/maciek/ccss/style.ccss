@@ -5,8 +5,8 @@ body:
     margin: 0;
     padding: 0;
     background-color: #888;
-    font-size: 11pt;
-    font-family: "century gothic",futura, sans-serif;
+    font-size: 10pt;
+    font-family: Arial, futura, sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
@@ -40,7 +40,7 @@ body:
             border: none;
         
     p:
-        margin: 0.1em 0;
+        margin: 0.3em 0;
         padding: 0.1em 0;
         font-size: 0.9em;
         color: #000000;
@@ -52,7 +52,7 @@ body:
         border: none;
 
 // CONTENT_BODY
-SITE_WIDTH = 956px
+SITE_WIDTH = 1000px
 SHADOW_COLOR = #111111;
 #vcms_body:
     position: relative;
@@ -76,34 +76,42 @@ SHADOW_COLOR = #111111;
 HEADING_WIDTH = 100%
 HEADING_HEIGHT = 52px
 HEADING_HEIGHT_LARGE = 96px
+
+body.large #vcms_header:
+    height: $HEADING_HEIGHT_LARGE; 
+    background: url(../images/heading/large/bg.jpg) bottom left repeat-x #131313;
+    border-bottom: 1px solid #b9ff3c;
+
+body.normal #vcms_header:
+    height: $HEADING_HEIGHT;
+    background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
+
 #vcms_header:
     position:relative; 
     width: $HEADING_WIDTH 
-    height: $HEADING_HEIGHT; 
     margin: 0 auto;
     padding: 0;
-    background: url(../images/heading/bg.jpg) bottom left repeat-x #131313;
     z-index: 20;
-    
-    .large &:
-        height: $HEADING_HEIGHT_LARGE; 
-        background: url(../images/heading_large/bg.jpg) bottom left repeat-x #131313; 
+    //border-bottom: 1px solid #b9ff3c;
+
+body.large #vcms_header_logo:
+    height: $HEADING_HEIGHT_LARGE;
+    background: url(../images/logo/logo_large.jpg) top left no-repeat;
+
+body.normal #vcms_header_logo:
+    background: url(../images/logo/logo.jpg) top left no-repeat;
 
 #vcms_header_logo:
-    width: 320px; 
+    width: 346px; 
     height: $HEADING_HEIGHT;
     margin-left: 2em;
-    background: url(../images/logo/logo.jpg) top left no-repeat;
- 
-    .large &:
-        height: $HEADING_HEIGHT_LARGE;
-        background: url(../images/logo/logo_large.jpg) top left no-repeat;
+           
 
 // BANNER
 BANNER_WIDTH = $SITE_WIDTH-$NAVIGATION_WIDTH;
 BANNER_HEIGHT = 112px;
 div#banner:
-    width: $BANNER_WIDTH
+    //width: $BANNER_WIDTH
     margin: 0 auto
     padding: 0
 
@@ -183,7 +191,7 @@ FOOTING_HEIGHT = 37px
         
     .large &:
         height: $FOOTING_HEIGHT+1;
-        border-top: 1px solid #b9ff3c;
+        //border-top: 1px solid #b9ff3c;
  
  
 // CLEAR 
@@ -203,7 +211,7 @@ div#quicklinks:
     width: 30px;
     height: 400px;
     top: 0px;
-    left: 956px;
+    left: $SITE_WIDTH;
     margin: 0;
     margin-top: 0em;
     padding: 0;
@@ -243,7 +251,6 @@ div#quicklinks:
             // /* For IE 5.5 - 7 */
             filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
 	        
-             
     span:
         //border: thin solid pink;
         //float: left;
@@ -255,15 +262,6 @@ div#quicklinks:
             margin-top: 6px;
             padding-left: 8px;
             
-
-
-
-
-
-
-        
-        
-        
 // GALLERY
 div.gallery_nav:
     position: absolute; 
@@ -321,30 +319,11 @@ div#vcms_content_body:
             float:right;
 
 
-// NAVIGATION
-NAVIGATION_WIDTH = 240px;
-NAV_BORDER_STYLE = 1px solid #656565;
-div#vcms_navigation_container:
-    width: $NAVIGATION_WIDTH;
-    border-bottom: $NAV_BORDER_STYLE;
-    border-right: $NAV_BORDER_STYLE;
-    float: left;
-    background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
-    
-    ul:
-        width: 100%;
-        background-color: #dadada;
-
 // CONTENT
-div#vcms_content_container:
-    width: $SITE_WIDTH-$NAVIGATION_WIDTH;
-    background-color: #fff;
-    float: right;
-    padding-bottom: 2em;
-
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div#vcms_content:
     margin: 2em 2em;
+    background-color: #fff;
 
     #page_title:
         text-align: center;
@@ -383,11 +362,73 @@ div#vcms_content:
             background-repeat: no-repeat;
             background-position: right 4px;
 
-.bordered_content:
-	border: $BOX_CONTENT_BORDER;
-	
-	
+div#vcms_content_container:
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 100%;
+    background-color: #fff;
+    float: right;
+    
+    p:
+        line-height: 1.4em;
+        margin-top: 0.8em;
+        margin-left: 1em; 
+    
+    h5:
+        line-height: 1.4em;
+        margin-top: 1.2em;
+        margin-left: 1em;
+    
 // CONTAINER
+
+// NAVIGATION
+NAVIGATION_WIDTH = 240px;
+LARGE_NAVIGATION_WIDTH = 274px;
+NAV_BORDER_STYLE = 1px solid #656565;
+NAV_BG_COLOR = #333333;
+body.large div#vcms_navigation_container:
+    width: $LARGE_NAVIGATION_WIDTH;
+
+body.normal div#vcms_navigation_container:
+    width: $NAVIGATION_WIDTH;
+
+TEXTCOLOR_ONDARK=#cccccc;
+TEXTCOLOR_ONLIGHT=#707070;
+div#vcms_navigation_container, div.vcms_navigation_container:
+    border-bottom: $NAV_BORDER_STYLE;
+    border-right: $NAV_BORDER_STYLE;
+    //float: left;
+    background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
+    background-color: $NAV_BG_COLOR; 
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+    
+    ul:
+        width: 100%;
+        background-color: #dadada;
+        
+    h1,h2,h3,h4,h5,h6,span,p:
+        margin: 1em;
+        color: $TEXTCOLOR_ONDARK;
+        
+    h6:
+        color: $TEXTCOLOR_ONDARK;
+        line-height: 1.2em;
+        margin-top: 2.2em;
+        
+body.large div#vcms_content_container:
+    width: $SITE_WIDTH-$LARGE_NAVIGATION_WIDTH-1;
+    
+body.normal div#vcms_content_container:
+    width: $SITE_WIDTH-$NAVIGATION_WIDTH-1;
+
+
+.bordered_content:
+    border: $BOX_CONTENT_BORDER;
+    
+      
 div.container_absolute:
     position: relative;
     
@@ -400,7 +441,7 @@ div.container_relative:
     & > div:
         position: relative;
 
-div.container_float:
+div.vcms_float_container:
     position: relative;
     
     & > div:
@@ -408,9 +449,9 @@ div.container_float:
         float: left;
         
         
-div#container_header_widget:
+div#header_content_container:
     position: relative;
-    height: 112px;
+    //height: 112px;
     width: 100%;
     border-bottom: thin solid #b9ff3c;
     font-size: 0.8em;
@@ -426,5 +467,98 @@ div#container_header_widget:
     // /* For IE 5.5 - 7 */
     filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
 
+div.vcms_column_container:
+    background-image: url(../images/containers/grid/bg.jpg);
+    background-repeat: repeat-x;
+    background-position: right bottom;
+    
+    background-color: #fff;
+    table:
+        
+        td:
+            padding: 0.8em;
+            width: 33%;
+        
+        td.col2:
+            background-image: url(../images/containers/column/separator.jpg);
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            
+div.table_container:
+    background-color: #ffffff;
+        
+    table:
+        td:
+            vertical-align: top;
+            padding: 1.2em;
+            width: 64%;
+        td.col2:
+            width: 35%;
 
 
+//CONTENT element
+
+div.content_title:
+    background-color: #333;
+    width: 100%;
+    padding: 0.4em 0;
+    
+    h6:
+        margin: 0.1em 1.1em 0.1em 1.1em;
+        text-transform: uppercase;
+    
+    span:
+        float: right;
+        color: #B7B7B7;
+        margin-right: 1.1em;
+        margin-top: -1.4em;
+        font-size: 0.8em;
+     
+div.small_media_preview:
+    float: right;
+    width:226px;
+    margin-bottom: 1em;
+    
+    div.video_container:
+        margin: 1em 0 16px 16px;
+        width:210px;
+        height: 139px;
+        float: left;
+    
+        object, embed:
+            width: 210px;
+            height: 139px;
+    
+    div.thumbnail:
+        float: left;
+        
+        img:
+            margin-left: 16px;
+            width: 97px;
+            height: 77px;
+            float: left;
+
+p.bottom_link:
+    text-align: right;
+    text-transform: uppercase;
+
+    a:
+        //display: block;
+        padding: 0.4em;
+        padding-right: 20px;
+        padding-left: 1em;
+        margin-top: 1em;
+        background-position: 94% 50%;
+        background-repeat: no-repeat;
+        //background-color: $NAV_BG_COLOR;
+        
+    .dark_bg &:
+        a:
+            color: $TEXTCOLOR_ONDARK;
+            background-image: url(../images/link/arrow_clear.png);
+    
+    .clear_bg &:
+        a:
+            color: $TEXTCOLOR_ONLIGHT;
+            background-image: url(../images/link/arrow_dark.png);
+            

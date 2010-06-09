@@ -1,10 +1,63 @@
-{% extends "master.html" %}
+{% extends "master_frame.html" %}
 
 {% block bodyclass %}large{% endblock bodyclass %}
 
-{% block content %}
-<!--=========content=========== -->
+<!--=========NAVIGATION=========== -->
+{% block navigation %}
+    <div>
+    <h6>Welcome to Simthetiq, supplier of advanced 3D solutions for the global defense, aerospace, gaming and research industries.</h6>
+    <p>We offer our partners choice and control, with an encyclopaedic library of 3D models and environments, rapid product development on request, guaranteed cross-platform compatibility, a selection of fidelity and licensing options, and on-demand support.</p>
+    <p>Browse our library, explore your options, learn more about our services and compatibility, sign up to receive updates, or manage your account online with one  of the fastest growing virtual content    developers at simthetiq.com</p>
+    <p>Master your reality. Interact with Simthetiq.</p>
+    <p></p>
+    
+    <p class="bottom_link ondark"><a href="#">Learn More</a></p>
+    </div>
+{% endblock navigation %}
 
+{% block vcms_main_content %}
+    <div class="table_container clear_bg">
+	    <table>
+		   <tr><td>
+		      <div>
+               <div class="content_title">
+                        <h6>Featured Product</h6>
+                       <span>January 8, 2010</span>
+               </div>
+               <div class="small_media_preview">
+                   <div class="video_container">
+                       <object>
+                            <param name="movie" value="/static/videos/virtual_khairabad_mp4_controller.swf">
+                            <embed src="/static/videos/virtual_khairabad_mp4_controller.swf"></embed>
+                        </object>
+                   </div>
+                   <div class="thumbnail">
+	                   <img src="/static/images/home_thumbnail.jpg" />
+	                   <img src="/static/images/home_thumbnail.jpg" />
+                   </div>
+               </div>
+    		   
+		       <h5>Virtual Khairabad</h5>
+	           <p>Simthetiq is pleased to announce the imminent release of Virtual Khairabad, an openflight real-time geo-specific database, for training in virtual synthetic environments. A seamless blend between art and technical skills that results in a truely immersive 360- degree realistic simulation. A seamless blend between art and technical skills that results in a truely immersive 360-degree realistic simulation.</p>
+	           <p></p>
+               <p class="bottom_link onmedium"><a href="#">Learn More</a></p>
+	           </div>
+		       </td>
 
-<!--=========//content=========== -->
-{% endblock content %}
+                <td>
+                <div>
+                <div class="content_title">
+                        <h6>Update</h6>
+                        <span>January 15, 2010</span>
+                </div>
+                <h5>New Leopard Tank</h5>
+                <p>Simthetiq is pleased to announce the imminent release of Virtual Khairabad, an openflight real-time geo-specific database, for training in virtual synthetic environments. A seamless blend between art and technical skills thalts in.A seamless blend between art and technical skillults in.A seamless blend between art and technical skills that results in.A seamlesn art and technical skills that results in.</p>
+                <p>A seamless blend between art and technical skills that results in.</p>
+                
+                <p class="bottom_link onmedium"><a href="#">Learn More</a></p>
+                </div>
+                </td>
+	        </tr>
+		</table>
+    </div>
+{% endblock vcms_main_content %}

@@ -1,0 +1,5 @@
+fieldset.container_attributes, fieldset.widgets_attributes:
+    margin-left: 110px;
+
+div.addwidget:
+    float: right;
