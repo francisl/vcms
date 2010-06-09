@@ -66,7 +66,7 @@ qx.Class.define("vcms.client.Application",
       var left_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 300 });
       main_container.add(left_container);
       for (i = 0, n = 15; i < n; i++)
-          left_container.add(new qx.ui.form.Button("Button #" + i));
+        left_container.add(new qx.ui.form.Button("Button #" + i));
       var buttons_left_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 5 }));
       left_container.add(buttons_left_container);
       buttons_left_container.add(new qx.ui.form.Button("Add a simple page"));
@@ -74,10 +74,18 @@ qx.Class.define("vcms.client.Application",
       buttons_left_container.add(new qx.ui.form.Button("Add a news page"));
       
       // Center container
-      var center_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 400 });
+      var center_container = new qx.ui.container.Composite(new qx.ui.layout.VBox()).set({ width: 400 });
+      var tabs_center_container = new qx.ui.tabview.TabView();
+      for (i = 0, n = 3; i < n; i++)
+      {
+        var page = new qx.ui.tabview.Page("Page #" + i);
+        tabs_center_container.add(page);
+        page.setLayout(new qx.ui.layout.VBox());
+        page.add(new qx.ui.form.List());
+        page.add(new qx.ui.form.Button("Remove widget from page"));
+      }
+      center_container.add(tabs_center_container);
       main_container.add(center_container);
-      center_container.add(new qx.ui.form.List());
-      center_container.add(new qx.ui.form.Button("Remove widget from page"));
       
       // Right container
       var right_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 150 });
