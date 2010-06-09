@@ -80,13 +80,14 @@ class BasicPageManager(models.Manager):
             return None
 
     """
-    def get_AllBasic(self):
-        return self.filter(status=StatusField.PUBLISHED).filter(module__in=["Basic", 'Dashboard'])
+    def get_all_basic(self):
+        from vcms.apps.www.models.page import Language
+        return self.filter(language=Language.objects.get_default())
 
-    def get_MainPublished(self):
+    def get_main_published(self):
         return self.filter(status=StatusField.PUBLISHED).filter(level=0)
 
-    def get_Published(self):
+    def get_published(self):
         return self.filter(status=StatusField.PUBLISHED)
 
 
