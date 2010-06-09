@@ -5,6 +5,9 @@
 client_cms_static/CACHE/*
 server/database/whoosh/*
 
+# qooxdoo
+client/qooxdoo-1.1-sdk/*
+
 # Editor backup files
 *~
 *.~*
