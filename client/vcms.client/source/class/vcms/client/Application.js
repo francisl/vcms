@@ -80,7 +80,7 @@ qx.Class.define("vcms.client.Application",
       {
         var page = new qx.ui.tabview.Page("Page #" + i);
         tabs_center_container.add(page);
-        page.setLayout(new qx.ui.layout.VBox());
+        page.setLayout(new qx.ui.layout.VBox().set({ spacing: 2 }));
         page.add(new qx.ui.form.List());
         page.add(new qx.ui.form.Button("Remove widget from page"));
       }
