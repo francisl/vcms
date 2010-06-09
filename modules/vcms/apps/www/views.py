@@ -123,10 +123,13 @@ def MainPage(request, context={}):
     
     
 def Simple(request, context={}):
-    context['contents'] = Content.objects.filter(page=context["page_info"]['page'])
+    print("simple page context : %s" % context["page_info"]['page'])
+    current_page = context["page_info"]['page']
+    #context['contents'] = Content.objects.filter(page=current_page)
     #debugtrace("basic", context["page_info"]['page'], **{'basic content':context['contents']})
 
-    content = Content.objects.filter(page=context["page_info"]['page'].id)
+    content = []
+    #content = Content.objects.filter(page=context["page_info"]['page'].id)
     if len(content) == 0 :
         """ When page has no content, it redirect to the first child """
         subpage = Page.objects.get_PageFirstChild(context["page_info"]['page'])
