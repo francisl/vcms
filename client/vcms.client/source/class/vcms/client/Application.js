@@ -100,6 +100,13 @@ qx.Class.define("vcms.client.Application",
       main_container.add(right_container);
       right_container.add(new qx.ui.form.List());
       right_container.add(new qx.ui.form.Button("Add widget to page"));
+      
+      // Gets the list of pages available
+      var req = new qx.io.remote.Request("/ajax/page/list/", "GET", "application/json");
+      req.addListener("completed", function(e) {
+        alert(e.getContent());
+      });
+      req.send();
     },
     members :
     {
