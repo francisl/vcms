@@ -3,23 +3,6 @@ form>div {
   padding: 0.8em;
 }
 
-form .button {
-  float: right;
-}
-
-form > div {
-  float: left;
-  width: 46%;
-  margin: 0;
-  margin-right: 1.1em;
-  margin-top: 1em;
-  padding: 0;
-}
-
-form div.button {
-  width: 18%;
-}
-
 form p.error {
   float: left;
   width: 78%;
@@ -76,6 +59,23 @@ textarea {
 #login_form {
   width: 76%;
   float: left;
+}
+
+#login_form form > div {
+  float: left;
+  width: 46%;
+  margin: 0;
+  margin-right: 1.1em;
+  margin-top: 1em;
+  padding: 0;
+}
+
+#login_form .button {
+  float: right;
+}
+
+#login_form div.button {
+  width: 18%;
 }
 
 button.button {

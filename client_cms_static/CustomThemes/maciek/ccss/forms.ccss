@@ -1,21 +1,7 @@
 form:
     &>table, &>div:
         padding: 0.8em;
-        
-    .button:
-        float: right;
-    
-    & > div:
-        float: left;
-        width: 46%;
-        margin: 0;
-        margin-right: 1.1em;
-        margin-top: 1em;
-        padding: 0;
-    
-    div.button:
-        width: 18%;
-        
+
     p.error:
         float: left;
         width: 78%;
@@ -61,7 +47,20 @@ textarea:
 #login_form:
     width: 76%;
     float: left;
+        
+    form > div:
+        float: left;
+        width: 46%;
+        margin: 0;
+        margin-right: 1.1em;
+        margin-top: 1em;
+        padding: 0;
+
+    .button:
+        float: right;
     
+    div.button:
+        width: 18%;
 
     
 button.button:
