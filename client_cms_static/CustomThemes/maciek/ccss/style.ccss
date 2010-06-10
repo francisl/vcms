@@ -318,13 +318,31 @@ div#vcms_content_body:
         div.right:
             float:right;
 
+    
 
+div#vcms_content_container:
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 100%;
+    background-color: #fff;
+    float: right;
+    
+    h5:
+        line-height: 1.4em;
+        margin-top: 1.2em;
+        margin-left: 1em;
+        
 // CONTENT
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
-div#vcms_content:
-    margin: 2em 2em;
+div.vcms_content:
+    margin: 1.2em 0;
     background-color: #fff;
 
+    p:
+        margin-left: 0;
+        line-height: 1.4em;
+        margin-top: 0.8em; 
+        
     #page_title:
         text-align: center;
 
@@ -361,23 +379,9 @@ div#vcms_content:
             background-image: url(../images/content_box/content_box_link4.jpg);
             background-repeat: no-repeat;
             background-position: right 4px;
-
-div#vcms_content_container:
-    margin-top: 0px;
-    margin-bottom: 0px;
-    height: 100%;
-    background-color: #fff;
-    float: right;
     
-    p:
-        line-height: 1.4em;
-        margin-top: 0.8em;
-        margin-left: 1em; 
-    
-    h5:
-        line-height: 1.4em;
-        margin-top: 1.2em;
-        margin-left: 1em;
+    img:
+        margin: 0.8em;
     
 // CONTAINER
 

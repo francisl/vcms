@@ -14,7 +14,7 @@ from vcms.apps.www.managers.containers import RelativeContainerManager
 from vcms.apps.www.managers.containers import GridContainerManager
 
 class BasicContainer(models.Model):
-    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
+    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     page = models.ForeignKey(BasicPage)
 
     objects = BasicContainerManager()
@@ -26,7 +26,7 @@ class BasicContainer(models.Model):
         verbose_name_plural = "Container - Basic"
         
     def __unicode__(self):
-        return self.name
+        return self.page.name + " - " + self.name
 
 class ContainerDefinition:
     """ Defines the human name associated to a container type. """

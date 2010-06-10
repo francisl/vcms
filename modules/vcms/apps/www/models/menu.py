@@ -37,7 +37,7 @@ class MainMenu(NS_Node):
             default    : %s
         """ % (self.id, self.menu_name, self.lft, self.rgt, self.tree_id, self.depth, self.display, self.default)
         
-        return to_print
+        return self.menu_name
     
     """
     def save(self):

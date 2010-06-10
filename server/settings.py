@@ -258,5 +258,5 @@ from local_settings import *
 
 if DEBUG:
     import socket
-    #if socket.gethostname() == "LAPTOP": # Francois
-    DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
+    if socket.gethostname() == "LAPTOP": # Francois
+        DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!

@@ -6,7 +6,7 @@
 from django.db import models
 
 from treebeard.models import Node
-#from vcms.apps.www.models.menu import PageMenu
+#from vcms.apps.www.models.menu import MainMenu
 
 
 class MainMenuManager(models.Manager):
@@ -22,7 +22,20 @@ class MainMenuManager(models.Manager):
         #root.add_child(node)
         pass
         
+    def get_root_menu(self):
+        return self.get_first_root_node()
+    
     def get_default_page(self):
         default_menu = self.filter(default=True)[0]
         return default_menu.content_object
 
+     
+    def get_submenu(self):
+        from vcms.apps.vwm.tree import helper
+        """ return navigation tree as a list containing tree node dictionary """
+        root = self.get_root_menu() 
+        nav = []
+        for navgroup in self.all():
+            nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
+        return nav
+    

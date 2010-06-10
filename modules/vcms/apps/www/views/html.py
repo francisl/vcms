@@ -127,6 +127,11 @@ def BlankPage(request, context={}):
     content_container = context["containers"]["Content"]
     ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
     context.update(content_widgets = ContentWidgets)
+    
+    import treebeard
+    
+    #form = treebeard.forms()
+    #context.update(form=form)
     return render_to_response('simple.html',
                               context,
                               context_instance=RequestContext(request))

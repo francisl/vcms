@@ -53,7 +53,7 @@ class GridWidgetWrapper(WidgetWrapper):
 
 class RelativeWidgetWrapper(WidgetWrapper):
     container = models.ForeignKey(RelativeContainer, related_name="widgets")
-    position = models.IntegerField(unique=True)
+    position = models.IntegerField(unique=False)
 
     class Meta:
         app_label = 'www'

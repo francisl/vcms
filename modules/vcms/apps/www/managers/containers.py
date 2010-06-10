@@ -22,7 +22,7 @@ class GridContainerManager(BasicContainerManager):
     def get_widgets(self):
         return self.grid_widget.all()
 
-
+## TODO: to remove
 class DashboardElementManager(models.Manager):
     def get_PublishedAll(self):
         return self.filter(published=True)

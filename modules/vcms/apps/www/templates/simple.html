@@ -7,33 +7,16 @@
 {% endblock navigation %}
 
 {% block vcms_main_content %}
-        <div class="vcms_container_relative">
+    <div class="vcms_container_relative">
         <div class="vcms_content">
             <h1>{{ page }} / <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
         </div>
 		<!-- Content -->
-		<div class="vcms_content">
 		{% for c in content_widgets %}
 		
           {{ c.widget.render|safe  }}
         
         {% endfor %}
-        </div>
-		{% if contents %}
-		
-		
-		
-		{% for c in contents %}
-		<div class="division_content" name="{{ c.id }}">
-			<br />
-			<h4>{{ c.name|upper }}</h4>
-			<hr />
-			<div class="division_content">
-				{{ c.content|safe }}
-			</div>
-		</div>
-		{% endfor %}
-		{% endif %}
-		
-		</div>
+
+	</div>
 {% endblock vcms_main_content %}

@@ -8,6 +8,8 @@ from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
+from treebeard import admin as treeadmin
+
 from vcms.apps.www.models import *
 from vcms.apps.www.models.page import *
 from vcms.apps.www.models.containers import *
@@ -16,7 +18,7 @@ from vcms.apps.www.models.containers import *
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
-class MainMenuAdmin(admin.ModelAdmin):
+class MainMenuAdmin(treeadmin.TreeAdmin):
     pass
 admin.site.register(MainMenu, MainMenuAdmin)
 
@@ -53,7 +55,7 @@ class MainPageAdmin(admin.ModelAdmin):
 admin.site.register(MainPage, MainPageAdmin)
 
 class BlankPageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name')
     
 admin.site.register(BlankPage, BlankPageAdmin)
 
@@ -83,7 +85,8 @@ class TableContainerAdmin(admin.ModelAdmin):
 admin.site.register(TableContainer, TableContainerAdmin)
 
 class RelativeContainerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['page', 'name']
+    #filter_horizontal = ('page',)
 admin.site.register(RelativeContainer, RelativeContainerAdmin)
 
 
