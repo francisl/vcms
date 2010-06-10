@@ -1,0 +1,30 @@
+
+{% if submenu %}
+<div id="submenu">
+	<ul>
+	{% for sm in submenu %}
+		 <li class="{% if selected_submenu %}{% ifequal sm.id selected_submenu.id %}submenu_selected{% endifequal%}{% endif %}">
+		 	<a href="{{ sm.get_absolute_url }}">{{ sm }}</a>
+		 </li>
+	{% endfor %}
+	<div style="clear: both; height: 0px;"></div>
+	</ul>
+
+ </div>
+
+ {% endif %}
+ 
+ 
+ {% for item, info in annotated_list %}
+    {% if info.open %}
+        <ul><li>
+    {% else %}
+        </li><li>
+    {% endif %}
+
+    {{ item }}
+
+    {% for close in info.close %}
+        </li></ul>
+    {% endfor %}
+{% endfor %}
