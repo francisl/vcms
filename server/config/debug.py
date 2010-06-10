@@ -8,9 +8,9 @@ DEBUG_INSTALLED_APPS = ()
 DEBUG_MIDDLEWARE_CLASSES = ()
 
 try:
-    import debug_toolbar
-    DEBUG_INSTALLED_APPS += ('debug_toolbar',)
-    DEBUG_MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    #import debug_toolbar
+    #DEBUG_INSTALLED_APPS += ('debug_toolbar',)
+    #DEBUG_MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INTERNAL_IPS = ('127.0.0.1',)
 except:
     pass
