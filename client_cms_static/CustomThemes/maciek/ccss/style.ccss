@@ -18,7 +18,10 @@ body:
     h1,h2:
         font-size: 1.6em;
         margin-top: 0.8em;
-        
+    
+    h2:
+        color: #484848;
+     
     h3:
         padding-top: 0.8em;
         
@@ -396,7 +399,7 @@ body.large div#vcms_navigation_container:
 body.normal div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
 
-TEXTCOLOR_ONDARK=#cccccc;
+TEXTCOLOR_ONDARK=#c2c2c2;
 TEXTCOLOR_ONLIGHT=#707070;
 div#vcms_navigation_container, div.vcms_navigation_container:
     border-bottom: $NAV_BORDER_STYLE;
@@ -582,13 +585,17 @@ p.bottom_link:
         background-repeat: no-repeat;
         //background-color: $NAV_BG_COLOR;
         
-    .dark_bg &:
-        a:
-            color: $TEXTCOLOR_ONDARK;
-            background-image: url(../images/link/arrow_clear.png);
+.dark_bg &:
+    a:
+        color: $TEXTCOLOR_ONDARK;
+        background-image: url(../images/link/arrow_clear.png);
+
+.clear_bg &:
+    a:
+        color: $TEXTCOLOR_ONLIGHT;
+        background-image: url(../images/link/arrow_dark.png);
+
+.error:
+    text-transform: uppercase;
+    color: #D93315;
     
-    .clear_bg &:
-        a:
-            color: $TEXTCOLOR_ONLIGHT;
-            background-image: url(../images/link/arrow_dark.png);
-            

@@ -26,6 +26,10 @@ body h2 {
   margin-top: 0.8em;
 }
 
+body h2 {
+  color: #484848;
+}
+
 body h3 {
   padding-top: 0.8em;
 }
@@ -445,12 +449,12 @@ div.vcms_navigation_container span,
 div#vcms_navigation_container p,
 div.vcms_navigation_container p {
   margin: 1em;
-  color: #cccccc;
+  color: #c2c2c2;
 }
 
 div#vcms_navigation_container h6,
 div.vcms_navigation_container h6 {
-  color: #cccccc;
+  color: #c2c2c2;
   line-height: 1.2em;
   margin-top: 2.2em;
 }
@@ -634,12 +638,17 @@ p.bottom_link a {
   background-repeat: no-repeat;
 }
 
-.dark_bg p.bottom_link a {
-  color: #cccccc;
+.dark_bg * a {
+  color: #c2c2c2;
   background-image: url(../images/link/arrow_clear.png);
 }
 
-.clear_bg p.bottom_link a {
+.clear_bg * a {
   color: #707070;
   background-image: url(../images/link/arrow_dark.png);
+}
+
+.error {
+  text-transform: uppercase;
+  color: #d93315;
 }

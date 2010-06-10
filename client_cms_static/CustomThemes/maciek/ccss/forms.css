@@ -3,6 +3,29 @@ form>div {
   padding: 0.8em;
 }
 
+form .button {
+  float: right;
+}
+
+form > div {
+  float: left;
+  width: 46%;
+  margin: 0;
+  margin-right: 1.1em;
+  margin-top: 1em;
+  padding: 0;
+}
+
+form div.button {
+  width: 18%;
+}
+
+form p.error {
+  float: left;
+  width: 78%;
+  margin-top: 0.9em;
+}
+
 .standard_form {
   text-align: center;
 }
@@ -21,18 +44,52 @@ form>div {
 }
 
 label {
-  font-weight: bold;
-  font-size: 0.9em;
+  font-size: 1em;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.notice {
   float: right;
-  margin-right: 1em;
-  text-transform: uppercase;
-  text-align: right;
+  font-size: 0.9em;
+}
+
+.notice a {
+  font-style: italic;
+  color: #c2c2c2;
+}
+
+.notice a .black {
+  color: #121212;
 }
 
 input {
-  width: 94%;
+  width: 98%;
+  height: 2em;
+  border: 1px solid #c9c9c9;
 }
 
 textarea {
   width: 92%;
+}
+
+#login_form {
+  width: 76%;
+  float: left;
+}
+
+button.button {
+  border: none;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: #555555;
+  margin-right: 1.1em;
+  padding: 0.3em 0.4em;
+  padding-right: 20px;
+  padding-left: 1em;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  color: #c2c2c2;
+  background-image: url(../images/link/arrow_gray.png);
 }

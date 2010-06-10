@@ -82,12 +82,14 @@ div.detailed_search_form:
         margin: 0;
         padding: 0 0.4em 0 0.6em;
 
-        
         input, label:
             float: left;
             margin-top: 1em;
             font-weight: normal;
-            font-size: 0.8em; 
+            font-size: 1em; 
+            padding: 0;
+        label: 
+            padding: 0.4em; 
         input:
             width: 6%;
     

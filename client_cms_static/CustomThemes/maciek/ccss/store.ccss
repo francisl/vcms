@@ -7,15 +7,6 @@ BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 .registration_form:
     width: 62%;
 
-#login_form:
-    width: 50%;
-    
-    table:
-        background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
-
-    input:
-        margin-right: 3em;
-
 div.noaccount:
     width: 50%;
     a:
@@ -44,10 +35,6 @@ div.whyregister:
         float: right;
         div.list:
             text-align: left;
-
-.notice:
-    float: left;
-    font-size: 0.8em;
 
 
 .benefits:

@@ -1,83 +1,89 @@
 {% extends "shop/base.html" %}
 {% load i18n %}
+{% load search_widget %}
 
 {% block stylesheetlink %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
 {% endblock stylesheetlink %}
 
-{% block content %}
+{% block navigation %}
+    {% show_detailed_search_box %}
+{% endblock navigation %}
 
-<div id='login_form' class="standard_form">
-    <h1>{% trans "LOG" %}<span class="black">{% trans "IN" %}</span></h1>
-    {% if form.non_field_errors %}
-    <p class="error">
-        {% for err in form.non_field_errors %}
-            {{ err }}
-            {% if not forloop.last %}<br/>{% endif %}
-        {% endfor %}
-        </p>
-    {% endif %}
-    <br/>
+{% block vcms_main_content %}
+<div class="vcms_container_relative">
+<h2>{% trans "Customer Login" %}</h2>
+
+<div id='login_form' style="width: 75%">
     <form method="post" action=".">
-        <table class="standard login">
-            <tr>
-                <td><label for="id_username">{% trans 'Username' %}</label></td>
-                <td>{{ form.username }}</td>
-            </tr>
+        <div class="">
+            <label for="id_username">{% trans 'Email' %}</label>
+            {{ form.username }}
             {% if form.username.errors %}
-                <tr>
-                    <td class="error" colspan="2">***{{ form.username.errors|join:", " }}</td>
-                </tr>
+                <span class="error">***{{ form.username.errors|join:", " }}</span>
             {% endif %}
-            <tr>
-                <td><label for="id_password">{% trans 'Password' %}</label></td>
-                <td>{{ form.password }}</td>
-            </tr>
-            {% if form.password.errors %}
-                <tr>
-                    <td class="error" colspan="2">***{{ form.password.errors|join:", " }}</td>
-                </tr>
-            {% endif %}
-        </table>
-
+        </div>
+        <div class="">
+	        <div class="notice"><a href="{% url auth_password_reset %}">{% trans "Forgot your " %} <span class="black">{% trans "Password" %}?</span></a></div>
+	        <label for="id_password">{% trans 'Password' %}</label> 
+	        {{ form.password }}
+	        {% if form.password.errors %}
+	            <span class="error">***{{ form.password.errors|join:", " }}</span>
+	        {% endif %}
+	    </div>
         <input type="hidden" name="next"
         {% if next %}
             value={{ next }} />
         {% else %}
             value="{% url satchmo_account_info %}" />
         {% endif %}
-        <div class="underform login">
-            <div class="notice"><a href="{% url auth_password_reset %}">{% trans "FORGOT" %} <span class="black">{% trans "USERNAME" %}</span> {% trans "OR" %} <span class="black">{% trans "PASSWORD" %}</span></a></div>
-            <div class="submit"><button type="submit" value="{% trans "Login" %}"><u>{% trans "Login" %}</u></button></div>
+
+        
+        {% if form.non_field_errors %}
+        <p class="error">
+        {% for err in form.non_field_errors %}
+            <!-- {{ err }} -->{% trans 'The username or password you entered is incorrect' %}<br/> {% trans 'Fields are case-sensitive' %}.
+            {% if not forloop.last %}{% endif %}
+        {% endfor %}
+        </p>
+        {% endif %}
+                <!-- <div class="button"> -->
+        <div class="button">
+            <button type="submit" class="button dark_bg"value="{% trans "Login" %}">{% trans "Login" %}</button>
         </div>
+       <!--  </div >-->
+        <div class="clear"></div>
     </form>
+       
 </div>
+       <div class="clear"></div>
 
-
-<div class="noaccount">
-    <div class="noaccount_info">{% trans "Don't have an account?" %}</div>
-    <div class="noaccount_info register_button"><a href="{% url registration_register %}">{% trans "REGISTER" %}</a></div>
-    <div class="clear"></div>
-</div>
-
-<div class="content">
-    <div class="whyregister">
-	    <div class="left">
-	        <h3>{% trans "Why Register?" %}</h3>
-	        <p>TODO: full text.</p>
-	    </div>
-	    <div class="right standard benefits">
-	        <div>
-	            <h2>{% trans "BENEFITS" %}</h2>
-	        </div>
-	        <div class="list">
-	            <ul>
-	                <li>Access to the free model database</li>
-	                <li>Receive news and product updates</li>
-	                <li>Request product quotes</li>
-	            </ul>
-	        </div>
-	    </div>
+    <!-- 
+	<div class="noaccount">
+	    <div class="noaccount_info">{% trans "Don't have an account?" %}</div>
+	    <div class="noaccount_info register_button"><a href="{% url registration_register %}">{% trans "REGISTER" %}</a></div>
+	    <div class="clear"></div>
 	</div>
+
+	<div class="content">
+	    <div class="whyregister">
+		    <div class="left">
+		        <h3>{% trans "Why Register?" %}</h3>
+		        <p>TODO: full text.</p>
+		    </div>
+		    <div class="right standard benefits">
+		        <div>
+		            <h2>{% trans "BENEFITS" %}</h2>
+		        </div>
+		        <div class="list">
+		            <ul>
+		                <li>Access to the free model database</li>
+		                <li>Receive news and product updates</li>
+		                <li>Request product quotes</li>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+	</div> -->
 </div>
-{% endblock %}
+{% endblock vcms_main_content %}

@@ -9,18 +9,6 @@
   width: 62%;
 }
 
-#login_form {
-  width: 50%;
-}
-
-#login_form table {
-  background: url(../images/form/form_bg_75px.jpg) bottom repeat-x;
-}
-
-#login_form input {
-  margin-right: 3em;
-}
-
 div.noaccount {
   width: 50%;
   font-weight: bold;
@@ -59,11 +47,6 @@ div.whyregister div.right {
 
 div.whyregister div.right div.list {
   text-align: left;
-}
-
-.notice {
-  float: left;
-  font-size: 0.8em;
 }
 
 .benefits {
