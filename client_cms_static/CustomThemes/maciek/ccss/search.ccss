@@ -84,7 +84,7 @@ div.detailed_search_form:
 
         input, label:
             float: left;
-            margin-top: 0.6em;
+            margin-top: 0.2em;
             font-weight: normal;
             font-size: 1em; 
             padding: 0;
