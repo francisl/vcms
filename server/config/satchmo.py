@@ -56,10 +56,3 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
     )
 
-#### Satchmo unique variables ####
-#from django.conf.urls.defaults import patterns, include
-SATCHMO_SETTINGS = {
-                    'SHOP_BASE' : '',
-                    'MULTISHOP' : False,
-                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
-                    }

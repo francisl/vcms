@@ -254,7 +254,7 @@ for app in INSTALLED_APPS:
             pass
 
 # Load the local Satchmo settings
-from local_settings import *
+from config.satchmo_local import *
 
 if DEBUG:
     import socket

@@ -17,14 +17,7 @@ from satchmo_store.urls import urlpatterns
 # __TODO: This should be located in a client-specific configuration file
 from livesettings import config_value
 from satchmo_utils import urlhelper
-urlhelper.replace_urlpatterns(
-    urlpatterns,
-    [
-        url(r'^register/complete/$', 'vcms.apps.store.views.complete', {}, 'registration_complete'),
-        url(r'^register/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
-        url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
-    ]
-)
+
 
 urlpatterns += patterns('',
     # Uncomment this for admin:
@@ -32,8 +25,16 @@ urlpatterns += patterns('',
     (r'^gestion/style', 'vcms.apps.www.admin.views.show_style'),
     (r'^gestion/www/update_menu', 'vcms.apps.www.admin.views.UpdateMenu'),
     (r'^gestion/', include(admin.site.urls)),
+    url(r'^contact/', include('vcms.apps.contact.urls')),
 )
-
+urlhelper.replace_urlpatterns(
+    urlpatterns,
+    [   url(r'^register/complete/$', 'vcms.apps.store.views.complete', {}, 'registration_complete'),
+        url(r'^register/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
+        url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
+        url(r'^contact/$', 'vcms.apps.contact.views.Contact', {}, 'satchmo_account_info'),
+    ]
+)
 # __ VIMBA CMS __
 urlpatterns += patterns('',
     url(r'^www/', include('vcms.apps.www.urls')),

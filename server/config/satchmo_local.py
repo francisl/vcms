@@ -69,3 +69,9 @@ fileLog.setFormatter(formatter)
 logging.getLogger('').addHandler(fileLog)
 logging.getLogger('keyedcache').setLevel(logging.INFO)
 logging.info("Satchmo Started")
+
+SATCHMO_SETTINGS = {
+                    'SHOP_BASE' : '/store',
+                    'MULTISHOP' : False,
+                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
+                    }
