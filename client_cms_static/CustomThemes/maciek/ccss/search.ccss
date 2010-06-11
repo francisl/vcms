@@ -14,15 +14,15 @@ div#search_form:
         
     form:
         position: relative;
-        margin: 12px 10px 04px 10px;
+        margin: 12px 10px 04px 14px;
 
     input#search_text_input:
         position: relative;
-        width: 72%;
+        width: 68%;
         margin: 0;
         margin-top: 0px;
         padding: 0 0.6em;
-        height: 20px;
+        height: 24px;
         color: gray;
         float: left;
         
@@ -37,7 +37,8 @@ div#search_form:
         margin: 0;
         margin-top: 0px;
         margin-left: 0px;
-        width: 18%;
+        padding: 0;
+        width: 16%;
         border-left: 1px solid gray;
         border-right: 1px solid gray;
         text-transform: uppercase;
@@ -87,11 +88,11 @@ div.detailed_search_form:
             margin-top: 0.2em;
             font-weight: normal;
             font-size: 1em; 
-            padding: 0;
         label: 
             padding: 0.4em; 
         input:
             width: 6%;
+            border: none;
     
     background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
     border-bottom: $NAV_BORDER_STYLE; 

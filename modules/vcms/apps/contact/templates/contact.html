@@ -1,77 +1,76 @@
 {% extends "master.html" %}
+{% load i18n %}
+{% load search_widget %}
 
-{% block stylesheetlink %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
-{% endblock stylesheetlink %}
+{% block navigation %}
+    {% show_detailed_search_box %}
+{% endblock navigation %}
        
-{% block content %}
+{% block vcms_main_content %}
 <!--=========content=========== -->
 
-<div class="standard_form contact_form" >
-    <div class="form_name">
-        <h2>{{ contact_page.form_name }}</h2>
-    </div>
-    <div>
+<div class="vcms_container_relative">
+    {% block contact_form %}
+    <h2>{% trans "Contact Us" %}</h2>
+    <div class="normal_form">
         <form method="post" action="/contact/{{ current_page }}" 
                 onsubmit="return checkifcompleted(document.orderform, requiredfield, errormess );">
 		   {% csrf_token %}
-		   <div class="">
-				<input id="default_input" type="hidden" />
-				<table>
-		            <tr><td><label id="cie_name" for="cie_name">Business Name
-		                    <span style="color: red;"> {{ form.cie_name.errors.0 }}</span></label></td>
-		                <td>{{form.cie_name}}</td>
-		            </tr>
-		            <tr><td><label id="firstname">First name
-						    <span style="color: red;"> {{ form.firstname.errors.0 }}</span></label></td>
-					     <td>{{form.firstname}}</td>
-					</tr>
-					<tr><td><label id="lastname">Last name 
-					         <span style="color: red;"> {{ form.lastname.errors.0 }}</span></label></td>
-		                <td>{{form.lastname}}</td>
-		            </tr>
-		            <tr><td><label id="phone_number">Phone Number
-						    <span style="color: red;"> {{ form.phone_number.errors.0 }}</span></label></td>
-						<td>{{form.phone_number}}</td>
-					</tr>
-					{% if emailerror %}
-		            <tr><td colspan="2">
-		                <div class="error">
-		                    <H4>An error occured sending to this email address.</h4></div>
-					     </td>
-					</tr>
-					{% endif %}
-		            <tr><td><label id="email">Email
-		                    <span style="color: red;"> {{ form.email.errors.0 }}</span></label></td>
-					     <td>{{form.email}}</td>
-					</tr>
-		            <tr><td><label id="email2">Email Validation
-		                    <span style="color: red;"> {{ form.email2.errors.0 }}</span></label></td>
-					     <td>{{form.email2}}</td>
-					</tr>
-					{% if form.message.errors %}
-		            <tr><td colspan="2"><span style="color: red;"> {{ form.message.errors.0 }}</span></label></td></tr>
-		            {% endif %}
-		            <tr><td colspan="2">{{form.message}}</td></tr>
-		            <tr><td><span style="color: red;"> {{ form.captcha.errors.0 }}</span></label></td>
-		                <td>{{ form.captcha }}</td>
-			        </tr>
-		        </table>
+            <input id="default_input" type="hidden" />
+            <div class="">
+                <label id="cie_name" for="cie_name">Business Name</label>
+		        {% if form.cie_name.errors %}<span class="error">*** {{ form.cie_name.errors.0 }}</span>{% endif %}
+		        {{form.cie_name}}
+            </div>
+            <div class="">
+                <label id="firstname">First name</label>
+                {% if form.firstname.errors %}<span class="error">*** {{ form.firstname.errors.0 }}</span>{% endif %}
+                {{form.firstname}}
+            </div>
+            <div class="">
+			    <label id="lastname">Last name </label>
+                {% if form.lastname.errors %}<span class="error">*** {{ form.lastname.errors.0 }}</span>{% endif %}
+		        {{form.lastname}}
+            </div>
+            <div class="">            
+                <label id="phone_number">Phone Number</label>
+				{% if form.phone_number.errors %}<span class="error">*** {{ form.phone_number.errors.0 }}</span>{% endif %}
+				{{form.phone_number}}
+            </div>					
+            {% if emailerror %}
+            <div class="error">
+                <h4>An error occured sending to this email address.</h4></div>
+            </div>
+			{% endif %}
+            <div class="">
+                <label id="email">Email</label>
+		        {% if form.email.errors %}<span class="error">*** {{ form.email.errors.0 }}</span>{% endif %}
+                {{form.email}}
+            </div>    
+            <div class="">
+                <label id="email2">Email Validation</label>
+		        {% if form.email.errors %}<span class="error">*** {{ form.email2.errors.0 }}</span>{% endif %}
+					     {{form.email2}}
+            </div>
+            <div class="" style="width: 100%;">
+                <label id="message">Message</label>
+                {% if form.message.errors %}<span class="error">*** {{ form.message.errors.0 }}</span>{% endif %}
+                {{form.message}}
+            </div>
+		    <div class="">
+                {% if form.captcha.errors %}<span class="error">*** {{ form.captcha.errors.0 }}</span>{% endif %}
+		        {{ form.captcha }}
 		    </div>
 
-			<div class="submit">
-	            <!-- <button type="reset"><u>Clear</u></button>-->
-	            <button type="submit" value="Submit"><u>Submit</u></button>
+			<div class="button">
+	            <button type="submit" value="Submit">Submit</button>
 	        </div>
+	        <div class="clear"></div>
 	    </form>
 	</div>
+	{% endblock contact_form %}
 </div>
 
-{% for content in contents %}
-<div class="content">
-    {{ content.content|safe }}
-</div>
-{% endfor %}
     
 <script language="JavaScript" type="text/JavaScript" src="/static/Library/validation/order.js"></script>
 <script>
@@ -81,4 +80,4 @@
     errormess = ["Please fill all required fields!","Please, enter a valid email address!", "Email address don't match!"];
 </script>
 <!--=========//dashboardelement=========== -->
-{% endblock content %}
+{% endblock vcms_main_content %}

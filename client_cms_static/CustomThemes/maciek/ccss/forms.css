@@ -1,6 +1,6 @@
 form>table,
 form>div {
-  padding: 0.8em;
+  padding: 0;
 }
 
 form p.error {
@@ -30,6 +30,7 @@ label {
   font-size: 1em;
   text-transform: capitalize;
   text-align: left;
+  margin-top: 0.8em;
 }
 
 .notice {
@@ -49,19 +50,23 @@ label {
 input {
   width: 98%;
   height: 2em;
-  border: 1px solid #c9c9c9;
 }
 
 textarea {
-  width: 92%;
+  width: 93%;
 }
 
-#login_form {
+input,
+textarea {
+  border: 1px solid #c9c9c9;
+}
+
+.normal_form {
   width: 76%;
   float: left;
 }
 
-#login_form form > div {
+.normal_form form > div {
   float: left;
   width: 46%;
   margin: 0;
@@ -70,15 +75,16 @@ textarea {
   padding: 0;
 }
 
-#login_form .button {
+.normal_form .button {
   float: right;
 }
 
-#login_form div.button {
+.normal_form div.button {
   width: 18%;
 }
 
-button.button {
+button.button,
+button {
   border: none;
   font-size: 0.9em;
   font-weight: bold;
@@ -87,9 +93,30 @@ button.button {
   margin-right: 1.1em;
   padding: 0.3em 0.4em;
   padding-right: 20px;
-  padding-left: 1em;
-  background-position: 90% 50%;
+  padding-top: 4px;
+  padding-left: 6px;
+  background-position: 88% 52%;
   background-repeat: no-repeat;
   color: #c2c2c2;
   background-image: url(../images/link/arrow_gray.png);
+  cursor: pointer;
+}
+
+div.contact_form {
+  float: left;
+  margin-right: 2em;
+}
+
+div.contact_form>div {
+  text-align: center;
+}
+
+div.contact_form h1 {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+div.contact_form h3 {
+  font-weight: normal;
+  padding: 0;
 }

@@ -33,7 +33,13 @@
         	<tr><td>Email: 		</td><td>{{orderinfo.email}} </td>
         	</tr>
         	<tr><td>Message: 	</td><td>{{orderinfo.message}} </td>
+            <tr><td>Signup to the mailing list: </td><td>{{orderinfo.mailinglist}} </td>
+            </tr>
+        	{% if mailinglist %}
+        	<tr><td colspan="2">
+        	   <a mailto:{{email_for_removal}}?subject="remove from mailing list"&body={% trans "remove from mailing list {{orderinfo.email}}">To be remove from the mailing list</a></td>
    			</tr>
+   			{% endif %}
    		</table>
    		<br />
 		<br />

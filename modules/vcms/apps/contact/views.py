@@ -33,7 +33,7 @@ class ContactForm(forms.Form):
 def Contact(request, page=None, context={}):
     context.update(InitPage(page_slug=page, app_slug='contact'))
     context.update(locals())
-    contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
+    #contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
     form = ContactForm()
     
     requiredfields = ["id_%s" % fieldname for fieldname,fieldobject in form.fields.items() if fieldobject.required]
@@ -59,7 +59,7 @@ def Contact(request, page=None, context={}):
                 email_from = EMAILS["CONTACT"]["FROM"]
                 email_to = form.data["email"]
                 text_content = render_to_response('contact/email_customer.txt', { "orderinfo": form.cleaned_data  })
-                html_content = render_to_response('contact/email_customer.html', { "orderinfo": form.cleaned_data  })
+                html_content = render_to_response('contact/email_customer.html', { "orderinfo": form.cleaned_data, "email_for_removal":email_from  })
                 msg = EmailMultiAlternatives(subject, text_content, email_from, [email_to])
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
@@ -70,7 +70,7 @@ def Contact(request, page=None, context={}):
             
             # return render_to_response('contact.html', { "menuselected":"menu_contact", "form": contactform, "successful": False, "emailerror": True, } )
             context.update(locals())
-            return render_to_response('email_confirmation.html', 
+            return render_to_response('confirmation.html', 
                                       context,
                                       context_instance=RequestContext(request))
         
@@ -79,7 +79,7 @@ def Contact(request, page=None, context={}):
             form.errors["email2"] = ["Email don't match"]
     
     
-    contents = Content.objects.get_contents_for_page(context["page_info"]['page'])
+    #contents = Content.objects.get_contents_for_page(context["page_info"]['page'])
     #print("content for contant page %s : %s" % (context["page_info"]['page'], contents))
             
     context.update(locals())

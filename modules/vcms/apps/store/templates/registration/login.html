@@ -8,51 +8,51 @@
 
 {% block vcms_main_content %}
 <div class="vcms_container_relative">
-<h2>{% trans "Customer Login" %}</h2>
-
-<div id='login_form'>
-    <form method="post" action=".">
-        <div class="">
-            <label for="id_username">{% trans 'Email' %}</label>
-            {{ form.username }}
-            {% if form.username.errors %}
-                <span class="error">***{{ form.username.errors|join:", " }}</span>
-            {% endif %}
-        </div>
-        <div class="">
-	        <div class="notice"><a href="{% url auth_password_reset %}">{% trans "Forgot your " %} <span class="black">{% trans "Password" %}?</span></a></div>
-	        <label for="id_password">{% trans 'Password' %}</label> 
-	        {{ form.password }}
-	        {% if form.password.errors %}
-	            <span class="error">***{{ form.password.errors|join:", " }}</span>
+	<h2>{% trans "Customer Login" %}</h2>
+	
+	<div class='normal_form'>
+	    <form method="post" action="." class="">
+	        <div class="">
+	            <label for="id_username">{% trans 'Email' %}</label>
+	            {{ form.username }}
+	            {% if form.username.errors %}
+	                <span class="error">***{{ form.username.errors|join:", " }}</span>
+	            {% endif %}
+	        </div>
+	        <div class="">
+		        <div class="notice"><a href="{% url auth_password_reset %}">{% trans "Forgot your " %} <span class="black">{% trans "Password" %}?</span></a></div>
+		        <label for="id_password">{% trans 'Password' %}</label> 
+		        {{ form.password }}
+		        {% if form.password.errors %}
+		            <span class="error">***{{ form.password.errors|join:", " }}</span>
+		        {% endif %}
+		    </div>
+	        <input type="hidden" name="next"
+	        {% if next %}
+	            value={{ next }} />
+	        {% else %}
+	            value="{% url satchmo_account_info %}" />
 	        {% endif %}
-	    </div>
-        <input type="hidden" name="next"
-        {% if next %}
-            value={{ next }} />
-        {% else %}
-            value="{% url satchmo_account_info %}" />
-        {% endif %}
-
-        
-        {% if form.non_field_errors %}
-        <p class="error">
-        {% for err in form.non_field_errors %}
-            <!-- {{ err }} -->{% trans 'The username or password you entered is incorrect' %}<br/> {% trans 'Fields are case-sensitive' %}.
-            {% if not forloop.last %}{% endif %}
-        {% endfor %}
-        </p>
-        {% endif %}
-                <!-- <div class="button"> -->
-        <div class="button">
-            <button type="submit" class="button dark_bg"value="{% trans "Login" %}">{% trans "Login" %}</button>
-        </div>
-       <!--  </div >-->
-        <div class="clear"></div>
-    </form>
-       
-</div>
-       <div class="clear"></div>
+	
+	        
+	        {% if form.non_field_errors %}
+	        <p class="error">
+	        {% for err in form.non_field_errors %}
+	            <!-- {{ err }} -->{% trans 'The username or password you entered is incorrect' %}<br/> {% trans 'Fields are case-sensitive' %}.
+	            {% if not forloop.last %}{% endif %}
+	        {% endfor %}
+	        </p>
+	        {% endif %}
+	                <!-- <div class="button"> -->
+	        <div class="button">
+	            <button type="submit" class="button dark_bg"value="{% trans "Login" %}">{% trans "Login" %}</button>
+	        </div>
+	       <!--  </div >-->
+	        <div class="clear"></div>
+	    </form>
+	       
+	</div>
+    <div class="clear"></div>
 
     <!-- 
 	<div class="noaccount">
