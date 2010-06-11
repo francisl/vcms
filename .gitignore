@@ -13,6 +13,9 @@ client/qooxdoo-1.1-sdk/*
 *.~*
 .~*
 
+#log file
+*.log
+
 # Mac OSX
 .DS_Store
 
