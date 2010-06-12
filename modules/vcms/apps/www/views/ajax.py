@@ -36,20 +36,23 @@ def get_page_list(request):
         pages = BasicPage.objects.get_all_basic()
         mainmemu = mm.objects.get(menu_name='english')
         print("all basic page = %s" % pages)
-        pages_dict = {}
+        pages_dict = {"name":'english'
+                      ,"pages": []
+                      }
 
         for page in mainmemu.get_children():
-            pages_dict[page.id] = {"id" : page.content_object.id
-                                   ,"left" : page.lft
-                                   ,"right" : page.rgt
-                                   ,"menu_name" : page.menu_name
-                                   ,"slug" : page.content_object.slug
-                                   ,"description": page.content_object.description
-                                   ,"containers" : {}
-                                   ,"pages" : {}
-                                   ,"displayed" : page.display
-                                   ,"published" : page.content_object.status
-                                   }
+            pages_dict['pages'].append({ "name": page.menu_name
+                                    ,"id" : page.content_object.id
+                                    ,"left" : page.lft
+                                    ,"right" : page.rgt
+                                    ,"menu_name" : page.menu_name
+                                    ,"slug" : page.content_object.slug
+                                    ,"description": page.content_object.description
+                                    ,"containers" : {}
+                                    ,"pages" : []
+                                    ,"displayed" : page.display
+                                    ,"published" : page.content_object.status
+                                    })
         print("dict to json : %s " % pages_dict)
         return HttpResponse(simplejson.dumps(pages_dict), mimetype='application/javascript')
         

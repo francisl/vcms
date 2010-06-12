@@ -32,7 +32,6 @@ urlhelper.replace_urlpatterns(
     [   url(r'^register/complete/$', 'vcms.apps.store.views.complete', {}, 'registration_complete'),
         url(r'^register/(?P<activation_key>\w+)/$', 'vcms.apps.store.views.activate', {}, 'registration_activate'),
         url(r'^register/$', 'vcms.apps.store.views.register', {}, 'registration_register'),
-        url(r'^contact/$', 'vcms.apps.contact.views.Contact', {}, 'satchmo_account_info'),
     ]
 )
 # __ VIMBA CMS __
