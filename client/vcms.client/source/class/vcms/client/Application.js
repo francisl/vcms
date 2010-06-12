@@ -84,7 +84,7 @@ qx.Class.define("vcms.client.Application",
       main_container.add(center_container);
       
       // Right container
-      main_container.add(new vcms.client.widgets.WidgetList());
+      main_container.add(new vcms.client.widgets.WidgetList().set({ width: 150 }));
     }
   }
 });
