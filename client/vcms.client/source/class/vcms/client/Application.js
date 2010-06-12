@@ -79,15 +79,7 @@ qx.Class.define("vcms.client.Application",
       
       // Center container
       var center_container = new qx.ui.container.Composite(new qx.ui.layout.VBox()).set({ width: 400 });
-      var tabs_center_container = new qx.ui.tabview.TabView();
-      for (i = 0, n = 3; i < n; i++)
-      {
-        var page = new qx.ui.tabview.Page("Page #" + i);
-        tabs_center_container.add(page);
-        page.setLayout(new qx.ui.layout.VBox().set({ spacing: 2 }));
-        page.add(new qx.ui.form.List());
-        page.add(new qx.ui.form.Button("Remove widget from page"));
-      }
+      var tabs_center_container = new vcms.client.widgets.WidgetList();
       center_container.add(tabs_center_container);
       main_container.add(center_container);
       
