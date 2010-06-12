@@ -79,7 +79,7 @@ qx.Class.define("vcms.client.Application",
       
       // Center container
       var center_container = new qx.ui.container.Composite(new qx.ui.layout.VBox()).set({ width: 400 });
-      var tabs_center_container = new vcms.client.widgets.WidgetList();
+      var tabs_center_container = new vcms.client.widgets.ContainerWidgetList();
       center_container.add(tabs_center_container);
       main_container.add(center_container);
       

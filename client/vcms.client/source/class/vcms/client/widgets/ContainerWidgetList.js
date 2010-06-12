@@ -1,4 +1,4 @@
-qx.Class.define("vcms.client.widgets.WidgetList",
+qx.Class.define("vcms.client.widgets.ContainerWidgetList",
 {
     extend : qx.ui.tabview.TabView,
  
