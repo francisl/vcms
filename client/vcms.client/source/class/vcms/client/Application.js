@@ -65,24 +65,12 @@ qx.Class.define("vcms.client.Application",
       // Left container
       var left_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 300 });
       main_container.add(left_container);
-      var tree = new qx.ui.tree.Tree().set({
+      var tree = new vcms.client.widgets.PageTree().set({
         width: 600,
         height: 500
       });
       left_container.add(tree);
-      var root = this.configureTreeItem(new qx.ui.tree.TreeFolder(), "Root");
-      tree.setRoot(root);
-      tree.setHideRoot(true);
-      root.setOpen(true);
-      // Gets the list of available pages
-      var req = new qx.io.remote.Request("/ajax/page/list/", "GET", "application/json");
-      req.addListener("completed", function(e)
-      {
-        // TODO
-        var te1 = this.configureTreeItem(new qx.ui.tree.TreeFolder(), "Desktop");
-        root.add(te1);
-      }, this);
-      req.send();
+
       var buttons_left_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 5 }));
       left_container.add(buttons_left_container);
       buttons_left_container.add(new qx.ui.form.Button("Add a simple page"));
@@ -108,21 +96,6 @@ qx.Class.define("vcms.client.Application",
       main_container.add(right_container);
       right_container.add(new qx.ui.form.List());
       right_container.add(new qx.ui.form.Button("Add widget to page"));
-    },
-    configureTreeItem : function(treeitem, label)
-    {
-      if (treeitem instanceof qx.ui.tree.TreeFolder)
-        treeitem.addOpenButton();
-
-      var checkbox = new qx.ui.form.CheckBox();
-      checkbox.setFocusable(false);
-      treeitem.addWidget(checkbox);
-
-      treeitem.addLabel(label);
-
-      treeitem.addWidget(new qx.ui.core.Spacer(), {flex: 1});
-
-      return treeitem;
     }
   }
 });
