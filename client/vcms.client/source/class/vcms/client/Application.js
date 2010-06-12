@@ -87,7 +87,10 @@ qx.Class.define("vcms.client.Application",
       var right_container = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({ spacing: 2 })).set({ width: 150 });
       main_container.add(right_container);
       right_container.add(new qx.ui.form.List());
-      right_container.add(new qx.ui.form.Button("Add widget to page"));
+      var buttons_container = new qx.ui.container.Composite(new qx.ui.layout.HBox());
+      right_container.add(buttons_container);
+      buttons_container.add(new qx.ui.form.Button("Add widget to page"), {flex: 0});
+      buttons_container.add(new qx.ui.core.Spacer(), {flex: 1});
     }
   }
 });
