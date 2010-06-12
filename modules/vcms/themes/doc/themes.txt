@@ -1,0 +1,36 @@
+*Planification de projet de développement – Thèmes V1
+
+**Mission du produit
+Offrir un système de thèmes pour le CMS. Offre la possibilité de choisir dynamiquement un thèmes, de le modifier graphiquement via une application, d'ajouter des thèmes tierce partie comme plug-ins. Le système doit être performant et flexible.
+
+**Attentes des utilisateurs (User Stories)
+Être en mesure de changer le thèmes facilement
+Être capable d'apporter des changements facilement via une interface graphique (voir projet séparé)
+
+**Acteurs
+Site web administration
+
+**Fonctionnalités
+Changement du thèmes
+Ajustement des paramètre du css
+Garder un historique des versions
+
+**Objets
+Page d'administration pour choisir le thèmes.
+Page d'aperçu du/des thèmes
+Interface de modification graphique 
+
+**Actions possible de l’utilisateur 
+Sélectionner un nouveau thèmes
+
+**Testes de validation et de mesure
+Il doit toujours avoir un thèmes par défaut
+
+**Dictionnaire et terme des objets et action
+Thème → identifie le nome du thème qui inclus tout les css et images
+
+**Plan du produit
+Structure chart (http://en.wikipedia.org/wiki/Structure_chart)
+A Structure Chart (SC) in software engineering and organizational theory is a chart, which shows the breakdown of the configuration system to the lowest manageable levels. It is used to show the hierarchical arrangement of the modules in a structured program. Each rectangular box represents a module. The names of the modules are written inside the box. An arrow joins two modules that have an invocation relationship.
+
+**Tout autre éléments qui servent à augmenté la qualité du produit

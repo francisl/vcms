@@ -1,0 +1,13 @@
+**Objects-Actions analysis
+
+This document contains all conceptual objects that an application will expose to users, the actions that users can perform on each object, the attributes (user-visible settings) of each type of object, and the relationships between objects.
+
+Add and edit :
+Pages
+Media
+News
+Product
+Blogs
+Widgets ; maps, media, custom made html snipset
+
+

@@ -1,0 +1,49 @@
+*Planification de projet de développement
+
+**Mission du produit 
+Offrir un API qui permet de faire une abstraction entre les models/data et le code HTML. Similaire à un «toolkit» graphique, l'API permettra de générer dynamiquement des widget html qui sont souvent réutilisé et variable selon les données. Tel que des arbres, tables, menus etc..
+L'API doit être simple à utiliser et flexible afin de permettre de s'adapter à tout type de site.
+Les produits générés seront toutes identifiés pour facilité l'intégration avec javascript et css.
+
+**Acteurs
+Programmeur django
+
+**Fonctionnalités
+Permet de créer : Tree, Table
+Retourne un erreur seulement si debug == True, sinon une structure valide vide
+
+**Fonctionnement
+Soit dans les templates avec un template tag ou bien directement dans la view.
+
+***Exemple Templatetag :
+{% load vwm %}
+{% generate_tree {{datasource}} type %}
+
+***Exemple Views :
+import vcms.apps.vwm as vwm
+html = vwm.generate_tree(datasource, type=dl or li)
+
+**Tests de validation et de mesure
+S'assurer que des données inégal, qui contient plus de header que de data ou des colonne inégale, ne génère pas d'erreurs.
+
+**Dictionnaire et terme des objets et action
+Terme
+Definition
+synomes
+
+
+Tree	
+Crée un arbres à multiple niveau qui utilise les «definition list» <dl>
+[]
+
+Table
+Crée une table standard html <table>
+
+
+
+
+
+
+
+
+
