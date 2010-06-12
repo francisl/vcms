@@ -4,13 +4,13 @@
 
 from django.conf.urls.defaults import *
 from django.conf import settings
-from vcms.apps.news.feeds import LatestNewsFeed, CategoryFeed
+from vcms.news.feeds import LatestNewsFeed, CategoryFeed
 
 
 feeds = { "news" : LatestNewsFeed,
           "categories" : CategoryFeed }
 
-urlpatterns = patterns('vcms.apps.news.views',
+urlpatterns = patterns('vcms.news.views',
     # Example:
     #(r'^(\d+)/$', 'NewsSingle'),
     #(r'^page/(?P<page>[-\w]+)/$', 'Generic'),

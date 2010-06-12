@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
-#from vcms.apps.www.managers.widget import ContentManager
-from vcms.apps.www.models.containers import TableContainer, GridContainer, RelativeContainer
+#from vcms.www.managers.widget import ContentManager
+from vcms.www.models.containers import TableContainer, GridContainer, RelativeContainer
 
 
 class WidgetWrapper(models.Model):

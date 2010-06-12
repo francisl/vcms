@@ -5,16 +5,16 @@
 
 import datetime
 
-from vcms.apps.www.managers import BannerManager #, BannerImageManager, ContentManager, QuickLinksManager
-from vcms.apps.www.managers import BannerImageManager
-from vcms.apps.www.managers import ContentManager
-from vcms.apps.www.managers import QuickLinksManager
+from vcms.www.managers import BannerManager #, BannerImageManager, ContentManager, QuickLinksManager
+from vcms.www.managers import BannerImageManager
+from vcms.www.managers import ContentManager
+from vcms.www.managers import QuickLinksManager
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
-from vcms.apps.www.models.page import BasicPage
-#from vcms.apps.www.models import Language
+from vcms.www.models.page import BasicPage
+#from vcms.www.models import Language
 
 # -- CONTENT
 # ----------
@@ -65,17 +65,17 @@ class Content(models.Model):
 
 
 
-#from vcms.apps.www.fields import StatusField
+#from vcms.www.fields import StatusField
 
 # -- variable
 PRODUCT_IMAGES = "uploadto/prod_images"
 PRODUCT_VIDEOS = "uploadto/prod_videos"
 APP_SLUGS = "www"
 
-#from vcms.apps.www.models.page import BasicPage
-#from vcms.apps.www.models.menu import PageMenu
+#from vcms.www.models.page import BasicPage
+#from vcms.www.models.menu import PageMenu
 
-#from vcms.apps.www.models.page import SimplePage
+#from vcms.www.models.page import SimplePage
 
 def _delete_page(page2delete):
     """ Move submenu up one level """

@@ -8,10 +8,10 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
-from vcms.apps.www.models import PageElementPosition
-from vcms.apps.simpleannouncements.models import Announcement, AnnouncementCategory
-from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
-from vcms.apps.simplenews.managers import NewsManager, NewsCategoryManager
+from vcms.www.models import PageElementPosition
+from vcms.simpleannouncements.models import Announcement, AnnouncementCategory
+from vcms.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
+from vcms.simplenews.managers import NewsManager, NewsCategoryManager
 
 
 APP_SLUGS = "news"
@@ -36,7 +36,7 @@ class News(Announcement):
     published = PublishedAnnouncementManager()
 
     def get_absolute_url(self):
-        return reverse("vcms.apps.simplenews.views.single_news", args=[self.slug, self.category.slug])
+        return reverse("vcms.simplenews.views.single_news", args=[self.slug, self.category.slug])
 
     class Meta:
         verbose_name_plural = _("News")
@@ -45,7 +45,7 @@ class News(Announcement):
 
 
 class NewsPageModule(PageElementPosition):
-    from vcms.apps.www.models.page import DashboardPage as DP
+    from vcms.www.models.page import DashboardPage as DP
     page = models.ForeignKey(DP)
     tags = TagField()
     title = models.CharField(max_length="60", help_text=_("Max 60 characters"), verbose_name=_("Title"))

@@ -6,7 +6,7 @@
 from django.db import models
 
 from treebeard.models import Node
-#from vcms.apps.www.models.menu import MainMenu
+#from vcms.www.models.menu import MainMenu
 
 
 class MainMenuManager(models.Manager):
@@ -31,7 +31,7 @@ class MainMenuManager(models.Manager):
 
      
     def get_submenu(self):
-        from vcms.apps.vwm.tree import helper
+        from hwm.tree import helper
         """ return navigation tree as a list containing tree node dictionary """
         root = self.get_root_menu() 
         nav = []

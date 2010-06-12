@@ -20,7 +20,7 @@ Soit dans les templates avec un template tag ou bien directement dans la view.
 {% generate_tree {{datasource}} type %}
 
 ***Exemple Views :
-import vcms.apps.vwm as vwm
+import hwm as vwm
 html = vwm.generate_tree(datasource, type=dl or li)
 
 **Tests de validation et de mesure

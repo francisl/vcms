@@ -14,7 +14,7 @@ def generate_buttons(buttons, css_id="", css_class=""):
         @param css_class: string, class name of thelist container
         
         @example:
-            >>> from vcms.apps.vwm import button.generator, templatetags
+            >>> from hwm import button.generator, templatetags
             
             # create one item 
             >>> buttons_list = []

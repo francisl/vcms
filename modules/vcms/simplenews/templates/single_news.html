@@ -14,12 +14,12 @@
         <div id="item_navigation">
             <div class="left">
                 {% if previous_news %}
-                    <a href="{% url vcms.apps.simplenews.views.single_news category_slug=previous_news.category.slug news_slug=previous_news.slug %}">{{previous_news.name}}</a>
+                    <a href="{% url vcms.simplenews.views.single_news category_slug=previous_news.category.slug news_slug=previous_news.slug %}">{{previous_news.name}}</a>
                 {% endif %}
             </div>
             <div class="right">
                 {% if next_news %}
-                    <a href="{% url vcms.apps.simplenews.views.single_news category_slug=next_news.category.slug news_slug=next_news.slug %}">{{next_news.name}}</a>
+                    <a href="{% url vcms.simplenews.views.single_news category_slug=next_news.category.slug news_slug=next_news.slug %}">{{next_news.name}}</a>
                 {% endif %}
             </div>
         </div>
@@ -65,7 +65,7 @@
 {% block navigation %}
     <ul>
     {% for category in categories %}
-        <li><a href="{% url vcms.apps.simplenews.views.list_news category_slug=category.slug %}">{{category.name}}</a></li>
+        <li><a href="{% url vcms.simplenews.views.list_news category_slug=category.slug %}">{{category.name}}</a></li>
     {% endfor %}
     </ul>
 {% endblock navigation %}

@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 24-03-2010.
 
 from django.contrib import admin
-from vcms.apps.simpleblogs.models import Blog, BlogPageModule
+from vcms.simpleblogs.models import Blog, BlogPageModule
 
 
 class BlogPageModuleAdmin(admin.ModelAdmin):

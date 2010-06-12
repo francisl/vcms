@@ -25,5 +25,5 @@ class NewsCategoryManager(models.Manager):
             Returns the NewsCategory instances which are associated
             to published news instances.
         """
-        from vcms.apps.simplenews.models import News
+        from vcms.simplenews.models import News
         return self.filter(pk__in=News.published.all().values("category__pk"))

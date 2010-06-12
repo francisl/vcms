@@ -2,7 +2,7 @@
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
 from django import template
-from vcms.apps.www.models import Banner
+from vcms.www.models import Banner
 import settings
 register = template.Library()
 

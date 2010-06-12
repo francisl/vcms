@@ -4,7 +4,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-urlpatterns = patterns('vcms.apps.contact.views'
+urlpatterns = patterns('vcontact.views'
     ,(r'page/(?P<page>[-\w]+)/$', 'Contact')
     ,(r'^$', 'Contact')    
 )

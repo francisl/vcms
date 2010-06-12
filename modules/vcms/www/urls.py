@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 import haystack
 
-urlpatterns = patterns('vcms.apps.www.views'
+urlpatterns = patterns('vcms.www.views'
     # Example:
     # (r'^search/$', 'Search'),
     ,(r'^search/', include('haystack.urls'))

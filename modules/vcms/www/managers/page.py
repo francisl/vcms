@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 30-05-2010.
 
 from django.db import models
-from vcms.apps.www.fields import StatusField
+from vcms.www.fields import StatusField
 
 class BasicPageManager(models.Manager):
     """
@@ -81,7 +81,7 @@ class BasicPageManager(models.Manager):
 
     """
     def get_all_basic(self):
-        from vcms.apps.www.models.page import Language
+        from vcms.www.models.page import Language
         return self.filter(language=Language.objects.get_default())
 
     def get_main_published(self):

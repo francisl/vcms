@@ -4,9 +4,9 @@
 from django import template
 from django.template.loader import render_to_string
 
-from vcms.apps.www.models.page import BasicPage as Page
-from vcms.apps.www.models.menu import MainMenu
-from vcms.apps.www.models.page import Language
+from vcms.www.models.page import BasicPage as Page
+from vcms.www.models.menu import MainMenu
+from vcms.www.models.page import Language
 
 register = template.Library()
 
@@ -57,9 +57,9 @@ def show_sub_menu(current_page=None):
 def generate_sub_menu(current_page=None):
     """ return a html version of the submenu
     """
-    from vcms.apps.vwm.tree import helper
-    from vcms.apps.vwm.tree import generator
-    from vcms.apps.www.menu import MainMenu
+    from hwm.tree import helper
+    from hwm.tree import generator
+    from vcms.www.menu import MainMenu
     
     l = Language.objects.get_default()
     """ return navigation tree as a list containin tree node dictionary """ 

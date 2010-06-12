@@ -4,7 +4,7 @@
 
 from django.db import models
 from django.contrib.sites.managers import CurrentSiteManager
-from vcms.apps.www.fields import StatusField
+from vcms.www.fields import StatusField
 
 
 class ProductPageManager(models.Manager):
@@ -183,12 +183,12 @@ class ProductPageManager(models.Manager):
             product.save(reorder=False)
 
     def get_available_products(self):
-        #from vcms.apps.www.models.page import Page
+        #from vcms.www.models.page import Page
         return self.filter(status=StatusField.PUBLISHED)
        
 class StandardNavigationGroupManager(models.Manager): 
     def get_navigation(self):
-        from vcms.apps.vwm.tree import helper
+        from hwm.tree import helper
         """ return navigation tree as a list containin tree node dictionary """ 
         nav = []
         for navgroup in self.all():

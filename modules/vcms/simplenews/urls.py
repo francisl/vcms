@@ -5,13 +5,13 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.conf.urls.defaults import *
-from vcms.apps.simplenews.feeds import NewsRssFeed, NewsCategoryRssFeed
-from vcms.apps.simplenews.models import APP_SLUGS
+from vcms.simplenews.feeds import NewsRssFeed, NewsCategoryRssFeed
+from vcms.simplenews.models import APP_SLUGS
 
 
 urlpatterns_prefix = r'^%s/' % APP_SLUGS
 
-urlpatterns = patterns('vcms.apps.simplenews.views',
+urlpatterns = patterns('vcms.simplenews.views',
     (r'^(?P<category_slug>.+)/page-(?P<page>\d+)/$', 'list_news'), # ^/finances/page-1/
     url(r'^page-(?P<page>\d+)/$', 'list_news', { "category_slug": None }), # ^/page-1/
     (r'^(?P<category_slug>.+)/(?P<news_slug>.+)/$', 'single_news'), # ^/finances/year-of-the-linux-desktop/
@@ -34,12 +34,12 @@ urlpatterns = patterns('vcms.apps.simplenews.views',
     #url(r'^archives/(?P<month>\d{2})-(?P<year>\d{4}).atom$', 'TODO', { "category_slug": None }), # ^/archives/12-2010.atom
     #url(r'^recent.atom$', 'TODO', { "category_slug": None }), # ^/recent.atom
     #(r'^(?P<category_slug>.+)/recent.atom$', 'TODO'), # ^/finances/recent.atom
-    url(r'^recent.rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # ^/recent.rss
-    url(r'^(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # ^/01-2010.rss
-    url(r'^(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.apps.simplenews.views.news.recent.rss'), # ^/2010.rss
-    url(r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # ^/finances/recent.rss
-    url(r'^(?P<category_slug>.+)/(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # ^/finances/01-2010.rss
-    url(r'^(?P<category_slug>.+)/(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.apps.simplenews.views.newscategory.recent.rss'), # ^/finances/2010.rss
+    url(r'^recent.rss$', NewsRssFeed(), name='vcms.simplenews.views.news.recent.rss'), # ^/recent.rss
+    url(r'^(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.simplenews.views.news.recent.rss'), # ^/01-2010.rss
+    url(r'^(?P<year>\d{4}).rss$', NewsRssFeed(), name='vcms.simplenews.views.news.recent.rss'), # ^/2010.rss
+    url(r'^(?P<category_slug>.+)/recent.rss$', NewsCategoryRssFeed(), name='vcms.simplenews.views.newscategory.recent.rss'), # ^/finances/recent.rss
+    url(r'^(?P<category_slug>.+)/(?P<month>\d{2})-(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.simplenews.views.newscategory.recent.rss'), # ^/finances/01-2010.rss
+    url(r'^(?P<category_slug>.+)/(?P<year>\d{4}).rss$', NewsCategoryRssFeed(), name='vcms.simplenews.views.newscategory.recent.rss'), # ^/finances/2010.rss
     (r'^(?P<category_slug>.+)/', 'list_news'), # Catchall index page for a category
     url(r'^', 'list_news', { "category_slug": None }), # Catchall index page
 )

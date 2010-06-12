@@ -12,10 +12,10 @@ from django.db.models import signals
 
 from treebeard.ns_tree import NS_Node
 
-from vcms.apps.www.fields import StatusField
-from vcms.apps.www.models.menu import MainMenu
-from vcms.apps.www.managers.page import BasicPageManager
-from vcms.apps.www.managers.page import LanguageManager
+from vcms.www.fields import StatusField
+from vcms.www.models.menu import MainMenu
+from vcms.www.managers.page import BasicPageManager
+from vcms.www.managers.page import LanguageManager
 
 class Language(models.Model):
     language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
@@ -90,7 +90,7 @@ class BasicPage(models.Model):
         
     def save(self):
         self.app_slug='www'
-        from vcms.apps.www.models.menu import MainMenu as PageMenu
+        from vcms.www.models.menu import MainMenu as PageMenu
         first_root = MainMenu.get_first_root_node()
         root = None
         
@@ -188,10 +188,10 @@ class MainPage(BasicPage):
         
     @staticmethod
     def get_containers():
-        from vcms.apps.www.models.containers import ContainerDefinition
-        from vcms.apps.www.models.containers import GridContainer
-        from vcms.apps.www.models.containers import TableContainer
-        from vcms.apps.www.models.containers import RelativeContainer
+        from vcms.www.models.containers import ContainerDefinition
+        from vcms.www.models.containers import GridContainer
+        from vcms.www.models.containers import TableContainer
+        from vcms.www.models.containers import RelativeContainer
         return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
                     ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
 
@@ -214,7 +214,7 @@ class BlankPage(BasicPage):
         super(BlankPage, self).save()
         
     def get_containers(self):
-        from vcms.apps.www.models.containers import RelativeContainer
+        from vcms.www.models.containers import RelativeContainer
         my_rel_cont = {} 
         for container in RelativeContainer.objects.filter(page=self): 
             my_rel_cont[container.name] = container
@@ -241,7 +241,7 @@ class SimplePage(BasicPage):
 # DASHBOARD
 # Dashboard is an information page layout that display preview and modules
 #
-from vcms.apps.www.managers.containers import DashboardElementManager
+from vcms.www.managers.containers import DashboardElementManager
 
 class PageElementPosition(models.Model):
     #PREVIEW
@@ -299,7 +299,7 @@ class DashboardElement(PageElementPosition):
 
 
 class DashboardPreview(PageElementPosition):
-    from vcms.apps.www.models.old import Content
+    from vcms.www.models.old import Content
     page = models.ForeignKey(DashboardPage)
     preview = models.ForeignKey(Content)
 

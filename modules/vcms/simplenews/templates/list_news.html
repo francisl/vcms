@@ -23,7 +23,7 @@
 	            {{ c.content|truncatewords:50|safe }}
 	        </p>
 	        <div class="content_box_link">
-	        <a href="{% url vcms.apps.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">
+	        <a href="{% url vcms.simplenews.views.single_news category_slug=c.category.slug news_slug=c.slug %}">
 	           {% trans "Full Story" %}
 	        </a>
 	        </div>

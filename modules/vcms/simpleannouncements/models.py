@@ -6,9 +6,9 @@
 
 from django.db import models
 from tagging.fields import TagField
-from vcms.apps.www.models.page import Page
-from vcms.apps.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
-from vcms.apps.www.fields import StatusField
+from vcms.www.models.page import Page
+from vcms.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
+from vcms.www.fields import StatusField
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group, User
 import datetime

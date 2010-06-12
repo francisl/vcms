@@ -10,13 +10,13 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from vcms.apps.simplenews import settings
-from vcms.apps.simplenews.models import News, NewsCategory
-from vcms.apps.simplenews.models import APP_SLUGS
-from vcms.apps.www.views import InitPage, setPageParameters
-from vcms.apps.vwm.tree import generator as generator
-from vcms.apps.vwm.tree import helper 
-from vcms.apps.vwm.paginator import generator as pgenerator
+from vcms.simplenews import settings
+from vcms.simplenews.models import News, NewsCategory
+from vcms.simplenews.models import APP_SLUGS
+from vcms.www.views import InitPage, setPageParameters
+from hwm.tree import generator as generator
+from hwm.tree import helper 
+from hwm.paginator import generator as pgenerator
 
 def list_news(request, category_slug, page=1, context={}):
     context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
@@ -41,8 +41,8 @@ def list_news(request, category_slug, page=1, context={}):
     archive_nav = helper.create_tree_node("Archives", selected=True) 
     archive_items = []
     for year in archive_years:
-        archive_items.append(helper.create_tree_node(year, url=reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year })))
-        #print(".... %s " % reverse("vcms.apps.simplenews.views.news_archives" , kwargs={ "year":year }))
+        archive_items.append(helper.create_tree_node(year, url=reverse("vcms.simplenews.views.news_archives" , kwargs={ "year":year })))
+        #print(".... %s " % reverse("vcms.simplenews.views.news_archives" , kwargs={ "year":year }))
     
     archive_nav["items"] = archive_items
     nav.append(archive_nav)
@@ -62,7 +62,7 @@ def list_news(request, category_slug, page=1, context={}):
         news_paginator = paginator.page(paginator.num_pages)
     contents = news_paginator.object_list
 
-    reverse_url = "vcms.apps.simplenews.views.list_news"
+    reverse_url = "vcms.simplenews.views.list_news"
     url_args = {}
     if category_slug: # add category if necessary
         url_args.update(category_slug = category_slug)

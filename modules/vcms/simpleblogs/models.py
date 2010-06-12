@@ -7,8 +7,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
-from vcms.apps.www.models import PageElementPosition
-from vcms.apps.simpleannouncements.models import Announcement
+from vcms.www.models import PageElementPosition
+from vcms.simpleannouncements.models import Announcement
 
 
 APP_SLUGS = "simpleblogs"
@@ -21,7 +21,7 @@ class Blog(Announcement):
         ordering = ['-date_created']
 
 class BlogPageModule(PageElementPosition):
-    from vcms.apps.www.models.page import DashboardPage as DP
+    from vcms.www.models.page import DashboardPage as DP
     page = models.ForeignKey(DP)
     tags = TagField()
     title = models.CharField(max_length="60", help_text=_("Max 60 characters"), verbose_name=_("Title"))

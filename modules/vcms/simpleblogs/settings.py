@@ -6,6 +6,6 @@
 
 
 INSTALLED_APPS = (
-    'vcms.apps.simpleannouncements',
+    'vcms.simpleannouncements',
     'tagging', # http://code.google.com/p/django-tagging/
 )

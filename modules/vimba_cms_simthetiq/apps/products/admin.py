@@ -5,7 +5,7 @@ from vimba_cms_simthetiq.tools.widgets.admin_image_widget import AdminImageWidge
 from vimba_cms_simthetiq.apps.products.models import Kind, Domain, DISCountry, Category, StandardNavigationGroup
 from vimba_cms_simthetiq.apps.products.models import MediaTagsTranslation, MediaTags, FileFormat, ProductPage, ProductContent,Image, Video  
     #DomainPage, DomainElement, GalleryPage
-#from vcms.apps.www.models import Content
+#from vcms.www.models import Content
 
 # -- PRODUCTS
 # -----------

@@ -22,13 +22,13 @@ from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Config
 from livesettings import config_get_group, config_value
 from l10n.models import Country
-from vcms.apps.www.registration.models import AdminRegistrationProfile
-from vcms.apps.store.forms import StoreRegistrationForm
-from vcms.apps.www.views import setPageParameters
+from vcms.www.registration.models import AdminRegistrationProfile
+from vcms.store.forms import StoreRegistrationForm
+from vcms.www.views import setPageParameters
 
 
 import logging
-log = logging.getLogger('vcms.apps.store.views')
+log = logging.getLogger('vcms.store.views')
 
 # Add the Administrator verification method to the
 # site settings "Account Verification" option.

@@ -46,7 +46,7 @@ def generate_tree(data, navigation_title=None, css_id="", css_class="", type="dl
         @param type: string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
         
         @example - Without helper:
-            >>> from vcms.apps.vwm.tree import generator
+            >>> from hwm.tree import generator
             
             # create one item 
             >>> item = {}
@@ -63,8 +63,8 @@ def generate_tree(data, navigation_title=None, css_id="", css_class="", type="dl
             #then add the generated code to the navigation section {% block navigation %}
             
         @example - Using the helper:
-            >>> from vcms.apps.vwm.tree import generator
-            >>> rom vcms.apps.vwm.tree import helper
+            >>> from hwm.tree import generator
+            >>> rom hwm.tree import helper
             
             # create the item
             >>> item = helper.create_tree_node([item_name], url=item.get_absolute_url()))

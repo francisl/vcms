@@ -3,7 +3,7 @@
 # programmer : Francis Lavoie
 
 from django.contrib import admin
-from vcms.apps.news.models import NewsPageModule
+from vcms.news.models import NewsPageModule
 
 class NewsPageModuleInline(admin.StackedInline):
     model = NewsPageModule

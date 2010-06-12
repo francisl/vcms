@@ -11,14 +11,14 @@ import inspect
 # external requirement
 from captcha.fields import CaptchaField
 
-from vcms.apps.www.models import PageElementPosition
-from vcms.apps.www.models.old import Content, APP_SLUGS
-from vcms.apps.www.models.page import BasicPage as Page
-from vcms.apps.www.models.page import BasicPage
-from vcms.apps.www.models.menu import MainMenu
-from vcms.apps.www.models.page import DashboardPage
-from vcms.apps.www.models.page import DashboardElement
-from vcms.apps.www.models.page import DashboardPreview
+from vcms.www.models import PageElementPosition
+from vcms.www.models.old import Content, APP_SLUGS
+from vcms.www.models.page import BasicPage as Page
+from vcms.www.models.page import BasicPage
+from vcms.www.models.menu import MainMenu
+from vcms.www.models.page import DashboardPage
+from vcms.www.models.page import DashboardElement
+from vcms.www.models.page import DashboardPreview
 from django.core.exceptions import ObjectDoesNotExist
 from config.email import EMAILS 
 
@@ -123,7 +123,7 @@ def MainPage(request, context={}):
                               context_instance=RequestContext(request))
 
 def BlankPage(request, context={}):
-    from vcms.apps.www.models.widget import RelativeWidgetWrapper
+    from vcms.www.models.widget import RelativeWidgetWrapper
     content_container = context["containers"]["Content"]
     ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
     context.update(content_widgets = ContentWidgets)

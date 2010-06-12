@@ -5,9 +5,9 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
-from vcms.apps.www.models.page import Page
-from vcms.apps.www.models import Language
-#from vcms.apps.news.managers import NewsCategoryManager
+from vcms.www.models.page import Page
+from vcms.www.models import Language
+#from vcms.news.managers import NewsCategoryManager
 
 # Application connection to CMS
 APP_SLUGS = "news"
@@ -75,10 +75,10 @@ class News(models.Model):
     def get_videos_preview(self):
         return self.product_videos.all()[:3]
 
-from vcms.apps.www.models import PageElementPosition
+from vcms.www.models import PageElementPosition
 
 class NewsPageModule(PageElementPosition):
-    from vcms.apps.www.models.page import DashboardPage as DP
+    from vcms.www.models.page import DashboardPage as DP
     page = models.ForeignKey(DP)
     categories = models.ManyToManyField(NewsCategory)
     title = models.CharField(max_length="60")

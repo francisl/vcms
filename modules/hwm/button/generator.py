@@ -14,7 +14,7 @@ def create_button(name, url, type='text', input_type="submit"):
         @param input: type: if type == input, option are 'reset' or 'submit'
         
         @example:
-            >>> from vcms.apps.vwm import button.generator
+            >>> from hwm import button.generator
             
             # create one item 
             >>> buttons_list = []

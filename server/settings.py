@@ -119,7 +119,7 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #'django.middleware.csrf.CsrfViewMiddleware' __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
                       ,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
                       ,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
-                      #'vcms.apps.www.middleware.EnforceLoginMiddleware',
+                      #'vcms.www.middleware.EnforceLoginMiddleware',
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
@@ -146,13 +146,13 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'djvideo'
                   ,'compressor'                           # git://github.com/dziegler/django-css.git
                   # VIMBA CMS APPS
-                  ,'vcms.apps.www'
-                  ,'vcms.apps.simpleblogs'
-                  ,'vcms.apps.simplenews'
-                  ,'vcms.apps.vwm'
-                  ,'vcms.apps.themes'
-                  ,'vcms.apps.contact'
-                  ,'vcms.apps.store'
+                  ,'vcms.www'
+                  ,'vcms.simpleblogs'
+                  ,'vcms.simplenews'
+                  ,'hwm'
+                  ,'vcms.themes'
+                  ,'vcontact'
+                  ,'vcms.store'
                   # Custom apps for cms
                   ,'vimba_cms_simthetiq.apps.order'
                   ,'vimba_cms_simthetiq.apps.products'

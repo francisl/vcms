@@ -9,8 +9,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 from treebeard.ns_tree import NS_Node
-#from vcms.apps.www.models.page import BasicPage
-from vcms.apps.www.managers.menu import MainMenuManager
+#from vcms.www.models.page import BasicPage
+from vcms.www.managers.menu import MainMenuManager
 
 class MainMenu(NS_Node):
     menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters")

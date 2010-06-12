@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 20-03-2010.
 
 from django.contrib import admin
-from vcms.apps.simplenews.models import News, NewsCategory, NewsPageModule
+from vcms.simplenews.models import News, NewsCategory, NewsPageModule
 
 
 class NewsCategoryAdmin(admin.ModelAdmin):

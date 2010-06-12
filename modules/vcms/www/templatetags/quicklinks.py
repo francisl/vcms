@@ -2,7 +2,7 @@
 # copyright Vimba inc. 2009
 # programmer : Francis Lavoie
 from django import template
-from vcms.apps.www.models import QuickLinks
+from vcms.www.models import QuickLinks
 
 register = template.Library()
 

@@ -11,9 +11,9 @@ from django import forms
 from django.core.mail import send_mail, EmailMultiAlternatives
 
 # from other aps
-from vcms.apps.contact.models import ContactPage
-from vcms.apps.www.models import Content
-from vcms.apps.www.views import InitPage
+from vcontact.models import ContactPage
+from vcms.www.models import Content
+from vcms.www.views import InitPage
 
 # external requirement
 from config.email import EMAILS

@@ -1,7 +1,7 @@
 
 from haystack import indexes
 from haystack import site
-from vcms.apps.news.models import News
+from vcms.news.models import News
 
 
 class NewsIndex(indexes.SearchIndex):

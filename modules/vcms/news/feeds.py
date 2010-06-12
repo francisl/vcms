@@ -5,7 +5,7 @@
 from django.utils.feedgenerator import Atom1Feed
 from django.contrib.syndication.feeds import Feed
 from django.core.exceptions import ObjectDoesNotExist
-from vcms.apps.news.models import News, NewsCategory
+from vcms.news.models import News, NewsCategory
 
 #current_site = Site.objects.get_current()
 

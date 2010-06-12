@@ -10,10 +10,10 @@ from django.conf import settings
 
 from treebeard import admin as treeadmin
 
-from vcms.apps.www.models import *
-from vcms.apps.www.models.page import *
-from vcms.apps.www.models.containers import *
-#from vcms.apps.www.models.menu import PageMenu
+from vcms.www.models import *
+from vcms.www.models.page import *
+from vcms.www.models.containers import *
+#from vcms.www.models.menu import PageMenu
 
 class LanguageAdmin(admin.ModelAdmin):
     pass

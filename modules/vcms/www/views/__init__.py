@@ -1,4 +1,4 @@
 # -*- coding: UTF8 -*-
 
-from vcms.apps.www.views.ajax import *
-from vcms.apps.www.views.html import *
+from vcms.www.views.ajax import *
+from vcms.www.views.html import *

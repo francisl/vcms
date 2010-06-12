@@ -18,12 +18,12 @@ from satchmo_store.shop.models import Config
 from satchmo_store.shop.utils import clean_field
 from signals_ahoy.signals import form_postsave
 from livesettings import config_value
-from vcms.apps.www.registration.models import AdminRegistrationProfile
+from vcms.www.registration.models import AdminRegistrationProfile
 from satchmo_store.contact import signals as contact_signals
 from satchmo_store.accounts import signals as accounts_signals
 
 import logging
-log = logging.getLogger('vcms.apps.store.forms')
+log = logging.getLogger('vcms.store.forms')
 
 selection = ''
 
@@ -92,7 +92,7 @@ class StoreRegistrationForm(ProxyContactForm):
             Updates the choices attributes of the state field with
             the active states/provinces for the specified country.
         """
-        from vcms.apps.store.views import get_queryset_states_provinces
+        from vcms.store.views import get_queryset_states_provinces
         self.fields['state'].choices = [(aa.abbrev or aa.name, _(aa.name)) for aa in get_queryset_states_provinces(country_id)]
 
     def clean(self):

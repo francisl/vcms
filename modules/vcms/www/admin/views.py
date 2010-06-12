@@ -8,7 +8,7 @@ from django.utils import simplejson as json
 from django.shortcuts import render_to_response
 from django.template import RequestContext 
 
-from vcms.apps.www.models.page import Page
+from vcms.www.models.page import Page
 
 @staff_member_required
 def UpdateMenu(request):

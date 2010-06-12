@@ -4,8 +4,8 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from vcms.apps.www.models.page import Page
-from vcms.apps.contact.managers import ContactPageManager
+from vcms.www.models.page import Page
+from vcontact.managers import ContactPageManager
 
 class ContactPage(Page):
     page_header = models.TextField(help_text=_("Title at the top of the page"))

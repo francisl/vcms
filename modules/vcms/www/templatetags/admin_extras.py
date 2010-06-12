@@ -1,6 +1,6 @@
 from django import template
 from django.template import Node
-from vcms.apps.www.models.page import Page
+from vcms.www.models.page import Page
 
 register = template.Library()
 
@@ -46,7 +46,7 @@ class get_editable_container_fields_node(Node):
         kwargs = dict([(smart_str(k,'ascii'), v.resolve(context))
                        for k, v in self.kwargs.items()])
         # Hide the field if it is not editable, is auto created or is one of the fields inherited from BasicPage
-        from vcms.apps.www.models.page import BasicPage
+        from vcms.www.models.page import BasicPage
         basicpage_fields = [field.attname for field in BasicPage._meta.fields]
         fields = [field for field in context[self.type]._meta.fields if field.editable and not field.auto_created and field.attname != "page_id" and field.attname not in basicpage_fields]
         if self.asvar:

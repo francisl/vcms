@@ -6,8 +6,8 @@
 
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from vcms.apps.simpleannouncements.models import Announcement
-from vcms.apps.simpleannouncements.settings import ANNOUNCEMENTS_PER_FEED
+from vcms.simpleannouncements.models import Announcement
+from vcms.simpleannouncements.settings import ANNOUNCEMENTS_PER_FEED
 
 
 

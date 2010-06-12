@@ -2,7 +2,7 @@ from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 from registration import signals
 from registration.backends.default import DefaultBackend
-from vcms.apps.www.registration.models import AdminRegistrationProfile
+from vcms.www.registration.models import AdminRegistrationProfile
 
 
 class AdminActivationBackend(DefaultBackend):

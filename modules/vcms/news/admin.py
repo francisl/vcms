@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.contrib.admin.views.decorators import staff_member_required
 
-from vcms.apps.news.models import News, NewsPageModule, NewsCategory
+from vcms.news.models import News, NewsPageModule, NewsCategory
 
 class NewsPageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}

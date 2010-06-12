@@ -10,8 +10,8 @@ from django.contrib.sites.models import Site
 import settings
 
 from vimba_cms_simthetiq.apps.products import models as productmodels
-from vcms.apps.www.views import InitPage, setPageParameters
-from vcms.apps.vwm.paginator import generator as pgenerator
+from vcms.www.views import InitPage, setPageParameters
+from hwm.paginator import generator as pgenerator
 
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
@@ -71,14 +71,14 @@ def set_navigation_type(request, page=None, type="standard"):
 def get_navigation(request, navigation_type):
     """ Take a request and return the html navigation
     """
-    from vcms.apps.vwm.tree import generator
+    from hwm.tree import generator
     if request.session.get('navigation_type') == "DIS" or navigation_type.upper() == "DIS":
         return category.get_navigation_menu()
     else: #if request.session.get('navigation_type') == "standard" :
         return generator.generate_tree(productmodels.StandardNavigationGroup.objects.get_navigation())
 
 def productHome(request, context={}):
-    from vcms.apps.www.models import MenuLocalLink
+    from vcms.www.models import MenuLocalLink
     
     page = MenuLocalLink.objects.get(local_link="/products/home")
     context.update(setPageParameters(page))
@@ -138,7 +138,7 @@ def get_avail_products_for_page(page_number, item_per_page=20):
                                    item_per_page=item_per_page)
 
 def get_products_top_button_list(nav_type):
-    from vcms.apps.vwm.button import generator as button
+    from hwm.button import generator as button
     buttons_list = []
     buttons_list.append(button.create_button('My Account', '/accounts/register', 'text'))
     buttons_list.append(button.create_button('Cart', '', 'text'))

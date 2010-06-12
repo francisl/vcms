@@ -4,8 +4,8 @@
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 21-04-2010.
 
-from vcms.apps.simpleannouncements.feeds import AnnouncementRssFeed, AnnouncementCategoryRssFeed #AnnouncementCategoryAtom1Feed
-from vcms.apps.simplenews.models import News
+from vcms.simpleannouncements.feeds import AnnouncementRssFeed, AnnouncementCategoryRssFeed #AnnouncementCategoryAtom1Feed
+from vcms.simplenews.models import News
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -20,7 +20,7 @@ class NewsRssFeed(AnnouncementRssFeed):
         return _("Latest news site-wide.")
 
     def link(self):
-        return reverse("vcms.apps.simplenews.views.news.recent.rss")
+        return reverse("vcms.simplenews.views.news.recent.rss")
 
     def get_object(self, request, month=None, year=None):
         obj = super(NewsRssFeed, self).get_object(request)
@@ -47,7 +47,7 @@ class NewsCategoryRssFeed(AnnouncementCategoryRssFeed):
     def link(self, obj):
         if len(obj) > 0:
             slug = obj[0].category.slug
-            return reverse("vcms.apps.simplenews.views.newscategory.recent.rss", kwargs={ "category_slug": slug })
+            return reverse("vcms.simplenews.views.newscategory.recent.rss", kwargs={ "category_slug": slug })
         else:
             return ""
 
