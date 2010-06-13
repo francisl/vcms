@@ -6,21 +6,15 @@ qx.Class.define("vcms.client.widgets.PageTree",
     {
         this.base(arguments);
         
-        var root = this.configureTreeItem(new qx.ui.tree.TreeFolder(), "Root");
+        var root = this.configureTreeItem(new qx.ui.tree.TreeFolder(), "root");
         this.setRoot(root);
-//        this.setHideRoot(true);
-        root.setOpen(true);
         // Gets the list of available pages
-//        var controller = new qx.data.controller.Tree(null, tree, "pages", "menu_name");
+        var controller = new qx.data.controller.Tree(null, this, "pages", "name");
         var store = new qx.data.store.Json("/ajax/page/list/");
-//        alert(store.getModel());
-//        var json = qx.util.Json.parse(store.getModel());
-//        alert(qx.util.Json.parse.stringify(json));
-//        store.bind("model", controller, "model");
-//        store.bind("state", status, "value");
-//        store.addListener("loaded", function(ev) {
-//          tree.getRoot().setOpen(true);
-//        }, this);
+        store.bind("model", controller, "model");
+        store.addListener("loaded", function(e) {
+          this.getRoot().setOpen(true);
+        }, this);
     },
     members :
     {
