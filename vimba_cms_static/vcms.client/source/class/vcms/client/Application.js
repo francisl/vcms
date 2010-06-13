@@ -67,6 +67,9 @@ qx.Class.define("vcms.client.Application",
       main_container.add(left_container);
       var tree = new vcms.client.widgets.PageTree().set({width: 600, height: 500});
       left_container.add(tree);
+      tree.addListener("changeSelection", function(e) {
+//        alert(tree.getSelection()[0].getModel().getPages());
+      });
 
       var buttons_left_container = new qx.ui.container.Composite(new qx.ui.layout.HBox().set({ spacing: 5 }));
       left_container.add(buttons_left_container);
