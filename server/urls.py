@@ -95,6 +95,7 @@ if settings.DEBUG:
     import os
     urlpatterns += patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../client_cms_static', 'show_indexes': True}),
+    (r'^vcms.client/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../vimba_cms_static/vcms.client', 'show_indexes': True}),
 )
 
 # Import applicaton-specific urls
