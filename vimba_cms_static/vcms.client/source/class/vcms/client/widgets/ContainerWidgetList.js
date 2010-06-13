@@ -5,10 +5,12 @@ qx.Class.define("vcms.client.widgets.ContainerWidgetList",
     construct : function()
     {
         this.base(arguments);
-        
-        for (i = 0, n = 3; i < n; i++)
+    },
+    members :
+    {
+        addContainer : function(container_name)
         {
-            var page = new qx.ui.tabview.Page("Page #" + i);
+            var page = new qx.ui.tabview.Page(container_name);
             page.setLayout(new qx.ui.layout.VBox().set({ spacing: 2 }));
             page.add(new qx.ui.form.List());
             var buttons_container = new qx.ui.container.Composite(new qx.ui.layout.HBox());
