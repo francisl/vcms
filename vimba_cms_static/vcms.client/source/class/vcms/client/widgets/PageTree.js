@@ -8,16 +8,28 @@ qx.Class.define("vcms.client.widgets.PageTree",
         
         var root = this.configureTreeItem(new qx.ui.tree.TreeFolder(), "root");
         this.setRoot(root);
-        // Gets the list of available pages
-        var controller = new qx.data.controller.Tree(null, this, "pages", "name");
-        var store = new qx.data.store.Json("/ajax/page/list/");
-        store.bind("model", controller, "model");
-        store.addListener("loaded", function(e) {
-          this.getRoot().setOpen(true);
-        }, this);
+        
+        // Hide the root until the tree gets databound
+        this.setHideRoot(true);
+        
+        // Get the list of available pages and databind them to the tree
+        this.fillTree(this);
     },
     members :
     {
+        fillTree : function(tree)
+        {
+            // Databind the tree with the JSON data
+            var controller = new qx.data.controller.Tree(null, tree, "pages", "name");
+            var store = new qx.data.store.Json(vcms.client.widgets.PageTree.JSON_PAGES_URL);
+            store.bind("model", controller, "model");
+            
+            // Show the root and open it after the tree gets databound
+            store.addListener("loaded", function(e) {
+                this.setHideRoot(false);
+                tree.getRoot().setOpen(true);
+            }, this);
+        },
         configureTreeItem : function(treeitem, label)
         {
           if (treeitem instanceof qx.ui.tree.TreeFolder)
@@ -33,6 +45,10 @@ qx.Class.define("vcms.client.widgets.PageTree",
 
           return treeitem;
         }
+    },
+    statics :
+    {
+        JSON_PAGES_URL : "/ajax/page/list/"
     }
 });
 
