@@ -1,5 +1,7 @@
-#Sat Jun 12 16:32:39 EDT 2010
+#Sun Jun 13 20:49:58 EDT 2010
 eclipse.preferences.version=1
+encoding//modules/vcms/www/urls.py=utf-8
+encoding//modules/vcontact/urls.py=utf-8
 encoding//modules/vimba_cms/apps/news/__init__.py=utf-8
 encoding//modules/vimba_cms/apps/news/admin.py=utf-8
 encoding//modules/vimba_cms/apps/news/feeds.py=utf-8
@@ -21,7 +23,6 @@ encoding//modules/vimba_cms_simthetiq/tools/product_import.py=utf-8
 encoding//server/config/database.py=utf-8
 encoding//server/config/debug.py=utf-8
 encoding//server/config/email.py=utf-8
-encoding//server/config/satchmo.py=utf-8
 encoding//server/config/search_engine.py=utf-8
 encoding//server/settings.py=utf-8
 encoding//server/urls.py=utf-8

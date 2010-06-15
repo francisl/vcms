@@ -19,21 +19,14 @@ from livesettings import config_value
 from satchmo_utils import urlhelper
 
 
-urlpatterns += patterns('',
-    # Uncomment this for admin:
-    #(r'admin/', include('mptt.admin.urls')),
-    (r'^gestion/style', 'vcms.www.admin.views.show_style'),
-    (r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
-    (r'^gestion/', include(admin.site.urls)),
-    url(r'^contact/', include('vcontact.urls')),
-)
-urlhelper.replace_urlpatterns(
-    urlpatterns,
-    [   url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'registration_complete'),
-        url(r'^register/(?P<activation_key>\w+)/$', 'vcms.store.views.activate', {}, 'registration_activate'),
-        url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register'),
-    ]
-)
+
+replacement = [ url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'registration_complete')
+               ,url(r'^register/(?P<activation_key>\w+)/$', 'vcms.store.views.activate', {}, 'registration_activate')
+               ,url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register')
+               #,url(r'^login/$', 'vcms.store.views.emaillogin', {}, 'auth_login')
+               ] 
+urlhelper.replace_urlpatterns( urlpatterns, replacement)
+
 # __ VIMBA CMS __
 urlpatterns += patterns('',
     url(r'^www/', include('vcms.www.urls')),
@@ -127,6 +120,14 @@ urlpatterns += patterns('',
     url(r'', include('vcms.www.urls')),
 )
 
+urlpatterns += patterns('',
+    # Uncomment this for admin:
+    #(r'admin/', include('mptt.admin.urls')),
+    (r'^gestion/style', 'vcms.www.admin.views.show_style'),
+    (r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
+    (r'^gestion/', include(admin.site.urls)),
+    url(r'^contact/', include('vcontact.urls')),
+)
 #print("------URL PATTERNS : ---------")
 #for i in urlpatterns:
 #    print("%s" % i)

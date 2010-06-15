@@ -6,7 +6,8 @@ import os
 from django.utils.translation import ugettext_lazy as _
 
 ADMINS = (
-    ('Francois Lebel', 'lebel.francois@vimba.ca'),
+    ('Francois Lebel', 'lebel.francois@vimba.ca')
+    ,('Francis Lavoie', 'lavoie.francis@vimba.ca')
 )
 
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
