@@ -200,7 +200,13 @@ FOOTING_HEIGHT = 37px
 // CLEAR 
 .clear:
     clear: both;
-    
+
+ul.manual_bullet:
+    list-style: none;
+    padding:0;
+    li:
+        padding-bottom: 0.5em;
+
 // CAPTCHA        
 input.id_captcha_1:
     width: 4em 
@@ -389,7 +395,7 @@ div.vcms_content:
 // CONTAINER
 
 // NAVIGATION
-NAVIGATION_WIDTH = 240px;
+NAVIGATION_WIDTH = 220px;
 LARGE_NAVIGATION_WIDTH = 274px;
 NAV_BORDER_STYLE = 1px solid #656565;
 NAV_BG_COLOR = #333333;
@@ -486,7 +492,7 @@ div.vcms_column_container:
             background-repeat: no-repeat;
      
 div.vcms_container_relative:
-    margin: 3.2em;
+    margin: 2.4em;
     
     p:
         margin-left: 0px;
@@ -588,7 +594,7 @@ p.bottom_link:
 .dark_bg &:
     a:
         color: $TEXTCOLOR_ONDARK;
-        background-image: url(../images/link/arrow_clear.png);
+        //background-image: url(../images/link/arrow_clear.png);
 
 .clear_bg &:
     a:

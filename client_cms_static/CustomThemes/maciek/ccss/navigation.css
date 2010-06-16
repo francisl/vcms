@@ -1,45 +1,35 @@
 div#vcms_navigation_container {
   z-index: 15;
+  padding: 0;
 }
 
 div#vcms_navigation_container dl {
   padding: 0;
   margin: 0;
-  background-color: #dadada;
 }
 
 div#vcms_navigation_container dt {
   background-color: #333333;
-  border-top: 1px solid #656565;
-  border-bottom: 1px solid #000000;
   color: #cecece;
+  padding: 0.2em 0.8em;
+  margin: 0;
+  text-transform: uppercase;
+  background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
+  border-bottom: 1px solid #656565;
 }
 
 div#vcms_navigation_container dt a {
-  color: #cecece;
-}
-
-div#vcms_navigation_container dt a:hover {
-  background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
-}
-
-div#vcms_navigation_container dt.selected {
-  background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
+  color: #b9ff3c;
 }
 
 div#vcms_navigation_container dt:hover {
   background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
 }
 
-div#vcms_navigation_container dt {
-  padding: 0 0.8em;
-  margin: 0;
-  text-transform: capitalize;
-}
-
 div#vcms_navigation_container dd {
-  padding: 0 1.3em;
+  padding: 0.2em 1.3em;
   margin: 0;
+  background-color: #dadada;
 }
 
 div#vcms_navigation_container dd:hover,

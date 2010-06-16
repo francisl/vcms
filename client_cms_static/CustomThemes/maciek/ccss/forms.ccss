@@ -7,18 +7,6 @@ form:
         width: 78%;
         margin-top: 0.9em;
         
-
-.standard_form:
-    text-align: center;
-    table:
-        background: url(../images/form/form_bg.jpg) bottom repeat-x;
-        width: 100%;
-        
-    label:
-        width: 10em;
-    select:
-        width: 100%;
-    
 label:
     font-size: 1em;
     text-transform: capitalize;
@@ -28,7 +16,7 @@ label:
 
 .notice:
     float: right;
-    font-size: 0.9em;
+    font-size: 0.8em;
 
     a:
         font-style: italic;
@@ -36,7 +24,10 @@ label:
         .black:
             color: #121212;
 
-input:
+.mandatory:
+    color: red;
+
+input, select:
     width: 98%;
     height: 2em;
     
@@ -47,7 +38,7 @@ input, textarea:
     border: 1px solid #c9c9c9;
         
 .normal_form:
-    width: 76%;
+    width: 72%;
     float: left;
         
     form > div:
@@ -64,6 +55,40 @@ input, textarea:
     div.button:
         width: 18%;
     
+    .col_1:
+        padding-right: 1em;
+        width: 49%;
+        
+    .col_2:
+        padding-left: 1em;
+        width: 49%;
+        
+    table:
+        font-size: 0.9em;r
+        margin-top: 1em;
+        
+        td:
+            padding: 0.2em 0;
+            
+        ul:
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        
+            li:
+                float: left;
+                width: auto;
+                margin-right: 0.2em;
+                
+                input:
+                    float: left;
+                    height: auto;
+                    width: auto;
+                    padding: 0;
+                    
+        select:
+            width:100%;
+        
 button.button, button:
     border: none;
     font-size: 0.9em;

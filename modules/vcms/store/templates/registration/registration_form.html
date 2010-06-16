@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load i18n %}
+{% load search_widget %}
 
 {% block stylesheetlink %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
@@ -28,23 +29,42 @@ $('select#id_country').change(function() {
 {% endblock javascript %}
 
 {% block navigation %}
-   <li class="first"><a href="{{shop_base}}/">{% trans "Home" %}</a></li>
-   <li>{% trans "Registration" %}</li>
+    {% show_detailed_search_box %}
+    <div class="navigation_title">
+        <dl>
+            <dt class=""><a href="#">{% trans "Register" %}</a></dt>
+        </dl>
+    </div>
 {% endblock %}
 
 {% block vcms_main_content  %}
-<div class="vcms_container_relative normal_form">
+<div class="vcms_container_relative">
+
+        
+    <div style="float: right; width: 26%; font-size: 0.9em; margin-left: 2%; margin-top: 4em;">
+    <b>The benefits of registering with Simthetiq.com</b>
+    <ul class="manual_bullet">
+        <li>• Be the first to learn about new Simthetiq products and services</li>
+        <li>• Manage your account online</li>
+        <li>• Download free functional samples and stylish desktop wallpapers</li>
+        <li>• Purchase models and terrains online (coming soon!)</li>
+    </ul>
+    </div>
     <h2>{% trans "Register" %}</h2>
 
+    <div class="normal_form">
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
         <table>
-            <tr><td width="50%">{{ form.email.label_tag }}{{ form.email }}</td><td></td></tr>
+            <colgroup class="col_1" />
+            <colgroup class="col_2" />
+            
+            <tr><td>{{ form.email.label_tag }}<span class="mandatory">*</span>{{ form.email }}</td><td></td></tr>
             <tr><td>{% if form.email.errors %}<span style="color: red;">{{ form.email.errors|join:", " }}</span>{% endif %}</td><td></td></tr>
 
-            <tr><td>{{ form.password.label_tag }}{{ form.password }}</td>
-                <td>{{ form.password_confirm.label_tag }}{{ form.password_confirm }}</td>
+            <tr><td>{{ form.password.label_tag }}<span class="mandatory">*</span>{{ form.password }}</td>
+                <td>{{ form.password_confirm.label_tag }}<span class="mandatory">*</span>{{ form.password_confirm }}</td>
             </tr>
             
             <tr><td>{% if form.password.errors %}<span style="color: red;">{{ form.password.errors|join:", " }}</span>{% endif %}</td>
@@ -55,15 +75,15 @@ $('select#id_country').change(function() {
                 <td></td>
             </tr>
 
-            <tr><td>{{ form.first_name.label_tag }}{{ form.first_name }}</td>
-                <td>{{ form.last_name.label_tag }}{{ form.last_name }}</td>
+            <tr><td>{{ form.first_name.label_tag }}<span class="mandatory">*</span>{{ form.first_name }}</td>
+                <td>{{ form.last_name.label_tag }}<span class="mandatory">*</span>{{ form.last_name }}</td>
             </tr>
             <tr><td>{% if form.first_name.errors %}<span style="color: red;">{{ form.first_name.errors|join:", " }}</span>{% endif %}</td>
                 <td>{% if form.last_name.errors %}<span style="color: red;">{{ form.last_name.errors|join:", " }}</span>{% endif %}</td>
             </tr>
 
-            <tr><td>{{ form.organization_type }}<br />{{ form.organization }}</td>
-                <td>{{ form.role.label_tag }}{{ form.role }}</td>
+            <tr><td>{{ form.organization_type }}<span class="mandatory">*</span><br />{{ form.organization }}</td>
+                <td>{{ form.role.label_tag }}<span class="mandatory">*</span>{{ form.role }}</td>
             </tr>
             
             <tr><td>{% if form.organization.errors %}<span style="color: red;">{{ form.organization.errors|join:", " }}</span>{% endif %}</td>
@@ -71,7 +91,7 @@ $('select#id_country').change(function() {
             </tr>
 
             <tr><td>{{ form.address.label_tag }}{{ form.address }}</td>
-                <td>{{ form.street.label_tag }}{{ form.street }}</td>
+                <td>{{ form.street2.label_tag }}{{ form.street2 }}</td>
             </tr>
             
             <tr><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td>
@@ -79,8 +99,8 @@ $('select#id_country').change(function() {
             </tr>
 
 
-            <tr><td>{{ form.city.label_tag }}{{ form.city }}</td>
-                <td>{{ form.state.label_tag }}{{ form.state }}</td>
+            <tr><td>{{ form.city.label_tag }}<span class="mandatory">*</span>{{ form.city }}</td>
+                <td>{{ form.state.label_tag }}<span class="mandatory">*</span>{{ form.state }}</td>
             </tr>
             
             <tr><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td>
@@ -91,7 +111,7 @@ $('select#id_country').change(function() {
                 <td></td><td>{% if form.postal_code.errors %}<span style="color: red;">{{ form.postal_code.errors|join:", " }}</span>{% endif %}</td></tr>
             --> 
 
-            <tr><td>{{ form.country.label_tag }}{{ form.country }}</td>
+            <tr><td>{{ form.country.label_tag }}<span class="mandatory">*</span>{{ form.country }}</td>
                 <td>{{ form.phone.label_tag }}{{ form.phone }}</td>
             </tr>
             
@@ -107,12 +127,25 @@ $('select#id_country').change(function() {
             {% else %}
             <input type='hidden' name='newsletter' value="False" />
             {% endif %}
+
+            
+            <tr><td><h6><span class="mandatory">*</span>Mandatory Field</h6>
+                    <span class="notice">Please note that your customer information will be handled in strict accordance with Simthtiq.com’s privacy policy.</span></td>
+                <td>
+                    <div class="button">
+                        <button type="submit" value="{% trans "Register" %}" class="button dark_bg">{% trans "Register" %}</button>
+                    </div>
+                </td>
+            </tr>
+            
             
         </table>
         <div class="underform register">
-            <div class="notice">All fields are required.</div>
-            <div class="submit"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
+
+            <div class="submit"></div>
         </div>
     </form>
+    </div>
+
 </div>
 {% endblock vcms_main_content  %}

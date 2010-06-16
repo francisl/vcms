@@ -9,23 +9,6 @@ form p.error {
   margin-top: 0.9em;
 }
 
-.standard_form {
-  text-align: center;
-}
-
-.standard_form table {
-  background: url(../images/form/form_bg.jpg) bottom repeat-x;
-  width: 100%;
-}
-
-.standard_form label {
-  width: 10em;
-}
-
-.standard_form select {
-  width: 100%;
-}
-
 label {
   font-size: 1em;
   text-transform: capitalize;
@@ -35,7 +18,7 @@ label {
 
 .notice {
   float: right;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .notice a {
@@ -47,7 +30,12 @@ label {
   color: #121212;
 }
 
-input {
+.mandatory {
+  color: red;
+}
+
+input,
+select {
   width: 98%;
   height: 2em;
 }
@@ -62,7 +50,7 @@ textarea {
 }
 
 .normal_form {
-  width: 76%;
+  width: 72%;
   float: left;
 }
 
@@ -81,6 +69,48 @@ textarea {
 
 .normal_form div.button {
   width: 18%;
+}
+
+.normal_form .col_1 {
+  padding-right: 1em;
+  width: 49%;
+}
+
+.normal_form .col_2 {
+  padding-left: 1em;
+  width: 49%;
+}
+
+.normal_form table {
+  font-size: 0.9em, r;
+  margin-top: 1em;
+}
+
+.normal_form table td {
+  padding: 0.2em 0;
+}
+
+.normal_form table ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.normal_form table ul li {
+  float: left;
+  width: auto;
+  margin-right: 0.2em;
+}
+
+.normal_form table ul li input {
+  float: left;
+  height: auto;
+  width: auto;
+  padding: 0;
+}
+
+.normal_form table select {
+  width: 100%;
 }
 
 button.button,

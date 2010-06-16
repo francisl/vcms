@@ -125,7 +125,7 @@ div#banner {
 }
 
 div#banner #s3slider {
-  width: 760px;
+  width: 780px;
   height: 112px;
   position: relative;
   overflow: hidden;
@@ -210,6 +210,15 @@ div#banner .s3sliderImage span {
 
 .clear {
   clear: both;
+}
+
+ul.manual_bullet {
+  list-style: none;
+  padding: 0;
+}
+
+ul.manual_bullet li {
+  padding-bottom: 0.5em;
 }
 
 input.id_captcha_1 {
@@ -411,7 +420,7 @@ body.large div#vcms_navigation_container {
 }
 
 body.normal div#vcms_navigation_container {
-  width: 240px;
+  width: 220px;
 }
 
 div#vcms_navigation_container,
@@ -464,7 +473,7 @@ body.large div#vcms_content_container {
 }
 
 body.normal div#vcms_content_container {
-  width: 759px;
+  width: 779px;
 }
 
 .bordered_content {
@@ -521,7 +530,7 @@ div.vcms_column_container table td.col2 {
 }
 
 div.vcms_container_relative {
-  margin: 3.2em;
+  margin: 2.4em;
 }
 
 div.vcms_container_relative p {
@@ -640,7 +649,6 @@ p.bottom_link a {
 
 .dark_bg * a {
   color: #c2c2c2;
-  background-image: url(../images/link/arrow_clear.png);
 }
 
 .clear_bg * a {
