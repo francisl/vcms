@@ -85,12 +85,14 @@ def register_handle_form(request, redirect=None):
 
     if request.method == 'POST':
         form = StoreRegistrationForm(request.POST)
+        print("form = %s " % form.__class__.__class__)
 
         # Make sure the states/provinces available match
         # the selected country
         form.update_state_choices(request.POST['country'])
 
         if form.is_valid():
+            
             contact = form.save()
 
             if not redirect:

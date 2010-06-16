@@ -27,69 +27,92 @@ $('select#id_country').change(function() {
 });
 {% endblock javascript %}
 
-{% block navbar %}
+{% block navigation %}
    <li class="first"><a href="{{shop_base}}/">{% trans "Home" %}</a></li>
    <li>{% trans "Registration" %}</li>
 {% endblock %}
 
-{% block content %}
-<div class="registration_form standard_form">
-    <h1>{% trans "Register" %}</h1>
-    <h3>{% trans "Register to get access to our premium content." %}</h3>
-    <br/>
-    <div class="standard">
+{% block vcms_main_content  %}
+<div class="vcms_container_relative normal_form">
+    <h2>{% trans "Register" %}</h2>
+
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
         <table>
-            <tr><td>{{ form.username.label_tag }}</td><td>{{ form.username }}</td></tr>
-            <tr><td></td><td>{% if form.username.errors %}<span style="color: red;">{{ form.username.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td width="50%">{{ form.email.label_tag }}{{ form.email }}</td><td></td></tr>
+            <tr><td>{% if form.email.errors %}<span style="color: red;">{{ form.email.errors|join:", " }}</span>{% endif %}</td><td></td></tr>
 
-            <tr><td>{{ form.password.label_tag }}</td><td>{{ form.password }}</td></tr>
-            <tr><td></td><td>{% if form.password.errors %}<span style="color: red;">{{ form.password.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.password.label_tag }}{{ form.password }}</td>
+                <td>{{ form.password_confirm.label_tag }}{{ form.password_confirm }}</td>
+            </tr>
+            
+            <tr><td>{% if form.password.errors %}<span style="color: red;">{{ form.password.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.password_confirm.errors %}<span style="color: red;">{{ form.password_confirm.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.password_confirm.label_tag }}</td><td>{{ form.password_confirm }}</td></tr>
-            <tr><td></td><td>{% if form.password_confirm.errors %}<span style="color: red;">{{ form.password_confirm.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.title.label_tag }}{{ form.title }}</td>
+                <td></td>
+            </tr>
 
-            <tr><td>{{ form.organization.label_tag }}</td><td>{{ form.organization }}</td></tr>
-            <tr><td></td><td>{% if form.organization.errors %}<span style="color: red;">{{ form.organization.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.first_name.label_tag }}{{ form.first_name }}</td>
+                <td>{{ form.last_name.label_tag }}{{ form.last_name }}</td>
+            </tr>
+            <tr><td>{% if form.first_name.errors %}<span style="color: red;">{{ form.first_name.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.last_name.errors %}<span style="color: red;">{{ form.last_name.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.first_name.label_tag }}</td><td>{{ form.first_name }}</td></tr>
-            <tr><td></td><td>{% if form.first_name.errors %}<span style="color: red;">{{ form.first_name.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.organization_type }}<br />{{ form.organization }}</td>
+                <td>{{ form.role.label_tag }}{{ form.role }}</td>
+            </tr>
+            
+            <tr><td>{% if form.organization.errors %}<span style="color: red;">{{ form.organization.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.role.errors %}<span style="color: red;">{{ form.role.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.last_name.label_tag }}</td><td>{{ form.last_name }}</td></tr>
-            <tr><td></td><td>{% if form.last_name.errors %}<span style="color: red;">{{ form.last_name.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.address.label_tag }}{{ form.address }}</td>
+                <td>{{ form.street.label_tag }}{{ form.street }}</td>
+            </tr>
+            
+            <tr><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.state.errors %}<span style="color: red;">{{ form.state.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.country.label_tag }}</td><td>{{ form.country }}</td></tr>
-            <tr><td></td><td>{% if form.country.errors %}<span style="color: red;">{{ form.country.errors|join:", " }}</span>{% endif %}</td></tr>
 
-            <tr><td>{{ form.state.label_tag }}</td><td>{{ form.state }}</td></tr>
-            <tr><td></td><td>{% if form.state.errors %}<span style="color: red;">{{ form.state.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.city.label_tag }}{{ form.city }}</td>
+                <td>{{ form.state.label_tag }}{{ form.state }}</td>
+            </tr>
+            
+            <tr><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.state.errors %}<span style="color: red;">{{ form.state.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.city.label_tag }}</td><td>{{ form.city }}</td></tr>
-            <tr><td></td><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td></tr>
+            <!-- <tr><td>{{ form.postal_code.label_tag }}</td><td>{{ form.postal_code }}</td>
+                <td></td><td>{% if form.postal_code.errors %}<span style="color: red;">{{ form.postal_code.errors|join:", " }}</span>{% endif %}</td></tr>
+            --> 
 
-            <tr><td>{{ form.postal_code.label_tag }}</td><td>{{ form.postal_code }}</td></tr>
-            <tr><td></td><td>{% if form.postal_code.errors %}<span style="color: red;">{{ form.postal_code.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.country.label_tag }}{{ form.country }}</td>
+                <td>{{ form.phone.label_tag }}{{ form.phone }}</td>
+            </tr>
+            
+            <tr><td>{% if form.country.errors %}<span style="color: red;">{{ form.country.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.phone.errors %}<span style="color: red;">{{ form.country.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
 
-            <tr><td>{{ form.email.label_tag }}</td><td>{{ form.email }}</td></tr>
-            <tr><td></td><td>{% if form.email.errors %}<span style="color: red;">{{ form.email.errors|join:", " }}</span>{% endif %}</td></tr>
-
-            <tr><td>{{ form.email_confirm.label_tag }}</td><td>{{ form.email_confirm }}</td></tr>
-            <tr><td></td><td>{% if form.email_confirm.errors %}<span style="color: red;">{{ form.email_confirm.errors|join:", " }}</span>{% endif %}</td></tr>
 
             {% if show_newsletter %}
-            <tr><td>{{ form.newsletter.label_tag }}</td><td>{{ form.newsletter }}</td></tr>
-            <tr><td></td><td>{% if form.newsletter.errors %}<span style="color: red;">{{ form.newsletter.errors|join:", " }}</span>{% endif %}</td></tr>
+            <tr><td>{{ form.newsletter.label_tag }}{{ form.newsletter }}</td></tr>
+                <td>{% if form.newsletter.errors %}<span style="color: red;">{{ form.newsletter.errors|join:", " }}</span>{% endif %}</td>
+            </tr>
             {% else %}
             <input type='hidden' name='newsletter' value="False" />
             {% endif %}
+            
         </table>
         <div class="underform register">
             <div class="notice">All fields are required.</div>
             <div class="submit"><button type="submit" value="{% trans "Register" %}"><u>{% trans "Register" %}</u></button></div>
         </div>
     </form>
-    </div>
 </div>
-{% endblock %}
+{% endblock vcms_main_content  %}
