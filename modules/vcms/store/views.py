@@ -173,7 +173,6 @@ def register(request, redirect=None, template='registration/registration_form.ht
         Allows a new user to register an account.
     """
     ret = register_handle_form(request, redirect)
-    print("ret -= %s" % ret[1])
     success = ret[0]
     todo = ret[1]
     if len(ret) > 2:
