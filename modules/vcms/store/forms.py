@@ -47,18 +47,18 @@ class StoreRegistrationForm(ProxyContactForm):
     password = forms.CharField(label=_('Password'), max_length=30, widget=forms.PasswordInput(), required=True)
     password_confirm = forms.CharField(label=_('Confirm password'), max_length=30, widget=forms.PasswordInput(), required=True)
     title = forms.ChoiceField(label=_('Title'), required=True, choices=TITLE_CHOICES, widget=forms.RadioSelect(attrs={"default":TITLE_CHOICES[0]}))
-    #username = forms.CharField(label=_('Username'), max_length=30, required=True)
+    username = forms.CharField(label=_('Username'), max_length=30, required=True)
     first_name = forms.CharField(max_length=30, label=_('First Name'), required=True)
     last_name = forms.CharField(max_length=30, label=_('Last Name'), required=True)
     organization_type = forms.ChoiceField(required=True, choices=ORGANIZATION_CHOICES, widget=forms.RadioSelect(attrs={"class":"form_list"}))
     organization = forms.CharField(max_length=50, label=_('Company name'), required=True)
-    role = forms.ModelChoiceField(queryset=ContactRole.objects, label=_("Role"), required=True)
+    role = forms.ModelChoiceField(queryset=ContactRole.objects, label=_("Title"), required=True)
     address = forms.CharField(max_length=50, label=_("Street Address"), required=False)
     street2 = forms.CharField(max_length=50, label=_("Suite/Unit/Apt"), required=False)
     city = forms.CharField(max_length=30, label=_('City'), required=True)
     state = forms.ChoiceField(choices=[], required=True, label=_('State/Province/Administrative Region')) # choices are set in constructor
     # country, added in constructor
-    postal_code = forms.CharField(max_length=10, label=_('ZIP / Postal code'), required=True)
+    postal_code = forms.CharField(max_length=10, label=_('ZIP / Postal code'), required=False)
     phone = forms.CharField(max_length=30, label=_('Daytime Phone Number'), required=False)
 
     def __init__(self, *args, **kwargs):
@@ -77,7 +77,7 @@ class StoreRegistrationForm(ProxyContactForm):
         self.update_state_choices(self.fields['country'].initial)
         # Must specify the fields order because we have a dynamically-added field
         self.fields.keyOrder = [
-            #'username',
+            'username',
             'password',
             'password_confirm',
             'organization',
@@ -86,7 +86,6 @@ class StoreRegistrationForm(ProxyContactForm):
             'country',
             'state',
             'city',
-            'postal_code',
             'email',]
 
     def _check_state(self, data, country):
@@ -199,6 +198,8 @@ class StoreRegistrationForm(ProxyContactForm):
         log.debug('creating new contact')
 
         data = self.cleaned_data.copy()
+        # set username equal to email since we want to use email as username
+        #data["username"] = data["email"]
 
         # Create the account for the user
         account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
