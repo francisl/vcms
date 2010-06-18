@@ -16,7 +16,7 @@ body:
         margin: 0 0.1em 0 0;
         
     h1,h2:
-        font-size: 1.6em;
+        font-size: 1.8em;
         margin-top: 0.8em;
     
     h2:
@@ -496,6 +496,7 @@ div.vcms_container_relative:
     
     p:
         margin-left: 0px;
+        margin-top: 1em;
             
 div.vcms_container_table:
     background-color: #ffffff;

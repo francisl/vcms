@@ -53,7 +53,7 @@ input, textarea:
         float: right;
     
     div.button:
-        width: 18%;
+        min-width: 22%;
     
     .col_1:
         padding-right: 1em;
@@ -95,12 +95,12 @@ button.button, button:
     font-weight: bold;
     text-transform: uppercase;
     background: #555;
-    margin-right: 1.1em;
+    margin-right: 16%;
     padding: 0.3em 0.4em;
     padding-right: 20px;
     padding-top: 4px;
     padding-left: 6px; 
-    background-position: 88% 52%;
+    background-position: 95% 52%;
     background-repeat: no-repeat;
     color: #c2c2c2;
     background-image: url(../images/link/arrow_gray.png);

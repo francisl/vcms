@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+{% load i18n %}
+{% load search_widget %}
+
+{% block navigation %}
+    {% show_detailed_search_box %}
+    <div class="navigation_title">
+        <dl>
+            <dt class=""><a href="#">{% trans "Register" %}</a></dt>
+        </dl>
+    </div>
+{% endblock %}
+
+{% block vcms_main_content  %}
+<div class="vcms_container_relative">
+        <h2>{% trans "Updates" %}</h2>
+        <div class='normal_form'>
+            
+            <p>{% trans 'To register exclusively for product and compny updates, enter your e-mail address' %}</p>
+            {% if EMAIL_MATCH_ERROR %}
+            <span class="error">***{% trans "Email address don't match" %}</span>
+            {% endif %}
+            {% if EMAIL_ALREADY_EXIST_ERROR %}
+            <span class="error">{% trans "You are already registered!" %}</span>
+            {% endif %}
+            
+            <form method="post" action="." class="">
+               <div class="">
+                    <label for="email">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <span class="error">***{{ form.email.errors|join:", " }}</span>
+                    {% endif %}
+                </div>
+                <div class="">
+                  <label for="id_password">{{ form.email_confirmation.label }}</label>
+                  {{ form.email_confirmation }}
+                        {% if form.email_confirmation.errors %}
+                            <span class="error">***{{ form.email_confirmation.errors|join:", " }}</span>
+                        {% endif %}
+                    </div>
+                <div class="button">
+                    <button type="submit" class="button dark_bg"value="{{ confirm }}">{{ confirm }}</button>
+                </div>
+            </form>
+	</div>
+    <div class="clear"></div>
+
+</div>
+{% endblock vcms_main_content  %}

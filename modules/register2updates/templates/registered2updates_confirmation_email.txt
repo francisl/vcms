@@ -1,0 +1,9 @@
+
+{% load i18n %}
+
+{% trans "For questions regarding the Simthetiq Update Services please contact Simthetiq directly on" %} {{ INFO_PHONE }} {% trans "or by e-mail at" %} {{ INFO_EMAIL }}.
+    
+{% trans "Thank you for subscribing to Simthetiq Updates" %}.
+{% trans "You will now be among the first to learn about new product releases and relevant company developments. A confirmation email has been sent to" %} {{ email_registered }}.
+{% trans "We understand the importance of your time and will endeavour to provide you with meaningful information at respectful intervals" %}. {% trans "No more than one update will be mailed per week" %}.
+{% trans "You may unsubscribe from the Simthetiq Update Service at any time by clicking the clearly indicated unsubscribe link at the bottom of every e-mail update" %}.
