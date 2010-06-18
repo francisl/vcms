@@ -20,6 +20,7 @@ from satchmo_utils import urlhelper
 
 
 
+
 replacement = [ url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'registration_complete')
                ,url(r'^register/(?P<activation_key>\w+)/$', 'vcms.store.views.activate', {}, 'registration_activate')
                ,url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register')
@@ -27,6 +28,9 @@ replacement = [ url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'r
                ] 
 urlhelper.replace_urlpatterns( urlpatterns, replacement)
 
+if 'register2updates' in settings.INSTALLED_APPS: # register2update
+    urlpatterns += patterns( '', url(r'^register/', include('register2updates.urls')),)
+    
 # __ VIMBA CMS __
 urlpatterns += patterns('',
     url(r'^www/', include('vcms.www.urls')),
