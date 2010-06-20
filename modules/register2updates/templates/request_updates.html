@@ -18,10 +18,11 @@
             
             <p>{% trans 'To register exclusively for product and compny updates, enter your e-mail address' %}</p>
             {% if EMAIL_MATCH_ERROR %}
-            <span class="error">***{% trans "Email address don't match" %}</span>
+            <p class="error">***{% trans "Email address don't match" %}</p>
             {% endif %}
+            
             {% if EMAIL_ALREADY_EXIST_ERROR %}
-            <span class="error">{% trans "You are already registered!" %}</span>
+            <p class="error">***{% trans "You are already registered!" %}</p>
             {% endif %}
             
             <form method="post" action="." class="">

@@ -88,7 +88,7 @@ if 'vcms.news' in settings.INSTALLED_APPS:
         # now news module availlable
         pass
 
-if settings.DEBUG:
+if settings.ENABLE_STATIC:
     import os
     urlpatterns += patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.dirname(__file__) + '/../client_cms_static', 'show_indexes': True}),
