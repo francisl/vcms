@@ -17,7 +17,8 @@ MEDIA_PATH = SERVER_PATH + "/../"
 #MEDIA_PATH = SERVER_PATH + "/../../webv2_static"
 #developpement
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
+ENABLE_STATIC = True
 
 # ## EMAIL
 if DEBUG:

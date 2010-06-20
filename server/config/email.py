@@ -9,7 +9,7 @@ EMAIL_HOST='smtp.webfaction.com'
 # stmp: 25, stmp-ssl: 465, stmp-tls: 587
 EMAIL_PORT=587                    
 EMAIL_HOST_USER='simthetiq_noreply'
-EMAIL_HOST_PASSWORD='cfd6d14a'
+EMAIL_HOST_PASSWORD='cfd6d14' #+a
 EMAIL_USE_TLS=True  # False OR True
 
 
