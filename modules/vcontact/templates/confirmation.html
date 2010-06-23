@@ -1,19 +1,22 @@
 {% extends "contact.html" %}
+{% load i18n %}
 
 {% block contact_form %}
-	{% if completed %}
+	   {% if completed %}
+	   <h2>{% trans "Thank You" %}</h2>
+	   <div style="float: left; width: 70%; height: 260px; margin-right: 8%;">
+			<p>Your inquiry has been successfully submitted. A copy has also been sent to the e-mail address provided.</p>
+        {% else %}
+        <h2>{% trans "Sorry" %}</h2>
+         <div style="float: left; height: 200px;">
 			<br />
-			<h3>Your request has been sent!</h3>
-			<p>You will receive a confirmation email shortly</p>
+			<p>We are sorry, the message delevery failed.</p>
+			<p>It has been repport to simthetiq support and it will be resolve shortly. You may try later.</p>
 			<p>Thank you!</p>
-			{% else %}
-				<br />
-				<p>An error as occured!</p>
-				<p>It has been repport to simthetiq support. You may try later.</p>
-				<p>Thank you!</p>
-		{% endif %}
-	<br />
 
-<br />
+        {% endif %}	
+        <br />
+        </div>
+        
 {% endblock contact_form %}
 

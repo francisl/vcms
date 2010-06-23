@@ -30,12 +30,16 @@ body:
         padding-bottom: 0.4em;
         
     h5: // used in content_box
-        color: #484848
-        font-size: 1.1em;
-        
-    h6: // date header
+        color: #484848;
         font-size: 1em;
-        color: #b7b7b7;
+        margin-top: 0.8em;
+        margin-bottom: 0.4em;
+        
+    h6: // notice header
+        font-size: 1em;
+        color: #484848;
+        margin-top: 0.6em;
+        margin-bottom: 0.4em;
         
     a:
         text-decoration: none;
@@ -552,12 +556,12 @@ div.small_media_preview:
             height: 77px;
             float: left;
 
-dl.content_def_link:
+.content_def_link:
     width: 200px;
     dt:
         margin-bottom: 0.6em;
         font-style:italic;
-    dt,a:
+    dt,a,p:
         font-size: 1em;
         color: #929292;
     
@@ -576,6 +580,17 @@ dl.content_def_link:
     a:
         display: block;
         padding-right: 20px;
+        
+    p:
+        font-size: 0.8em;
+        line-height: 0.8em;
+
+.vcms_notice_relative_container:
+    span:
+        font-size: 0.9em;
+        color: #929292;
+        line-height: 0.8em;
+        margin-top: 8px;
         
 
 p.bottom_link:
