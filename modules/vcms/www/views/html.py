@@ -122,7 +122,7 @@ def MainPage(request, context={}):
                               context,
                               context_instance=RequestContext(request))
 
-def BlankPage(request, context={}):
+def SimplePage(request, context={}):
     from vcms.www.models.widget import RelativeWidgetWrapper
     content_container = context["containers"]["Content"]
     ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
@@ -148,7 +148,7 @@ def Simple(request, context={}):
     #content = Content.objects.filter(page=context["page_info"]['page'].id)
     if len(content) == 0 :
         """ When page has no content, it redirect to the first child """
-        subpage = Page.objects.get_PageFirstChild(context["page_info"]['page'])
+        subpage = Page.objects.get_children() #context["page_info"]['page'])
 
         if subpage:
             #debugtrace("Generic", context["page_info"]['page'],

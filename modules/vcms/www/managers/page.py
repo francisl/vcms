@@ -72,14 +72,14 @@ class BasicPageManager(models.Manager):
         except:
             #print("NO FCP!!!!!!!")
             return None
-
-    def get_PageChildren(self, parent=None):
+    """
+    def get_children(self, parent=None):
         if parent:
             return self.filter(parent=parent).filter(status=StatusField.PUBLISHED).filter(display=True)
         else:
             return None
 
-    """
+
     def get_all_basic(self):
         from vcms.www.models.page import Language
         return self.filter(language=Language.objects.get_default())

@@ -44,20 +44,20 @@ admin.site.register(QuickLinks, QuickLinksAdmin)
 
 
 class BasicPageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'id')
     #prepopulated_fields = {"slug": ("name",)}
     #list_display = ('name','module','status','language',)
 admin.site.register(BasicPage, BasicPageAdmin)
 
 class MainPageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'id')
     
 admin.site.register(MainPage, MainPageAdmin)
 
-class BlankPageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+class SimplePageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'id')
     
-admin.site.register(BlankPage, BlankPageAdmin)
+admin.site.register(SimplePage, SimplePageAdmin)
 
 
 class ContentInline(admin.StackedInline):

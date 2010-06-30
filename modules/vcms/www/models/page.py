@@ -68,8 +68,8 @@ class BasicPage(models.Model):
     
 
     class Meta:
-        verbose_name = _("Basic page")
-        verbose_name_plural = _("Basic pages")
+        verbose_name = _("Page - Basic page (do not edit)")
+        verbose_name_plural = _("Page - Basic pages (do not edit)")
         app_label = 'www'
 
     def __unicode__(self):
@@ -121,7 +121,7 @@ class BasicPage(models.Model):
             if not exist:
                 self._add_to_main_menu(root)
             
-                            
+                  
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
 
@@ -181,6 +181,8 @@ class Page(BasicPage):
 class MainPage(BasicPage):
     class Meta:
         app_label = 'www'
+        verbose_name = "Page - Main page"
+        verbose_name_plural = "Page - Main pages"
 
     def save(self):
         self.module = 'MainPage'
@@ -195,31 +197,6 @@ class MainPage(BasicPage):
         return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
                     ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
 
-def pre_MainPage(instance, **kargs):
-    print("!!! entering PRE_SAVE for MainPage")
-    print("instance = %s" % instance)
-    print("**kargs = %s" % kargs)
-    print("**kargs = %s" % kargs['signal'])
-
-#signals.pre_save.connect(pre_MainPage, sender=MainPage)
-
-class BlankPage(BasicPage):
-    class Meta:
-        verbose_name = "Page - Blank page"
-        verbose_name_plural = "Page - Blank pages"
-        app_label = 'www'
-
-    def save(self):
-        self.module = 'BlankPage'
-        super(BlankPage, self).save()
-        
-    def get_containers(self):
-        from vcms.www.models.containers import RelativeContainer
-        my_rel_cont = {} 
-        for container in RelativeContainer.objects.filter(page=self): 
-            my_rel_cont[container.name] = container
-        return my_rel_cont
-        
 
 class SimplePage(BasicPage):
     class Meta:
@@ -228,14 +205,18 @@ class SimplePage(BasicPage):
         app_label = 'www'
 
     def save(self):
-        self.module = 'Simple'
-        self.app_slug = APP_SLUGS
+        self.module = 'SimplePage'
         super(SimplePage, self).save()
-
+        
+    def get_containers(self):
+        from vcms.www.models.containers import RelativeContainer
+        my_rel_cont = {} 
+        for container in RelativeContainer.objects.filter(page=self): 
+            my_rel_cont[container.name] = container
+        return my_rel_cont
 
 # -----
 # OLD
-
 
 #
 # DASHBOARD

@@ -17,14 +17,17 @@ def show_dropdown_menu(current_page=None):
     """
     l = Language.objects.get_default()
     try:
-        root = MainMenu.objects.get(menu_name=str(l))
+        root = MainMenu.objects.get(menu_name=str(l).lower())
     except:
         root = None
-    menus = {}
+    menus = []
     if root != None:
         for menuitem in root.get_children():
-            menus[menuitem] = {}
-    
+            menu = dict(menu=menuitem, submenus=[])
+            for submenu in menuitem.get_children():
+                submenudict = dict(menu=submenu, submenu=[])
+                menu['submenus'].append(submenudict)
+            menus.append(menu)
     return locals()
     
 @register.inclusion_tag('menu/menu.html')

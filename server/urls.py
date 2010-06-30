@@ -65,9 +65,9 @@ if 'rosetta' in settings.INSTALLED_APPS:
 sitemaps = {}
 if 'vcms.www' in settings.INSTALLED_APPS:
     try: 
-        from www.models.page import Page
+        from www.models.page import BasicPage
         info_page = {
-            'queryset': Page.objects.get_Published(),
+            'queryset': BasicPage.objects.get_Published(),
             'date_field': 'date_modified'
         }
         sitemaps["pages"] = GenericSitemap(info_page)

@@ -29,13 +29,22 @@ class MainMenuManager(models.Manager):
         default_menu = self.filter(default=True)[0]
         return default_menu.content_object
 
-     
     def get_submenu(self):
         from hwm.tree import helper
-        """ return navigation tree as a list containing tree node dictionary """
+        """ return navigation tree as a list containing tree node dictionary 
+        
+            ex:
+                >>> from vcms.www.models import menu
+                >>> mm = menu.MainMenu
+                >>> mm.objects.get_children_for_object_id(3)
+        """
         root = self.get_root_menu() 
         nav = []
         for navgroup in self.all():
             nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
         return nav
+    
+    def get_children_for_object_id(self, obj_id):
+        node = self.filter(content_object=obj_id)[0]
+        return node.get_children()
     
