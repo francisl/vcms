@@ -160,6 +160,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vimba_cms_simthetiq.apps.order'
                   ,'vimba_cms_simthetiq.apps.products'
                   ,'vimba_cms_simthetiq.apps.importer'
+                  ,'south'
                   )
 
 # ## ###
