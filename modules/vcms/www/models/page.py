@@ -76,7 +76,7 @@ class BasicPage(models.Model):
         return self.name
 
     def get_name(self):
-        return self.name
+        return self.__unicode__()
 
     def get_absolute_url(self):
         return "/www/page/" + self.slug
@@ -90,7 +90,6 @@ class BasicPage(models.Model):
         
     def save(self):
         self.app_slug='www'
-        from vcms.www.models.menu import MainMenu as PageMenu
         first_root = MainMenu.get_first_root_node()
         root = None
         

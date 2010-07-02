@@ -6,8 +6,6 @@
 from django.db import models
 
 from treebeard.models import Node
-#from vcms.www.models.menu import MainMenu
-
 
 class MainMenuManager(models.Manager):
     #def set_menu_root(self, page):

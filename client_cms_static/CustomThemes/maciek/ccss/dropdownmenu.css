@@ -43,23 +43,22 @@ ul.dropdown li {
 
 ul#mainmenu ul,
 ul.dropdown ul {
-  width: 100%;
-  top: 100%;
-  left: 0px;
-  text-align: left;
-  padding: 0.4em 0;
+  background-color: #000000;
   border-left: 1px solid #7b7b7a;
   border-right: 1px solid #7b7b7a;
   border-bottom: 1px solid #7b7b7a;
-  visibility: hidden;
-  position: absolute;
-  z-index: 40;
-  width: 140px;
-  background-color: #000000;
   color: #ffffff;
   font-size: 1em;
-  text-transform: none;
   filter: alpha opacity=70;
+  left: 0px;
+  padding: 0.4em 0;
+  position: absolute;
+  top: 100%;
+  text-align: left;
+  text-transform: none;
+  visibility: hidden;
+  width: 200px;
+  z-index: 40;
   -moz-opacity: .7;
   KhtmlOpacity: .7;
   opacity: .7;

@@ -106,26 +106,34 @@ class MenuSeparator(BasicPage):
     def get_absolute_url(self):
         return "/" + self.external_link
 
-class MenuLocalLink(BasicPage):
-    """ MenuLocalLink is to link static page dynamicaly into the menu
-        Let sta
-    """
+class MenuLocalLink(models.Model):
+    """ MenuLocalLink is to link static page dynamicaly into the menu """
+    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
     local_link = models.CharField(max_length=200, null=True, blank=True,
                                   help_text="Link on this web site. ex. /www/page/")
     
     class Meta:
         app_label = "www"
+    
+    def __unicode__(self):
+        return self.name
+    
+    def get_name(self):
+        return self.__unicode__()
+        
+    def get_absolute_url(self):
+        return self.local_link
         
     def save(self):
-        self.status = StatusField.PUBLISHED
-        self.language = Language.objects.get_default()
-        self.module = "LocalLink"
+        #self.status = StatusField.PUBLISHED
+        #self.language = Language.objects.get_default()
+        #self.module = "LocalLink"
         try:
             if self.local_link[-1:] == '/' and len(self.local_link) > 1:
                 self.local_link = self.local_link[:-1]
         except:
              self.local_link = ''
-        self.slug = self.get_absolute_url()
+        #self.slug = self.get_absolute_url()
         super(MenuLocalLink, self).save()
 
 class QuickLinks(models.Model):

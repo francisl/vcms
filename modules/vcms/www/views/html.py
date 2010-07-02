@@ -74,7 +74,7 @@ def InitPage(page_slug, app_slug):
     # ON ERROR RAISE 404
     if page_slug == None:
         #debugtrace("Initpage - get default", page_slug)
-        current_page = MainMenu.objects.get_default_page()
+        current_page = BasicPage.objects.get_default_page()
     # When Page slug i
     else:
         #debugtrace("Initpage - query page_slug", page_slug)

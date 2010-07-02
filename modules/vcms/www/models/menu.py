@@ -9,11 +9,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 from treebeard.ns_tree import NS_Node
-#from vcms.www.models.page import BasicPage
+from treebeard.mp_tree import MP_Node
 from vcms.www.managers.menu import MainMenuManager
 
-class MainMenu(NS_Node):
-    menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters")
+class MainMenu(MP_Node):
+    menu_name = models.CharField(max_length=10, help_text="Maximum 50 characters", blank=True, null=True)
     display = models.BooleanField(default=True, help_text="Display in menu")
     default = models.BooleanField(default=False)
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
@@ -26,44 +26,8 @@ class MainMenu(NS_Node):
         app_label = 'www'
 
     def __unicode__(self):
-        to_print = """
-            id         : %s
-            menu_name  : %s
-            lft        : %s
-            rgt        : %s
-            tree_id    : %s
-            depth      : %s
-            display    : %s
-            default    : %s
-        """ % (self.id, self.menu_name, self.lft, self.rgt, self.tree_id, self.depth, self.display, self.default)
-        
+        if self.menu_name == None or self.menu_name == '':
+            self.menu_name = self.content_object.get_name()
         return self.menu_name
     
-    """
-    def save(self):
-        
-        if self.default == True:
-            self.set_root(self)
-            
-        try:
-            root_node = PageMenu.get_root(self)
-            root_node.add_child(self)
-        except:
-            PageMenu.add_root()
-            #root_node = PageMenu.get_root(self)
-        
-        print("root node = %s" % root_node)
-        
-        #PageMenu.objects.set_as_generic_node(self)
-       
-        
-        super(PageMenu, self).save()
-        """
-
-class DummyPageMenu(NS_Node):
-    name = models.CharField(max_length=100)
-    
-    class Meta:
-        app_label = 'www'
-        
         

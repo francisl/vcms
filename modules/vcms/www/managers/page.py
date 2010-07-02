@@ -79,7 +79,10 @@ class BasicPageManager(models.Manager):
         else:
             return None
 
-
+    def get_default_page(self):
+        #mm = menu.MainMenu.objects.get_default_page()
+        return self.all()[0] #mm.content_object
+    
     def get_all_basic(self):
         from vcms.www.models.page import Language
         return self.filter(language=Language.objects.get_default())

@@ -8,6 +8,9 @@ from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.menu import MainMenu
 from vcms.www.models.page import Language
 
+from hwm.tree import helper
+from hwm.tree import generator
+    
 register = template.Library()
 
 @register.inclusion_tag('menu/menu_dropdown.html')
@@ -17,17 +20,21 @@ def show_dropdown_menu(current_page=None):
     """
     l = Language.objects.get_default()
     try:
-        root = MainMenu.objects.get(menu_name=str(l).lower())
+        root = MainMenu.objects.get(menu_name=str(l.language_code).lower())
     except:
         root = None
+    print("root %s " % root)
     menus = []
     if root != None:
         for menuitem in root.get_children():
             menu = dict(menu=menuitem, submenus=[])
+            print('menuitem : %s ' % menuitem)
+            print('got children : %s ' % menuitem.get_children())
             for submenu in menuitem.get_children():
                 submenudict = dict(menu=submenu, submenu=[])
                 menu['submenus'].append(submenudict)
             menus.append(menu)
+    print("menus = %s" % menus)
     return locals()
     
 @register.inclusion_tag('menu/menu.html')
@@ -60,10 +67,6 @@ def show_sub_menu(current_page=None):
 def generate_sub_menu(current_page=None):
     """ return a html version of the submenu
     """
-    from hwm.tree import helper
-    from hwm.tree import generator
-    from vcms.www.menu import MainMenu
-    
     l = Language.objects.get_default()
     """ return navigation tree as a list containin tree node dictionary """ 
     

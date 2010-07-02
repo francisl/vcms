@@ -41,26 +41,27 @@ ul#mainmenu, ul.dropdown:
         padding: 0;
         list-style: none;
 
-    ul:
-        width: 100%;
-        top: 100%; 
-        left: 0px;// align menu to main
-        text-align: left;
-        //right: 0px;// align menu to main
-        //text-align: right;
-        padding: 0.4em 0;
+    ul: // submenus
+        background-color: #000;
         border-left: $SUBMENU_BORDER;
         border-right: $SUBMENU_BORDER;
         border-bottom: $SUBMENU_BORDER;
-        visibility: hidden;
-        position: absolute;
-        z-index: 40;
-        width: 140px;
-        background-color: #000;
         color: #fff;
         font-size: $MAIN_MENU_FONT_SIZE;
-        text-transform: none;
         filter: alpha(opacity=70);
+        left: 0px;// align menu to main
+        padding: 0.4em 0;
+        position: absolute;
+        top: 100%; 
+        text-align: left;
+        text-transform: none;
+        //right: 0px;// align menu to main
+        //text-align: right;
+
+        visibility: hidden;
+        width: 200px;
+        z-index: 40;
+        
         -moz-opacity: .7;
         KhtmlOpacity: .7;
         opacity: .7;

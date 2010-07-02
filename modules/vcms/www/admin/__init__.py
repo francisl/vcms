@@ -18,9 +18,14 @@ from vcms.www.models.containers import *
 class LanguageAdmin(admin.ModelAdmin):
     pass
 
+
 class MainMenuAdmin(treeadmin.TreeAdmin):
     pass
 admin.site.register(MainMenu, MainMenuAdmin)
+
+#class MainMenuAdmin(treeadmin.TreeAdmin):
+#    pass
+#admin.site.register(MainMenu, MainMenuAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',
@@ -30,7 +35,7 @@ class MenuSeparatorAdmin(admin.ModelAdmin):
 admin.site.register(MenuSeparator, MenuSeparatorAdmin)
 
 class MenuLocalLinkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('name', 'local_link')
     fieldsets = (( 'Separator',
                    { 'fields': ('name','local_link') }
                    ),
@@ -56,7 +61,6 @@ admin.site.register(MainPage, MainPageAdmin)
 
 class SimplePageAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
-    
 admin.site.register(SimplePage, SimplePageAdmin)
 
 
