@@ -15,7 +15,8 @@ client/qooxdoo-1.1-sdk/*
 #emacs
 *~
 \#*\#
-
+#komodo
+*.kpf
 
 #log file
 *.log
