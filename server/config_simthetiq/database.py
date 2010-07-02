@@ -4,11 +4,11 @@
 
 DATABASES = {
     'default' : {
-            'NAME': './database/djangodata',
-            'ENGINE': 'sqlite3',                # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-            'HOST': '',
-            'PORT': '',
-            'USER': '',
-            'PASSWORD': '',
+            'NAME': 'simuser_cmsprod',
+            'ENGINE': 'postgresql_psycopg2',                # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'HOST': 'web26.webfaction.com',
+            'PORT': '5432',
+            'USER': 'simuser_cmsprod',
+            'PASSWORD': '25975dd535',
                  }
     }
