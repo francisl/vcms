@@ -61,5 +61,7 @@ class CMSMenu(models.Model):
         prefix = "+-- " * self.level
         return prefix + self.__unicode__()
     
+    def get_absolute_url(self):
+        return self.content_object.get_absolute_url()
         
 mptt.register(CMSMenu, order_insertion_by=['menu_name'])
