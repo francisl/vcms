@@ -93,8 +93,6 @@ def Generic(request, page=None, context={}):
     
 
 def MainPage(request, context={}):
-    contecurrent_page = MainPage.objects.get(slug=current_page.slug)
-    return _get_page_parameters(current_page)
     return render_to_response('master_large.html',
                               context,
                               context_instance=RequestContext(request))
