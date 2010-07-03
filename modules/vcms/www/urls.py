@@ -10,6 +10,7 @@ urlpatterns = patterns('vcms.www.views'
     # (r'^search/$', 'Search'),
     ,(r'^search/', include('haystack.urls'))
     ,(r'^page/(?P<page>[-\w]+)/$', 'Generic')
+    ,(r'^menu/move/(?P<menuid>[-\w]+)/$', 'testCMSMenuForm')
         
     # AJAX
     ,(r'^ajax/page/list/$', 'get_page_list')

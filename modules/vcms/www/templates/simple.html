@@ -1,9 +1,13 @@
 {% extends "master.html" %}
 {% load search_widget %}
+{% load tree %}
 
 <!--=========NAVIGATION=========== -->
 {% block navigation %}
     {% show_detailed_search_box %}
+	{% if page_info.current_page.menu %}
+		{% generate_dl_tree page_info.current_page.menu %}
+	{% endif %}
 {% endblock navigation %}
 
 {% block vcms_main_content %}
@@ -13,10 +17,7 @@
         </div>
 		<!-- Content -->
 		{% for c in content_widgets %}
-		
           {{ c.widget.render|safe  }}
-        
         {% endfor %}
-
 	</div>
 {% endblock vcms_main_content %}

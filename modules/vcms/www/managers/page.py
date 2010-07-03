@@ -6,7 +6,8 @@
 
 from django.db import models
 from vcms.www.fields import StatusField
-
+from django.conf import settings
+    
 class BasicPageManager(models.Manager):
     """
     def get_Default(self):
@@ -172,9 +173,17 @@ class BannerImageManager(models.Manager):
 
 class LanguageManager(models.Manager):
     def get_default(self):
-        from settings import LANGUAGE_CODE
-        return self.get(language_code=LANGUAGE_CODE[:2])
+        return self.get(language_code=settings.LANGUAGE_CODE[:2])
 
+    def get_default_code(self):
+        return self.get(language_code=settings.LANGUAGE_CODE[:2]).language_code
+        
+    def get_default_for_choice(self):
+        l = self.get(language_code=settings.LANGUAGE_CODE[:2])
+        return (l.language, l.language_code)
+        
+    def get_available_language(self):
+        return [(l.language, l.language_code) for l in self.all()]
 
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):

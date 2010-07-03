@@ -10,24 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.db.models import signals
 
-from treebeard.ns_tree import NS_Node
-
+from vcms.www.models.menu import CMSMenu
 from vcms.www.fields import StatusField
-from vcms.www.models.menu import MainMenu
+from vcms.www.models.language import Language
+
 from vcms.www.managers.page import BasicPageManager
-from vcms.www.managers.page import LanguageManager
-
-class Language(models.Model):
-    language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
-    language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
-
-    objects = LanguageManager()
-
-    class Meta:
-        app_label = "www"
-        
-    def __unicode__(self):
-        return self.language
     
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
@@ -57,7 +44,7 @@ class BasicPage(models.Model):
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
     language = models.ForeignKey(Language)
     
-    menu = generic.GenericRelation(MainMenu)
+    menu = generic.GenericRelation(CMSMenu)
     
     objects = BasicPageManager()
 
@@ -90,7 +77,8 @@ class BasicPage(models.Model):
         
     def save(self):
         self.app_slug='www'
-        first_root = MainMenu.get_first_root_node()
+        """
+        #first_root = CMSMenu.get_first_root_node()
         root = None
         
         if type(first_root) != type(None):
@@ -103,11 +91,9 @@ class BasicPage(models.Model):
                         root = sibling
                         break
         
-        super(BasicPage, self).save()
-        
         if root == None:
             # root menu not found
-            root = MainMenu.add_root(menu_name=str(self.language))
+            root = CMSMen.add_root(menu_name=str(self.language))
             self._add_to_main_menu(root)
         else:
             # root already exist
@@ -123,7 +109,9 @@ class BasicPage(models.Model):
                   
         # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
         #self.indexer.update()
-
+        """
+        
+        super(BasicPage, self).save()
 
 class Page(BasicPage):
     EMPTY = 0

@@ -13,19 +13,20 @@ from treebeard import admin as treeadmin
 from vcms.www.models import *
 from vcms.www.models.page import *
 from vcms.www.models.containers import *
-#from vcms.www.models.menu import PageMenu
+from vcms.www.models.menu import *
 
 class LanguageAdmin(admin.ModelAdmin):
     pass
-
+admin.site.register(Language, LanguageAdmin)
 
 class MainMenuAdmin(treeadmin.TreeAdmin):
     pass
 admin.site.register(MainMenu, MainMenuAdmin)
 
-#class MainMenuAdmin(treeadmin.TreeAdmin):
-#    pass
-#admin.site.register(MainMenu, MainMenuAdmin)
+class CMSMenuAdmin(admin.ModelAdmin):
+    list_display = ('get_tab_name', 'language','id', 'parent', 'lft', 'rght', 'tree_id')
+    #filter_horizontal = ('language',)
+admin.site.register(CMSMenu, CMSMenuAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
     fieldsets = (( 'Separator',

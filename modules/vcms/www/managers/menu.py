@@ -45,4 +45,7 @@ class MainMenuManager(models.Manager):
     def get_children_for_object_id(self, obj_id):
         node = self.filter(content_object=obj_id)[0]
         return node.get_children()
-    
+
+class CMSMenuManager(models.Manager):
+    def get_roots(self, language):
+        return self.filter(level=0).filter(language=language)

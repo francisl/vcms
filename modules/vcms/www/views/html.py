@@ -15,7 +15,7 @@ from vcms.www.models import PageElementPosition
 from vcms.www.models.old import Content, APP_SLUGS
 from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.page import BasicPage
-from vcms.www.models.menu import MainMenu
+from vcms.www.models.menu import CMSMenu
 from vcms.www.models.page import DashboardPage
 from vcms.www.models.page import DashboardElement
 from vcms.www.models.page import DashboardPreview
@@ -61,28 +61,16 @@ def InitPage(page_slug, app_slug):
                     it use reflection to execute the appropriate views function
             menu_style : Style used to display the menu in the master template
     """
-
     #debugtrace("Initpage - entry", page_slug)
-    current_page = MainMenu.objects.get_default_page()
-    #debugtrace("Initpage - current page", current_page)
-    #frm = inspect.stack()[1]
-    #mod = inspect.getmodule(frm[0])
-    #print '[%s] %s' % (mod.__name__, 'traceback')
-    
+    current_page = CMSMenu.objects.get_default_page()
+
     #try:
-    # IF NOTHING SELECTED, GO FIRST MENU
-    # ON ERROR RAISE 404
+    # IF NOTHING SELECTED, GO FIRST MENU ON ERROR RAISE 404
     if page_slug == None:
-        #debugtrace("Initpage - get default", page_slug)
         current_page = BasicPage.objects.get_default_page()
     # When Page slug i
     else:
-        #debugtrace("Initpage - query page_slug", page_slug)
-        #debugtrace("Initpage - query app_slug", app_slug)
         current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
-        #current_page = BasicPage.objects.get(slug=page_slug, app_slug=app_slug)
-        #debugtrace("Initpage - current page", current_page)
-
     return setPageParameters(current_page)
     #except:
     #    raise Http404
@@ -99,12 +87,6 @@ def Generic(request, page=None, context={}):
     # Get the instance of the containers contained in the page
     containers_types = page_instance.get_containers()
     
-    #containers = dict()
-    #for container_name, container_definition in containers_types.items():
-    #    try:
-    #        containers.update((container_name, container_definition.type.objects.get(page=current_page).render()))
-    #    except ObjectDoesNotExist:
-    #        pass
     context.update({ "containers": containers_types })
 
     #print("context page_info ==== %s" % context["page_info"])
@@ -127,8 +109,7 @@ def SimplePage(request, context={}):
     content_container = context["containers"]["Content"]
     ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
     context.update(content_widgets = ContentWidgets)
-    
-    import treebeard
+    #import treebeard
     
     #form = treebeard.forms()
     #context.update(form=form)
@@ -242,4 +223,28 @@ def Search(request):
 def robots(request):
     response = HttpResponse("User-agent: * \nDisallow: /", mimetype="text/plain")
     return response
+
+def testCMSMenuForm(request, menuid):
+    from django.http import HttpResponseRedirect
+    from vcms.www.models.menu import CMSMenu
+    from mptt.exceptions import InvalidMove
+    from mptt.forms import MoveNodeForm
+    from django.conf import settings
+
+    menu = get_object_or_404(CMSMenu, id=2)
+    print('menu = %s'  % menu)
+    if request.method == 'POST':
+        form = MoveNodeForm(menu, request.POST, valid_targets=CMSMenu.objects.all())
+        if form.is_valid():
+            try:
+                menu = form.save()
+            except InvalidMove:
+                pass
+    else:
+        form = MoveNodeForm(menu)
+
+    return render_to_response('testmovemenu.html',
+                              {'form': form
+                               ,'menu': menu },
+                              context_instance=RequestContext(request))
 

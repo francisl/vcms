@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block vcms_main_content %}
+<!--=========content=========== -->
+
+<h1> Moving : {{ menu.get_name }}</h1>
+<form method="post" action="/www/menu/move/{{ menu.id }}/" >
+{{ form }}
+<input type="submit" value="move" />
+</form>
+
+{{ menu_tree }}
+
+<!--=========//content=========== -->
+{% endblock vcms_main_content %}
