@@ -4,21 +4,40 @@ div#vcms_navigation_container:
     z-index: 15;
     padding: 0; 
     
+    h1.navigation_title:
+        color: #b9ff3c;
+        font-weight: normal;
+        font-family: arial, sans-serif;
+        font-size: 1em;
+        margin-bottom: 0.2em;
+        padding-left: 0.7em;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+        border-bottom: $NAV_BORDER_STYLE; 
+        text-transform: uppercase;
+        margin: 0;
+        background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
+    
+    
     dl:
         padding: 0;
         margin: 0;
    
     dt:
         background-color: #333333;
-        color: #cecece;
-        padding: 0.2em 0.8em;
+        color: #d0cfce;
+        display: block;
+        font-size: 0.9em;
+        padding: 0.2em 0.6em 0.2em 1.8em;
         margin: 0;
         text-transform: uppercase;
         background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
         border-bottom: $NAV_BORDER_STYLE; 
 
-        
         a:
+            display: block;
+            
+        a:hover:
             color: #b9ff3c;
             
         //a:hover, &.selected:
@@ -36,9 +55,12 @@ div#vcms_navigation_container:
         &:hover:
             background-color: #7e7e7e;
             
-    dl, dt, dd, li a:
+    dd, li a:
         font-decoration: none;
-        color: #2e2e2e;
+        font-size: 1em;
+        color: #d0cfce;
         display: block;
+        margin-left: 1em;
         &:hover:
             color: #AAF82E;
+    

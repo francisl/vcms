@@ -409,7 +409,7 @@ body.large div#vcms_navigation_container:
 body.normal div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
 
-TEXTCOLOR_ONDARK=#c2c2c2;
+TEXTCOLOR_ONDARK=#d0cfce;
 TEXTCOLOR_ONLIGHT=#707070;
 div#vcms_navigation_container, div.vcms_navigation_container:
     border-bottom: $NAV_BORDER_STYLE;

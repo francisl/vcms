@@ -462,12 +462,12 @@ div.vcms_navigation_container span,
 div#vcms_navigation_container p,
 div.vcms_navigation_container p {
   margin: 1em;
-  color: #c2c2c2;
+  color: #d0cfce;
 }
 
 div#vcms_navigation_container h6,
 div.vcms_navigation_container h6 {
-  color: #c2c2c2;
+  color: #d0cfce;
   line-height: 1.2em;
   margin-top: 2.2em;
 }
@@ -666,7 +666,7 @@ p.bottom_link a {
 }
 
 .dark_bg * a {
-  color: #c2c2c2;
+  color: #d0cfce;
 }
 
 .clear_bg * a {
