@@ -10,14 +10,14 @@ from django.contrib.sites.models import Site
 import settings
 
 from vimba_cms_simthetiq.apps.products import models as productmodels
-from vcms.www.views import InitPage, setPageParameters
+from vcms.www.views import get_requested_page, _set_page_paramters
 from hwm.paginator import generator as pgenerator
 
 
 def Generic(request, page=None, product=None, selected_category=None, slug=None, context={}):
     """ Is called first, then it calls the right view base on module name containt in the url
     """
-    context.update(InitPage(page_slug=page, app_slug=productmodels.APP_SLUGS))
+    context.update(get_requested_page(page_slug=page, app_slug=productmodels.APP_SLUGS))
     context.update(locals())
     
     if context["module"] in globals():
@@ -65,7 +65,7 @@ def set_navigation_type(request, page=None, type="standard"):
     """ Set the naviation type into the user's session
     """
     request.session['navigation_type'] = type # standard or DIS
-    return productHome(request, InitPage(page=page))
+    return productHome(request, get_requested_page(page=page))
     
 
 def get_navigation(request, navigation_type):
@@ -81,7 +81,7 @@ def productHome(request, context={}):
     from vcms.www.models import MenuLocalLink
     
     page = MenuLocalLink.objects.get(local_link="/products/home")
-    context.update(setPageParameters(page))
+    context.update(_set_page_paramters(page))
     context.update(locals())
     
     # set navigation type if not set
@@ -166,7 +166,7 @@ def product_list(request, nav_type="standard", nav_selection='all', paginator_pa
 
     return render_to_response('slist.html',
                                 {"menuselected":  "menu_products"
-                                 ,"page_info": setPageParameters()["page_info"] # set basic page information
+                                 ,"page_info": _set_page_paramters() # set basic page information
                                  ,'nav_type': nav_type
                                  ,"navigation_menu": nav
                                  ,'nav_selection': nav_selection
@@ -195,7 +195,7 @@ def product_detailed_list(request, nav_type="standard", nav_selection='all', pag
 
     return render_to_response('detailed_list.html',
                                 {"menuselected":  "menu_products"
-                                 ,"page_info": setPageParameters()["page_info"] # set basic page information
+                                 ,"page_info": _set_page_paramters() # set basic page information
                                  ,'nav_type': nav_type
                                  ,"navigation_menu": nav
                                  ,'nav_selection': nav_selection

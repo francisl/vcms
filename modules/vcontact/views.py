@@ -13,7 +13,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 # from other aps
 from vcontact.models import ContactPage
 from vcms.www.models import Content
-from vcms.www.views import InitPage
+from vcms.www.views import get_requested_page
 
 # external requirement
 from config.email import EMAILS
@@ -31,7 +31,7 @@ class ContactForm(forms.Form):
 
 
 def Contact(request, page=None, context={}):
-    context.update(InitPage(page_slug=page, app_slug='contact'))
+    context.update(get_requested_page(page_slug=page, app_slug='contact'))
     context.update(locals())
     #contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
     form = ContactForm()

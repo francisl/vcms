@@ -59,7 +59,7 @@ class CMSMenu(models.Model):
         
     def get_tab_name(self):
         prefix = "+-- " * self.level
-
         return prefix + self.__unicode__()
+    
         
 mptt.register(CMSMenu, order_insertion_by=['menu_name'])

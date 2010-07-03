@@ -49,3 +49,10 @@ class MainMenuManager(models.Manager):
 class CMSMenuManager(models.Manager):
     def get_roots(self, language):
         return self.filter(level=0).filter(language=language)
+        
+    def get_default_page(self):
+        default_menu = self.filter(default=True)
+        if default_menu.count() == 0 or default_menu == None:
+            return self.all()[0].content_object
+        else:
+            return default_menu[0].content_object

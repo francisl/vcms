@@ -13,7 +13,7 @@
 {% block vcms_main_content %}
     <div class="vcms_container_relative">
         <div class="vcms_content">
-            <h1>{{ page }} / <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+            <h1>{{ page_info.page.get_menu.get_root }} / <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
         </div>
 		<!-- Content -->
 		{% for c in content_widgets %}

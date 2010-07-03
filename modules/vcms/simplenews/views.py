@@ -13,13 +13,13 @@ from django.utils.translation import ugettext_lazy as _
 from vcms.simplenews import settings
 from vcms.simplenews.models import News, NewsCategory
 from vcms.simplenews.models import APP_SLUGS
-from vcms.www.views import InitPage, setPageParameters
+from vcms.www.views import get_requested_page, _get_page_parameters
 from hwm.tree import generator as generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
 
 def list_news(request, category_slug, page=1, context={}):
-    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
+    context.update(get_requested_page(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     
@@ -74,13 +74,13 @@ def list_news(request, category_slug, page=1, context={}):
     return render_to_response("list_news.html", {"navigation_menu": navigation_menu, 
                                                  "contents": contents, 
                                                  "paginator_html": paginator_html, 
-                                                 "page_info": setPageParameters()["page_info"],
+                                                 "page_info": _get_page_parameters(),
                                                  },
                                                  
                                context_instance=RequestContext(request))
 
 def single_news(request, category_slug, news_slug, context={}):
-    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
+    context.update(get_requested_page(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     categories = NewsCategory.objects.get_categories_in_use()
     #content = context["current_page"]
@@ -97,13 +97,13 @@ def single_news(request, category_slug, news_slug, context={}):
     return render_to_response("single_news.html", context, context_instance=RequestContext(request))
 
 def news_category(request, category_slug, category, page=1, context={}):
-    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
+    context.update(get_requested_page(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
     return render_to_response("", context, context_instance=RequestContext(request))
 
 def news_archives(request, category_slug, year, month=0, page=1, context={}):
-    context.update(InitPage(page_slug=category_slug, app_slug=APP_SLUGS))
+    context.update(get_requested_page(page_slug=category_slug, app_slug=APP_SLUGS))
     context.update(locals())
     context.update({ "categories": categories, "contents": contents, "paginator": news_paginator, "paginator_previous_url": paginator_previous_url, "paginator_next_url": paginator_next_url })
     return render_to_response("", context, context_instance=RequestContext(request))

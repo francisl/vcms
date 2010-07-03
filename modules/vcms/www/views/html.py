@@ -34,7 +34,7 @@ def debugtrace(view, current_page, **argd):
     for v in argd:
         print("%s : %s" % (v,argd[v]))
 
-def setPageParameters(page=None):
+def _get_page_parameters(page=None):
     """ Set the default parameter for a CMS page 
         module , menu_style, current_page, page
     """
@@ -49,48 +49,41 @@ def setPageParameters(page=None):
         page_info.update(menu_style = DROPDOWN_MENU)
         page_info.update(current_page = None)
         page_info.update(page = None)
-    return { 'page_info' : page_info }
+    return page_info
 
-def InitPage(page_slug, app_slug):
-    """ InitPage get a page slug and its corresponding app slug then return
+#def get_requested_page(page_slug, app_slug):
+def get_requested_page(page_slug, app_slug):
+    """ get_requested_page get a page slug and its corresponding app slug then return
         an updated context containing the required information for the CMS pages
-    
-        returns: 
-            current_page : Page instance that is currently request
-            module : Page instance modules or function to call in the Views, 
-                    it use reflection to execute the appropriate views function
-            menu_style : Style used to display the menu in the master template
     """
-    #debugtrace("Initpage - entry", page_slug)
-    current_page = CMSMenu.objects.get_default_page()
+    #debugtrace("get_requested_page - entry", page_slug)
 
     #try:
     # IF NOTHING SELECTED, GO FIRST MENU ON ERROR RAISE 404
     if page_slug == None:
-        current_page = BasicPage.objects.get_default_page()
+        current_page = CMSMenu.objects.get_default_page()
+        print("crrent page == %s" % current_page)
+        #current_page = BasicPage.objects.get_default_page()
     # When Page slug i
     else:
         current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
-    return setPageParameters(current_page)
     #except:
     #    raise Http404
-    
+    #return _get_page_parameters(current_page)
+    return current_page
+
+def _get_page_instance(page):
+    return getattr(page, page.module.lower())
+
+def _get_page_containers(page):
+    return page.get_containers()
+
 def Generic(request, page=None, context={}):
-    #debugtrace("Generic", page)
-    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
-    context.update(locals())
+    basic_page = get_requested_page(page_slug=page, app_slug=APP_SLUGS)
+    page_instance = _get_page_instance(basic_page)
+    context.update(page_info=_get_page_parameters(page_instance))
+    context.update(containers=_get_page_containers(page_instance))
 
-    # Get the instance of the current page
-    current_page = context["page_info"]["current_page"]
-    page_instance = getattr(current_page, current_page.module.lower())
-    
-    # Get the instance of the containers contained in the page
-    containers_types = page_instance.get_containers()
-    
-    context.update({ "containers": containers_types })
-
-    #print("context page_info ==== %s" % context["page_info"])
-    
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
         #debugtrace("Generic in Globals", context["page_info"]['page'], **{'module':context["module"]})
@@ -100,6 +93,8 @@ def Generic(request, page=None, context={}):
     
 
 def MainPage(request, context={}):
+    contecurrent_page = MainPage.objects.get(slug=current_page.slug)
+    return _get_page_parameters(current_page)
     return render_to_response('master_large.html',
                               context,
                               context_instance=RequestContext(request))

@@ -74,6 +74,10 @@ class BasicPage(models.Model):
     @staticmethod
     def get_containers():
         raise NotImplementedError()
+    
+    @staticmethod
+    def get_menu(self):
+        raise NotImplementedError()
         
     def save(self):
         self.app_slug='www'
@@ -202,6 +206,9 @@ class SimplePage(BasicPage):
             my_rel_cont[container.name] = container
         return my_rel_cont
 
+    def get_menu(self):
+        return self.menu.all()[0]
+        
 # -----
 # OLD
 

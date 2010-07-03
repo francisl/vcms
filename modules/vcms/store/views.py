@@ -24,7 +24,7 @@ from livesettings import config_get_group, config_value
 from l10n.models import Country
 from vcms.www.registration.models import AdminRegistrationProfile
 from vcms.store.forms import StoreRegistrationForm
-from vcms.www.views import setPageParameters
+from vcms.www.views import _get_page_parameters
 
 
 import logging
@@ -124,7 +124,7 @@ def register_handle_form(request, redirect=None):
 
 def complete(request):
     context = { 'verification': config_value('SHOP', 'ACCOUNT_VERIFICATION')
-                    ,"page_info": setPageParameters()["page_info"] }
+                    ,"page_info": _get_page_parameters() }
 
     return render_to_response('registration/registration_complete.html',
                                 context,
@@ -162,7 +162,7 @@ def activate(request, activation_key, template = 'registration/activate.html'):
     context = RequestContext(request, {
         'account': account,
         'expiration_days': config_value('SHOP', 'ACCOUNT_ACTIVATION_DAYS'),
-        "page_info": setPageParameters()["page_info"],
+        "page_info": _get_page_parameters(),
     })
     return render_to_response(template,
                               context_instance=context)
@@ -196,7 +196,7 @@ def register(request, redirect=None, template='registration/registration_form.ht
         if extra_context:
             context.update(extra_context)
 
-        context.update({"page_info": setPageParameters()["page_info"]})
+        context.update({"page_info": _get_page_parameters()})
 
         return render_to_response(template,
                                     context,
@@ -231,6 +231,6 @@ def emaillogin(request, template_name='registration/login.html',
         'form': form,
         redirect_field_name: redirect_to,
         'site_name': current_site.name,
-        "page_info": setPageParameters()["page_info"],
+        "page_info": _get_page_parameters(),
     }, context_instance=RequestContext(request))
 emaillogin = never_cache(emaillogin)

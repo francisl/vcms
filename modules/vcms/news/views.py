@@ -14,10 +14,10 @@ from vcms.news.models import News as m_News
 from vcms.news.models import NewsPage as m_NewsPage
 from vcms.news.models import NewsPageModule as m_NewsPageModule
 
-from vcms.www.views import InitPage
+from vcms.www.views import get_requested_page
 
 def Generic(request, page=None, slug=None, context={}):
-    context.update(InitPage(page_slug=page, app_slug=APP_SLUGS))
+    context.update(get_requested_page(page_slug=page, app_slug=APP_SLUGS))
     context.update(locals())
     
     if context["module"] in globals():
