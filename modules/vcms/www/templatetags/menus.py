@@ -5,12 +5,12 @@ from django import template
 from django.template.loader import render_to_string
 
 from vcms.www.models.page import BasicPage as Page
-from vcms.www.models.menu import MainMenu
+from vcms.www.models.menu import CMSMenu
 from vcms.www.models.page import Language
 
 from hwm.tree import helper
 from hwm.tree import generator
-    
+
 register = template.Library()
 
 @register.inclusion_tag('menu/menu_dropdown.html')
@@ -18,24 +18,22 @@ def show_dropdown_menu(current_page=None):
     """ return main menu list
         and return the menu currently selected
     """
-    l = Language.objects.get_default()
-    try:
-        root = MainMenu.objects.get(menu_name=str(l.language_code).lower())
-    except:
-        root = None
-    print("root %s " % root)
     menus = []
-    if root != None:
-        for menuitem in root.get_children():
-            menu = dict(menu=menuitem, submenus=[])
-            print('menuitem : %s ' % menuitem)
-            print('got children : %s ' % menuitem.get_children())
-            for submenu in menuitem.get_children():
-                submenudict = dict(menu=submenu, submenu=[])
-                menu['submenus'].append(submenudict)
-            menus.append(menu)
+    for menuitem in CMSMenu.objects.get_roots(language='en'):
+        menu = dict(menu=menuitem, submenus=[])
+        print('menuitem : %s ' % menuitem)
+        print('got children : %s ' % menuitem.get_children())
+        for submenu in menuitem.get_children():
+            submenudict = dict(menu=submenu, submenu=[])
+            menu['submenus'].append(submenudict)
+        menus.append(menu)
     print("menus = %s" % menus)
     return locals()
+    
+
+@register.inclusion_tag('menu/side_navigation.html')
+def show_navigation_menu(current_page=None):
+    return show_dropdown_menu()
     
 @register.inclusion_tag('menu/menu.html')
 def show_main_menu(current_page=None):

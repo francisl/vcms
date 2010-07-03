@@ -1,0 +1,19 @@
+<div>
+    <div class="navigation_title">{{ root.get_name }}</div>
+    <dl id="{{ cssid }}">
+    {% for elem in root.get_children %}
+        <dt class="{% if elem.selected %}selected{% endif %} {% if elem.child_selected %}child_selected{% endif %}">
+            {% if category.url %}
+                <a href="{{ elem.get_absolute_url }}/">{{ elem.get_name }}</a>
+            {% else %}
+                {{ elem.get_name }}
+            {% endif %}
+        </dt>
+        {% for item in elem.get_children %}
+            <dd class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
+            <a href="{{ item.get_absolute_url }}/">{{ item.get_name }}</a></dd>
+        {% endfor %}
+    {% endfor %}
+    </dl>
+    <div style="clear: both; height: 0px;"></div>
+</div>
