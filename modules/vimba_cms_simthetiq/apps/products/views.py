@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 import settings
 
 from vimba_cms_simthetiq.apps.products import models as productmodels
-from vcms.www.views import get_requested_page, _set_page_paramters
+from vcms.www.views.html import get_requested_page, _get_page_parameters
 from hwm.paginator import generator as pgenerator
 
 

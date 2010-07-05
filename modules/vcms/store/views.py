@@ -24,7 +24,7 @@ from livesettings import config_get_group, config_value
 from l10n.models import Country
 from vcms.www.registration.models import AdminRegistrationProfile
 from vcms.store.forms import StoreRegistrationForm
-from vcms.www.views import _get_page_parameters
+from vcms.www.views.html import _get_page_parameters
 
 
 import logging

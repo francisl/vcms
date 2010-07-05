@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from vcms.simplenews import settings
 from vcms.simplenews.models import News, NewsCategory
 from vcms.simplenews.models import APP_SLUGS
-from vcms.www.views import get_requested_page, _get_page_parameters
+from vcms.www.views.html import get_requested_page, _get_page_parameters
 from hwm.tree import generator as generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
