@@ -31,7 +31,7 @@ class ContactForm(forms.Form):
 
 
 def Contact(request, page=None, context={}):
-    context.update(get_requested_page(page_slug=page, app_slug='contact'))
+    context.update(current_page=get_requested_page(page_slug=page, app_slug='contact'))
     context.update(locals())
     #contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
     form = ContactForm()
