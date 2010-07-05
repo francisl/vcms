@@ -62,8 +62,6 @@ def get_requested_page(page_slug, app_slug):
     # IF NOTHING SELECTED, GO FIRST MENU ON ERROR RAISE 404
     if page_slug == None:
         current_page = CMSMenu.objects.get_default_page()
-        print("crrent page == %s" % current_page)
-        #current_page = BasicPage.objects.get_default_page()
     # When Page slug i
     else:
         current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
@@ -113,7 +111,6 @@ def SimplePage(request, context={}):
         
     
 def Simple(request, context={}):
-    print("simple page context : %s" % context["page_info"]['page'])
     current_page = context["page_info"]['page']
     #context['contents'] = Content.objects.filter(page=current_page)
     #debugtrace("basic", context["page_info"]['page'], **{'basic content':context['contents']})
@@ -143,7 +140,6 @@ def dashboardRegister(module, function):
         DASHBOARD_MODULES.append(html_function)
     except:
         pass
-    #    #print("modules exception : %s" % module)
 
         
 def Dashboard(request, context={}):
@@ -185,7 +181,6 @@ def Dashboard(request, context={}):
     page = DashboardPage.objects.get(id=context['current_page'].id)
     template = [t for t in DashboardPage.TEMPLATES if t[0] == page.template]
 
-    #print page.template
     return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
                                 context_instance=RequestContext(request))
 
@@ -225,7 +220,6 @@ def testCMSMenuForm(request, menuid):
     from django.conf import settings
 
     menu = get_object_or_404(CMSMenu, id=2)
-    print('menu = %s'  % menu)
     if request.method == 'POST':
         form = MoveNodeForm(menu, request.POST, valid_targets=CMSMenu.objects.all())
         if form.is_valid():

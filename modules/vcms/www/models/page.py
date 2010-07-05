@@ -188,6 +188,8 @@ class MainPage(BasicPage):
         return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
                     ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
 
+    def get_menu(self):
+        return self.menu.all()[0]
 
 class SimplePage(BasicPage):
     class Meta:
