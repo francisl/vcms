@@ -68,6 +68,10 @@ body p {
   color: #000000;
 }
 
+body p a {
+  color: #548c00;
+}
+
 body hr {
   height: 1px;
   size: 1px;
@@ -606,7 +610,7 @@ div.small_media_preview div.thumbnail img {
 }
 
 .content_def_link {
-  width: 200px;
+  width: 226px;
 }
 
 .content_def_link dt {

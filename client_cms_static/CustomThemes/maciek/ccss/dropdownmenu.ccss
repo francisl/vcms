@@ -41,6 +41,69 @@ ul#mainmenu, ul.dropdown:
         padding: 0;
         list-style: none;
 
+    // main menu item
+    & > li:
+        //height: $MAIN_MENU_HEIGHT;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        background-position: 0px "0px";
+        background-repeat: no-repeat;
+        display: block;
+        
+        & > a:
+            color: #c2c2c2;
+            margin: auto 0 0 0;
+            padding-bottom: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            
+        &.menu_selected > a:
+            color: #b9ff3c; //light green
+       
+       
+    .normal & > li:
+        height: $MAIN_MENU_HEIGHT;
+        background-image: url(../images/menu/main_menu_separator.jpg);
+        & > a:
+            padding-top: $MAIN_MENU_HEIGHT-24px;
+    
+    .normal & > li:hover:
+        background-image: url(../images/menu/main_bg_hover.jpg);
+            
+    .large & > li:
+        height: $MAIN_MENU_HEIGHT_LARGE;
+        background-image: url(../images/menu_large/main_menu_separator.jpg);
+        & > a:
+            padding-top: $MAIN_MENU_HEIGHT_LARGE-24px;
+            
+        &:hover & > a:
+            color: #99ca3c;
+        &:hover:
+            background-image: url(../images/menu_large/main_bg_hover.jpg);
+        
+    li:
+        float: left;
+        zoom: 1;
+        line-height: normal;
+
+        &:hover, .hover:
+            position: relative;
+            z-index: 40;
+            cursor: default;
+        &:hover > ul:
+            visibility: visible;
+
+    a:
+        position: relative;
+        display: block;
+        
+        &:link, &:visited:
+            text-decoration: none; 
+            display : block;
+        &:hover:
+            text-decoration: none;
+
     ul: // submenus
         background-color: #000;
         border-left: $SUBMENU_BORDER;
@@ -67,12 +130,14 @@ ul#mainmenu, ul.dropdown:
         opacity: .7;
         
         li:
-            height: 100%;
+            //height: 100%;
             font-size: $SUB_MENU_FONT_SIZE;
             float: none;
             color: #fff;
             filter: none;
-            padding: 0;
+            padding: 0em;
+            padding-top: 0px;
+            margin: 0;
                 
         a:
             color: #fff;
@@ -85,71 +150,3 @@ ul#mainmenu, ul.dropdown:
                 background-color: #4a4a4a;
                 color: #fff;
                 text-decoration: none;
-
-    // main menu item
-    & > li:
-        //height: $MAIN_MENU_HEIGHT;
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-        background-position: 0px "0px";
-        background-repeat: no-repeat;
-        display: block;
-        
-        & > a:
-            color: #c2c2c2;
-            margin: auto 0 0 0;
-            padding-bottom: 12px;
-            padding-left: 12px;
-            padding-right: 12px;
-            
-        &.menu_selected > a:
-            color: #b9ff3c; //light green
-       
-       
-    .normal & > li:
-        height: $MAIN_MENU_HEIGHT;
-        background-image: url(../images/menu/main_menu_separator.jpg);
-        a:
-            padding-top: $MAIN_MENU_HEIGHT-24px;
-    
-    .normal & > li:hover:
-        background-image: url(../images/menu/main_bg_hover.jpg);
-            
-    .large & > li:
-        height: $MAIN_MENU_HEIGHT_LARGE;
-        background-image: url(../images/menu_large/main_menu_separator.jpg);
-        a:
-            padding-top: $MAIN_MENU_HEIGHT_LARGE-24px;
-            
-        &:hover a:
-            color: #99ca3c;
-        &:hover:
-            background-image: url(../images/menu_large/main_bg_hover.jpg);
-        
-    
-    
-    li:
-        float: left;
-        zoom: 1;
-        line-height: normal;
-
-        &:hover, .hover:
-            position: relative;
-            z-index: 40;
-            cursor: default;
-        &:hover > ul:
-            visibility: visible;
-            
-
-    a:
-        position: relative;
-        display: block;
-        
-        &:link, &:visited:
-            text-decoration: none; 
-            display : block;
-        &:hover:
-            text-decoration: none;
-
-

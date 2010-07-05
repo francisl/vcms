@@ -51,6 +51,8 @@ body:
         padding: 0.1em 0;
         font-size: 0.9em;
         color: #000000;
+        a:
+            color: #548c00;
         
     hr:
         height: 1px;
@@ -557,7 +559,7 @@ div.small_media_preview:
             float: left;
 
 .content_def_link:
-    width: 200px;
+    width: 226px;
     dt:
         margin-bottom: 0.6em;
         font-style:italic;
