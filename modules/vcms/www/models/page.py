@@ -31,7 +31,7 @@ class BasicPage(models.Model):
         Page can be classified by language - NOTE not yet working
         # TODO : add multi-language fonctionnality
     """
-    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
+    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     status = StatusField()
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)

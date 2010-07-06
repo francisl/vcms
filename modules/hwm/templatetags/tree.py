@@ -11,7 +11,7 @@ def generate_dl_tree(data, css_id=None, css_class=None):
     """
     root = data.all()[0].get_root()
     
-    return {"root": root, "cssid":css_id, "cssclass": css_class}
+    return {"root": root, "current_menu": data.all()[0], "cssid":css_id, "cssclass": css_class}
 
 @register.inclusion_tag('tree/tree_li.html')
 def generate_li_tree(data, css_id, css_class):

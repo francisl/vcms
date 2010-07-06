@@ -57,6 +57,9 @@ class CMSMenu(models.Model):
     def get_name(self):
         return self.__unicode__()
         
+    def get_slug(self):
+        return self.content_object.get_absolute_url()
+        
     def get_tab_name(self):
         prefix = "+-- " * self.level
         return prefix + self.__unicode__()

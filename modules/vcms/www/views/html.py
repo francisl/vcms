@@ -195,7 +195,7 @@ def Search(request):
 
         # temp_results
         results[_("Page")] = Page.indexer.search(query)
-
+        print("results = %s" % results)
         try:
             # get result from product
             from products.models import ProductInformation
@@ -204,7 +204,7 @@ def Search(request):
             # no products
             pass
                     
-        return render_to_response('search_temp_registration.html', 
+        return render_to_response('search/search_simple.html', 
                                   {'query': query, 'results': results },
                                   context_instance=RequestContext(request))
 
@@ -219,7 +219,7 @@ def testCMSMenuForm(request, menuid):
     from mptt.forms import MoveNodeForm
     from django.conf import settings
 
-    menu = get_object_or_404(CMSMenu, id=2)
+    menu = get_object_or_404(CMSMenu, id=menuid)
     if request.method == 'POST':
         form = MoveNodeForm(menu, request.POST, valid_targets=CMSMenu.objects.all())
         if form.is_valid():

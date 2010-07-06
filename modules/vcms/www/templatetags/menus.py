@@ -21,7 +21,7 @@ def show_dropdown_menu(current_page=None):
     menus = []
     for menuitem in CMSMenu.objects.get_roots(language='en'):
         menu = dict(menu=menuitem, submenus=[])
-        for submenu in menuitem.get_children():
+        for submenu in CMSMenu.objects.get_displayable_children(menuitem):
             submenudict = dict(menu=submenu, submenu=[])
             menu['submenus'].append(submenudict)
         menus.append(menu)

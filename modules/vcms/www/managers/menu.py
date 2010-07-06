@@ -48,7 +48,11 @@ class MainMenuManager(models.Manager):
 
 class CMSMenuManager(models.Manager):
     def get_roots(self, language):
-        return self.filter(level=0).filter(language=language)
+        return self.filter(level=0).filter(language=language).filter(display=True)
+        
+    def get_displayable_children(self, parent):
+        #parent.get_children()
+        return parent.get_children().filter(display=True)
         
     def get_default_page(self):
         default_menu = self.filter(default=True)

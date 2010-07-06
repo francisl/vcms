@@ -2,7 +2,7 @@
     <h1 class="navigation_title">{{ root.get_name }}</h1>
     <dl id="{{ cssid }}">
     {% for elem in root.get_children %}
-        <dt class="{% if elem.selected %}selected{% endif %} {% if elem.child_selected %}child_selected{% endif %}">
+        <dt class="{% ifequal current_menu.id elem.id %}selected{% endifequal%}{% if elem.child_selected %}child_selected{% endif %}">
             {% if elem.get_absolute_url %}
                 <a href="{{ elem.get_absolute_url }}/">{{ elem.get_name }}</a>
             {% else %}

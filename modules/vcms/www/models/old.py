@@ -108,7 +108,7 @@ class MenuSeparator(BasicPage):
 
 class MenuLocalLink(models.Model):
     """ MenuLocalLink is to link static page dynamicaly into the menu """
-    name = models.CharField(max_length=100, unique=True, help_text=_('Max 100 characters.'))
+    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     local_link = models.CharField(max_length=200, null=True, blank=True,
                                   help_text="Link on this web site. ex. /www/page/")
     
