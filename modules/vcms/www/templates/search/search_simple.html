@@ -1,0 +1,40 @@
+{% extends "master.html" %}
+{% load search_widget %}
+{% load tree %}
+
+<!--=========NAVIGATION=========== -->
+{% block navigation %}
+    {% show_detailed_search_box %}
+	{% if page_info.current_page.menu %}
+		{% generate_dl_tree page_info.current_page.menu %}
+	{% endif %}
+{% endblock navigation %}
+
+{% block vcms_main_content %}
+<div class="division_content">
+{% if results %}
+	<h3>Search result for : <i>"{{ query }}"</i></h3>
+
+	{% for key, value in results.items %}
+		<h5>{{ value.count }} {{ key }}{{ value.count|pluralize }} found</h5>
+
+		<table style="width: 60%; border: none; ">
+			{% for item in value %}
+			<tr>
+				<td style="width: 20%; vertical-align: text-top;">{{ item.percent }} %</td>
+				<td style="text-align: left"><a href="{{ item.instance.get_absolute_url }}">{{ item.instance.get_name }}</a><br />
+					  {{ item.instance.description|removetags:"p"|safe }}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br />
+	{% endfor %}
+
+{% else %}
+	Your search for <i>"{{ query }}"</i> yield no result!
+{% endif %}
+	
+
+</div>
+{% endblock vcms_main_content %}

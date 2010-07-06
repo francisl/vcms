@@ -18,4 +18,4 @@ class ProductPageIndex(search_index):
         return ProductPage.objects.all()
 
 
-site.register(ProductPage, ProductPageIndex)
+#site.register(ProductPage, ProductPageIndex)

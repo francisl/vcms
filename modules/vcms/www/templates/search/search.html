@@ -1,14 +1,15 @@
 {% extends "master.html" %}
+{% load search_widget %}
+{% load tree %}
 
-{% block title %}
-    Search result for {{ query }}
-{% endblock title %}
+<!--=========NAVIGATION=========== -->
+{% block navigation %}
+    {% show_detailed_search_box %}
+{% endblock navigation %}
 
-{% block content %}
-<!--=========content=========== -->
-
-<div class="division_content search">
-    <form method="get" action=".">
+{% block vcms_main_content %}
+<div class="vcms_container_relative">
+    <!-- <form method="get" action=".">
         <table>
             <tr><td><h2>Search</h2></td>
                 <td>{{ form.q }}</td>
@@ -22,17 +23,18 @@
                 <td></td>
             </tr>
         </table>
-            
+    </form> -->
         {% if query %}
             <h2>Results</h2>
-            <table style="text-align:left;">
+            <br />
+            <table style="text-align:left; width: 80%;">
             {% for result in page.object_list %}
                 <tr>
-                    <td id="first_column" style="width: 6%">{{ result.score|floatformat:"-2" }}</td>
-                    <td> <a href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a> ({{ result.verbose_name|cut:"page"|cut:" " }})</td>
+                    <td id="first_column" style="width: 14%">{{ result.score|floatformat:"-2" }}</td>
+                    <td> <a href="{{ result.object.get_page_where_available }}">{{ result.object.name }}</a></td>
                 </tr>
                 <tr>
-                    <td></td><td>{{ result.object.product_description|truncatewords:30 }}</td>
+                    <td></td><td>{{ result.object.content|truncatewords:20|safe }}</td>
                 </tr>
             {% empty %}
                 <p>No results found.</p>
@@ -41,7 +43,7 @@
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
         {% endif %}
-    </form>
+
 </div>
 <!--=========//content=========== -->
-{% endblock content %}
+{% endblock vcms_main_content %}

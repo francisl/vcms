@@ -125,8 +125,27 @@ class TextWidget(Widget):
     class Meta:
         verbose_name= "Widget - Text"
         verbose_name_plural = "Widget - Text"
-        ordering = [ 'date']
+        ordering = ['date']
         app_label = 'www'
     
     def __unicode__(self):
         return self.name
+
+    def get_page_where_available(self):
+        thiswidget = RelativeWidgetWrapper.objects.get(widget_id=self.id)
+        return thiswidget.container.page.get_absolute_url()
+    
+from haystack.indexes import *
+from haystack import site
+
+class TextWidgetIndex(SearchIndex):
+    text = CharField(document=True, use_template=True)
+    content = CharField(model_attr='content')
+    page = CharField(model_attr='get_page_where_available')
+    
+    def get_queryset(self):
+        """Used when the entire index for model is updated."""
+        return TextWidget.objects.filter(published=True)
+
+
+site.register(TextWidget, TextWidgetIndex)

@@ -1,0 +1,4 @@
+{{ object.text }}
+{{ object.content }}
+{{ object.get_page_where_available }}
+
