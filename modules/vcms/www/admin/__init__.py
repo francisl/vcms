@@ -24,7 +24,7 @@ class MainMenuAdmin(treeadmin.TreeAdmin):
 admin.site.register(MainMenu, MainMenuAdmin)
 
 class CMSMenuAdmin(admin.ModelAdmin):
-    list_display = ('get_tab_name', 'language','id', 'parent', 'lft', 'rght', 'tree_id')
+    list_display = ('get_tab_name', 'get_slug', 'language','id', 'parent', 'lft', 'rght', 'tree_id')
     #filter_horizontal = ('language',)
 admin.site.register(CMSMenu, CMSMenuAdmin)
 
@@ -36,7 +36,7 @@ class MenuSeparatorAdmin(admin.ModelAdmin):
 admin.site.register(MenuSeparator, MenuSeparatorAdmin)
 
 class MenuLocalLinkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'local_link')
+    list_display = ('name', 'local_link', 'id')
     fieldsets = (( 'Separator',
                    { 'fields': ('name','local_link') }
                    ),
@@ -61,7 +61,7 @@ class MainPageAdmin(admin.ModelAdmin):
 admin.site.register(MainPage, MainPageAdmin)
 
 class SimplePageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id')
+    list_display = ('name', 'slug', 'id')
 admin.site.register(SimplePage, SimplePageAdmin)
 
 
