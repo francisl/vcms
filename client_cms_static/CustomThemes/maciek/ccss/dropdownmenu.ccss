@@ -117,7 +117,7 @@ ul#mainmenu, ul.dropdown:
         position: absolute;
         top: 100%; 
         text-align: left;
-        text-transform: none;
+        text-transform: Capitalize;
         //right: 0px;// align menu to main
         //text-align: right;
 
@@ -138,6 +138,9 @@ ul#mainmenu, ul.dropdown:
             padding: 0em;
             padding-top: 0px;
             margin: 0;
+            
+            &.menu_selected > a:
+                color: #b9ff3c; //light green
                 
         a:
             color: #fff;
@@ -150,3 +153,4 @@ ul#mainmenu, ul.dropdown:
                 background-color: #4a4a4a;
                 color: #fff;
                 text-decoration: none;
+            

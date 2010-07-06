@@ -43,12 +43,18 @@ div#vcms_navigation_container dt a {
   padding-left: 1em;
 }
 
+div#vcms_navigation_container dt.selected > a {
+  color: #b9ff3c;
+  background-position: 0 -20px;
+}
+
 div#vcms_navigation_container dt a:hover {
   color: #b9ff3c;
   background-position: 0 -20px;
 }
 
-div#vcms_navigation_container dt:hover {
+div#vcms_navigation_container dt:hover,
+div#vcms_navigation_container dt.selected {
   background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
 }
 

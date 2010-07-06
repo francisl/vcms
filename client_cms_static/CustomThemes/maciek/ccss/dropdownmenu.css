@@ -161,7 +161,7 @@ ul.dropdown ul {
   position: absolute;
   top: 100%;
   text-align: left;
-  text-transform: none;
+  text-transform: Capitalize;
   visibility: hidden;
   width: 200px;
   z-index: 40;
@@ -179,6 +179,11 @@ ul.dropdown ul li {
   padding: 0em;
   padding-top: 0px;
   margin: 0;
+}
+
+ul#mainmenu ul li.menu_selected > a,
+ul.dropdown ul li.menu_selected > a {
+  color: #b9ff3c;
 }
 
 ul#mainmenu ul a,

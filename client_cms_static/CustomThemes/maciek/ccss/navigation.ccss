@@ -18,7 +18,6 @@ div#vcms_navigation_container:
         margin: 0;
         background: url(../images/side_navigation/black_stripe.jpg) bottom repeat-x;
     
-    
     dl:
         padding: 0;
         margin: 0;
@@ -36,11 +35,15 @@ div#vcms_navigation_container:
 
         a:
             background-image: url(../images/link/arrow_light_and_green.png);
-            
             background-repeat: no-repeat;
             background-position: 0 '2px';
             display: block;
             padding-left: 1em;
+            
+        &.selected > a:
+            color: #b9ff3c; //light green
+            background-position: 0 '-20px';    
+        
             
         a:hover:
             color: #b9ff3c;
@@ -49,7 +52,7 @@ div#vcms_navigation_container:
         //a:hover, &.selected:
             //background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
             
-    dt:hover:
+    dt:hover, dt.selected:
         background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
        
     dd:
