@@ -113,9 +113,9 @@ class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
     pass
 admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
 
-class WidgetAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Widget, WidgetAdmin)
+#class WidgetAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(Widget, WidgetAdmin)
 
 class TextWidgetAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
