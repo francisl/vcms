@@ -97,9 +97,9 @@ admin.site.register(RelativeContainer, RelativeContainerAdmin)
 
 ## ################
 ## WIDGETS
-class WidgetWrapperAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
+#class WidgetWrapperAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
 
 class GridWidgetWrapperAdmin(admin.ModelAdmin):
     pass
