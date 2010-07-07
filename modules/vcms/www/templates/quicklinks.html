@@ -1,11 +1,7 @@
 {% if quicklinks %}
 <div id="quicklinks">
-    <div>
        {% for link in quicklinks %}
-       <div>
-        <span><a href='{{ link.get_absolute_url }}'>{{ link.name }}</a></span>
-       </div>
+       <a href='{{ link.get_absolute_url }}'><img src="{{ MEDIA_URL }}{{ link.image }}" width="{{ link.width }}px" height="{{ link.height }}px"/></a>
        {% endfor %}
-    </div>
 </div>
 {% endif %}

@@ -49,10 +49,10 @@ body:
     p:
         margin: 0.3em 0;
         padding: 0.1em 0;
-        font-size: 0.9em;
+        font-size: 1em;
         color: #000000;
         a:
-            color: #548c00;
+            color: #9aca3c;
         
     hr:
         height: 1px;
@@ -226,56 +226,23 @@ div#quicklinks:
     width: 30px;
     height: 400px;
     top: 0px;
-    left: $SITE_WIDTH;
+    left: $SITE_WIDTH+1;
     margin: 0;
     margin-top: 0em;
     padding: 0;
-    
-    &>div:
-        position: relative;
-        width: 30px;
-        height: 300px;
-        list-style: none;
-        //display: block;
-        //float: left;
-        margin: 0;
-        margin-left: 0px;
-        padding: 0;
-        //margin-top: 1em;
-        //border: thin solid blue;
+
+    img:
+        margin-top: 6px;
+        // SHADOW
+        -moz-box-shadow: 0px 2px 8px $SHADOW_COLOR2; // orientation x, orientation x, blur, color
+        -webkit-box-shadow: 0px 2px 8px $SHADOW_COLOR2;
+        box-shadow: 0px 2px 8px $SHADOW_COLOR2;
+        // /* For IE 8 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
+        // /* For IE 5.5 - 7 */
+        filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
         
-        div:
-            background-color: #eeeeee;
-            border: 1px solid grey;
-            height: 80px;
-            margin-left: -48px;
-            //<!--[if gte IE 8]>
-            //    <link rel="stylesheet" type="text/css" href="ie8-and-up.css" />
-            //<![endif]-->
-            -webkit-transform: "rotate(90deg)";
-            -moz-transform: "rotate(90deg)";
-            filter: "progid: DXImageTransform.Microsoft.BasicImage(rotation=3)";
-            -ms-filter: "progid: DXImageTransform.Microsoft.BasicImage(rotation=3)";
-            writing-mode: tb-rl;
-            // SHADOW
-            -moz-box-shadow: 0px 2px 8px $SHADOW_COLOR2; // orientation x, orientation x, blur, color
-            -webkit-box-shadow: 0px 2px 8px $SHADOW_COLOR2;
-            box-shadow: 0px 2px 8px $SHADOW_COLOR2;
-            // /* For IE 8 */
-            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
-            // /* For IE 5.5 - 7 */
-            filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='$SHADOW_COLOR2')";
-	        
-    span:
-        //border: thin solid pink;
-        //float: left;
-        display: block;
-        
-        a:
-            display: block;
-            height: 24px;
-            margin-top: 6px;
-            padding-left: 8px;
+
             
 // GALLERY
 div.gallery_nav:
@@ -347,6 +314,15 @@ div#vcms_content_container:
         margin-top: 1.2em;
         margin-left: 1em;
         
+    h6:
+        background-color: #333;
+        width: 92%;
+        font-size: 1.1em;
+        padding: 0.6em 4%;
+        color: #d0cfce;
+        
+    p:
+        margin-top: 0.6em;
 // CONTENT
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div.vcms_content:
@@ -402,14 +378,20 @@ div.vcms_content:
 
 // NAVIGATION
 NAVIGATION_WIDTH = 220px;
-LARGE_NAVIGATION_WIDTH = 274px;
+LARGE_NAVIGATION_WIDTH = 273px;
 NAV_BORDER_STYLE = 1px solid #656565;
 NAV_BG_COLOR = #333333;
 body.large div#vcms_navigation_container:
     width: $LARGE_NAVIGATION_WIDTH;
+    
+    p:
+        font-size: 0.9em;
 
 body.normal div#vcms_navigation_container:
     width: $NAVIGATION_WIDTH;
+    
+    p:
+        font-size: 0.9em;
 
 TEXTCOLOR_ONDARK=#d0cfce;
 TEXTCOLOR_ONLIGHT=#707070;
@@ -511,10 +493,11 @@ div.vcms_container_table:
         td:
             vertical-align: top;
             padding: 1.2em;
-            width: 64%;
+            border-right: thin solid #b7b7b7;
+            
         td.col2:
-            width: 35%;
-
+            width: 265px;
+                
 
 //CONTENT element
 
@@ -609,10 +592,10 @@ p.bottom_link:
         background-repeat: no-repeat;
         //background-color: $NAV_BG_COLOR;
         
-.dark_bg &:
-    a:
-        color: $TEXTCOLOR_ONDARK;
-        //background-image: url(../images/link/arrow_clear.png);
+    .dark_bg &:
+        a:
+            color: $TEXTCOLOR_ONDARK;
+            background-image: url(../images/link/arrow_gray.png);
 
 .clear_bg &:
     a:
@@ -622,4 +605,3 @@ p.bottom_link:
 .error:
     text-transform: uppercase;
     color: #D93315;
-    

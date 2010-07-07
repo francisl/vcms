@@ -11,6 +11,7 @@ from django.contrib.contenttypes import generic
 #from treebeard.ns_tree import NS_Node
 from treebeard.mp_tree import MP_Node
 from vcms.www.managers.menu import CMSMenuManager, MainMenuManager
+from vcms.www.managers import QuickLinksManager
 from vcms.www.models.language import Language
 
 class MainMenu(MP_Node):
@@ -68,3 +69,68 @@ class CMSMenu(models.Model):
         return self.content_object.get_absolute_url()
         
 mptt.register(CMSMenu, order_insertion_by=['menu_name'])
+
+
+class MenuLocalLink(models.Model):
+    """ MenuLocalLink is to link static page dynamicaly into the menu """
+    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
+    local_link = models.CharField(max_length=200, null=True, blank=True,
+                                  help_text="Link on this web site. ex. /www/page/")
+    
+    class Meta:
+        app_label = "www"
+    
+    def __unicode__(self):
+        return self.name
+    
+    def get_name(self):
+        return self.__unicode__()
+        
+    def get_absolute_url(self):
+        return self.local_link
+        
+    def save(self):
+        #self.status = StatusField.PUBLISHED
+        #self.language = Language.objects.get_default()
+        #self.module = "LocalLink"
+        try:
+            if self.local_link[-1:] == '/' and len(self.local_link) > 1:
+                self.local_link = self.local_link[:-1]
+        except:
+             self.local_link = ''
+        #self.slug = self.get_absolute_url()
+        super(MenuLocalLink, self).save()
+
+class QuickLinks(models.Model):
+    """ Like bookmark, enable to put side links to local webpage
+    """
+    name = models.CharField(max_length="40", help_text="Max 40 characters")
+    image = models.ImageField(upload_to='uploadto/quicklinks', width_field='width', height_field='height')
+    width = models.PositiveIntegerField(blank=True)
+    height = models.PositiveIntegerField(blank=True)
+    local_link = models.CharField(max_length=200, help_text="Link on this web site. ex. /www/page/")
+    position = models.IntegerField()
+
+    objects = QuickLinksManager()
+
+    def __unicode__(self):
+        return self.name
+
+    def save(self):
+        try:
+            if self.local_link[-1:] == '/' and len(self.local_link) > 1:
+                self.local_link = self.local_link[:-1]
+        except:
+             self.local_link = ''
+        super(QuickLinks, self).save()
+
+    def get_absolute_url(self):
+        if self.local_link[0] != "/":
+            return self.local_link
+        else:
+            return self.local_link
+
+    class Meta:
+        verbose_name_plural = "Quicklinks"
+        ordering = [ 'position' ]
+        app_label = "www"

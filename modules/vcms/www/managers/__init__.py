@@ -6,4 +6,6 @@
 
 from vcms.www.managers.containers import *
 from vcms.www.managers.page import *
+from vcms.www.managers.menu import *
 from vcms.www.managers.widget import *
+

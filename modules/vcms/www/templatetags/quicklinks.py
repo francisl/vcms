@@ -3,6 +3,7 @@
 # programmer : Francis Lavoie
 from django import template
 from vcms.www.models import QuickLinks
+from django.conf import settings
 
 register = template.Library()
 
@@ -12,6 +13,7 @@ register = template.Library()
 def show_quicklinks():
     """ return all the quicklinks
     """
+    MEDIA_URL = settings.MEDIA_URL
     quicklinks = QuickLinks.objects.get_quicklinks() 
     return locals()
 
