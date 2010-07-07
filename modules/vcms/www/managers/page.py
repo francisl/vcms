@@ -184,7 +184,3 @@ class LanguageManager(models.Manager):
         
     def get_available_language(self):
         return [(l.language, l.language_code) for l in self.all()]
-
-class QuickLinksManager(models.Manager):
-    def get_quicklinks(self):
-        return self.all()
