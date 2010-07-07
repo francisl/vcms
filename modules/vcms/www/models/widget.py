@@ -7,7 +7,6 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
-from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
 #from vcms.www.managers.widget import ContentManager
@@ -89,8 +88,9 @@ class Widget(models.Model):
         raise NotImplementedError()
 
 
-# -- CONTENT
-# ----------
+# -----------------
+# CONTENT
+# -----------------
 class TextWidget(Widget):
     #CONTENT
     excerpt = models.TextField(verbose_name="Preview")
@@ -134,7 +134,45 @@ class TextWidget(Widget):
     def get_page_where_available(self):
         thiswidget = RelativeWidgetWrapper.objects.get(widget_id=self.id)
         return thiswidget.container.page.get_absolute_url()
-    
+
+
+class PageLinksWidget(Widget):
+    title = models.CharField(max_length=60)
+    note = models.TextField()
+
+    class Meta:
+        verbose_name= "Widget - Page links"
+        verbose_name_plural = "Widget - Page links"
+        ordering = ['title']
+        app_label = 'www'
+
+    def render(self):
+        content = { 'title': self.title
+                   ,'links': self.links
+                   ,'note': self.note
+                   }
+        return render_to_string("widget/pagelinks.html", content)
+
+    def __unicode__(self):
+        return self.title
+
+class PageLinksWidgetLink(models.Model):
+    link = models.URLField()
+    text = models.TextField()
+    pagelink = models.ForeignKey(PageLinksWidget, related_name="links")
+
+    class Meta:
+        verbose_name= "Widget - Page links"
+        verbose_name_plural = "Widget - Page links"
+        ordering = ['link']
+        app_label = 'www'
+
+    def __unicode__(self):
+        return "%s - %s" % (self.text, self.link)
+
+# -----------------
+# CONTENT
+# -----------------
 from haystack.indexes import *
 from haystack import site
 
