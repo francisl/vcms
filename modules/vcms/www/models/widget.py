@@ -148,7 +148,7 @@ class PageLinksWidget(Widget):
 
     def render(self):
         content = { 'title': self.title
-                   ,'links': self.links
+                   ,'links': self.links.all()
                    ,'note': self.note
                    }
         return render_to_string("widget/pagelinks.html", content)
@@ -162,8 +162,8 @@ class PageLinksWidgetLink(models.Model):
     pagelink = models.ForeignKey(PageLinksWidget, related_name="links")
 
     class Meta:
-        verbose_name= "Widget - Page links"
-        verbose_name_plural = "Widget - Page links"
+        verbose_name= "Widget - Page links' link"
+        verbose_name_plural = "Widget - Page links' links"
         ordering = ['link']
         app_label = 'www'
 
