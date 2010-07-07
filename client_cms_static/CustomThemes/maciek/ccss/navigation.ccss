@@ -39,6 +39,7 @@ div#vcms_navigation_container:
             background-position: 0 '2px';
             display: block;
             padding-left: 1em;
+            color: #d0cfce;
             
         &.selected > a:
             color: #b9ff3c; //light green

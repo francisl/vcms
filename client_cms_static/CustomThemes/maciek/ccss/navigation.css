@@ -41,6 +41,7 @@ div#vcms_navigation_container dt a {
   background-position: 0 2px;
   display: block;
   padding-left: 1em;
+  color: #d0cfce;
 }
 
 div#vcms_navigation_container dt.selected > a {
