@@ -20,14 +20,12 @@ from config.email import EMAILS
 from captcha.fields import CaptchaField
 
 class ContactForm(forms.Form):
-        cie_name = forms.CharField(required=True)
-        firstname = forms.CharField(required=True)
-        lastname = forms.CharField(required=True)
-        phone_number = forms.CharField()
-        email = forms.EmailField(required=True)
-        email2 = forms.EmailField(required=True)
-        message = forms.CharField(widget=forms.Textarea, required=True)
-        if EMAILS["CONTACT"]["CAPTCHA"] : captcha = CaptchaField()
+    firstname = forms.CharField(required=True)
+    lastname = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    cie_name = forms.CharField(required=False)
+    message = forms.CharField(widget=forms.Textarea, required=True)
+    if EMAILS["CONTACT"]["CAPTCHA"] : captcha = CaptchaField()
 
 
 def Contact(request, page=None, context={}):
@@ -42,9 +40,8 @@ def Contact(request, page=None, context={}):
         # Post means it has been sent by the submit buttom, some should have been completed
         form = ContactForm(request.POST)
         
-        if form.is_valid() and form["email"].data == form["email2"].data:
-            # valid and both email are equal
-            #Email to simthetiq
+        if form.is_valid():
+        #Email to simthetiq
             try:
                 subject = 'A message has been send through the contact form'
                 email_from = EMAILS["CONTACT"]["FROM"]
@@ -67,18 +64,13 @@ def Contact(request, page=None, context={}):
             except:
                 pass
                 completed = False
-            
+
             # return render_to_response('contact.html', { "menuselected":"menu_contact", "form": contactform, "successful": False, "emailerror": True, } )
             context.update(locals())
             return render_to_response('confirmation.html', 
                                       context,
                                       context_instance=RequestContext(request))
-        
-        elif form["email"].data != form["email2"].data: 
-            form.errors["email"] = ["Email don't match"]
-            form.errors["email2"] = ["Email don't match"]
-    
-    
+                
     #contents = Content.objects.get_contents_for_page(context["page_info"]['page'])
     #print("content for contant page %s : %s" % (context["page_info"]['page'], contents))
             
