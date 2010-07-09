@@ -97,9 +97,9 @@ admin.site.register(RelativeContainer, RelativeContainerAdmin)
 
 ## ################
 ## WIDGETS
-class WidgetWrapperAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
+#class WidgetWrapperAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
 
 class GridWidgetWrapperAdmin(admin.ModelAdmin):
     pass
@@ -113,14 +113,22 @@ class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
     pass
 admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
 
-class WidgetAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Widget, WidgetAdmin)
+#class WidgetAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(Widget, WidgetAdmin)
 
 class TextWidgetAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 admin.site.register(TextWidget, TextWidgetAdmin)
 
+class PageLinksWidgetLinkInline(admin.StackedInline):
+    model = PageLinksWidgetLink
+    extra = 1
+
+class PageLinksWidgetAdmin(admin.ModelAdmin):
+    list_display = ('name', 'id')
+    inlines = [PageLinksWidgetLinkInline]
+admin.site.register(PageLinksWidget, PageLinksWidgetAdmin)
 
 
 """
