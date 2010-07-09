@@ -25,12 +25,12 @@ if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
 else:
-    from config.email import *
+    from config_sqlite.email import *
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
 
 # ## DATABASE
-from config.database import *
+from config_sqlite.database import *
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -160,7 +160,16 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vimba_cms_simthetiq.apps.order'
                   ,'vimba_cms_simthetiq.apps.products'
                   ,'vimba_cms_simthetiq.apps.importer'
-                  #,'south'
+                  ,'south'
+                  #SATCHMO
+                  ,'satchmo_store.contact'
+                  ,'product'
+                  
+                  ,'payment'
+                  ,'payment.modules.dummy'
+                  ,'payment.modules.giftcertificate'
+                  ,'satchmo_utils'
+                  ,'app_plugins'
                   )
 
 # ## ###
@@ -201,18 +210,18 @@ COMPILER_FORMATS = {
 # ## LOAD LOCAL SETTING
 # ## DEBUG
 if DEBUG:
-    from config.debug import *
+    from config_sqlite.debug import *
     if DEBUG_INSTALLED_APPS: 
         INSTALLED_APPS += DEBUG_INSTALLED_APPS
         MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 
 # ## SEARCH ENGINE
-from config.search_engine import *
+from config_sqlite.search_engine import *
 if SEARCH_ENGINE:
     INSTALLED_APPS += (SEARCH_ENGINE,)
 
 # ## SATCHMO
-#from config.satchmo import *
+#from config_sqlite.satchmo import *
 
 # Import applicaton-specific settings
 def get_all_installed_apps(apps_base_name, installed_apps, module_name, modules_set=set()):
@@ -258,7 +267,7 @@ for app in INSTALLED_APPS:
             pass
 
 # Load the local Satchmo settings
-from config.satchmo_local import *
+from config_sqlite.satchmo_local import *
 
 if DEBUG:
     import socket
