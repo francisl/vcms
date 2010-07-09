@@ -124,7 +124,7 @@ body.normal #vcms_header_logo {
 #vcms_header_logo {
   width: 346px;
   height: 52px;
-  margin-left: 2em;
+  margin-left: 9px;
 }
 
 div#banner {
@@ -193,6 +193,8 @@ div#banner .s3sliderImage span {
   margin: auto;
   padding: 10px 0;
   text-align: center;
+  font-size: 0.9em;
+  color: #888888;
 }
 
 #footing .spacer {
@@ -649,6 +651,7 @@ div.small_media_preview div.thumbnail img {
 p.bottom_link {
   text-align: right;
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 p.bottom_link a {
@@ -671,6 +674,7 @@ p.bottom_link a {
 }
 
 .error {
+  font-size: 0.8em;
   text-transform: uppercase;
   color: #d93315;
 }

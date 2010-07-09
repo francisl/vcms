@@ -212,6 +212,9 @@ def robots(request):
     response = HttpResponse("User-agent: * \nDisallow: /", mimetype="text/plain")
     return response
 
+
+from django.contrib.admin.views.decorators import staff_member_required
+@staff_member_required
 def testCMSMenuForm(request, menuid):
     from django.http import HttpResponseRedirect
     from vcms.www.models.menu import CMSMenu

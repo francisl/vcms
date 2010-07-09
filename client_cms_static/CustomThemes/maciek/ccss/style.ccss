@@ -113,7 +113,7 @@ body.normal #vcms_header_logo:
 #vcms_header_logo:
     width: 346px; 
     height: $HEADING_HEIGHT;
-    margin-left: 2em;
+    margin-left: 9px;
            
 
 // BANNER
@@ -176,7 +176,7 @@ FOOTING_HEIGHT = 37px
     height: $FOOTING_HEIGHT;
     background-color: #333; 
     color: #525252;
-    clear: both; 
+    clear: both;
         
     .footing_content:
         width: $FOOTING_WIDTH;
@@ -184,6 +184,8 @@ FOOTING_HEIGHT = 37px
         margin : auto;
         padding:  10px 0;
         text-align: center;
+        font-size: 0.9em;
+        color: #888;
 
     .spacer:
         margin: auto 1em;
@@ -581,6 +583,10 @@ div.small_media_preview:
 p.bottom_link:
     text-align: right;
     text-transform: uppercase;
+    margin-bottom: 10px;
+    //right: 16px;
+    //bottom: 20px;
+    //position: absolute;
 
     a:
         //display: block;
@@ -603,5 +609,6 @@ p.bottom_link:
         background-image: url(../images/link/arrow_dark.png);
 
 .error:
+    font-size: 0.8em;
     text-transform: uppercase;
     color: #D93315;

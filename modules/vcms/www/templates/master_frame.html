@@ -21,18 +21,17 @@
     <link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
     
     {% compress css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/style.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/store.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/search.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/forms.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/style.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/store.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/search.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/forms.ccss" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
     {% block stylesheetlink %}{% endblock stylesheetlink %}
     <style type="text/css" media="all">
        {% block stylesheet %}{% endblock stylesheet %}
@@ -98,6 +97,7 @@
         <!-- =========footer=========== -->
         <div id="footing" >
             <div class="footing_content">
+            Simthetiq &copy; 2010 |<span style="color: #aaa;"> Privacy Policy </span>
             {% block vcms_footer %}
             {% endblock vcms_footer %}
             </div>

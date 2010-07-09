@@ -5,8 +5,8 @@ MAIN_MENU_HEIGHT = 52px;
 MAIN_MENU_HEIGHT_LARGE = 96px;
 
 SUBMENU_BORDER = 1px solid #7b7b7a;
-MAIN_MENU_FONT_SIZE = 1em;
-SUB_MENU_FONT_SIZE = 0.9em;
+MAIN_MENU_FONT_SIZE = 0.9em;
+SUB_MENU_FONT_SIZE = 1.1em;
 
 div#mainnav:
     .normal &:  
@@ -50,6 +50,7 @@ ul#mainmenu, ul.dropdown:
         background-position: 0px "0px";
         background-repeat: no-repeat;
         display: block;
+        font-size: $MAIN_MENU_FONT_SIZE;
         
         & > a:
             color: #c2c2c2;
