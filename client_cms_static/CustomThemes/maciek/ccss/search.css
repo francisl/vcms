@@ -17,7 +17,7 @@ div#search_form input#search_text_input {
   width: 68%;
   margin: 0;
   margin-top: 0px;
-  padding: 0 0.6em;
+  padding: 0 0.8em;
   height: 24px;
   color: gray;
   float: left;
@@ -87,7 +87,7 @@ div.detailed_search_form input#search_text_input {
 div.detailed_search_form div.search_scope {
   text-align: left;
   margin: 0;
-  padding: 0 0.4em 0 0.6em;
+  padding: 0 0.2em 0 0.3em;
 }
 
 div.detailed_search_form div.search_scope input,
@@ -99,10 +99,10 @@ div.detailed_search_form div.search_scope label {
 }
 
 div.detailed_search_form div.search_scope label {
-  padding: 0.4em;
+  padding: 0.1em;
 }
 
 div.detailed_search_form div.search_scope input {
-  width: 6%;
+  width: 8%;
   border: none;
 }

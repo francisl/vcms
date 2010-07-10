@@ -6,7 +6,7 @@ body:
     padding: 0;
     background-color: #888;
     font-size: 10pt;
-    font-family: Arial, futura, sans-serif;
+    font-family: Verdana, Arial, futura, sans-serif;
     color: #707070; 
     
     h1,h2,h3,h4,h5,h6:
