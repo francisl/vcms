@@ -58,6 +58,7 @@ class RelativeWidgetWrapper(WidgetWrapper):
         app_label = 'www'
         verbose_name = "Widget Wrapper - Relative"
         verbose_name_plural = "Widget Wrapper - Relative"
+        ordering = ['position']
 
 
 # -----------------
