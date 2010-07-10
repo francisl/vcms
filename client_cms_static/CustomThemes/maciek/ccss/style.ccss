@@ -322,7 +322,7 @@ div#vcms_content_container:
     h6:
         background-color: #333;
         width: 92%;
-        font-size: 1.1em;
+        font-size: 1.2em;
         padding: 0.6em 4%;
         color: #d0cfce;
         
