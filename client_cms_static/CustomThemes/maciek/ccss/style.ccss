@@ -222,7 +222,7 @@ input.id_captcha_1:
     heigth: 1em
 
 // QUICKLINKS
-SHADOW_COLOR2 = #666666;
+SHADOW_COLOR2 = #111;
 div#quicklinks:
     position: absolute;
     width: 30px;
@@ -308,8 +308,9 @@ div#vcms_content_container:
     margin-top: 0px;
     margin-bottom: 0px;
     height: 100%;
-    background-color: #fff;
+    background-color: ;
     float: right;
+    background: url(../images/navigation/side_shadow.jpg) 0px 0px repeat-y #fff;
     
     h5:
         line-height: 1.4em;
@@ -413,7 +414,7 @@ div#vcms_navigation_container, div.vcms_navigation_container:
         background-color: #dadada;
         
     h1,h2,h3,h4,h5,h6,span,p:
-        margin: 1em;
+        margin: 1.1em 1.5em;
         color: $TEXTCOLOR_ONDARK;
         
     h6:
@@ -445,7 +446,7 @@ div.vcms_container_grid:
         position: relative;
         float: left;
         
-        
+
 div#vcms_container_header_content:
     position: relative;
     //height: 112px;
@@ -474,7 +475,7 @@ div.vcms_column_container:
         
         td:
             padding: 0.8em;
-            width: 33%;
+            width: 42%;
         
         td.col2:
             background-image: url(../images/containers/column/separator.jpg);
@@ -489,8 +490,8 @@ div.vcms_container_relative:
         margin-top: 1em;
             
 div.vcms_container_table:
-    background-color: #ffffff;
-        
+    background: url(../images/navigation/side_shadow.jpg) 0px 0px repeat-y #fff;
+    
     table:
         td:
             vertical-align: top;
@@ -498,7 +499,8 @@ div.vcms_container_table:
             border-right: thin solid #b7b7b7;
             
         td.col2:
-            width: 265px;
+            width: 245px;
+            border-right: none;
                 
 
 //CONTENT element
@@ -584,6 +586,7 @@ p.bottom_link:
     text-align: right;
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-weight: bold;
     //right: 16px;
     //bottom: 20px;
     //position: absolute;

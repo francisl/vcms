@@ -250,9 +250,9 @@ div#quicklinks {
 
 div#quicklinks img {
   margin-top: 6px;
-  -moz-box-shadow: 0px 2px 8px #666666;
-  -webkit-box-shadow: 0px 2px 8px #666666;
-  box-shadow: 0px 2px 8px #666666;
+  -moz-box-shadow: 0px 2px 8px #111111;
+  -webkit-box-shadow: 0px 2px 8px #111111;
+  box-shadow: 0px 2px 8px #111111;
   -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
   filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
 }
@@ -327,8 +327,9 @@ div#vcms_content_container {
   margin-top: 0px;
   margin-bottom: 0px;
   height: 100%;
-  background-color: #ffffff;
+  background-color: None;
   float: right;
+  background: url(../images/navigation/side_shadow.jpg) 0px 0px repeat-y #ffffff;
 }
 
 div#vcms_content_container h5 {
@@ -458,7 +459,7 @@ div#vcms_navigation_container span,
 div.vcms_navigation_container span,
 div#vcms_navigation_container p,
 div.vcms_navigation_container p {
-  margin: 1em;
+  margin: 1.1em 1.5em;
   color: #d0cfce;
 }
 
@@ -505,9 +506,9 @@ div#vcms_container_header_content {
   font-size: 0.8em;
   z-index: 10;
   overflow: hidden;
-  -moz-box-shadow: 0px 2px 8px #666666;
-  -webkit-box-shadow: 0px 2px 8px #666666;
-  box-shadow: 0px 2px 8px #666666;
+  -moz-box-shadow: 0px 2px 8px #111111;
+  -webkit-box-shadow: 0px 2px 8px #111111;
+  box-shadow: 0px 2px 8px #111111;
   -ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
   filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=\'$SHADOW_COLOR2\')';
 }
@@ -521,7 +522,7 @@ div.vcms_column_container {
 
 div.vcms_column_container table td {
   padding: 0.8em;
-  width: 33%;
+  width: 42%;
 }
 
 div.vcms_column_container table td.col2 {
@@ -540,7 +541,7 @@ div.vcms_container_relative p {
 }
 
 div.vcms_container_table {
-  background-color: #ffffff;
+  background: url(../images/navigation/side_shadow.jpg) 0px 0px repeat-y #ffffff;
 }
 
 div.vcms_container_table table td {
@@ -550,7 +551,8 @@ div.vcms_container_table table td {
 }
 
 div.vcms_container_table table td.col2 {
-  width: 265px;
+  width: 245px;
+  border-right: none;
 }
 
 div.content_title {
@@ -652,6 +654,7 @@ p.bottom_link {
   text-align: right;
   text-transform: uppercase;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 p.bottom_link a {

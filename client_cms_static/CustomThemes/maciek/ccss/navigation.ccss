@@ -2,7 +2,7 @@
 NAV_BORDER_STYLE = 1px solid #656565;
 div#vcms_navigation_container:
     z-index: 15;
-    padding: 0; 
+    padding: 0;
     
     h1.navigation_title:
         color: #b9ff3c;
