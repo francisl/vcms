@@ -4,7 +4,8 @@ body {
   padding: 0;
   background-color: #888888;
   font-size: 10pt;
-  font-family: Verdana, Arial, futura, sans-serif;
+  font-family: Arial, futura, sans-serif;
+  line-height: 1.3em;
   color: #707070;
 }
 
@@ -62,9 +63,10 @@ body a img {
 }
 
 body p {
+  font-family: Verdana, Arial, futura, sans-serif;
   margin: 0.3em 0;
   padding: 0.1em 0;
-  font-size: 1em;
+  font-size: 0.85em;
   color: #000000;
 }
 
@@ -410,11 +412,11 @@ div.vcms_content img {
 }
 
 body.large div#vcms_navigation_container {
-  width: 273px;
+  width: 290px;
 }
 
 body.large div#vcms_navigation_container p {
-  font-size: 0.9em;
+  font-size: 0 .em;
 }
 
 body.normal div#vcms_navigation_container {
@@ -471,7 +473,7 @@ div.vcms_navigation_container h6 {
 }
 
 body.large div#vcms_content_container {
-  width: 726px;
+  width: 709px;
 }
 
 body.normal div#vcms_content_container {
@@ -551,7 +553,7 @@ div.vcms_container_table table td {
 }
 
 div.vcms_container_table table td.col2 {
-  width: 245px;
+  width: 235px;
   border-right: none;
 }
 

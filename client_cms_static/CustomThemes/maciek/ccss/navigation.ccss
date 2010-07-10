@@ -36,19 +36,19 @@ div#vcms_navigation_container:
         a:
             background-image: url(../images/link/arrow_light_and_green.png);
             background-repeat: no-repeat;
-            background-position: 0 '2px';
+            background-position: 0 '4px';
             display: block;
             padding-left: 1em;
             color: #d0cfce;
             
         &.selected > a:
             color: #b9ff3c; //light green
-            background-position: 0 '-20px';    
+            background-position: 0 '-18px';    
         
             
         a:hover:
             color: #b9ff3c;
-            background-position: 0 '-20px';
+            background-position: 0 '-18px';
             
         //a:hover, &.selected:
             //background: url(../images/side_navigation/selected_bd.jpg) top right no-repeat #141c06;
