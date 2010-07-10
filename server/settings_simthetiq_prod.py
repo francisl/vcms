@@ -25,12 +25,12 @@ if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
 else:
-    from config_simthetiq_mysql.email import *
+    from config_simthetiq_prod.email import *
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
 
 # ## DATABASE
-from config_simthetiq_mysql.database import *
+from config_simthetiq_prod.database import *
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -201,18 +201,18 @@ COMPILER_FORMATS = {
 # ## LOAD LOCAL SETTING
 # ## DEBUG
 if DEBUG:
-    from config_simthetiq_mysql.debug import *
+    from config_simthetiq_prod.debug import *
     if DEBUG_INSTALLED_APPS: 
         INSTALLED_APPS += DEBUG_INSTALLED_APPS
         MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 
 # ## SEARCH ENGINE
-from config_simthetiq_mysql.search_engine import *
+from config_simthetiq_prod.search_engine import *
 if SEARCH_ENGINE:
     INSTALLED_APPS += (SEARCH_ENGINE,)
 
 # ## SATCHMO
-#from config_simthetiq_mysql.satchmo import *
+#from config_simthetiq_prod.satchmo import *
 
 # Import applicaton-specific settings
 def get_all_installed_apps(apps_base_name, installed_apps, module_name, modules_set=set()):
@@ -258,7 +258,7 @@ for app in INSTALLED_APPS:
             pass
 
 # Load the local Satchmo settings
-from config_simthetiq_mysql.satchmo_local import *
+from config_simthetiq_prod.satchmo_local import *
 
 if DEBUG:
     import socket
