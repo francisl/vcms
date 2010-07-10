@@ -597,16 +597,13 @@ p.bottom_link:
         background-position: 94% 50%;
         background-repeat: no-repeat;
         //background-color: $NAV_BG_COLOR;
+        color: $TEXTCOLOR_ONLIGHT;
+        background-image: url(../images/link/arrow_dark.png);
         
     .dark_bg &:
         a:
             color: $TEXTCOLOR_ONDARK;
             background-image: url(../images/link/arrow_gray.png);
-
-.clear_bg &:
-    a:
-        color: $TEXTCOLOR_ONLIGHT;
-        background-image: url(../images/link/arrow_dark.png);
 
 .error:
     font-size: 0.8em;

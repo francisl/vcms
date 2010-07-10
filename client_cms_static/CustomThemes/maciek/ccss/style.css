@@ -661,16 +661,13 @@ p.bottom_link a {
   margin-top: 1em;
   background-position: 94% 50%;
   background-repeat: no-repeat;
+  color: #707070;
+  background-image: url(../images/link/arrow_dark.png);
 }
 
 .dark_bg p.bottom_link a {
   color: #d0cfce;
   background-image: url(../images/link/arrow_gray.png);
-}
-
-.clear_bg * a {
-  color: #707070;
-  background-image: url(../images/link/arrow_dark.png);
 }
 
 .error {
