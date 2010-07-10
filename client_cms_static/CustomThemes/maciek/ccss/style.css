@@ -412,7 +412,7 @@ div.vcms_content img {
 }
 
 body.large div#vcms_navigation_container {
-  width: 290px;
+  width: 288px;
 }
 
 body.large div#vcms_navigation_container p {
@@ -461,7 +461,7 @@ div#vcms_navigation_container span,
 div.vcms_navigation_container span,
 div#vcms_navigation_container p,
 div.vcms_navigation_container p {
-  margin: 1.1em 1.5em;
+  margin: 1.1em 1.4em;
   color: #d0cfce;
 }
 
@@ -473,7 +473,7 @@ div.vcms_navigation_container h6 {
 }
 
 body.large div#vcms_content_container {
-  width: 709px;
+  width: 711px;
 }
 
 body.normal div#vcms_content_container {

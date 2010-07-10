@@ -383,7 +383,7 @@ div.vcms_content:
 
 // NAVIGATION
 NAVIGATION_WIDTH = 220px;
-LARGE_NAVIGATION_WIDTH = 290px;
+LARGE_NAVIGATION_WIDTH = 288px;
 NAV_BORDER_STYLE = 1px solid #656565;
 NAV_BG_COLOR = #333333;
 body.large div#vcms_navigation_container:
@@ -416,7 +416,7 @@ div#vcms_navigation_container, div.vcms_navigation_container:
         background-color: #dadada;
         
     h1,h2,h3,h4,h5,h6,span,p:
-        margin: 1.1em 1.5em;
+        margin: 1.1em 1.4em;
         color: $TEXTCOLOR_ONDARK;
         
     h6:
