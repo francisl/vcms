@@ -59,7 +59,8 @@ input, textarea:
         //margin-right: 1.;
     
     div.button:
-        margin-right: 22px;
+        margin-top: 18px;
+        margin-right: 24px;
     
     .col_1:
         padding-right: 1em;
