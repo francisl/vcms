@@ -41,7 +41,7 @@ select {
 }
 
 textarea {
-  width: 93%;
+  width: 100%;
 }
 
 input,
@@ -50,17 +50,21 @@ textarea {
 }
 
 .normal_form {
-  width: 72%;
+  width: 550px;
   float: left;
 }
 
 .normal_form form > div {
   float: left;
-  width: 46%;
+  width: 254px;
   margin: 0;
-  margin-right: 1.1em;
+  margin-right: 20px;
   margin-top: 1em;
   padding: 0;
+}
+
+.normal_form form > div.fullsize {
+  width: 520px;
 }
 
 .normal_form .button {
@@ -70,7 +74,7 @@ textarea {
 }
 
 .normal_form div.button {
-  min-width: 20%;
+  margin-right: 22px;
 }
 
 .normal_form .col_1 {
