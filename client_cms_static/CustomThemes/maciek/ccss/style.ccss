@@ -331,7 +331,7 @@ body.large div#vcms_content_container h6:
     
 body.normal div#vcms_content_container h6:
     background-color: #484848;
-    width: 92%;
+    width: 100%;
     font-size: 1.2em;
     padding: 0.3em 3%;
     color: #ebebeb;
@@ -558,12 +558,12 @@ div.small_media_preview:
             float: left;
 
 .content_def_link:
-    width: 226px;
+    width: 200px;
     dt:
         margin-bottom: 0.6em;
         font-style:italic;
     dt,a,p:
-        font-size: 0.9em;
+        font-size: 0.85em;
         color: #929292;
     
     dd:

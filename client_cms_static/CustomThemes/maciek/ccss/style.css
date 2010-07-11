@@ -354,7 +354,7 @@ body.large div#vcms_content_container h6 {
 
 body.normal div#vcms_content_container h6 {
   background-color: #484848;
-  width: 92%;
+  width: 100%;
   font-size: 1.2em;
   padding: 0.3em 3%;
   color: #ebebeb;
@@ -615,7 +615,7 @@ div.small_media_preview div.thumbnail img {
 }
 
 .content_def_link {
-  width: 226px;
+  width: 200px;
 }
 
 .content_def_link dt {
@@ -626,7 +626,7 @@ div.small_media_preview div.thumbnail img {
 .content_def_link dt,
 .content_def_link a,
 .content_def_link p {
-  font-size: 0.9em;
+  font-size: 0.85em;
   color: #929292;
 }
 
