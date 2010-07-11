@@ -340,16 +340,24 @@ div#vcms_content_container h5 {
   margin-left: 1em;
 }
 
-div#vcms_content_container h6 {
+div#vcms_content_container p {
+  margin-top: 0.6em;
+}
+
+body.large div#vcms_content_container h6 {
   background-color: #333333;
   width: 92%;
   font-size: 1.2em;
-  padding: 0.6em 4%;
+  padding: 0.4em 3%;
   color: #d0cfce;
 }
 
-div#vcms_content_container p {
-  margin-top: 0.6em;
+body.large div#vcms_content_container h6 .normal h6 {
+  background-color: #484848;
+  width: 92%;
+  font-size: 1.2em;
+  padding: 0.3em 3%;
+  color: #d0cfce;
 }
 
 div.vcms_content {

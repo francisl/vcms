@@ -5,8 +5,8 @@ MAIN_MENU_HEIGHT = 52px;
 MAIN_MENU_HEIGHT_LARGE = 96px;
 
 SUBMENU_BORDER = 1px solid #7b7b7a;
-MAIN_MENU_FONT_SIZE = 0.9em;
-SUB_MENU_FONT_SIZE = 1em;
+MAIN_MENU_FONT_SIZE = 11pt;
+SUB_MENU_FONT_SIZE = 1.1em;
 
 div#mainnav:
     .normal &:  

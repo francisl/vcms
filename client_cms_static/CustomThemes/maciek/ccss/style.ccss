@@ -318,16 +318,26 @@ div#vcms_content_container:
         line-height: 1.4em;
         margin-top: 1.2em;
         margin-left: 1em;
-        
-    h6:
-        background-color: #333;
-        width: 92%;
-        font-size: 1.2em;
-        padding: 0.6em 4%;
-        color: #d0cfce;
-        
+
     p:
         margin-top: 0.6em;
+        
+body.large div#vcms_content_container h6:
+    background-color: #333;
+    width: 92%;
+    font-size: 1.2em;
+    padding: 0.4em 3%;
+    color: #d0cfce;
+    
+body.normal div#vcms_content_container h6:
+    background-color: #484848;
+    width: 92%;
+    font-size: 1.2em;
+    padding: 0.3em 3%;
+    color: #ebebeb;
+    
+        
+
 // CONTENT
 BOX_CONTENT_BORDER = 1px solid #b1b1b1;
 div.vcms_content:

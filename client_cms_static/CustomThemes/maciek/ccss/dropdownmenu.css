@@ -50,7 +50,7 @@ ul.dropdown > li {
   background-position: 0px 0px;
   background-repeat: no-repeat;
   display: block;
-  font-size: 0.9em;
+  font-size: 11pt;
 }
 
 ul#mainmenu > li > a,
@@ -156,7 +156,7 @@ ul.dropdown ul {
   border-right: 1px solid #7b7b7a;
   border-bottom: 1px solid #7b7b7a;
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 11pt;
   filter: alpha opacity=70;
   left: 0px;
   padding: 0.4em 0;
@@ -174,7 +174,7 @@ ul.dropdown ul {
 
 ul#mainmenu ul li,
 ul.dropdown ul li {
-  font-size: 1em;
+  font-size: 1.1em;
   float: none;
   color: #ffffff;
   filter: none;
