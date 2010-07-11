@@ -8,7 +8,7 @@ div#vcms_navigation_container:
         color: #b9ff3c;
         font-weight: normal;
         font-family: arial, sans-serif;
-        font-size: 1em;
+        font-size: 0.9em;
         margin-bottom: 0.2em;
         padding-left: 0.7em;
         padding-top: 0.3em;
@@ -26,7 +26,7 @@ div#vcms_navigation_container:
         background-color: #333333;
         color: #d0cfce;
         display: block;
-        font-size: 0.9em;
+        font-size: 0.8em;
         padding: 0.2em 0.6em 0.2em 1.8em;
         margin: 0;
         text-transform: uppercase;
