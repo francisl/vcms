@@ -9,6 +9,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 
+from positions.fields import PositionField # http://github.com/jpwatts/django-positions
+
 #from vcms.www.managers.widget import ContentManager
 from vcms.www.models.containers import TableContainer, GridContainer, RelativeContainer
 from vcms.www.models.page import BasicPage
@@ -162,6 +164,7 @@ class PageLinksWidgetLink(models.Model):
     link = models.ForeignKey(BasicPage)
     text = models.TextField()
     pagelink = models.ForeignKey(PageLinksWidget, related_name="links")
+    position = PositionField(collection='link')
 
     class Meta:
         verbose_name= "Widget - Page links' link"
