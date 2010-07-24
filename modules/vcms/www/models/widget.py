@@ -152,7 +152,7 @@ class PageLinksWidget(Widget):
 
     def render(self):
         content = { 'title': self.title
-                   ,'links': self.links.all()
+                   ,'links': self.links.all().order_by('position')
                    ,'note': self.note
                    ,"name": self.name
                    ,"width": self.width
