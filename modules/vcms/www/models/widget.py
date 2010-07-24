@@ -162,7 +162,6 @@ class PageLinksWidget(Widget):
 
 class PageLinksWidgetLink(models.Model):
     link = models.ForeignKey(BasicPage)
-    text = models.TextField()
     pagelink = models.ForeignKey(PageLinksWidget, related_name="links")
     position = PositionField(collection='link')
 
