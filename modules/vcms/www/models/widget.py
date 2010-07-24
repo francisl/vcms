@@ -154,6 +154,8 @@ class PageLinksWidget(Widget):
         content = { 'title': self.title
                    ,'links': self.links.all()
                    ,'note': self.note
+                   ,"name": self.name
+                   ,"width": self.width
                    }
         return render_to_string("widget/pagelinks.html", content)
 
