@@ -172,7 +172,7 @@ class PageLinksWidgetLink(models.Model):
         app_label = 'www'
 
     def __unicode__(self):
-        return "%s - %s" % (self.text, self.link)
+        return self.link.name
 
 # -----------------
 # CONTENT
