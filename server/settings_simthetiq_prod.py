@@ -62,7 +62,7 @@ MEDIA_URL = '/static/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/adminmedia/'
+ADMIN_MEDIA_PREFIX = '/adminmedia/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')z=ki#(2ki!o7*@3-+9vrae)tq6^v(8#d)k76eo26%hz6v)nke'
@@ -161,7 +161,6 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vimba_cms_simthetiq.apps.products'
                   ,'vimba_cms_simthetiq.apps.importer'
                   #,'south'
-                  ,'vimba_cms_simthetiq.widget.simthetiq_recommends'
                   )
 
 # ## ###
