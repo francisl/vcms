@@ -141,7 +141,7 @@ class TextWidget(Widget):
         thiswidget = RelativeWidgetWrapper.objects.filter(widget_id=self.id)[0]
         return thiswidget.container.page.get_absolute_url()
 
-
+"""
 class PageLinksWidget(Widget):
     title = models.CharField(max_length=60)
     note = models.TextField()
@@ -179,6 +179,7 @@ class PageLinksWidgetLink(models.Model):
 
     def __unicode__(self):
         return self.link.name
+"""
 
 # -----------------
 # CONTENT

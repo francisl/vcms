@@ -121,15 +121,6 @@ class TextWidgetAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 admin.site.register(TextWidget, TextWidgetAdmin)
 
-class PageLinksWidgetLinkInline(admin.StackedInline):
-    model = PageLinksWidgetLink
-    extra = 1
-
-class PageLinksWidgetAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id')
-    inlines = [PageLinksWidgetLinkInline]
-admin.site.register(PageLinksWidget, PageLinksWidgetAdmin)
-
 
 """
 NEED TO BE REDONE

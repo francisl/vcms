@@ -68,6 +68,8 @@ class CMSMenu(models.Model):
     def get_absolute_url(self):
         return self.content_object.get_absolute_url()
         
+    name = property(get_name)
+    
 mptt.register(CMSMenu, order_insertion_by=['menu_name'])
 
 
