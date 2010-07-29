@@ -1,9 +1,0 @@
-<div class="vcms_pagelinks" name="{{name}}" style="width: {{width}}">
-        <dl class="content_def_link" style="position: absolute; top: 50px; right: 0px;">
-            <dt>{{title}}</dt>
-            {% for link in links %}
-                <dd><a href="{{ link.link.get_absolute_url }}">{{link.link.name}}</a></dd>
-            {% endfor %}
-            <dt>{{note|safe}}</dt>
-        </dl>
-</div>
