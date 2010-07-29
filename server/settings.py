@@ -164,12 +164,12 @@ INSTALLED_APPS = ('django.contrib.sites'
                   #SATCHMO
                   ,'satchmo_store.contact'
                   ,'product'
-                  
                   ,'payment'
                   ,'payment.modules.dummy'
                   ,'payment.modules.giftcertificate'
                   ,'satchmo_utils'
                   ,'app_plugins'
+                  ,'vimba_cms_simthetiq.widget.simthetiq_recommends'
                   )
 
 # ## ###
