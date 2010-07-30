@@ -5,8 +5,8 @@ MAIN_MENU_HEIGHT = 52px;
 MAIN_MENU_HEIGHT_LARGE = 96px;
 
 SUBMENU_BORDER = 1px solid #7b7b7a;
-MAIN_MENU_FONT_SIZE = 0.9em;
-SUB_MENU_FONT_SIZE = 1.1em;
+MAIN_MENU_FONT_SIZE = 9pt;
+SUB_MENU_FONT_SIZE = 8pt;
 
 div#mainnav:
     .normal &:  
@@ -112,7 +112,8 @@ ul#mainmenu, ul.dropdown:
         border-right: $SUBMENU_BORDER;
         border-bottom: $SUBMENU_BORDER;
         color: #fff;
-        font-size: $MAIN_MENU_FONT_SIZE;
+        font-family: Verdana;
+        font-size: $SUB_MENU_FONT_SIZE;
         filter: alpha(opacity=70);
         left: 0px;// align menu to main
         padding: 0.4em 0;
@@ -124,7 +125,7 @@ ul#mainmenu, ul.dropdown:
         //text-align: right;
 
         visibility: hidden;
-        width: 200px;
+        width: 150px;
         z-index: 40;
         
         -moz-opacity: .7;

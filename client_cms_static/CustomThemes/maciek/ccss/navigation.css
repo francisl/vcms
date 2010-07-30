@@ -36,7 +36,7 @@ div#vcms_navigation_container dt {
 }
 
 div#vcms_navigation_container dt a {
-  background-image: url(../images/link/arrow_light_and_green.png);
+  background-image: url(../images/navigation/arrow_light_and_green.png);
   background-repeat: no-repeat;
   background-position: 0 4px;
   display: block;
