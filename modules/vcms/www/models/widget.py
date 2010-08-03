@@ -101,7 +101,6 @@ class Widget(models.Model):
         raise NotImplementedError()
 
     def get_width_mesure(self):
-        print self.WIDTH_CHOICES[self.width_mesure][1]
         return self.WIDTH_CHOICES[self.width_mesure][1]
 
 # -----------------
