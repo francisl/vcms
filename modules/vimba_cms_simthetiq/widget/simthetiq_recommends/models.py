@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 
 class PageLinksWidget(Widget):
     title = models.CharField(max_length=60)
-    note = models.TextField()
+    note = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name= "Widget - Simthetiq Recommends"

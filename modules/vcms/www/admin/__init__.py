@@ -91,7 +91,7 @@ admin.site.register(TableContainer, TableContainerAdmin)
 
 class RelativeContainerAdmin(admin.ModelAdmin):
     list_display = ['page', 'name']
-    #filter_horizontal = ('page',)
+    #
 admin.site.register(RelativeContainer, RelativeContainerAdmin)
 
 
@@ -110,7 +110,8 @@ class TableWidgetWrapperAdmin(admin.ModelAdmin):
 admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
 
 class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['widget', 'widget_type']
+    list_filter = ('container',)
 admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
 
 #class WidgetAdmin(admin.ModelAdmin):

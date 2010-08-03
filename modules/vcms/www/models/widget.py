@@ -30,7 +30,7 @@ class WidgetWrapper(models.Model):
         verbose_name_plural = "Widget Wrappers"
 
     def __unicode__(self):
-        return 'Widget - ' + self.widget.name
+        raise NotImplementedError()
 
 
 class TableWidgetWrapper(WidgetWrapper):
@@ -44,6 +44,9 @@ class TableWidgetWrapper(WidgetWrapper):
         app_label = 'www'
         verbose_name = "Widget Wrapper - Table"
         verbose_name_plural = "Widget Wrapper - Table"
+        
+    def __unicode__(self):
+        return 'Widget - ' + self.widget.name
 
 class GridWidgetWrapper(WidgetWrapper):
     container = models.ForeignKey(GridContainer, related_name="widgets")
@@ -54,6 +57,8 @@ class GridWidgetWrapper(WidgetWrapper):
         verbose_name = "Widget Wrapper - Grid"
         verbose_name_plural = "Widget Wrapper - Grid"
 
+    def __unicode__(self):
+        return 'Widget - ' + self.widget.name
 
 class RelativeWidgetWrapper(WidgetWrapper):
     container = models.ForeignKey(RelativeContainer, related_name="widgets")
@@ -64,7 +69,9 @@ class RelativeWidgetWrapper(WidgetWrapper):
         verbose_name = "Widget Wrapper - Relative"
         verbose_name_plural = "Widget Wrapper - Relative"
         ordering = ['position']
-
+    
+    def __unicode__(self):
+        return 'Widget - ' + self.widget.name
 
 # -----------------
 # WIDGETS

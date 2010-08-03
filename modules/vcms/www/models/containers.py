@@ -26,7 +26,7 @@ class BasicContainer(models.Model):
         verbose_name_plural = "Container - Basic"
         
     def __unicode__(self):
-        return self.page.name + " - " + self.name
+        return self.page.name + "("+ str(self.id) + ") - " + self.name
 
 class ContainerDefinition:
     """ Defines the human name associated to a container type. """
