@@ -557,7 +557,7 @@ div.small_media_preview:
             float: left;
 
 .content_def_link:
-    width: 200px;
+    //width: 200px;
     dt:
         margin-bottom: 0.6em;
         font-style:italic;

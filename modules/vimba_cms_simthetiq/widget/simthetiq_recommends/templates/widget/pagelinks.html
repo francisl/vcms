@@ -1,5 +1,5 @@
-<div class="vcms_pagelinks" name="{{name}}" style="width: {{width}}">
-        <dl class="content_def_link" style="position: absolute; top: 50px; right: 0px;">
+<div class="vcms_pagelinks" name="{{name}}" style="width: {{width}}{{ width_mesure }}">
+        <dl class="content_def_link" style="position: absolute; top: 50px; right: 0px;width: {{width}}{{ width_mesure }};">
             <dt>{{title}}</dt>
             {% for link in links %}
                 <dd><a href="{{ link.link.get_absolute_url }}">{% if link.link.parent %}{{ link.link.parent }} / {% endif %}<b>{{link.link.name}}</b></a></dd>

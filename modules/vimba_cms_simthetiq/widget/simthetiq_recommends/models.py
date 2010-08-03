@@ -30,6 +30,7 @@ class PageLinksWidget(Widget):
                    ,'note': self.note
                    ,"name": self.name
                    ,"width": self.width
+                   ,"width_mesure": self.get_width_mesure()
                    }
         return render_to_string("widget/pagelinks.html", content)
 

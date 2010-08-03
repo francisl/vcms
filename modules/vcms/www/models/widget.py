@@ -71,7 +71,7 @@ class RelativeWidgetWrapper(WidgetWrapper):
         ordering = ['position']
     
     def __unicode__(self):
-        return 'Widget - ' + self.widget.name
+        return SELF.CONTAINER.PAGE.NAME + 'Widget - ' + self.widget.name
 
 # -----------------
 # WIDGETS
@@ -100,6 +100,9 @@ class Widget(models.Model):
     def render(self):
         raise NotImplementedError()
 
+    def get_width_mesure(self):
+        print self.WIDTH_CHOICES[self.width_mesure][1]
+        return self.WIDTH_CHOICES[self.width_mesure][1]
 
 # -----------------
 # CONTENT
