@@ -561,7 +561,7 @@ div.small_media_preview:
     dt:
         margin-bottom: 0.6em;
         font-style:italic;
-        font-size: 10pt;
+        font-size: 9.5pt;
         
     dt,a,p:
         color: #929292;
@@ -570,7 +570,7 @@ div.small_media_preview:
         border-left: 1px solid #929292;
         border-top: 1px solid #929292;
         border-bottom: 1px solid #929292;
-        font-size: 9pt;
+        font-size: 8pt;
         text-align: right;
         margin:0;
         background-image: url(../images/simthetiq_recommends/arrow_dark.png);
