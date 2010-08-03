@@ -44,8 +44,8 @@ class PageLink(models.Model):
     objects = PositionManager()
 
     class Meta:
-        verbose_name= "Widget - Simthetiq Recommends"
-        verbose_name_plural = "Widget - Simthetiq Recommends"
+        verbose_name= "Page Link"
+        verbose_name_plural = "Page Link"
         ordering = ['link']
         app_label = 'www'
 
