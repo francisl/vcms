@@ -561,32 +561,33 @@ div.small_media_preview:
     dt:
         margin-bottom: 0.6em;
         font-style:italic;
+        font-size: 10pt;
+        
     dt,a,p:
-        font-size: 0.85em;
         color: #929292;
     
     dd:
         border-left: 1px solid #929292;
         border-top: 1px solid #929292;
         border-bottom: 1px solid #929292;
+        font-size: 9pt;
         text-align: right;
         margin:0;
-        background-image: url(../images/link/arrow_dark.png);
+        background-image: url(../images/simthetiq_recommends/arrow_dark.png);
         background-repeat: no-repeat;
         background-position: 95% 48%;
         margin-top: -1px;
         padding: 0.2em 0;
+        
             
     a:
         display: block;
         padding-right: 24px;
         
     p:
-        font-size: 0.7em;
-        line-height: 0.8em;
-        width: 80%;
-        //font-size: 0.4em;
-        color: gray;
+        font-size: 7.5pt;
+        line-height: 1.4em;
+        width: 83%;
 
 .vcms_notice_relative_container:
     span:

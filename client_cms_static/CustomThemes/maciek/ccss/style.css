@@ -627,12 +627,12 @@ div.small_media_preview div.thumbnail img {
 .content_def_link dt {
   margin-bottom: 0.6em;
   font-style: italic;
+  font-size: 10pt;
 }
 
 .content_def_link dt,
 .content_def_link a,
 .content_def_link p {
-  font-size: 0.85em;
   color: #929292;
 }
 
@@ -640,9 +640,10 @@ div.small_media_preview div.thumbnail img {
   border-left: 1px solid #929292;
   border-top: 1px solid #929292;
   border-bottom: 1px solid #929292;
+  font-size: 9pt;
   text-align: right;
   margin: 0;
-  background-image: url(../images/link/arrow_dark.png);
+  background-image: url(../images/simthetiq_recommends/arrow_dark.png);
   background-repeat: no-repeat;
   background-position: 95% 48%;
   margin-top: -1px;
@@ -655,10 +656,9 @@ div.small_media_preview div.thumbnail img {
 }
 
 .content_def_link p {
-  font-size: 0.7em;
-  line-height: 0.8em;
-  width: 80%;
-  color: gray;
+  font-size: 7.5pt;
+  line-height: 1.4em;
+  width: 83%;
 }
 
 .vcms_notice_relative_container span {
