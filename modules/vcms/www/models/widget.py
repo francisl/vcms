@@ -71,7 +71,7 @@ class RelativeWidgetWrapper(WidgetWrapper):
         ordering = ['position']
     
     def __unicode__(self):
-        return SELF.CONTAINER.PAGE.NAME + 'Widget - ' + self.widget.name
+        return self.container.page.name + 'Widget - ' + self.widget.name
 
 # -----------------
 # WIDGETS
