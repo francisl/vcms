@@ -209,7 +209,10 @@ class SimplePage(BasicPage):
         return my_rel_cont
 
     def get_menu(self):
-        return self.menu.all()[0]
+        try:
+            return self.menu.all()[0]
+        except:
+            return None
         
 # -----
 # OLD

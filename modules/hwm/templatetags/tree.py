@@ -9,9 +9,18 @@ register = template.Library()
 def generate_dl_tree(data, css_id=None, css_class=None):
     """ TODO: COMPLETE generate_dl_tree templatetags
     """
-    root = data.all()[0].get_root()
+    try:
+        root = data.all()[0].get_root()
+    except:
+        root = []
+        
+    if data.all():
+        current_node = data.all()[0]
+    else:
+        current_node = None 
     
-    return {"root": root, "current_menu": data.all()[0], "cssid":css_id, "cssclass": css_class}
+    
+    return {"root": root, "current_menu": current_node, "cssid":css_id, "cssclass": css_class}
 
 @register.inclusion_tag('tree/tree_li.html')
 def generate_li_tree(data, css_id, css_class):

@@ -35,7 +35,7 @@ class MainMenu(MP_Node):
         
 import mptt
 class CMSMenu(models.Model):
-    menu_name = models.CharField(max_length=10, help_text="Maximum 50 characters", blank=True, null=True)
+    menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters", blank=True, null=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu")
     default = models.BooleanField(default=False)
