@@ -147,8 +147,11 @@ class TextWidget(Widget):
         return self.name
 
     def get_page_where_available(self):
-        thiswidget = RelativeWidgetWrapper.objects.filter(widget_id=self.id)[0]
-        return thiswidget.container.page.get_absolute_url()
+        try:
+            thiswidget = RelativeWidgetWrapper.objects.filter(widget_id=self.id)[0]
+            return thiswidget.container.page.get_absolute_url()
+        except:
+            return None
 
 """
 class PageLinksWidget(Widget):
