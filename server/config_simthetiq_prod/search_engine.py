@@ -18,7 +18,7 @@ To rebuild a new search index :
 if SEARCH_ENGINE == "haystack":
     WHOOSH_SEARCH_ENGINE = 'whoosh'
     XAPIAN_SEARCH_ENGINE = 'xapian'
-    HAYSTACK_SEARCH_ENGINE = XAPIAN_SEARCH_ENGINE
+    HAYSTACK_SEARCH_ENGINE = WHOOSH_SEARCH_ENGINE
 
     if HAYSTACK_SEARCH_ENGINE == WHOOSH_SEARCH_ENGINE :
         HAYSTACK_WHOOSH_PATH = os.path.dirname(__file__) + '/../database/whoosh'
