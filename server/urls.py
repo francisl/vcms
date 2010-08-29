@@ -23,13 +23,13 @@ from satchmo_utils import urlhelper
 
 replacement = [ url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'registration_complete')
                ,url(r'^register/(?P<activation_key>\w+)/$', 'vcms.store.views.activate', {}, 'registration_activate')
-               ,url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register')
+               #,url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register')
                #,url(r'^login/$', 'vcms.store.views.emaillogin', {}, 'auth_login')
                ] 
 urlhelper.replace_urlpatterns( urlpatterns, replacement)
 
-if 'register2updates' in settings.INSTALLED_APPS: # register2update
-    urlpatterns += patterns( '', url(r'^register/', include('register2updates.urls')),)
+if 'updates_registration' in settings.INSTALLED_APPS: # register2update
+    urlpatterns += patterns( '', url(r'^register/', include('updates_registration.urls')),)
     
 # __ VIMBA CMS __
 urlpatterns += patterns('',
