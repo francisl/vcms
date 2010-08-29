@@ -1,0 +1,16 @@
+{% extends "master.html" %}
+{% load i18n %}
+{% load search_widget %}
+
+{% block navigation %}
+    {% show_detailed_search_box %}
+    <div class="navigation_title">
+        <dl>
+            <dt class=""><a href="#">{% trans "Register" %}</a></dt>
+        </dl>
+    </div>
+{% endblock %}
+
+{% block vcms_main_content  %}
+    {{ form }}
+{% endblock vcms_main_content  %}

@@ -2,7 +2,7 @@ import unittest
 from django.test.client import Client
 from register2updates.models import Registered2Updates
 
-class register2UpdatesTestCase(unittest.TestCase):
+class UpdatesRegistrationTestCase(unittest.TestCase):
     def setUp(self):
         self.registered_user_email = "test@test.ca"
         self.registered_user = Registered2Updates(email=self.registered_user_email)
@@ -16,10 +16,9 @@ class register2UpdatesTestCase(unittest.TestCase):
         
     def test_if_get_register_validate_non_existing_user(self):
         self.assertFalse(Registered2Updates.objects.is_registered("test2@test.ca"))
+        
 
-    
-
-class Register2UpdatesViewsTestCase(unittest.TestCase):
+class UpdatesRegistrationViewsTestCase(unittest.TestCase):
     def setUp(self):
         self.c = Client()
         

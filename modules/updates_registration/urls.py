@@ -6,6 +6,7 @@
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('register2updates.views'
-    ,(r'^updates/$', 'register_2_updates')
+urlpatterns = patterns('updates_registration.views'
+    ,(r'^updates/$', 'updates_registration')
+    ,(r'^updates/success/$', 'register_success')
 )
