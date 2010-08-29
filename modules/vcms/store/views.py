@@ -25,7 +25,7 @@ from l10n.models import Country
 from vcms.www.registration.models import AdminRegistrationProfile
 from vcms.store.forms import StoreRegistrationForm
 from vcms.www.views.html import _get_page_parameters
-
+from updates_registration.views import UpdatesRegistrationForm, UpdatesRegistrationFormManager 
 
 import logging
 log = logging.getLogger('vcms.store.views')
@@ -172,6 +172,7 @@ def register(request, redirect=None, template='registration/registration_form.ht
     """
         Allows a new user to register an account.
     """
+    print("Request post : %s" % request.POST)
     ret = register_handle_form(request, redirect)
     success = ret[0]
     todo = ret[1]
@@ -197,6 +198,22 @@ def register(request, redirect=None, template='registration/registration_form.ht
             context.update(extra_context)
 
         context.update({"page_info": _get_page_parameters()})
+
+        # register to update
+        if request.method == "POST":
+            form_object = UpdatesRegistrationForm(request.POST)
+            form_updates_registration = UpdatesRegistrationFormManager(form_object, request)
+            form_success = form_updates_registration.validate()
+             
+            if form_success:
+                return form_updates_registration.notify_and_redirect()
+                   
+        else:
+            form_object = UpdatesRegistrationForm()
+            form_updates_registration = UpdatesRegistrationFormManager(form_object, request)
+            
+        context.update({"form_updates_registration": form_updates_registration.render_html()})
+        
 
         return render_to_response(template,
                                     context,

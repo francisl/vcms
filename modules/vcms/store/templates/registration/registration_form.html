@@ -2,10 +2,6 @@
 {% load i18n %}
 {% load search_widget %}
 
-{% block stylesheetlink %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/contact.ccss" type="text/css" charset="utf-8">
-{% endblock stylesheetlink %}
-
 {% block javascript %}
 $('select#id_country').change(function() {
     var country_id =$('select#id_country').val();
@@ -39,9 +35,7 @@ $('select#id_country').change(function() {
 
 {% block vcms_main_content  %}
 <div class="vcms_container_relative">
-
-        
-    <div style="float: right; width: 26%; font-size: 0.9em; margin-left: 2%; margin-top: 4em;">
+    <div style="float: right; width: 20%; font-size: 0.9em; margin-left: 2%; margin-top: 4em;">
     <b>The benefits of registering with Simthetiq.com</b>
     <ul class="manual_bullet">
         <li>• Be the first to learn about new Simthetiq products and services</li>
@@ -53,7 +47,6 @@ $('select#id_country').change(function() {
     <h2>{% trans "Register" %}</h2>
 
     <div class="normal_form">
-    {{ form.errors }}
     <form method="post" action=".">
         {{ form.next }}
         {% csrf_token %}
@@ -134,23 +127,23 @@ $('select#id_country').change(function() {
             {% endif %}
 
             
-            <tr><td><h6><span class="mandatory">*</span>Mandatory Field</h6>
+            <tr><td><span class="mandatory">*</span><i>{% trans "Mandatory Field" %}</i>
                     <span class="notice">Please note that your customer information will be handled in strict accordance with Simthtiq.com’s privacy policy.</span></td>
                 <td>
                     <div class="button">
-                        <button type="submit" value="{% trans "Register" %}" class="button dark_bg">{% trans "Register" %}</button>
+                        <button type="submit" value="{% trans "Register Me" %}" class="button dark_bg">{% trans "Register Me" %}    <img src="{{MEDIA_URL}}CustomThemes/maciek/images/button/arrow.png" /></button>
                     </div>
                 </td>
             </tr>
             
             
         </table>
-        <div class="underform register">
 
-            <div class="submit"></div>
-        </div>
     </form>
     </div>
-
+    
 </div>
+
+{{ form_updates_registration }}
+
 {% endblock vcms_main_content  %}

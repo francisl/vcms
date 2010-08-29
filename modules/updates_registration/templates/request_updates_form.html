@@ -1,36 +1,36 @@
 {% load i18n %}
 <div class="vcms_container_relative" style="height:500px; clear: both; padding-top: 1em;">
-        <h2>{% trans "Updates" %}</h2>
-        <div class='normal_form'>
-            
-            <p>{% trans 'To register exclusively for product and compny updates, enter your e-mail address' %}</p>
-            {% if EMAIL_MATCH_ERROR %}
-            <p class="error">***{% trans "Email address don't match" %}</p>
-            {% endif %}
-            
-            {% if EMAIL_ALREADY_EXIST_ERROR %}
-            <p class="error">***{% trans "You are already registered!" %}</p>
-            {% endif %}
-            
-            <form method="post" action="." class="">
-               <div class="">
-                    <label for="email">{{ form.registration_email.label }}<span class="mandatory">*</span></label>
-                    {{ form.registration_email }}
-                    {% if form.registration_email.errors %}
-                        <span class="error">***{{ form.registration_email.errors|join:", " }}</span>
-                    {% endif %}
-                </div>
-                <div class="">
-                  <label for="id_password">{{ form.registration_email_confirmation.label }}<span class="mandatory">*</span></label>
-                  {{ form.registration_email_confirmation }}
-                        {% if form.registration_email_confirmation.errors %}
-                            <span class="error">***{{ form.registration_email_confirmation.errors|join:", " }}</span>
-                        {% endif %}
-                    </div>
-                <div class="button">
-                    <button type="submit" value="{{ confirm_button_text }}">{{ confirm_button_text }}  <img src="{{MEDIA_URL}}CustomThemes/maciek/images/button/arrow.png" /></button>
-                </div>
-            </form>
+	<h2>{% trans "Updates" %}</h2>
+	<div class='normal_form'>
+	    
+	    <p>{% trans 'To register exclusively for product and compny updates, enter your e-mail address' %}</p>
+	    {% if EMAIL_MATCH_ERROR %}
+	    <p class="error">***{% trans "Email address don't match" %}</p>
+	    {% endif %}
+	    
+	    {% if EMAIL_ALREADY_EXIST_ERROR %}
+	    <p class="error">***{% trans "You are already registered!" %}</p>
+	    {% endif %}
+	    
+	    <form method="post" action="." class="">
+	       <div class="">
+	            <label for="email">{{ form.registration_email.label }}<span class="mandatory">*</span></label>
+	            {{ form.registration_email }}
+	            {% if form.registration_email.errors %}
+	                <span class="error">***{{ form.registration_email.errors|join:", " }}</span>
+	            {% endif %}
+	        </div>
+	        <div class="">
+	          <label for="id_password">{{ form.registration_email_confirmation.label }}<span class="mandatory">*</span></label>
+	          {{ form.registration_email_confirmation }}
+	                {% if form.registration_email_confirmation.errors %}
+	                    <span class="error">***{{ form.registration_email_confirmation.errors|join:", " }}</span>
+	                {% endif %}
+	            </div>
+	        <div class="button">
+	            <button type="submit" value="{{ confirm_button_text }}">{{ confirm_button_text }}  <img src="{{MEDIA_URL}}CustomThemes/maciek/images/button/arrow.png" /></button>
+	        </div>
+	    </form>
     </div>
     <div class="clear"></div>
 </div>
