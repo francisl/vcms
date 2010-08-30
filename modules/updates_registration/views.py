@@ -10,8 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, EmailMultiAlternatives
 
 from updates_registration.models import UpdatesRegistration
-from config.contacts import INFO_EMAIL, INFO_PHONE
-from config.email import EMAILS
+
+from django.conf import settings 
+INFO_EMAIL = settings.INFO_EMAIL 
+INFO_PHONE = settings.INFO_PHONE
+EMAILS = settings.EMAILS
 
 
 def _send_email(email_to, email_from, subject="Thank you for subscribing to Simthetiq Updates"):

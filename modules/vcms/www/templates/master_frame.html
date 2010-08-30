@@ -11,31 +11,45 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="ROBOTS" content="ALL" />
     <meta name="robots" content="noarchive">
-    <meta name="description" content="{% if page_info.current_page.description %}
-                                        {{ page_info.current_page.description|striptags }}
-                                        {% else %}High quality models for real-time 3D in Openflight format and more for the simulation and game industry{% endif%} {% block metadescription %} {% endblock metadescription %}">
+    <meta name="description" content="{% if page_info.current_page.description %} {{ page_info.current_page.description|striptags }} {% endif%} {% block metadescription %} {% endblock metadescription %}">
     <meta name="keywords" content="{{ page_info.current_page.keywords }}{% block keywords %} {% endblock keywords %}">
     
     <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
     
-    <link rel="shortcut icon" href="{{ MEDIA_URL }}CustomThemes/Simthetiq/images/favicon.ico" />
+    
+    {% comment %}
+        <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/images/favicon.ico" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/style.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/navigation.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/product.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/store.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/search.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/forms.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
+    {% endcomment %}
     
     {% compress css %}
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/style.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/navigation.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/product.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/store.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/widget_button.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/search.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/forms.ccss" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="/static/CustomThemes/maciek/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
-    {% block stylesheetlink %}{% endblock stylesheetlink %}
-    <style type="text/css" media="all">
-       {% block stylesheet %}{% endblock stylesheet %}
-    </style>
+        <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/classic/images/favicon.ico" />
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/style.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/navigation.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/product.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/store.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/widget_button.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/search.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/forms.ccss" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
+	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/classic/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
+	    
+	    {% block stylesheetlink %}{% endblock stylesheetlink %}
+	    <style type="text/css" media="all">
+	       {% block stylesheet %}{% endblock stylesheet %}
+	    </style>
     {% endcompress %}
 </head>
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
