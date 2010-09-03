@@ -1,0 +1,25 @@
+pip install easy_thumbnails
+
+# SEARCH
+pip install -e git+http://github.com/toastdriven/django-haystack.git#egg=django-haystack
+pip install whoosh
+
+#pip install django-mptt
+pip install --upgrade -e git+http://github.com/bfirsh/django-mptt.git#egg=django-mptt
+
+pip install django-simple-captcha
+
+pip install django-registration
+
+pip install Satchmo
+
+pip install -e git+http://github.com/dziegler/django-css.git#egg=compressor
+
+pip install BeautifulSoup
+
+pip install http://django-tagging.googlecode.com/files/django-tagging-0.3.1.tar.gz
+
+pip install -e git+http://github.com/jpwatts/django-positions.git#egg=django-positions
+
+# to be remove
+pip install django-treebeard
