@@ -1,25 +1,77 @@
-pip install easy_thumbnails
+##############
+# HOW TO USE #
+##############
+# mkdir ~/python-environments && cd ~/python-environments
+#
+# virtualenv --no-site-packages --distribute vimba_cms
+#
+# pip install -E vimba_cms -r ../PATH/TO/buildout.pip
+#
+###################################################
+# Tweak for djvideo that doesn't live on a branch #
+###################################################
+# A copy of the original repository with the branching
+# problem fixed lives at http://github.com/flebel/djvideo
+# or do these manual steps and update the djvideo line below:
+#
+# mkdir /tmp/djvideo && cd /tmp/djvideo
+# git init
+# git remote add origin http://git.participatoryculture.org/djvideo
+# git pull origin master
+#
+
+Django==1.2.1
+#-e svn+http://code.djangoproject.com/svn/django/trunk/@rev#egg=Django
+
+-e git+http://github.com/django-extensions/django-extensions.git@1610e1e59124071e1d01#egg=django-extensions
+
+-e git+http://github.com/SmileyChris/easy-thumbnails.git@3ef403977683313242cb#egg=easy-thumbnails
 
 # SEARCH
-pip install -e git+http://github.com/toastdriven/django-haystack.git#egg=django-haystack
-pip install whoosh
+-e git+http://github.com/toastdriven/django-haystack.git@b9a002d99124e6f08e2b#egg=django-haystack
+-e hg+http://bitbucket.org/mchaput/whoosh@9c6a01abf78b#egg=whoosh
 
-#pip install django-mptt
-pip install --upgrade -e git+http://github.com/bfirsh/django-mptt.git#egg=django-mptt
+-e git+http://github.com/django-mptt/django-mptt.git@dfd7af7502729c47b914#egg=django-mptt
 
-pip install django-simple-captcha
+-e svn+http://django-simple-captcha.googlecode.com/svn/trunk/@55#egg=django-simple-captcha
 
-pip install django-registration
+-e hg+http://bitbucket.org/ubernostrum/django-registration@d36a38202ee3#egg=django-registration
 
-pip install Satchmo
+# Satchmo-related
+-e hg+http://bitbucket.org/chris1610/satchmo@v0.9.1#egg=Satchmo
+-e hg+http://bitbucket.org/bkroeze/django-signals-ahoy@4025183881b7#egg=django-signals-ahoy
+-e hg+http://bitbucket.org/bkroeze/django-livesettings@d36ca58338e8#egg=django-livesettings
+-e hg+http://bitbucket.org/bkroeze/django-threaded-multihost@826db9b7bf7a#egg=django-threaded-multihost
+-e hg+http://bitbucket.org/mmarshall/django-keyedcache@7ff6360a42e0#egg=django-keyedcache
+pycrypto
 
-pip install -e git+http://github.com/dziegler/django-css.git#egg=compressor
+-e git+http://github.com/dziegler/django-css.git@ce3b4709b1903150fa39#egg=compressor # ce3b4709b1903150fa39 == 2.3.0
 
-pip install BeautifulSoup
+BeautifulSoup==3.0.8.1
 
-pip install http://django-tagging.googlecode.com/files/django-tagging-0.3.1.tar.gz
+http://django-tagging.googlecode.com/files/django-tagging-0.3.1.tar.gz
 
-pip install -e git+http://github.com/jpwatts/django-positions.git#egg=django-positions
+-e git+http://github.com/jpwatts/django-positions.git#egg=django-positions
 
-# to be remove
-pip install django-treebeard
+# Use the following line and execute the manual steps listed at the beginning of the file
+#-e git+file:///tmp/djvideo/#egg=djvideo
+-e git+http://github.com/flebel/djvideo.git#egg=djvideo
+
+zope.mimetype
+
+-e hg+http://bitbucket.org/andrewgodwin/south@7e4cbf82243f#egg=south # 7e4cbf82243f = 0.7.2
+
+-e svn+http://django-app-plugins.googlecode.com/svn/trunk/@24#egg=django-app-plugins
+
+-e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
+
+-e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
+
+PIL
+
+# to be removed in the future
+-e hg+http://code.tabo.pe/django-treebeard@0f2a87d336ee#egg=django-treebeard # 0f2a87d336ee = 1.61
+
+# Utils to manage packages
+yolk
+
