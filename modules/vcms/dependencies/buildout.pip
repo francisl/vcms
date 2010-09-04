@@ -65,6 +65,7 @@ zope.mimetype
 
 -e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
 
+# Optionally used by developpers as a webserver and debugger
 -e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
 
 PIL
