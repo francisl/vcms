@@ -49,30 +49,30 @@ pycrypto
 
 BeautifulSoup==3.0.8.1
 
-http://django-tagging.googlecode.com/files/django-tagging-0.3.1.tar.gz
+-e svn+http://django-tagging.googlecode.com/svn/trunk/@186#egg=django-tagging # r186 == 0.3.1
 
--e git+http://github.com/jpwatts/django-positions.git#egg=django-positions
+-e git+http://github.com/jpwatts/django-positions.git@e9869faaa8c101c279aa#egg=django-positions
 
 # Use the following line and execute the manual steps listed at the beginning of the file
-#-e git+file:///tmp/djvideo/#egg=djvideo
--e git+http://github.com/flebel/djvideo.git#egg=djvideo
+#-e git+file:///tmp/djvideo/@423e9e17145ff11a81a8#egg=djvideo
+-e git+http://github.com/flebel/djvideo.git@423e9e17145ff11a81a8#egg=djvideo
 
-zope.mimetype
+zope.mimetype==1.3.0
 
--e hg+http://bitbucket.org/andrewgodwin/south@7e4cbf82243f#egg=south # 7e4cbf82243f = 0.7.2
+-e hg+http://bitbucket.org/andrewgodwin/south@7e4cbf82243f#egg=south # 7e4cbf82243f == 0.7.2
 
 -e svn+http://django-app-plugins.googlecode.com/svn/trunk/@24#egg=django-app-plugins
 
 -e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
 
-# Optionally used by developpers as a webserver and debugger
--e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
-
-PIL
+PIL==1.1.6
 
 # to be removed in the future
--e hg+http://code.tabo.pe/django-treebeard@0f2a87d336ee#egg=django-treebeard # 0f2a87d336ee = 1.61
+-e hg+http://code.tabo.pe/django-treebeard@0f2a87d336ee#egg=django-treebeard # 0f2a87d336ee == 1.61
 
-# Utils to manage packages
+# Optionally used by developpers as a webserver and debugger, keeping it at the latest version
+-e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
+
+# Utils to manage packages (useful for virtualenvs), keeping it at the latest version
 yolk
 
