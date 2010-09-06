@@ -7,6 +7,17 @@
 #
 # pip install -E vimba_cms -r ../PATH/TO/buildout.pip
 #
+################
+# DEPENDENCIES #
+################
+# SCMs: Git, Mercurial, Subversion
+# Packaging: distribute, pip, setuptools
+#           Install setuptools (for easy_install) from the distro's package manager, then:
+#           curl -O http://python-distribute.org/distribute_setup.py
+#           python distribute_setup.py
+#           easy_install pip
+# Others: python-dev (for PIL)
+#
 ###################################################
 # Tweak for djvideo that doesn't live on a branch #
 ###################################################
@@ -65,6 +76,7 @@ zope.mimetype==1.3.0
 
 -e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
 
+# PIL requires python-dev
 PIL==1.1.7
 
 # to be removed in the future
