@@ -13,9 +13,8 @@
 # SCMs: Git, Mercurial, Subversion
 # Packaging: distribute, pip, setuptools
 #           Install setuptools (for easy_install) from the distro's package manager, then:
-#           curl -O http://python-distribute.org/distribute_setup.py
-#           python distribute_setup.py
 #           easy_install pip
+#           pip install distribute
 # Others: python-dev (for PIL)
 #
 ###################################################
