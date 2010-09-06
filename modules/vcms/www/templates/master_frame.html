@@ -17,22 +17,6 @@
     
     <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
     
-    
-    {% comment %}
-        <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/images/favicon.ico" />
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/style.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/dropdownmenu.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/navigation.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/product.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/store.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/widget_button.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/search.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/widget_paginator.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/forms.ccss" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/prettyPhoto/css/prettyPhoto.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{{SELECTED_THEME}}/ccss/hwm_tree.ccss" type="text/css" charset="utf-8">
-    {% endcomment %}
-    
     {% compress css %}
         <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/favicon.ico" />
 	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/style.ccss" type="text/css" charset="utf-8">

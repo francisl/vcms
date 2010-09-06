@@ -21,11 +21,12 @@ TEMPLATE_DEBUG = True
 ENABLE_STATIC = True
 
 # ## EMAIL
+from config_sqlite.contacts import *
+from config_sqlite.email import *
 if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
-else:
-    from config_sqlite.email import *
+    
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
 

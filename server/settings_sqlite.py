@@ -21,16 +21,17 @@ TEMPLATE_DEBUG = True
 ENABLE_STATIC = True
 
 # ## EMAIL
+from config_sqlite.contacts import *
+from config_sqlite.email import *
 if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
-else:
-    from config.email import *
+    
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
 
 # ## DATABASE
-from config.database import *
+from config_sqlite.database import *
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -201,13 +202,13 @@ COMPILER_FORMATS = {
 # ## LOAD LOCAL SETTING
 # ## DEBUG
 if DEBUG:
-    from config.debug import *
+    from config_sqlite.debug import *
     if DEBUG_INSTALLED_APPS: 
         INSTALLED_APPS += DEBUG_INSTALLED_APPS
         MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
 
 # ## SEARCH ENGINE
-from config.search_engine import *
+from config_sqlite.search_engine import *
 if SEARCH_ENGINE:
     INSTALLED_APPS += (SEARCH_ENGINE,)
 
@@ -258,7 +259,7 @@ for app in INSTALLED_APPS:
             pass
 
 # Load the local Satchmo settings
-from config.satchmo_local import *
+from config_sqlite.satchmo_local import *
 
 if DEBUG:
     import socket
