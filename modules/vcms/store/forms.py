@@ -35,7 +35,7 @@ class StoreRegistrationForm(ProxyContactForm):
     """
     ORGANIZATION_CHOICES = (("company", _("Company"))
                             ,("agency", _("Agency"))
-                            ,("organisation", _("Organisation"))
+                            ,("organization", _("Organization"))
                             )
     TITLE_CHOICES = (('Mr.', 'Mr.')
                      ,('Ms.',_('Ms.'))
