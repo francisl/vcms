@@ -276,4 +276,5 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
 
 # THEME
-from config.theme import *
+#from config.theme import *
+
