@@ -88,8 +88,8 @@ $('select#id_country').change(function() {
                 <td>{{ form.street2.label_tag }}{{ form.street2 }}</td>
             </tr>
             
-            <tr><td>{% if form.city.errors %}<span style="color: red;">{{ form.city.errors|join:", " }}</span>{% endif %}</td>
-                <td>{% if form.state.errors %}<span style="color: red;">{{ form.state.errors|join:", " }}</span>{% endif %}</td>
+            <tr><td>{% if form.address.errors %}<span style="color: red;">{{ form.address.errors|join:", " }}</span>{% endif %}</td>
+                <td>{% if form.street2.errors %}<span style="color: red;">{{ form.street2.errors|join:", " }}</span>{% endif %}</td>
             </tr>
 
 
