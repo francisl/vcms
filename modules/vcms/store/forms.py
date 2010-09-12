@@ -228,12 +228,12 @@ class StoreRegistrationForm(ProxyContactForm):
         account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
 
         if account_verification == "ADMINISTRATOR":
+            site = Site.objects.get_current()
             user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
-                    data['password'], data['email'], False) # Make sure we don't send the email
+                    data['password'], data['email'], site, False) # Make sure we don't send the email
             # Manually send the activation email, AdminRegistrationProfile
             # sends the email to the Administrators, instead of the default
             # that sends to the user.
-            site = Site.objects.get_current()
             profile = AdminRegistrationProfile.objects.get(user=user)
             profile.send_activation_email(site)
         elif account_verification == 'EMAIL':
