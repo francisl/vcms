@@ -143,6 +143,20 @@ class StoreRegistrationForm(ProxyContactForm):
                 del self.cleaned_data['password_confirm']
         return self.cleaned_data
 
+    def clean_address(self):
+        address = self.cleaned_data.get('address')
+        if not address:
+            if 'street1' not in self.required_billing_data:
+                return address
+            raise forms.ValidationError(_('This field is required.'))
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if not phone:
+            if 'phone' not in self.required_billing_data:
+                return phone
+            raise forms.ValidationError(_('This field is required.'))
+
     def clean_country(self):
         if self._local_only:
             return self._default_country
