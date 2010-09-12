@@ -263,7 +263,6 @@ class StoreRegistrationForm(ProxyContactForm):
         # The action activation is set to IMMEDIATE, therefore we shall login the user
         if account_verification == 'IMMEDIATE':
             user = authenticate(username=data['username'], password=data['password'])
-            login(request, user)
             send_welcome_email(data['email'], data['first_name'], data['last_name'])
             accounts_signals.satchmo_registration_verified.send(self, contact=contact)
 
