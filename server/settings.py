@@ -267,14 +267,17 @@ for app in INSTALLED_APPS:
         except ImportError:
             pass
 
-# Load the local Satchmo settings
-from config_sqlite.satchmo_local import *
-
 if DEBUG:
-    import socket
+    #import socket
     #if socket.gethostname() == "LAPTOP": # Francois
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
 
 # THEME
 from config.theme import *
+
+# Load the local Satchmo settings
+from config_sqlite.satchmo_local import *
+
+# Custom settings for apps
+from config_sqlite.settings import *
 

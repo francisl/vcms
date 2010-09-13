@@ -23,10 +23,10 @@ from satchmo_store.shop.models import Config
 from livesettings import config_get_group, config_value
 from l10n.models import Country
 from vcms.www.registration.models import AdminRegistrationProfile
-from vcms.store.forms import StoreRegistrationForm
 from vcms.www.views.html import _get_page_parameters
 from updates_registration.views import UpdatesRegistrationForm, UpdatesRegistrationFormManager 
 
+import imp
 import logging
 log = logging.getLogger('vcms.store.views')
 
@@ -36,6 +36,11 @@ from livesettings import config_get
 from satchmo_store.shop.config import SHOP_GROUP
 ACCOUNT_VERIFICATION = config_get(SHOP_GROUP, 'ACCOUNT_VERIFICATION')
 ACCOUNT_VERIFICATION.add_choice(('ADMINISTRATOR', _('Administrator')))
+
+# Get the registration form class to use for this configuration
+REGISTER_MODULE = '/'.join(settings.REGISTER_FORM.split('.')[:-1]) # imp.find_module requires the '.' to be '/' in order to find the module
+REGISTER_CLASS = settings.REGISTER_FORM.split('.')[-1]
+REGISTER_FORM = getattr(imp.load_module(REGISTER_CLASS, *imp.find_module(REGISTER_MODULE)), REGISTER_CLASS)
 
 
 def get_queryset_states_provinces(country_id):
@@ -84,7 +89,7 @@ def register_handle_form(request, redirect=None):
         contact = None
 
     if request.method == 'POST':
-        form = StoreRegistrationForm(request.POST)
+        form = REGISTER_FORM(request.POST)
         # Make sure the states/provinces available match
         # the selected country
         form.update_state_choices(request.POST['country'])
@@ -117,7 +122,7 @@ def register_handle_form(request, redirect=None):
                     USA = Country.objects.get(iso2_code__exact="US")
                     initial_data['country'] = USA
 
-        form = StoreRegistrationForm(initial=initial_data)
+        form = REGISTER_FORM(initial=initial_data)
 
     return (False, form, {'country' : shop.in_country_only})
 

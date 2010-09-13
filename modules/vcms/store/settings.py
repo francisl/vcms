@@ -38,3 +38,6 @@ INSTALLED_APPS = (
 #TEMPLATE_CONTEXT_PROCESSORS =     ('satchmo_store.shop.context_processors.settings',
 #                                 'django.core.context_processors.auth',
 #                                 )
+
+REGISTER_FORM = "registration.forms.RegistrationForm"
+
