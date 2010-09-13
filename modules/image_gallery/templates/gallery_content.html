@@ -1,0 +1,30 @@
+{% extends "master.html" %}
+{% load search_widget %}
+{% load tree %}
+{% load thumbnail %}
+{% block vcms_main_content %}
+    
+    <div class="vcms_container_relative">
+        <div class="vcms_content">
+            <h1><span style="color: #444444;">Gallery</span></h1>
+        </div>
+        <!-- Content -->
+        <div class="image_gallery">
+        {% for image in gallery_images %}
+          <a rel="prettyPhoto[gallery]" href="{{ MEDIA_URL }}{{ image.get_absolute_url }}"><img src="{% thumbnail image.file thumbnail_size crop %}"/></a>
+        {% endfor %}
+        </div>
+        <br />
+		{{ page_paginator }}
+    </div>
+    
+    <div id='vcms_main_content_inside_navigation'>
+	   {% if gallery_categories %}
+	   <dl><dt><h3>Categories</h3></dt>
+	    {% for category in gallery_categories %}
+	        <a href="/gallery/{{ gallery_page.slug }}/{{ category }}/"<dd>{{ category }} ({{ category.get_image_quantity }})</dd></a>
+	    {% endfor %}
+	    </dl>
+	    {% endif %}
+    </div>
+{% endblock vcms_main_content %}

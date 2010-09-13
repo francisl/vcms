@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.conf import settings
 
 # from other aps
 from vcontact.models import ContactPage
@@ -16,7 +17,6 @@ from vcms.www.models import Content
 from vcms.www.views import get_requested_page
 
 # external requirement
-from config.email import EMAILS
 from captcha.fields import CaptchaField
 
 class ContactForm(forms.Form):
@@ -25,7 +25,7 @@ class ContactForm(forms.Form):
     email = forms.EmailField(required=True)
     cie_name = forms.CharField(required=False)
     message = forms.CharField(widget=forms.Textarea, required=True)
-    if EMAILS["CONTACT"]["CAPTCHA"] : captcha = CaptchaField()
+    if settings.EMAILS["CONTACT"]["CAPTCHA"] : captcha = CaptchaField()
 
 
 def Contact(request, page=None, context={}):
@@ -44,8 +44,8 @@ def Contact(request, page=None, context={}):
         #Email to simthetiq
             try:
                 subject = 'A message has been send through the contact form'
-                email_from = EMAILS["CONTACT"]["FROM"]
-                email_to = EMAILS["CONTACT"]["TO"]
+                email_from = settings.EMAILS["CONTACT"]["FROM"]
+                email_to = settings.EMAILS["CONTACT"]["TO"]
                 text_content = render_to_response('contact/email_internal.txt', { "orderinfo": form.cleaned_data  })
                 html_content = render_to_response('contact/email_internal.html', { "orderinfo": form.cleaned_data  })
                 msg = EmailMultiAlternatives(subject, text_content, email_from, [email_to])

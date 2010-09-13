@@ -37,6 +37,12 @@ urlpatterns += patterns('',
     url(r'^captcha/', include('captcha.urls')),
 )
 
+# __ VIMBA CMS GALLERY __
+# ordering formular
+if 'image_gallery' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^gallery/', include('image_gallery.urls')),)
+
+
 # __ SIMTHETIQ __
 # ordering formular
 if 'vimba_cms_simthetiq.apps.order' in settings.INSTALLED_APPS:

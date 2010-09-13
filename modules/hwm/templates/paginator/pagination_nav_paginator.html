@@ -3,8 +3,8 @@
 {% if paginator.has_previous %}
     <a href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{paginator.previous_page_number}}">
     <span class="pagination_previous"></span></a>{%endif%}
-{{ paginator.number }} / {{ paginator.paginator.num_pages }}
+{{ paginator.number }} / {{ paginator.num_pages }}
 {% if paginator.has_next %}
     <a href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{paginator.next_page_number}}">
-    <span class="pagination_next"></span></a>{%endif%}
+    <span class="pagination_next">&gt;</span></a>{%endif%}
 </div>

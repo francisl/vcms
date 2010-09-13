@@ -37,7 +37,7 @@ def get_navigation_from_paginator(paginator, paginator_slug=False, css_id=None, 
                              "css_id":css_id, "css_class": css_class}) 
 
 
-def get_page_navigation(paginator, previous_url=None, next_url=None, css_id=None, css_class=None):
+def get_page_navigation(paginator, current_page_number, reverse_url=None, previous_url=None, next_url=None, css_id=None, css_class=None, reverse_kwargs={}):
     """ generate a paginator naviation with specified navigation
         With previous, next page link, the current page and the total amount of page
         
@@ -64,15 +64,30 @@ def get_page_navigation(paginator, previous_url=None, next_url=None, css_id=None
             <class 'django.utils.safestring.SafeUnicode'>
             
     """
+    
+    current_page = paginator.page(current_page_number)
+    if previous_url == None and reverse_url != None:
+        print("getting previous url")
+        previous_url = get_paginator_previous_url(paginator.page(current_page_number), reverse_url, kwargs=reverse_kwargs)
+    if next_url == None and reverse_url != None:
+        print("getting next url")
+        next_url = get_paginator_next_url(paginator.page(current_page_number), reverse_url, kwargs=reverse_kwargs)
+    
     #print("paginator_previous_url %s - %s" % (previous_url, next_url) )
+    print("page previous = %s" % previous_url)
+    print("page next = %s" % next_url)
+    print("page paginator = %s" % paginator.num_pages)
+    print("page current_page_number = %s" % current_page_number)
+    
     return render_to_string('paginator/pagination_nav.html', 
-                            { "paginator": paginator,
-                             "previous_url": previous_url,
-                             "next_url": next_url,
-                             "css_id":css_id, "css_class": css_class})
+                            { "current_page": current_page
+                              ,"paginator": paginator
+                              ,"previous_url": previous_url
+                              ,"next_url": next_url
+                              ,"css_id":css_id, "css_class": css_class})
 
 
-def get_paginator_next_url(page_paginator, reverse_url, page_key="page", kwargs={}):
+def get_paginator_next_url(page_paginator, reverse_url, page_key="page_number", kwargs={}):
     """ return the next page url using the reverse django facilities
         
         @type page_paginator: page_paginator 
@@ -96,7 +111,7 @@ def get_paginator_next_url(page_paginator, reverse_url, page_key="page", kwargs=
         return reverse(reverse_url, kwargs=kwargs)
     return None 
 
-def get_paginator_previous_url(page_paginator, reverse_url, page_key="page", kwargs={}):
+def get_paginator_previous_url(page_paginator, reverse_url, page_key="page_number", kwargs={}):
     """ return the next page url using the reverse django facilities
         
         @type page_paginator: page_paginator 

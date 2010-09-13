@@ -20,7 +20,6 @@ from vcms.www.models.page import DashboardPage
 from vcms.www.models.page import DashboardElement
 from vcms.www.models.page import DashboardPreview
 from django.core.exceptions import ObjectDoesNotExist
-from config.email import EMAILS 
 
 DROPDOWN_MENU = 0
 SIMPLE_MENU = 1

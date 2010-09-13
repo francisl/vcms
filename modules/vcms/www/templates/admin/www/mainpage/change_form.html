@@ -2,11 +2,12 @@
 {% load i18n admin_modify adminmedia %}
 {% load compress %}
 {% load admin_extras %}
+{% load cms_theme %}
 
 {% block extrahead %}
     {{ block.super }}
     {% compress css %}
-        <link rel="stylesheet" href="{{ MEDIA_URL }}CustomThemes/maciek/ccss/admin.ccss" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/admin.ccss" type="text/css" charset="utf-8">
     {% endcompress %}
 {% endblock %}
 
