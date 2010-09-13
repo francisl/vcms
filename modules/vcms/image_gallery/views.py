@@ -6,7 +6,7 @@ from django.http import Http404
 from django.core.paginator import Paginator
 
 from site_media.models import Image, ImageCategory
-from image_gallery.models import ImageGalleryPage
+from vcms.image_gallery.models import ImageGalleryPage
 from hwm.paginator import generator as pgenerator
 
 
@@ -24,7 +24,7 @@ def gallery(request, page=None, category=None, page_number=1):
     
     thumbnail_size =  str(gallery_page.thumbnail_width) + 'x' + str(gallery_page.thumbnail_height)
     
-    reverse_url = "image_gallery.views.gallery"
+    reverse_url = "vcms.image_gallery.views.gallery"
 
     paginator = Paginator(images, gallery_page.thumbnail_per_page)
     if int(page_number) > int(paginator.num_pages):

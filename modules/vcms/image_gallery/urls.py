@@ -3,7 +3,7 @@
 # programmer : Francis Lavoie
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('image_gallery.views'
+urlpatterns = patterns('vcms.image_gallery.views'
     # Example:
     ,(r'^(?P<page>[-\w]+)/(?P<category>[-\w]+)/(?P<page_number>(\d+))/$', 'gallery')
     ,(r'^(?P<page>[-\w]+)/(?P<page_number>\d+)/$', 'gallery')

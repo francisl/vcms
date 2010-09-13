@@ -9,7 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 
 from vcms.www.admin import BasicPageAdmin
-from image_gallery.models import *
+from vcms.image_gallery.models import *
 
 class ImageGalleryPageAdmin(BasicPageAdmin):
     pass

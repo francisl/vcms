@@ -4,7 +4,7 @@ from django.db import models
 from vcms.www.models import Language
 from vcms.www.models.page import BasicPage
 from site_media.models import ImageCategory
-from image_gallery.managers import ImageGalleryPageManager
+from vcms.image_gallery.managers import ImageGalleryPageManager
 from django.utils.translation import ugettext_lazy as _
 
 from site_media.models import Image

@@ -39,8 +39,8 @@ urlpatterns += patterns('',
 
 # __ VIMBA CMS GALLERY __
 # ordering formular
-if 'image_gallery' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^gallery/', include('image_gallery.urls')),)
+if 'vcms.image_gallery' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^gallery/', include('vcms.image_gallery.urls')),)
 
 
 # __ SIMTHETIQ __
