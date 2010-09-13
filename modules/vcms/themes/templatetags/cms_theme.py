@@ -9,6 +9,5 @@ register = template.Library()
 
 @register.inclusion_tag('cms_theme.html')
 def get_selected_theme():
-    print("tehme == %s" % settings.SELECTED_THEME)
     return {'theme' : settings.SELECTED_THEME }
  
