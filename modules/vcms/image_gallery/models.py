@@ -47,9 +47,6 @@ class ImageGalleryPage(BasicPage):
         return Image.objects.filter(category__in=self.display_category.all())
 
     def get_all_images_for_category(self, category):
-        print( "category == %s" % self.display_category.all())
-        print("category == %s" % category)
-        #if category in self.display_category.all():
         if category:
             return Image.objects.filter(category=category)
         else:

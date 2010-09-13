@@ -38,9 +38,6 @@ def gallery(request, page=None, category=None, page_number=1):
     start_index = page.start_index()-1
     end_index = page.end_index()
     
-    print("start index %s" % start_index)
-    print("End index %s" % end_index)
-    
     return render_to_response('gallery_content.html'
                               ,{ 'gallery_categories': gallery_page.get_image_categories() 
                                  ,'gallery_images': images[start_index:end_index]
