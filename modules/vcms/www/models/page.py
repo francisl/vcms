@@ -11,12 +11,18 @@ from django.contrib.contenttypes import generic
 from django.db.models import signals
 
 from vcms.www.models.menu import CMSMenu
-from vcms.www.fields import StatusField
 from vcms.www.models.language import Language
 
 from vcms.www.managers.page import BasicPageManager
-    
+
+
 class BasicPage(models.Model):
+    DRAFT = 0
+    PUBLISHED = 1
+    STATUSES = (
+        (DRAFT, _('Draft')),
+        (PUBLISHED, _('Published')),
+    )
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
         A page can have multiple sub-section define in the application urls
@@ -32,7 +38,9 @@ class BasicPage(models.Model):
         # TODO : add multi-language fonctionnality
     """
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
-    status = StatusField()
+    
+    status = models.PositiveIntegerField(choices=STATUSES, default=STATUSES[DRAFT])
+
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     module = models.CharField(max_length=30, default='', editable=False)
@@ -52,7 +60,6 @@ class BasicPage(models.Model):
     #widget_type = models.ForeignKey(ContentType)
     #widget_id = models.PositiveIntegerField()
     #widget = generic.GenericForeignKey('widget_type', 'widget_id')
-    
 
     class Meta:
         verbose_name = _("Page - Basic page (do not edit)")
