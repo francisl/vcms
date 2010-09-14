@@ -5,6 +5,7 @@
 # Created by Francois Lebel on 30-05-2010.
 
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from vcms.www.models.page import BasicPage
@@ -29,7 +30,7 @@ class BasicContainer(models.Model):
         return self.page.name + "("+ str(self.id) + ") - " + self.name
 
 class ContainerDefinition:
-    """ Defines the human name associated to a container type. """
+    """ Class used to associate a display name to a container type. """
     name = _("Basic container")
     type = BasicContainer
 
@@ -68,4 +69,5 @@ class RelativeContainer(BasicContainer):
 
     def render(self):
         content = { 'widgets': self.widgets }
-        render_to_response("containers/relative.html", content)
+        return render_to_string("containers/relative.html", content)
+
