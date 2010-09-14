@@ -27,7 +27,27 @@ class BasicContainer(models.Model):
         verbose_name_plural = "Container - Basic"
         
     def __unicode__(self):
-        return self.page.name + "("+ str(self.id) + ") - " + self.name
+        container_name = self.name
+        # If the current container has its name set as the one of the required
+        # containers for a type of page, then display its formatted name instead
+        # of its internal name.
+        if self.name in self.page.get_type().get_page_containers():
+            container_name = self.page.get_type().get_page_containers()[self.name].name
+        return unicode(self.page.name) + "("+ unicode(self.id) + ") - " + unicode(container_name)
+
+    def get_type(self):
+        """
+            Returns the class of the current container.
+            Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
+        """
+        if GridContainer.objects.filter(pk=self.pk).exists():
+            return GridContainer
+        elif TableContainer.objects.filter(pk=self.pk).exists():
+            return TableContainer
+        elif RelativeContainer.objects.filter(pk=self.pk).exists():
+            return RelativeContainer
+        else:
+            return BasicContainer
 
 class ContainerDefinition:
     """ Class used to associate a display name to a container type. """
@@ -68,6 +88,6 @@ class RelativeContainer(BasicContainer):
         verbose_name_plural = "Container - Relative"
 
     def render(self):
-        content = { 'widgets': self.widgets }
+        content = { 'widgets': self.widgets.all() }
         return render_to_string("containers/relative.html", content)
 

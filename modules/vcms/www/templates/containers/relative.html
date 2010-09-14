@@ -1,5 +1,5 @@
 <div class="vcms_float_container">
      {% for w in widgets %}
-        {{w.name}}
+        {{w.render|safe}}
      {% endfor %}
 </div>

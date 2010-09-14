@@ -32,6 +32,9 @@ class WidgetWrapper(models.Model):
     def __unicode__(self):
         raise NotImplementedError()
 
+    def render(self):
+        """ Renders the widget and returns the resulting HTML produced. """
+        return self.widget.render()
 
 class TableWidgetWrapper(WidgetWrapper):
     container = models.ForeignKey(TableContainer, related_name="widgets")

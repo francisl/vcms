@@ -69,6 +69,20 @@ class BasicPage(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_type(self):
+        """
+            Returns the class of the current page.
+            Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
+        """
+        if Page.objects.filter(pk=self.pk).exists():
+            return Page
+        elif MainPage.objects.filter(pk=self.pk).exists():
+            return MainPage
+        elif SimplePage.objects.filter(pk=self.pk).exists():
+            return SimplePage
+        else:
+            return BasicPage
+
     def get_name(self):
         return self.__unicode__()
 
@@ -78,8 +92,11 @@ class BasicPage(models.Model):
     def _add_to_main_menu(self, root):
         root.add_child(menu_name=self.name, content_object=self)
 
-    @staticmethod
     def get_containers():
+        raise NotImplementedError()
+
+    @staticmethod
+    def get_page_containers():
         raise NotImplementedError()
     
     @staticmethod
@@ -157,13 +174,20 @@ class MainPage(BasicPage):
         return "/www/page/" + self.slug
     
     @staticmethod
-    def get_containers():
+    def get_page_containers():
         from vcms.www.models.containers import ContainerDefinition
         from vcms.www.models.containers import GridContainer
         from vcms.www.models.containers import TableContainer
         from vcms.www.models.containers import RelativeContainer
         return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
                     ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
+
+    def get_containers(self):
+        instance_containers = {}
+        for page_container_name, page_container_definition in self.__class__.get_page_containers().items():
+            for container in page_container_definition.type.objects.filter(page=self).filter(name=page_container_name):
+                instance_containers[page_container_name] = container
+        return instance_containers
 
     def get_menu(self):
         return self.menu.all()[0]

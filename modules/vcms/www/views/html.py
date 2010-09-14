@@ -90,7 +90,8 @@ def Generic(request, page=None, context={}):
     
 
 def MainPage(request, context={}):
-    return render_to_response('master_large.html',
+    context.update(context["containers"])
+    return render_to_response('mainpage.html',
                               context,
                               context_instance=RequestContext(request))
 
@@ -99,6 +100,7 @@ def SimplePage(request, context={}):
     content_container = context["containers"]["Content"]
     ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
     context.update(content_widgets = ContentWidgets)
+
     #import treebeard
     
     #form = treebeard.forms()

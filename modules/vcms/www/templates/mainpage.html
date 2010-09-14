@@ -1,0 +1,63 @@
+{% extends "master_frame.html" %}
+{% load search_widget %}
+
+{% block bodyclass %}large{% endblock bodyclass %}
+
+{% block vcms_content_header %}
+    {% show_search_box %}
+    {{ block.super }}
+{% endblock vcms_content_header %}
+
+<!--=========NAVIGATION=========== -->
+{% block navigation %}
+    {{navigation_container.render|safe}}
+{% endblock navigation %}
+
+{% block vcms_main_content %}
+    {{main_content}}
+    <div class="vcms_container_table clear_bg">
+	    <table>
+		   <tr><td>
+		      <div style="position: relative; background: url(/static/images/Terrorist-Truck.jpg) bottom right no-repeat;">
+					<h6>The Choice Is Yours</h6>
+					<p>Simthetiq invites you to take control of your 3D content. With a wide selection of products, options and support services, the power is yours.</p>
+					<p>Our expanding Simthetiq Content Library offers an extensive selection of professional-grade models and terrains in both high-fidelity and light versions. No less than three standard licensing options make it easy to ensure favourable terms. </p>
+					<p>Our <a href="/www/page/service_custom/">Custom Development Service</a> can rapidly meet your special requirements. Our <a href="/www/page/system_integration/">Systems Integration</a> and <a href="/www/page/support/">Support Services</a> are available to make light work of your most challenging projects.</p>
+					<p><b>Welcome to Simthetiq 2.0. The Choice is Yours.</b></p>
+					<!--               <div class="small_media_preview">
+					   <div class="video_container">
+						   <object>
+								<param name="movie" value="/static/videos/virtual_khairabad_mp4_controller.swf">
+								<embed src="/static/videos/virtual_khairabad_mp4_controller.swf"></embed>
+							</object>
+					   </div>
+					   <div class="thumbnail">
+						   <img src="/static/images/home_thumbnail.jpg" />
+						   <img src="/static/images/home_thumbnail.jpg" />
+					   </div>
+				   </div>
+				   -->
+				   <br />
+				   <br />
+				   	<br /><br />
+					<br /><br />
+				   
+				   <p class="bottom_link onmedium"><a href="/www/page/we_are_simthetiq/">Learn More</a></p>
+	           </div>
+		       </td>
+
+                <td class="col2">
+				<div style="position: relative;">
+					<h6>Update</h6>
+					<p>Simthetiq has launched a major upgrade of its website but has not finished adding features and functionality.</p>
+					<p>Customers who enjoyed browsing special products can now download Simthetiq's <a href="/static/files/Simthetiq_Models_Catalogue_Q3_2010.pdf">product catalogues</a>. Full e-commerce capabilities are coming soon.</p>
+					<p>Where information was need-to-know, Simthetiq.com now offers more information about our company, services, options and products and makes keeping in touch even easier.</p>
+					<p><b><a href="/register/updates/">Sign up</a> for company and product updates, and be the first to learn about new developments!</b></p>
+					<br /><p></p>
+					<p class="bottom_link onmedium"><a href="#">Learn More</a></p>
+                </div>
+                </td>
+	        </tr>
+		</table>
+    </div>
+{% endblock vcms_main_content %}
