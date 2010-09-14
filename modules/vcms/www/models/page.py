@@ -73,7 +73,7 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        return "/www/page/" + self.slug
+        return "/%s/%s" % (self.app_slug, self.slug)
 
     def _add_to_main_menu(self, root):
         root.add_child(menu_name=self.name, content_object=self)
@@ -185,7 +185,10 @@ class MainPage(BasicPage):
     def save(self):
         self.module = 'MainPage'
         super(BlankPage, self).save()
-        
+    
+    def get_absolute_url(self):
+        return "/www/page/" + self.slug
+    
     @staticmethod
     def get_containers():
         from vcms.www.models.containers import ContainerDefinition
@@ -207,7 +210,10 @@ class SimplePage(BasicPage):
     def save(self):
         self.module = 'SimplePage'
         super(SimplePage, self).save()
-        
+    
+    def get_absolute_url(self):
+        return "/www/page/" + self.slug
+    
     def get_containers(self):
         from vcms.www.models.containers import RelativeContainer
         my_rel_cont = {} 

@@ -1,13 +1,15 @@
 from django.db import models
 
+from django.utils.translation import ugettext_lazy as _
+
 # CMS
 from vcms.www.models import Language
 from vcms.www.models.page import BasicPage
-from site_media.models import ImageCategory
 from vcms.image_gallery.managers import ImageGalleryPageManager
-from django.utils.translation import ugettext_lazy as _
-
 from site_media.models import Image
+from site_media.models import ImageCategory
+
+APP_SLUGS = "gallery"
 
 ## PAGE
 class ImageGalleryPage(BasicPage):
@@ -25,6 +27,7 @@ class ImageGalleryPage(BasicPage):
 
     def save(self):
         self.module = 'ImageGallery'
+        self.app_slug = APP_SLUGS
         super(ImageGalleryPage, self).save()
         
     def get_containers(self):
