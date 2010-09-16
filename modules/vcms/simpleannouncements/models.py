@@ -21,8 +21,8 @@ APP_SLUGS = "simpleannouncements"
 
 class AnnouncementPage(BasicPage):
     comments_allowed = models.BooleanField(default=True)
-    authorized_users = models.ManyToManyField(User, related_name="announcement_page", blank=True, null=True)
-    authorized_groups = models.ManyToManyField(Group, related_name="announcement_page", blank=True, null=True)
+    authorized_users = models.ManyToManyField(User, blank=True, null=True)
+    authorized_groups = models.ManyToManyField(Group, blank=True, null=True)
     number_of_post_per_page = models.PositiveIntegerField(default=5)
 
     objects = models.Manager()
