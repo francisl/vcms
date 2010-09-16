@@ -20,7 +20,7 @@
     
     <div id='vcms_main_content_inside_navigation'>
 	   {% if gallery_categories %}
-	   <dl><dt><h3>Categories</h3></dt>
+	   <dl><dt><h4>Categories</h4></dt>
 	    {% for category in gallery_categories %}
 	        <a href="/gallery/{{ gallery_page.slug }}/{{ category }}/"<dd>{{ category }} ({{ category.get_image_quantity }})</dd></a>
 	    {% endfor %}
