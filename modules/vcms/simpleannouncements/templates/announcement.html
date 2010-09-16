@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+{% load search_widget %}
+{% load tree %}
+{% load thumbnail %}
+{% block vcms_main_content %}
+{% load humanize %}
+
+    <div class="vcms_container_relative">
+        <div class="vcms_content">
+            <h1><span style="color: #444444;">{{ page_name }}</span></h1>
+        </div>
+        <!-- Content -->
+        <div class="image_gallery">
+        {% for post in posts %}
+            <div>
+                <h3>{{ post.title }}</h3>
+                <h5>{{ post.date_published|naturalday }}</h5>
+                {{ post.content|safe }}
+                <p>Tags: {{ post.tags }}</p>
+                <br />
+            </div>
+        {% endfor %}
+        </div>
+        <br />
+		{{ page_paginator }}
+    </div>
+    
+	{% if categories %}
+    <div id='vcms_main_content_inside_navigation'>
+	   <dl><dt><h4>Categories</h4></dt>
+	    {% for category in categories %}
+	        <a href="/gallery/{{ gallery_page.slug }}/{{ category }}/"<dd>{{ category }} ({{ category.count }})</dd></a>
+	    {% endfor %}
+	    </dl>
+
+    </div>
+    {% endif %}
+{% endblock vcms_main_content %}
