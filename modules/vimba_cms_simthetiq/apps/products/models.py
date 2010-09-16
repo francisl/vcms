@@ -41,7 +41,7 @@ def validate_video_mime_type(value):
 class Licence(models.Model):
     display_name = models.CharField(max_length=50)
     term = models.TextField()
-    language = models.ForeignKey(Language)
+    language = models.ForeignKey(Language, default=Language.objects.get_default())
     #lang = models.IntegerField(max_length=2,choices=settings.LANGUAGES, 
     #                           default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
 """
@@ -62,7 +62,7 @@ class MediaTags(models.Model):
 """
 class MediaTagsTranslation(models.Model):
     tag = models.ForeignKey(MediaTags)
-    language = models.ForeignKey(Language)
+    language = models.ForeignKey(Language, default=Language.objects.get_default())
     tagname = models.CharField(max_length=30)
 
 # -- PRODUCTS

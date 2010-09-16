@@ -29,6 +29,7 @@ class BlogPage(AnnouncementPage):
 class BlogPostCategory(AnnouncementPostCategory):
     class Meta:
         ordering = ['name']
+        verbose_name_plural = _("Blog Posts Categories")
 
 class BlogPost(AnnouncementPost):
     display_on_page = models.ForeignKey(BlogPage)

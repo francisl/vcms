@@ -43,7 +43,7 @@ class AnnouncementPage(BasicPage):
 class AnnouncementPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
-    lang = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language, default=Language.objects.get_default())
 
     class Meta:
         abstract = True
@@ -62,7 +62,7 @@ class AnnouncementPost(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(auto_now=True, editable=False)
-    lang = models.ForeignKey(Language)
+    language = models.ForeignKey(Language, default=Language.objects.get_default())
     
     published = PublishedAnnouncementPostManager()
     

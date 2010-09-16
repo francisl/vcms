@@ -51,7 +51,7 @@ class BasicPage(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
-    language = models.ForeignKey(Language)
+    language = models.ForeignKey(Language, default=Language.objects.get_default())
     
     menu = generic.GenericRelation(CMSMenu)
     
