@@ -15,14 +15,15 @@ from vcms.www.models.language import Language
 
 from vcms.www.managers.page import BasicPageManager
 
+STATUS_DRAFT = 0
+STATUS_PUBLISHED = 1
+STATUSES = (
+    (STATUS_PUBLISHED, _('Draft')),
+    (STATUS_PUBLISHED, _('Published')),
+)
 
 class BasicPage(models.Model):
-    DRAFT = 0
-    PUBLISHED = 1
-    STATUSES = (
-        (DRAFT, _('Draft')),
-        (PUBLISHED, _('Published')),
-    )
+
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
         A page can have multiple sub-section define in the application urls
@@ -39,7 +40,7 @@ class BasicPage(models.Model):
     """
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     
-    status = models.PositiveIntegerField(choices=STATUSES, default=STATUSES[DRAFT])
+    status = models.PositiveIntegerField(choices=STATUSES, default=STATUSES[STATUS_DRAFT])
 
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
@@ -87,41 +88,8 @@ class BasicPage(models.Model):
         raise NotImplementedError()
         
     def save(self):
-        self.app_slug='www'
-        """
-        #first_root = CMSMenu.get_first_root_node()
-        root = None
-        
-        if type(first_root) != type(None):
-            if first_root.menu_name == str(self.language).lower():
-                root = first_root
-                del first_root
-            else:
-                for sibling in root.get_siblings():
-                    if sibling.menu_name == str(self.language).lower():
-                        root = sibling
-                        break
-        
-        if root == None:
-            # root menu not found
-            root = CMSMen.add_root(menu_name=str(self.language))
-            self._add_to_main_menu(root)
-        else:
-            # root already exist
-            # check if already insert in menu
-            exist = False
-            for child in root.get_children():
-                if child.menu_name == self.name:
-                    exist = True
-                    break
-            if not exist:
-                self._add_to_main_menu(root)
-            
-                  
-        # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
-        #self.indexer.update()
-        """
-        
+        if not self.app_slug:
+            self.app_slug='www'
         super(BasicPage, self).save()
 
 class Page(BasicPage):
