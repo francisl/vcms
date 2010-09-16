@@ -10,7 +10,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from vcms.simpleblogs.models import BlogPage, BlogPost
+from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
 from vcms.simpleblogs.models import APP_SLUGS
 from hwm.tree import generator
 from hwm.tree import helper 
@@ -20,11 +20,11 @@ from hwm.paginator import generator as pgenerator
 def blog_page(request, blog_page=None, category=None):
     page = BlogPage.objects.get_blog_page_from_string(blog_page)
     if page:
-        blogs = BlogPost.published.get_all_for_page(page)
+        blogs = BlogPost.published.get_all_for_page(page, category=category)
         return render_to_response("announcement.html"
                                     ,{ 'page_name': blog_page
                                         ,'posts': blogs
-                                        ,'categories': BlogPost.get_model_tags(counts=True)
+                                        ,'categories': BlogPostCategory.objects.get_non_empty_categories_for_page(page, counts=True)
                                         ,'model': BlogPost
                                         }
                                     ,context_instance=RequestContext(request))

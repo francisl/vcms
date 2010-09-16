@@ -10,13 +10,13 @@
             <h1><span style="color: #444444;">{{ page_name }}</span></h1>
         </div>
         <!-- Content -->
-        <div class="image_gallery">
+        <div class="vcms_inner_content">
         {% for post in posts %}
             <div>
                 <h3>{{ post.title }}</h3>
                 <h5>{{ post.date_published|naturalday }}</h5>
                 {{ post.content|safe }}
-                <p>Tags: {{ post.tags }}</p>
+                <p>Tags: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
                 <br />
             </div>
         {% endfor %}
@@ -28,8 +28,8 @@
 	{% if categories %}
     <div id='vcms_main_content_inside_navigation'>
 	   <dl><dt><h4>Categories</h4></dt>
-	    {% for category in categories %}
-	        <a href="/gallery/{{ gallery_page.slug }}/{{ category }}/"<dd>{{ category }} ({{ category.count }})</dd></a>
+	    {% for category, values in categories.items %}
+	        <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"<dd>{{ category }} ({{ values.count }})</dd></a>
 	    {% endfor %}
 	    </dl>
 

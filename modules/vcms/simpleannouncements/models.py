@@ -9,6 +9,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group, User
+from django.template import defaultfilters
 
 from tagging.fields import TagField
 
@@ -42,6 +43,7 @@ class AnnouncementPage(BasicPage):
 
 class AnnouncementPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
     language = models.ForeignKey(Language, default=Language.objects.get_default_code())
 
@@ -54,6 +56,9 @@ class AnnouncementPostCategory(models.Model):
     def get_quantity_in_category(self):
         raise NotImplemented
     
+    def save(self):
+        self.slug = defaultfilters.slugify(self.name.lower())
+        super(AnnouncementPostCategory, self).save()
 
 class AnnouncementPost(models.Model):
     title = models.CharField(max_length=120)
