@@ -8,17 +8,45 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.www.models import PageElementPosition
-from vcms.simpleannouncements.models import Announcement
+from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
+from vcms.simpleblogs.managers import BlogPageManager, PublishedBlogPostManager
+from tagging.models import Tag
 
+APP_SLUGS = "blogs"
 
-APP_SLUGS = "simpleblogs"
+class BlogPage(AnnouncementPage):
+    objects = BlogPageManager()
 
-
-class Blog(Announcement):
     class Meta:
-        verbose_name_plural = _("Blogs")
+        verbose_name = _("Page - Blog Page")
+        verbose_name_plural = _("Page - Blog Pages")
+        ordering = ['name']
+        
+    def save(self):
+        self.app_slug = APP_SLUGS
+        super(BlogPage, self).save()
+
+class BlogPostCategory(AnnouncementPostCategory):
+    class Meta:
+        ordering = ['name']
+
+class BlogPost(AnnouncementPost):
+    display_on_page = models.ForeignKey(BlogPage)
+    category = models.ManyToManyField(BlogPostCategory)
+    published = PublishedBlogPostManager()
+    
+    class Meta:
+        verbose_name_plural = _("Blog Posts")
         get_latest_by = ['-date_created']
         ordering = ['-date_created']
+  
+    @staticmethod
+    def get_model_tags(counts=True):
+        return Tag.objects.usage_for_model(BlogPost, counts=counts)
+
+    def __unicode__(self):
+        return self.title
+
 
 class BlogPageModule(PageElementPosition):
     from vcms.www.models.page import DashboardPage as DP
@@ -26,5 +54,4 @@ class BlogPageModule(PageElementPosition):
     tags = TagField()
     title = models.CharField(max_length="60", help_text=_("Max 60 characters"), verbose_name=_("Title"))
 
-    def __unicode__(self):
-        return self.page.name
+   

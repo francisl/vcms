@@ -8,7 +8,6 @@ from django.conf.urls.defaults import *
 from vcms.simplenews.feeds import NewsRssFeed, NewsCategoryRssFeed
 from vcms.simplenews.models import APP_SLUGS
 
-
 urlpatterns_prefix = r'^%s/' % APP_SLUGS
 
 urlpatterns = patterns('vcms.simplenews.views',

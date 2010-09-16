@@ -5,13 +5,17 @@
 # Created by Francois Lebel on 24-03-2010.
 
 from django.contrib import admin
-from vcms.simpleblogs.models import Blog, BlogPageModule
+from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
 
 
-class BlogPageModuleAdmin(admin.ModelAdmin):
+class BlogPageAdmin(admin.ModelAdmin):
     pass
-admin.site.register(BlogPageModule, BlogPageModuleAdmin)
+admin.site.register(BlogPage, BlogPageAdmin)
 
-class BlogAdmin(admin.ModelAdmin):
+class BlogPostAdmin(admin.ModelAdmin):
     pass
-admin.site.register(Blog, BlogAdmin)
+admin.site.register(BlogPost, BlogPostAdmin)
+
+class BlogPostCategoryAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(BlogPostCategory, BlogPostCategoryAdmin)

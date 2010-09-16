@@ -6,29 +6,15 @@
 
 from django.db import models
 from vcms.www.fields import StatusField
+from vcms.www.models.page import STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
 
-
-class PublishedAnnouncementManager(models.Manager):
+class PublishedAnnouncementPostManager(models.Manager):
     def get_query_set(self):
         """Filters the results to display the published announcements."""
-        from vcms.www.models.page import Page
-        return super(PublishedAnnouncementManager, self).get_query_set().filter(status=StatusField.PUBLISHED)
+        return self.filter(status=STATUSES[STATUS_PUBLISHED])
 
     def get_latest(self):
         """
             Returns the latest Announcement instances.
-        """
-        return self.order_by("-date_published")
-
-
-class PublishedAnnouncementCategoryManager(models.Manager):
-    def get_query_set(self):
-        """Filters the results to display the published category announcements."""
-        from vcms.www.models.page import Page
-        return super(PublishedAnnouncementCategoryManager, self).get_query_set().filter(status=StatusField.PUBLISHED)
-
-    def get_latest(self):
-        """
-            Returns the latest AnnouncementCategory instances.
         """
         return self.order_by("-date_published")
