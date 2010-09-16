@@ -46,7 +46,7 @@ class News(models.Model):
     name = models.CharField(max_length="40", help_text="Max 40 characters", verbose_name="Title")
     excerpt = models.TextField(verbose_name="Preview")
     content = models.TextField()
-    language = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language, default=Language.objects.get_default_code())
     categories = models.ManyToManyField(NewsCategory)
     status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS, help_text=_("Only Entries with 'live' status will be publicly displayed"))
     

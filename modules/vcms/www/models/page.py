@@ -23,7 +23,6 @@ STATUSES = (
 )
 
 class BasicPage(models.Model):
-
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
         A page can have multiple sub-section define in the application urls
@@ -51,7 +50,7 @@ class BasicPage(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(default=datetime.datetime.min, editable=False)
-    language = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language)
     
     menu = generic.GenericRelation(CMSMenu)
     

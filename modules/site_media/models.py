@@ -24,7 +24,7 @@ class ImageCategoryTranslation(models.Model):
     name = models.CharField(max_length=150, unique=True)
     category = models.ForeignKey(ImageCategory)
     
-    language = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language, default=Language.objects.get_default_code())
 
 # -- --------
 class Image(models.Model):
@@ -50,4 +50,4 @@ class ImageDescription(models.Model):
     image = models.ForeignKey(Image)
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
-    language = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language, default=Language.objects.get_default_code())

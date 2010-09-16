@@ -39,7 +39,7 @@ class CMSMenu(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu")
     default = models.BooleanField(default=False)
-    language = models.ForeignKey(Language, default=Language.objects.get_default())
+    language = models.ForeignKey(Language)
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')

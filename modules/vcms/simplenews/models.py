@@ -10,7 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from vcms.www.models import PageElementPosition
 from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost
-from vcms.simpleannouncements.managers import PublishedAnnouncementManager, PublishedAnnouncementCategoryManager
 from vcms.simplenews.managers import NewsManager, NewsCategoryManager
 
 
