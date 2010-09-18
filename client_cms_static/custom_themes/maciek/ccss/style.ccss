@@ -494,8 +494,6 @@ div.vcms_column_container:
             background-repeat: no-repeat;
      
 div.vcms_container_relative:
-    margin: 2.4em;
-    
     p:
         margin-left: 0px;
         margin-top: 1em;
@@ -531,7 +529,10 @@ div.content_title:
         margin-right: 1.1em;
         margin-top: -1.4em;
         font-size: 0.8em;
-     
+
+div.main_content:
+    margin: 2.4em;
+
 div.small_media_preview:
     float: right;
     width:226px;
@@ -634,3 +635,4 @@ p.bottom_link:
     font-size: 0.8em;
     text-transform: uppercase;
     color: #D93315;
+

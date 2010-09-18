@@ -547,10 +547,6 @@ div.vcms_column_container table td.col2 {
   background-repeat: no-repeat;
 }
 
-div.vcms_container_relative {
-  margin: 2.4em;
-}
-
 div.vcms_container_relative p {
   margin-left: 0px;
   margin-top: 1em;
@@ -588,6 +584,10 @@ div.content_title span {
   margin-right: 1.1em;
   margin-top: -1.4em;
   font-size: 0.8em;
+}
+
+div.main_content {
+  margin: 2.4em;
 }
 
 div.small_media_preview {
