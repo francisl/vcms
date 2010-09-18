@@ -48,7 +48,7 @@ class StoreRegistrationForm(ProxyContactForm):
     email = forms.EmailField(max_length=75, label=_('Email'), required=True)
     password = forms.CharField(label=_('Password'), max_length=30, widget=forms.PasswordInput(), required=True)
     password_confirm = forms.CharField(label=_('Confirm password'), max_length=30, widget=forms.PasswordInput(), required=True)
-    title = forms.ChoiceField(label=_('Title'), choices=TITLE_CHOICES, widget=forms.RadioSelect(attrs={"default":TITLE_CHOICES[0]}), required=True)
+    title = forms.ChoiceField(label=_('Title'), choices=TITLE_CHOICES, widget=forms.RadioSelect(attrs={"default":TITLE_CHOICES[0]}), required=False)
     username = forms.CharField(label=_('Username'), max_length=30, required=True)
     first_name = forms.CharField(max_length=30, label=_('First Name'), required=True)
     last_name = forms.CharField(max_length=30, label=_('Last Name'), required=True)
