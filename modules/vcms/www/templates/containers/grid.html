@@ -1,0 +1,7 @@
+<div class="vcms_container_grid">
+     {% for w in widgets %}
+        <div style="float: {{float_orientation}};">
+            {{w.render|safe}}
+        </div>
+     {% endfor %}
+</div>

@@ -68,6 +68,12 @@ class GridContainer(BasicContainer):
         verbose_name = "Container - Grid"
         verbose_name_plural = "Container - Grid"
 
+    def render(self):
+        content = { 'float_orientation': self.float_orientation,
+                    'widgets': self.widgets.all()
+                    }
+        return render_to_string("containers/grid.html", content)
+
 class TableContainer(BasicContainer):
     maximum_column = models.PositiveIntegerField(default=3, help_text="How many column are available")
     
@@ -78,6 +84,9 @@ class TableContainer(BasicContainer):
         verbose_name = "Container - Table"
         verbose_name_plural = "Container - Table"
 
+    def render(self):
+        content = { 'widgets': self.widgets.all() }
+        return render_to_string("containers/table.html", content)
 
 class RelativeContainer(BasicContainer):
     objects = RelativeContainerManager()
