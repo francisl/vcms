@@ -5,6 +5,7 @@
 # Created by Francois Lebel on 12-05-2010.
 
 from django import forms
+from django.db import transaction
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -212,6 +213,7 @@ class StoreRegistrationForm(ProxyContactForm):
             kwargs['contact'] = None
         return self.save_info(**kwargs)
 
+    @transaction.commit_on_success
     def save_info(self, contact=None, **kwargs):
         """Save the contact info into the database.
         Checks to see if contact exists. If not, creates a contact
@@ -224,47 +226,10 @@ class StoreRegistrationForm(ProxyContactForm):
         # set username equal to email since we want to use email as username
         #data["username"] = data["email"]
 
-        # Create the account for the user
-        account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
-
-        if account_verification == "ADMINISTRATOR":
-            site = Site.objects.get_current()
-            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
-                    data['password'], data['email'], site, False) # Make sure we don't send the email
-            # Manually send the activation email, AdminRegistrationProfile
-            # sends the email to the Administrators, instead of the default
-            # that sends to the user.
-            profile = AdminRegistrationProfile.objects.get(user=user)
-            profile.send_activation_email(site)
-        elif account_verification == 'EMAIL':
-            # TODO:
-            # In django-registration trunk this signature has changed.
-            # Satchmo is going to stick with the latest release so I'm changing
-            # this to work with 0.7
-            # When 0.8 comes out we're going to have to refactor to this:
-            #user = RegistrationProfile.objects.create_inactive_user(
-            #    username, email, password, site)
-            # See ticket #1028 where we checked in the above line prematurely
-            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
-                    data['password'], data['email'])
-        elif account_verification == "IMMEDIATE":
-            # Create the user without further validation
-            user = User.objects.create_user(data['username'], data['email'], data['password'])
-
         if 'newsletter' not in data:
             subscribed = False
         else:
             subscribed = data['newsletter']
-
-        accounts_signals.satchmo_registration.send(self, contact=contact, subscribed=subscribed, data=data)
-
-        customer.user_id = user.pk
-
-        # The action activation is set to IMMEDIATE, therefore we shall login the user
-        if account_verification == 'IMMEDIATE':
-            user = authenticate(username=data['username'], password=data['password'])
-            send_welcome_email(data['email'], data['first_name'], data['last_name'])
-            accounts_signals.satchmo_registration_verified.send(self, contact=contact)
 
         country = data['country']
         if not isinstance(country, Country):
@@ -291,8 +256,6 @@ class StoreRegistrationForm(ProxyContactForm):
         if not customer.role:
             customer.role = ContactRole.objects.get(pk='Customer')
 
-        customer.save()
-
         # we need to make sure we don't blindly add new addresses
         # this isn't ideal, but until we have a way to manage addresses
         # this will force just the two addresses, shipping and billing
@@ -315,8 +278,46 @@ class StoreRegistrationForm(ProxyContactForm):
         bill_address.is_default_billing = True
         bill_address.is_default_shipping = True
 
+        # Create the account for the user
+        account_verification = config_value('SHOP', 'ACCOUNT_VERIFICATION')
 
+        if account_verification == "ADMINISTRATOR":
+            site = Site.objects.get_current()
+            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
+                    data['password'], data['email'], site, False, False) # Make sure we don't send the email and don't save the user
+            # Manually send the activation email, AdminRegistrationProfile
+            # sends the email to the Administrators, instead of the default
+            # that sends to the user.
+            profile = AdminRegistrationProfile.objects.get(user=user)
+            profile.send_activation_email(site, contact=customer, billing_address=bill_address)
+        elif account_verification == 'EMAIL':
+            # TODO:
+            # In django-registration trunk this signature has changed.
+            # Satchmo is going to stick with the latest release so I'm changing
+            # this to work with 0.7
+            # When 0.8 comes out we're going to have to refactor to this:
+            #user = RegistrationProfile.objects.create_inactive_user(
+            #    username, email, password, site)
+            # See ticket #1028 where we checked in the above line prematurely
+            user = AdminRegistrationProfile.objects.create_inactive_user(data['username'],
+                    data['password'], data['email'], True, False)
+        elif account_verification == "IMMEDIATE":
+            # Create the user without further validation
+            user = User.objects.create_user(data['username'], data['email'], data['password'])
+
+        # The action activation is set to IMMEDIATE, therefore we shall login the user
+        if account_verification == 'IMMEDIATE':
+            user = authenticate(username=data['username'], password=data['password'])
+            send_welcome_email(data['email'], data['first_name'], data['last_name'])
+            accounts_signals.satchmo_registration_verified.send(self, contact=contact)
+
+        user.save()
+        customer.user_id = user.pk
+        customer.save()
+        bill_address.contact_id = user.pk
         bill_address.save()
+
+        accounts_signals.satchmo_registration.send(self, contact=contact, subscribed=subscribed, data=data)
 
         form_postsave.send(ContactInfoForm, object=customer, formdata=data, form=self)
 
@@ -334,3 +335,4 @@ class StoreRegistrationForm(ProxyContactForm):
                 return response
 
         return postcode
+

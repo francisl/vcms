@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.mail import mail_admins
+from django.db import transaction
 from django.template.loader import render_to_string
 from registration.models import RegistrationManager, RegistrationProfile, SHA1_RE
 
@@ -61,6 +63,35 @@ class AdminRegistrationManager(RegistrationManager):
                 return user
         return False
 
+    def create_inactive_user(self, username, email, password,
+                             site, send_email=True, save_user=True):
+        """
+        Create a new, inactive ``User``, generate a
+        ``RegistrationProfile`` and email its activation key to the
+        ``User``, returning the new ``User``.
+
+        By default, an activation email will be sent to the new
+        user. To disable this, pass ``send_email=False``.
+        
+        The only modification to the method from the inherited class
+        is that we added a parameter to save the user within this
+        method. That way, we can save only if the steps undertaken
+        in the method calling this one succeeds.
+        
+        """
+        new_user = User.objects.create_user(username, email, password)
+        new_user.is_active = False
+
+        if save_user:
+            new_user.save()
+
+        registration_profile = self.create_profile(new_user)
+
+        if send_email:
+            registration_profile.send_activation_email(site)
+
+        return new_user
+
 
 class AdminRegistrationProfile(RegistrationProfile):
     """
@@ -83,7 +114,7 @@ class AdminRegistrationProfile(RegistrationProfile):
     class Meta:
         proxy = True
 
-    def send_activation_email(self, site):
+    def send_activation_email(self, site, contact, billing_address):
         """
         Send an activation email to the Administrators to
         activate this ``RegistrationProfile``.
@@ -121,10 +152,23 @@ class AdminRegistrationProfile(RegistrationProfile):
             framework for details regarding these objects' interfaces.
 
         """
+
         #print "DEBUG: Envoit email a partir de AdminRegistrationProfile"
         ctx_dict = {'activation_key': self.activation_key,
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
-                    'site': site}
+                    'site': site,
+                    'full_name': contact.full_name,
+                    'organization': contact.organization.name,
+                    'organization_type': contact.organization.type.name,
+                    'address': billing_address.street1,
+                    'suite_unit_apt': billing_address.street2,
+                    'city': billing_address.city,
+                    'state': billing_address.state,
+                    'postal_code': billing_address.postal_code,
+                    'country': billing_address.country.name,
+                    'phone_number': '', # TODO
+                    'role': contact.role.name
+                    }
         subject = render_to_string('registration/administrator_activation_email_subject.txt',
                                    ctx_dict)
         # Email subject *must not* contain newlines
