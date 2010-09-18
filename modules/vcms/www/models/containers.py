@@ -14,6 +14,10 @@ from vcms.www.managers.containers import TableContainerManager
 from vcms.www.managers.containers import RelativeContainerManager
 from vcms.www.managers.containers import GridContainerManager
 
+import inspect
+import sys
+
+
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     page = models.ForeignKey(BasicPage)
@@ -40,14 +44,16 @@ class BasicContainer(models.Model):
             Returns the class of the current container.
             Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
         """
-        if GridContainer.objects.filter(pk=self.pk).exists():
-            return GridContainer
-        elif TableContainer.objects.filter(pk=self.pk).exists():
-            return TableContainer
-        elif RelativeContainer.objects.filter(pk=self.pk).exists():
-            return RelativeContainer
-        else:
-            return BasicContainer
+        # Get all the classes in the current module
+        for name, obj in inspect.getmembers(sys.modules[__name__]):
+            # Discard everything but classes and classes that inherit from BasicContainer
+            if inspect.isclass(obj) and BasicContainer in obj.__bases__:
+                # If there are instances for the current container, the instance is of
+                # the current container's type
+                if obj.objects.filter(pk=self.pk).exists():
+                    return obj
+        return BasicContainer
+
 
 class ContainerDefinition:
     """ Class used to associate a display name to a container type. """

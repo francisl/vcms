@@ -21,6 +21,9 @@ STATUSES = (
     (STATUS_PUBLISHED, _('Draft')),
     (STATUS_PUBLISHED, _('Published')),
 )
+import inspect
+import sys
+
 
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
@@ -74,14 +77,15 @@ class BasicPage(models.Model):
             Returns the class of the current page.
             Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
         """
-        if Page.objects.filter(pk=self.pk).exists():
-            return Page
-        elif MainPage.objects.filter(pk=self.pk).exists():
-            return MainPage
-        elif SimplePage.objects.filter(pk=self.pk).exists():
-            return SimplePage
-        else:
-            return BasicPage
+        # Get all the classes in the current module
+        for name, obj in inspect.getmembers(sys.modules[__name__]):
+            # Discard everything but classes and classes that inherit from BasicPage
+            if inspect.isclass(obj) and BasicPage in obj.__bases__:
+                # If there are instances for the current page, the instance is of
+                # the current page's type
+                if obj.objects.filter(pk=self.pk).exists():
+                    return obj
+        return BasicPage
 
     def get_name(self):
         return self.__unicode__()
