@@ -159,6 +159,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vcms.store'
                   # Custom apps for cms
                   ,'vimba_cms_simthetiq.apps.order'
+                  ,'vimba_cms_simthetiq.apps.store'
                   ,'vimba_cms_simthetiq.apps.products'
                   ,'vimba_cms_simthetiq.apps.importer'
                   ,'south'
