@@ -67,18 +67,10 @@ def get_page_navigation(paginator, current_page_number, reverse_url=None, previo
     
     current_page = paginator.page(current_page_number)
     if previous_url == None and reverse_url != None:
-        print("getting previous url")
         previous_url = get_paginator_previous_url(paginator.page(current_page_number), reverse_url, kwargs=reverse_kwargs)
     if next_url == None and reverse_url != None:
-        print("getting next url")
         next_url = get_paginator_next_url(paginator.page(current_page_number), reverse_url, kwargs=reverse_kwargs)
-    
-    #print("paginator_previous_url %s - %s" % (previous_url, next_url) )
-    print("page previous = %s" % previous_url)
-    print("page next = %s" % next_url)
-    print("page paginator = %s" % paginator.num_pages)
-    print("page current_page_number = %s" % current_page_number)
-    
+
     return render_to_string('paginator/pagination_nav.html', 
                             { "current_page": current_page
                               ,"paginator": paginator
