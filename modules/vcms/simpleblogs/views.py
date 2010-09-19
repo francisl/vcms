@@ -4,12 +4,16 @@
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francis Lavoie 20100913
 import datetime
+import inspect
+
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ObjectDoesNotExist
 
+from vcms.www.views.html import _get_page_parameters
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
 from vcms.simpleblogs.models import APP_SLUGS
 from hwm.tree import generator
@@ -32,7 +36,7 @@ def archives_for_one_year(by_month_year, older_archive):
 blogs_by_month_year = lambda month,year: BlogPost.published.filter(date_published__month=month, date_published__year=year) 
 blogs_older_archives_month_year = lambda month, year: BlogPost.published.filter(date_published__lt=datetime.date(year, month, 1))
 
-def generate_paginator(page_number, items, item_per_page=6, reverse_url="vcms.simpleblogs.views.blog_page", reverse_kwargs={}):
+def generate_paginator(page_number, items, reverse_url, item_per_page=6, reverse_kwargs={}):
     import copy
     reverse = copy.copy(reverse_kwargs)
     for key in reverse:
@@ -60,46 +64,48 @@ def get_side_menu(page):
     archives, older_archives = archives_for_one_year(blogs_by_month_year, blogs_older_archives_month_year)
     return categories, archives, older_archives
 
-def page(request, page=None, category=None, page_number=1, year=None, month=None, day=None, post_id=None):
-    page_slug = page
-    page = get_object_or_404(BlogPage, slug=page)
-    if category:
-        category = get_object_or_404(BlogPostCategory, slug=category)
-    reverse_url="vcms.simpleblogs.views.page"
-    if page:
-        blogs = BlogPost.published.get_all_for_page(page, category=category.slug)
-        categories, archives, older_archives = get_side_menu(page)
-        pitems, ppage, page_paginator = generate_paginator(page_number, blogs, page.number_of_post_per_page, reverse_url, {'page':page_slug, 'category': category.slug})
-        return render_to_response("announcement.html"
-                                    ,{'page_name': page_slug
-                                      ,'posts': pitems
-                                      ,'categories': categories
-                                      ,'archives': archives
-                                      ,'older_archives': older_archives
-                                      ,'page_paginator': page_paginator
-                                      ,'model': BlogPost
-                                    }
-                                    ,context_instance=RequestContext(request))
+def get_page_information(page_slug, method_name):
+    page = get_object_or_404(BlogPage, slug=page_slug)
+    page_parameters = _get_page_parameters(page)
+    reverse_url="vcms.simpleblogs.views." + method_name
+    return page, page_parameters ,reverse_url
+    
 
-def page_for_date(request, page=None, category=None, page_number=1, year=None, month=1, day=1, post_id=None):
-    page_slug = page
-    page = get_object_or_404(BlogPage, slug=page)
-    reverse_url="vcms.simpleblogs.views.page_for_date"
-    if page:
-        blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
-        categories, archives, older_archives = get_side_menu(page)
-        pitems, ppage, page_paginator = generate_paginator(page_number, blogs, page.number_of_post_per_page, reverse_url, {'page':page_slug, 'year':year, 'month':month})
-        return render_to_response("announcement.html"
-                                    ,{'page_name': page_slug
-                                      ,'posts': pitems
-                                      ,'categories': categories
-                                      ,'archives': archives
-                                      ,'older_archives': older_archives
-                                      ,'page_paginator': page_paginator
+def page(request, page_slug=None, category=None, page_number=1, year=None, month=None, day=None, post_id=None):
+    page, page_parameters ,reverse_url = get_page_information(page_slug, 'page')
+    categories, archives, older_archives = get_side_menu(page)
+    
+    if category != None:
+        category = get_object_or_404(BlogPostCategory, slug=category).slug
+            
+    blogs = BlogPost.published.get_all_for_page(page, category=category)
+    pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
+    return render_to_response("announcement.html"
+                                ,{'page_name': page_slug
+                                  ,'posts': pitems
+                                  ,'categories': categories
+                                  ,'archives': archives
+                                  ,'older_archives': older_archives
+                                  ,'page_paginator': page_paginator
+                                }
+                                ,context_instance=RequestContext(request))
 
-                                      ,'model': BlogPost
-                                    }
-                                    ,context_instance=RequestContext(request))
+def page_for_date(request, page_slug=None, category=None, page_number=1, year=None, month=1, day=1, post_id=None):
+    page, page_parameters ,reverse_url = get_page_information(page_slug, 'page_for_date')
+    categories, archives, older_archives = get_side_menu(page)
+    
+    blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
+    
+    pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
+    return render_to_response("announcement.html"
+                                ,{'page_name': page_slug
+                                  ,'posts': pitems
+                                  ,'categories': categories
+                                  ,'archives': archives
+                                  ,'older_archives': older_archives
+                                  ,'page_paginator': page_paginator
+                                }
+                                ,context_instance=RequestContext(request))
     
     
     
