@@ -28,7 +28,6 @@ def gallery(request, page=None, category=None, page_number=1):
 
     paginator = Paginator(images, gallery_page.thumbnail_per_page)
     if int(page_number) > int(paginator.num_pages):
-        print('yes its bigger')
         page_number = paginator.num_pages
     page_paginator = pgenerator.get_page_navigation(paginator, page_number, reverse_url, reverse_kwargs=reverse_kwargs)
     
