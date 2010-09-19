@@ -6,6 +6,7 @@
 
 from django.db import models
 from vcms.www.models.page import STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
+from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
 
 
 class BlogPageManager(models.Manager):
@@ -13,6 +14,9 @@ class BlogPageManager(models.Manager):
         return self.get(slug=page_name)
 
 class PublishedBlogPostManager(models.Manager):
+    def get_count_in_category(self, category):
+        return len(self.filter(category__in=category))
+        
     def get_all_for_page(self, page, category=None):
         """ Returns the latest Announcement instances.
         """
@@ -21,23 +25,19 @@ class PublishedBlogPostManager(models.Manager):
         return self.filter(display_on_page=page).order_by("-date_published")
 
 class BlogPostCategoryManager(models.Manager):
-    def get_non_empty_categories_for_page(self, page, counts=False):
-        from vcms.simpleblogs.models import BlogPage, BlogPost
-        blogposts = BlogPost.published.filter(display_on_page=page)
-        if counts:
-            categories = {}
-            for post in blogposts:
-                for category in post.category.all():
-                    if categories.has_key(category.name):
-                        categories[category.name]['count'] += 1
-                        categories[category.name]['model'] = category
-                    else:
-                        categories[category.name] = {}
-                        categories[category.name]['count']=1
-                        categories[category.name]['model'] = category
+    
+    def get_count_in_category(self, category):
+        return len(self.get(slug=category.slug).blogpost_set.all())
 
+    def get_non_empty_categories_for_page(self, page, counts=False):
+        categories_len= {}
+        if counts:
+            for category in self.all():
+                categories_len[category.name] = {'model': category
+                                            ,'count' : self.get_count_in_category(category)
+                                            }
         else:
-            categories = [category.name for category in post.category.all() for post in blogposts]
+            categories_len[category.name] = {'model': category }
         
-        return categories
+        return categories_len
         

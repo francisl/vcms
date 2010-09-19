@@ -10,6 +10,7 @@ from tagging.fields import TagField
 #from vcms.www.models.page import PageElementPosition
 from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
 from vcms.simpleblogs.managers import BlogPageManager, PublishedBlogPostManager, BlogPostCategoryManager
+from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
 from tagging.models import Tag
 
 APP_SLUGS = "blogs"
@@ -35,7 +36,7 @@ class BlogPostCategory(AnnouncementPostCategory):
 class BlogPost(AnnouncementPost):
     display_on_page = models.ForeignKey(BlogPage)
     category = models.ManyToManyField(BlogPostCategory)
-    published = PublishedBlogPostManager()
+    published = PublishedAnnouncementPostManager()
     
     class Meta:
         verbose_name_plural = _("Blog Posts")

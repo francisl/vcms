@@ -1,10 +1,11 @@
 {% extends "master.html" %}
 {% load search_widget %}
-{% load tree %}
-{% load thumbnail %}
-{% block vcms_main_content %}
+{% load i18n %}
 {% load humanize %}
+{% load thumbnail %}
+{% load tree %}
 
+{% block vcms_main_content %}
     <div class="vcms_container_relative">
         <div class="vcms_content">
             <h1><span style="color: #444444;">{{ page_name }}</span></h1>
@@ -28,11 +29,18 @@
 	{% if categories %}
     <div id='vcms_main_content_inside_navigation'>
 	   <dl><dt><h4>Categories</h4></dt>
-	    {% for category, values in categories.items %}
+	       {% for category, values in categories.items %}
 	        <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"<dd>{{ category }} ({{ values.count }})</dd></a>
-	    {% endfor %}
+	        {% endfor %}
+            <br />
+            <dt><h4>Archives</h4></dt>
+    	    {% for archive in archives %}
+    	        {% if archive.items_count %}
+    	        <a href="/blogs/{{ page_name }}/{{ archive.year }}/{{ archive.month }}/"<dd>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dd></a>
+    	        {% endif %}
+    	    {% endfor %}
+    	        <a href="/blogs/{{ page_name }}/-{{ older_archives.date|date:"Y" }}/"<dd>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dd></a>
 	    </dl>
-
     </div>
     {% endif %}
 {% endblock vcms_main_content %}
