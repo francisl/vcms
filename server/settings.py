@@ -151,7 +151,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # VIMBA CMS APPS
                   ,'vcms.www'
                   ,'vcms.simpleblogs'
-                  ,'vcms.simplenews'
+                  #,'vcms.simplenews'
                   ,'hwm'
                   ,'vcms.themes'
                   ,'vcontact'
