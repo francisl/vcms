@@ -21,12 +21,6 @@ class ImageGalleryPageManager(models.Manager):
         except:
             return self.get_default_page()
 
-    def get_seletcted_page(self, page):
-        try:
-            return self.get(slug=page)
-        except:
-            return None
-        
     def get_all_images_for_page(gallery_page):
         categories = self.display_category.all()
         images = Image.models.filter(category__in=categories)

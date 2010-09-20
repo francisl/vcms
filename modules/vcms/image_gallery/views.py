@@ -1,46 +1,49 @@
 # Create your views here.
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 from django.core.paginator import Paginator
 
 from site_media.models import Image, ImageCategory
-from vcms.image_gallery.models import ImageGalleryPage
 from hwm.paginator import generator as pgenerator
 
+from vcms.www.views.html import _get_page_parameters
+from vcms.image_gallery.models import ImageGalleryPage
 
 def gallery(request, page=None, category=None, page_number=1):
     reverse_kwargs={}
-    gallery_page = ImageGalleryPage.objects.get_seletcted_page(page)
     reverse_kwargs['page'] = page
-    if gallery_page == None:
-        raise Http404
+    
+    page = get_object_or_404(ImageGalleryPage, slug=page)
+    page_info = _get_page_parameters(page)
 
     images_category = ImageCategory.objects.filter(default_name=category)
     if len(images_category) > 0:
         reverse_kwargs['category'] = category
-    images = gallery_page.get_all_images_for_category(images_category)
+    images = page.get_all_images_for_category(images_category)
     
-    thumbnail_size =  str(gallery_page.thumbnail_width) + 'x' + str(gallery_page.thumbnail_height)
+    thumbnail_size =  str(page.thumbnail_width) + 'x' + str(page.thumbnail_height)
     
     reverse_url = "vcms.image_gallery.views.gallery"
 
-    paginator = Paginator(images, gallery_page.thumbnail_per_page)
+    paginator = Paginator(images, page.thumbnail_per_page)
     if int(page_number) > int(paginator.num_pages):
         page_number = paginator.num_pages
-    page_paginator = pgenerator.get_page_navigation(paginator, page_number, reverse_url, reverse_kwargs=reverse_kwargs)
+    paginator_html = pgenerator.get_page_navigation(paginator, page_number, reverse_url, reverse_kwargs=reverse_kwargs)
     
-    page = paginator.page(page_number)
+    paginator_page = paginator.page(page_number)
 
 
-    start_index = page.start_index()-1
-    end_index = page.end_index()
+    start_index = paginator_page.start_index()-1
+    end_index = paginator_page.end_index()
     
+    print(type(page))
     return render_to_response('gallery_content.html'
-                              ,{ 'gallery_categories': gallery_page.get_image_categories() 
+                              ,{ 'gallery_categories': page.get_image_categories() 
                                  ,'gallery_images': images[start_index:end_index]
-                                 ,'gallery_page': gallery_page
+                                 ,'gallery_page': page
                                  ,'thumbnail_size': thumbnail_size
-                                 ,'page_paginator': page_paginator }
+                                 ,'paginator_html': paginator_html
+                                 ,'page_info': page_info }
                               ,context_instance=RequestContext(request))

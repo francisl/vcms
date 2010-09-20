@@ -66,13 +66,13 @@ def get_side_menu(page):
 
 def get_page_information(page_slug, method_name):
     page = get_object_or_404(BlogPage, slug=page_slug)
-    page_parameters = _get_page_parameters(page)
+    page_info = _get_page_parameters(page)
     reverse_url="vcms.simpleblogs.views." + method_name
-    return page, page_parameters ,reverse_url
+    return page, page_info ,reverse_url
     
 
 def page(request, page_slug=None, category=None, page_number=1, year=None, month=None, day=None, post_id=None):
-    page, page_parameters ,reverse_url = get_page_information(page_slug, 'page')
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page')
     categories, archives, older_archives = get_side_menu(page)
     
     if category != None:
@@ -87,11 +87,12 @@ def page(request, page_slug=None, category=None, page_number=1, year=None, month
                                   ,'archives': archives
                                   ,'older_archives': older_archives
                                   ,'page_paginator': page_paginator
+                                  ,'page_info': page_info
                                 }
                                 ,context_instance=RequestContext(request))
 
 def page_for_date(request, page_slug=None, category=None, page_number=1, year=None, month=1, day=1, post_id=None):
-    page, page_parameters ,reverse_url = get_page_information(page_slug, 'page_for_date')
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page_for_date')
     categories, archives, older_archives = get_side_menu(page)
     
     blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
@@ -104,6 +105,7 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                   ,'archives': archives
                                   ,'older_archives': older_archives
                                   ,'page_paginator': page_paginator
+                                  ,'page_info': page_info
                                 }
                                 ,context_instance=RequestContext(request))
     
