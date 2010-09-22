@@ -147,7 +147,7 @@ class TextWidget(Widget):
         app_label = 'www'
     
     def __unicode__(self):
-        return self.name
+        return self.__class__.__name__ + ' ' + self.content[:16]
 
     def get_page_where_available(self):
         try:
@@ -155,46 +155,6 @@ class TextWidget(Widget):
             return thiswidget.container.page.get_absolute_url()
         except:
             return None
-
-"""
-class PageLinksWidget(Widget):
-    title = models.CharField(max_length=60)
-    note = models.TextField()
-
-    class Meta:
-        verbose_name= "Widget - Page links"
-        verbose_name_plural = "Widget - Page links"
-        ordering = ['title']
-        app_label = 'www'
-
-    def render(self):
-        content = { 'title': self.title
-                   ,'links': self.links.all().order_by('position')
-                   ,'note': self.note
-                   ,"name": self.name
-                   ,"width": self.width
-                   }
-        return render_to_string("widget/pagelinks.html", content)
-
-    def __unicode__(self):
-        return self.title
-
-class PageLinksWidgetLink(models.Model):
-    link = models.ForeignKey(BasicPage)
-    pagelink = models.ForeignKey(PageLinksWidget, related_name="links")
-    position = PositionField(collection='pagelink')
-
-    objects = PositionManager()
-
-    class Meta:
-        verbose_name= "Widget - Page links' link"
-        verbose_name_plural = "Widget - Page links' links"
-        ordering = ['link']
-        app_label = 'www'
-
-    def __unicode__(self):
-        return self.link.name
-"""
 
 # -----------------
 # CONTENT

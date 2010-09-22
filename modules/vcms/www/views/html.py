@@ -91,15 +91,16 @@ def Generic(request, page=None, context={}):
 
 def MainPage(request, context={}):
     context.update(context["containers"])
+    print("context : %s" % context)
     return render_to_response('mainpage.html',
                               context,
                               context_instance=RequestContext(request))
 
 def SimplePage(request, context={}):
-    from vcms.www.models.widget import RelativeWidgetWrapper
-    content_container = context["containers"]["Content"]
-    ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
-    context.update(content_widgets = ContentWidgets)
+    #from vcms.www.models.widget import RelativeWidgetWrapper
+    #content_container = context["containers"]["Content"]
+    #ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
+    #context.update(content_widgets = ContentWidgets)
 
     #import treebeard
     

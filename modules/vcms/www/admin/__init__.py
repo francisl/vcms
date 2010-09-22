@@ -19,9 +19,9 @@ class LanguageAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Language, LanguageAdmin)
 
-class MainMenuAdmin(treeadmin.TreeAdmin):
-    pass
-admin.site.register(MainMenu, MainMenuAdmin)
+#class MainMenuAdmin(treeadmin.TreeAdmin):
+#    pass
+#admin.site.register(MainMenu, MainMenuAdmin)
 
 class CMSMenuAdmin(admin.ModelAdmin):
     list_display = ('get_tab_name', 'get_slug', 'language','id', 'parent', 'lft', 'rght', 'tree_id')
@@ -53,7 +53,7 @@ class BasicPageAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
     #prepopulated_fields = {"slug": ("name",)}
     #list_display = ('name','module','status','language',)
-admin.site.register(BasicPage, BasicPageAdmin)
+#admin.site.register(BasicPage, BasicPageAdmin)
 
 class MainPageAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
@@ -81,18 +81,26 @@ class ContentInline(admin.StackedInline):
 #    pass
 #admin.site.register(BasicContainer, BasicContainerAdmin)
 
-class GridContainerAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(GridContainer, GridContainerAdmin)
+class PageContainerAdmin(admin.ModelAdmin):
+    list_display = ('page', 'container_type', 'container_name')
+admin.site.register(PageContainer, PageContainerAdmin)
 
-class TableContainerAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(TableContainer, TableContainerAdmin)
+class ContainerWidgetsAdmin(admin.ModelAdmin):
+    list_display = ('widget',)
+admin.site.register(ContainerWidgets, ContainerWidgetsAdmin)
 
-class RelativeContainerAdmin(admin.ModelAdmin):
-    list_display = ['page', 'name']
+#class GridContainerAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(GridContainer, GridContainerAdmin)
+
+#class TableContainerAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(TableContainer, TableContainerAdmin)
+
+#class RelativeContainerAdmin(admin.ModelAdmin):
+#    list_display = ['page', 'name']
     #
-admin.site.register(RelativeContainer, RelativeContainerAdmin)
+#admin.site.register(RelativeContainer, RelativeContainerAdmin)
 
 
 ## ################
@@ -101,18 +109,18 @@ admin.site.register(RelativeContainer, RelativeContainerAdmin)
 #    pass
 #admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
 
-class GridWidgetWrapperAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(GridWidgetWrapper, GridWidgetWrapperAdmin)
+#class GridWidgetWrapperAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(GridWidgetWrapper, GridWidgetWrapperAdmin)
 
-class TableWidgetWrapperAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
+#class TableWidgetWrapperAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
 
-class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
-    list_display = ['widget', 'widget_type']
-    list_filter = ('container',)
-admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
+#class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
+#    list_display = ['widget', 'widget_type']
+#    list_filter = ('container',)
+#admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
 
 #class WidgetAdmin(admin.ModelAdmin):
 #    pass
@@ -122,36 +130,6 @@ class TextWidgetAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 admin.site.register(TextWidget, TextWidgetAdmin)
 
-
-"""
-NEED TO BE REDONE
-class DashboardElementInline(admin.StackedInline):
-    model = DashboardElement
-    extra = 1
-
-class DashboardPreviewInline(admin.TabularInline):
-    model = DashboardPreview
-    extra = 2
-
-DASHBOARD_MODULES = [DashboardElementInline,DashboardPreviewInline]
-# now scan to cms apps module to see if something wants to register to dahsboard
-for module in settings.PAGE_MODULES:
-    try:
-        # loading requirements first
-        __import__(module['models'], globals(), locals(), [module["model"]])
-        # loading module into dashboard list
-        mod = __import__(module["admin"], globals(), locals(), [module["model"]])
-        inline_mod = getattr(mod,module["inline"]) 
-        DASHBOARD_MODULES.append(inline_mod)
-
-    except:
-        pass
-        #print("modules exception : %s" % module)
-
-class DashboardPageAdmin(admin.ModelAdmin):
-    inlines = DASHBOARD_MODULES
-admin.site.register(DashboardPage, DashboardPageAdmin)
-"""
 
 # -- BANNER
 # -----------

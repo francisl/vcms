@@ -6,6 +6,18 @@
 
 from django.db import models
 
+
+class PageContainerManager(models.Manager):
+    def get_containers_for_page(self, page):
+        return self.filter(page=page)
+
+    def get_container_for_page_of_type(self, page, type, container_name):
+        return self.filter(page=page).filter(container_type=type).filter(container_name=container_name)
+        
+class ContainerWidgetsManager(models.Manager):
+    def get_widgets_for_container(self, container):
+        return self.filter(container=container)
+
 class BasicContainerManager(models.Manager):
     def get_widgets(self):
         raise NotImplementedError

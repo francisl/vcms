@@ -1,5 +1,5 @@
 <div class="vcms_container_relative">
      {% for w in widgets %}
-        {{w.render|safe}}
+        {{ w.widget.render|safe }}
      {% endfor %}
 </div>

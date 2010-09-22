@@ -102,6 +102,8 @@ class MenuSeparator(BasicPage):
 
     class Meta:
         app_label = "www"
+        verbose_name = 'Menu - Separator'
+        verbose_name_plural = 'Menu - Separator'
 
     def get_absolute_url(self):
         return "/" + self.external_link

@@ -1,6 +1,7 @@
-{% extends "master.html" %}
+{% extends "master_frame.html" %}
 {% load search_widget %}
 {% load tree %}
+{% load containers %}
 
 <!--=========NAVIGATION=========== -->
 {% block navigation %}
@@ -14,8 +15,9 @@
     {{ block.super }}
     <div class="vcms_container_relative main_content">
         <div class="vcms_content">
-            <h1>{{ page_info.page.get_menu.get_root }} / <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+            <h1>{% if page_info.page.get_menu.get_root %}{{ page_info.page.get_menu.get_root }} / {% endif %}<span style="color: #444444;">{{ page_info.page.name }}</span></h1>
         </div>
+        {% relative_container page_info.current_page 'content' %}
 		<!-- Content -->
 		{% for c in content_widgets %}
           {{ c.widget.render|safe  }}

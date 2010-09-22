@@ -48,6 +48,9 @@ class CMSMenu(models.Model):
     
     class Meta:
         app_label = 'www'
+        verbose_name = 'Menu - Master'
+        verbose_name_plural = 'Menu - Master'
+        
         ordering = ['tree_id', 'lft']
         
     def __unicode__(self):
@@ -81,6 +84,8 @@ class MenuLocalLink(models.Model):
     
     class Meta:
         app_label = "www"
+        verbose_name = 'Menu - Local Link'
+        verbose_name_plural = 'Menu - Local Link'
     
     def __unicode__(self):
         return self.name

@@ -4,20 +4,70 @@
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 30-05-2010.
 
+import inspect
+import sys
+
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 
 from vcms.www.models.page import BasicPage
+from vcms.www.managers.containers import PageContainerManager
+from vcms.www.managers.containers import ContainerWidgetsManager
 from vcms.www.managers.containers import BasicContainerManager
 from vcms.www.managers.containers import TableContainerManager
 from vcms.www.managers.containers import RelativeContainerManager
 from vcms.www.managers.containers import GridContainerManager
 
-import inspect
-import sys
+CONTAINER_TYPE= (('relative' ,"Relative"),('table' ,"Table"))
 
+class PageContainer(models.Model):
+    container_name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
+    page = models.ForeignKey(BasicPage)
+    container_type = models.CharField(max_length=20, choices=CONTAINER_TYPE, default=CONTAINER_TYPE[0])
+    objects = PageContainerManager()
 
+    class Meta:
+        app_label = 'www'
+        verbose_name = "Container - Page"
+        verbose_name_plural = "Container - Pages"
+        
+    def __unicode__(self):
+        return self.page.name + " - " + self.container_type + " - " + self.container_name
+        
+    def get_widgets(self):
+        return ContainerWidgets.objects.filter(container=self)
+
+class ContainerWidgets(models.Model):
+    widget_type = models.ForeignKey(ContentType)
+    widget_id = models.PositiveIntegerField()
+    widget = generic.GenericForeignKey('widget_type', 'widget_id')
+
+    container = models.ForeignKey(PageContainer, related_name="page_container")
+
+    objects = ContainerWidgetsManager()
+
+    #table positionning
+    table_row = models.IntegerField()
+    table_col = models.IntegerField()
+    table_row_span = models.IntegerField()
+    table_col_span = models.IntegerField()
+
+    #Relativ positionning
+    position = models.IntegerField(unique=True)
+
+    class Meta:
+        app_label = 'www'
+        verbose_name = "Container - Widget"
+        verbose_name_plural = "Container - Widgets"
+
+    def __unicode__(self):
+        return self.widget.name
+                
+                
+        
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     page = models.ForeignKey(BasicPage)
