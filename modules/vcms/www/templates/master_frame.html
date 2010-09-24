@@ -15,7 +15,7 @@
     <meta name="description" content="{% if page_info.current_page.description %} {{ page_info.current_page.description|striptags }} {% endif%} {% block metadescription %} {% endblock metadescription %}">
     <meta name="keywords" content="{{ page_info.current_page.keywords }}{% block keywords %} {% endblock keywords %}">
     
-    <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %}Simthetiq Inc. {% block title %}Real-Time 3D models for simulation and Game {% endblock title %}</title>
+    <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %} {{ page_info.data.title }} {% block title %}{{ page_info.data.description }}{% endblock title %}</title>
     
     {% compress css %}
         <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/favicon.ico" />
@@ -94,13 +94,15 @@
         </div><!-- vcms_content_body -->
         
         <!-- =========footer=========== -->
+        {% if page_info.data.footer %}
         <div id="footing" >
             <div class="footing_content">
             {% block vcms_footer %}
-                Simthetiq &copy; 2010 |<a href="/www/page/privacy_policy/"><span style="color: #aaa;"> Privacy Policy </span></a>
+               {{ page_info.data.footer }}
             {% endblock vcms_footer %}
             </div>
         </div>
+        {% endif %}
     </div><!-- vcms_body -->
 <!-- =========GOOGLE SCRIPT=========== -->
 <!--  

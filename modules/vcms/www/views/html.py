@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import Template, Context, RequestContext 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 import inspect
 # external requirement
@@ -38,14 +39,17 @@ def _get_page_parameters(page=None):
         module , menu_style, current_page, page
     """
     page_info = {}
+    page_info.update(menu_style = DROPDOWN_MENU)
+    page_info.update(data = { 'title': settings.SITE_NAME
+                                ,'description':settings.SITE_DESCRIPTION
+                                ,'footer':settings.FOOTER_HTML })
     if page:
         page_info.update(module = page.module)
-        page_info.update(menu_style = DROPDOWN_MENU)
         page_info.update(current_page = page)
         page_info.update(page = page)
+
     else:
         page_info.update(module = None)
-        page_info.update(menu_style = DROPDOWN_MENU)
         page_info.update(current_page = None)
         page_info.update(page = None)
     return page_info
