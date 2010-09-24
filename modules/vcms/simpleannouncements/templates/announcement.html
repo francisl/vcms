@@ -9,7 +9,7 @@
 <div class="vcms_content">
     <h1><span style="color: #444444;">{{ page_name }}</span></h1>
 </div>
-    <div class="vcms_container_relative">
+    <div class="vcms_column_container">
         <!-- Content -->
         <div class="vcms_inner_content">
         {% for post in posts %}
@@ -21,9 +21,10 @@
                 <br />
             </div>
         {% endfor %}
-        </div>
         <br />
 		{{ page_paginator }}
+        </div>
+
     </div>
     
 	{% if categories %}
