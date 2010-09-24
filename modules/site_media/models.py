@@ -11,6 +11,7 @@ IMAGE_UPLOAD_TO = "uploadto/imagegallery/images/"
 class ImageCategory(models.Model):
     default_name = models.CharField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(max_length=150, unique=True)
     
     #objects = managers.ImageCategoryManager()
     

@@ -24,7 +24,7 @@
 	   {% if gallery_categories %}
 	   <dl><dt><h4>Categories</h4></dt>
 	    {% for category in gallery_categories %}
-	        <a href="/gallery/{{ gallery_page.slug }}/{{ category }}/"<dd>{{ category }} ({{ category.get_image_quantity }})</dd></a>
+	        <a href="/gallery/{{ gallery_page.slug }}/{{ category.slug }}/"<dd>{{ category }} ({{ category.get_image_quantity }})</dd></a>
 	    {% endfor %}
 	    </dl>
 	    {% endif %}
