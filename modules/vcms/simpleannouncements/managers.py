@@ -14,8 +14,7 @@ from vcms.www.models.page import STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
 
 class PublishedAnnouncementPostManager(models.Manager):
     def get_latest(self):
-        """
-            Returns the latest Announcement instances.
+        """ Returns the latest Announcement instances.
         """
         return self.order_by("-date_published")
 
@@ -28,3 +27,8 @@ class PublishedAnnouncementPostManager(models.Manager):
         if category:
             return self.filter(display_on_page=page).filter(category__slug__contains=category).order_by("-date_published")
         return self.filter(display_on_page=page).order_by("-date_published")
+        
+    def get_latest_post_for_page(self, page, qty=1, category=None):
+        if category:
+            return self.filter(display_on_page=page).filter(category__slug__contains=category).order_by("-date_published")[:qty]
+        return self.filter(display_on_page=page).order_by("-date_published")[:qty]

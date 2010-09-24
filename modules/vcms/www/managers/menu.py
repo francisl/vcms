@@ -20,6 +20,11 @@ class MainMenuManager(models.Manager):
         #root.add_child(node)
         pass
         
+    def get_root_menu_if_exist(self):
+        if len(self.ancestors) > 0 :
+            return self.ancestors[0]
+        return None
+
     def get_root_menu(self):
         return self.get_first_root_node()
     
@@ -30,7 +35,6 @@ class MainMenuManager(models.Manager):
     def get_submenu(self):
         from hwm.tree import helper
         """ return navigation tree as a list containing tree node dictionary 
-        
             ex:
                 >>> from vcms.www.models import menu
                 >>> mm = menu.MainMenu

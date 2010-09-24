@@ -7,7 +7,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
-#from vcms.www.models.page import PageElementPosition
+from django.template.loader import render_to_string
+
+from vcms.www.models.widget import Widget
 from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
 from vcms.simpleblogs.managers import BlogPageManager, PublishedBlogPostManager, BlogPostCategoryManager
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
@@ -36,6 +38,7 @@ class BlogPostCategory(AnnouncementPostCategory):
 class BlogPost(AnnouncementPost):
     display_on_page = models.ForeignKey(BlogPage)
     category = models.ManyToManyField(BlogPostCategory)
+    
     published = PublishedAnnouncementPostManager()
     
     class Meta:
@@ -46,11 +49,28 @@ class BlogPost(AnnouncementPost):
     def __unicode__(self):
         return self.title
 
-"""
-class BlogPageModule(PageElementPosition):
-    from vcms.www.models.page import DashboardPage as DP
-    page = models.ForeignKey(DP)
-    tags = TagField()
-    title = models.CharField(max_length="60", help_text=_("Max 60 characters"), verbose_name=_("Title"))
-"""
-   
+        # -----------------
+# CONTENT
+# -----------------
+class BlogPostWidget(Widget):
+    page = models.ForeignKey(BlogPage)
+    display_elements = models.PositiveIntegerField(default=2)
+    display_category = models.ForeignKey(BlogPostCategory, null=True, blank=True, help_text=_("select nothings to display all categories"))
+    display_image = models.BooleanField(default=True)
+    
+    def render(self):
+        print("RENDER IN")
+        posts = BlogPost.published.get_latest_post_for_page(self.page) #, self.display_elements)
+        #posts = BlogPost.published.all()
+        print("posts = %s" % posts)
+        widget =  render_to_string("widget/announcement.html"
+                                    ,{ 'name': self.name, 'posts':posts, 'width' : self.get_width(), 'height': self.get_height() })
+        print("Widget = %s" % widget)
+        return widget
+
+    class Meta:
+        verbose_name= "Widget - Blog"
+        verbose_name_plural = "Widget - Blogs"
+
+    def __unicode__(self):
+        return self.__class__.__name__ + ' ' + self.name

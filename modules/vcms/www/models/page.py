@@ -59,6 +59,8 @@ class BasicPage(models.Model):
     
     objects = BasicPageManager()
 
+    display_title = models.BooleanField(default=True)
+
     # Generic FK to the container, used as an inheritance workaround
     #widget_type = models.ForeignKey(ContentType)
     #widget_id = models.PositiveIntegerField()

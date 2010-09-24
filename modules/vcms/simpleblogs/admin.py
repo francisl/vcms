@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 24-03-2010.
 
 from django.contrib import admin
-from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
+from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory, BlogPostWidget
 
 
 class BlogPageAdmin(admin.ModelAdmin):
@@ -19,3 +19,7 @@ admin.site.register(BlogPost, BlogPostAdmin)
 class BlogPostCategoryAdmin(admin.ModelAdmin):
     pass
 admin.site.register(BlogPostCategory, BlogPostCategoryAdmin)
+
+class BlogPostWidgetAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(BlogPostWidget, BlogPostWidgetAdmin)

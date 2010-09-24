@@ -50,13 +50,13 @@ class ContainerWidgets(models.Model):
     objects = ContainerWidgetsManager()
 
     #table positionning
-    table_row = models.IntegerField()
-    table_col = models.IntegerField()
-    table_row_span = models.IntegerField()
-    table_col_span = models.IntegerField()
+    table_row = models.PositiveIntegerField(default=0)
+    table_col = models.PositiveIntegerField(default=0)
+    table_row_span = models.PositiveIntegerField(default=0)
+    table_col_span = models.PositiveIntegerField(default=0)
 
     #Relativ positionning
-    position = models.IntegerField(unique=True)
+    position = models.PositiveIntegerField(default=1)
 
     class Meta:
         app_label = 'www'

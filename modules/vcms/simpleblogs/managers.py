@@ -13,6 +13,7 @@ class BlogPageManager(models.Manager):
     def get_blog_page_from_string(self, page_name):
         return self.get(slug=page_name)
 
+
 class PublishedBlogPostManager(models.Manager):
     def get_count_in_category(self, category):
         return len(self.filter(category__in=category))

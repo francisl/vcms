@@ -1,0 +1,8 @@
+<div class="vcms_blog_widget" style="width: {{ width }}; height: {{ height }}; overflow: hidden">
+    <h1>{{ name|safe }}</h1>
+    {% for post in posts %}
+        <div class="vcms_blog_widget_post">
+            {{ post.content|safe }}
+        </div>
+    {% endfor %}
+</div>

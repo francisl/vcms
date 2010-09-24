@@ -13,14 +13,10 @@
 
 {% block vcms_main_content %}
     {{ block.super }}
-    <div class="vcms_container_relative main_content">
         <div class="vcms_content">
-            <h1>{% if page_info.page.get_menu.get_root %}{{ page_info.page.get_menu.get_root }} / {% endif %}<span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+            {% if page_info.page.display_title %}
+                <h1>{% if page_info.page.get_menu.get_root_menu_if_exist %}{{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}<span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+            {% endif %}
         </div>
         {% relative_container page_info.current_page 'content' %}
-		<!-- Content -->
-		{% for c in content_widgets %}
-          {{ c.widget.render|safe  }}
-        {% endfor %}
-	</div>
 {% endblock vcms_main_content %}
