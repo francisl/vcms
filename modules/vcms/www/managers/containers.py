@@ -12,7 +12,10 @@ class PageContainerManager(models.Manager):
         return self.filter(page=page)
 
     def get_container_for_page_of_type(self, page, type, container_name):
-        return self.filter(page=page).filter(container_type=type).filter(container_name=container_name)
+        container = self.filter(page=page).filter(container_type=type).filter(container_name=container_name)
+        if len(container) > 0:
+            return container[0]
+        return []
         
 class ContainerWidgetsManager(models.Manager):
     def get_widgets_for_container(self, container):

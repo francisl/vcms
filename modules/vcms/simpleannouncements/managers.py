@@ -30,5 +30,5 @@ class PublishedAnnouncementPostManager(models.Manager):
         
     def get_latest_post_for_page(self, page, qty=1, category=None):
         if category:
-            return self.filter(display_on_page=page).filter(category__slug__contains=category).order_by("-date_published")[:qty]
+            return self.filter(display_on_page=page).filter(category__slug__contains=category.slug).order_by("-date_published")[:qty]
         return self.filter(display_on_page=page).order_by("-date_published")[:qty]

@@ -134,7 +134,7 @@ urlpatterns += patterns('',
     # Uncomment this for admin:
     #(r'admin/', include('mptt.admin.urls')),
     (r'^gestion/style', 'vcms.www.admin.views.show_style'),
-    (r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
+    #(r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
     (r'^gestion/', include(admin.site.urls)),
     url(r'^contact/', include('vcontact.urls')),
 )

@@ -5,6 +5,7 @@
 {% load i18n %}
 {% load quicklinks %}
 {% load cms_theme %}
+{% load containers %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -40,6 +41,9 @@
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
 <!-- =========header=========== -->
     <div id="vcms_body">
+        {% if page_info.current_page %}
+        {% absolute_container page_info.current_page 'page_absolute' %}
+        {% endif %}
         {% show_quicklinks %}
         <div id="vcms_header">  
             <div id="vcms_header_logo" onclick="document.location.href='/'" onmouseover="style.cursor='pointer'">

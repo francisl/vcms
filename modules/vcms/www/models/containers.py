@@ -21,7 +21,7 @@ from vcms.www.managers.containers import TableContainerManager
 from vcms.www.managers.containers import RelativeContainerManager
 from vcms.www.managers.containers import GridContainerManager
 
-CONTAINER_TYPE= (('relative' ,"Relative"),('table' ,"Table"))
+CONTAINER_TYPE= (('relative' ,"Relative"),('table' ,"Table"),('absolute' ,"Absolute"))
 
 class PageContainer(models.Model):
     container_name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
@@ -49,14 +49,24 @@ class ContainerWidgets(models.Model):
 
     objects = ContainerWidgetsManager()
 
+    #style
+    css_style = models.CharField(max_length=200, null=True, blank=True)
+
     #table positionning
     table_row = models.PositiveIntegerField(default=0)
     table_col = models.PositiveIntegerField(default=0)
     table_row_span = models.PositiveIntegerField(default=0)
     table_col_span = models.PositiveIntegerField(default=0)
 
+    #Static positionning
+    absolute_top = models.IntegerField(blank=True, null=True)
+    absolute_bottom = models.IntegerField(blank=True, null=True)
+    absolute_left = models.IntegerField(blank=True, null=True)
+    absolute_right = models.IntegerField(blank=True, null=True)
+        
     #Relativ positionning
-    position = models.PositiveIntegerField(default=1)
+    relative_position = models.PositiveIntegerField(default=1)
+    
 
     class Meta:
         app_label = 'www'
@@ -66,7 +76,20 @@ class ContainerWidgets(models.Model):
     def __unicode__(self):
         return self.widget.name
                 
-                
+    def get_style(self):
+        style = ""
+
+        if self.container.container_type == 'absolute':
+            style="position: absolute; "
+            if self.absolute_top >= 0:
+                style += "top : %spx; " % self.absolute_top
+            if self.absolute_bottom >= 0:
+                style += "bottom : %spx; " % self.absolute_bottom
+            if self.absolute_left >= 0:
+                style += "left : %spx; " % self.absolute_left
+            if self.absolute_right >= 0:
+                style += "right : %spx; " % self.absolute_right
+        return style
         
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))

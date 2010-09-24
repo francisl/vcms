@@ -59,13 +59,9 @@ class BlogPostWidget(Widget):
     display_image = models.BooleanField(default=True)
     
     def render(self):
-        print("RENDER IN")
-        posts = BlogPost.published.get_latest_post_for_page(self.page) #, self.display_elements)
-        #posts = BlogPost.published.all()
-        print("posts = %s" % posts)
+        posts = BlogPost.published.get_latest_post_for_page(self.page, qty=self.display_elements, category=self.display_category) #, self.display_elements)
         widget =  render_to_string("widget/announcement.html"
                                     ,{ 'name': self.name, 'posts':posts, 'width' : self.get_width(), 'height': self.get_height() })
-        print("Widget = %s" % widget)
         return widget
 
     class Meta:

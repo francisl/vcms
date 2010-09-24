@@ -241,6 +241,6 @@ def testCMSMenuForm(request, menuid):
 
     return render_to_response('testmovemenu.html',
                               {'form': form
-                               ,'menu': menu },
+                               ,'menu': menu, 'page_info': _get_page_parameters() },
                               context_instance=RequestContext(request))
 
