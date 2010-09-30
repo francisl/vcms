@@ -19,6 +19,5 @@ def absolute_container(current_page, container_name):
         return {}
     widgets = ContainerWidgets.objects.get_widgets_for_container(page_container)
     container_widget = ContainerWidgets.objects.get(container=page_container)
-    print("page containre = %s" % container_widget)
     style=container_widget.get_style()
     return { 'container_widget': container_widget, 'widgets': widgets, 'style': style }

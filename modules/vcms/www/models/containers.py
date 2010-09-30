@@ -41,6 +41,15 @@ class PageContainer(models.Model):
         return ContainerWidgets.objects.filter(container=self)
 
 class ContainerWidgets(models.Model):
+    MESURE_CHOICES = ((0, "px")
+                     ,(1, "em")
+                     ,(2, "%")
+                     )
+    FLOAT_CHOICES = (('float: left;', "Left")
+                      ,('clear: both;', "Clear")
+                      ,('float: right;', "Right")
+                      )
+                     
     widget_type = models.ForeignKey(ContentType)
     widget_id = models.PositiveIntegerField()
     widget = generic.GenericForeignKey('widget_type', 'widget_id')
@@ -49,7 +58,13 @@ class ContainerWidgets(models.Model):
 
     objects = ContainerWidgetsManager()
 
+    width = models.FloatField(default=200)
+    width_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
+    height = models.FloatField(default=0)
+    height_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
+
     #style
+    float_position = models.CharField(max_length=40, default=1, choices=FLOAT_CHOICES)
     css_style = models.CharField(max_length=200, null=True, blank=True)
 
     #table positionning
@@ -63,11 +78,10 @@ class ContainerWidgets(models.Model):
     absolute_bottom = models.IntegerField(blank=True, null=True)
     absolute_left = models.IntegerField(blank=True, null=True)
     absolute_right = models.IntegerField(blank=True, null=True)
-        
+
     #Relativ positionning
     relative_position = models.PositiveIntegerField(default=1)
     
-
     class Meta:
         app_label = 'www'
         verbose_name = "Container - Widget"
@@ -90,6 +104,19 @@ class ContainerWidgets(models.Model):
             if self.absolute_right >= 0:
                 style += "right : %spx; " % self.absolute_right
         return style
+        
+    def get_width(self):
+        if self.width > 0:
+            return str(self.width) + self.MESURE_CHOICES[self.width_mesure][1]
+        return "none"
+
+    def get_width_mesure(self):
+        return self.MESURE_CHOICES[self.width_mesure][1]
+
+    def get_height(self):
+        if self.height > 0:
+            return str(self.height) + self.MESURE_CHOICES[self.height_mesure][1]
+        return "none"
         
 class BasicContainer(models.Model):
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))

@@ -2,17 +2,20 @@
 
 {% block extrahead %}
 {{ block.super }}
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}Library/jquery/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}Library/editor/tiny_mce/tiny_mce.js"></script>
 <script language="javascript" type="text/javascript">
 
 tinyMCE.init({
 	theme : "advanced"
 	,skin : "default"
-    ,mode: "textareas"
+    ,mode: "exact"
+    ,elements : 'id_content, id_description'
 	,theme_advanced_toolbar_location : "top"
 	,theme_advanced_toolbar_align : "left"
 	,auto_resize : true
 	,relative_urls : false
+	,height : "480"
 });
 </script> 
 

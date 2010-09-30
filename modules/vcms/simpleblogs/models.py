@@ -61,7 +61,7 @@ class BlogPostWidget(Widget):
     def render(self):
         posts = BlogPost.published.get_latest_post_for_page(self.page, qty=self.display_elements, category=self.display_category) #, self.display_elements)
         widget =  render_to_string("widget/announcement.html"
-                                    ,{ 'name': self.name, 'posts':posts, 'width' : self.get_width(), 'height': self.get_height() })
+                                    ,{ 'name': self.name, 'posts':posts })
         return widget
 
     class Meta:

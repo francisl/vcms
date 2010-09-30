@@ -84,16 +84,7 @@ class Widget(models.Model):
         Contain all information required for all widget
         Make sure that a render method is override (to provide html)
     """
-    MESURE_CHOICES = ((0, "px")
-                     ,(1, "em")
-                     ,(2, "%")
-                     )
-    
     name = models.CharField(max_length="40", help_text="Max 40 characters")
-    width = models.FloatField(default=200)
-    width_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
-    height = models.FloatField(default=0)
-    height_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
     
     class Meta:
         abstract = True
@@ -104,19 +95,6 @@ class Widget(models.Model):
 
     def render(self):
         raise NotImplementedError()
-
-    def get_width(self):
-        if self.width > 0:
-            return str(self.width) + self.MESURE_CHOICES[self.width_mesure][1]
-        return "none"
-        
-    def get_width_mesure(self):
-        return self.MESURE_CHOICES[self.width_mesure][1]
-
-    def get_height(self):
-        if self.height > 0:
-            return str(self.height) + self.MESURE_CHOICES[self.height_mesure][1]
-        return "none"
 
 
 # -----------------
@@ -148,7 +126,6 @@ class TextWidget(Widget):
     def render(self):
         content = { 'name': self.name
                    ,'content' : self.content
-                   ,'width': self.get_width()
                    ,'style': self.style
                    }
         return render_to_string("widget/content.html", content)
@@ -160,7 +137,7 @@ class TextWidget(Widget):
         app_label = 'www'
     
     def __unicode__(self):
-        return self.__class__.__name__ + ' ' + self.content[:16]
+        return self.__class__.__name__ + ' : ' + self.name
 
     def get_page_where_available(self):
         try:
@@ -183,6 +160,5 @@ class TextWidgetIndex(SearchIndex):
     def get_queryset(self):
         """Used when the entire index for model is updated."""
         return TextWidget.objects.filter(published=True)
-
-
+        
 site.register(TextWidget, TextWidgetIndex)

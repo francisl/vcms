@@ -1,5 +1,7 @@
 <div class="vcms_container_relative">
      {% for w in widgets %}
+     <div style="{{ w.float_position }} width: {{  w.get_width }};">
         {{ w.widget.render|safe }}
+     </div>
      {% endfor %}
 </div>

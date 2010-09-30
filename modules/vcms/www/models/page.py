@@ -61,11 +61,6 @@ class BasicPage(models.Model):
 
     display_title = models.BooleanField(default=True)
 
-    # Generic FK to the container, used as an inheritance workaround
-    #widget_type = models.ForeignKey(ContentType)
-    #widget_id = models.PositiveIntegerField()
-    #widget = generic.GenericForeignKey('widget_type', 'widget_id')
-
     class Meta:
         verbose_name = _("Page - Basic page (do not edit)")
         verbose_name_plural = _("Page - Basic pages (do not edit)")
