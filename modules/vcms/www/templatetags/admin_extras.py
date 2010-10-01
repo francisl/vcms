@@ -84,3 +84,8 @@ def get_editable_container_fields(parser, token):
                 args.append(parser.compile_filter(value))
     return get_editable_container_fields_node(type, args, kwargs, asvar)
 get_editable_container_fields = register.tag(get_editable_container_fields)
+
+@register.inclusion_tag('admin/tiny_mce_addons_with_javascript_requirements.html')
+def add_tiny_mce_with_requirements_javascript():
+    from django.core.context_processors import media
+    return media('MEDIA_URL')
