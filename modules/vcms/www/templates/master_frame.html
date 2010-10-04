@@ -121,14 +121,14 @@
     </script>
  -->
     {% block javascript-master %}
-        <script type="text/javascript" src="/vcmsmedia/Library/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/vcmsmedia/Library/jquery/jquery-ui-min.js"></script>
-        <script src="/vcmsmedia/Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="/vcmsmedia/Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
-        <script src="/vcmsmedia/Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="/vcmsmedia/Library/search/inputbox_manager.js"></script>
+        <script type="text/javascript" src="/media/Library/jquery/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="/media/Library/jquery/jquery-ui-min.js"></script>-->
+        <script src="/media/Library/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="/media/Library/banner/jqFancyTransitions.js" type="text/javascript"></script> -->
+        <script src="/media/Library/banner/s3SliderCustom.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/media/Library/search/inputbox_manager.js"></script>
         <!--[if lt IE 7]> <!--  DROP DOWN MENU -->
-        <script type="text/javascript" src="/vcmsmedia/Library/menu/jquery.dropdown.js"></script>
+        <script type="text/javascript" src="/media/Library/menu/jquery.dropdown.js"></script>
         <![endif]-->
         
         {% block javascript-include %}{% endblock javascript-include%}
@@ -151,9 +151,12 @@
                     counter_separator_label: '/' /* The separator for the gallery counter 1 "of" 2 */
                 });
                 
-                $('#s3slider').s3Slider({
-                    timeOut: 4000
-                });
+                if ($('#s3slider').length > 0 ){
+                    $('#s3slider').s3Slider({
+                        timeOut: 4000
+                    });
+                }
+                
                 {% block jquery %} {% endblock jquery %}
             });
         </script>
