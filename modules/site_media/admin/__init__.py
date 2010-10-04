@@ -25,5 +25,7 @@ class ImageDescriptionInline(admin.StackedInline):
 
 class ImageAdmin(admin.ModelAdmin):
     inlines = [ImageDescriptionInline]
+    list_display = ('default_name', 'file', 'file_size',)
+    filter_vertical = ('category',)
 admin.site.register(Image, ImageAdmin)
 
