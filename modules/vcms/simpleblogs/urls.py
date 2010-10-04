@@ -18,6 +18,7 @@ urlpatterns = patterns('vcms.simpleblogs.views'
     ,(r'^(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<year>\d{4})/(?P<month>\d{1,2})/$', 'page_for_date')
     ,(r'^(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<year>\d{4})/$', 'page_for_date')
     
+    ,(r'^(?P<page_slug>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{2})/(?P<post_id>\d+)$', 'page_for_date')
     ,(r'^(?P<page_slug>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{2})/$', 'page_for_date')
     ,(r'^(?P<page_slug>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{1,2})/$', 'page_for_date')
     ,(r'^(?P<page_slug>[-\w]+)/(?P<year>\d{4})/$', 'page_for_date')

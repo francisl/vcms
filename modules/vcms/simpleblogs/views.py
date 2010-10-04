@@ -95,7 +95,10 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
     page, page_info ,reverse_url = get_page_information(page_slug, 'page_for_date')
     categories, archives, older_archives = get_side_menu(page)
     
-    blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
+    if post_id == None:
+        blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
+    else:
+        blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day, post_id=post_id)
     
     pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
     return render_to_response("announcement.html"
@@ -108,6 +111,4 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                   ,'page_info': page_info
                                 }
                                 ,context_instance=RequestContext(request))
-    
-    
     

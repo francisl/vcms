@@ -18,7 +18,9 @@ class PublishedAnnouncementPostManager(models.Manager):
         """
         return self.order_by("-date_published")
 
-    def get_for_page_by_date(self, page, category=None, year=None, month=1, day=1):
+    def get_for_page_by_date(self, page, category=None, year=None, month=1, day=1, post_id=None):
+        if post_id:
+            return self.filter(date_published__year=int(year)).filter(date_published__month=int(month)).filter(id=post_id)
         return self.filter(date_published__year=int(year)).filter(date_published__month=int(month))
         
     def get_all_for_page(self, page, category=None):

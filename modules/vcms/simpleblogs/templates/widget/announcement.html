@@ -1,8 +1,13 @@
+{% load humanize %}
 <div class="vcms_blog_widget" style="overflow: hidden">
     <h1>{{ name|safe }}</h1>
     {% for post in posts %}
+        {% if post.preview %}
         <div class="vcms_blog_widget_post">
-            {{ post.content|safe }}
+            <h3>{{ post.title }}</h3>
+            <h5>{{ post.date_published|naturalday }}</h5>
+            {{ post.preview|safe }}<a href="{{ post.get_absolute_url }}">....</a>
         </div>
+        {% endif %}
     {% endfor %}
 </div>

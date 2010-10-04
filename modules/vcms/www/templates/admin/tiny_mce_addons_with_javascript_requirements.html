@@ -6,7 +6,20 @@ tinyMCE.init({
 	theme : "advanced"
 	,skin : "default"
     ,mode: "exact"
-    ,elements : 'id_content, id_description'
+    ,elements : 'id_preview'
+	,theme_advanced_toolbar_location : "top"
+	,theme_advanced_toolbar_align : "left"
+	,auto_resize : true
+	,relative_urls : false
+	,height : "340"
+	,width: "860"
+});
+
+tinyMCE.init({
+	theme : "advanced"
+	,skin : "default"
+    ,mode: "exact"
+    ,elements : 'id_content, id_description, id_preview'
 	,theme_advanced_toolbar_location : "top"
 	,theme_advanced_toolbar_align : "left"
 	,auto_resize : true

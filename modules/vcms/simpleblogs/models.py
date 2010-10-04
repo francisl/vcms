@@ -49,7 +49,10 @@ class BlogPost(AnnouncementPost):
     def __unicode__(self):
         return self.title
 
-        # -----------------
+    def get_absolute_url(self):
+        return "/%s/%s/%s/%s/%s/%d" % (APP_SLUGS, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+
+# -----------------
 # CONTENT
 # -----------------
 class BlogPostWidget(Widget):

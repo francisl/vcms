@@ -62,11 +62,12 @@ class AnnouncementPostCategory(models.Model):
 
 class AnnouncementPost(models.Model):
     title = models.CharField(max_length=120)
+    preview = models.TextField(help_text=_('Display in widget or for post information and summary'))
     content = models.TextField()
     status = StatusField()
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
-    date_published = models.DateTimeField(auto_now=True, editable=False)
+    date_published = models.DateTimeField(auto_now_add=True, editable=False)
     language = models.ForeignKey(Language, default=Language.objects.get_default_code())
     
     published = PublishedAnnouncementPostManager()
@@ -96,3 +97,4 @@ class AnnouncementPost(models.Model):
         
     def __unicode__(self):
         return self.title
+    
