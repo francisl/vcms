@@ -4,7 +4,7 @@
     {% for post in posts %}
         {% if post.preview %}
         <div class="vcms_blog_widget_post">
-            <h3>{{ post.title }}</h3>
+            <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
             <h5>{{ post.date_published|naturalday }}</h5>
             {{ post.preview|safe }}<a href="{{ post.get_absolute_url }}">....</a>
         </div>
