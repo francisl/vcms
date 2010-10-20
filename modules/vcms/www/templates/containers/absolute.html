@@ -1,6 +1,6 @@
 
 {% for w in widgets %}
-    <div class="vcms_container_absolute" style="z-index:120; {{ style }}">
+    <div class="vcms_container_absolute" style="z-index:120; {{ w.get_style }}">
     {{ w.widget.render|safe }}
     </div>
 {% endfor %}

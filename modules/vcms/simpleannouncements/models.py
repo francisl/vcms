@@ -14,9 +14,9 @@ from django.template import defaultfilters
 from tagging.fields import TagField
 
 from vcms.www.fields import StatusField
-from vcms.www.models.page import BasicPage, STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
-from vcms.www.models import Language
+from site_language.models import Language
+from vcms.www.models.page import BasicPage
 
 APP_SLUGS = "simpleannouncements"
 

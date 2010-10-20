@@ -8,10 +8,6 @@ from datetime import date
 
 from django.db import models
 
-from vcms.www.fields import StatusField
-from vcms.www.models.page import STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
-
-
 class PublishedAnnouncementPostManager(models.Manager):
     def get_latest(self):
         """ Returns the latest Announcement instances.

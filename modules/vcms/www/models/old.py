@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
 from vcms.www.models.page import BasicPage
-#from vcms.www.models import Language
+from site_language.models import Language
 
 # -- CONTENT
 # ----------
@@ -170,29 +170,4 @@ class BannerImage(models.Model):
         #super(BannerImage, self).save()
         #self.banner = ir.save_resized_image(self, self.file, self.file.path, tuple((955, 300)), False)
         super(BannerImage, self).save()
-
-"""
-TODO : remake djapian code to haystack code
-import djapian
-class PageIndexer(djapian.Indexer):
-    fields=["text"]
-    tags=[
-        ("name",  "name" ),
-        ("description",   "description"),
-        ("keywords",    "keywords"  )
-         ]
-    trigger=lambda indexer, obj: obj.status == StatusField.PUBLISHED
-
-class ContentIndexer(djapian.Indexer):
-    fields=["text"]
-    tags=[
-        ("name",  "name" ),
-        ("content",   "content")
-         ]
-    trigger=lambda indexer, obj: obj.page.status == StatusField.PUBLISHED
-
-
-djapian.add_index(Page, PageIndexer, attach_as="indexer")
-djapian.add_index(Content, ContentIndexer, attach_as="indexer")
-"""
 

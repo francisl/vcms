@@ -14,67 +14,67 @@ from positions.fields import PositionField
 from positions import PositionManager
 
 #from vcms.www.managers.widget import ContentManager
-from vcms.www.models.containers import TableContainer, GridContainer, RelativeContainer
+#from vcms.www.models.containers import TableContainer, GridContainer, RelativeContainer
 from vcms.www.models.page import BasicPage
 
 
-class WidgetWrapper(models.Model):
-    # Generic FK to the widget, used as an inheritance workaround
-    widget_type = models.ForeignKey(ContentType)
-    widget_id = models.PositiveIntegerField()
-    widget = generic.GenericForeignKey('widget_type', 'widget_id')
-
-    class Meta:
-        abstract = True
-        verbose_name = "Widget Wrapper"
-        verbose_name_plural = "Widget Wrappers"
-
-    def __unicode__(self):
-        raise NotImplementedError()
-
-    def render(self):
-        """ Renders the widget and returns the resulting HTML produced. """
-        return self.widget.render()
-
-class TableWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(TableContainer, related_name="widgets")
-    row = models.IntegerField()
-    col = models.IntegerField()
-    row_span = models.IntegerField()
-    col_span = models.IntegerField()
-    
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Widget Wrapper - Table"
-        verbose_name_plural = "Widget Wrapper - Table"
-        
-    def __unicode__(self):
-        return 'Widget - ' + self.widget.name
-
-class GridWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(GridContainer, related_name="widgets")
-    position = models.IntegerField(unique=True)
-
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Widget Wrapper - Grid"
-        verbose_name_plural = "Widget Wrapper - Grid"
-
-    def __unicode__(self):
-        return 'Widget - ' + self.widget.name
-
-class RelativeWidgetWrapper(WidgetWrapper):
-    container = models.ForeignKey(RelativeContainer, related_name="widgets")
-    position = models.IntegerField(unique=False)
-
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Widget Wrapper - Relative"
-        verbose_name_plural = "Widget Wrapper - Relative"
-        ordering = ['position']
-    
-    def __unicode__(self):
-        return self.container.page.name + 'Widget - ' + self.widget.name
+#class WidgetWrapper(models.Model):
+#    # Generic FK to the widget, used as an inheritance workaround
+#    widget_type = models.ForeignKey(ContentType)
+#    widget_id = models.PositiveIntegerField()
+#    widget = generic.GenericForeignKey('widget_type', 'widget_id')
+#
+#    class Meta:
+#        abstract = True
+#        verbose_name = "Widget Wrapper"
+#        verbose_name_plural = "Widget Wrappers"
+#
+#    def __unicode__(self):
+#        raise NotImplementedError()
+#
+#    def render(self):
+#        """ Renders the widget and returns the resulting HTML produced. """
+#        return self.widget.render()
+#
+#class TableWidgetWrapper(WidgetWrapper):
+#    container = models.ForeignKey(TableContainer, related_name="widgets")
+#    row = models.IntegerField()
+#    col = models.IntegerField()
+#    row_span = models.IntegerField()
+#    col_span = models.IntegerField()
+#    
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Widget Wrapper - Table"
+#        verbose_name_plural = "Widget Wrapper - Table"
+#        
+#    def __unicode__(self):
+#        return 'Widget - ' + self.widget.name
+#
+#class GridWidgetWrapper(WidgetWrapper):
+#    container = models.ForeignKey(GridContainer, related_name="widgets")
+#    position = models.IntegerField(unique=True)
+#
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Widget Wrapper - Grid"
+#        verbose_name_plural = "Widget Wrapper - Grid"
+#
+#    def __unicode__(self):
+#        return 'Widget - ' + self.widget.name
+#
+#class RelativeWidgetWrapper(WidgetWrapper):
+#    container = models.ForeignKey(RelativeContainer, related_name="widgets")
+#    position = models.IntegerField(unique=False)
+#
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Widget Wrapper - Relative"
+#        verbose_name_plural = "Widget Wrapper - Relative"
+#        ordering = ['position']
+#    
+#    def __unicode__(self):
+#        return self.container.page.name + 'Widget - ' + self.widget.name
 
 # -----------------
 # WIDGETS
@@ -104,7 +104,6 @@ class TextWidget(Widget):
     #CONTENT
     excerpt = models.TextField(verbose_name="Preview")
     content = models.TextField()
-    published = models.BooleanField(default=False)
 
     #appearance
     TEXT_ONLY = 0

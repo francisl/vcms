@@ -21,7 +21,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=150)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_media.ImageCategory'])),
-            ('lang', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['www.Language'])),
+            ('lang', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_language.Language'])),
         ))
         db.send_create_signal('site_media', ['ImageCategoryTranslation'])
 
@@ -48,7 +48,7 @@ class Migration(SchemaMigration):
             ('image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_media.Image'])),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=150)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('lang', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['www.Language'])),
+            ('lang', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['site_language.Language'])),
         ))
         db.send_create_signal('site_media', ['ImageDescription'])
 
@@ -90,7 +90,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'ImageCategoryTranslation'},
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['site_media.ImageCategory']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lang': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['www.Language']"}),
+            'lang': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['site_language.Language']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '150'})
         },
         'site_media.imagedescription': {
@@ -98,10 +98,10 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['site_media.Image']"}),
-            'lang': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['www.Language']"}),
+            'lang': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['site_language.Language']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '150'})
         },
-        'www.language': {
+        'site_language.language': {
             'Meta': {'object_name': 'Language'},
             'language': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'language_code': ('django.db.models.fields.CharField', [], {'max_length': '2', 'primary_key': 'True'})

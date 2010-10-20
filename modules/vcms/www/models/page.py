@@ -3,27 +3,19 @@
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 30-05-2010.
-import datetime
+import datetime, inspect, sys
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.db.models import signals
 
+from site_language.models import Language
+
 from vcms.www.models.menu import CMSMenu
-from vcms.www.models.language import Language
-
 from vcms.www.managers.page import BasicPageManager
-
-STATUS_DRAFT = 0
-STATUS_PUBLISHED = 1
-STATUSES = (
-    (STATUS_PUBLISHED, _('Draft')),
-    (STATUS_PUBLISHED, _('Published')),
-)
-import inspect
-import sys
-
+from vcms.www.managers.containers import DashboardElementManager
+from vcms.www.fields import StatusField
 
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
@@ -41,9 +33,7 @@ class BasicPage(models.Model):
         # TODO : add multi-language fonctionnality
     """
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
-    
-    status = models.PositiveIntegerField(choices=STATUSES, default=STATUSES[STATUS_DRAFT])
-
+    status = models.BooleanField(choices=StatusField.STATUSES, default=StatusField.DRAFT)
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     module = models.CharField(max_length=30, default='', editable=False)
@@ -60,6 +50,14 @@ class BasicPage(models.Model):
     objects = BasicPageManager()
 
     display_title = models.BooleanField(default=True)
+
+    containers = (('content', _('Content'))
+                    ,('side_navigation', _('Side Navigation'))
+                    ,('page_absolute', _('Page Absolute'))
+                    )
+    containers_type = { 'content': 'absolute'
+                        ,'side_navigation': 'relative'
+                        ,'page_absolute': 'absolute' }
 
     class Meta:
         verbose_name = _("Page - Basic page (do not edit)")
@@ -174,21 +172,21 @@ class MainPage(BasicPage):
     def get_absolute_url(self):
         return "/www/page/" + self.slug
     
-    @staticmethod
-    def get_page_containers():
-        from vcms.www.models.containers import ContainerDefinition
-        from vcms.www.models.containers import GridContainer
-        from vcms.www.models.containers import TableContainer
-        from vcms.www.models.containers import RelativeContainer
-        return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
-                    ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
-
-    def get_containers(self):
-        instance_containers = {}
-        for page_container_name, page_container_definition in self.__class__.get_page_containers().items():
-            for container in page_container_definition.type.objects.filter(page=self).filter(name=page_container_name):
-                instance_containers[page_container_name] = container
-        return instance_containers
+#    @staticmethod
+#    def get_page_containers():
+#        from vcms.www.models.containers import ContainerDefinition
+#        from vcms.www.models.containers import GridContainer
+#        from vcms.www.models.containers import TableContainer
+#        from vcms.www.models.containers import RelativeContainer
+#        return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
+#                    ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
+#
+#    def get_containers(self):
+#        instance_containers = {}
+#        for page_container_name, page_container_definition in self.__class__.get_page_containers().items():
+#            for container in page_container_definition.type.objects.filter(page=self).filter(name=page_container_name):
+#                instance_containers[page_container_name] = container
+#        return instance_containers
 
     def get_menu(self):
         return self.menu.all()[0]
@@ -206,12 +204,12 @@ class SimplePage(BasicPage):
     def get_absolute_url(self):
         return "/www/page/" + self.slug
     
-    def get_containers(self):
-        from vcms.www.models.containers import RelativeContainer
-        my_rel_cont = {} 
-        for container in RelativeContainer.objects.filter(page=self): 
-            my_rel_cont[container.name] = container
-        return my_rel_cont
+#    def get_containers(self):
+#        #from vcms.www.models.containers import RelativeContainer
+#        my_rel_cont = {} 
+#        for container in RelativeContainer.objects.filter(page=self): 
+#            my_rel_cont[container.name] = container
+#        return my_rel_cont
 
     def get_menu(self):
         try:
@@ -226,7 +224,7 @@ class SimplePage(BasicPage):
 # DASHBOARD
 # Dashboard is an information page layout that display preview and modules
 #
-from vcms.www.managers.containers import DashboardElementManager
+#from vcms.www.managers.containers import DashboardElementManager
 
 class PageElementPosition(models.Model):
     #PREVIEW
@@ -264,7 +262,6 @@ class DashboardPage(BasicPage):
         self.app_slug = APP_SLUGS
         super(DashboardPage, self).save()
 
-
 class DashboardElement(PageElementPosition):
     """ Text holder that are display in a dashboard element
     """
@@ -293,5 +290,4 @@ class DashboardPreview(PageElementPosition):
         
     def __unicode__(self):
         return self.preview.name
-
 

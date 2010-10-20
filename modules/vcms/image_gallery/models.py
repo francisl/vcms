@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 # CMS
-from vcms.www.models import Language
 from vcms.www.models.page import BasicPage
 from vcms.image_gallery.managers import ImageGalleryPageManager
 from site_media.models import Image
@@ -53,4 +52,5 @@ class ImageGalleryPage(BasicPage):
         if category:
             return Image.objects.filter(category=category)
         else:
-            return self.get_all_images()
+            return []
+            

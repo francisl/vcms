@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.menu import CMSMenu
-from vcms.www.models.page import Language
+from site_language.models import Language
 
 from hwm.tree import helper
 from hwm.tree import generator

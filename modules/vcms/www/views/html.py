@@ -59,15 +59,13 @@ def get_requested_page(page_slug, app_slug):
     """ get_requested_page get a page slug and its corresponding app slug then return
         an updated context containing the required information for the CMS pages
     """
-    #debugtrace("get_requested_page - entry", page_slug)
-
     #try:
     # IF NOTHING SELECTED, GO FIRST MENU ON ERROR RAISE 404
     if page_slug == None:
         current_page = CMSMenu.objects.get_default_page()
     # When Page slug i
     else:
-        current_page = get_object_or_404(BasicPage, slug=page_slug, app_slug=app_slug)
+        current_page = Page.objects.get_page_or_404(page_slug, app_slug)
     #except:
     #    raise Http404
     #return _get_page_parameters(current_page)
@@ -83,7 +81,7 @@ def Generic(request, page=None, context={}):
     basic_page = get_requested_page(page_slug=page, app_slug=APP_SLUGS)
     page_instance = _get_page_instance(basic_page)
     context.update(page_info=_get_page_parameters(page_instance))
-    context.update(containers=_get_page_containers(page_instance))
+    #context.update(containers=_get_page_containers(page_instance))
 
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
@@ -101,15 +99,6 @@ def MainPage(request, context={}):
                               context_instance=RequestContext(request))
 
 def SimplePage(request, context={}):
-    #from vcms.www.models.widget import RelativeWidgetWrapper
-    #content_container = context["containers"]["Content"]
-    #ContentWidgets = RelativeWidgetWrapper.objects.filter(container=content_container)
-    #context.update(content_widgets = ContentWidgets)
-
-    #import treebeard
-    
-    #form = treebeard.forms()
-    #context.update(form=form)
     return render_to_response('simple.html',
                               context,
                               context_instance=RequestContext(request))
@@ -118,11 +107,7 @@ def SimplePage(request, context={}):
     
 def Simple(request, context={}):
     current_page = context["page_info"]['page']
-    #context['contents'] = Content.objects.filter(page=current_page)
-    #debugtrace("basic", context["page_info"]['page'], **{'basic content':context['contents']})
-
     content = []
-    #content = Content.objects.filter(page=context["page_info"]['page'].id)
     if len(content) == 0 :
         """ When page has no content, it redirect to the first child """
         subpage = Page.objects.get_children() #context["page_info"]['page'])

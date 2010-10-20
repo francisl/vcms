@@ -14,31 +14,32 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 from vcms.www.models.page import BasicPage
-from vcms.www.managers.containers import PageContainerManager
+#from vcms.www.managers.containers import PageContainerManager
 from vcms.www.managers.containers import ContainerWidgetsManager
-from vcms.www.managers.containers import BasicContainerManager
-from vcms.www.managers.containers import TableContainerManager
-from vcms.www.managers.containers import RelativeContainerManager
-from vcms.www.managers.containers import GridContainerManager
+#from vcms.www.managers.containers import BasicContainerManager
+#from vcms.www.managers.containers import TableContainerManager
+#from vcms.www.managers.containers import RelativeContainerManager
+#from vcms.www.managers.containers import GridContainerManager
+from vcms.www.fields import StatusField
 
-CONTAINER_TYPE= (('relative' ,"Relative"),('table' ,"Table"),('absolute' ,"Absolute"))
-
-class PageContainer(models.Model):
-    container_name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
-    page = models.ForeignKey(BasicPage)
-    container_type = models.CharField(max_length=20, choices=CONTAINER_TYPE, default=CONTAINER_TYPE[0])
-    objects = PageContainerManager()
-
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Container - Page"
-        verbose_name_plural = "Container - Pages"
-        
-    def __unicode__(self):
-        return self.page.name + " - " + self.container_type + " - " + self.container_name
-        
-    def get_widgets(self):
-        return ContainerWidgets.objects.filter(container=self)
+#CONTAINER_TYPE= (('relative' ,"Relative"),('table' ,"Table"),('absolute' ,"Absolute"))
+#
+#class PageContainer(models.Model):
+#    container_name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
+#    page = models.ForeignKey(BasicPage)
+#    container_type = models.CharField(max_length=20, choices=CONTAINER_TYPE, default=CONTAINER_TYPE[0])
+#    objects = PageContainerManager()
+#
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Container - Page"
+#        verbose_name_plural = "Container - Pages"
+#        
+#    def __unicode__(self):
+#        return self.page.name + " - " + self.container_type + " - " + self.container_name
+#        
+#    def get_widgets(self):
+#        return ContainerWidgets.objects.get_published_widget(page, self)
 
 class ContainerWidgets(models.Model):
     MESURE_CHOICES = ((0, "px")
@@ -49,12 +50,15 @@ class ContainerWidgets(models.Model):
                       ,('clear: both;', "Clear")
                       ,('float: right;', "Right")
                       )
-                     
+    
+    page = models.ForeignKey(BasicPage)   
+    container = models.CharField(max_length=80, default=BasicPage.containers[0][0], choices=BasicPage.containers)
+    
     widget_type = models.ForeignKey(ContentType)
     widget_id = models.PositiveIntegerField()
     widget = generic.GenericForeignKey('widget_type', 'widget_id')
 
-    container = models.ForeignKey(PageContainer, related_name="page_container")
+    status = models.BooleanField(choices=StatusField.STATUSES, default=StatusField.PUBLISHED)
 
     objects = ContainerWidgetsManager()
 
@@ -92,8 +96,7 @@ class ContainerWidgets(models.Model):
                 
     def get_style(self):
         style = ""
-
-        if self.container.container_type == 'absolute':
+        if self.page.containers_type[self.container] == 'absolute':
             style="position: absolute; "
             if self.absolute_top >= 0:
                 style += "top : %spx; " % self.absolute_top
@@ -118,91 +121,92 @@ class ContainerWidgets(models.Model):
             return str(self.height) + self.MESURE_CHOICES[self.height_mesure][1]
         return "none"
         
-class BasicContainer(models.Model):
-    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
-    page = models.ForeignKey(BasicPage)
 
-    objects = BasicContainerManager()
-
-    class Meta:
-        abstract = True
-        app_label = 'www'
-        verbose_name = "Container - Basic"
-        verbose_name_plural = "Container - Basic"
-        
-    def __unicode__(self):
-        container_name = self.name
-        # If the current container has its name set as the one of the required
-        # containers for a type of page, then display its formatted name instead
-        # of its internal name.
-        if self.name in self.page.get_type().get_page_containers():
-            container_name = self.page.get_type().get_page_containers()[self.name].name
-        return unicode(self.page.name) + "("+ unicode(self.id) + ") - " + unicode(container_name)
-
-    def get_type(self):
-        """
-            Returns the class of the current container.
-            Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
-        """
-        # Get all the classes in the current module
-        for name, obj in inspect.getmembers(sys.modules[__name__]):
-            # Discard everything but classes and classes that inherit from BasicContainer
-            if inspect.isclass(obj) and BasicContainer in obj.__bases__:
-                # If there are instances for the current container, the instance is of
-                # the current container's type
-                if obj.objects.filter(pk=self.pk).exists():
-                    return obj
-        return BasicContainer
-
-
-class ContainerDefinition:
-    """ Class used to associate a display name to a container type. """
-    name = _("Basic container")
-    type = BasicContainer
-
-    def __init__(self, name, type):
-        self.name = name
-        self.type = type
-
-class GridContainer(BasicContainer):
-    ORIENTATION_CHOICES = (('left', _('Left'))
-                           ,('right', _('Right'))
-                           )
-    float_orientation = models.CharField(max_length=10, default=ORIENTATION_CHOICES[0], choices=ORIENTATION_CHOICES)
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Container - Grid"
-        verbose_name_plural = "Container - Grid"
-
-    def render(self):
-        content = { 'float_orientation': self.float_orientation,
-                    'widgets': self.widgets.all()
-                    }
-        return render_to_string("containers/grid.html", content)
-
-class TableContainer(BasicContainer):
-    maximum_column = models.PositiveIntegerField(default=3, help_text="How many column are available")
-    
-    objects = TableContainerManager()
-    
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Container - Table"
-        verbose_name_plural = "Container - Table"
-
-    def render(self):
-        content = { 'widgets': self.widgets.all() }
-        return render_to_string("containers/table.html", content)
-
-class RelativeContainer(BasicContainer):
-    objects = RelativeContainerManager()
-    
-    class Meta:
-        app_label = 'www'
-        verbose_name = "Container - Relative"
-        verbose_name_plural = "Container - Relative"
-
-    def render(self):
-        content = { 'widgets': self.widgets.all() }
-        return render_to_string("containers/relative.html", content)
+#class BasicContainer(models.Model):
+#    name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
+#    page = models.ForeignKey(BasicPage)
+#
+#    objects = BasicContainerManager()
+#
+#    class Meta:
+#        abstract = True
+#        app_label = 'www'
+#        verbose_name = "Container - Basic"
+#        verbose_name_plural = "Container - Basic"
+#        
+#    def __unicode__(self):
+#        container_name = self.name
+#        # If the current container has its name set as the one of the required
+#        # containers for a type of page, then display its formatted name instead
+#        # of its internal name.
+#        if self.name in self.page.get_type().get_page_containers():
+#            container_name = self.page.get_type().get_page_containers()[self.name].name
+#        return unicode(self.page.name) + "("+ unicode(self.id) + ") - " + unicode(container_name)
+#
+#    def get_type(self):
+#        """
+#            Returns the class of the current container.
+#            Used as a workaround to Django's ORM inheritance vs OOP's inheritance.
+#        """
+#        # Get all the classes in the current module
+#        for name, obj in inspect.getmembers(sys.modules[__name__]):
+#            # Discard everything but classes and classes that inherit from BasicContainer
+#            if inspect.isclass(obj) and BasicContainer in obj.__bases__:
+#                # If there are instances for the current container, the instance is of
+#                # the current container's type
+#                if obj.objects.filter(pk=self.pk).exists():
+#                    return obj
+#        return BasicContainer
+#
+#
+#class ContainerDefinition:
+#    """ Class used to associate a display name to a container type. """
+#    name = _("Basic container")
+#    type = BasicContainer
+#
+#    def __init__(self, name, type):
+#        self.name = name
+#        self.type = type
+#
+#class GridContainer(BasicContainer):
+#    ORIENTATION_CHOICES = (('left', _('Left'))
+#                           ,('right', _('Right'))
+#                           )
+#    float_orientation = models.CharField(max_length=10, default=ORIENTATION_CHOICES[0], choices=ORIENTATION_CHOICES)
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Container - Grid"
+#        verbose_name_plural = "Container - Grid"
+#
+#    def render(self):
+#        content = { 'float_orientation': self.float_orientation,
+#                    'widgets': self.widgets.all()
+#                    }
+#        return render_to_string("containers/grid.html", content)
+#
+#class TableContainer(BasicContainer):
+#    maximum_column = models.PositiveIntegerField(default=3, help_text="How many column are available")
+#    
+#    objects = TableContainerManager()
+#    
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Container - Table"
+#        verbose_name_plural = "Container - Table"
+#
+#    def render(self):
+#        content = { 'widgets': self.widgets.all() }
+#        return render_to_string("containers/table.html", content)
+#
+#class RelativeContainer(BasicContainer):
+#    objects = RelativeContainerManager()
+#    
+#    class Meta:
+#        app_label = 'www'
+#        verbose_name = "Container - Relative"
+#        verbose_name_plural = "Container - Relative"
+#
+#    def render(self):
+#        content = { 'widgets': self.widgets.all() }
+#        return render_to_string("containers/relative.html", content)
 

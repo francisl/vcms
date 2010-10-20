@@ -3,8 +3,8 @@ import os
 from django.db import models
 
 # CMS
-from vcms.www.models import Language
-#from image_gallery import managers
+from site_language.models import Language
+from site_media.managers import ImageCategoryManager
 
 IMAGE_UPLOAD_TO = "uploadto/imagegallery/images/"
 
@@ -13,7 +13,7 @@ class ImageCategory(models.Model):
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(max_length=150, unique=True)
     
-    #objects = managers.ImageCategoryManager()
+    objects = ImageCategoryManager()
     
     def __unicode__(self):
         return self.default_name

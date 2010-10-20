@@ -65,6 +65,7 @@ class CMSMenuManager(models.Manager):
         else:
             return default_menu[0].content_object
 
+
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):
         return self.all()

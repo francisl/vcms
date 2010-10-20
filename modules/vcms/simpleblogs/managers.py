@@ -5,9 +5,7 @@
 # Created by Francis Lavoie
 
 from django.db import models
-from vcms.www.models.page import STATUS_DRAFT, STATUS_PUBLISHED, STATUSES
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
-
 
 class BlogPageManager(models.Manager):
     def get_blog_page_from_string(self, page_name):

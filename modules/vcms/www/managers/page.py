@@ -7,73 +7,11 @@
 from django.db import models
 from vcms.www.fields import StatusField
 from django.conf import settings
-    
+from django.http import Http404
+
+from site_language.models import Language
+
 class BasicPageManager(models.Manager):
-    """
-    def get_Default(self):
-        try:
-            defaultpage = self.filter(default=True)[0]
-        except:
-            defaultpage = self.all()[0]
-        return defaultpage
-
-    def reset_Default(self):
-        defaultpage = self.filter(default=True)
-        for page in defaultpage:
-            page.default = False
-            page.save()
-
-    def reset_Default2(self):
-        try:
-            defaultpage = self.filter(status=StatusField.PUBLISHED)[0]
-            defaultpage.default = True
-        except:
-            pass
-
-    def get_RootMenu(self):
-        menu = self.filter(level=0).filter(status=StatusField.PUBLISHED).filter(display=True)
-        return menu
-
-    def get_RootSelectedMenu(self, current_page):
-        def up1level(page):
-            if page.level != 0:
-                return up1level(page.parent)
-            else:
-                return page
-
-        if current_page:
-            return up1level(current_page)
-        else:
-            return None
-
-    def get_SubMenu(self, current_page):
-        try:
-            #print("currentpage = %s" % current_page)
-            root = self.get_RootSelectedMenu(current_page)
-            children = self.get_PageChildren(root)
-        except:
-            children = None
-
-        try:
-            selected = children.get(id=current_page.id)
-            #print("selected submenu = %s" % selected)
-        except:
-            selected = None
-
-        #print("SubMenu returning : %s, %s" % (children, selected))
-        return children, selected
-
-    def get_NotDisplay(self, lang='en'):
-        return self.filter(status=StatusField.PUBLISHED).filter(display=False).filter(language='en')
-
-    def get_PageFirstChild(self, current_page, lang='en'):
-        try:
-            #print("asdfasdfa = %s" % self.get_SubMenu(current_page)[0])
-            return self.get_SubMenu(current_page)[0]
-        except:
-            #print("NO FCP!!!!!!!")
-            return None
-    """
     def get_children(self, parent=None):
         if parent:
             return self.filter(parent=parent).filter(status=StatusField.PUBLISHED).filter(display=True)
@@ -81,11 +19,9 @@ class BasicPageManager(models.Manager):
             return None
 
     def get_default_page(self):
-        #mm = menu.MainMenu.objects.get_default_page()
-        return self.all()[0] #mm.content_object
+        return self.get_published()[0] #mm.content_object
     
     def get_all_basic(self):
-        from vcms.www.models.page import Language
         return self.filter(language=Language.objects.get_default())
 
     def get_main_published(self):
@@ -94,12 +30,21 @@ class BasicPageManager(models.Manager):
     def get_published(self):
         return self.filter(status=StatusField.PUBLISHED)
 
-
     def drafts(self):
         return self.filter(status=StatusField.DRAFT)
 
+    def get_pages(self, lang='en'):
+        lang = Language.objects.get_language(lang)
+        return self.get_published().filter(language=lang)
+        
     def get_containers(self):
         raise NotImplementedError
+        
+    def get_page_or_404(self, slug, app_slug):
+        page = self.get_pages().filter(slug=slug).filter(app_slug=app_slug)
+        if len(page) == 0:
+            raise Http404
+        return page[0]
 
 
 class ContentManager(models.Manager):
@@ -170,17 +115,4 @@ class BannerImageManager(models.Manager):
     def get_banner_images(self, Banner):
         return self.filter(banner=Banner)
 
-
-class LanguageManager(models.Manager):
-    def get_default(self):
-        return self.get(language_code=settings.LANGUAGE_CODE[:2])
-
-    def get_default_code(self):
-        return self.get(language_code=settings.LANGUAGE_CODE[:2]).language_code
         
-    def get_default_for_choice(self):
-        l = self.get(language_code=settings.LANGUAGE_CODE[:2])
-        return (l.language, l.language_code)
-        
-    def get_available_language(self):
-        return [(l.language, l.language_code) for l in self.all()]

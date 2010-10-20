@@ -12,7 +12,8 @@ from django.contrib.contenttypes import generic
 from treebeard.mp_tree import MP_Node
 from vcms.www.managers.menu import CMSMenuManager, MainMenuManager
 from vcms.www.managers import QuickLinksManager
-from vcms.www.models.language import Language
+from site_language.models import Language
+from vcms.www.fields import StatusField
 
 class MainMenu(MP_Node):
     menu_name = models.CharField(max_length=10, help_text="Maximum 50 characters", blank=True, null=True)
@@ -37,7 +38,7 @@ import mptt
 class CMSMenu(models.Model):
     menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters", blank=True, null=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
-    display = models.BooleanField(default=True, help_text="Display in menu")
+    display = models.BooleanField(default=True, help_text="Display in menu - Only work for page that are set as published")
     default = models.BooleanField(default=False)
     language = models.ForeignKey(Language)
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
@@ -58,6 +59,12 @@ class CMSMenu(models.Model):
             self.menu_name = self.content_object.get_name()
         return self.menu_name
 
+    def save(self):
+        print("content object status = %i" % self.content_object.status)
+        if self.display == True and self.content_object.status == StatusField.DRAFT:
+            self.display = False
+        super(CMSMenu, self).save()
+            
     def get_name(self):
         return self.__unicode__()
         
@@ -70,8 +77,12 @@ class CMSMenu(models.Model):
     
     def get_absolute_url(self):
         return self.content_object.get_absolute_url()
-        
+    
+    def get_page_status(self):
+        return self.content_object.status
+    
     name = property(get_name)
+    status = property(get_page_status)
     
 mptt.register(CMSMenu, order_insertion_by=['menu_name'])
 

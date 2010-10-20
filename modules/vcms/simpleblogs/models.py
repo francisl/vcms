@@ -52,6 +52,8 @@ class BlogPost(AnnouncementPost):
     def get_absolute_url(self):
         return "/%s/%s/%s/%s/%s/%d" % (APP_SLUGS, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
+    
+
 # -----------------
 # CONTENT
 # -----------------
@@ -64,7 +66,7 @@ class BlogPostWidget(Widget):
     def render(self):
         posts = BlogPost.published.get_latest_post_for_page(self.page, qty=self.display_elements, category=self.display_category) #, self.display_elements)
         widget =  render_to_string("widget/announcement.html"
-                                    ,{ 'name': self.name, 'posts':posts })
+                                    ,{ 'name': self.name, 'posts':posts, 'widget': self })
         return widget
 
     class Meta:
@@ -73,3 +75,6 @@ class BlogPostWidget(Widget):
 
     def __unicode__(self):
         return self.__class__.__name__ + ' ' + self.name
+
+    def get_absolute_url(self):
+        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )

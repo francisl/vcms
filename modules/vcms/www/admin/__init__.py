@@ -15,17 +15,12 @@ from vcms.www.models.page import *
 from vcms.www.models.containers import *
 from vcms.www.models.menu import *
 
-class LanguageAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Language, LanguageAdmin)
-
 #class MainMenuAdmin(treeadmin.TreeAdmin):
 #    pass
 #admin.site.register(MainMenu, MainMenuAdmin)
 
 class CMSMenuAdmin(admin.ModelAdmin):
     list_display = ('get_tab_name', 'get_slug', 'language','id', 'parent', 'lft', 'rght', 'tree_id')
-    #filter_horizontal = ('language',)
 admin.site.register(CMSMenu, CMSMenuAdmin)
 
 class MenuSeparatorAdmin(admin.ModelAdmin):
@@ -81,9 +76,9 @@ class ContentInline(admin.StackedInline):
 #    pass
 #admin.site.register(BasicContainer, BasicContainerAdmin)
 
-class PageContainerAdmin(admin.ModelAdmin):
-    list_display = ('page', 'container_type', 'container_name')
-admin.site.register(PageContainer, PageContainerAdmin)
+#class PageContainerAdmin(admin.ModelAdmin):
+#    list_display = ('page', 'container_type', 'container_name')
+#admin.site.register(PageContainer, PageContainerAdmin)
 
 class ContainerWidgetsAdmin(admin.ModelAdmin):
     list_display = ('widget',)

@@ -12,10 +12,10 @@ from decimal import Decimal
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 
-from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, Language, MediaTags
+from vimba_cms_simthetiq.apps.products.models import ProductPage, Image, MediaTags
+from site_language.models import Language
 
 language = Language.objects.get_default()
-
 
 def createNewImage(name, file_name=None, description=None, tags=None, show_in_gallery=False):
     imagesDir = os.path.dirname(__file__) + "/images/"
