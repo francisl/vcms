@@ -7,18 +7,7 @@
 from django.db import models
 from vcms.www.fields import StatusField
 
-
-#class PageContainerManager(models.Manager):
-#    def get_container_for_page_of_type_for_page(self, page):
-#        return self.filter(page=page)
-#
-#    def get_container_for_page_of_type(self, page, type, container_name):
-#        container = self.filter(page=page).filter(container_type=type).filter(container_name=container_name)
-#        if len(container) > 0:
-#            return container[0]
-#        return []
-#     
-   
+  
 class ContainerWidgetsManager(models.Manager):
     def get_widgets(self, page, container):
         return self.filter(page=page).filter(container=container)

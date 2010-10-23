@@ -12,16 +12,8 @@ class BlogPageManager(models.Manager):
         return self.get(slug=page_name)
 
 
-class PublishedBlogPostManager(models.Manager):
-    def get_count_in_category(self, category):
-        return len(self.filter(category__in=category))
-        
-    def get_all_for_page(self, page, category=None):
-        """ Returns the latest Announcement instances.
-        """
-        if category:
-            return self.filter(display_on_page=page).filter(category__slug__contains=category).order_by("-date_published")
-        return self.filter(display_on_page=page).order_by("-date_published")
+class PublishedBlogPostManager(PublishedAnnouncementPostManager):
+    pass
 
 class BlogPostCategoryManager(models.Manager):
     

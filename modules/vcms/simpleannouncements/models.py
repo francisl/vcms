@@ -61,9 +61,17 @@ class AnnouncementPostCategory(models.Model):
         super(AnnouncementPostCategory, self).save()
 
 class AnnouncementPost(models.Model):
+    PREVIEW_SHORT = 1
+    PREVIEW_MEDIUM = 2
+    PREVIEW_LONG = 4
+    PREVIEW_LENGTH = ((1, _('Short'))
+                      ,(2, _('Medium'))
+                      ,(4, _('Long'))
+                      )
     title = models.CharField(max_length=120)
-    preview = models.TextField(help_text=_('Display in widget or for post information and summary'))
+    preview = models.TextField(help_text=_('Display in widget or for post information and summary'), blank=True, editable=False)
     content = models.TextField()
+    preview_length = models.PositiveIntegerField(choices=PREVIEW_LENGTH, default=PREVIEW_SHORT)
     status = StatusField()
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
@@ -71,6 +79,7 @@ class AnnouncementPost(models.Model):
     language = models.ForeignKey(Language, default=Language.objects.get_default_code())
     
     published = PublishedAnnouncementPostManager()
+    objects = PublishedAnnouncementPostManager()
     
     class Meta:
         """Default values. Will be inherited from children models even if the Meta class is redefined."""
@@ -82,13 +91,13 @@ class AnnouncementPost(models.Model):
     def save(self):
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
         self.date_modified = datetime.datetime.now()
-        if self.status == STATUSES[STATUS_PUBLISHED]:
+        if self.status == StatusField.PUBLISHED:
             # If the post is being created, set its published date
             if not self.pk:
                 self.date_published = self.date_modified
             # If the post is being edited, check against the current version in the database and update if it hasn't been previously published
             else:
-                model_in_db = AnnouncementPost.objects.get(pk=self.pk)
+                model_in_db = self.__class__.objects.get(pk=self.pk)
                 if model_in_db.status != StatusField.PUBLISHED:
                     self.date_published = self.date_modified
 

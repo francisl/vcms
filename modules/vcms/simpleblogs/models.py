@@ -39,7 +39,7 @@ class BlogPost(AnnouncementPost):
     display_on_page = models.ForeignKey(BlogPage)
     category = models.ManyToManyField(BlogPostCategory)
     
-    published = PublishedAnnouncementPostManager()
+    published = PublishedBlogPostManager()
     
     class Meta:
         verbose_name_plural = _("Blog Posts")
@@ -52,6 +52,15 @@ class BlogPost(AnnouncementPost):
     def get_absolute_url(self):
         return "/%s/%s/%s/%s/%s/%d" % (APP_SLUGS, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
+    def save(self):
+        import re
+        reg = re.compile(r"<p(?:.*?)>(.*?)<\/p>")
+        preview = ""
+        all_found = reg.findall(self.content)
+        for found in all_found[:self.preview_length]:
+            preview += '<p>' + found + '</p>'
+        self.preview = "<div>" + preview + "</div>"
+        super(BlogPost, self).save() 
     
 
 # -----------------

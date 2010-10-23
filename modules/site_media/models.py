@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from django.db import models
 
@@ -11,7 +12,7 @@ IMAGE_UPLOAD_TO = "uploadto/imagegallery/images/"
 class ImageCategory(models.Model):
     default_name = models.CharField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
-    slug = models.SlugField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True, default='')
     
     objects = ImageCategoryManager()
     
@@ -33,6 +34,8 @@ class Image(models.Model):
     file = models.FileField(upload_to=IMAGE_UPLOAD_TO)
     category = models.ManyToManyField(ImageCategory)
     file_size = models.IntegerField(editable=False, blank=True, null=True, default=0)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False, default=datetime.datetime.min)
+    date_modified = models.DateTimeField(auto_now=True, editable=False, default=datetime.datetime.min)
     
     def __unicode__(self):
         return self.default_name

@@ -46,11 +46,11 @@ class ImageGalleryPage(BasicPage):
         return self.display_category.all()
     
     def get_all_images(self):
-        return Image.objects.filter(category__in=self.display_category.all())
+        return Image.objects.filter(category__in=self.display_category.all()).order_by('-date_modified', '-date_created')
 
     def get_all_images_for_category(self, category):
         if category:
-            return Image.objects.filter(category=category)
+            return Image.objects.filter(category=category).order_by('-date_modified', '-date_created')
         else:
             return []
             
