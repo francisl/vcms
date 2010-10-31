@@ -13,7 +13,8 @@ import inspect
 from captcha.fields import CaptchaField
 
 from vcms.www.models import PageElementPosition
-from vcms.www.models.old import Content, APP_SLUGS
+from vcms.www.models.page import APP_SLUGS
+
 from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.page import BasicPage
 from vcms.www.models.menu import CMSMenu

@@ -7,31 +7,12 @@
 from django.db import models
 from vcms.www.fields import StatusField
 
-  
 class ContainerWidgetsManager(models.Manager):
     def get_widgets(self, page, container):
         return self.filter(page=page).filter(container=container)
         
     def get_published_widget(self, page, container):
         return self.filter(page=page).filter(container=container).filter(status=StatusField.PUBLISHED)
-
-#class BasicContainerManager(models.Manager):
-#    def get_widgets(self):
-#        raise NotImplementedError
-#
-#class RelativeContainerManager(BasicContainerManager):
-#    def get_widgets(self):
-#        return self.relative_widget.all()
-#    
-#class TableContainerManager(BasicContainerManager):
-#    def get_widgets(self):
-#        return self.table_widget.all()
-#    
-#class GridContainerManager(BasicContainerManager):
-#    def get_widgets(self):
-#        return self.grid_widget.all()
-#
-### TODO: to remove
 
 class DashboardElementManager(models.Manager):
     def get_PublishedAll(self):

@@ -17,6 +17,23 @@ from vcms.www.managers.page import BasicPageManager
 from vcms.www.managers.containers import DashboardElementManager
 from vcms.www.fields import StatusField
 
+APP_SLUGS = 'www'
+
+def _delete_page(page2delete):
+    """ Move submenu up one level """
+    pages = Page.objects.filter(parent=page2delete.id)
+    #print("menus : %s" % menus)
+    if pages:
+        for page in pages:
+            if page.level != 0: # root = 0, no less
+                # put menu one level up
+                page.level = page.level - 1
+                page.parent = page2delete.parent
+            page.save()
+            # check if menu has children, a level up them too
+            _delete_page(page)
+
+        
 class BasicPage(models.Model):
     """ A page is a placeholder accessible by the user that represents a section content
         Like a news page, a forum page with multiple sub-section, a contact page ...
@@ -119,20 +136,11 @@ class Page(BasicPage):
     tree_position = models.IntegerField(editable=False, default=0)
     display = models.BooleanField(editable=False, default=False)
 
-    # Parameteers
-    
-    # lang = models.IntegerField(max_length=2,choices=settings.LANGUAGES,
-    #                       default=settings.DEFAULT_LANGUAGE, db_index=True, editable=False)
-
-    # Controler for the pages
-    #objects = PageManager()
-
     class Meta:
         ordering = ['tree_position', 'name']
         verbose_name_plural = "Menu Administration"
         #unique_together = ("slug", "app_slug")
         app_label = "www"
-        
 
     def get_absolute_url(self):
         if self.app_slug:
@@ -172,22 +180,6 @@ class MainPage(BasicPage):
     def get_absolute_url(self):
         return "/www/page/" + self.slug
     
-#    @staticmethod
-#    def get_page_containers():
-#        from vcms.www.models.containers import ContainerDefinition
-#        from vcms.www.models.containers import GridContainer
-#        from vcms.www.models.containers import TableContainer
-#        from vcms.www.models.containers import RelativeContainer
-#        return { "navigation_container": ContainerDefinition(_("Navigation"), RelativeContainer)
-#                    ,"main_content": ContainerDefinition(_("Content"), GridContainer) }
-#
-#    def get_containers(self):
-#        instance_containers = {}
-#        for page_container_name, page_container_definition in self.__class__.get_page_containers().items():
-#            for container in page_container_definition.type.objects.filter(page=self).filter(name=page_container_name):
-#                instance_containers[page_container_name] = container
-#        return instance_containers
-
     def get_menu(self):
         return self.menu.all()[0]
 
@@ -203,14 +195,7 @@ class SimplePage(BasicPage):
     
     def get_absolute_url(self):
         return "/www/page/" + self.slug
-    
-#    def get_containers(self):
-#        #from vcms.www.models.containers import RelativeContainer
-#        my_rel_cont = {} 
-#        for container in RelativeContainer.objects.filter(page=self): 
-#            my_rel_cont[container.name] = container
-#        return my_rel_cont
-
+ 
     def get_menu(self):
         try:
             return self.menu.all()[0]
@@ -218,7 +203,24 @@ class SimplePage(BasicPage):
             return None
         
 # -----
-# OLD
+# Menu
+
+class MenuSeparator(BasicPage):
+    external_link = models.URLField(max_length=200, null=True, blank=True)
+    def save(self):
+        self.slug = self.get_absolute_url()
+        self.status = StatusField.PUBLISHED
+        self.language = Language.objects.get_default()
+        self.module = "Separator"
+        super(MenuSeparator, self).save()
+
+    class Meta:
+        app_label = "www"
+        verbose_name = 'Menu - Separator'
+        verbose_name_plural = 'Menu - Separator'
+
+    def get_absolute_url(self):
+        return "/" + self.external_link
 
 #
 # DASHBOARD
@@ -279,7 +281,6 @@ class DashboardElement(PageElementPosition):
     def __unicode__(self):
         return self.name
 
-
 class DashboardPreview(PageElementPosition):
     from vcms.www.models.old import Content
     page = models.ForeignKey(DashboardPage)
@@ -290,4 +291,3 @@ class DashboardPreview(PageElementPosition):
         
     def __unicode__(self):
         return self.preview.name
-

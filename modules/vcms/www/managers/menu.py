@@ -8,16 +8,7 @@ from django.db import models
 from treebeard.models import Node
 
 class MainMenuManager(models.Manager):
-    #def set_menu_root(self, page):
-    #    PageMenu.add_root(page=page)
-    
-    #def get_menu_root(self):
-    #    return PageMenu.get_root()
-
     def set_as_generic_node(self, node):
-        #root = node.get_root()
-        #print("root = %s" % root)
-        #root.add_child(node)
         pass
         
     def get_root_menu_if_exist(self):

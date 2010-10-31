@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 30-05-2010.
 
 from vcms.www.managers.containers import *
+#from vcms.www.managers.banner import *
 from vcms.www.managers.page import *
 from vcms.www.managers.menu import *
 from vcms.www.managers.widget import *
-

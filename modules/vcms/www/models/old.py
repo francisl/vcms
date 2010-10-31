@@ -5,10 +5,7 @@
 
 import datetime
 
-from vcms.www.managers import BannerManager #, BannerImageManager, ContentManager, QuickLinksManager
-from vcms.www.managers import BannerImageManager
 from vcms.www.managers import ContentManager
-
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
@@ -18,6 +15,7 @@ from site_language.models import Language
 
 # -- CONTENT
 # ----------
+
 class Content(models.Model):
     #CONTENT
     name = models.CharField(max_length="40", help_text="Max 40 characters")
@@ -62,112 +60,4 @@ class Content(models.Model):
 
     def get_absolute_url(self):
         self.page.get_absolute_url()
-
-
-
-#from vcms.www.fields import StatusField
-
-# -- variable
-PRODUCT_IMAGES = "uploadto/prod_images"
-PRODUCT_VIDEOS = "uploadto/prod_videos"
-APP_SLUGS = "www"
-
-#from vcms.www.models.page import BasicPage
-#from vcms.www.models.menu import PageMenu
-
-#from vcms.www.models.page import SimplePage
-
-def _delete_page(page2delete):
-    """ Move submenu up one level """
-    pages = Page.objects.filter(parent=page2delete.id)
-    #print("menus : %s" % menus)
-    if pages:
-        for page in pages:
-            if page.level != 0: # root = 0, no less
-                # put menu one level up
-                page.level = page.level - 1
-                page.parent = page2delete.parent
-            page.save()
-            # check if menu has children, a level up them too
-            _delete_page(page)
-
-class MenuSeparator(BasicPage):
-    external_link = models.URLField(max_length=200, null=True, blank=True)
-    def save(self):
-        self.slug = self.get_absolute_url()
-        self.status = StatusField.PUBLISHED
-        self.language = Language.objects.get_default()
-        self.module = "Separator"
-        super(MenuSeparator, self).save()
-
-    class Meta:
-        app_label = "www"
-        verbose_name = 'Menu - Separator'
-        verbose_name_plural = 'Menu - Separator'
-
-    def get_absolute_url(self):
-        return "/" + self.external_link
-
-
-# -- CONTENT
-# ----------
-
-class Banner(models.Model):
-    SLIDESHOW = 0
-    RANDOM = 1
-    DISPLAY_CHOICES = ((SLIDESHOW, _("Slideshow")),(RANDOM, _("Random")))
-    name = models.CharField(max_length=90)
-    description = models.TextField(blank=True, null=True)
-    page = models.ManyToManyField(BasicPage, null=True, blank=True)
-    style = models.IntegerField(choices=DISPLAY_CHOICES, default=SLIDESHOW)
-    width = models.IntegerField(default=955)
-    height = models.IntegerField(default=300)
-
-    objects = BannerManager()
-
-    class Meta:
-        app_label = "www"
-        
-    def __unicode__(self):
-        return self.name
-
-    def get_images(self):
-        return BannerImage.objects.get_banner_images(self)
-
-    def get_random_image(self):
-        import random
-        images = BannerImage.objects.get_banner_images(self)
-        images_len = len(images)
-        if images_len == 0 or images_len == 1:
-            return images
-        else:
-            random = random.randrange(0,images_len)
-            rimage = images[random]
-            #print("RIMAGE URL = %s" % rimage.file)
-            return [rimage]
-
-    def get_size(self):
-        return (self.width, self.height)
-
-class BannerImage(models.Model):
-    FILE_PATH = "uploadto/banners"
-    name = models.CharField(max_length=90)
-    description = models.TextField(blank=True, null=True)
-    file = models.FileField(upload_to=FILE_PATH)
-    url = models.URLField(max_length=200, null=True, blank=True)
-    banner = models.ManyToManyField(Banner)
-
-    objects = BannerImageManager()
-
-    class Meta:
-        app_label = "www"
-        
-    def __unicode__(self):
-        return self.name
-
-    def save(self):
-        #from vcms.tools.image import image_resize as ir
-        #super(BannerImage, self).save()
-        #self.banner = ir.save_resized_image(self, self.file, self.file.path, tuple((955, 300)), False)
-        super(BannerImage, self).save()
 

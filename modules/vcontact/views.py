@@ -31,7 +31,6 @@ class ContactForm(forms.Form):
 def Contact(request, page=None, context={}):
     context.update(current_page=get_requested_page(page_slug=page, app_slug='contact'))
     context.update(locals())
-    #contact_page = ContactPage.objects.get(slug=context["page_info"]['page'].slug)
     form = ContactForm()
     
     requiredfields = ["id_%s" % fieldname for fieldname,fieldobject in form.fields.items() if fieldobject.required]
@@ -70,10 +69,7 @@ def Contact(request, page=None, context={}):
             return render_to_response('confirmation.html', 
                                       context,
                                       context_instance=RequestContext(request))
-                
-    #contents = Content.objects.get_contents_for_page(context["page_info"]['page'])
-    #print("content for contant page %s : %s" % (context["page_info"]['page'], contents))
-            
+   
     context.update(locals())
     return render_to_response('contact.html', 
                               context,
