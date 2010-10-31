@@ -13,7 +13,7 @@ class BlogPageAdmin(admin.ModelAdmin):
 admin.site.register(BlogPage, BlogPageAdmin)
 
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'display_on_page', 'status', language)
+    list_display = ('title', 'display_on_page', 'status', 'language')
 admin.site.register(BlogPost, BlogPostAdmin)
 
 class BlogPostCategoryAdmin(admin.ModelAdmin):
