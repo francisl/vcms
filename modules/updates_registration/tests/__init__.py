@@ -1,2 +1,2 @@
-from register2updates.tests.models import *
+from updates_registration.tests.models import *
 

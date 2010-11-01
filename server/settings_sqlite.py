@@ -20,6 +20,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 ENABLE_STATIC = True
 
+
 # ## EMAIL
 from config_sqlite.contacts import *
 from config_sqlite.email import *
@@ -150,12 +151,13 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'compressor'                           # git://github.com/dziegler/django-css.git
                   # VIMBA CMS APPS
                   ,'vcms.www'
+                  ,'vcms.simpleannouncements'
                   ,'vcms.simpleblogs'
-                  ,'vcms.simplenews'
+                  #,'vcms.simplenews'
                   ,'hwm'
                   ,'vcms.themes'
                   ,'vcontact'
-                  ,'register2updates'
+                  ,'updates_registration'
                   ,'vcms.store'
                   # Custom apps for cms
                   ,'vimba_cms_simthetiq.apps.order'
@@ -265,3 +267,6 @@ if DEBUG:
     import socket
     #if socket.gethostname() == "LAPTOP": # Francois
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
+
+
+from config_sqlite import *

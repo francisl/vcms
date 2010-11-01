@@ -102,7 +102,7 @@
         <div id="footing" >
             <div class="footing_content">
             {% block vcms_footer %}
-               {{ page_info.data.footer }}
+               {{ page_info.data.footer|safe }}
             {% endblock vcms_footer %}
             </div>
         </div>

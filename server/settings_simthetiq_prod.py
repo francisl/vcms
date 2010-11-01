@@ -156,7 +156,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'hwm'
                   ,'vcms.themes'
                   ,'vcontact'
-                  ,'register2updates'
+                  ,'updates_registration'
                   ,'vcms.store'
                   # Custom apps for cms
                   ,'vimba_cms_simthetiq.apps.order'

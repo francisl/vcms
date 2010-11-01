@@ -28,13 +28,6 @@ SIMPLE_MENU = 1
 MENU_STYLE = ((DROPDOWN_MENU, _('Dropdown')),
               (SIMPLE_MENU, _('Single line')))
 
-def debugtrace(view, current_page, **argd):
-    print("------------- %s -------------" % view)
-    print("Current page = %s" % current_page)
-
-    for v in argd:
-        print("%s : %s" % (v,argd[v]))
-
 def _get_page_parameters(page=None):
     """ Set the default parameter for a CMS page 
         module , menu_style, current_page, page
@@ -55,7 +48,6 @@ def _get_page_parameters(page=None):
         page_info.update(page = None)
     return page_info
 
-#def get_requested_page(page_slug, app_slug):
 def get_requested_page(page_slug, app_slug):
     """ get_requested_page get a page slug and its corresponding app slug then return
         an updated context containing the required information for the CMS pages
@@ -64,7 +56,6 @@ def get_requested_page(page_slug, app_slug):
     # IF NOTHING SELECTED, GO FIRST MENU ON ERROR RAISE 404
     if page_slug == None:
         current_page = CMSMenu.objects.get_default_page()
-    # When Page slug i
     else:
         current_page = Page.objects.get_page_or_404(page_slug, app_slug)
     #except:
@@ -82,19 +73,15 @@ def Generic(request, page=None, context={}):
     basic_page = get_requested_page(page_slug=page, app_slug=APP_SLUGS)
     page_instance = _get_page_instance(basic_page)
     context.update(page_info=_get_page_parameters(page_instance))
-    #context.update(containers=_get_page_containers(page_instance))
 
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
-        #debugtrace("Generic in Globals", context["page_info"]['page'], **{'module':context["module"]})
         return globals()[context["page_info"]['page'].module](request, context)
     else:
         return Simple(request, context)
     
 
 def MainPage(request, context={}):
-    context.update(context["containers"])
-    print("context : %s" % context)
     return render_to_response('mainpage.html',
                               context,
                               context_instance=RequestContext(request))
@@ -114,8 +101,6 @@ def Simple(request, context={}):
         subpage = Page.objects.get_children() #context["page_info"]['page'])
 
         if subpage:
-            #debugtrace("Generic", context["page_info"]['page'],
-            #        **{'len content': len(content), 'First subpage': subpage[0].slug})
             return HttpResponseRedirect("/"+subpage[0].app_slug+"/"+subpage[0].slug)
 
     return render_to_response('simple.html',
@@ -138,7 +123,6 @@ def Dashboard(request, context={}):
     """
         Display a page with preview from other pages, summary, widgets or forms
     """
-    #debugtrace("Dashboard", context["page_info"]['page'].id)
     
     contents = { 'left': [], 'right': [] }
     # load all modules that are registered at startup
@@ -165,9 +149,6 @@ def Dashboard(request, context={}):
     # sorting content
     context["contents"]['left'].sort()
     context["contents"]['right'].sort()
-
-    #debugtrace("Dashboard", context["page_info"]['page'],
-    #        **{'contents':context['contents']})
 
     #get the dashboard page
     page = DashboardPage.objects.get(id=context['current_page'].id)

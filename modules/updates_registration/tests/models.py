@@ -1,6 +1,6 @@
 import unittest
 from django.test.client import Client
-from register2updates.models import Registered2Updates
+from updates_registration.models import Registered2Updates
 
 class UpdatesRegistrationTestCase(unittest.TestCase):
     def setUp(self):
