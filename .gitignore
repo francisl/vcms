@@ -36,3 +36,6 @@ nbproject
 # Log files
 server/satchmo.log
 
+# all cache directory
+
+*/CACHE/*
