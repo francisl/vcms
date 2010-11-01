@@ -31,7 +31,6 @@
 #
 
 Django==1.2.1
-#-e svn+http://code.djangoproject.com/svn/django/trunk/@rev#egg=Django
 
 -e git+http://github.com/django-extensions/django-extensions.git@1610e1e59124071e1d01#egg=django-extensions
 
@@ -87,3 +86,4 @@ PIL==1.1.7
 # Utils to manage packages (useful for virtualenvs), keeping it at the latest version
 yolk
 
+django-rosetta==0.5.6
