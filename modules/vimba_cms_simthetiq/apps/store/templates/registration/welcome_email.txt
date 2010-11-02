@@ -1,4 +1,0 @@
-{% load i18n %}{% blocktrans %}Your account at {{site}} has been actived.{% endblocktrans %}
-
-{% blocktrans %}You can now log in at http://{{ site }}{% endblocktrans %}
-
