@@ -31,16 +31,16 @@
     <div id='vcms_main_content_inside_navigation'>
 	   <dl><dt><h4>Categories</h4></dt>
 	       {% for category, values in categories.items %}
-	        <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"<dd>{{ category }} ({{ values.count }})</dd></a>
+	        <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"><dd>{{ category }} ({{ values.count }})</dd></a>
 	        {% endfor %}
             <br />
             <dt><h4>Archives</h4></dt>
     	    {% for archive in archives %}
     	        {% if archive.items_count %}
-    	        <a href="/blogs/{{ page_name }}/{{ archive.year }}/{{ archive.month }}/"<dd>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dd></a>
+    	        <a href="/blogs/{{ page_name }}/{{ archive.year }}/{{ archive.month }}/"><dd>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dd></a>
     	        {% endif %}
     	    {% endfor %}
-    	        <a href="/blogs/{{ page_name }}/-{{ older_archives.date|date:"Y" }}/"<dd>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dd></a>
+    	        <a href="/blogs/{{ page_name }}/-{{ older_archives.date|date:"Y" }}/"><dd>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dd></a>
 	    </dl>
     </div>
     {% endif %}

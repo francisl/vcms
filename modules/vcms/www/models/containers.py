@@ -35,12 +35,12 @@ class ContainerWidgets(models.Model):
     objects = ContainerWidgetsManager()
 
     width = models.FloatField(default=200)
-    width_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
+    width_mesure = models.IntegerField(default=MESURE_CHOICES[0], choices=MESURE_CHOICES)
     height = models.FloatField(default=0)
-    height_mesure = models.IntegerField(default=0, choices=MESURE_CHOICES)
+    height_mesure = models.IntegerField(default=MESURE_CHOICES[0], choices=MESURE_CHOICES)
 
     #style
-    float_position = models.CharField(max_length=40, default=1, choices=FLOAT_CHOICES)
+    float_position = models.CharField(max_length=40, default=FLOAT_CHOICES[1], choices=FLOAT_CHOICES)
     css_style = models.CharField(max_length=200, null=True, blank=True)
 
     #table positionning

@@ -50,7 +50,7 @@ class BannerImage(models.Model):
     description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to=FILE_PATH)
     url = models.URLField(max_length=200, null=True, blank=True)
-    banner = models.ManyToManyField(Banner)
+    banner = models.ManyToManyField(Banner, null=True, blank=True)
 
     objects = BannerImageManager()
 
