@@ -37,7 +37,6 @@ Django==1.2.1
 -e git+http://github.com/SmileyChris/easy-thumbnails.git@3ef403977683313242cb#egg=easy-thumbnails
 
 # SEARCH
--e git+http://github.com/toastdriven/django-haystack.git@b9a002d99124e6f08e2b#egg=django-haystack
 -e hg+http://bitbucket.org/mchaput/whoosh@9c6a01abf78b#egg=whoosh
 
 -e git+http://github.com/django-mptt/django-mptt.git@dfd7af7502729c47b914#egg=django-mptt
@@ -81,9 +80,12 @@ PIL==1.1.7
 -e hg+http://code.tabo.pe/django-treebeard@0f2a87d336ee#egg=django-treebeard # 0f2a87d336ee == 1.61
 
 # Optionally used by developpers as a webserver and debugger, keeping it at the latest version
--e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
+#-e hg+http://dev.pocoo.org/hg/werkzeug-main#egg=werkzeug
+werkzeug==0.6.2
 
 # Utils to manage packages (useful for virtualenvs), keeping it at the latest version
 yolk
 
 django-rosetta==0.5.6
+
+django-haystack==1.0.2-final
