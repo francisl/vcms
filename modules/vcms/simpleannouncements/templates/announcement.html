@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load thumbnail %}
 {% load tree %}
+{% load cms_theme %}
 
 {% block vcms_main_content %}
 <div class="vcms_content">
@@ -29,6 +30,9 @@
     
 	{% if categories %}
     <div id='vcms_main_content_inside_navigation'>
+       {% if page.rss_feed %}
+       <div class="feedsbox"><a href="/blogs/rss/page/{{ page_name }}/"><img src="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/feeds/feed-icon-24x24.png"></a></div>
+       {% endif %}
 	   <dl><dt><h4>Categories</h4></dt>
 	       {% for category, values in categories.items %}
 	        <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"><dd>{{ category }} ({{ values.count }})</dd></a>

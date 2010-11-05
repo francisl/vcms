@@ -5,11 +5,25 @@
 # Created by Francis Lavoie
 
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
+
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
+from vcms.www.fields import StatusField
 
 class BlogPageManager(models.Manager):
     def get_blog_page_from_string(self, page_name):
-        return self.get(slug=page_name)
+        page = self.get(slug=page_name)
+        if page :
+            return page
+        raise ObjectDoesNotExist
+    
+class PublishedBlogPageManager(models.Manager):
+    def get_blog_page(self, page_name):
+        page = self.get(slug=page_name)
+        if page and page.status ==  StatusField.PUBLISHED :
+            return page
+        return None
+
 
 
 class PublishedBlogPostManager(PublishedAnnouncementPostManager):

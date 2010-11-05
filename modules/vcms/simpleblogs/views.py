@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 from vcms.www.views.html import _get_page_parameters
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
@@ -65,7 +66,10 @@ def get_side_menu(page):
     return categories, archives, older_archives
 
 def get_page_information(page_slug, method_name):
-    page = get_object_or_404(BlogPage, slug=page_slug)
+    page = BlogPage.published.get_blog_page(page_slug)
+    #page = get_object_or_404(BlogPage, slug=page_slug)
+    if not page :
+        raise Http404
     page_info = _get_page_parameters(page)
     reverse_url="vcms.simpleblogs.views." + method_name
     return page, page_info ,reverse_url
@@ -81,7 +85,8 @@ def page(request, page_slug=None, category=None, page_number=1, year=None, month
     blogs = BlogPost.published.get_all_for_page(page, category=category)
     pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
     return render_to_response("announcement.html"
-                                ,{'page_name': page_slug
+                                ,{ 'page': page
+                                  ,'page_name': page_slug
                                   ,'posts': pitems
                                   ,'categories': categories
                                   ,'archives': archives
@@ -102,7 +107,8 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
     
     pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
     return render_to_response("announcement.html"
-                                ,{'page_name': page_slug
+                                ,{ 'page': page
+                                  ,'page_name': page_slug
                                   ,'posts': pitems
                                   ,'categories': categories
                                   ,'archives': archives

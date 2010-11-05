@@ -25,6 +25,7 @@ class AnnouncementPage(BasicPage):
     authorized_users = models.ManyToManyField(User, blank=True, null=True)
     authorized_groups = models.ManyToManyField(Group, blank=True, null=True)
     number_of_post_per_page = models.PositiveIntegerField(default=5)
+    rss_feed = models.BooleanField(default=True)
 
     objects = models.Manager()
     

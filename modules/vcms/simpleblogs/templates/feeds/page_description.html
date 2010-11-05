@@ -1,0 +1,6 @@
+
+{% if obj.preview %}
+    {{ obj.preview|safe }}
+{% else %}
+    {{ obj.content|truncatewords_html:"50"|safe }}
+{% endif %}

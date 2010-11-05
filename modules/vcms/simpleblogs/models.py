@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 
 from vcms.www.models.widget import Widget
 from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
-from vcms.simpleblogs.managers import BlogPageManager, PublishedBlogPostManager, BlogPostCategoryManager
+from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedBlogPostManager, BlogPostCategoryManager
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
 from tagging.models import Tag
 
@@ -19,7 +19,7 @@ APP_SLUGS = "blogs"
 
 class BlogPage(AnnouncementPage):
     objects = BlogPageManager()
-
+    published = PublishedBlogPageManager()
     class Meta:
         verbose_name = _("Page - Blog Page")
         verbose_name_plural = _("Page - Blog Pages")
