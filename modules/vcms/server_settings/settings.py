@@ -6,32 +6,26 @@ import os
 from django.utils.translation import ugettext_lazy as _
 
 ADMINS = (
-    ('Francois Lebel', 'lebel.francois@vimba.ca')
-    ,('Francis Lavoie', 'lavoie.francis@vimba.ca')
+    ('support', 'support@vimba.ca')
 )
 
 SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
 MEDIA_PATH = SERVER_PATH + "/../"
+
 #Production
 #DEBUG = False
 #MEDIA_PATH = SERVER_PATH + "/../../webv2_static"
 #developpement
-DEBUG = True
-TEMPLATE_DEBUG = True
-ENABLE_STATIC = True
+DEBUG = False
+TEMPLATE_DEBUG = False
+ENABLE_STATIC = False
 
 # ## EMAIL
-from config_sqlite.contacts import *
-from config_sqlite.email import *
 if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
-    
 DEFAULT_FROM_EMAIL = "noreply@exemple.com"
 EMAIL_SUBJECT_PREFIX = ""
-
-# ## DATABASE
-from config_sqlite.database import *
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -65,9 +59,6 @@ MEDIA_URL = '/static/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/adminmedia/'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = ')z=ki#(2ki!o7*@3-+9vrae)tq6^v(8#d)k76eo26%hz6v)nke'
-
 # ## ###
 # ## LOGIN
 LOGIN_URL = '/accounts/login/'
@@ -80,7 +71,7 @@ LOGIN_URL = '/accounts/login/'
 #    r'logout/',
 #)
 
-ROOT_URLCONF = 'server.urls'
+ROOT_URLCONF = 'urls'
 
 AUTHENTICATION_BACKENDS = (
     'satchmo_store.accounts.email-auth.EmailBackend',   # Required by Satchmo
