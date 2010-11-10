@@ -81,7 +81,7 @@ class ContentInline(admin.StackedInline):
 #admin.site.register(PageContainer, PageContainerAdmin)
 
 class ContainerWidgetsAdmin(admin.ModelAdmin):
-    list_display = ('widget',)
+    list_display = ('widget', 'page', 'container', 'status')
 admin.site.register(ContainerWidgets, ContainerWidgetsAdmin)
 
 #class GridContainerAdmin(admin.ModelAdmin):

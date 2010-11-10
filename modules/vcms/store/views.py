@@ -38,10 +38,14 @@ ACCOUNT_VERIFICATION = config_get(SHOP_GROUP, 'ACCOUNT_VERIFICATION')
 ACCOUNT_VERIFICATION.add_choice(('ADMINISTRATOR', _('Administrator')))
 
 # Get the registration form class to use for this configuration
-REGISTER_MODULE = '/'.join(settings.REGISTER_FORM.split('.')[:-1]) # imp.find_module requires the '.' to be '/' in order to find the module
-REGISTER_CLASS = settings.REGISTER_FORM.split('.')[-1]
-REGISTER_FORM = getattr(imp.load_module(REGISTER_CLASS, *imp.find_module(REGISTER_MODULE)), REGISTER_CLASS)
+#REGISTER_MODULE = '/'.join(settings.REGISTER_FORM.split('.')[:-1]) # imp.find_module requires the '.' to be '/' in order to find the module
+#REGISTER_CLASS = settings.REGISTER_FORM.split('.')[-1]
+#REGISTER_FORM = getattr(imp.load_module(REGISTER_CLASS, *imp.find_module(REGISTER_MODULE)), REGISTER_CLASS)
 
+REGISTER_MODULE = '.'.join(settings.REGISTER_FORM.split('.')[:-1])
+REGISTER_CLASS = settings.REGISTER_FORM.split('.')[-1]
+mod = __import__(REGISTER_MODULE, globals(), locals(), ['forms'], -1)
+REGISTER_FORM = getattr(mod, REGISTER_CLASS)
 
 def get_queryset_states_provinces(country_id):
     """

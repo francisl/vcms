@@ -69,10 +69,12 @@ class BasicPage(models.Model):
     display_title = models.BooleanField(default=True)
 
     containers = (('content', _('Content'))
+                    ,('content_absolute', _('Content Absolute'))
                     ,('side_navigation', _('Side Navigation'))
                     ,('page_absolute', _('Page Absolute'))
                     )
-    containers_type = { 'content': 'absolute'
+    containers_type = { 'content': 'relative'
+                        ,'content_absolute': 'absolute'
                         ,'side_navigation': 'relative'
                         ,'page_absolute': 'absolute' }
 

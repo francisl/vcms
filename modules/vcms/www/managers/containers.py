@@ -8,11 +8,14 @@ from django.db import models
 from vcms.www.fields import StatusField
 
 class ContainerWidgetsManager(models.Manager):
+    def get_all(self, page):
+        return self.order_by('relative_position').filter(page=page)
+    
     def get_widgets(self, page, container):
-        return self.filter(page=page).filter(container=container)
+        return self.get_all(page=page).filter(container=container)
         
     def get_published_widget(self, page, container):
-        return self.filter(page=page).filter(container=container).filter(status=StatusField.PUBLISHED)
+        return self.get_all(page=page).filter(container=container).filter(status=StatusField.PUBLISHED)
 
 class DashboardElementManager(models.Manager):
     def get_PublishedAll(self):

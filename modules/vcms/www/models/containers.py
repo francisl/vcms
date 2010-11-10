@@ -30,7 +30,7 @@ class ContainerWidgets(models.Model):
     widget_id = models.PositiveIntegerField()
     widget = generic.GenericForeignKey('widget_type', 'widget_id')
 
-    status = models.BooleanField(choices=StatusField.STATUSES, default=StatusField.PUBLISHED)
+    status = models.IntegerField(default=StatusField.PUBLISHED, choices=StatusField.STATUSES)
 
     objects = ContainerWidgetsManager()
 
@@ -68,7 +68,7 @@ class ContainerWidgets(models.Model):
                 
     def get_style(self):
         style = ""
-        if self.page.containers_type[self.container] == 'absolute':
+        if self.page.containers_type.get(self.container) == 'absolute':
             style="position: absolute; "
             if self.absolute_top >= 0:
                 style += "top : %spx; " % self.absolute_top
@@ -78,6 +78,7 @@ class ContainerWidgets(models.Model):
                 style += "left : %spx; " % self.absolute_left
             if self.absolute_right >= 0:
                 style += "right : %spx; " % self.absolute_right
+        style += "width: %s%s" % (self.width, self.MESURE_CHOICES[self.width_mesure][1])
         return style
         
     def get_width(self):
