@@ -2,7 +2,7 @@
 
 {% block vcms_main_content %}
 <!--=========content=========== -->
-
+<div>
 <h1> Moving : {{ menu.get_name }}</h1>
 <form method="post" action="/www/menu/move/{{ menu.id }}/" >
 {{ form }}
@@ -11,5 +11,6 @@
 
 {{ menu_tree }}
 
+</div>
 <!--=========//content=========== -->
 {% endblock vcms_main_content %}

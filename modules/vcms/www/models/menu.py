@@ -15,6 +15,7 @@ from vcms.www.managers import QuickLinksManager
 from site_language.models import Language
 from vcms.www.fields import StatusField
 
+
 class MainMenu(MP_Node):
     menu_name = models.CharField(max_length=10, help_text="Maximum 50 characters", blank=True, null=True)
     display = models.BooleanField(default=True, help_text="Display in menu")
@@ -60,7 +61,6 @@ class CMSMenu(models.Model):
         return self.menu_name
 
     def save(self):
-        print("content object status = %i" % self.content_object.status)
         if self.display == True and self.content_object.status == StatusField.DRAFT:
             self.display = False
         super(CMSMenu, self).save()
@@ -80,11 +80,11 @@ class CMSMenu(models.Model):
     
     def get_page_status(self):
         return self.content_object.status
-    
+
     name = property(get_name)
     status = property(get_page_status)
     
-mptt.register(CMSMenu, order_insertion_by=['menu_name'])
+mptt.register(CMSMenu, order_insertion_by=['object_id'])
 
 
 class MenuLocalLink(models.Model):

@@ -22,7 +22,6 @@ APP_SLUGS = 'www'
 def _delete_page(page2delete):
     """ Move submenu up one level """
     pages = Page.objects.filter(parent=page2delete.id)
-    #print("menus : %s" % menus)
     if pages:
         for page in pages:
             if page.level != 0: # root = 0, no less
@@ -124,6 +123,14 @@ class BasicPage(models.Model):
     def save(self):
         if not self.app_slug:
             self.app_slug='www'
+        super(BasicPage, self).save()
+
+        from django.contrib.contenttypes.models import ContentType
+        this_content_type = ContentType.objects.get_for_model(self.__class__)        
+        if not CMSMenu.objects.has_menu_for_page(self):
+            menu = CMSMenu(display=False, language=self.language, content_type=this_content_type, object_id=self.id)
+            menu.save()
+
         super(BasicPage, self).save()
 
 class Page(BasicPage):

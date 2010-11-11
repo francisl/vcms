@@ -56,6 +56,11 @@ class CMSMenuManager(models.Manager):
         else:
             return default_menu[0].content_object
 
+    def has_menu_for_page(self, page):
+        from django.contrib.contenttypes.models import ContentType
+        this_content_type = ContentType.objects.get_for_model(type(page))
+        menus = self.filter(content_type=this_content_type, object_id=page.id)
+        return True if menus else False
 
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):
