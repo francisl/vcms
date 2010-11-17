@@ -1,9 +1,0 @@
-[ {
-    "model": "www.Language",
-    "pk": 1,
-    "fields": {
-      "language": "English",
-      "language_code": "en"
-    }
-  }
-]

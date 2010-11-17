@@ -45,18 +45,18 @@ if 'vcms.image_gallery' in settings.INSTALLED_APPS:
 
 # __ SIMTHETIQ __
 # ordering formular
-if 'vimba_cms_simthetiq.apps.order' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^order/', include('vimba_cms_simthetiq.apps.order.urls')),)
+if 'vcms_simthetiq.simthetiq_order' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^order/', include('vcms_simthetiq.simthetiq_order.urls')),)
 
 # __ SIMTHETIQ __
 # For simthetiq product management
-if 'vimba_cms_simthetiq.apps.products' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^products/', include('vimba_cms_simthetiq.apps.products.urls')),)
+if 'vcms_simthetiq.simthetiq_products' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^products/', include('vcms_simthetiq.simthetiq_products.urls')),)
 
 # __ SIMTHETIQ __
 # For simthetiq importer
-if 'vimba_cms_simthetiq.apps.importer' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^importer/', include('vimba_cms_simthetiq.apps.importer.urls')),)
+if 'vcms_simthetiq.simthetiq_importer' in settings.INSTALLED_APPS:
+    urlpatterns += patterns( '', url(r'^importer/', include('vcms_simthetiq.simthetiq_importer.urls')),)
    
         
 #print("INSTALLED APPS %s " % settings.INSTALLED_APPS)

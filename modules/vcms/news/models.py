@@ -51,8 +51,8 @@ class News(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS, help_text=_("Only Entries with 'live' status will be publicly displayed"))
     
     try:
-        from vimba_cms_simthetiq.apps.products.models import Image as p_Image
-        from vimba_cms_simthetiq.apps.products.models import Video as p_Video
+        from vcms_simthetiq.simthetiq_products.models import Image as p_Image
+        from vcms_simthetiq.simthetiq_products.models import Video as p_Video
         product_images = models.ManyToManyField(p_Image, blank=True)
         product_videos = models.ManyToManyField(p_Video, blank=True)
     except:

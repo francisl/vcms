@@ -46,7 +46,7 @@ class AnnouncementPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True)
     description = models.TextField(blank=True, null=True)
-    language = models.ForeignKey(Language, default=Language.objects.get_default_code())
+    language = models.ForeignKey(Language, default='en') #Language.objects.get_default_code())
 
     class Meta:
         abstract = True
@@ -77,7 +77,7 @@ class AnnouncementPost(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(auto_now_add=True, editable=False)
-    language = models.ForeignKey(Language, default=Language.objects.get_default_code())
+    language = models.ForeignKey(Language, default='en') #Language.objects.get_default_code())
     
     published = PublishedAnnouncementPostManager()
     objects = PublishedAnnouncementPostManager()

@@ -149,10 +149,10 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'updates_registration'
                   ,'vcms.store'
                   # Custom apps for cms
-                  ,'vimba_cms_simthetiq.apps.order'
-                  ,'vimba_cms_simthetiq.apps.store'
-                  ,'vimba_cms_simthetiq.apps.products'
-                  ,'vimba_cms_simthetiq.apps.importer'
+                  ,'vcms_simthetiq.simthetiq_order'
+                  ,'vcms_simthetiq.simthetiq_store'
+                  ,'vcms_simthetiq.simthetiq_products'
+                  ,'vcms_simthetiq.simthetiq_importer'
                   ,'south'
                   #SATCHMO
                   ,'satchmo_store.contact'
@@ -162,7 +162,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'payment.modules.giftcertificate'
                   ,'satchmo_utils'
                   ,'app_plugins'
-                  ,'vimba_cms_simthetiq.widget.simthetiq_recommends'
+                  ,'vcms_simthetiq.widget.simthetiq_recommends'
                   )
 
 # ## ###
