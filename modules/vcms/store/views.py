@@ -181,7 +181,7 @@ def register(request, redirect=None, template='registration/registration_form.ht
     """
         Allows a new user to register an account.
     """
-    print("Request post : %s" % request.POST)
+    #print("Request post : %s" % request.POST)
     ret = register_handle_form(request, redirect)
     success = ret[0]
     todo = ret[1]

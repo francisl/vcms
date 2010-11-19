@@ -35,7 +35,7 @@ def get_page_list(request):
     if request.method == 'GET':
         pages = BasicPage.objects.get_all_basic()
         mainmemu = mm.objects.get(menu_name='english')
-        print("all basic page = %s" % pages)
+        #print("all basic page = %s" % pages)
         pages_dict = {"name":'english'
                       ,"pages": []
                       }
@@ -53,7 +53,7 @@ def get_page_list(request):
                                     ,"displayed" : page.display
                                     ,"published" : page.content_object.status
                                     })
-        print("dict to json : %s " % pages_dict)
+        #print("dict to json : %s " % pages_dict)
         return HttpResponse(simplejson.dumps(pages_dict), mimetype='application/javascript')
         
 

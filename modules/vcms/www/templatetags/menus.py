@@ -42,7 +42,6 @@ def show_main_menu(current_page=None):
         root = MainMenu.objects.get(menu_name=str(l), depth=0)
     except:
         root = None
-    print("root = %s" % root)
     
     if root != None:
         main_menu = [ menuitem for menuitem in root.get_children()]
@@ -71,9 +70,7 @@ def generate_sub_menu(current_page=None):
         if rootmenu.name == l.language.lower():
             root = rootmenu
             menu = root.get_children()
-            print("set root to %s" % root)
     
-    print("current page = %s " % current_page)
     node=None
     if current_page != None:
         for menu_item in menu:
