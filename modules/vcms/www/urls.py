@@ -16,4 +16,5 @@ urlpatterns = patterns('vcms.www.views'
     ,(r'^ajax/page/list/$', 'get_page_list')
     ,(r'^ajax/page/add/$', 'add_new_page')
     ,(r'^ajax/page/update/$', 'update_page')
+    ,(r'^', 'Generic'),
 )
