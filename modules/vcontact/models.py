@@ -4,10 +4,10 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from vcms.www.models.page import Page
+from vcms.www.models.page import BasicPage
 from vcontact.managers import ContactPageManager
 
-class ContactPage(Page):
+class ContactPage(BasicPage):
     page_header = models.TextField(help_text=_("Title at the top of the page"))
     form_name = models.CharField(max_length=75)
     email_message = models.TextField(help_text=_("Message that will be displayed in the email"))

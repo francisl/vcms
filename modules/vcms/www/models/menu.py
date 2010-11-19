@@ -69,14 +69,14 @@ class CMSMenu(models.Model):
         return self.__unicode__()
         
     def get_slug(self):
-        return self.content_object.get_absolute_url()
+        return self.content_object.get_absolute_url() + "/"
         
     def get_tab_name(self):
         prefix = "+-- " * self.level
         return prefix + self.__unicode__()
     
     def get_absolute_url(self):
-        return self.content_object.get_absolute_url()
+        return self.content_object.get_absolute_url() + "/"
     
     def get_page_status(self):
         return self.content_object.status

@@ -30,6 +30,7 @@ class LanguageManager(models.Manager):
 
 
 class Language(models.Model):
+    DEFAULT = settings.LANGUAGE_CODE[:2]
     language = models.CharField(max_length=50, help_text=_('Max 50 characters.'))
     language_code = models.CharField(max_length=2, primary_key=True, help_text=_('e.g. fr = French or en = english'))
 

@@ -1,0 +1,9 @@
+[ {
+    "model": "site_language.Language",
+    "pk": 1,
+    "fields": {
+      "language": "English",
+      "language_code": "en"
+    }
+  }
+]

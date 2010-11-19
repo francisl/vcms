@@ -120,7 +120,7 @@ class BasicPage(models.Model):
     def get_menu(self):
         raise NotImplementedError()
         
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.app_slug:
             self.app_slug='www'
         super(BasicPage, self).save()
@@ -131,8 +131,9 @@ class BasicPage(models.Model):
             menu = CMSMenu(display=False, language=self.language, content_type=this_content_type, object_id=self.id)
             menu.save()
 
-        super(BasicPage, self).save()
+        super(BasicPage, self).save(*args, **kwargs)
 
+## TO BE REMOVED !!
 class Page(BasicPage):
     EMPTY = 0
     TEMPLATES = ((EMPTY, 'Default'),)
