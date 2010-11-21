@@ -21,7 +21,7 @@ from hwm.tree import generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
 
-def archives_for_one_year(by_month_year, older_archive):
+def archives_for_one_year(page, by_month_year, older_archive):
     archives = []
     delta = datetime.timedelta(days=31)
     today = datetime.date.today()
@@ -29,13 +29,17 @@ def archives_for_one_year(by_month_year, older_archive):
     
     for i in range(12):
         current_date = query_date(i)
-        archives.append({ 'date': current_date, 'year': current_date.year, "month": current_date.month, 'items_count': len(by_month_year(current_date.month, current_date.year))})
+        archives.append({ 'date': current_date
+                         ,'year': current_date.year
+                         ,"month": current_date.month
+                         ,'items_count': len(by_month_year(page, current_date.month, current_date.year))})
 
-    older = { 'date': query_date(12), 'items_count': len(older_archive(query_date(12).month, query_date(12).year))}
+    older = { 'date': query_date(12), 'items_count': len(older_archive(page, query_date(12).month, query_date(12).year))}
     return archives, older
-            
-blogs_by_month_year = lambda month,year: BlogPost.published.filter(date_published__month=month, date_published__year=year) 
-blogs_older_archives_month_year = lambda month, year: BlogPost.published.filter(date_published__lt=datetime.date(year, month, 1))
+
+blogs_by_month_year = lambda page, month,year: BlogPost.published.get_for_page_by_date(page, year=year, month=month) 
+blogs_older_archives_month_year = lambda page, month, year: BlogPost.published.get_archive_for_page(page, year=year, month=month)
+
 
 def generate_paginator(page_number, items, reverse_url, item_per_page=6, reverse_kwargs={}):
     import copy
@@ -61,8 +65,8 @@ def generate_paginator(page_number, items, reverse_url, item_per_page=6, reverse
     return page_items, page_paginator, html_paginator
 
 def get_side_menu(page):
-    categories = BlogPostCategory.objects.get_non_empty_categories_for_page(page, counts=True)
-    archives, older_archives = archives_for_one_year(blogs_by_month_year, blogs_older_archives_month_year)
+    categories = BlogPostCategory.objects.get_category_for_page(page, counts=True)
+    archives, older_archives = archives_for_one_year(page, blogs_by_month_year, blogs_older_archives_month_year)
     return categories, archives, older_archives
 
 def get_page_information(page_slug, method_name):

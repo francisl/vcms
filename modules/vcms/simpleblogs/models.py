@@ -11,38 +11,47 @@ from django.template.loader import render_to_string
 
 from vcms.www.models.widget import Widget
 from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
-from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedBlogPostManager, BlogPostCategoryManager
+from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedNewsBlogPostManager, BlogPostCategoryManager
 from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
 from tagging.models import Tag
 
 APP_SLUGS = "blogs"
 
+NEWS_TYPE = "news"
+BLOGS_TYPE = "blogs"
+NEWS_BLOGS_TYPE = ((NEWS_TYPE, _('NEWS'))
+                   ,(BLOGS_TYPE, _('BLOGS'))
+                   )
+
 class BlogPage(AnnouncementPage):
     objects = BlogPageManager()
     published = PublishedBlogPageManager()
+    type = models.CharField(max_length=12, choices=NEWS_BLOGS_TYPE, default=BLOGS_TYPE)
+    
     class Meta:
-        verbose_name = _("Page - Blog Page")
-        verbose_name_plural = _("Page - Blog Pages")
+        verbose_name = _("Page - News/Blog Page")
+        verbose_name_plural = _("Page - News/Blog Pages")
         ordering = ['name']
         
     def save(self):
-        self.app_slug = APP_SLUGS
+        self.app_slug = self.type
         super(BlogPage, self).save()
 
 class BlogPostCategory(AnnouncementPostCategory):
     objects = BlogPostCategoryManager()
     class Meta:
         ordering = ['name']
-        verbose_name_plural = _("Blog Posts Categories")
+        verbose_name_plural = _("News/Blog Posts Categories")
         
 class BlogPost(AnnouncementPost):
     display_on_page = models.ForeignKey(BlogPage)
     category = models.ManyToManyField(BlogPostCategory)
     
-    published = PublishedBlogPostManager()
+    objects = PublishedNewsBlogPostManager()
+    published = PublishedNewsBlogPostManager()
     
     class Meta:
-        verbose_name_plural = _("Blog Posts")
+        verbose_name_plural = _("News/Blog Posts")
         get_latest_by = ['-date_created']
         ordering = ['-date_created']
 
@@ -79,8 +88,8 @@ class BlogPostWidget(Widget):
         return widget
 
     class Meta:
-        verbose_name= "Widget - Blog"
-        verbose_name_plural = "Widget - Blogs"
+        verbose_name= "Widget - News/Blog"
+        verbose_name_plural = "Widget - News/Blogs"
 
     def __unicode__(self):
         return self.__class__.__name__ + ' ' + self.name

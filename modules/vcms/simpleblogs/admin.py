@@ -9,7 +9,7 @@ from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory, BlogPo
 
 
 class BlogPageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'type', 'status', 'language', 'id')
 admin.site.register(BlogPage, BlogPageAdmin)
 
 class BlogPostAdmin(admin.ModelAdmin):
