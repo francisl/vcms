@@ -17,16 +17,41 @@ from tagging.models import Tag
 
 APP_SLUGS = "blogs"
 
-NEWS_TYPE = "news"
-BLOGS_TYPE = "blogs"
-NEWS_BLOGS_TYPE = ((NEWS_TYPE, _('NEWS'))
-                   ,(BLOGS_TYPE, _('BLOGS'))
-                   )
 
 class BlogPage(AnnouncementPage):
+    NEWS_TYPE = "news"
+    BLOGS_TYPE = "blogs"
+    NEWS_BLOGS_TYPE = ((NEWS_TYPE, _('NEWS'))
+                       ,(BLOGS_TYPE, _('BLOGS'))
+                       )
+    
+    NAVIGATION_DISABLE = 'disable'
+    NAVIGATION_SIDE_NAVIGATION = 'side_navigation'
+    NAVIGATION_IN_PAGE_NAVIGATION = 'in_page_navigation'
+    NAVIGATION = ((NAVIGATION_SIDE_NAVIGATION, _('Side navigation'))
+                  ,(NAVIGATION_IN_PAGE_NAVIGATION, _('Inside Page navigation'))
+                  ,(NAVIGATION_DISABLE, _('Disable'))
+                  )
+    
+    FEEDS_ICON_DISABLE = 0
+    FEEDS_ICON_HEADER = 1
+    FEEDS_ICON_PAGE = 2
+    FEEDS_ICON = ((FEEDS_ICON_DISABLE, _('Disable'))
+                  ,(FEEDS_ICON_HEADER, _('In navigation header')) 
+                  ,(FEEDS_ICON_PAGE, _('On page'))
+                  )
+    
+    TEMPLATE_SHORT_LIST = 'short_list'
+    TEMPLATE_DETAILED_LIST = 'detailed_list'
+    TEMPLATE = ((TEMPLATE_DETAILED_LIST, _('Detailed List'))
+                ,(TEMPLATE_SHORT_LIST, _("Short List"))
+                )
     objects = BlogPageManager()
     published = PublishedBlogPageManager()
+    listing_style = models.CharField(max_length=32, choices=TEMPLATE, default=TEMPLATE_DETAILED_LIST)
     type = models.CharField(max_length=12, choices=NEWS_BLOGS_TYPE, default=BLOGS_TYPE)
+    display_navigation_in = models.CharField(max_length=32, choices=NAVIGATION, default=NAVIGATION_SIDE_NAVIGATION)
+    feeds_icon_position = models.PositiveIntegerField(choices=FEEDS_ICON, default=FEEDS_ICON_HEADER)
     
     class Meta:
         verbose_name = _("Page - News/Blog Page")
@@ -109,27 +134,27 @@ class BlogPostWidget(Widget):
     def get_absolute_url(self):
         return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
 
-class NewsBlogNavigationWidget(Widget):
-    page = models.ForeignKey(BlogPage)
-
-    def render(self, current_page=None):
-        from vcms.simpleblogs.views import get_side_menu
-        categories, archives, older_archives = get_side_menu(self.page)
-        template = "newsblogs_navigation.html"
-        widget =  render_to_string(template
-                                   ,{'page': self.page
-                                     ,'categories': categories
-                                     ,'archives':archives
-                                     ,'older_archives': older_archives })
-        return widget
-
-    class Meta:
-        verbose_name= "Widget - News/Blog Navigation"
-        verbose_name_plural = "Widget - News/Blogs Navigation"
-
-    def __unicode__(self):
-        return self.__class__.__name__ + ' ' + self.name
-
-    def get_absolute_url(self):
-        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
+#class NewsBlogNavigationWidget(Widget):
+#    page = models.ForeignKey(BlogPage)
+#
+#    def render(self, current_page=None):
+#        from vcms.simpleblogs.views import get_side_menu
+#        categories, archives, older_archives = get_side_menu(self.page)
+#        template = "newsblogs_navigation.html"
+#        widget =  render_to_string(template
+#                                   ,{'page': self.page
+#                                     ,'categories': categories
+#                                     ,'archives':archives
+#                                     ,'older_archives': older_archives })
+#        return widget
+#
+#    class Meta:
+#        verbose_name= "Widget - News/Blog Navigation"
+#        verbose_name_plural = "Widget - News/Blogs Navigation"
+#
+#    def __unicode__(self):
+#        return self.__class__.__name__ + ' ' + self.name
+#
+#    def get_absolute_url(self):
+#        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
 

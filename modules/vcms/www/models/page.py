@@ -49,7 +49,7 @@ class BasicPage(models.Model):
         # TODO : add multi-language fonctionnality
     """
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
-    status = models.BooleanField(choices=StatusField.STATUSES, default=StatusField.DRAFT)
+    status = models.PositiveIntegerField(choices=StatusField.STATUSES, default=StatusField.DRAFT)
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     app_slug = models.SlugField(default="", editable=False, null=True, blank=True)
     module = models.CharField(max_length=30, default='', editable=False)

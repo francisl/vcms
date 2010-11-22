@@ -1,0 +1,14 @@
+{% extends "announcement.html" %}
+{% load humanize %}
+
+{% block newsblogs_list %}
+{% for post in posts %}
+    <div>
+        <h3>{{ post.title }}</h3>
+        <h5>{{ post.date_published|naturalday }}</h5>
+        {{ post.content|safe }}
+        <p>Tags: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
+        <br />
+    </div>
+{% endfor %}
+{% endblock newsblogs_list %}

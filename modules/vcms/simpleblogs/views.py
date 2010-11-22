@@ -79,6 +79,8 @@ def get_page_information(page_slug, method_name):
     reverse_url="vcms.simpleblogs.views." + method_name
     return page, page_info ,reverse_url
     
+newsblogs_template = {'short_list': 'newsblogs_short_list.html'
+            ,'detailed_list': 'newsblogs_detailed_list.html' }
 
 def page(request, page_slug=None, category=None, page_number=1, year=None, month=None, day=None, post_id=None):
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
@@ -90,7 +92,7 @@ def page(request, page_slug=None, category=None, page_number=1, year=None, month
     blogs = BlogPost.published.get_all_for_page(page, category=category)
     pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
     
-    return render_to_response("announcement.html"
+    return render_to_response( newsblogs_template[page.listing_style]
                                 ,{ 'page': page
                                   ,'page_name': page_slug
                                   ,'posts': pitems

@@ -8,6 +8,7 @@
 {% load thumbnail %}
 {% load tree %}
 {% load cms_theme %}
+{% load newsblogs_navigation %}
 
 <!--=========NAVIGATION=========== -->
 {% block navigation %}
@@ -15,22 +16,32 @@
     {% if page_info.current_page.menu %}
         {% generate_dl_tree page_info.current_page.menu %}
     {% endif %}
+    {% ifequal page.display_navigation_in 'side_navigation' %}
+        {% newsblogs_navigation page_info.current_page %}
+    {% endifequal %}
 {% endblock navigation %}
 
 {% block vcms_main_content %}
     {{ block.super }}
-        <div class="vcms_content">
-            {% if page_info.page.display_title %}
-                <h1>{% if page_info.page.get_menu.get_root_menu_if_exist %}
-                        {{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}
-                        <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
-            {% endif %}
-            <div class="vcms_content">
-    <h1><span style="color: #444444;">{{ page_name }}</span></h1>
-</div>
+    <div class="vcms_content">
+        {% if page_info.page.display_title %}
+            <h1>{% if page_info.page.get_menu.get_root_menu_if_exist %}
+                {{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}
+                <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+        {% endif %}
+    <div class="vcms_content">
+        <h1><span style="color: #444444;">{{ page_name }}</span></h1>
+    </div>
+    <div id='vcms_rss_feeds_on_page'>
+    {% ifequal page.feeds_icon_position 2 %}
+        {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">
+        <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>{% endif %}
+    {% endifequal %}
+    </div>
     <div class="vcms_column_container">
         <!-- Content -->
         <div class="vcms_inner_content">
+        {% block newsblogs_list %}
         {% for post in posts %}
             <div>
                 <h3>{{ post.title }}</h3>
@@ -40,37 +51,15 @@
                 <br />
             </div>
         {% endfor %}
+        {% endblock newsblogs_list %}
         <br />
         {{ page_paginator }}
         </div>
-
     </div>
     
-
-    {% if inside_navigation %}
-    <div id='vcms_main_content_inside_navigation'>
-    {% if categories %}
-       {% if page.rss_feed %}
-       <div class="feedsbox"><a href="/blogs/rss/page/{{ page_name }}/"><img src="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/feeds/feed-icon-24x24.png"></a></div>
-       {% endif %}
-       <dl><dt><h4>Categories</h4></dt>
-           {% for category, values in categories.items %}
-            <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"><dd>{{ category }} ({{ values.count }})</dd></a>
-            {% endfor %}
-            <br />
-            <dt><h4>Archives</h4></dt>
-            {% for archive in archives %}
-                {% if archive.items_count %}
-                <a href="/blogs/{{ page_name }}/{{ archive.year }}/{{ archive.month }}/"><dd>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dd></a>
-                {% endif %}
-            {% endfor %}
-                <a href="/blogs/{{ page_name }}/-{{ older_archives.date|date:"Y" }}/"><dd>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dd></a>
-        </dl>
-    {% endif %}
+    {% ifequal page.display_navigation_in 'in_page_navigation' %}
+        {% newsblogs_navigation page_info.current_page %}
+    {% endifequal %}
     </div>
-    {% endif %}
-        </div>
-        {% relative_container page_info.current_page 'content' %}
-        {% absolute_container page_info.current_page 'content_absolute' %}
 {% endblock vcms_main_content %}
 
