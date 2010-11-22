@@ -6,10 +6,11 @@
     {% for post in posts %}
         {% if post.preview %}
         <div class="vcms_blog_widget_post">
-            <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
+            <a href="{{ post.get_absolute_url }}"><h3 class="vcms_blog_item_widget_title">{{ post.title }}</h3></a>
             <!-- <h5>{{ post.date_published|naturalday }}</h5> -->
-            {{ post.preview|striptags }}<br />
-            <a href="{{ post.get_absolute_url }}">{% trans 'More ' %}...</a>
+            <div class="vcms_blog_item_content">{{ post.preview|striptags }}<br />
+            <a href="{{ post.get_absolute_url }}" class="more">{% trans 'More ' %}...</a>
+            </div>
         </div>
         {% endif %}
     {% endfor %}
