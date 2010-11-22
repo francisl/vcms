@@ -1,0 +1,32 @@
+{% load cms_theme %}
+{% load i18n %}
+
+{% if categories %}
+
+	<div class="tree">
+	<h1>Categories {% if page.rss_feed %}
+    <a href="/blogs/rss/page/{{ page_name }}/">
+       <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>
+    {% endif %}</h1>
+	<dl>
+	    {% for category, values in categories.items %}
+	     <a href="/{{ page.type }}/{{ page.slug }}/{{ values.model.slug }}"><dt>{{ category }} ({{ values.count }})</dt></a>
+	     {% endfor %}
+	</dl>
+    </div>
+{% endif %}
+{% if archives %}
+	   <div class="tree">
+	   <h1>Archives</h1>
+	   <dl>
+	     {% for archive in archives %}
+	         {% if archive.items_count %}
+	         <a href="/{{page.type}}/{{ page.slug }}/{{ archive.year }}/{{ archive.month }}/">
+	           <dt>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dt></a>
+	         {% endif %}
+	     {% endfor %}
+	     <a href="/{{page.type}}/{{ page.slug }}/-{{ older_archives.date|date:"Y" }}/">
+	       <dt>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dt></a>
+    </dl>
+    </div>
+{% endif %}

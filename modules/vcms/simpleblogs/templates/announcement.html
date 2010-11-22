@@ -1,0 +1,76 @@
+{% extends "master_frame.html" %}
+{% load search_widget %}
+{% load tree %}
+{% load containers %}
+
+{% load i18n %}
+{% load humanize %}
+{% load thumbnail %}
+{% load tree %}
+{% load cms_theme %}
+
+<!--=========NAVIGATION=========== -->
+{% block navigation %}
+    {% show_detailed_search_box %}
+    {% if page_info.current_page.menu %}
+        {% generate_dl_tree page_info.current_page.menu %}
+    {% endif %}
+{% endblock navigation %}
+
+{% block vcms_main_content %}
+    {{ block.super }}
+        <div class="vcms_content">
+            {% if page_info.page.display_title %}
+                <h1>{% if page_info.page.get_menu.get_root_menu_if_exist %}
+                        {{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}
+                        <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+            {% endif %}
+            <div class="vcms_content">
+    <h1><span style="color: #444444;">{{ page_name }}</span></h1>
+</div>
+    <div class="vcms_column_container">
+        <!-- Content -->
+        <div class="vcms_inner_content">
+        {% for post in posts %}
+            <div>
+                <h3>{{ post.title }}</h3>
+                <h5>{{ post.date_published|naturalday }}</h5>
+                {{ post.content|safe }}
+                <p>Tags: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
+                <br />
+            </div>
+        {% endfor %}
+        <br />
+        {{ page_paginator }}
+        </div>
+
+    </div>
+    
+
+    {% if inside_navigation %}
+    <div id='vcms_main_content_inside_navigation'>
+    {% if categories %}
+       {% if page.rss_feed %}
+       <div class="feedsbox"><a href="/blogs/rss/page/{{ page_name }}/"><img src="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/feeds/feed-icon-24x24.png"></a></div>
+       {% endif %}
+       <dl><dt><h4>Categories</h4></dt>
+           {% for category, values in categories.items %}
+            <a href="/blogs/{{ page_name }}/{{ values.model.slug }}/"><dd>{{ category }} ({{ values.count }})</dd></a>
+            {% endfor %}
+            <br />
+            <dt><h4>Archives</h4></dt>
+            {% for archive in archives %}
+                {% if archive.items_count %}
+                <a href="/blogs/{{ page_name }}/{{ archive.year }}/{{ archive.month }}/"><dd>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dd></a>
+                {% endif %}
+            {% endfor %}
+                <a href="/blogs/{{ page_name }}/-{{ older_archives.date|date:"Y" }}/"><dd>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dd></a>
+        </dl>
+    {% endif %}
+    </div>
+    {% endif %}
+        </div>
+        {% relative_container page_info.current_page 'content' %}
+        {% absolute_container page_info.current_page 'content_absolute' %}
+{% endblock vcms_main_content %}
+
