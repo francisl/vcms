@@ -84,7 +84,7 @@ class BlogPost(AnnouncementPost):
         return self.title
 
     def get_absolute_url(self):
-        return "/%s/%s/%s/%s/%s/%d" % (APP_SLUGS, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+        return "/%s/%s/%s/%s/%s/%d" % (self.display_on_page.type, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
     def save(self):
         import re
@@ -132,7 +132,7 @@ class BlogPostWidget(Widget):
         return self.__class__.__name__ + ' ' + self.name
 
     def get_absolute_url(self):
-        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
+        return "/%s/%s/%s/" % (self.page.type, self.page.slug, self.display_category.slug )
 
 #class NewsBlogNavigationWidget(Widget):
 #    page = models.ForeignKey(BlogPage)

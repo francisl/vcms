@@ -74,7 +74,6 @@ def Generic(request, page=None, context={}):
     page_instance = _get_page_instance(basic_page)
     context.update(page_info=_get_page_parameters(page_instance))
 
-    print "basic page %s " % page
     if context["page_info"]['page'].module in globals():
         """ Transfert the view specified by the model module name """
         return globals()[context["page_info"]['page'].module](request, context)
@@ -170,7 +169,6 @@ def Search(request):
 
         # temp_results
         results[_("Page")] = Page.indexer.search(query)
-        #print("results = %s" % results)
         try:
             # get result from product
             from products.models import ProductInformation

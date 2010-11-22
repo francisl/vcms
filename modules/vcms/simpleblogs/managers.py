@@ -81,7 +81,6 @@ class PublishedNewsBlogPostManager(models.Manager):
         query = self.get_latest()
         query = self.get_for_page(page, queryset=query)
         if category:
-            print(category)
             query = query.filter(category=category) 
         return query
         
