@@ -1,3 +1,0 @@
-Dependencies for SimpleNews
-
-django-tagging          # http://code.google.com/p/django-tagging/
