@@ -100,11 +100,36 @@ class BlogPostWidget(Widget):
         return widget
 
     class Meta:
-        verbose_name= "Widget - News/Blog"
-        verbose_name_plural = "Widget - News/Blogs"
+        verbose_name= "Widget - News/Blog Preview"
+        verbose_name_plural = "Widget - News/Blogs Preview"
 
     def __unicode__(self):
         return self.__class__.__name__ + ' ' + self.name
 
     def get_absolute_url(self):
         return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
+
+class NewsBlogNavigationWidget(Widget):
+    page = models.ForeignKey(BlogPage)
+
+    def render(self, current_page=None):
+        from vcms.simpleblogs.views import get_side_menu
+        categories, archives, older_archives = get_side_menu(self.page)
+        template = "newsblogs_navigation.html"
+        widget =  render_to_string(template
+                                   ,{'page': self.page
+                                     ,'categories': categories
+                                     ,'archives':archives
+                                     ,'older_archives': older_archives })
+        return widget
+
+    class Meta:
+        verbose_name= "Widget - News/Blog Navigation"
+        verbose_name_plural = "Widget - News/Blogs Navigation"
+
+    def __unicode__(self):
+        return self.__class__.__name__ + ' ' + self.name
+
+    def get_absolute_url(self):
+        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
+
