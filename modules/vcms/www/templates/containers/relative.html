@@ -1,4 +1,4 @@
-<div class="vcms_container_relative">
+<div class="vcms_container_{{container_name}}">
      {% for w in widgets %}
      <div style="{{ w.get_style }};">
         {{ w.widget.render|safe }}

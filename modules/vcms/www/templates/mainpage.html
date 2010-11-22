@@ -9,13 +9,11 @@
     {{ block.super }}
 {% endblock vcms_content_header %}
 
-<!--=========NAVIGATION=========== -->
-{% block navigation %}
-        {% relative_container page_info.current_page 'side_navigation' %}
-{% endblock navigation %}
-
 {% block vcms_main_content %}
     <div class="vcms_container_table main_content clear_bg">
-	    {% relative_container page_info.current_page 'content' %}
+        <table><tr>
+           <td>{% relative_container page_info.current_page 'content_col1' %}</td>
+	       <td>{% relative_container page_info.current_page 'content_col2' %}</td>
+	    </tr></table>
     </div>
 {% endblock vcms_main_content %}

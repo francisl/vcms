@@ -11,3 +11,8 @@ register = template.Library()
 def get_selected_theme():
     return {'theme' : settings.SELECTED_THEME }
  
+
+@register.inclusion_tag('cms_theme_path.html')
+def get_selected_theme_path():
+    return {'theme' : settings.SELECTED_THEME, 'media_url': settings.MEDIA_URL }
+ 

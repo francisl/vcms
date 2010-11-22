@@ -71,11 +71,16 @@ class BasicPage(models.Model):
                     ,('content_absolute', _('Content Absolute'))
                     ,('side_navigation', _('Side Navigation'))
                     ,('page_absolute', _('Page Absolute'))
+                    ,('content_col1', _('Content Column 1 - MainPage only'))
+                    ,('content_col2', _('Content Column 2 - MainPage only'))
                     )
     containers_type = { 'content': 'relative'
                         ,'content_absolute': 'absolute'
                         ,'side_navigation': 'relative'
-                        ,'page_absolute': 'absolute' }
+                        ,'page_absolute': 'absolute'
+                        ,'content_col1': 'relative'
+                        ,'content_col2': 'relative' 
+    }
 
     class Meta:
         verbose_name = _("Page - Basic page (do not edit)")

@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.conf import settings 
 
 from vcms.www.views.html import _get_page_parameters
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
@@ -84,10 +85,11 @@ def page(request, page_slug=None, category=None, page_number=1, year=None, month
     categories, archives, older_archives = get_side_menu(page)
     
     if category != None:
-        category = get_object_or_404(BlogPostCategory, slug=category).slug
-            
+        category = get_object_or_404(BlogPostCategory, slug=category)
+
     blogs = BlogPost.published.get_all_for_page(page, category=category)
     pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
+    
     return render_to_response("announcement.html"
                                 ,{ 'page': page
                                   ,'page_name': page_slug
@@ -97,6 +99,7 @@ def page(request, page_slug=None, category=None, page_number=1, year=None, month
                                   ,'older_archives': older_archives
                                   ,'page_paginator': page_paginator
                                   ,'page_info': page_info
+                                  ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                 }
                                 ,context_instance=RequestContext(request))
 
@@ -119,6 +122,7 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                   ,'older_archives': older_archives
                                   ,'page_paginator': page_paginator
                                   ,'page_info': page_info
+                                  ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                 }
                                 ,context_instance=RequestContext(request))
     

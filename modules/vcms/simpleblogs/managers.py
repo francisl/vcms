@@ -35,7 +35,6 @@ class BlogPostCategoryManager(models.Manager):
                 categories_for_page[category.name] = {'model': category
                                             ,'count' : posts.count()
                                             }
-
         return categories_for_page
 
 class PublishedNewsBlogPostManager(models.Manager):
@@ -82,6 +81,7 @@ class PublishedNewsBlogPostManager(models.Manager):
         query = self.get_latest()
         query = self.get_for_page(page, queryset=query)
         if category:
+            print(category)
             query = query.filter(category=category) 
         return query
         

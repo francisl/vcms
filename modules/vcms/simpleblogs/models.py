@@ -81,9 +81,21 @@ class BlogPostWidget(Widget):
     display_category = models.ForeignKey(BlogPostCategory, null=True, blank=True, help_text=_("select nothings to display all categories"))
     display_image = models.BooleanField(default=True)
     
+    WIDGET_TEMPLATE_SUMMARY_LIST = 1
+    WIDGET_TEMPLATE_DETAILED = 2
+    WIDGET_TEMPLATE = ((WIDGET_TEMPLATE_SUMMARY_LIST, _('Short List'))
+                      ,(WIDGET_TEMPLATE_DETAILED, _('Detailed view'))
+                      )
+
+    display_template = models.PositiveIntegerField(choices=WIDGET_TEMPLATE, default=WIDGET_TEMPLATE_DETAILED)
+    
     def render(self):
         posts = BlogPost.published.get_latest_post_for_page(self.page, qty=self.display_elements, category=self.display_category) #, self.display_elements)
-        widget =  render_to_string("widget/announcement.html"
+        if self.display_template == self.WIDGET_TEMPLATE_SUMMARY_LIST:
+            template = "newsblogs_widget/short_list.html"
+        else: 
+            template = "newsblogs_widget/detailed_view.html"
+        widget =  render_to_string(template
                                     ,{ 'name': self.name, 'posts':posts, 'widget': self })
         return widget
 

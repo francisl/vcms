@@ -86,6 +86,9 @@
                     {% block navigation %}
                     
                     {% endblock navigation %}
+                    {% if page_info %}
+                        {% relative_container page_info.current_page 'side_navigation' %}
+                    {% endif%}
                 </div>
                 {% endblock remove_navigation %}
                 <div id="vcms_content_container" class="dark_on_clear">

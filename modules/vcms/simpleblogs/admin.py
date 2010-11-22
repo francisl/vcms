@@ -5,7 +5,7 @@
 # Created by Francois Lebel on 24-03-2010.
 
 from django.contrib import admin
-from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory, BlogPostWidget
+from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory, BlogPostWidget, NewsBlogNavigationWidget
 
 
 class BlogPageAdmin(admin.ModelAdmin):
@@ -21,5 +21,9 @@ class BlogPostCategoryAdmin(admin.ModelAdmin):
 admin.site.register(BlogPostCategory, BlogPostCategoryAdmin)
 
 class BlogPostWidgetAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'page', 'display_template', 'id')
 admin.site.register(BlogPostWidget, BlogPostWidgetAdmin)
+
+class NewsBlogNavigationWidgetAdmin(admin.ModelAdmin):
+    list_display = ('name', 'page', 'id')
+admin.site.register(NewsBlogNavigationWidget, NewsBlogNavigationWidgetAdmin)
