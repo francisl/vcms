@@ -1,21 +1,21 @@
 import unittest
 from django.test.client import Client
-from updates_registration.models import Registered2Updates
+from updates_registration.models import UpdatesRegistration
 
 class UpdatesRegistrationTestCase(unittest.TestCase):
     def setUp(self):
         self.registered_user_email = "test@test.ca"
-        self.registered_user = Registered2Updates(email=self.registered_user_email)
+        self.registered_user = UpdatesRegistration(email=self.registered_user_email)
         self.registered_user.save()
 
     def tearDown(self):
         self.registered_user.delete()
     
     def test_if_get_register_validate_existing_user(self):
-        self.assertTrue(Registered2Updates.objects.is_registered(self.registered_user_email))
+        self.assertTrue(UpdatesRegistration.objects.is_registered(self.registered_user_email))
         
     def test_if_get_register_validate_non_existing_user(self):
-        self.assertFalse(Registered2Updates.objects.is_registered("test2@test.ca"))
+        self.assertFalse(UpdatesRegistration.objects.is_registered("test2@test.ca"))
         
 
 class UpdatesRegistrationViewsTestCase(unittest.TestCase):
