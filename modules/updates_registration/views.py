@@ -101,8 +101,8 @@ class UpdatesRegistrationFormManager(object):
         
     def _validate(self):
         if self.form.is_valid(): 
-            self.email = self.form.cleaned_data['email']
-            self.email_confirmation = self.form.cleaned_data['email_confirmation']
+            self.email = self.form.cleaned_data['registration_email']
+            self.email_confirmation = self.form.cleaned_data['registration_email_confirmation']
             if self.email != self.email_confirmation:
                 self.EMAIL_MATCH_ERROR = True
             elif UpdatesRegistration.objects.is_registered(self.email):
@@ -120,7 +120,7 @@ class UpdatesRegistrationFormManager(object):
         new_request = UpdatesRegistration(email=self.email)
         as_been_sent = _send_email(self.email_confirmation, EMAILS["CONTACT"]["FROM"])
         new_request.save()
-        redirect = urlresolvers.reverse('updatesregistration.views.register_success')
+        redirect = urlresolvers.reverse('updates_registration.views.register_success')
         return HttpResponseRedirect(redirect)
             
     

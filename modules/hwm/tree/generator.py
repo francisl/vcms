@@ -15,7 +15,6 @@ def _generate_li_tree(data, css_id, css_class):
 
 def generate_tree(data, navigation_title=None, css_id="", css_class="", type="dl"):
     """ Take a list and generate a html tree
-        ˙
         @param data: a list containing a dictionary
             List item dictionary required field :
             @key url : string - used to generate <a> tag (default="#")
@@ -29,36 +28,6 @@ def generate_tree(data, navigation_title=None, css_id="", css_class="", type="dl
         @param css_id: string id of the list container
         @param css_class: string, class name of thelist container
         @param type: string, either "dl" for a definition list (<dl>/dl>) or "ul" for a unordered list (<ul></ul>)
-        
-        @example - Without helper:
-            >>> from hwm.tree import generator
-            
-            # create one item 
-            >>> item = {}
-            >>> item["name"] = "item_name"
-            >>> item["url"] = "/products/"
-            >>> item["child_selected"] = False
-            >>> item["selected"] = False
-            >>> item["items"] = []
-            >>> item["category"] = "Category"
-            
-            #generate the html
-            >>> generated_navigation = generator.generate_tree([item,], "Page Test")
-            
-            #then add the generated code to the navigation section {% block navigation %}
-            
-        @example - Using the helper:
-            >>> from hwm.tree import generator
-            >>> rom hwm.tree import helper
-            
-            # create the item
-            >>> item = helper.create_tree_node([item_name], url=item.get_absolute_url()))
-            
-            # generate the html
-            >>> generated_navigation = generator.generate_tree([item,])
-            
-            # then add the generated code to the navigation section {% block navigation %}
-            
     """
     
     if type == "dl":
