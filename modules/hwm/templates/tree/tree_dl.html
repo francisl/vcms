@@ -11,7 +11,7 @@
         </dt>
         {% for item in category.items %}
             <dd class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
-            <a href="{{ item.url }}/">{{ item.name }}</a></dd>
+            <a href="{{ item.get_absolute_url }}/">{{ item }}</a></dd>
         {% endfor %}
     {% endfor %}
     </dl>
