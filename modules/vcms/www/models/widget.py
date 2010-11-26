@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 
 from vcms.www.models.page import BasicPage
-
+from vcms.www.models.containers import ContainerWidgets
 # -----------------
 # WIDGETS
 # -----------------
@@ -72,7 +72,7 @@ class TextWidget(Widget):
 
     def get_page_where_available(self):
         try:
-            thiswidget = RelativeWidgetWrapper.objects.filter(widget_id=self.id)[0]
+            thiswidget = ContainerWidgets.objects.filter(widget_id=self.id)[0]
             return thiswidget.container.page.get_absolute_url()
         except:
             return None
