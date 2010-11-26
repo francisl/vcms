@@ -4,9 +4,9 @@
 {% block newsblogs_list %}
 <table width="100%">
     {% for post in posts %}
-        <tr>
-        <td width="10%">{{ post.date_published|naturalday }}</td>
-        <td width="80%">{{ post.title }} - {{ post.preview|striptags }}</td>
+        <tr class="{% cycle 'uneven-line' 'even-line' %}">
+        <td width="10%">{{ post.date_published|date:"m / d / Y" }}</td>
+        <td width="80%">{{ post.title }}{% comment %} - {{ post.preview|striptags }}{% endcomment %}</td>
         </tr>
     {% endfor %}
 </table>
