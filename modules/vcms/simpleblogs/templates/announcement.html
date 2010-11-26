@@ -30,9 +30,6 @@
                 {{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}
                 <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
         {% endif %}
-    <div class="vcms_content">
-        <h1><span style="color: #444444;">{{ page_name }}</span></h1>
-    </div>
     <div id='vcms_rss_feeds_on_page'>
     {% ifequal page.feeds_icon_position 2 %}
         {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">

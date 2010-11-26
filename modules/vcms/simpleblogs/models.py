@@ -61,6 +61,9 @@ class BlogPage(AnnouncementPage):
     def save(self):
         self.app_slug = self.type
         super(BlogPage, self).save()
+        
+    def get_absolute_url(self):
+        return "/%s/%s" % (self.type, self.slug)
 
 class BlogPostCategory(AnnouncementPostCategory):
     objects = BlogPostCategoryManager()
