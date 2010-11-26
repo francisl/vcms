@@ -73,7 +73,7 @@ class TextWidget(Widget):
     def get_page_where_available(self):
         try:
             thiswidget = ContainerWidgets.objects.filter(widget_id=self.id)[0]
-            return thiswidget.container.page.get_absolute_url()
+            return thiswidget.page.get_absolute_url()
         except:
             return None
 

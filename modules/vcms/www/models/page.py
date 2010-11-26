@@ -109,7 +109,7 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        return "/%s/%s" % (self.app_slug, self.slug)
+        return "/%s/page/%s" % (self.app_slug, self.slug)
 
     url = property(get_absolute_url)
     
