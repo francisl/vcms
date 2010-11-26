@@ -56,7 +56,7 @@ class MainPageAdmin(admin.ModelAdmin):
 admin.site.register(MainPage, MainPageAdmin)
 
 class SimplePageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'id')
+    list_display = ('name', 'slug', 'url', 'id')
 admin.site.register(SimplePage, SimplePageAdmin)
 
 
@@ -81,7 +81,8 @@ class ContentInline(admin.StackedInline):
 #admin.site.register(PageContainer, PageContainerAdmin)
 
 class ContainerWidgetsAdmin(admin.ModelAdmin):
-    list_display = ('widget', 'page', 'container', 'status')
+    list_display = ('widget', 'page', 'container', 'widget_type', 'status')
+    list_filter = ('page',)
 admin.site.register(ContainerWidgets, ContainerWidgetsAdmin)
 
 #class GridContainerAdmin(admin.ModelAdmin):

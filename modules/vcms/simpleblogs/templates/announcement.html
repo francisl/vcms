@@ -16,6 +16,7 @@
     {% if page_info.current_page.menu %}
         {% generate_dl_tree page_info.current_page.menu %}
     {% endif %}
+    <br />
     {% ifequal page.display_navigation_in 'side_navigation' %}
         {% newsblogs_navigation page_info.current_page %}
     {% endifequal %}

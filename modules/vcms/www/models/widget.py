@@ -90,6 +90,6 @@ class TextWidgetIndex(SearchIndex):
     
     def get_queryset(self):
         """Used when the entire index for model is updated."""
-        return TextWidget.objects.filter(published=True)
+        return TextWidget.objects.all()
         
 site.register(TextWidget, TextWidgetIndex)

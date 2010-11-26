@@ -111,6 +111,8 @@ class BasicPage(models.Model):
     def get_absolute_url(self):
         return "/%s/%s" % (self.app_slug, self.slug)
 
+    url = property(get_absolute_url)
+    
     def _add_to_main_menu(self, root):
         root.add_child(menu_name=self.name, content_object=self)
 
