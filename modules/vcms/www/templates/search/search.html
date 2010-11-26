@@ -31,7 +31,7 @@
             {% for result in page.object_list %}
                 <tr>
                     <td id="first_column" style="width: 14%">{{ result.score|floatformat:"-2" }}</td>
-                    <td> <a href="/{{ result.object.get_page_where_available }}">{{ result.object.name }}</a></td>
+                    <td> <a href="{{ result.object.get_page_where_available }}">{{ result.object.name }}</a></td>
                 </tr>
                 <tr>
                     <td></td><td>{{ result.object.content|truncatewords:20|safe }}</td>
