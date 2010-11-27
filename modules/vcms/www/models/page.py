@@ -214,10 +214,8 @@ class SimplePage(BasicPage):
         return "/www/page/" + self.slug
  
     def get_menu(self):
-        try:
-            return self.menu.all()[0]
-        except:
-            return None
+        return self.menu.all()[0]
+
         
 # -----
 # Menu

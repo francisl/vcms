@@ -15,7 +15,7 @@
     {{ block.super }}
         <div class="vcms_content">
             {% if page_info.page.display_title %}
-                <h1>{% if page_info.page.get_menu.get_root_menu_if_exist %}{{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}<span style="color: #444444;">{{ page_info.page.name }}</span></h1>
+                <h1>{% if page_info.page.get_menu.get_root_menu %}<span class="vcms_page_title_parent_menu">{{ page_info.page.get_menu.get_root_menu }}</span> / {% endif %}<span style="color: #444444;">{{ page_info.page.name }}</span></h1>
             {% endif %}
         </div>
         {% relative_container page_info.current_page 'content' %}

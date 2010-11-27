@@ -80,6 +80,9 @@ class CMSMenu(models.Model):
     
     def get_page_status(self):
         return self.content_object.status
+    
+    def get_root_menu(self):
+        return self.parent
 
     name = property(get_name)
     status = property(get_page_status)
