@@ -1,7 +1,11 @@
 {% extends "announcement.html" %}
 {% load humanize %}
+{% load containers %}
+{% relative_container pageinfo.current_page 'vcms_simpleblogs_container' %}
+
 
 {% block newsblogs_list %}
+<div class="vcms_simpleblogs_container">
 <table width="100%">
     {% for post in posts %}
         <tr class="{% cycle 'uneven-line' 'even-line' %}">
@@ -10,4 +14,6 @@
         </tr>
     {% endfor %}
 </table>
+</div>
 {% endblock newsblogs_list %}
+
