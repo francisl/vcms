@@ -5,7 +5,10 @@
 # Created by Francois Lebel on 20-03-2010.
 
 
+ANNOUNCEMENTS_PER_FEED = 5
+
 INSTALLED_APPS = (
-    'vcms.simpleannouncements',
+    'django.contrib.comments', # http://docs.djangoproject.com/en/dev/ref/contrib/comments/
+    'django.contrib.sites', # Required by django.contrib.comments
     'tagging', # http://code.google.com/p/django-tagging/
 )

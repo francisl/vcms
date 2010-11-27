@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <div class="vcms_blog_widget" style="overflow: hidden">
-    <a href="{{ widget.get_absolute_url }}"><h1 class="newsblog_widget_title">{{ name|safe }}</h1></a>
+    <a href="{{ widget.get_absolute_url }}"><h6 class="newsblog_widget_title">{{ name|safe }}</h6></a>
     {% for post in posts %}
         {% if post.preview %}
         <div class="vcms_blog_widget_post">

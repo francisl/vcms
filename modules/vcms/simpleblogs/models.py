@@ -6,19 +6,23 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from tagging.fields import TagField
 from django.template.loader import render_to_string
+from django.contrib.auth.models import User, Group
 
-from vcms.www.models.widget import Widget
-from vcms.simpleannouncements.models import AnnouncementPage, AnnouncementPost, AnnouncementPostCategory
-from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedNewsBlogPostManager, BlogPostCategoryManager
-from vcms.simpleannouncements.managers import PublishedAnnouncementPostManager
+from tagging.fields import TagField
 from tagging.models import Tag
+
+from site_language.models import Language
+from vcms.www.models.page import BasicPage
+from vcms.www.models.widget import Widget
+from vcms.www.fields import StatusField
+from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedNewsBlogPostManager, BlogPostCategoryManager
+
 
 APP_SLUGS = "blogs"
 
 
-class BlogPage(AnnouncementPage):
+class BlogPage(BasicPage):
     NEWS_TYPE = "news"
     BLOGS_TYPE = "blogs"
     NEWS_BLOGS_TYPE = ((NEWS_TYPE, _('NEWS'))
@@ -46,12 +50,22 @@ class BlogPage(AnnouncementPage):
     TEMPLATE = ((TEMPLATE_DETAILED_LIST, _('Detailed List'))
                 ,(TEMPLATE_SHORT_LIST, _("Short List"))
                 )
-    objects = BlogPageManager()
-    published = PublishedBlogPageManager()
+    
+    comments_allowed = models.BooleanField(default=True)
+    authorized_users = models.ManyToManyField(User, blank=True, null=True)
+    authorized_groups = models.ManyToManyField(Group, blank=True, null=True)
+    number_of_post_per_page = models.PositiveIntegerField(default=5)
+    
+    
     listing_style = models.CharField(max_length=32, choices=TEMPLATE, default=TEMPLATE_DETAILED_LIST)
     type = models.CharField(max_length=12, choices=NEWS_BLOGS_TYPE, default=BLOGS_TYPE)
     display_navigation_in = models.CharField(max_length=32, choices=NAVIGATION, default=NAVIGATION_SIDE_NAVIGATION)
+    
+    rss_feed = models.BooleanField(default=True)
     feeds_icon_position = models.PositiveIntegerField(choices=FEEDS_ICON, default=FEEDS_ICON_HEADER)
+    
+    objects = BlogPageManager()
+    published = PublishedBlogPageManager()
     
     class Meta:
         verbose_name = _("Page - News/Blog Page")
@@ -64,16 +78,60 @@ class BlogPage(AnnouncementPage):
         
     def get_absolute_url(self):
         return "/%s/%s" % (self.type, self.slug)
+    
+    def get_next_announcement(self):
+        return self.get_next_by_date_published(status=StatusField.PUBLISHED)
 
-class BlogPostCategory(AnnouncementPostCategory):
+    def get_previous_announcement(self):
+        return self.get_previous_by_date_published(status=StatusField.PUBLISHED)
+
+
+class BlogPostCategory(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
+    description = models.TextField(blank=True, null=True)
+    language = models.ForeignKey(Language, default='en') #Language.objects.get_default_code())
+
     objects = BlogPostCategoryManager()
     class Meta:
         ordering = ['name']
         verbose_name_plural = _("News/Blog Posts Categories")
         
-class BlogPost(AnnouncementPost):
-    display_on_page = models.ForeignKey(BlogPage)
+    def __unicode__(self):
+        return self.name
+
+    def get_quantity_in_category(self):
+        raise NotImplemented
+    
+    def save(self):
+        self.slug = defaultfilters.slugify(self.name.lower())
+        super(BlogPostCategory, self).save()
+
+        
+class BlogPost(models.Model):
+    PREVIEW_SHORT = 1
+    PREVIEW_MEDIUM = 2
+    PREVIEW_LONG = 4
+    PREVIEW_LENGTH = ((1, _('Short'))
+                      ,(2, _('Medium'))
+                      ,(4, _('Long'))
+                      )
+    title = models.CharField(max_length=120)
     category = models.ManyToManyField(BlogPostCategory)
+    description = models.CharField(max_length=240)
+    content = models.TextField()
+    
+    preview = models.TextField(help_text=_('Display in widget or for post information and summary'), blank=True, editable=False)
+    preview_length = models.PositiveIntegerField(choices=PREVIEW_LENGTH, default=PREVIEW_SHORT)
+    
+    status = StatusField()
+    language = models.ForeignKey(Language, default='en') #Language.objects.get_default_code())
+    display_on_page = models.ForeignKey(BlogPage)
+    
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
+    date_modified = models.DateTimeField(auto_now=True, editable=False)
+    date_published = models.DateTimeField(auto_now_add=True, editable=False)
+    
     
     objects = PublishedNewsBlogPostManager()
     published = PublishedNewsBlogPostManager()
@@ -97,6 +155,19 @@ class BlogPost(AnnouncementPost):
         for found in all_found[:self.preview_length]:
             preview += '<p>' + found + '</p>'
         self.preview = "<div>" + preview + "</div>"
+        
+        # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
+        self.date_modified = datetime.datetime.now()
+        if self.status == StatusField.PUBLISHED:
+            # If the post is being created, set its published date
+            if not self.pk:
+                self.date_published = self.date_modified
+            # If the post is being edited, check against the current version in the database and update if it hasn't been previously published
+            else:
+                model_in_db = self.__class__.objects.get(pk=self.pk)
+                if model_in_db.status != StatusField.PUBLISHED:
+                    self.date_published = self.date_modified
+
         super(BlogPost, self).save() 
     
 
@@ -136,28 +207,3 @@ class BlogPostWidget(Widget):
 
     def get_absolute_url(self):
         return "/%s/%s/%s/" % (self.page.type, self.page.slug, self.display_category.slug )
-
-#class NewsBlogNavigationWidget(Widget):
-#    page = models.ForeignKey(BlogPage)
-#
-#    def render(self, current_page=None):
-#        from vcms.simpleblogs.views import get_side_menu
-#        categories, archives, older_archives = get_side_menu(self.page)
-#        template = "newsblogs_navigation.html"
-#        widget =  render_to_string(template
-#                                   ,{'page': self.page
-#                                     ,'categories': categories
-#                                     ,'archives':archives
-#                                     ,'older_archives': older_archives })
-#        return widget
-#
-#    class Meta:
-#        verbose_name= "Widget - News/Blog Navigation"
-#        verbose_name_plural = "Widget - News/Blogs Navigation"
-#
-#    def __unicode__(self):
-#        return self.__class__.__name__ + ' ' + self.name
-#
-#    def get_absolute_url(self):
-#        return "/%s/%s/%s/" % (APP_SLUGS, self.page.slug, self.display_category.slug )
-

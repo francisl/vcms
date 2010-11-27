@@ -16,7 +16,9 @@ urlpatterns_prefix = r'^(blogs|news)/'
 urlpatterns = patterns('',
                        (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
                        )
+
 urlpatterns += patterns('vcms.simpleblogs.views'
+    ,(r'^announcements/comments/', include('django.contrib.comments.urls'))
     #,(r'^(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/(?P<month>\d{1,2}/(?P<day>\d{2})/)$', 'page_for_date')
     #,(r'^(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/(?P<month>\d{1,2}/)$', 'page_for_date')
     #,(r'^(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/$', 'page_for_date')
