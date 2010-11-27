@@ -3,6 +3,7 @@
 # Module: SimpleNews
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francois Lebel on 20-03-2010.
+import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -12,6 +13,7 @@ from django.contrib.auth.models import User, Group
 from tagging.fields import TagField
 from tagging.models import Tag
 
+#from custom_fields.models import CustomField
 from site_language.models import Language
 from vcms.www.models.page import BasicPage
 from vcms.www.models.widget import Widget
@@ -20,7 +22,6 @@ from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager,
 
 
 APP_SLUGS = "blogs"
-
 
 class BlogPage(BasicPage):
     NEWS_TYPE = "news"
@@ -51,6 +52,16 @@ class BlogPage(BasicPage):
                 ,(TEMPLATE_SHORT_LIST, _("Short List"))
                 )
     
+    ARCHIVE_DELAY_DEFAULT = 0
+    ARCHIVE_DELAY_3MONTH = 90
+    ARCHIVE_DELAY_6MONTH = 180
+    ARCHIVE_DELAY_1YEAR = 356
+    ARCHIVE_DELAY_CHOICES = ((ARCHIVE_DELAY_DEFAULT, _('No archives'))
+                             ,(ARCHIVE_DELAY_3MONTH, _('Three months'))
+                             ,(ARCHIVE_DELAY_6MONTH, _('Six months'))
+                             ,(ARCHIVE_DELAY_1YEAR, _('One year'))
+                             )
+    
     comments_allowed = models.BooleanField(default=True)
     authorized_users = models.ManyToManyField(User, blank=True, null=True)
     authorized_groups = models.ManyToManyField(Group, blank=True, null=True)
@@ -60,6 +71,7 @@ class BlogPage(BasicPage):
     listing_style = models.CharField(max_length=32, choices=TEMPLATE, default=TEMPLATE_DETAILED_LIST)
     type = models.CharField(max_length=12, choices=NEWS_BLOGS_TYPE, default=BLOGS_TYPE)
     display_navigation_in = models.CharField(max_length=32, choices=NAVIGATION, default=NAVIGATION_SIDE_NAVIGATION)
+    archives_if_older = models.PositiveIntegerField(choices=ARCHIVE_DELAY_CHOICES, default=0)
     
     rss_feed = models.BooleanField(default=True)
     feeds_icon_position = models.PositiveIntegerField(choices=FEEDS_ICON, default=FEEDS_ICON_HEADER)
@@ -130,8 +142,9 @@ class BlogPost(models.Model):
     
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False)
-    date_published = models.DateTimeField(auto_now_add=True, editable=False)
+    date_published = models.DateTimeField(blank=True, null=True)
     
+    #custom_fields = models.ManyToManyField(CustomField, blank=True, null=True)
     
     objects = PublishedNewsBlogPostManager()
     published = PublishedNewsBlogPostManager()
@@ -157,19 +170,43 @@ class BlogPost(models.Model):
         self.preview = "<div>" + preview + "</div>"
         
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
-        self.date_modified = datetime.datetime.now()
-        if self.status == StatusField.PUBLISHED:
-            # If the post is being created, set its published date
-            if not self.pk:
-                self.date_published = self.date_modified
-            # If the post is being edited, check against the current version in the database and update if it hasn't been previously published
-            else:
-                model_in_db = self.__class__.objects.get(pk=self.pk)
-                if model_in_db.status != StatusField.PUBLISHED:
-                    self.date_published = self.date_modified
+        now = datetime.datetime.now()
+        self.date_modified = now
+        if self.date_published == None:
+            self.date_published = now
+            
+        #model_in_db = self.__class__.objects.get(pk=self.pk)
+        #if self.status == StatusField.PUBLISHED and self.date_published == None:
+        #self.date_published = now
+#            
+#        
+#        if self.status == StatusField.PUBLISHED:
+#            # If the post is being created, set its published date
+#            if not self.pk:
+#                self.date_published = now
+#            # If the post is being edited, check against the current version in the database and update if it hasn't been previously published
+#            else:
+#                model_in_db = self.__class__.objects.get(pk=self.pk)
+#                if model_in_db.status != StatusField.PUBLISHED:
+#                    self.date_published = self.date_modified
 
         super(BlogPost, self).save() 
     
+    def get_fields(self):
+        return dict([(field.name, field.value) for field in self.customfield_set.all()])
+
+class CustomField(models.Model):
+    name = models.CharField(max_length=120)
+    value = models.TextField()
+    post = models.ForeignKey(BlogPost)
+    
+    @staticmethod
+    def get_fiels_for_page(self, page):
+        return dict([(field.name, field.value) for field in self.objects.filter(page_set=page)])
+
+    def __unicode__(self):
+        return '%s : %s' % (self.name, self.value)
+
 
 # -----------------
 # CONTENT

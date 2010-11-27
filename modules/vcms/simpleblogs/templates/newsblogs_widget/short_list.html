@@ -6,9 +6,11 @@
     {% for post in posts %}
         {% if post.preview %}
         <div class="vcms_blog_widget_post">
-            <a href="{{ post.get_absolute_url }}"><h3 class="vcms_blog_item_widget_title">{{ post.title }}</h3></a>
+            
+            <a href="{{ post.get_absolute_url }}">
+                <h3 class="vcms_blog_item_widget_title">{% if post.get_fields.short_title %}{{ post.get_fields.short_title }}{% else %}{{ post.title }}{% endif %}</h3></a>
             <!-- <h5>{{ post.date_published|naturalday }}</h5> -->
-            <div class="vcms_blog_item_content">{{ post.preview|striptags }}<br />
+            <div class="vcms_blog_item_content">{{ post.description|striptags }}<br />
             <a href="{{ post.get_absolute_url }}" class="more">{% trans 'More ' %}...<span></span></a>
             </div>
         </div>

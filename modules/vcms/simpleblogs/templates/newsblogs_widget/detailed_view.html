@@ -6,7 +6,7 @@
     {% for post in posts %}
         {% if post.preview %}
         <div class="vcms_blog_widget_post">
-            <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
+            <a href="{{ post.get_absolute_url }}"><h3>{% if post.get_fields.short_title %}{{ post.get_fields.short_title }}{% else %}{{ post.title }}{% endif %}</h3></a>
             <h5>{{ post.date_published|naturalday }}</h5>
             {{ post.preview|safe }}<a href="{{ post.get_absolute_url }}">{% trans 'More ' %}...</a>
         </div>
