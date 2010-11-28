@@ -85,8 +85,8 @@ def get_page_information(page_slug, method_name):
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
-    pag, page_info ,reverse_url = get_page_information(page_slug, 'page')
-    categries, archives, older_archives = get_side_menu(page)
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page')
+    categories, archives, older_archives = get_side_menu(page)
     
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
@@ -139,9 +139,33 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                 }
                                 ,context_instance=RequestContext(request))
-    
+
+def archives(request, page_slug=None, year=-2009, category=None, page_number=1, ):
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page')
+    categories, archives, older_archives = get_side_menu(page)
+    blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year)
+    pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
+    reverse_kwargs = {'page_slug':page_slug
+                      ,'category': category.slug if category else None
+                      ,'page_number': page_number
+                      ,'year':year
+                    }
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
+    return render_to_response(newsblogs_template[page.listing_style]
+                                ,{ 'page': page
+                                  ,'page_name': page_slug
+                                  ,'posts': pitems
+                                  ,'categories': categories
+                                  ,'archives': archives
+                                  ,'older_archives': older_archives
+                                  ,'page_paginator': page_paginator
+                                  ,'page_info': page_info
+                                  ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
+                                }
+                                ,context_instance=RequestContext(request))
+
 def post(request, page_slug=None, category=None, page_number=1, year=None, month=1, day=1, post_id=None):
-    page, page_info ,reverse_url = get_page_information(page_slug, 'page_for_date')
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page')
     categories, archives, older_archives = get_side_menu(page)
     
     if post_id == None:

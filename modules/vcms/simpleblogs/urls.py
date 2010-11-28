@@ -35,6 +35,9 @@ urlpatterns += patterns('vcms.simpleblogs.views'
     ,(r'(?P<page_slug>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{1,2})/$', 'page_for_date')
     ,(r'(?P<page_slug>[-\w]+)/(?P<year>\d{4})/$', 'page_for_date')
     
+    ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/archives/-(?P<year>\d{4})/$', 'archives')
+    ,(r'(?P<page_slug>[-\w]+)/archives/-(?P<year>\d{4})/$', 'archives')
+    
     ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/$', 'page')
     ,(r'(?P<page_slug>[-\w]+)/(?P<category>[-\w]+)/$', 'page')
     ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/$', 'page')
