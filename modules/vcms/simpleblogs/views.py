@@ -5,6 +5,7 @@
 # Created by Francis Lavoie 20100913
 import datetime
 import inspect
+import copy
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import render_to_response, get_object_or_404
@@ -41,13 +42,23 @@ def archives_for_one_year(page, by_month_year, older_archive):
 blogs_by_month_year = lambda page, month,year: BlogPost.published.get_for_page_by_date(page, year=year, month=month) 
 blogs_older_archives_month_year = lambda page, month, year: BlogPost.published.get_archive_for_page(page, year=year, month=month)
 
-
-def generate_paginator(page_number, items, reverse_url, item_per_page=6, reverse_kwargs={}):
-    import copy
+def clean_kwargs_for_reverse_url(reverse_kwargs):
     reverse = copy.copy(reverse_kwargs)
     for key in reverse:
         if reverse_kwargs[key] == None:
             del reverse_kwargs[key]
+    return reverse_kwargs
+
+def get_page_items(items, page_number=1, item_per_page=6):
+    if page_number == 1 :
+        start_index = 0
+    else :
+        start_index = (int(page_number)-1) * item_per_page
+    end_index = start_index + item_per_page
+    return items[start_index:end_index]
+
+def generate_html_paginator(page_number, items, reverse_url, item_per_page=6, reverse_kwargs={}):
+    reverse_kwargs = clean_kwargs_for_reverse_url(reverse_kwargs)
 
     paginator = Paginator(items, item_per_page)
     if int(page_number) > int(paginator.num_pages):
@@ -55,15 +66,7 @@ def generate_paginator(page_number, items, reverse_url, item_per_page=6, reverse
     html_paginator = pgenerator.get_page_navigation(paginator, page_number, reverse_url, reverse_kwargs=reverse_kwargs)
     page_paginator = paginator.page(page_number)
 
-    if page_paginator.start_index() == 0:
-        start_index = page_paginator.start_index()
-    else:
-        start_index = page_paginator.start_index()-1
-        
-    end_index = page_paginator.end_index()
-    page_items = items[start_index:end_index]
-
-    return page_items, page_paginator, html_paginator
+    return html_paginator
 
 def get_side_menu(page):
     categories = BlogPostCategory.objects.get_category_for_page(page, counts=True)
@@ -78,19 +81,22 @@ def get_page_information(page_slug, method_name):
     page_info = _get_page_parameters(page)
     reverse_url="vcms.simpleblogs.views." + method_name
     return page, page_info ,reverse_url
-    
+
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }
-
-def page(request, page_slug=None, category=None, page_number=1, year=None, month=None, day=None, post_id=None):
+def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
+    print "PAGE NUMBER = %s " % page_number
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
+    print "revrse url == %s" % reverse_url
     categories, archives, older_archives = get_side_menu(page)
     
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
 
     blogs = BlogPost.published.get_all_for_page(page, category=category)
-    pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
+
+    pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
     
     return render_to_response( newsblogs_template[page.listing_style]
                                 ,{ 'page': page
@@ -113,8 +119,9 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
         blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
     else:
         blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day, post_id=post_id)
+    pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
     
-    pitems, ppage, page_paginator = generate_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
     return render_to_response("announcement.html"
                                 ,{ 'page': page
                                   ,'page_name': page_slug

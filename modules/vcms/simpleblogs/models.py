@@ -2,13 +2,14 @@
 # Application: Vimba - CMS
 # Module: SimpleNews
 # Copyright (c) 2010 Vimba inc. All rights reserved.
-# Created by Francois Lebel on 20-03-2010.
+
 import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User, Group
+from django.template.defaultfilters import slugify
 
 from tagging.fields import TagField
 from tagging.models import Tag
@@ -71,7 +72,6 @@ class BlogPage(BasicPage):
     listing_style = models.CharField(max_length=32, choices=TEMPLATE, default=TEMPLATE_DETAILED_LIST)
     type = models.CharField(max_length=12, choices=NEWS_BLOGS_TYPE, default=BLOGS_TYPE)
     display_navigation_in = models.CharField(max_length=32, choices=NAVIGATION, default=NAVIGATION_SIDE_NAVIGATION)
-    archives_if_older = models.PositiveIntegerField(choices=ARCHIVE_DELAY_CHOICES, default=0)
     
     rss_feed = models.BooleanField(default=True)
     feeds_icon_position = models.PositiveIntegerField(choices=FEEDS_ICON, default=FEEDS_ICON_HEADER)
@@ -116,7 +116,7 @@ class BlogPostCategory(models.Model):
         raise NotImplemented
     
     def save(self):
-        self.slug = defaultfilters.slugify(self.name.lower())
+        self.slug = slugify(self.name.lower())
         super(BlogPostCategory, self).save()
 
         
