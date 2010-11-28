@@ -52,7 +52,7 @@ def Contact(request, page=None, context={}):
                 cdr = msg.send()
                 #Email to customer
                 subject = 'Your message has been sent to Simthetiq'
-                email_from = EMAILS["CONTACT"]["FROM"]
+                email_from = settings.EMAILS["CONTACT"]["FROM"]
                 email_to = form.data["email"]
                 text_content = render_to_response('contact/email_customer.txt', { "orderinfo": form.cleaned_data  })
                 html_content = render_to_response('contact/email_customer.html', { "orderinfo": form.cleaned_data, "email_for_removal":email_from  })
