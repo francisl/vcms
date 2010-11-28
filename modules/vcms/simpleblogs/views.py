@@ -85,9 +85,7 @@ def get_page_information(page_slug, method_name):
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
-    print "PAGE NUMBER = %s " % page_number
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
-    print "revrse url == %s" % reverse_url
     categories, archives, older_archives = get_side_menu(page)
     
     if category != None:
