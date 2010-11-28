@@ -94,7 +94,7 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
     blogs = BlogPost.published.get_all_for_page(page, category=category)
 
     pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
-    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category})
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category.slug})
     
     return render_to_response( newsblogs_template[page.listing_style]
                                 ,{ 'page': page
