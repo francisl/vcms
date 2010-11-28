@@ -94,7 +94,10 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
     blogs = BlogPost.published.get_all_for_page(page, category=category)
 
     pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
-    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'category': category.slug})
+    reverse_kwargs = {'page_slug':page_slug,
+                       'category': category.slug if category else None
+                       }
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
     
     return render_to_response( newsblogs_template[page.listing_style]
                                 ,{ 'page': page
@@ -118,9 +121,41 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
     else:
         blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day, post_id=post_id)
     pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
+    reverse_kwargs = {'page_slug':page_slug
+                      ,'category': category.slug if category else None
+                      ,'year':year
+                      ,'month':month
+                    }
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
+    return render_to_response(newsblogs_template[page.listing_style]
+                                ,{ 'page': page
+                                  ,'page_name': page_slug
+                                  ,'posts': pitems
+                                  ,'categories': categories
+                                  ,'archives': archives
+                                  ,'older_archives': older_archives
+                                  ,'page_paginator': page_paginator
+                                  ,'page_info': page_info
+                                  ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
+                                }
+                                ,context_instance=RequestContext(request))
     
-    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, {'page_slug':page_slug, 'year':year, 'month':month})
-    return render_to_response("announcement.html"
+def post(request, page_slug=None, category=None, page_number=1, year=None, month=1, day=1, post_id=None):
+    page, page_info ,reverse_url = get_page_information(page_slug, 'page_for_date')
+    categories, archives, older_archives = get_side_menu(page)
+    
+    if post_id == None:
+        blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day)
+    else:
+        blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year, month=month, day=day, post_id=post_id)
+    pitems = get_page_items(blogs, page_number=page_number, item_per_page=page.number_of_post_per_page)
+    reverse_kwargs = {'page_slug':page_slug
+                      ,'category': category.slug if category else None
+                      ,'year':year
+                      ,'month':month
+                    }
+    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
+    return render_to_response(newsblogs_template['detailed_list']
                                 ,{ 'page': page
                                   ,'page_name': page_slug
                                   ,'posts': pitems

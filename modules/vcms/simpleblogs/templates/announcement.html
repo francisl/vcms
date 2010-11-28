@@ -41,11 +41,11 @@
         <div class="vcms_inner_content">
         {% block newsblogs_list %}
         {% for post in posts %}
-            <div>
-                <h3>{{ post.title }}</h3>
+            <div class="vcms_simpleblogs_container">
+                <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <h5>{{ post.date_published|naturalday }}</h5>
                 {{ post.content|safe }}
-                <p>Tags: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
+                <p>Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
                 <br />
             </div>
         {% endfor %}
