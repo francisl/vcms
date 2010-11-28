@@ -7,6 +7,7 @@ from django.template import Template, Context, RequestContext
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 import inspect
 # external requirement
@@ -21,7 +22,7 @@ from vcms.www.models.menu import CMSMenu
 from vcms.www.models.page import DashboardPage
 from vcms.www.models.page import DashboardElement
 from vcms.www.models.page import DashboardPreview
-from django.core.exceptions import ObjectDoesNotExist
+
 
 DROPDOWN_MENU = 0
 SIMPLE_MENU = 1
@@ -211,3 +212,7 @@ def testCMSMenuForm(request, menuid):
                                ,'menu': menu, 'page_info': _get_page_parameters() },
                               context_instance=RequestContext(request))
 
+def cms500(request):
+    return render_to_response('500.html'
+                              ,{'MEDIA_URL': settings.MEDIA_URL}
+                              ,context_instance=RequestContext(request))

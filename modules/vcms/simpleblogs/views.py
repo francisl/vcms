@@ -85,8 +85,8 @@ def get_page_information(page_slug, method_name):
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
-    page, page_info ,reverse_url = get_page_information(page_slug, 'page')
-    categories, archives, older_archives = get_side_menu(page)
+    pag, page_info ,reverse_url = get_page_information(page_slug, 'page')
+    categries, archives, older_archives = get_side_menu(page)
     
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
