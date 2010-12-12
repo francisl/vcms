@@ -93,3 +93,7 @@ django-haystack==1.0.2-final
 
 # extra test
 mockito
+
+
+# google-analytics
+-e git+https://github.com/clintecker/django-google-analytics.git@e835a1e1a0eb7d2ce30#egg=google_analytics

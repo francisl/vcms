@@ -6,6 +6,7 @@
 {% load quicklinks %}
 {% load cms_theme %}
 {% load containers %}
+{% load analytics %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -36,6 +37,8 @@
 	    <style type="text/css" media="all">
 	       {% block stylesheet %}{% endblock stylesheet %}
 	    </style>
+
+        {% analytics %}
     {% endcompress %}
 </head>
 <body class="{% block bodyclass %}normal{% endblock bodyclass %}">
@@ -140,6 +143,7 @@
            
         {% block javascript %}
         {% endblock javascript %}
+
         </script> 
         <script type="text/javascript">
             $(document).ready(function() {
