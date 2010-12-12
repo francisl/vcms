@@ -1,5 +1,5 @@
 # encoding: utf-8
-# copyright Vimba inc. 2009
+# copyright Vimba inc. 2010
 # programmer : Francis Lavoie
 # 
 import os
@@ -9,77 +9,49 @@ ADMINS = (
     ('support', 'support@vimba.ca')
 )
 
-SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
-MEDIA_PATH = SERVER_PATH + "/../"
+#SERVER_PATH = os.path.dirname(os.path.realpath( __file__ ))
+#MEDIA_PATH = SERVER_PATH + "/../"
 
-#Production
-#DEBUG = False
-#MEDIA_PATH = SERVER_PATH + "/../../webv2_static"
-#developpement
 DEBUG = False
 TEMPLATE_DEBUG = False
 ENABLE_STATIC = False
 
-# ## EMAIL
 if DEBUG:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
-DEFAULT_FROM_EMAIL = "noreply@exemple.com"
-EMAIL_SUBJECT_PREFIX = ""
-
+    
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be avilable on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Montreal'
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
+# Language code for this installation. All choices can be found here: # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 DEFAULT_LANGUAGE = 0
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
+# If you set this to False, Django will make some optimizations so as not to load the internationalization machinery.
 USE_I18N = True
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = MEDIA_PATH + "/client_cms_static/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/adminmedia/'
 
-# ## ###
-# ## LOGIN
-LOGIN_URL = '/accounts/login/'
-#LOGIN_REDIRECT_URL = '/'
-# Set of URLs that does not require to be logged in.
-# Used by the EnforceLoginMiddleware middleware
-#PUBLIC_URLS = (
-#    r'admin/',
-#    r'login/',
-#    r'logout/',
-#)
-
 ROOT_URLCONF = 'urls'
 
 AUTHENTICATION_BACKENDS = (
-    'satchmo_store.accounts.email-auth.EmailBackend',   # Required by Satchmo
-    'django.contrib.auth.backends.ModelBackend'
+    #'satchmo_store.accounts.email-auth.EmailBackend',   # Required by Satchmo
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'satchmo_store.shop.context_processors.settings',   # Required by Satchmo
+    #'satchmo_store.shop.context_processors.settings',   # Required by Satchmo
     'django.core.context_processors.auth',                  # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
     'django.core.context_processors.request',               # Add the request to the context
     'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
@@ -98,8 +70,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    SERVER_PATH + '/templates',
+    #SERVER_PATH + '/templates',
     #os.path.dirname(__file__) + '/www/templates',
+    
 )
 
 MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
@@ -107,17 +80,17 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #'django.middleware.cache.UpdateCacheMiddleware',
                       #'django.middleware.cache.FetchFromCacheMiddleware',
                       ,'django.contrib.sessions.middleware.SessionMiddleware'
-                      ,"django.middleware.locale.LocaleMiddleware" # Required by Satchmo
+                      #,"django.middleware.locale.LocaleMiddleware" # Required by Satchmo
                       ,'django.contrib.auth.middleware.AuthenticationMiddleware'
                       ,'django.middleware.doc.XViewMiddleware'
                       #'django.middleware.csrf.CsrfViewMiddleware' __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
-                      ,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
-                      ,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
+                      #,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
+                      #,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
                       #'vcms.www.middleware.EnforceLoginMiddleware',
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
-                  ,'satchmo_store.shop' # Satchmo, must preceed django.contrib.admin
+                  #,'satchmo_store.shop' # Satchmo, must preceed django.contrib.admin
                   ,'django.contrib.admin'
                   ,'django.contrib.auth'
                   ,'django.contrib.contenttypes'
@@ -133,16 +106,14 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'mptt'
                   ,'captcha'                              # http://code.google.com/p/django-simple-captcha/
                   ,'registration'                         # http://bitbucket.org/ubernostrum/django-registration/
+                  ,'vcms.www'
                   ,'l10n'
-                  # ## DJVIDEO
-                  # djvideo_link | http://git.participatoryculture.org/djvideo/
-                  # djanvideo_file | git clone http://git.participatoryculture.org/djvideo/
-                  ,'djvideo'
+                  #,'djvideo'                  # djvideo_link | http://git.participatoryculture.org/djvideo/
                   ,'compressor'                           # git://github.com/dziegler/django-css.git
                   # VIMBA CMS APPS
-                  ,'vcms.www'
+                  ,'site_media'
+                  ,'site_language'
                   ,'vcms.simpleblogs'
-                  #,'vcms.simplenews'
                   ,'hwm'
                   ,'vcms.themes'
                   ,'vcontact'
@@ -151,21 +122,25 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # Custom apps for cms
                   ,'vcms_simthetiq.simthetiq_order'
                   ,'vcms_simthetiq.simthetiq_store'
-                  ,'vcms_simthetiq.simthetiq_products'
                   ,'vcms_simthetiq.simthetiq_importer'
-                  ,'south'
+                  ,'vcms_simthetiq.simthetiq_products'
+                  ,'vcms_simthetiq.simthetiq_dis_navigation'
+                  # google analytics
+                  ,'google_analytics'
+                  #,'south'
                   #SATCHMO
-                  ,'satchmo_store.contact'
-                  ,'product'
-                  ,'payment'
-                  ,'payment.modules.dummy'
-                  ,'payment.modules.giftcertificate'
-                  ,'satchmo_utils'
-                  ,'app_plugins'
+                  #,'satchmo_store.contact'
+                  #,'product'
+                  #,'payment'
+                  #,'payment.modules.dummy'
+                  #,'payment.modules.giftcertificate'
+                  #,'satchmo_utils'
+                  #,'app_plugins'
                   ,'vcms_simthetiq.widget.simthetiq_recommends'
                   )
 
-# ## ###
+
+# ----------------------------
 # sorl-thumbnail config option
 THUMBNAIL_DEBUG = False
 
@@ -198,20 +173,6 @@ COMPILER_FORMATS = {
         'arguments': '*.ccss'
     },
 }
-
-# ## ###
-# ## LOAD LOCAL SETTING
-# ## DEBUG
-if DEBUG:
-    from config_sqlite.debug import *
-    if DEBUG_INSTALLED_APPS: 
-        INSTALLED_APPS += DEBUG_INSTALLED_APPS
-        MIDDLEWARE_CLASSES += DEBUG_MIDDLEWARE_CLASSES
-
-# ## SEARCH ENGINE
-from config_sqlite.search_engine import *
-if SEARCH_ENGINE:
-    INSTALLED_APPS += (SEARCH_ENGINE,)
 
 # ## SATCHMO
 #from config_sqlite.satchmo import *
@@ -260,16 +221,5 @@ for app in INSTALLED_APPS:
             pass
 
 if DEBUG:
-    #import socket
-    #if socket.gethostname() == "LAPTOP": # Francois
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
-
-# THEME
-from config.theme import *
-
-# Load the local Satchmo settings
-from config_sqlite.satchmo_local import *
-
-# Custom settings for apps
-from config_sqlite.settings import *
 
