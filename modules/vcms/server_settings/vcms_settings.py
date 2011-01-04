@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #'django.middleware.csrf.CsrfViewMiddleware' __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
                       #,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
                       #,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
-                      #'vcms.www.middleware.EnforceLoginMiddleware',
+                      #,'vcms.www.middleware.EnforceLoginMiddleware',
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
@@ -120,11 +120,6 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'updates_registration'
                   ,'vcms.store'
                   # Custom apps for cms
-                  ,'vcms_simthetiq.simthetiq_order'
-                  ,'vcms_simthetiq.simthetiq_store'
-                  ,'vcms_simthetiq.simthetiq_importer'
-                  ,'vcms_simthetiq.simthetiq_products'
-                  ,'vcms_simthetiq.simthetiq_dis_navigation'
                   # google analytics
                   ,'google_analytics'
                   #,'south'
@@ -136,7 +131,6 @@ INSTALLED_APPS = ('django.contrib.sites'
                   #,'payment.modules.giftcertificate'
                   #,'satchmo_utils'
                   #,'app_plugins'
-                  ,'vcms_simthetiq.widget.simthetiq_recommends'
                   )
 
 
@@ -223,3 +217,4 @@ for app in INSTALLED_APPS:
 if DEBUG:
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
 
+#GOOGLE_ANALYTICS_MODEL = True

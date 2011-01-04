@@ -192,7 +192,7 @@ class MainPage(BasicPage):
 
     def save(self):
         self.module = 'MainPage'
-        super(BlankPage, self).save()
+        super(MainPage, self).save()
     
     def get_absolute_url(self):
         return "/www/page/" + self.slug
