@@ -23,8 +23,7 @@
 			<tr>
 				<td style="width: 20%; vertical-align: text-top;">{{ item.percent }} %</td>
 				<td style="text-align: left"><a href="{{ item.instance.get_absolute_url }}">{{ item.instance.get_name }}</a><br />
-					  {{ item.instance.description|removetags:"p"|safe }}
-				</td>
+                    {{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}				</td>
 			</tr>
 			{% endfor %}
 		</table>

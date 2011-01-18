@@ -190,7 +190,6 @@ def robots(request):
     except:
         site_text = ""
     text = "%s\nUser-agent: * \nDisallow: /media" % site_text
-    
     return HttpResponse(text, mimetype="text/plain")
 
 

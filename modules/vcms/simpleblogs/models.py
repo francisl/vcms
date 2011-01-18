@@ -149,6 +149,14 @@ class BlogPost(models.Model):
     objects = PublishedNewsBlogPostManager()
     published = PublishedNewsBlogPostManager()
     
+    def _get_title(self):
+        return self.title
+    name = property(_get_title) # for search
+    
+    def get_page_where_available(self):
+        return self.get_absolute_url()
+
+        
     class Meta:
         verbose_name_plural = _("News/Blog Posts")
         get_latest_by = ['-date_created']

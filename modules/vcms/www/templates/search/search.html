@@ -34,7 +34,7 @@
                     <td> <a href="{{ result.object.get_page_where_available }}">{{ result.object.name }}</a></td>
                 </tr>
                 <tr>
-                    <td></td><td>{{ result.object.content|truncatewords:20|safe }}</td>
+                    <td></td><td>{{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}</td>
                 </tr>
             {% empty %}
                 <p>No results found.</p>
