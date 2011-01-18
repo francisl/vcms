@@ -183,8 +183,15 @@ def Search(request):
                                   context_instance=RequestContext(request))
 
 def robots(request):
-    response = HttpResponse("User-agent: * \nDisallow: /", mimetype="text/plain")
-    return response
+    from django.contrib.sites.models import Site
+    try:
+        current_site = Site.objects.get(id=settings.SITE_ID)
+        site_text = "Sitemap: http://%s/sitemap.xml" % current_site.domain 
+    except:
+        site_text = ""
+    text = "%s\nUser-agent: * \nDisallow: /media" % site_text
+    
+    return HttpResponse(text, mimetype="text/plain")
 
 
 from django.contrib.admin.views.decorators import staff_member_required
