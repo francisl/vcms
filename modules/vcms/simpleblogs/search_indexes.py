@@ -9,6 +9,6 @@ class NewsBlogsIndex(indexes.SearchIndex):
     name = indexes.CharField(model_attr='title')
     description = indexes.CharField(model_attr='description')
     keywords = indexes.CharField(model_attr='preview')
-    pub_date = DateTimeField(model_attr='date_published')
+    pub_date = indexes.DateTimeField(model_attr='date_published')
 
 site.register(BlogPost, NewsBlogsIndex)
