@@ -189,7 +189,7 @@ def robots(request):
         site_text = "Sitemap: http://%s/sitemap.xml" % current_site.domain 
     except:
         site_text = ""
-    text = "%s\nUser-agent: * \nDisallow: /media" % site_text
+    text = "\nUser-agent: * \nDisallow: /media/ \n\n%s" % site_text
     return HttpResponse(text, mimetype="text/plain")
 
 
@@ -215,7 +215,8 @@ def testCMSMenuForm(request, menuid):
 
     return render_to_response('testmovemenu.html',
                               {'form': form
-                               ,'menu': menu, 'page_info': _get_page_parameters() },
+                               ,'menu': menu
+                               , 'page_info': _get_page_parameters() },
                               context_instance=RequestContext(request))
 
 def cms500(request):
