@@ -119,6 +119,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vcontact'
                   ,'updates_registration'
                   ,'vcms.store'
+                  ,'htmltools'
                   # Custom apps for cms
                   # google analytics
                   ,'google_analytics'

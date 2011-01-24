@@ -20,7 +20,7 @@ from vcms.www.models.page import BasicPage
 from vcms.www.models.widget import Widget
 from vcms.www.fields import StatusField
 from vcms.simpleblogs.managers import PublishedBlogPageManager, BlogPageManager, PublishedNewsBlogPostManager, BlogPostCategoryManager
-
+from htmltools.html import HtmlReduce
 
 APP_SLUGS = "blogs"
 
@@ -169,34 +169,13 @@ class BlogPost(models.Model):
         return "/%s/%s/%s/%s/%s/%d" % (self.display_on_page.type, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
     def save(self):
-        import re
-        reg = re.compile(r"<p(?:.*?)>(.*?)<\/p>")
-        preview = ""
-        all_found = reg.findall(self.content)
-        for found in all_found[:self.preview_length]:
-            preview += '<p>' + found + '</p>'
-        self.preview = "<div>" + preview + "</div>"
+        self.preview = "<div>" + HtmlReduce(self.content, self.preview_length).get_html() + "</div>"
         
         # If the status has been changed to published, then set the date_published field so that we don't reset the date of a published page that is being edited
         now = datetime.datetime.now()
         self.date_modified = now
         if self.date_published == None:
             self.date_published = now
-            
-        #model_in_db = self.__class__.objects.get(pk=self.pk)
-        #if self.status == StatusField.PUBLISHED and self.date_published == None:
-        #self.date_published = now
-#            
-#        
-#        if self.status == StatusField.PUBLISHED:
-#            # If the post is being created, set its published date
-#            if not self.pk:
-#                self.date_published = now
-#            # If the post is being edited, check against the current version in the database and update if it hasn't been previously published
-#            else:
-#                model_in_db = self.__class__.objects.get(pk=self.pk)
-#                if model_in_db.status != StatusField.PUBLISHED:
-#                    self.date_published = self.date_modified
 
         super(BlogPost, self).save() 
     

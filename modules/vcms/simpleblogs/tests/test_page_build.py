@@ -1,6 +1,4 @@
 # -*- coding: UTF8 -*-
-
-# Vimba CMS - Products
 # Application : CMS
 # Module : Products
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -13,8 +11,7 @@ from mockito import *
 
 from site_language.models import Language
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
-from vcms.simpleblogs.views import generate_paginator, get_page_items
-#from vcms.simpleblogs import views as newsblogs
+from vcms.simpleblogs.views import generate_html_paginator, get_page_items
 
 class PageBuildTest(TestCase):
     def setUp(self):
