@@ -118,11 +118,11 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vcms.themes'
                   ,'vcontact'
                   ,'updates_registration'
-                  ,'vcms.store'
                   ,'htmltools'
                   # Custom apps for cms
                   # google analytics
                   ,'google_analytics'
+                  ,'sorl.thumbnail'
                   #,'south'
                   #SATCHMO
                   #,'satchmo_store.contact'
