@@ -78,6 +78,7 @@ class ContainerWidgets(models.Model):
                 style += "left : %spx; " % self.absolute_left
             if self.absolute_right >= 0:
                 style += "right : %spx; " % self.absolute_right
+        style += '%s' % self.css_style 
         style += "width: %s%s" % (self.width, self.MESURE_CHOICES[self.width_mesure][1])
         return style
         
