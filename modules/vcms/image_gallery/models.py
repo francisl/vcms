@@ -36,6 +36,9 @@ class ImageGalleryPage(BasicPage):
             my_rel_cont[container.name] = container
         return my_rel_cont
 
+    def get_absolute_url(self):
+        return "/%s/%s" % (self.app_slug, self.slug)
+        
     def get_menu(self):
         try:
             return self.menu.all()[0]
