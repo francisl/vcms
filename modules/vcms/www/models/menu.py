@@ -33,7 +33,7 @@ class MainMenu(MP_Node):
         if self.menu_name == None or self.menu_name == '':
             self.menu_name = self.content_object.get_name()
         return self.menu_name
-    
+   
         
 import mptt
 class CMSMenu(models.Model):
@@ -57,7 +57,10 @@ class CMSMenu(models.Model):
         
     def __unicode__(self):
         if self.menu_name == None or self.menu_name == '':
-            self.menu_name = self.content_object.get_name()
+            try:
+                self.menu_name = self.content_object.get_name()
+            except:
+                self.menu_name = "Database relation error"
         return self.menu_name
 
     def save(self):

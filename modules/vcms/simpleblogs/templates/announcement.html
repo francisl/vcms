@@ -30,34 +30,36 @@
                 {{ page_info.page.get_menu.get_root_menu_if_exist }} / {% endif %}
                 <span style="color: #444444;">{{ page_info.page.name }}</span></h1>
         {% endif %}
-    <div id='vcms_rss_feeds_on_page'>
-    {% ifequal page.feeds_icon_position 2 %}
-        {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">
-        <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>{% endif %}
-    {% endifequal %}
-    </div>
-    <div class="vcms_column_container">
-        <!-- Content -->
-        <div class="vcms_inner_content">
-        {% block newsblogs_list %}
-        {% for post in posts %}
-            <div class="vcms_simpleblogs_container">
-                <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                <h5>{{ post.date_published|naturalday }}</h5>
-                {{ post.content|safe }}
-                <p>Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
-                <br />
-            </div>
-        {% endfor %}
-        {% endblock newsblogs_list %}
-        <br />
-        {{ page_paginator }}
+        <div id='vcms_rss_feeds_on_page'>
+        {% ifequal page.feeds_icon_position 2 %}
+            {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">
+            <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>{% endif %}
+        {% endifequal %}
         </div>
-    </div>
-    
-    {% ifequal page.display_navigation_in 'in_page_navigation' %}
-        {% newsblogs_navigation page_info.current_page %}
-    {% endifequal %}
+        <div class="vcms_column_container">
+            <!-- Content -->
+            <div class="vcms_inner_content">
+            {% block newsblogs_list %}
+            {% for post in posts %}
+                <div class="vcms_simpleblogs_container">
+                    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                    <h5>{{ post.date_published|naturalday }}</h5>
+                    {{ post.content|safe }}
+                    <p>Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
+                    <br />
+                </div>
+            {% endfor %}
+            {% endblock newsblogs_list %}
+            <br />
+            {{ page_paginator }}
+            </div>
+        </div>
+        
+        {% ifequal page.display_navigation_in 'in_page_navigation' %}
+        <div id="vcms_newsblogs_in_page_navigation">
+            {% newsblogs_navigation page_info.current_page %}
+        </div>
+        {% endifequal %}
     </div>
 {% endblock vcms_main_content %}
 

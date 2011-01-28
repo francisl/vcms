@@ -2,12 +2,12 @@
 {% load i18n %}
 
 {% if categories %}
-	<div class="tree">
-	<h1>Categories {% ifequal page.feeds_icon_position 1 %}
+	<div id="vcms_newsblogs_categories" class="tree">
+	<h3>Categories {% ifequal page.feeds_icon_position 1 %}
         {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">
             <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>{% endif %}
         {% endifequal %}
-    </h1>
+    </h3>
 	<dl>
 	    {% for category, values in categories.items %}
 	     <a href="/{{ page.type }}/{{ page.slug }}/{{ values.model.slug }}"><dt>{{ category }} ({{ values.count }})</dt></a>
@@ -16,8 +16,8 @@
     </div>
 {% endif %}
 {% if archives %}
-	   <div class="tree">
-	   <h1>Archives</h1>
+	   <div id="vcms_newsblogs_archives" class="tree">
+	   <h3>Archives</h3>
 	   <dl>
 	     {% for archive in archives %}
 	         {% if archive.items_count %}
