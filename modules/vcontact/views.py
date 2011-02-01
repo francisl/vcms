@@ -69,8 +69,16 @@ def Contact(request, page=None, context={}):
             return render_to_response('confirmation.html', 
                                       context,
                                       context_instance=RequestContext(request))
-   
+    
     context.update(locals())
+
+    page_info = {}
+    page_info.update(data = { 'title': settings.SITE_NAME
+                                ,'description':settings.SITE_DESCRIPTION
+                                ,'footer':settings.FOOTER_HTML })
+    page_info.update(current_page = page)
+    context.update(page_info=page_info)
+
     return render_to_response('contact.html', 
                               context,
                               context_instance=RequestContext(request))
