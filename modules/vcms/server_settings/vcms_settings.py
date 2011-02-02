@@ -124,6 +124,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # google analytics
                   ,'google_analytics'
                   ,'sorl.thumbnail'
+                  ,'search_engine_tools'
                   #,'south'
                   #SATCHMO
                   #,'satchmo_store.contact'

@@ -7,6 +7,7 @@
 {% load cms_theme %}
 {% load containers %}
 {% load analytics %}
+{% load bing_benefactor %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -16,7 +17,7 @@
     <meta name="robots" content="noarchive">
     <meta name="description" content="{% if page_info.current_page.description %} {{ page_info.current_page.description|striptags }} {% endif%} {% block metadescription %} {% endblock metadescription %}">
     <meta name="keywords" content="{{ page_info.current_page.keywords }}{% block keywords %} {% endblock keywords %}">
-    
+    {% insert_bing_meta %}
     <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %} {{ page_info.data.title }} {% block title %}{{ page_info.data.description }}{% endblock title %}</title>
     <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/favicon.ico" />
     
