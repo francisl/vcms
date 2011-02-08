@@ -8,6 +8,7 @@
 {% load containers %}
 {% load analytics %}
 {% load bing_benefactor %}
+{% load footer %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -104,17 +105,9 @@
             </div>
         {% endblock vcms_content_body %}
         </div><!-- vcms_content_body -->
-        
-        <!-- =========footer=========== -->
-        {% if page_info.data.footer %}
-        <div id="footing" >
-            <div class="footing_content">
-            {% block vcms_footer %}
-               {{ page_info.data.footer|safe }}
-            {% endblock vcms_footer %}
-            </div>
-        </div>
-        {% endif %}
+        <!-- retrieve the footer -->
+        {% show_footer %}
+
     </div><!-- vcms_body -->
 <!-- =========GOOGLE SCRIPT=========== -->
 <!--  
