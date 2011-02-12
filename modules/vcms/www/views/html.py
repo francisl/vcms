@@ -9,13 +9,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
-import inspect
-# external requirement
+import inspect # external requirement
 from captcha.fields import CaptchaField
 
 from vcms.www.models import PageElementPosition
 from vcms.www.models.page import APP_SLUGS
-
 from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.page import BasicPage
 from vcms.www.models.menu import CMSMenu
@@ -94,7 +92,6 @@ def SimplePage(request, context={}):
                               context_instance=RequestContext(request))
     
         
-    
 def Simple(request, context={}):
     current_page = context["page_info"]['page']
     content = []
