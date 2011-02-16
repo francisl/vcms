@@ -58,45 +58,6 @@ def show_sub_menu(current_page=None):
     return locals()
 
 
-def generate_sub_menu(current_page=None):
-    """ return a html version of the submenu
-    """
-    l = Language.objects.get_default()
-    """ return navigation tree as a list containin tree node dictionary """ 
-    
-    roots = MainMenu.get_root_nodes()
-    
-    for rootmenu in roots:
-        if rootmenu.name == l.language.lower():
-            root = rootmenu
-            menu = root.get_children()
-    
-    node=None
-    if current_page != None:
-        for menu_item in menu:
-            if menu_item.content_type.id == current_page.id:
-                node = menu_item
-                break
-    
-    #check if main or submenu
-    parent = node
-    if node.depth == 2:
-        parent = node.get_parent()
-    
-    nav = []
-    for navgroup in self.all():
-        nav.append(helper.create_tree_node(navgroup.name, url=navgroup.get_absolute_url()))
-    
-    #submenu, selected_submenu = Page.objects.get_SubMenu(current_page)
-    
-    if request.session.get('navigation_type') == "DIS" or navigation_type.upper() == "DIS":
-        return category.get_navigation_menu()
-    else: #if request.session.get('navigation_type') == "standard" :
-        return generator.generate_tree(productmodels.StandardNavigationGroup.objects.get_navigation())
-    
-    return generate_tree(nav)
-
-
 @register.inclusion_tag('menu/footer_menu.html')
 def show_footer_menu(current_page=None):
     """ return main menu list
