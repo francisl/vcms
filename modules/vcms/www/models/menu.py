@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francis Lavoie on 30-05-2010.
@@ -63,11 +63,6 @@ class CMSMenu(models.Model):
                 self.menu_name = "Database relation error"
         return self.menu_name
 
-    def save(self):
-        if self.display == True and self.content_object.status == StatusField.DRAFT:
-            self.display = False
-        super(CMSMenu, self).save()
-            
     def get_name(self):
         return self.__unicode__()
         
