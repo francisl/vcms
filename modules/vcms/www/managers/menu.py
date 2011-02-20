@@ -1,9 +1,10 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francis Lavoie
 
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 from treebeard.models import Node
 
@@ -61,6 +62,12 @@ class CMSMenuManager(models.Manager):
         this_content_type = ContentType.objects.get_for_model(type(page))
         menus = self.filter(content_type=this_content_type, object_id=page.id)
         return True if menus else False
+
+    def get_menu_from_string(self, menu_slug):
+        try:
+            return self.get(slug=menu_slug)
+        except ObjectDoesNotExist:
+            return None
 
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):

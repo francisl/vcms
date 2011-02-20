@@ -37,7 +37,8 @@ class MainMenu(MP_Node):
         
 import mptt
 class CMSMenu(models.Model):
-    menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters", blank=True, null=True)
+    menu_name = models.CharField(max_length=80, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
+    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu - Only work for page that are set as published")
     default = models.BooleanField(default=False)
@@ -84,6 +85,9 @@ class CMSMenu(models.Model):
 
     name = property(get_name)
     status = property(get_page_status)
+
+    def get_controller(self):
+        return None
     
 mptt.register(CMSMenu, order_insertion_by=['object_id'])
 

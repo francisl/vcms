@@ -113,6 +113,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # VIMBA CMS APPS
                   ,'site_media'
                   ,'site_language'
+                  ,'vcms.menu_navigation'
                   ,'vcms.simpleblogs'
                   ,'vcms.image_gallery'
                   ,'hwm'
