@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -41,7 +41,9 @@ class BannerManager(models.Manager):
         has_banner = False
         
         if page==None:
-            banner = self.all()[0]
+            banners = self.all()
+            if banners :
+                banner = banners[0]
         else:
             banners = self.filter(page=page.id)
             if len(banners) >= 1:

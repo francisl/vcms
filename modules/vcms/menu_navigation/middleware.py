@@ -8,6 +8,7 @@ from vcms.www.models.menu import CMSMenu
 
 class MenuNavigationMiddleWare(object):
     def _get_current_menu_from_url_path(self, url_path):
+        # TODO : exclude static or urelated path from querying the DB
         regex_all = re.compile('[-\w]+')
         url_list = regex_all.findall(url_path)
         #print('find all %s' % str(regex_all.findall(url_path)))
@@ -20,6 +21,8 @@ class MenuNavigationMiddleWare(object):
     
     def process_request(self, request):
         menu = self._get_current_menu_from_url_path(request.path)
-        if menu:
-            menu.content_object.get_controller()
+        if menu and hasattr(menu, 'get_controller'):
+            controller = menu.get_controller()
+            if controller:
+                return controller(request, menu_instance=menu)
         return None

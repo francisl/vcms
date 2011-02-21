@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -135,7 +135,9 @@ class BasicPage(models.Model):
         from django.contrib.contenttypes.models import ContentType
         this_content_type = ContentType.objects.get_for_model(self.__class__)        
         if not CMSMenu.objects.has_menu_for_page(self):
-            menu = CMSMenu(display=False, language=self.language, content_type=this_content_type, object_id=self.id)
+            menu = CMSMenu(display=False, language=self.language
+                           ,slug=self.slug
+                           ,content_type=this_content_type, object_id=self.id)
             menu.save()
 
         super(BasicPage, self).save(*args, **kwargs)
@@ -171,8 +173,7 @@ class Page(BasicPage):
         return self.name
     
     def save(self):
-        if self.default:
-            Page.objects.reset_Default()
+        self.module = 'simple'
         super(Page, self).save()
 
     def delete(self):
@@ -191,7 +192,7 @@ class MainPage(BasicPage):
         verbose_name_plural = "Page - Main pages"
 
     def save(self):
-        self.module = 'MainPage'
+        self.module = 'main_page'
         super(MainPage, self).save()
     
     def get_absolute_url(self):
@@ -200,6 +201,10 @@ class MainPage(BasicPage):
     def get_menu(self):
         return self.menu.all()[0]
 
+    def get_controller(self):
+        from vcms.www.views.html import MainPage
+        return MainPage
+
 class SimplePage(BasicPage):
     class Meta:
         verbose_name = "Page - Simple page"
@@ -207,7 +212,7 @@ class SimplePage(BasicPage):
         app_label = 'www'
 
     def save(self):
-        self.module = 'SimplePage'
+        self.module = 'simple_page'
         super(SimplePage, self).save()
     
     def get_absolute_url(self):
@@ -215,6 +220,10 @@ class SimplePage(BasicPage):
  
     def get_menu(self):
         return self.menu.all()[0]
+
+    def get_controller(self):
+        from vcms.www.views.html import simple_page
+        return simple_page
 
         
 # -----

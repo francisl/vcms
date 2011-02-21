@@ -26,12 +26,6 @@ class MainMenuManager(models.Manager):
 
     def get_submenu(self):
         from hwm.tree import helper
-        """ return navigation tree as a list containing tree node dictionary 
-            ex:
-                >>> from vcms.www.models import menu
-                >>> mm = menu.MainMenu
-                >>> mm.objects.get_children_for_object_id(3)
-        """
         root = self.get_root_menu() 
         nav = []
         for navgroup in self.all():
@@ -53,7 +47,9 @@ class CMSMenuManager(models.Manager):
     def get_default_page(self):
         default_menu = self.filter(default=True)
         if default_menu.count() == 0 or default_menu == None:
-            return self.all()[0].content_object
+            pages = self.all()
+            if pages:
+                return pages[0].content_object
         else:
             return default_menu[0].content_object
 

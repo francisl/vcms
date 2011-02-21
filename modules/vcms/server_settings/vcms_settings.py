@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
                       #,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
                       #,'vcms.www.middleware.EnforceLoginMiddleware',
+                      ,'vcms.menu_navigation.middleware.MenuNavigationMiddleWare'
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
