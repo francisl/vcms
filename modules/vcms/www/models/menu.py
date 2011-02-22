@@ -37,8 +37,8 @@ class MainMenu(MP_Node):
         
 import mptt
 class CMSMenu(models.Model):
-    menu_name = models.CharField(max_length=80, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
-    slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
+    menu_name = models.CharField(max_length=120, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
+    slug = models.SlugField(max_length=150, help_text=_("Used for hyperlinks, no spaces or special characters."))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu - Only work for page that are set as published")
     default = models.BooleanField(default=False)
@@ -53,7 +53,7 @@ class CMSMenu(models.Model):
         app_label = 'www'
         verbose_name = 'Menu - Master'
         verbose_name_plural = 'Menu - Master'
-        
+        unique_together = ('parent', 'slug')
         ordering = ['tree_id', 'lft']
         
     def __unicode__(self):
@@ -68,7 +68,7 @@ class CMSMenu(models.Model):
         return self.__unicode__()
         
     def get_slug(self):
-        return self.content_object.get_absolute_url()
+        return self.get_absolute_url()
         
     def get_tab_name(self):
         prefix = "+-- " * self.level

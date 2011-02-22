@@ -32,6 +32,7 @@ class MenuFactory(object):
         self.menu.save()
         self.menu2 = CMSMenu(menu_name='Testing Menu2'
                        ,display=True
+                       ,parent=self.menu
                        ,slug='testing_menu2'
                        ,language=Language.objects.get_default()
                        ,content_type=locallink_type
@@ -55,12 +56,19 @@ class CMSMenuManagerTest(TestCase):
         self.menu_factory.clean_menu_factory()
         
     def test_cmsmenu_objects_get_menu_for_string_should_return_the_model_instance_when_found(self):
-        menu = CMSMenu.objects.get_menu_from_string('testing_menu')
+        menu = CMSMenu.objects.get_menu_from_string(None, 'testing_menu')
         self.assertEqual(menu, self.menu)
         
     def test_cmsmenu_objects_get_menu_for_string_should_return_none_if_no_menu(self):
-        self.assertEqual(CMSMenu.objects.get_menu_from_string('test'), None)
+        self.assertEqual(CMSMenu.objects.get_menu_from_string(None, 'test'), None)
 
+    def test_cmsmenu_objects_get_menu_for_string_should_return_the_model_instance_for_submenu(self):
+        self.assertEqual(CMSMenu.objects.get_menu_from_string(self.menu2.parent.slug, self.menu2.slug), self.menu2)
+
+    def test_cmsmenu_objects_get_menu_for_string_should_not_return_the_model_instance_for_orphan_submenu(self):
+        self.assertEqual(CMSMenu.objects.get_menu_from_string(None, self.menu2.slug), None)
+
+        
 class CMSMenuModelTest(TestCase):
     def setUp(self):
         self.menu_factory = MenuFactory()

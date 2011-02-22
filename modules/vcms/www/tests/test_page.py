@@ -43,4 +43,4 @@ class PageModelTest(TestCase):
 
     def test_simplepage_get_controller_should_return_the_simple_controller_use_to_generate_the_simple_page(self):
         from vcms.www.views.html import simple_page
-        self.assertEqual(simple, self.page.get_controller())
+        self.assertEqual(simple_page, self.page.get_controller())

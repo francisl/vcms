@@ -59,9 +59,11 @@ class CMSMenuManager(models.Manager):
         menus = self.filter(content_type=this_content_type, object_id=page.id)
         return True if menus else False
 
-    def get_menu_from_string(self, menu_slug):
+    def get_menu_from_string(self, parent, menu_slug):
         try:
-            return self.get(slug=menu_slug)
+            if parent != None:
+                parent = self.get(parent=None, slug=parent)
+            return self.get(parent=parent, slug=menu_slug)
         except ObjectDoesNotExist:
             return None
 
