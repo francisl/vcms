@@ -65,7 +65,9 @@ class CMSMenu(models.Model):
         return self.menu_name
 
     def get_name(self):
-        return self.__unicode__()
+        if self.__unicode__():
+            return self.__unicode__()
+        return self.content_object.get_name()
         
     def get_slug(self):
         return self.get_absolute_url()

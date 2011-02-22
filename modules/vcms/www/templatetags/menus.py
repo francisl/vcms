@@ -33,7 +33,9 @@ def show_navigation_menu(current_page=None, selected_page=None):
     from django.contrib.contenttypes.models import ContentType
     from vcms_simthetiq.simthetiq_dis_navigation.models import MenuNavigation
     ct = ContentType.objects.get(model='menunavigation')
-    menu_items = CMSMenu.objects.filter(content_type=ct)[0].parent.get_children()
+    menu_items = CMSMenu.objects.filter(content_type=ct)
+    if menu_items and menu_items[0].parent:
+        menu_items = menu_items[0].parent.get_children()
     return { 'menu_items' : menu_items }
     
 @register.inclusion_tag('menu/menu.html')
