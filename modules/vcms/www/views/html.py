@@ -81,15 +81,11 @@ def Generic(request, page=None, context={}):
     
 
 def MainPage(request, context={}, page_instance=None):
-    #current_page = context["page_info"]['page']
     return render_to_response('mainpage.html',
                               context,
                               context_instance=RequestContext(request))
 
 def simple_page(request, context={}, menu_instance=None):
-    #page_instance=menu_instance.content_object
-    #context.update(page_info=_get_page_parameters(page_instance))
-    print('current page : %s' % request.current_page)
     return SimplePage(request, context)
 
 def SimplePage(request, context={}):
