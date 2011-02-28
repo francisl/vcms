@@ -49,4 +49,5 @@ class MenuNavigationMiddleWare(object):
             controller = menu.get_controller()
             if controller:
                 return controller(request)
+        request.cms_selected_menu = None
         return None
