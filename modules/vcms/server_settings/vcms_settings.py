@@ -57,6 +57,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
 #    'django.core.context_processors.debug',
 #    'django.core.context_processors.i18n',
+    'vcms.menu_navigation.request_processors.page_info',
+    'vcms.menu_navigation.request_processors.cms_menu',
 )
 
 # List of callables that know how to import templates from various sources.

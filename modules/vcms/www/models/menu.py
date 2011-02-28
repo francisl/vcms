@@ -37,6 +37,10 @@ class MainMenu(MP_Node):
         
 import mptt
 class CMSMenu(models.Model):
+    DROPDOWN_MENU = 0
+    SIMPLE_MENU = 1
+    MENU_STYLE = ((DROPDOWN_MENU, _('Dropdown')),
+              (SIMPLE_MENU, _('Single line')))
     menu_name = models.CharField(max_length=120, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
     slug = models.SlugField(max_length=150, help_text=_("Used for hyperlinks, no spaces or special characters."))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')

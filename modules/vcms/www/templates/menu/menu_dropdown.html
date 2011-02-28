@@ -2,12 +2,12 @@
     <ul class="dropdown dropdown-horizontal ">
 
     {% for menu in menus %}
-    <li class="{% ifequal current_page.get_menu.id menu.menu.id %}menu_selected{% endifequal%} {% ifequal current_page.get_menu.get_root.id menu.menu.id %}menu_selected{% endifequal%}">
+    <li class="{% if menu.selected %}menu_selected {% endif %}">
         <a href="{{menu.menu.get_absolute_url}}" class="dir">{{ menu.menu.get_name|upper }}</a>
         
         {% if menu.submenus %}{% comment %} dont display empty menu{% endcomment %}
 		<ul>{% for submenu in menu.submenus %}
-		      <li id="menu_{{menu.menu.id}}" class="{% ifequal current_page.get_menu.id submenu.menu.id %}menu_selected{% endifequal%}">
+		      <li id="menu_{{menu.menu.id}}" class="{% if submenu.selected %}menu_selected{% endif %}">
 		          <a href="{{submenu.menu.get_absolute_url}}">{{ submenu.menu }}</a>
 		      </li>{% endfor %}
 		</ul>

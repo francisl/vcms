@@ -13,17 +13,28 @@ from hwm.tree import generator
 
 register = template.Library()
 
+def is_menu_selected(menu, current_menu):
+    if menu == current_menu:
+        return True
+    return False
+
 @register.inclusion_tag('menu/menu_dropdown.html')
-def show_dropdown_menu(current_page=None):
+def show_dropdown_menu(current_menu=None):
     """ return main menu list
         and return the menu currently selected
     """
     menus = []
     for menuitem in CMSMenu.objects.get_roots(language='en'):
-        menu = dict(menu=menuitem, submenus=[])
+        #selected=is_menu_selected(menuitem, current_page.get_menu.get_root().id)
+        menu = dict(menu=menuitem
+                    ,selected=is_menu_selected(menuitem, current_menu)
+                    ,submenus=[])
         for submenu in CMSMenu.objects.get_displayable_children(menuitem):
-            submenudict = dict(menu=submenu, submenu=[])
+            is_selected = is_menu_selected(submenu, current_menu)
+            submenudict = dict(menu=submenu, selected=is_selected, submenu=[])
             menu['submenus'].append(submenudict)
+            if is_selected:
+                menu['selected'] = True
         menus.append(menu)
     return locals()
     

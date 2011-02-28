@@ -6,6 +6,18 @@ import re
 
 from vcms.www.models.menu import CMSMenu
 
+def _get_page_parameters(page=None):
+    """ Set the default parameter for a CMS page 
+        module , menu_style, current_page, page
+    """
+    page_info = { 'module' : None, 'current_page' : page }
+    page_info.update(menu_style = CMSMenu.DROPDOWN_MENU)
+    
+    if page:
+        page_info.update(module = page.module)
+    
+    return page_info
+
 class MenuNavigationMiddleWare(object):
     def _get_current_menu_from_url_path(self, url_path):
         # TODO : exclude static or urelated path from querying the DB
@@ -27,8 +39,14 @@ class MenuNavigationMiddleWare(object):
     
     def process_request(self, request):
         menu = self._get_current_menu_from_url_path(request.path)
+        context = {}
         if menu and hasattr(menu, 'get_controller'):
+            current_page = menu.content_object
+            request.current_page = _get_page_parameters(current_page)
+
+            request.cms_selected_menu = menu
+        
             controller = menu.get_controller()
             if controller:
-                return controller(request, menu_instance=menu)
+                return controller(request)
         return None
