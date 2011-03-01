@@ -31,16 +31,21 @@ class MenuNavigationMiddleWareTest(TestCase):
         self.assertEqual(None, self.menu_navigation_middleware.process_request(self.mock_httprequest))
 
     def test_middleware__get_current_menu_from_url_path_should_return_the_parent_menu(self):
-        menu = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/')
+        menu, extrapath = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/')
         self.assertEqual(menu, self.menu)
 
     def test_middleware__get_current_menu_from_url_path_should_return_the_submenu_when_second_parameter(self):
-        menu = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/testing_menu2/')
+        menu, extrapath = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/testing_menu2/')
         self.assertEqual(menu, self.menu2)
         
     def test_middleware__get_current_menu_from_url_path_should_return_the_submenu_when_second_parameter_and_more_are_present(self):
-        menu = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/testing_menu2/patate/au/riz')
+        menu, extrapath = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/testing_menu2/patate/au/riz')
         self.assertEqual(menu, self.menu2)
+
+    def test__get_current_menu_should_return_only_the_first_menu_if_the_extra_args_are_not_found(self):
+        menu, extrapath = self.menu_navigation_middleware._get_current_menu_from_url_path('/testing_menu/patate/au/riz')
+        self.assertEqual(menu, self.menu)
+        
 
     def test_middleware_should_return_call_the_menu_related_method_when_found(self):
         from vcms.www.views.html import simple_page
