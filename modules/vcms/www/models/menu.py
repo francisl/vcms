@@ -91,6 +91,9 @@ class CMSMenu(models.Model):
     def get_root_menu(self):
         return self.parent
 
+    def get_children(self):
+        return CMSMenu.objects.get_children(self)
+
     name = property(get_name)
     status = property(get_page_status)
 

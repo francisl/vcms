@@ -59,13 +59,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #    'django.core.context_processors.i18n',
     'vcms.menu_navigation.request_processors.page_info',
     'vcms.menu_navigation.request_processors.cms_menu',
+    'vcms.menu_navigation.request_processors.cms_menu_extrapath',
 )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
+#   'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_DIRS = (

@@ -59,13 +59,22 @@ class CMSMenuManager(models.Manager):
         menus = self.filter(content_type=this_content_type, object_id=page.id)
         return True if menus else False
 
-    def get_menu_from_string(self, parent, menu_slug):
+
+    def get_menu(self, menu_slug):
         try:
-            if parent != None:
-                parent = self.get(parent=None, slug=parent)
+            return self.get(parent=None, slug=menu_slug)
+        except ObjectDoesNotExist:
+            return None
+        
+    def get_submenu(self, parent_slug, menu_slug):
+        try:
+            parent = self.get_menu(parent_slug)
             return self.get(parent=parent, slug=menu_slug)
         except ObjectDoesNotExist:
             return None
+
+    def get_children(self, parent):
+        return self.filter(parent=parent)
 
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):
