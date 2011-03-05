@@ -8,11 +8,18 @@ def page_info(request):
     return {}
 
 def cms_menu(request):
+    to_return = {}
     if hasattr(request, 'cms_selected_menu'):
-        return { 'cms_menu' : request.cms_menu
-                 ,'cms_submenu' : request.cms_submenu
-                 ,'cms_selected_menu' : request.cms_selected_menu }
-    return {}
+        to_return.update(cms_selected_menu = request.cms_selected_menu)
+    if hasattr(request, 'cms_menu'):
+        print("context processoring cms_menu")
+        to_return.update(cms_menu = request.cms_menu)
+    if hasattr(request, 'cms_submenu'):
+        to_return.update(cms_submenu = request.cms_submenu)
+    if hasattr(request, 'cms_basepath'):
+        to_return.update(cms_basepath = request.cms_basepath)
+        
+    return to_return
 
 def cms_menu_extrapath(request):
     if hasattr(request, 'cms_menu_extrapath'):

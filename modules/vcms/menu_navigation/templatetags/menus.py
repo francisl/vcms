@@ -40,17 +40,24 @@ def show_dropdown_menu(current_menu=None):
     
 
 @register.inclusion_tag('menu/side_navigation.html')
-def show_navigation_menu(current_page=None, cms_menu=None, cms_submenu=None, cms_extrapath=None):
+def show_navigation_menu(current_page=None, cms_basepath=None, cms_menu=None, cms_submenu=None, cms_extrapath=None):
     from django.contrib.contenttypes.models import ContentType
     from vcms_simthetiq.simthetiq_dis_navigation.models import MenuNavigation
     ct = ContentType.objects.get(model='menunavigation')
     submenu_for = cms_menu
     if cms_menu.parent:
         submenu_for = cms_menu.parent
-           
-    menu_items = [{'item' : menu, 'selected' : True if menu.slug == cms_submenu.slug else False }
-                  for menu in CMSMenu.objects.get_displayable_children(cms_menu)]
-    print("menu items =  %s" % menu_items)
+
+    menus =  CMSMenu.objects.get_displayable_children(submenu_for)
+
+    menu_items = []
+    for menu in menus :
+        menu_info = {}
+        menu_info.update(item = menu)
+        menu_info.update(selected = True if menu.slug == cms_submenu.slug else False)
+        menu_info.update(submenu =  menu.content_object.render_submenu(cms_basepath=cms_basepath ,cms_extrapath = cms_extrapath) if hasattr(menu.content_object, 'render_submenu') else "")
+        menu_items.append(menu_info)
+
     return { 'menu_items' : menu_items, 'cms_menu' : cms_menu }
     
 @register.inclusion_tag('menu/menu.html')
