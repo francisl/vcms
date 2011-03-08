@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: SimpleNews
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -97,7 +97,10 @@ class BlogPage(BasicPage):
     def get_previous_announcement(self):
         return self.get_previous_by_date_published(status=StatusField.PUBLISHED)
 
-
+    def get_controller(self):
+        from vcms.simpleblogs.views import page, BlogPostPage
+        return BlogPostPage(self)
+    
 class BlogPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True)

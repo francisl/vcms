@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: SimpleBlogs
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -81,6 +81,13 @@ def get_page_information(page_slug, method_name):
     page_info = _get_page_parameters(page)
     reverse_url="vcms.simpleblogs.views." + method_name
     return page, page_info ,reverse_url
+
+class BlogPostPage(object):
+    def __init__(self, blog_page):
+        self.page = blog_page
+
+    def __call__(self, request):
+        return page(request, page_slug=self.page.slug)
 
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }

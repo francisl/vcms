@@ -64,7 +64,9 @@ class MenuNavigationMiddleWare(object):
             request.cms_selected_menu = cms_selected_menu
             request.cms_menu = menu
             request.cms_submenu = submenu
-            request.cms_basepath = "/%s/%s/" % (menu.slug, submenu.slug)
+            request.cms_basepath = "/%s/" % menu.slug
+            if submenu:
+                request.cms_basepath += "%s/" % submenu.slug
         
             controller = cms_selected_menu.get_controller()
             if controller:
