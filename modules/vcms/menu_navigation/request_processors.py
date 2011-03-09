@@ -12,7 +12,6 @@ def cms_menu(request):
     if hasattr(request, 'cms_selected_menu'):
         to_return.update(cms_selected_menu = request.cms_selected_menu)
     if hasattr(request, 'cms_menu'):
-        print("context processoring cms_menu")
         to_return.update(cms_menu = request.cms_menu)
     if hasattr(request, 'cms_submenu'):
         to_return.update(cms_submenu = request.cms_submenu)
