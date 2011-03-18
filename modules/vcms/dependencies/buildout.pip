@@ -71,7 +71,8 @@ zope.mimetype==1.3.0
 
 -e svn+http://django-app-plugins.googlecode.com/svn/trunk/@24#egg=django-app-plugins
 
--e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
+#-e hg+https://sorl-thumbnail.googlecode.com/hg/@0ce451b2f8#egg=sorl-thumbnail
+-e git+https://github.com/sorl/sorl-thumbnail.git#egg=sorl-thumbnail
 
 # PIL requires python-dev
 PIL==1.1.7

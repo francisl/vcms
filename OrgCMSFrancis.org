@@ -3,3 +3,9 @@
 ** TODO Make request_processor work
    CLOCK: [2011-03-04 Fri 14:23]--[2011-03-04 Fri 14:43] =>  0:20
 
+** TODO BLOG - Faire Fonctionner le blog avec les nouveau menu
+*** TODO Page generic du blog
+*** TODO Pagination
+*** TODO Page specifique de blog
+*** TODO Archive
+*** TODO Categorie
