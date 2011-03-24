@@ -56,7 +56,7 @@ class MenuNavigationMiddleWare(object):
     
     def process_request(self, request):
         menu, submenu, request.cms_menu_extrapath = self._get_current_menu_from_url_path(request.path)
-        request.test = {'bob': 'testing request'}
+        
         context = {}
         cms_selected_menu = submenu if submenu else menu
         if cms_selected_menu and hasattr(menu, 'get_controller'):

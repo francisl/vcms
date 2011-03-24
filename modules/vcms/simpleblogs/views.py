@@ -82,19 +82,37 @@ def get_page_information(page_slug, method_name):
     reverse_url="vcms.simpleblogs.views." + method_name
     return page, page_info ,reverse_url
 
-class BlogPostPage(object):
+class BlogPageController(object):
     def __init__(self, blog_page):
         self.page = blog_page
 
     def __call__(self, request):
-        return page(request, page_slug=self.page.slug)
+        if len(request.cms_menu_extrapath) > 0:
+            if request.cms_menu_extrapath[0] == 'archives':
+                req_year = None
+                if len(request.cms_menu_extrapath) > 1:
+                    req_year = request.cms_menu_extrapath[1]
+                req_year = req_year if type(req_year) == type(0) else 2009
+                return self._call_page_for_archives(request, page_slug=self.page.slug, year=req_year)
+        return self._call_page(request, page_slug=self.page.slug)
+
+    def _call_page(self, request, page_slug, page_number=1, cateory=None, year=None, month=None, day=None, post_id=None ):
+        return archives(request, page_slug, page_number, cateory, year, month, day, post_id)
+
+    def _call_page_for_archives(self, request, page_slug, year=-2009, category=None, page_number=1):
+        return archives(request, page_slug, year, category, page_number)
+    
+    def is_requesting_archived(self, extrapath):
+        if len(extrapath):
+            return True if extrapath[0] == 'archives' else False
+        return False
+    
 
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
             ,'detailed_list': 'newsblogs_detailed_list.html' }
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
     categories, archives, older_archives = get_side_menu(page)
-    
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
 
@@ -147,7 +165,7 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                 }
                                 ,context_instance=RequestContext(request))
 
-def archives(request, page_slug=None, year=-2009, category=None, page_number=1, ):
+def archives(request, page_slug=None, year=-2009, category=None, page_number=1 ):
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
     categories, archives, older_archives = get_side_menu(page)
     blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year)

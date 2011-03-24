@@ -98,8 +98,8 @@ class BlogPage(BasicPage):
         return self.get_previous_by_date_published(status=StatusField.PUBLISHED)
 
     def get_controller(self):
-        from vcms.simpleblogs.views import page, BlogPostPage
-        return BlogPostPage(self)
+        from vcms.simpleblogs.views import BlogPageController
+        return BlogPageController(self)
     
 class BlogPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
