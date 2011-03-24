@@ -1,4 +1,4 @@
-# -*- coding: UTF8 -*-
+# -*- coding: utf-8 -*-
 # Application : CMS
 # Module : Products
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -13,13 +13,10 @@ from site_language.models import Language
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
 from vcms.simpleblogs.views import generate_html_paginator, get_page_items
 
-class PageBuildTest(TestCase):
+class GetPostedItemsForPagpeControllerTest(TestCase):
     def setUp(self):
         pass
         
-    def test_generator_shoul_return_the_2_pages_when_10_items_are_sent_with_6_items_per_page(self):
-        paginator = generate_html_paginator(1, range(10), 'reverse_url')
-        self.assertEqual(paginator.num_pages, 2)
         
     def test_get_pages_items_should_return_the_first_6_items(self):
         page_items = get_page_items(range(12), page_number=1, item_per_page=6)
