@@ -10,7 +10,7 @@
     </h3>
 	<dl>
 	    {% for category, values in categories.items %}
-	     <a href="{{ cms_basepath }}{{ values.model.slug }}"><dt>{{ category }} ({{ values.count }})</dt></a>
+	     <a href="{{ cms_basepath }}{{ values.model.slug }}/"><dt>{{ category }} ({{ values.count }})</dt></a>
 	     {% endfor %}
 	</dl>
     </div>
@@ -25,7 +25,7 @@
 	           <dt>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dt></a>
 	         {% endif %}
 	     {% endfor %}
-	     <a href="{{ cms_basepath }}archives/-{{ older_archives.date|date:"Y" }}/">
+	     <a href="{{ cms_basepath }}archives/{{ older_archives.date|date:"Y" }}/">
 	       <dt>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dt></a>
     </dl>
     </div>

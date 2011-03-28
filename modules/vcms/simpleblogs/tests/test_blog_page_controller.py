@@ -7,6 +7,7 @@
 import types
 
 from django.test import TestCase
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest, HttpResponse, Http404
 
 from mockito import mock, when, spy, verify
@@ -72,10 +73,12 @@ class BlogPageControllerTest(TestCase):
         self.assertTrue(bpcn.archives_called)
         self.assertEqual(bpcn.archives_for_page, 2)
 
-
     def test___call___for_archives_with_too_many_parameter_should_raise_404(self):
         self.mock_request.cms_menu_extrapath = ['archives', 2009, 'category1', 'extra']
         bpcn = BlogPageController(self.bp)
-        response = bpcn(self.mock_request)
-        self.assertEqual(response, Http404)
+        try:
+            response = bpcn(self.mock_request)
+        except :
+            return
+        self.assertTrue(False)
 

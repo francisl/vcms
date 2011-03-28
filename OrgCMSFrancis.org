@@ -4,9 +4,27 @@
    CLOCK: [2011-03-04 Fri 14:23]--[2011-03-04 Fri 14:43] =>  0:20
 
 ** TODO BLOG - Faire Fonctionner le blog avec les nouveau menu
-*** TODO Page generic du blog
-*** TODO Pagination
+*** DONE Page generic du blog
+    CLOSED: [2011-03-28 Mon 01:04]
+*** DONE Pagination
+    CLOSED: [2011-03-28 Mon 01:03]
 *** TODO Page specifique de blog
-*** TODO Archive
-*** TODO Categorie
+*** DONE Archive
+    CLOSED: [2011-03-28 Mon 01:04]
+    CLOCK: [2011-03-27 Sun 19:33]--[2011-03-28 Mon 01:01] => 5:28  
+*** DONE Categorie
+    CLOSED: [2011-03-28 Mon 01:00]
+*** TODO Remove classic hardcode in blog archives
+*** TODO Refactor html_navigation for code reuse
 
+#+BEGIN: clocktable :maxlevel 2 :scope file
+Clock summary at [2011-03-28 Mon 01:03]
+
+|Headline|Time|
+|-
+|*Total time*| *5:48*|
+|-
+|Todos and time for Francis|5:48|
+|TODO Make request_processor work||0:20|
+|TODO BLOG - Faire Fonctionner le blog avec les nouveau menu||5:28|
+#+END:

@@ -171,6 +171,9 @@ class BlogPost(models.Model):
     def get_absolute_url(self):
         return "/%s/%s/%s/%s/%s/%d" % (self.display_on_page.type, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
+    def get_url(self):
+        return  "/%s/%s/%s/%d" % (self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+    
     def save(self):
         self.preview = "<div>" + HtmlReduce(self.content, self.preview_length).get_html() + "</div>"
         
