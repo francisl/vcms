@@ -1,10 +1,9 @@
 
 <div class="paginator_nav_container {{ cssclass }}">
-{% if paginator.has_previous %}
-    <a class="pagination_previous_link" href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{paginator.previous_page_number}}">
+{% if page.has_previous %}
+    <a class="pagination_previous_link" href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}?page={{page.previous_page_number}}">
     <span class="pagination_previous"></span></a>{%endif%}
-{{ paginator.number }} / {{ paginator.num_pages }}
-{% if paginator.has_next %}
-    <a class="pagination_next_link" href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}{{paginator.next_page_number}}">
-    <span class="pagination_next">&gt;</span></a>{%endif%}
-</div>
+{{ page.number }} / {{ page.paginator.num_pages }}
+{% if page.has_next %}
+    <a class="pagination_next_link" href="{% if paginator_slug %}{{ paginator_slug }}/{% endif %}?page={{page.next_page_number}}">
+    <span class="pagination_next">&gt;</span></a>{%endif%}</div>

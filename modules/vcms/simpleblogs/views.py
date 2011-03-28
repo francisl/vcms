@@ -87,20 +87,22 @@ class BlogPageController(object):
         self.page = blog_page
 
     def __call__(self, request):
-        if len(request.cms_menu_extrapath) > 0:
+        page_number = request.GET.get('page', 1)
+        extrapath_len = len(request.cms_menu_extrapath)
+        if extrapath_len > 0:
             if request.cms_menu_extrapath[0] == 'archives':
-                req_year = None
-                if len(request.cms_menu_extrapath) > 1:
-                    req_year = request.cms_menu_extrapath[1]
-                req_year = req_year if type(req_year) == type(0) else 2009
-                return self._call_page_for_archives(request, page_slug=self.page.slug, year=req_year)
-        return self._call_page(request, page_slug=self.page.slug)
+                return self._call_page_for_archives(request, page_slug=self.page.slug, page_number=page_number)
+            elif type(request.cms_menu_extrapath[0]) == type(''):
+                pass
+            elif len(request.cms_menu_extrapath[0]) == 4 and request.cms_menu_extrapath[0].isdigit():
+                pass
+        return self._call_page(request, page_slug=self.page.slug, page_number=page_number)
 
     def _call_page(self, request, page_slug, page_number=1, cateory=None, year=None, month=None, day=None, post_id=None ):
-        return archives(request, page_slug, page_number, cateory, year, month, day, post_id)
+        return page(request, page_slug, page_number, cateory, year, month, day, post_id)
 
-    def _call_page_for_archives(self, request, page_slug, year=-2009, category=None, page_number=1):
-        return archives(request, page_slug, year, category, page_number)
+    def _call_page_for_archives(self, request, page_slug, page_number):
+        return archives(request, page_slug, page_number=page_number)
     
     def is_requesting_archived(self, extrapath):
         if len(extrapath):
@@ -122,16 +124,18 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
     reverse_kwargs = {'page_slug':page_slug,
                        'category': category.slug if category else None
                        }
-    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
+    
+    page_paginator = pgenerator.get_page_paginator_from_list(blogs, page_number, 1)
+    html_navigation = pgenerator.get_navigation_from_paginator(page_paginator)
     
     return render_to_response( newsblogs_template[page.listing_style]
                                 ,{ 'page': page
                                   ,'page_name': page_slug
-                                  ,'posts': pitems
+                                  ,'posts': page_paginator.object_list
                                   ,'categories': categories
                                   ,'archives': archives
                                   ,'older_archives': older_archives
-                                  ,'page_paginator': page_paginator
+                                  ,'page_paginator': html_navigation
                                   ,'page_info': page_info
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                 }
@@ -165,7 +169,16 @@ def page_for_date(request, page_slug=None, category=None, page_number=1, year=No
                                 }
                                 ,context_instance=RequestContext(request))
 
-def archives(request, page_slug=None, year=-2009, category=None, page_number=1 ):
+def archives(request, page_slug=None, year=2009, category=None, page_number=1):
+    extrapath_len = len(request.cms_menu_extrapath)
+    if extrapath_len > 3:
+        raise Http404
+    req_year = None
+    if extrapath_len > 1:
+        req_year = request.cms_menu_extrapath[1]
+    req_year = req_year if type(req_year) == type(0) else 2009
+    page_number = page_number
+                
     page, page_info ,reverse_url = get_page_information(page_slug, 'page')
     categories, archives, older_archives = get_side_menu(page)
     blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year)
@@ -175,15 +188,18 @@ def archives(request, page_slug=None, year=-2009, category=None, page_number=1 )
                       ,'page_number': page_number
                       ,'year':year
                     }
-    page_paginator = generate_html_paginator(page_number, blogs, reverse_url, page.number_of_post_per_page, reverse_kwargs)
+
+    page_paginator = pgenerator.get_page_paginator_from_list(pitems, page_num, item_per_page)    
+    html_navigation = pgenerator.get_navigation_from_paginator(page_paginator)
+    
     return render_to_response(newsblogs_template[page.listing_style]
                                 ,{ 'page': page
                                   ,'page_name': page_slug
-                                  ,'posts': pitems
+                                  ,'posts': page_paginator.object_list
                                   ,'categories': categories
                                   ,'archives': archives
                                   ,'older_archives': older_archives
-                                  ,'page_paginator': page_paginator
+                                  ,'page_paginator': html_navigation
                                   ,'page_info': page_info
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                 }

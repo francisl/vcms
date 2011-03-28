@@ -7,7 +7,7 @@
 import types
 
 from django.test import TestCase
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404
 
 from mockito import mock, when, spy, verify
 
@@ -23,6 +23,8 @@ class BlogPageControllerTest(TestCase):
     def setUp(self):
         self.mock_request = mock(HttpRequest)
         self.mock_request.path = '/blog/'
+        self.mock_request.GET = {}
+        self.mock_request.method = 'GET'
         self.mock_request.cms_menu_extrapath = []
         self.lang = Language(language='english', language_code='en')
         self.lang.save()
@@ -37,7 +39,6 @@ class BlogPageControllerTest(TestCase):
         del self.mock_request
         self.lang.delete()
 
-    
     def test_asked_for_archives_should_return_false_when_not_specified(self):
         bpc = BlogPageController(dummyBlogPage())
         self.assertEqual(bpc.is_requesting_archived(['bob']), False)
@@ -56,20 +57,25 @@ class BlogPageControllerTest(TestCase):
         bpcn._call_page_for_archives = f
         bpcn(self.mock_request)
         self.assertTrue(bpcn.archives_called)
-        
-    def test___call___should_return_an_archives_for_a_particular_year(self):
+
+    def test___call___for_archives_with_page_get_parameter_should_return_an_archives_with_page_X(self):
         self.mock_request.cms_menu_extrapath = ['archives', 2009]
+        self.mock_request.GET = {'page' : 2 }
         def _call_page_for_archives(self, *args, **kwargs):
             self.archives_called = True
-            self.archives_for_year = kwargs['year']
+            self.archives_for_page = kwargs['page_number']
         bpcn = BlogPageController(self.bp)
         setattr(bpcn, 'archives_called', False)
         setattr(bpcn, 'archives_for_year', False)
         bpcn._call_page_for_archives = types.MethodType(_call_page_for_archives, bpcn, BlogPageController)
         bpcn(self.mock_request)
         self.assertTrue(bpcn.archives_called)
-        self.assertEqual(bpcn.archives_for_year, 2009)
-        
-        
-    def test__call__should_return_an_list_of_post_for_one_category(self):
-        pass
+        self.assertEqual(bpcn.archives_for_page, 2)
+
+
+    def test___call___for_archives_with_too_many_parameter_should_raise_404(self):
+        self.mock_request.cms_menu_extrapath = ['archives', 2009, 'category1', 'extra']
+        bpcn = BlogPageController(self.bp)
+        response = bpcn(self.mock_request)
+        self.assertEqual(response, Http404)
+

@@ -2,10 +2,25 @@
 # copyright Vimba inc. 2010
 # programmer : Francis Lavoie
 
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 
-def get_navigation_from_paginator(paginator, paginator_slug=False, css_id=None, css_class=None):
+def get_html_navigation(items, page_num, item_per_page=10, paginator_slug=False, css_id=None, css_class=None):
+    page = get_page_paginator_from_list(items, page_num, item_per_page)
+    return get_navigation_from_paginator(page, paginator_slug, css_id, css_class)
+
+def get_page_paginator_from_list(items, page_num, item_per_page=10):
+    page_num = int(page_num)
+    paginator = Paginator(items, item_per_page)
+    if type(page_num) != type(0):
+        page_num = 1
+    try: # make sure the page number is not off
+        return paginator.page(page_num)
+    except:
+        return paginator.page(paginator.num_pages)
+
+def get_navigation_from_paginator(page, paginator_slug=False, css_id=None, css_class=None):
     """ generate a paginator naviation from a paginator object
         Use a slug to generate the next/previous URL
                 ˙
@@ -32,7 +47,7 @@ def get_navigation_from_paginator(paginator, paginator_slug=False, css_id=None, 
     """
     
     return render_to_string('paginator/pagination_nav_paginator.html', 
-                            {"paginator": paginator, 
+                            {"page": page, 
                              "paginator_slug": paginator_slug,
                              "css_id":css_id, "css_class": css_class}) 
 

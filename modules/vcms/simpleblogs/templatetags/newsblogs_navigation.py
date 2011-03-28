@@ -7,10 +7,11 @@ from vcms.simpleblogs.views import get_side_menu
 register = template.Library()
 
 @register.inclusion_tag('newsblogs_navigation.html')
-def newsblogs_navigation(current_page):
+def newsblogs_navigation(current_page, cms_basepath):
     categories, archives, older_archives = get_side_menu(current_page)
     return {'categories': categories
             ,'archives': archives
             ,'older_archives': older_archives
             ,'page': current_page
+            ,'cms_basepath' : cms_basepath
             }

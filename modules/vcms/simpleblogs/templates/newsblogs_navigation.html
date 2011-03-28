@@ -2,30 +2,30 @@
 {% load i18n %}
 
 {% if categories %}
-	<div id="vcms_newsblogs_categories" class="tree">
-	<h3>Categories {% ifequal page.feeds_icon_position 1 %}
+  <div id="vcms_newsblogs_categories" class="tree">
+	<h3>Categories {{ cms_selected_menu }} {% ifequal page.feeds_icon_position 1 %}
         {% if page.rss_feed %}<a href="/{{ page.type }}/rss/page/{{ page.slug }}">
             <img class="feedsheader" src="{% get_selected_theme_path %}/images/feeds/feed-icon-24x24.png"></a>{% endif %}
         {% endifequal %}
     </h3>
 	<dl>
 	    {% for category, values in categories.items %}
-	     <a href="/{{ page.type }}/{{ page.slug }}/{{ values.model.slug }}"><dt>{{ category }} ({{ values.count }})</dt></a>
+	     <a href="{{ cms_basepath }}{{ values.model.slug }}"><dt>{{ category }} ({{ values.count }})</dt></a>
 	     {% endfor %}
 	</dl>
     </div>
 {% endif %}
 {% if archives %}
 	   <div id="vcms_newsblogs_archives" class="tree">
-	   <h3>Archives</h3>
+	   <h3>Archives {{ cms_selected_menu }}</h3>
 	   <dl>
 	     {% for archive in archives %}
 	         {% if archive.items_count %}
-	         <a href="/{{page.type}}/{{ page.slug }}/{{ archive.year }}/{{ archive.month }}/">
+	         <a href="{{ cms_basepath }}{{ archive.year }}/{{ archive.month }}/">
 	           <dt>{{ archive.date|date:"N Y" }} ({{ archive.items_count }})</dt></a>
 	         {% endif %}
 	     {% endfor %}
-	     <a href="/{{page.type}}/{{ page.slug }}/archives/-{{ older_archives.date|date:"Y" }}/">
+	     <a href="{{ cms_basepath }}archives/-{{ older_archives.date|date:"Y" }}/">
 	       <dt>{% trans 'Before' %} {{ older_archives.date|date:"N Y" }} ({{ older_archives.items_count }})</dt></a>
     </dl>
     </div>

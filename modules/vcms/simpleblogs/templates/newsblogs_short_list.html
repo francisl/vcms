@@ -10,7 +10,7 @@
     {% for post in posts %}
         <tr class="{% cycle 'uneven-line' 'even-line' %}">
         <td width="10%">{{ post.date_published|date:"m / d / Y" }}</td>
-        <td width="80%"><a href="{{ post.get_absolute_url }}">{{ post.title }}{% comment %} - {{ post.preview|striptags }}{% endcomment %}</a></td>
+        <td width="80%"><a href="{{ cms_basepath }}{{ post.id }}">{{ post.title }}{% comment %} - {{ post.preview|striptags }}{% endcomment %}</a></td>
         </tr>
     {% endfor %}
 </table>
