@@ -16,6 +16,8 @@
     CLOSED: [2011-03-28 Mon 01:00]
 *** TODO Remove classic hardcode in blog archives
 *** TODO Refactor html_navigation for code reuse
+*** TODO Make template tag or widget for blog navigation
+
 
 #+BEGIN: clocktable :maxlevel 2 :scope file
 Clock summary at [2011-03-28 Mon 01:03]

@@ -23,6 +23,33 @@ from hwm.tree import generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
 
+class BlogPageController(object):
+    def __init__(self, blog_page):
+        self.page = blog_page
+
+    def __call__(self, request):
+        page_number = request.GET.get('page', 1)
+        extrapath_len = len(request.cms_menu_extrapath)
+        if extrapath_len > 0:
+            first_param = request.cms_menu_extrapath[0]
+            if first_param == 'archives':
+                return self._call_page_for_archives(request, page_slug=self.page.slug, page_number=page_number)
+            elif not first_param.isdigit():
+                print('yea oankd')
+                return page(request, page_slug=self.page.slug, page_number=page_number, category=first_param)
+            elif len(first_param) == 4 and first_param.isdigit():
+                return page_for_date(request, page_slug=self.page.slug, page_number=page_number)
+            print('type : %s' % first_param.isalpha())
+        return page(request, page_slug=self.page.slug, page_number=page_number)
+
+    def _call_page_for_archives(self, request, page_slug, page_number):
+        return archives(request, page_slug, page_number=page_number)
+
+    def is_requesting_archived(self, extrapath):
+        if len(extrapath):
+            return True if extrapath[0] == 'archives' else False
+        return False
+
 def archives_for_one_year(page, by_month_year, older_archive):
     archives = []
     delta = datetime.timedelta(days=31)
@@ -52,33 +79,6 @@ def get_newsblog_page_or_404(page_slug):
     if not page :
         raise Http404
     return page
-
-class BlogPageController(object):
-    def __init__(self, blog_page):
-        self.page = blog_page
-
-    def __call__(self, request):
-        page_number = request.GET.get('page', 1)
-        extrapath_len = len(request.cms_menu_extrapath)
-        if extrapath_len > 0:
-            first_param = request.cms_menu_extrapath[0]
-            if first_param == 'archives':
-                return self._call_page_for_archives(request, page_slug=self.page.slug, page_number=page_number)
-            elif not first_param.isdigit():
-                print('yea oankd')
-                return page(request, page_slug=self.page.slug, page_number=page_number, category=first_param)
-            elif len(first_param) == 4 and first_param.isdigit():
-                return page_for_date(request, page_slug=self.page.slug, page_number=page_number)
-            print('type : %s' % first_param.isalpha())
-        return page(request, page_slug=self.page.slug, page_number=page_number)
-
-    def _call_page_for_archives(self, request, page_slug, page_number):
-        return archives(request, page_slug, page_number=page_number)
-
-    def is_requesting_archived(self, extrapath):
-        if len(extrapath):
-            return True if extrapath[0] == 'archives' else False
-        return False
     
 
 newsblogs_template = {'short_list': 'newsblogs_short_list.html'
@@ -158,11 +158,11 @@ def archives(request, page_slug=None, year=2009, category=None, page_number=1):
     req_year = year
     if extrapath_len > 1:
         req_year = request.cms_menu_extrapath[1]
-        year = req_year if type(int(req_year)) == type(0) else 2009
+        year = int(req_year) if type(int(req_year)) == type(0) else 2009
 
     page = get_newsblog_page_or_404(page_slug)
     categories, archives, older_archives = get_side_menu(page)
-    blogs = BlogPost.published.get_for_page_by_date(page, category=category, year=year)
+    blogs = BlogPost.published.get_archive_for_page(page, category=category, year=year)
 
     page_paginator = pgenerator.get_page_paginator_from_list(blogs, page_number, item_per_page=page.number_of_post_per_page) 
     html_navigation = pgenerator.get_navigation_from_paginator(page_paginator)

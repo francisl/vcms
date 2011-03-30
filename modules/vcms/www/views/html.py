@@ -178,7 +178,7 @@ def Search(request):
         except:
             # no products
             pass
-                    
+
         return render_to_response('search/search_simple.html', 
                                   {'query': query, 'results': results },
                                   context_instance=RequestContext(request))
