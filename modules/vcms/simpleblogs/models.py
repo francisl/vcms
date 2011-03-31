@@ -89,7 +89,7 @@ class BlogPage(BasicPage):
         super(BlogPage, self).save()
         
     def get_absolute_url(self):
-        return "/%s/%s" % (self.type, self.slug)
+        return "%s" % self.get_menu().get_absolute_url()
     
     def get_next_announcement(self):
         return self.get_next_by_date_published(status=StatusField.PUBLISHED)
@@ -100,7 +100,7 @@ class BlogPage(BasicPage):
     def get_controller(self):
         from vcms.simpleblogs.views import BlogPageController
         return BlogPageController(self)
-    
+
 class BlogPostCategory(models.Model):
     name = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(max_length=150, unique=True)
@@ -147,8 +147,6 @@ class BlogPost(models.Model):
     date_modified = models.DateTimeField(auto_now=True, editable=False)
     date_published = models.DateTimeField(blank=True, null=True)
     
-    #custom_fields = models.ManyToManyField(CustomField, blank=True, null=True)
-    
     objects = PublishedNewsBlogPostManager()
     published = PublishedNewsBlogPostManager()
     
@@ -159,7 +157,6 @@ class BlogPost(models.Model):
     def get_page_where_available(self):
         return self.get_absolute_url()
 
-        
     class Meta:
         verbose_name_plural = _("News/Blog Posts")
         get_latest_by = ['-date_created']
@@ -169,7 +166,7 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/%s/%s/%s/%s/%s/%d" % (self.display_on_page.type, self.display_on_page.slug, self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+        return "%s%s/%s/%s/%d" % (self.display_on_page.get_absolute_url(), self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
     def get_url(self):
         return  "/%s/%s/%s/%d" % (self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
@@ -236,4 +233,4 @@ class BlogPostWidget(Widget):
         return self.__class__.__name__ + ' ' + self.name
 
     def get_absolute_url(self):
-        return "/%s/%s/%s/" % (self.page.type, self.page.slug, self.display_category.slug )
+        return "%s%s/" % (self.page.get_absolute_url(), self.display_category.slug )

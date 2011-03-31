@@ -109,7 +109,7 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        return "/%s/page/%s" % (self.app_slug, self.slug)
+        return "%s" % (self.menu.get_absolute_url())
 
     url = property(get_absolute_url)
     
@@ -123,9 +123,9 @@ class BasicPage(models.Model):
     def get_page_containers():
         raise NotImplementedError()
     
-    @staticmethod
+    #@staticmethod
     def get_menu(self):
-        raise NotImplementedError()
+        return self.menu.all()[0]
         
     def save(self, *args, **kwargs):
         if not self.app_slug:

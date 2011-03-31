@@ -35,11 +35,9 @@ class BlogPageController(object):
             if first_param == 'archives':
                 return self._call_page_for_archives(request, page_slug=self.page.slug, page_number=page_number)
             elif not first_param.isdigit():
-                print('yea oankd')
                 return page(request, page_slug=self.page.slug, page_number=page_number, category=first_param)
             elif len(first_param) == 4 and first_param.isdigit():
                 return page_for_date(request, page_slug=self.page.slug, page_number=page_number)
-            print('type : %s' % first_param.isalpha())
         return page(request, page_slug=self.page.slug, page_number=page_number)
 
     def _call_page_for_archives(self, request, page_slug, page_number):
