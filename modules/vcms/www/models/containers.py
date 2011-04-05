@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -94,4 +94,6 @@ class ContainerWidgets(models.Model):
         if self.height > 0:
             return str(self.height) + self.MESURE_CHOICES[self.height_mesure][1]
         return "none"
-        
+
+    def get_absolute_url(self):
+        return self.page.get_absolute_url()

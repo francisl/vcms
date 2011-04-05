@@ -225,4 +225,5 @@ for app in INSTALLED_APPS:
 if DEBUG:
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
 
+HAYSTACK_SEARCH_ENGINE = 'simple'
 #GOOGLE_ANALYTICS_MODEL = True

@@ -53,12 +53,15 @@ class CMSMenuManager(models.Manager):
         else:
             return default_menu[0].content_object
 
-    def has_menu_for_page(self, page):
+    def get_menu_for_page(self, page):
         from django.contrib.contenttypes.models import ContentType
         this_content_type = ContentType.objects.get_for_model(type(page))
         menus = self.filter(content_type=this_content_type, object_id=page.id)
+        return menus
+    
+    def has_menu_for_page(self, page):
+        menus = self.get_menu_for_page(page)
         return True if menus else False
-
 
     def get_menu(self, menu_slug):
         try:

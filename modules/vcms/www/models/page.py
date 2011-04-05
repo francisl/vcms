@@ -9,6 +9,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.db.models import signals
+from django.contrib.contenttypes.models import ContentType
 
 from site_language.models import Language
 
@@ -48,6 +49,7 @@ class BasicPage(models.Model):
         Page can be classified by language - NOTE not yet working
         # TODO : add multi-language fonctionnality
     """
+    _content_type = None
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     status = models.PositiveIntegerField(choices=StatusField.STATUSES, default=StatusField.DRAFT)
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
@@ -109,7 +111,16 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        return "%s" % (self.menu.get_absolute_url())
+        #if self.__class__._content_type == None:
+        #    self.__class__._content_type = ContentType.objects.get_for_model(self.__class__)
+        menus = self.menu.all()
+        #menus = CMSMenu.objects.filter(content_type=self._content_type, object_id=self.id)
+        print('checking %s' % menus)
+        if menus:
+            menu = menus[0]
+            print('got menu : %s' % menu.get_absolute_url())
+            return menu.get_absolute_url()
+        return None
 
     url = property(get_absolute_url)
     
@@ -215,9 +226,6 @@ class SimplePage(BasicPage):
         self.module = 'simple_page'
         super(SimplePage, self).save()
     
-    def get_absolute_url(self):
-        return "/www/page/" + self.slug
- 
     def get_menu(self):
         return self.menu.all()[0]
 
@@ -225,7 +233,16 @@ class SimplePage(BasicPage):
         from vcms.www.views.html import simple_page
         return simple_page
 
-        
+    def get_absolute_url(self):
+        menus = self.menu.all()
+     
+        print('checking simple%s' % menus)
+        if menus:
+            menu = menus[0]
+            print('got menu : %s' % menu.get_absolute_url())
+            return menu.get_absolute_url()
+        return None
+     
 # -----
 # Menu
 

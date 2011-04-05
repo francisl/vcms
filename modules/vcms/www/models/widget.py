@@ -70,10 +70,19 @@ class TextWidget(Widget):
     def __unicode__(self):
         return self.__class__.__name__ + ' : ' + self.name
 
+    def get_absolute_url(self):
+        """ return first page url """
+        print("trying 2 ...")
+        page = ContainerWidgets.objects.get_page_for_widget(self)
+        if page:
+            print('page : %s ' % page)
+            return page.get_absolute_url()
+        return None
+    
     def get_page_where_available(self):
         try:
-            thiswidget = ContainerWidgets.objects.filter(widget_id=self.id)[0]
-            return thiswidget.page.get_absolute_url()
+            page = ContainerWidgets.objects.get_page_for_widget(self)
+            return page
         except:
             return None
 
