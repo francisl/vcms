@@ -164,6 +164,7 @@ def Dashboard(request, context={}):
 def mlogin(request):
     return render_to_response('master.html', {})
 
+"""
 def Search(request):
     if request.method == "GET":
         query = ''.join(request.GET.get('query'))
@@ -179,10 +180,7 @@ def Search(request):
             # no products
             pass
 
-        return render_to_response('search/search_simple.html', 
-                                  {'query': query, 'results': results },
-                                  context_instance=RequestContext(request))
-
+            """
 def robots(request):
     from django.contrib.sites.models import Site
     try:

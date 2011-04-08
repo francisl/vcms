@@ -20,7 +20,12 @@
       {% comment %}{% if result.object.content %}{% endcomment %}
         <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a><span style="display: none;"> <stronger>{{ result.model_name }}</stronger></span></td>
         </tr>
-        <tr><td>{{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}</td>
+        <tr><td>{% if result.object.content %}
+        {{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}
+        {% else %}
+        {{ result.object.description|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}       
+        {% endif %}
+      </td>
         </tr>
        {%comment%}{% endif %}{%endcomment%}
       {% empty %}
