@@ -111,14 +111,9 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        #if self.__class__._content_type == None:
-        #    self.__class__._content_type = ContentType.objects.get_for_model(self.__class__)
         menus = self.menu.all()
-        #menus = CMSMenu.objects.filter(content_type=self._content_type, object_id=self.id)
-        print('checking %s' % menus)
         if menus:
             menu = menus[0]
-            print('got menu : %s' % menu.get_absolute_url())
             return menu.get_absolute_url()
         return None
 
@@ -207,7 +202,7 @@ class MainPage(BasicPage):
         super(MainPage, self).save()
     
     def get_absolute_url(self):
-        return "/www/page/" + self.slug
+        return self.basicpage_ptr.get_absolute_url()
     
     def get_menu(self):
         return self.menu.all()[0]
@@ -234,14 +229,7 @@ class SimplePage(BasicPage):
         return simple_page
 
     def get_absolute_url(self):
-        menus = self.menu.all()
-     
-        print('checking simple%s' % menus)
-        if menus:
-            menu = menus[0]
-            print('got menu : %s' % menu.get_absolute_url())
-            return menu.get_absolute_url()
-        return None
+        return self.basicpage_ptr.get_absolute_url()
      
 # -----
 # Menu

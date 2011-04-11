@@ -72,10 +72,8 @@ class TextWidget(Widget):
 
     def get_absolute_url(self):
         """ return first page url """
-        print("trying 2 ...")
         page = ContainerWidgets.objects.get_page_for_widget(self)
         if page:
-            print('page : %s ' % page)
             return page.get_absolute_url()
         return None
     
