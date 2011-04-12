@@ -131,7 +131,10 @@ class BasicPage(models.Model):
     
     #@staticmethod
     def get_menu(self):
-        return self.menu.all()[0]
+        try:
+            return self.menu.all()[0]
+        except:
+            return []
         
     def save(self, *args, **kwargs):
         if not self.app_slug:
@@ -204,9 +207,6 @@ class MainPage(BasicPage):
     def get_absolute_url(self):
         return self.basicpage_ptr.get_absolute_url()
     
-    def get_menu(self):
-        return self.menu.all()[0]
-
     def get_controller(self):
         from vcms.www.views.html import MainPage
         return MainPage
@@ -221,9 +221,6 @@ class SimplePage(BasicPage):
         self.module = 'simple_page'
         super(SimplePage, self).save()
     
-    def get_menu(self):
-        return self.menu.all()[0]
-
     def get_controller(self):
         from vcms.www.views.html import simple_page
         return simple_page
