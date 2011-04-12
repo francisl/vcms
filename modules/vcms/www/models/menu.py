@@ -37,7 +37,12 @@ class MainMenu(MP_Node):
         
 import mptt
 class CMSMenu(models.Model):
-    menu_name = models.CharField(max_length=50, help_text="Maximum 50 characters", blank=True, null=True)
+    DROPDOWN_MENU = 0
+    SIMPLE_MENU = 1
+    MENU_STYLE = ((DROPDOWN_MENU, _('Dropdown')),
+              (SIMPLE_MENU, _('Single line')))
+    menu_name = models.CharField(max_length=120, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
+    slug = models.SlugField(max_length=150, help_text=_("Used for hyperlinks, no spaces or special characters."))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu - Only work for page that are set as published")
     default = models.BooleanField(default=False)
@@ -52,7 +57,7 @@ class CMSMenu(models.Model):
         app_label = 'www'
         verbose_name = 'Menu - Master'
         verbose_name_plural = 'Menu - Master'
-        
+        unique_together = ('parent', 'slug')
         ordering = ['tree_id', 'lft']
         
     def __unicode__(self):
@@ -64,17 +69,21 @@ class CMSMenu(models.Model):
         return self.menu_name
 
     def get_name(self):
-        return self.__unicode__()
+        if self.__unicode__():
+            return self.__unicode__()
+        return self.content_object.get_name()
         
     def get_slug(self):
-        return self.content_object.get_absolute_url()
+        return self.get_absolute_url()
         
     def get_tab_name(self):
         prefix = "+-- " * self.level
         return prefix + self.__unicode__()
     
     def get_absolute_url(self):
-        return self.content_object.get_absolute_url()
+        if self.parent:
+            return '/%s/%s/' % (self.parent.slug, self.slug)
+        return '/%s/' % self.slug
     
     def get_page_status(self):
         return self.content_object.status
@@ -82,8 +91,16 @@ class CMSMenu(models.Model):
     def get_root_menu(self):
         return self.parent
 
+    def get_children(self):
+        return CMSMenu.objects.get_children(self)
+
     name = property(get_name)
     status = property(get_page_status)
+
+    def get_controller(self):
+        if hasattr(self.content_object, 'get_controller'):
+            return self.content_object.get_controller()
+        return None
     
 mptt.register(CMSMenu, order_insertion_by=['object_id'])
 
@@ -119,6 +136,7 @@ class MenuLocalLink(models.Model):
              self.local_link = ''
         #self.slug = self.get_absolute_url()
         super(MenuLocalLink, self).save()
+
 
 class QuickLinks(models.Model):
     """ Like bookmark, enable to put side links to local webpage

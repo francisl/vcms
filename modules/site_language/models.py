@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francis Lavoie
@@ -14,9 +14,15 @@ class LanguageManager(models.Manager):
 
     def get_default_code(self):
         return self.get(language_code=settings.LANGUAGE_CODE[:2]).language_code
-        
+
+    def get_default(self):
+        try:
+            return self.get(language_code=settings.LANGUAGE_CODE[:2])
+        except ObjectDoesNotExist:
+            return None
+
     def get_default_for_choice(self):
-        l = self.get(language_code=settings.LANGUAGE_CODE[:2])
+        l = self.get_default()
         return (l.language, l.language_code)
         
     def get_available_language(self):

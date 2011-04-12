@@ -1,6 +1,8 @@
-{% extends "master.html" %}
+<?xml version="1.0" encoding="utf-8"?>
+{% extends "master_frame.html" %}
 {% load search_widget %}
 {% load tree %}
+{% load i18n %}
 
 <!--=========NAVIGATION=========== -->
 {% block navigation %}
@@ -9,40 +11,30 @@
 
 {% block vcms_main_content %}
 <div class="vcms_container_relative">
-    <!-- <form method="get" action=".">
-        <table>
-            <tr><td><h2>Search</h2></td>
-                <td>{{ form.q }}</td>
-                <td width="20%">
-                    <button type="submit" value="Search">
-                        <img src="/static" width="90" heght="50" alt="submit" />
-                    </button>
-                </td>
-            <tr><td></td>
-                <td>{{ form.models }}</td>
-                <td></td>
-            </tr>
-        </table>
-    </form> -->
-        {% if query %}
-            <h2>Results</h2>
-            <br />
-            <table style="text-align:left; width: 80%;">
-            {% for result in page.object_list %}
-                <tr>
-                    <td id="first_column" style="width: 14%">{{ result.score|floatformat:"-2" }}</td>
-                    <td> <a href="{{ result.object.get_page_where_available }}">{{ result.object.name }}</a></td>
-                </tr>
-                <tr>
-                    <td></td><td>{{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}</td>
-                </tr>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
-            </table>
+  {% if query %}
+    <h2>{{ page.object_list|length }} {% trans "Results for" %} "{{ query }}"</h2>
+    <br />
+    <table id='search_result' style="text-align:left; width: 80%;">
+      {% for result in page.object_list %}
+
+      {% comment %}{% if result.object.content %}{% endcomment %}
+        <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a><span style="display: block;"> <stronger>{{ result.model_name }}</stronger></span></td>
+        </tr>
+        <tr><td>{% if result.object.content %}
+        {{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}
         {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
+        {{ result.object.description|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}       
         {% endif %}
+      </td>
+        </tr>
+       {%comment%}{% endif %}{%endcomment%}
+      {% empty %}
+        <p>No results found.</p>
+      {% endfor %}
+    </table>
+  {% else %}
+    {# Show some example queries to run, maybe query syntax, something else? #}
+  {% endif %}
 
 </div>
 <!--=========//content=========== -->

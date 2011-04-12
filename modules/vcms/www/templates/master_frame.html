@@ -22,7 +22,7 @@
     <title>{% if page_info.current_page %} {{ page_info.current_page.name }} - {% endif %} {{ page_info.data.title }} {% block title %}{{ page_info.data.description }}{% endblock title %}</title>
     <link rel="shortcut icon" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/images/favicon.ico" />
     
-    {% compress css %}
+    {% comment %} { % compress css %} {% endcomment %}
 	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/style.css" type="text/css" charset="utf-8">
 	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/dropdownmenu.css" type="text/css" charset="utf-8">
 	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/navigation.css" type="text/css" charset="utf-8">
@@ -36,7 +36,7 @@
 	    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/hwm_tree.css" type="text/css" charset="utf-8">
 	    
     {% block stylesheetlink %}{% endblock stylesheetlink %}
-    {% endcompress %}
+    {% comment %} {% endcompress %}{% endcomment %}
     
     <style type="text/css" media="all">
         {% block stylesheet %}{% endblock stylesheet %}
@@ -69,7 +69,7 @@
             {% endif %}
         {% else %}
           {% if page_info.current_page %}
-            {% show_dropdown_menu page_info.current_page %}
+            {% show_dropdown_menu cms_selected_menu %}
           {% else %}
             {% show_dropdown_menu %}
           {% endif %}
@@ -135,10 +135,8 @@
         {% block javascript-include %}{% endblock javascript-include%}
         
         <script type="text/javascript">
-           
         {% block javascript %}
         {% endblock javascript %}
-
         </script> 
         <script type="text/javascript">
             $(document).ready(function() {

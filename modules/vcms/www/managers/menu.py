@@ -1,9 +1,10 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Copyright (c) 2010 Vimba inc. All rights reserved.
 # Created by Francis Lavoie
 
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 from treebeard.models import Node
 
@@ -25,12 +26,6 @@ class MainMenuManager(models.Manager):
 
     def get_submenu(self):
         from hwm.tree import helper
-        """ return navigation tree as a list containing tree node dictionary 
-            ex:
-                >>> from vcms.www.models import menu
-                >>> mm = menu.MainMenu
-                >>> mm.objects.get_children_for_object_id(3)
-        """
         root = self.get_root_menu() 
         nav = []
         for navgroup in self.all():
@@ -52,15 +47,37 @@ class CMSMenuManager(models.Manager):
     def get_default_page(self):
         default_menu = self.filter(default=True)
         if default_menu.count() == 0 or default_menu == None:
-            return self.all()[0].content_object
+            pages = self.all()
+            if pages:
+                return pages[0].content_object
         else:
             return default_menu[0].content_object
 
-    def has_menu_for_page(self, page):
+    def get_menu_for_page(self, page):
         from django.contrib.contenttypes.models import ContentType
         this_content_type = ContentType.objects.get_for_model(type(page))
         menus = self.filter(content_type=this_content_type, object_id=page.id)
+        return menus
+    
+    def has_menu_for_page(self, page):
+        menus = self.get_menu_for_page(page)
         return True if menus else False
+
+    def get_menu(self, menu_slug):
+        try:
+            return self.get(parent=None, slug=menu_slug)
+        except ObjectDoesNotExist:
+            return None
+        
+    def get_submenu(self, parent_slug, menu_slug):
+        try:
+            parent = self.get_menu(parent_slug)
+            return self.get(parent=parent, slug=menu_slug)
+        except ObjectDoesNotExist:
+            return None
+
+    def get_children(self, parent):
+        return self.filter(parent=parent)
 
 class QuickLinksManager(models.Manager):
     def get_quicklinks(self):

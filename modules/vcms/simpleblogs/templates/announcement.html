@@ -18,7 +18,7 @@
     {% endif %}
     <br />
     {% ifequal page.display_navigation_in 'side_navigation' %}
-        {% newsblogs_navigation page_info.current_page %}
+        {% newsblogs_navigation page_info.current_page cms_basepath %}
     {% endifequal %}
 {% endblock navigation %}
 
@@ -57,7 +57,7 @@
         
         {% ifequal page.display_navigation_in 'in_page_navigation' %}
         <div id="vcms_newsblogs_in_page_navigation">
-            {% newsblogs_navigation page_info.current_page %}
+            {% newsblogs_navigation page_info.current_page cms_basepath %}
         </div>
         {% endifequal %}
     </div>

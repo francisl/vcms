@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: www
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -9,6 +9,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.db.models import signals
+from django.contrib.contenttypes.models import ContentType
 
 from site_language.models import Language
 
@@ -48,6 +49,7 @@ class BasicPage(models.Model):
         Page can be classified by language - NOTE not yet working
         # TODO : add multi-language fonctionnality
     """
+    _content_type = None
     name = models.CharField(max_length=100, unique=False, help_text=_('Max 100 characters.'))
     status = models.PositiveIntegerField(choices=StatusField.STATUSES, default=StatusField.DRAFT)
     slug = models.SlugField(max_length=150, unique=True, help_text=_("Used for hyperlinks, no spaces or special characters."))
@@ -109,7 +111,11 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        return "/%s/page/%s" % (self.app_slug, self.slug)
+        menus = self.menu.all()
+        if menus:
+            menu = menus[0]
+            return menu.get_absolute_url()
+        return None
 
     url = property(get_absolute_url)
     
@@ -123,9 +129,12 @@ class BasicPage(models.Model):
     def get_page_containers():
         raise NotImplementedError()
     
-    @staticmethod
+    #@staticmethod
     def get_menu(self):
-        raise NotImplementedError()
+        try:
+            return self.menu.all()[0]
+        except:
+            return []
         
     def save(self, *args, **kwargs):
         if not self.app_slug:
@@ -135,7 +144,9 @@ class BasicPage(models.Model):
         from django.contrib.contenttypes.models import ContentType
         this_content_type = ContentType.objects.get_for_model(self.__class__)        
         if not CMSMenu.objects.has_menu_for_page(self):
-            menu = CMSMenu(display=False, language=self.language, content_type=this_content_type, object_id=self.id)
+            menu = CMSMenu(display=False, language=self.language
+                           ,slug=self.slug
+                           ,content_type=this_content_type, object_id=self.id)
             menu.save()
 
         super(BasicPage, self).save(*args, **kwargs)
@@ -171,8 +182,7 @@ class Page(BasicPage):
         return self.name
     
     def save(self):
-        if self.default:
-            Page.objects.reset_Default()
+        self.module = 'simple'
         super(Page, self).save()
 
     def delete(self):
@@ -191,14 +201,15 @@ class MainPage(BasicPage):
         verbose_name_plural = "Page - Main pages"
 
     def save(self):
-        self.module = 'MainPage'
+        self.module = 'main_page'
         super(MainPage, self).save()
     
     def get_absolute_url(self):
-        return "/www/page/" + self.slug
+        return self.basicpage_ptr.get_absolute_url()
     
-    def get_menu(self):
-        return self.menu.all()[0]
+    def get_controller(self):
+        from vcms.www.views.html import MainPage
+        return MainPage
 
 class SimplePage(BasicPage):
     class Meta:
@@ -207,16 +218,16 @@ class SimplePage(BasicPage):
         app_label = 'www'
 
     def save(self):
-        self.module = 'SimplePage'
+        self.module = 'simple_page'
         super(SimplePage, self).save()
     
-    def get_absolute_url(self):
-        return "/www/page/" + self.slug
- 
-    def get_menu(self):
-        return self.menu.all()[0]
+    def get_controller(self):
+        from vcms.www.views.html import simple_page
+        return simple_page
 
-        
+    def get_absolute_url(self):
+        return self.basicpage_ptr.get_absolute_url()
+     
 # -----
 # Menu
 

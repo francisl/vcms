@@ -80,18 +80,22 @@ def Generic(request, page=None, context={}):
         return Simple(request, context)
     
 
-def MainPage(request, context={}):
-    current_page = context["page_info"]['page']
+def MainPage(request, context={}, page_instance=None):
     return render_to_response('mainpage.html',
                               context,
                               context_instance=RequestContext(request))
+
+def simple_page(request, context={}, menu_instance=None):
+    return SimplePage(request, context)
 
 def SimplePage(request, context={}):
     return render_to_response('simple.html',
                               context,
                               context_instance=RequestContext(request))
     
-        
+
+
+
 def Simple(request, context={}):
     current_page = context["page_info"]['page']
     content = []
@@ -160,6 +164,7 @@ def Dashboard(request, context={}):
 def mlogin(request):
     return render_to_response('master.html', {})
 
+"""
 def Search(request):
     if request.method == "GET":
         query = ''.join(request.GET.get('query'))
@@ -174,11 +179,8 @@ def Search(request):
         except:
             # no products
             pass
-                    
-        return render_to_response('search/search_simple.html', 
-                                  {'query': query, 'results': results },
-                                  context_instance=RequestContext(request))
 
+            """
 def robots(request):
     from django.contrib.sites.models import Site
     try:

@@ -57,13 +57,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
 #    'django.core.context_processors.debug',
 #    'django.core.context_processors.i18n',
+    'vcms.menu_navigation.request_processors.page_info',
+    'vcms.menu_navigation.request_processors.cms_menu',
+    'vcms.menu_navigation.request_processors.cms_menu_extrapath',
 )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
+#   'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_DIRS = (
@@ -87,6 +90,7 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
                       #,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
                       #,'vcms.www.middleware.EnforceLoginMiddleware',
+                      ,'vcms.menu_navigation.middleware.MenuNavigationMiddleWare'
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
@@ -113,6 +117,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # VIMBA CMS APPS
                   ,'site_media'
                   ,'site_language'
+                  ,'vcms.menu_navigation'
                   ,'vcms.simpleblogs'
                   ,'vcms.image_gallery'
                   ,'hwm'
@@ -220,4 +225,5 @@ for app in INSTALLED_APPS:
 if DEBUG:
     DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS": False } # This really grinds my gears!
 
+HAYSTACK_SEARCH_ENGINE = 'simple'
 #GOOGLE_ANALYTICS_MODEL = True

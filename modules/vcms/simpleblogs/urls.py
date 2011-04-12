@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: SimpleNews
 # Copyright (c) 2010 Vimba inc. All rights reserved.
@@ -13,7 +13,6 @@ from vcms.simpleblogs.feeds import LatestBlogFeed, CategoryFeed
 feeds = { "page" : LatestBlogFeed }
 
 urlpatterns_prefix = ['blogs','news']
-#urlpatterns_prefix = r'^news/'
 urlpatterns = patterns('',
                        (r'rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
                        )
@@ -23,9 +22,6 @@ urlpatterns += patterns(''
 )
 
 urlpatterns += patterns('vcms.simpleblogs.views'
-    #,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/(?P<month>\d{1,2}/(?P<day>\d{2})/)$', 'page_for_date')
-    #,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/(?P<month>\d{1,2}/)$', 'page_for_date')
-    #,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<category>[-\w]+)/date/(?P<year>\d{4})/$', 'page_for_date')
     ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{2})/$', 'page_for_date')
     ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<year>\d{4})/(?P<month>\d{1,2})/$', 'page_for_date')
     ,(r'(?P<page_slug>[-\w]+)-(?P<page_number>\d+)/(?P<year>\d{4})/$', 'page_for_date')

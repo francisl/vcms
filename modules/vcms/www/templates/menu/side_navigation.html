@@ -1,16 +1,17 @@
-<div>
-    <div class="navigation_title">{{ navigation_title }}</div>
+<div class="tree">
+  <h1 class="navigation_title">{{ cms_menu }}</h1>
     <dl id="{{ cssid }}">
     {% for item in menu_items %}
         <dt class="{% if item.selected %}selected{% endif %} {% if item.child_selected %}child_selected{% endif %}">
-            {% if item.url %}
-                <a href="{{ item.url }}/">{{ item.name }}</a>
+            {% if item.item.get_absolute_url %}
+                <a href="{{ item.item.get_absolute_url }}">{{ item.item.name }}</a>
             {% else %}
-                {{ item.name }}
+                {{ item.item.name }}
             {% endif %}
           
         </dt>
-        {{ item.content_object.render_submenu }}
+        {{ item.submenu }}
+
     {% endfor %}
     </dl>
     <div style="clear: both; height: 0px;"></div>
