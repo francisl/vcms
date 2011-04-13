@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.db.models import signals
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
 
 from site_language.models import Language
 
@@ -111,10 +112,10 @@ class BasicPage(models.Model):
         return self.__unicode__()
 
     def get_absolute_url(self):
-        menus = self.menu.all()
+        page = self.get_type().objects.get(id=self.id)
+        menus = page.menu.all()
         if menus:
-            menu = menus[0]
-            return menu.get_absolute_url()
+            return menus[0].get_absolute_url()
         return None
 
     url = property(get_absolute_url)
@@ -130,11 +131,11 @@ class BasicPage(models.Model):
         raise NotImplementedError()
     
     #@staticmethod
-    def get_menu(self):
-        try:
-            return self.menu.all()[0]
-        except:
-            return []
+    #def get_menu(self):
+    #    try:
+    ###        return self.menu.all()[0]
+    #    except:
+    #        return []
         
     def save(self, *args, **kwargs):
         if not self.app_slug:
@@ -203,7 +204,13 @@ class MainPage(BasicPage):
     def save(self):
         self.module = 'main_page'
         super(MainPage, self).save()
-    
+
+    def get_menu(self):
+        try:
+            return self.menu.all()[0]
+        except:
+            return []
+        
     def get_absolute_url(self):
         return self.basicpage_ptr.get_absolute_url()
     
@@ -220,7 +227,13 @@ class SimplePage(BasicPage):
     def save(self):
         self.module = 'simple_page'
         super(SimplePage, self).save()
-    
+
+    def get_menu(self):
+        try:
+            return self.menu.all()[0]
+        except:
+            return []
+        
     def get_controller(self):
         from vcms.www.views.html import simple_page
         return simple_page

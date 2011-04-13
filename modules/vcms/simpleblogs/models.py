@@ -89,8 +89,11 @@ class BlogPage(BasicPage):
         super(BlogPage, self).save()
         
     def get_absolute_url(self):
-        return "%s" % self.get_menu().get_absolute_url()
-    
+        menus = self.menu.all()
+        if menus:
+            return "%s" % menus[0].get_absolute_url()
+        return '/'
+        
     def get_next_announcement(self):
         return self.get_next_by_date_published(status=StatusField.PUBLISHED)
 
@@ -166,10 +169,10 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "%s%s/%s/%s/%d" % (self.display_on_page.get_absolute_url(), self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+        return "%s%s/%s/%s/%d/" % (self.display_on_page.get_absolute_url(), self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
 
     def get_url(self):
-        return  "/%s/%s/%s/%d" % (self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+        return  "/%s/%s/%s/%d/" % (self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
     
     def save(self):
         self.preview = "<div>" + HtmlReduce(self.content, self.preview_length).get_html() + "</div>"
