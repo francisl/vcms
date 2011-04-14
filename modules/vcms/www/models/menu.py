@@ -42,7 +42,7 @@ class CMSMenu(models.Model):
     MENU_STYLE = ((DROPDOWN_MENU, _('Dropdown')),
               (SIMPLE_MENU, _('Single line')))
     menu_name = models.CharField(max_length=120, help_text="Name that appear in the menu. Maximum 80 characters", blank=True, null=True)
-    slug = models.SlugField(max_length=150, help_text=_("Used for hyperlinks, no spaces or special characters."))
+    slug = models.SlugField(max_length=150, help_text=_("Used for hyperlinks, no spaces or special characters."), blank=True, null=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     display = models.BooleanField(default=True, help_text="Display in menu - Only work for page that are set as published")
     default = models.BooleanField(default=False)
