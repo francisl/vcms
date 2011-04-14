@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 {% extends "master_frame.html" %}
 {% load search_widget %}
 {% load tree %}
@@ -18,7 +17,7 @@
       {% for result in page.object_list %}
 
       {% comment %}{% if result.object.content %}{% endcomment %}
-        <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a></td>
+        <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a><span style="display: block;"> <stronger>{{ result.model_name }}</stronger></span></td>
         </tr>
         <tr><td>{% if result.object.content %}
         {{ result.object.content|removetags:"p h1 h2 h3 h4 h5 h6 span strong"|truncatewords:20|safe }}
