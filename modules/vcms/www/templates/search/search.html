@@ -16,7 +16,7 @@
     <table id='search_result' style="text-align:left; width: 80%;">
       {% for result in page.object_list %}
 
-      {% comment %}{% if result.object.content %}{% endcomment %}
+      {% if result.object.get_absolute_url %}
         <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a><span style="display: block;"> <stronger>{{ result.model_name }}</stronger></span></td>
         </tr>
         <tr><td>{% if result.object.content %}
@@ -26,7 +26,7 @@
         {% endif %}
       </td>
         </tr>
-       {%comment%}{% endif %}{%endcomment%}
+       {% endif %}
       {% empty %}
         <p>No results found.</p>
       {% endfor %}
