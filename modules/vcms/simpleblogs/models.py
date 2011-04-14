@@ -236,4 +236,7 @@ class BlogPostWidget(Widget):
         return self.__class__.__name__ + ' ' + self.name
 
     def get_absolute_url(self):
-        return "%s%s/" % (self.page.get_absolute_url(), self.display_category.slug )
+        page_url = self.page.get_absolute_url()
+        if page_url:
+            return "%s%s/" % (page_url, self.display_category.slug )
+        return ''
