@@ -81,6 +81,8 @@ class CMSMenu(models.Model):
         return prefix + self.__unicode__()
     
     def get_absolute_url(self):
+        if hasattr(self.content_object, 'get_cmscustom_url'):
+            return self.content_object.get_cmscustom_url()
         if self.parent:
             return '/%s/%s/' % (self.parent.slug, self.slug)
         return '/%s/' % self.slug
@@ -124,17 +126,16 @@ class MenuLocalLink(models.Model):
         
     def get_absolute_url(self):
         return self.local_link
+
+    def get_cmscustom_url(self):
+        return self.local_link
         
     def save(self):
-        #self.status = StatusField.PUBLISHED
-        #self.language = Language.objects.get_default()
-        #self.module = "LocalLink"
         try:
             if self.local_link[-1:] == '/' and len(self.local_link) > 1:
                 self.local_link = self.local_link[:-1]
         except:
              self.local_link = ''
-        #self.slug = self.get_absolute_url()
         super(MenuLocalLink, self).save()
 
 
