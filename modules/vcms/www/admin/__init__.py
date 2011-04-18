@@ -63,64 +63,11 @@ admin.site.register(SimplePage, SimplePageAdmin)
 class ContentInline(admin.StackedInline):
     model = Content
     extra = 1
-    
-#class SimplePageAdmin(admin.ModelAdmin):
-#    prepopulated_fields = {"slug": ("name",)}
-#    inlines = [ContentInline]
-#admin.site.register(SimplePage, SimplePageAdmin)
-
-
-## ################
-## CONTAINERS
-#class BasicContainerAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(BasicContainer, BasicContainerAdmin)
-
-#class PageContainerAdmin(admin.ModelAdmin):
-#    list_display = ('page', 'container_type', 'container_name')
-#admin.site.register(PageContainer, PageContainerAdmin)
 
 class ContainerWidgetsAdmin(admin.ModelAdmin):
     list_display = ('widget', 'page', 'container', 'widget_type', 'status')
     list_filter = ('page',)
 admin.site.register(ContainerWidgets, ContainerWidgetsAdmin)
-
-#class GridContainerAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(GridContainer, GridContainerAdmin)
-
-#class TableContainerAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(TableContainer, TableContainerAdmin)
-
-#class RelativeContainerAdmin(admin.ModelAdmin):
-#    list_display = ['page', 'name']
-    #
-#admin.site.register(RelativeContainer, RelativeContainerAdmin)
-
-
-## ################
-## WIDGETS
-#class WidgetWrapperAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(WidgetWrapper, WidgetWrapperAdmin)
-
-#class GridWidgetWrapperAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(GridWidgetWrapper, GridWidgetWrapperAdmin)
-
-#class TableWidgetWrapperAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(TableWidgetWrapper, TableWidgetWrapperAdmin)
-
-#class RelativeWidgetWrapperAdmin(admin.ModelAdmin):
-#    list_display = ['widget', 'widget_type']
-#    list_filter = ('container',)
-#admin.site.register(RelativeWidgetWrapper, RelativeWidgetWrapperAdmin)
-
-#class WidgetAdmin(admin.ModelAdmin):
-#    pass
-#admin.site.register(Widget, WidgetAdmin)
 
 class TextWidgetAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
@@ -129,8 +76,10 @@ admin.site.register(TextWidget, TextWidgetAdmin)
 
 # -- BANNER
 # -----------
+
 class BannerImageAdmin(admin.ModelAdmin):
-    filter_horizontal = ('banner',)
+    list_display = ('name', 'description', 'image_thumbnail', 'displayed_in_banner')
+    #filter_horizontal = ('banner',)
 admin.site.register(BannerImage, BannerImageAdmin)
     
 class BannerAdmin(admin.ModelAdmin):

@@ -20,7 +20,7 @@ class Banner(models.Model):
     height = models.IntegerField(default=300)
 
     objects = BannerManager()
-
+    
     class Meta:
         app_label = APP_LABEL
         
@@ -54,6 +54,23 @@ class BannerImage(models.Model):
 
     objects = BannerImageManager()
 
+    def image_thumbnail(self):
+        banners = self.banner.all()
+        if banners:
+            banner = banners[0]
+            return u'<div><img src="%s" width="%s" height="%s" /></div>' % (self.file.url, banner.width/3, banner.height/3)
+    image_thumbnail.short_description = 'Thumbnail'
+    image_thumbnail.allow_tags = True
+
+    def displayed_in_banner(self):
+        banners_text = '<ul>'
+        for banner in self.banner.all():
+            banners_text += ('<li>%s</li>' % banner)
+        banners_text += '</ul>'
+        return banners_text
+    displayed_in_banner.short_description = 'Banners'
+    displayed_in_banner.allow_tags = True
+    
     class Meta:
         app_label = APP_LABEL
         
