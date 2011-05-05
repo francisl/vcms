@@ -15,7 +15,7 @@
     <br />
     <table id='search_result' style="text-align:left; width: 80%;">
       {% for result in page.object_list %}
-
+      {{ result.object.text }}
       {% if result.object.get_absolute_url %}
         <tr><td> <a href="{{ result.object.get_absolute_url }}" alt="{{ result.object.name }}">{{ result.object.name }}</a><span style="display: none;"> <stronger>{{ result.model_name }}</stronger></span></td>
         </tr>

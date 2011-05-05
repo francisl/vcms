@@ -1,4 +1,4 @@
-
+"""
 from haystack import indexes
 from haystack import site
 from vcms.www.models.page import SimplePage, MainPage
@@ -19,3 +19,4 @@ class MainPageIndex(indexes.SearchIndex):
 
 site.register(SimplePage, SimplePageIndex)
 site.register(MainPage, MainPageIndex)
+"""
