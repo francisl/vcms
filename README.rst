@@ -36,16 +36,18 @@ Workflow
 =========
 
 ::
+
+
 Request --> Middleware check if requested url in menu --(no)--> Continu normal django url patterns --(no)--> Return 404
-                            | (yes)                                          |(yes)
+                            - (yes)                                          -(yes)
                             v                                                v
            Ask page to return controller and execute it                Return Html
-                            |
+                            -
                             v
                          For all Container
-                         - For all Widger
-                         -- Call Render
-                            |
+                          For all Widger
+                            Call Render
+                            -
                             v
                         Return Html
 
