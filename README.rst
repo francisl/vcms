@@ -35,6 +35,8 @@ A container position the widget as specified in the BasicPage Model.
 Workflow
 =========
 
+::
+
 Request --> Middleware check if requested url in menu --(no)--> Continu normal django url patterns --(no)--> Return 404
                             | (yes)                                          |(yes)
                             v                                                v
@@ -47,6 +49,7 @@ Request --> Middleware check if requested url in menu --(no)--> Continu normal d
                             |
                             v
                         Return Html
+
 
 
 AUTHORS
