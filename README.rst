@@ -37,7 +37,6 @@ Workflow
 
 ::
 
-
 Request --> Middleware check if requested url in menu --(no)--> Continu normal django url patterns --(no)--> Return 404
                             - (yes)                                          -(yes)
                             v                                                v
