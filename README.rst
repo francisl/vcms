@@ -1,4 +1,4 @@
-Programmer's Documentation
+Technical Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 vcms.www
@@ -88,26 +88,27 @@ Basic page information    containers tuple (container slug, container translatab
 
 ContainerWidgets
 
-================================ =======================================================
-Provide                          Requires
-================================ =======================================================
-Map widget to a page containers  From page : containers_type for layout
+=================================== =======================================================
+Provide                             Requires
+=================================== =======================================================
+Map widget to a page containers     From page : containers_type for layout
 
-                                 From page : containers
-================================ =======================================================
+                                    From page : containersp
+=================================== =======================================================
 
 Widget ( Can be inherited )
 
-================================ =================================================
-Provide                          Should implement
-================================ =================================================
-html part that construct a page  get_absolute_url
+=================================== =================================================
+Provide                             Should implement
+=================================== =================================================
+html part that construct a page     get_absolute_url
 
-                                 render method : return html
-================================ =================================================
+                                    render method : return html
+=================================== =================================================
 
 
 
-AUTHORS
-~~~~~~~~
-Francis Lavoie
+:Authors:
+  Francis Lavoie,
+  Francois Lebel
+
