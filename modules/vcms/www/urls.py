@@ -7,16 +7,18 @@ import haystack
 
 from vcms.www.views.html import Generic
 
-urlpatterns = patterns('vcms.www.views'
+urlpatterns = patterns('vcms.www.views.html'
     # Example:
     # (r'^search/$', 'Search'),
     ,(r'^$', Generic)
     ,(r'^search/', include('haystack.urls'))
     ,(r'^page/(?P<page>[-\w]+)/$', 'Generic')
     ,(r'^menu/move/(?P<menuid>[-\w]+)/$', 'testCMSMenuForm')
-        
+)
+
+urlpatterns += patterns('vcms.www.views.ajax'
     # AJAX
     ,(r'^ajax/page/list/$', 'get_page_list')
-    ,(r'^ajax/page/add/$', 'add_new_page')
-    ,(r'^ajax/page/update/$', 'update_page')    
+    #,(r'^ajax/page/add/$', 'add_new_page')
+    #,(r'^ajax/page/update/$', 'update_page')    
 )

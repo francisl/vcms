@@ -164,23 +164,7 @@ def Dashboard(request, context={}):
 def mlogin(request):
     return render_to_response('master.html', {})
 
-"""
-def Search(request):
-    if request.method == "GET":
-        query = ''.join(request.GET.get('query'))
-        results = {}
 
-        # temp_results
-        results[_("Page")] = Page.indexer.search(query)
-        try:
-            # get result from product
-            from products.models import ProductInformation
-            results[_("Product")] = ProductInformation.indexer.search(query)
-        except:
-            # no products
-            pass
-
-            """
 def robots(request):
     from django.contrib.sites.models import Site
     try:

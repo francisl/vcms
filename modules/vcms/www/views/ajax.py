@@ -5,7 +5,6 @@
 from django.utils import simplejson
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 
 from vcms.www.models.page import BasicPage
@@ -55,13 +54,4 @@ def get_page_list(request):
                                     })
         #print("dict to json : %s " % pages_dict)
         return HttpResponse(simplejson.dumps(pages_dict), mimetype='application/javascript')
-        
-
-@login_required
-def add_new_page(request):
-    pass
-
-@login_required
-def update_page(request):
-    pass
 
