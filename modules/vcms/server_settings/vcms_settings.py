@@ -128,17 +128,10 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # Custom apps for cms
                   # google analytics
                   ,'google_analytics'
+                  ,'django_twitter'
                   ,'sorl.thumbnail'
                   ,'search_engine_tools'
                   #,'south'
-                  #SATCHMO
-                  #,'satchmo_store.contact'
-                  #,'product'
-                  #,'payment'
-                  #,'payment.modules.dummy'
-                  #,'payment.modules.giftcertificate'
-                  #,'satchmo_utils'
-                  #,'app_plugins'
                   )
 
 

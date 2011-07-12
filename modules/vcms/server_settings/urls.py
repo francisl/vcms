@@ -18,13 +18,8 @@ from satchmo_store.urls import urlpatterns
 from livesettings import config_value
 from satchmo_utils import urlhelper
 
-
-
-
 replacement = [ url(r'^register/complete/$', 'vcms.store.views.complete', {}, 'registration_complete')
                ,url(r'^register/(?P<activation_key>\w+)/$', 'vcms.store.views.activate', {}, 'registration_activate')
-               #,url(r'^register/$', 'vcms.store.views.register', {}, 'registration_register')
-               #,url(r'^login/$', 'vcms.store.views.emaillogin', {}, 'auth_login')
                ] 
 urlhelper.replace_urlpatterns( urlpatterns, replacement)
 
@@ -41,25 +36,7 @@ urlpatterns += patterns('',
 # ordering formular
 if 'vcms.image_gallery' in settings.INSTALLED_APPS:
     urlpatterns += patterns( '', url(r'^gallery/', include('vcms.image_gallery.urls')),)
-
-
-# __ SIMTHETIQ __
-# ordering formular
-if 'vcms_simthetiq.simthetiq_order' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^order/', include('vcms_simthetiq.simthetiq_order.urls')),)
-
-# __ SIMTHETIQ __
-# For simthetiq product management
-if 'vcms_simthetiq.simthetiq_products' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^products/', include('vcms_simthetiq.simthetiq_products.urls')),)
-
-# __ SIMTHETIQ __
-# For simthetiq importer
-if 'vcms_simthetiq.simthetiq_importer' in settings.INSTALLED_APPS:
-    urlpatterns += patterns( '', url(r'^importer/', include('vcms_simthetiq.simthetiq_importer.urls')),)
-   
-        
-#print("INSTALLED APPS %s " % settings.INSTALLED_APPS)
+ 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
         url(r'^rosetta/', include('rosetta.urls')),
@@ -122,23 +99,13 @@ urlpatterns += patterns('',
     (r'^robots.txt$', 'vcms.www.views.robots'),
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-    #url(r'^forms/contact/', 'vcms.www.views.Contact'),
-    url(r'^contact/', include('vcontact.urls')),
-    # url(r'^afghanistan/', 'www.),
-    # CMS, catch every page
-    #(r'^tinymce/', include('tinymce.urls')),
-    
-    url(r'', include('vcms.www.urls')),
+    (r'^contact/', include('vcontact.urls')),
+    (r'', include('vcms.www.urls')),
 )
 
 urlpatterns += patterns('',
-    # Uncomment this for admin:
-    #(r'admin/', include('mptt.admin.urls')),
     (r'^gestion/style', 'vcms.www.admin.views.show_style'),
     #(r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
     (r'^gestion/', include(admin.site.urls)),
-    url(r'^contact/', include('vcontact.urls')),
+    (r'^contact/', include('vcontact.urls')),
 )
-#print("------URL PATTERNS : ---------")
-#for i in urlpatterns:
-#    print("%s" % i)
