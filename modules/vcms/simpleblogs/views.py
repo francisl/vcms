@@ -23,6 +23,9 @@ from hwm.tree import generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
 
+if 'django_twitter' in settings.INSTALLED_APPS:
+    from django_twitter.models import TwitterButtonWidgetConfig as TBW
+
 class BlogPageController(object):
     def __init__(self, blog_page):
         self.page = blog_page
@@ -84,6 +87,9 @@ newsblogs_template = {'short_list': 'newsblogs_short_list.html'
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
     page = get_newsblog_page_or_404(page_slug)
     categories, archives, older_archives = get_side_menu(page)
+    twitter_widget = None
+    if TBW:
+        twitter_widget = TBW.objects.get_widget_for_application('simpleblogs', page_slug)
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
 
@@ -93,7 +99,7 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
     html_navigation = pgenerator.get_navigation_from_paginator(page_paginator)
     
     return render_to_response( newsblogs_template[page.listing_style]
-                                ,{ 'page': page
+                               ,{ 'page': page
                                   ,'page_name': page_slug
                                   ,'posts': page_paginator.object_list
                                   ,'categories': categories
@@ -101,6 +107,7 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
                                   ,'older_archives': older_archives
                                   ,'page_paginator': html_navigation
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
+                                  ,'twitter_widget' : twitter_widget
                                 }
                                 ,context_instance=RequestContext(request))
 

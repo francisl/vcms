@@ -9,6 +9,9 @@
         {{ post.content|safe }}
         <p>Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
         <br />
+        {% if twitter_widget %}
+            {{ twitter_widget.render }}
+        {% endif %}
     </div>
 {% endfor %}
 {% endblock newsblogs_list %}
