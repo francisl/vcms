@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # Application: Vimba - CMS
 # Module: SimpleBlogs
 # Copyright (c) 2010 Vimba inc. All rights reserved.
