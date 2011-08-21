@@ -30,7 +30,7 @@
 # git pull origin master
 #
 
-Django==1.2.1
+Django==1.3.1
 
 -e git+http://github.com/django-extensions/django-extensions.git@1610e1e59124071e1d01#egg=django-extensions
 
@@ -98,3 +98,6 @@ mockito
 
 # google-analytics
 -e git+https://github.com/clintecker/django-google-analytics.git@e835a1e1a0eb7d2ce30#egg=google_analytics
+
+# django_social_network
+#-e git+https://github.com/francisl/django_social_network.git#egg=django_social_network
