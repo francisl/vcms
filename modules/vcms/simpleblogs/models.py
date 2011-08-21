@@ -173,6 +173,10 @@ class BlogPost(models.Model):
 
     def get_url(self):
         return  "/%s/%s/%s/%d/" % (self.date_published.strftime("%Y"), self.date_published.strftime("%m"), self.date_published.strftime("%d"), self.id )
+
+    
+    template_url = property(get_absolute_url)
+
     
     def save(self):
         self.preview = "<div>" + HtmlReduce(self.content, self.preview_length).get_html() + "</div>"

@@ -23,8 +23,10 @@ from hwm.tree import generator
 from hwm.tree import helper 
 from hwm.paginator import generator as pgenerator
 
-if 'django_twitter' in settings.INSTALLED_APPS:
-    from django_twitter.models import TwitterButtonWidgetConfig as TBW
+if 'django_social_network' in settings.INSTALLED_APPS:
+    from django_social_network.models import TwitterButtonWidgetConfig as TwitterButton
+    from django_social_network.models import FacebookButtonWidgetConfig as FacebookButton
+    from django_social_network.models import FacebookCommentsWidgetConfig as FacebookComments
 
 class BlogPageController(object):
     def __init__(self, blog_page):
@@ -87,9 +89,14 @@ newsblogs_template = {'short_list': 'newsblogs_short_list.html'
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
     page = get_newsblog_page_or_404(page_slug)
     categories, archives, older_archives = get_side_menu(page)
-    twitter_widget = None
-    if TBW:
-        twitter_widget = TBW.objects.get_widget_for_application('simpleblogs', page_slug)
+    twitter_widget = facebook_like_button = facebook_comments = None
+    if TwitterButton:
+        twitter_widget = TwitterButton.widgets.get_widget_for_application('simpleblogs', page_slug)
+    if FacebookButton:
+        facebook_like_button = FacebookButton.widgets.get_widget_for_application('simpleblogs', page_slug)
+    if FacebookComments:
+        facebook_comments = FacebookComments.widgets.get_widget_for_application('simpleblogs', page_slug)
+        
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
 
@@ -108,6 +115,8 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
                                   ,'page_paginator': html_navigation
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
                                   ,'twitter_widget' : twitter_widget
+                                  ,'facebook_like_button' : facebook_like_button
+                                  ,'facebook_comments' : facebook_comments
                                 }
                                 ,context_instance=RequestContext(request))
 

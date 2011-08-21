@@ -128,7 +128,7 @@ INSTALLED_APPS = ('django.contrib.sites'
                   # Custom apps for cms
                   # google analytics
                   ,'google_analytics'
-                  ,'django_twitter'
+                  ,'django_social_network'
                   ,'sorl.thumbnail'
                   ,'search_engine_tools'
                   #,'south'

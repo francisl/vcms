@@ -1,5 +1,11 @@
 {% extends "announcement.html" %}
 {% load humanize %}
+{% if twitter_widget %}
+    {% load twitter_widget %}
+{% endif %}
+{% if facebook_like_button or facebook_comments %}
+    {% load facebook_widget %}
+{% endif %}
 
 {% block newsblogs_list %}
 {% for post in posts %}
@@ -7,11 +13,25 @@
         <h3><a href="{{ cms_basepath }}{{ post.get_url }}/">{{ post.title }}</a></h3>
         <h5>{{ post.date_published|naturalday }}</h5>
         {{ post.content|safe }}
-        <p>Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
-        <br />
         {% if twitter_widget %}
-            {{ twitter_widget.render }}
+            <div class="twitter_widget" style="float: left;">
+            {% render_twitter_widget twitter_widget post.template_url post.title %}
+            </div>
         {% endif %}
+        {% if facebook_like_button %}
+            <div class="facebook_like_button" style="float:left">
+            {% render_facebook_like_button facebook_like_button post.template_url post.title %}
+            </div>
+        {% endif %}
+        {% if facebook_comments %}
+            <div class="facebook_comments" style="clear: both;">
+            {% render_facebook_comments facebook_comments post.template_url post.title %}
+            </div>
+        {% endif %}
+        
+        <p style="clear: both;">Categories: {% for category in post.category.all %}{{ category.name }} {% endfor %}</p>
+        <br />
+
     </div>
 {% endfor %}
 {% endblock newsblogs_list %}
