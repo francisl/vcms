@@ -99,7 +99,6 @@ urlpatterns += patterns('',
     (r'^robots.txt$', 'vcms.www.views.robots'),
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-    (r'^contact/', include('vcontact.urls')),
     (r'', include('vcms.www.urls')),
 )
 
