@@ -8,6 +8,7 @@ from django.contrib.syndication.feeds import Feed
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.models import Site
 
 from vcms.simpleblogs.models import BlogPage, BlogPost, BlogPostCategory
 from vcms.simpleblogs.models import APP_SLUGS
@@ -16,7 +17,8 @@ class LatestBlogFeed(Feed):
     author_name = settings.SITE_NAME
     copyright = "%s" % settings.SITE_NAME
     feed_type = Rss201rev2Feed
-    item_copyright = "%s Copyright" % settings.SITE_NAME 
+    item_copyright = "%s Copyright" % settings.SITE_NAME
+    current_site = Site.objects.get(id=settings.SITE_ID)
     
     def get_object(self, bits) :
         if len(bits) < 1 :
@@ -39,9 +41,7 @@ class LatestBlogFeed(Feed):
         return item.date_published
     
     def item_guid(self, item):
-        return "tag:%s,%s:%s" % ("simthetiq.com", #current_site.domain,
-                                 item.date_published.strftime('%Y-%m-%d'),
-                                 item.get_absolute_url())
+        return "http://%s%s" % (self.current_site, item.get_absolute_url())
         
     def item_categories(self, item):
         return [c.name for c in item.category.all()]
@@ -57,10 +57,7 @@ class CategoryFeed(LatestBlogFeed):
     
     def description(self, obj):
         return "%s: Latest news in category '%s'" % ("Simthetiq", obj.name)
-    
-    #def link(self, obj):
-    #    return obj.get_absolute_url()
-    
+
     def items(self, obj):
         return obj.get_live_news()[:15]
     

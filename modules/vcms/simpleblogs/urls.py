@@ -6,16 +6,15 @@
 
 from django.conf.urls.defaults import *
 
-from vcms.simpleblogs.models import APP_SLUGS
-from vcms.simpleblogs.feeds import LatestBlogFeed, CategoryFeed
-
+from vcms.simpleblogs.feeds import LatestBlogFeed
 
 feeds = { "page" : LatestBlogFeed }
 
 urlpatterns_prefix = ['blogs','news']
-urlpatterns = patterns('',
-                       (r'rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
-                       )
+urlpatterns = patterns(
+    '',
+    (r'rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', { 'feed_dict': feeds }),
+    )
 
 urlpatterns += patterns(''
     ,(r'announcements/comments/', include('django.contrib.comments.urls'))
