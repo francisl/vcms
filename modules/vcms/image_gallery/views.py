@@ -11,7 +11,7 @@ from hwm.paginator import generator as pgenerator
 from vcms.www.views.html import _get_page_parameters
 from vcms.image_gallery.models import ImageGalleryPage
 
-def gallery(request, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
+def gallery(request, page=None, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
     reverse_kwargs={}
     page = request.current_page['current_page']
 
