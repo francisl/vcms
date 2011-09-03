@@ -106,5 +106,4 @@ urlpatterns += patterns('',
     (r'^gestion/style', 'vcms.www.admin.views.show_style'),
     #(r'^gestion/www/update_menu', 'vcms.www.admin.views.UpdateMenu'),
     (r'^gestion/', include(admin.site.urls)),
-    (r'^contact/', include('vcontact.urls')),
 )
