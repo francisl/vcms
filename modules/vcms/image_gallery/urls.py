@@ -12,5 +12,5 @@ urlpatterns = patterns('vcms.image_gallery.views'
     ,(r'^(?P<page>[-\w]+)/(?P<page_number>\d+)/$', 'gallery')
     ,(r'^(?P<page>[-\w]+)/(?P<category>[-\w]+)/$', 'gallery')
     ,url(r'^(?P<page>[-\w]+)/$', 'gallery')
-    ,(r'^$', 'gallery')
+    #,(r'^$', 'gallery')
 )
