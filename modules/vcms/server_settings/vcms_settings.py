@@ -122,7 +122,6 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'vcms.image_gallery'
                   ,'hwm'
                   ,'vcms.themes'
-                  ,'vcontact'
                   ,'updates_registration'
                   ,'htmltools'
                   # Custom apps for cms
