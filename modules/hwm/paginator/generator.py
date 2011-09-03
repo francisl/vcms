@@ -32,17 +32,6 @@ def get_navigation_from_paginator(page, paginator_slug=False, css_id=None, css_c
         @param css_id: string, id of the list container
         @param css_class: string, class name of the list container
         @return: string containing a html page navigation
-        
-        @exemple - using product:
-            >>> from vcms_simthetiq.simthetiq_products import models as productmodels
-            >>> from django.core.paginator import Paginator
-            >>> from hwm.paginator import generator as pgenerator
-            >>> products = productmodels.ModelProduct.objects.get_available_products()
-            >>> paginator = Paginator(products, 5)
-            >>> paginator_html = pgenerator.get_navigation_from_paginator(products, "slist")
-            >>> # test
-            >>> type(paginator_html)
-            <class 'django.utils.safestring.SafeUnicode'>
             
     """
     
@@ -66,18 +55,7 @@ def get_page_navigation(paginator, current_page_number, reverse_url=None, previo
         @param css_id: string, id of the list container
         @param css_class: string, class name of the list container
         @return: string containing a html page navigation
-        
-        @exemple - using product:
-            >>> from vcms_simthetiq.simthetiq_products import models as productmodels
-            >>> from django.core.paginator import Paginator
-            >>> from hwm.paginator import generator as pgenerator
-            >>> products = productmodels.ModelProduct.objects.get_available_products()
-            >>> paginator = Paginator(products, 5)
-            >>> paginator_html = pgenerator.get_page_navigation(paginator, paginator.previous_page_number, paginator.next_page_number)
-            >>> # test
-            >>> type(paginator_html)
-            <class 'django.utils.safestring.SafeUnicode'>
-            
+
     """
     
     current_page = paginator.page(current_page_number)
@@ -103,15 +81,6 @@ def get_paginator_next_url(page_paginator, reverse_url, page_key="page_number", 
         @param reverse_url: full python path of the views function 
         @type page: string
         @type next_url: url for the next page
-        
-        @exemple - using product:
-            >>> from vcms_simthetiq.simthetiq_products import models as productmodels
-            >>> from django.core.paginator import Paginator
-            >>> from hwm.paginator import generator as pgenerator
-            >>> products = productmodels.ModelProduct.objects.get_available_products()
-            >>> paginator = Paginator(products, 5)
-            >>> reverse_url = "vcms.simplenews.views.list_news"
-            >>> previous_url = pgenerator.get_paginator_previous_url(paginator.page(1), reverse_url)
     """
     if page_paginator.has_next():
         kwargs[page_key] = page_paginator.next_page_number()
@@ -127,15 +96,6 @@ def get_paginator_previous_url(page_paginator, reverse_url, page_key="page_numbe
         @param reverse_url: full python path of the views function 
         @type page: string
         @type next_url: url for the next page
-        
-        @exemple - using product:
-            >>> from vcms_simthetiq.simthetiq_products import models as productmodels
-            >>> from django.core.paginator import Paginator
-            >>> from hwm.paginator import generator as pgenerator
-            >>> products = productmodels.ModelProduct.objects.get_available_products()
-            >>> paginator = Paginator(products, 5)
-            >>> reverse_url = "vcms.simplenews.views.list_news"
-            >>> previous_url = pgenerator.get_paginator_previous_url(paginator.page(1), reverse_url)
     """
     if page_paginator.has_previous():
         kwargs[page_key] = page_paginator.previous_page_number()

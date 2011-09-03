@@ -11,13 +11,21 @@ from hwm.paginator import generator as pgenerator
 from vcms.www.views.html import _get_page_parameters
 from vcms.image_gallery.models import ImageGalleryPage
 
-def gallery(request, page=None, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
-    
+def gallery(request, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
     reverse_kwargs={}
-    reverse_kwargs['page'] = page
-    
-    page = get_object_or_404(ImageGalleryPage, slug=page)
+    page = request.current_page['current_page']
+
+    if len(request.cms_menu_extrapath) == 2:
+        category = request.cms_menu_extrapath[0]
+        page_number = request.cms_menu_extrapath[1]
+    if len(request.cms_menu_extrapath):
+        if request.cms_menu_extrapath[0].isdigit():
+            page_number = request.cms_menu_extrapath[0]
+        else:
+            category = request.cms_menu_extrapath[0]
+            
     page_info = _get_page_parameters(page)
+    reverse_kwargs['page'] = page.slug
 
     if category:
         images_category = ImageCategory.objects.get_image_category_from_slug(category)

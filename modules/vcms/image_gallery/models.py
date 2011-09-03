@@ -56,4 +56,8 @@ class ImageGalleryPage(BasicPage):
             return Image.objects.filter(category=category).order_by('-date_modified', '-date_created')
         else:
             return []
-            
+
+    def get_controller(self):
+        from vcms.image_gallery.views import gallery
+        return gallery
+    
