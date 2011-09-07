@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 from django.core.paginator import Paginator
+from django.http import Http404
 
 from site_media.models import Image, ImageCategory
 from hwm.paginator import generator as pgenerator
@@ -11,10 +12,13 @@ from hwm.paginator import generator as pgenerator
 from vcms.www.views.html import _get_page_parameters
 from vcms.image_gallery.models import ImageGalleryPage
 
-def gallery(request, page=None, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
+def gallery(request, page=None, current_page=None, category=None, page_number=1, reverse_url="vcms.image_gallery.views.gallery"):
     reverse_kwargs={}
-    page = request.current_page['current_page']
-
+    try:
+        page = request.current_page['current_page']
+    except:
+        raise Http404
+    
     if len(request.cms_menu_extrapath) == 2:
         category = request.cms_menu_extrapath[0]
         page_number = request.cms_menu_extrapath[1]
