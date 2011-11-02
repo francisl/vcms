@@ -12,14 +12,10 @@ from django.core.exceptions import ObjectDoesNotExist
 import inspect # external requirement
 from captcha.fields import CaptchaField
 
-from vcms.www.models import PageElementPosition
 from vcms.www.models.page import APP_SLUGS
 from vcms.www.models.page import BasicPage as Page
 from vcms.www.models.page import BasicPage
 from vcms.www.models.menu import CMSMenu
-from vcms.www.models.page import DashboardPage
-from vcms.www.models.page import DashboardElement
-from vcms.www.models.page import DashboardPreview
 
 
 DROPDOWN_MENU = 0
@@ -109,57 +105,7 @@ def Simple(request, context={}):
     return render_to_response('simple.html',
                               context,
                               context_instance=RequestContext(request))
-
-# Register Loading optionnal plugins
-DASHBOARD_MODULES = []
-def dashboardRegister(module, function):
-    try:
-        # loading requirements first
-        mod = __import__(module, globals(), locals(), [function])
-        html_function = getattr(mod,function) 
-        DASHBOARD_MODULES.append(html_function)
-    except:
-        pass
-
         
-def Dashboard(request, context={}):
-    """
-        Display a page with preview from other pages, summary, widgets or forms
-    """
-    
-    contents = { 'left': [], 'right': [] }
-    # load all modules that are registered at startup
-    for mod in DASHBOARD_MODULES:
-        for content in mod(request, pageid=context["page_info"]['page'].id):
-            contents[content["preview_position"]].append((content["preview_display_priority"], { "module": content["preview_content"]},))
-
-    for content in DashboardElement.objects.get_Published(context['current_page']):
-        contents[content.preview_position].append((content.preview_display_priority, 
-                                                    { "title": content.name, 
-                                                        "content": content.text,
-                                                        "link": content.link},
-                                                    ))
-
-    for content in DashboardPreview.objects.filter(page=context['current_page']):
-        contents[content.preview_position].append((content.preview_display_priority, 
-                                                   { "title": content.preview.name,
-                                                    "content": content.preview.content, 
-                                                    "link": content.preview.get_absolute_url()},
-                                                    ))
-
-    context["contents"] = contents
-    
-    # sorting content
-    context["contents"]['left'].sort()
-    context["contents"]['right'].sort()
-
-    #get the dashboard page
-    page = DashboardPage.objects.get(id=context['current_page'].id)
-    template = [t for t in DashboardPage.TEMPLATES if t[0] == page.template]
-
-    return render_to_response(DashboardPage.TEMPLATE_FILES[page.template],  context,
-                                context_instance=RequestContext(request))
-
 
 def mlogin(request):
     return render_to_response('master.html', {})
