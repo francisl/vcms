@@ -152,49 +152,6 @@ class BasicPage(models.Model):
 
         super(BasicPage, self).save(*args, **kwargs)
 
-## TO BE REMOVED !!
-class Page(BasicPage):
-    EMPTY = 0
-    TEMPLATES = ((EMPTY, 'Default'),)
-    TEMPLATE_FILES = { EMPTY: 'master.html'}
-    template = models.IntegerField(default=EMPTY, choices=TEMPLATES)
-
-    # menus
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', editable=False)
-    level = models.IntegerField(editable=False, default=0)
-    tree_position = models.IntegerField(editable=False, default=0)
-    display = models.BooleanField(editable=False, default=False)
-
-    class Meta:
-        ordering = ['tree_position', 'name']
-        verbose_name_plural = "Menu Administration"
-        #unique_together = ("slug", "app_slug")
-        app_label = "www"
-
-    def get_absolute_url(self):
-        if self.app_slug:
-            return "/" + self.app_slug + "/page/" + self.slug
-        elif self.slug == '/':
-            return ''
-        else:
-            return "/" + self.slug
-
-    def __unicode__(self):
-        return self.name
-    
-    def save(self):
-        self.module = 'simple'
-        super(Page, self).save()
-
-    def delete(self):
-        if self.default:
-            Page.objects.deleted_Default()
-        _delete_page(self)
-        super(Page, self).delete()
-        # __TODO: Commented out the following line as it doesn't work as of 31-01-2010
-        #self.indexer.update()
-
-
 class MainPage(BasicPage):
     class Meta:
         app_label = 'www'
