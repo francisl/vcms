@@ -3,12 +3,12 @@
 
     {% for menu in menus %}
     <li class="{% if menu.selected %}menu_selected {% endif %}">
-        <a href="{{menu.menu.get_absolute_url}}" class="dir">{{ menu.menu.get_name|upper }}</a>
+        <a id="link_menu_{{menu.menu.slug}}" href="{{menu.menu.get_absolute_url}}" class="dir">{{ menu.menu.get_name|upper }}</a>
         
         {% if menu.submenus %}{% comment %} dont display empty menu{% endcomment %}
 		<ul>{% for submenu in menu.submenus %}
 		      <li id="menu_{{menu.menu.id}}" class="{% if submenu.selected %}menu_selected{% endif %}">
-		          <a href="{{submenu.menu.get_absolute_url}}">{{ submenu.menu }}</a>
+		          <a id="link_submenu_{{menu.id}}" href="{{submenu.menu.get_absolute_url}}">{{ submenu.menu }}</a>
 		      </li>{% endfor %}
 		</ul>
 		{% endif %}
