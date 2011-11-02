@@ -1,14 +1,11 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_modify adminmedia %}
-{% load compress %}
 {% load admin_extras %}
 {% load cms_theme %}
 
 {% block extrahead %}
     {{ block.super }}
-    {% compress css %}
-        <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/admin.ccss" type="text/css" charset="utf-8">
-    {% endcompress %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}custom_themes/{% get_selected_theme %}/ccss/admin.ccss" type="text/css" charset="utf-8">
 {% endblock %}
 
 {% block after_related_objects %}
