@@ -89,13 +89,11 @@ newsblogs_template = {'short_list': 'newsblogs_short_list.html'
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
     page = get_newsblog_page_or_404(page_slug)
     categories, archives, older_archives = get_side_menu(page)
-    twitter_widget = facebook_like_button = facebook_comments = None
+    twitter_widget = facebook_like_button = None
     if TwitterButton:
         twitter_widget = TwitterButton.widgets.get_widget_for_application('simpleblogs', page_slug)
     if FacebookButton:
         facebook_like_button = FacebookButton.widgets.get_widget_for_application('simpleblogs', page_slug)
-    if FacebookComments:
-        facebook_comments = FacebookComments.widgets.get_widget_for_application('simpleblogs', page_slug)
         
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
@@ -114,9 +112,7 @@ def page(request, page_slug=None, page_number=1, category=None, year=None, month
                                   ,'older_archives': older_archives
                                   ,'page_paginator': html_navigation
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
-                                  ,'twitter_widget' : twitter_widget
-                                  ,'facebook_like_button' : facebook_like_button
-                                  ,'facebook_comments' : facebook_comments
+                                  ,'social_medias' : True
                                 }
                                 ,context_instance=RequestContext(request))
 
@@ -211,6 +207,7 @@ def post_page(request, page, post_id, page_paginator, html_navigation, categorie
                                   ,'older_archives': older_archives
                                   ,'page_paginator': html_navigation
                                   ,'inside_navigation': True if settings.SITE_NAME == 'Classic' else False
+                                  ,'social_medias' : True
                                 }
                                 ,context_instance=RequestContext(request))
     

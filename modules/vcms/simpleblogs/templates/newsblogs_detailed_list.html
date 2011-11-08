@@ -1,31 +1,27 @@
 {% extends "announcement.html" %}
 {% load humanize %}
-{% if twitter_widget %}
+{% if social_medias %}
     {% load twitter_widget %}
-{% endif %}
-{% if facebook_like_button or facebook_comments %}
     {% load facebook_widget %}
+    {% load scripts %}
 {% endif %}
 
 {% block newsblogs_list %}
 {% for post in posts %}
     <div>
-        <h3><a href="{{ cms_basepath }}{{ post.get_url }}/">{{ post.title }}</a></h3>
+        <h3><a href="{{ cms_basepath }}{{ post.get_url }}">{{ post.title }}</a></h3>
         <h5>{{ post.date_published|naturalday }}</h5>
         {{ post.content|safe }}
-        {% if twitter_widget %}
+        {% if social_medias %}
             <div class="twitter_widget" style="float: left;">
-            {% render_twitter_widget twitter_widget post.template_url post.title %}
+            {% twitter_widget "simpleblogs" "blog" post.template_url post.title %}
             </div>
-        {% endif %}
-        {% if facebook_like_button %}
             <div class="facebook_like_button" style="float:left">
-            {% render_facebook_like_button facebook_like_button post.template_url post.title %}
+            {% facebook_like_button "simpleblogs" "blog" post.template_url post.title %}
             </div>
-        {% endif %}
-        {% if facebook_comments %}
-            <div class="facebook_comments" style="clear: both;">
-            {% render_facebook_comments facebook_comments post.template_url post.title %}
+            <br />
+            <div class="facebook_comments" style="clear: both; margin-top: 8px;">
+            {% facebook_comments "simpleblogs" "blog" post.template_url post.title %}
             </div>
         {% endif %}
         
@@ -34,4 +30,7 @@
 
     </div>
 {% endfor %}
+{% if social_medias %}
+  {% load_social_medias_scripts "simpleblogs" "blog" %}
+{% endif %}
 {% endblock newsblogs_list %}
