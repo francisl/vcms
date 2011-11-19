@@ -89,18 +89,13 @@ newsblogs_template = {'short_list': 'newsblogs_short_list.html'
 def page(request, page_slug=None, page_number=1, category=None, year=None, month=None, day=None, post_id=None):
     page = get_newsblog_page_or_404(page_slug)
     categories, archives, older_archives = get_side_menu(page)
-    twitter_widget = facebook_like_button = None
-    if TwitterButton:
-        twitter_widget = TwitterButton.widgets.get_widget_for_application('simpleblogs', page_slug)
-    if FacebookButton:
-        facebook_like_button = FacebookButton.widgets.get_widget_for_application('simpleblogs', page_slug)
         
     if category != None:
         category = get_object_or_404(BlogPostCategory, slug=category)
 
     blogs = BlogPost.published.get_all_for_page(page, category=category)
     
-    page_paginator = pgenerator.get_page_paginator_from_list(blogs, page_number)
+    page_paginator = pgenerator.get_page_paginator_from_list(blogs, page_number, item_per_page=page.number_of_post_per_page)
     html_navigation = pgenerator.get_navigation_from_paginator(page_paginator)
     
     return render_to_response( newsblogs_template[page.listing_style]
