@@ -1,6 +1,6 @@
 from django import template
 from django.template import Node
-from vcms.www.models.page import Page
+from vcms.www.models.page import BasicPage as Page
 
 register = template.Library()
 
