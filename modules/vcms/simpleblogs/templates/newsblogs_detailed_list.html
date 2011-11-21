@@ -9,7 +9,7 @@
 {% block newsblogs_list %}
 {% for post in posts %}
     <div>
-        <h3><a href="{{ cms_basepath }}{{ post.get_url }}">{{ post.title }}</a></h3>
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
         <h5>{{ post.date_published|naturalday }}</h5>
         {{ post.content|safe }}
         {% if social_medias %}
