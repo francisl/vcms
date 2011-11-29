@@ -14,14 +14,14 @@
         {{ post.content|safe }}
         {% if social_medias %}
             <div class="twitter_widget" style="float: left;">
-            {% twitter_widget "simpleblogs" "blog" post.template_url post.title %}
+            {% twitter_widget "simpleblogs" "home" post.template_url post.title %}
             </div>
             <div class="facebook_like_button" style="float:left">
-            {% facebook_like_button "simpleblogs" "blog" post.template_url post.title %}
+            {% facebook_like_button "simpleblogs" "home" post.template_url post.title %}
             </div>
             <br />
             <div class="facebook_comments" style="clear: both; margin-top: 8px;">
-            {% facebook_comments "simpleblogs" "blog" post.template_url post.title %}
+            {% facebook_comments "simpleblogs" "home" post.template_url post.title %}
             </div>
         {% endif %}
         

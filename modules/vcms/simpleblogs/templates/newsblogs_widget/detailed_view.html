@@ -1,5 +1,10 @@
 {% load humanize %}
 {% load i18n %}
+{% if social_medias %}
+    {% load twitter_widget %}
+    {% load facebook_widget %}
+    {% load scripts %}
+{% endif %}
 
 <div class="vcms_blog_widget" style="overflow: hidden">
     <a href="{{ widget.get_absolute_url }}"><h1 class="newsblog_widget_title">{{ name|safe }}</h1></a>
@@ -10,6 +15,22 @@
             <h5>{{ post.date_published|naturalday }}</h5>
             {{ post.preview|safe }}<a href="{{ post.get_absolute_url }}">{% trans 'More ' %}...</a>
         </div>
+        <br />
+        {% if social_medias %}
+            <div class="twitter_widget" style="float: left;">
+            {% twitter_widget "simpleblogs" "blog" post.template_url post.title %}
+            </div>
+            <div class="facebook_like_button" style="float:left">
+            {% facebook_like_button "simpleblogs" "blog" post.template_url post.title %}
+            </div>
+            <br />
+            <div class="facebook_comments" style="clear: both; margin-top: 8px;">
+            {% facebook_comments "simpleblogs" "blog" post.template_url post.title %}
+            </div>
+        {% endif %}
         {% endif %}
     {% endfor %}
 </div>
+{% if social_medias %}
+  {% load_social_medias_scripts "simpleblogs" "blog" %}
+{% endif %}

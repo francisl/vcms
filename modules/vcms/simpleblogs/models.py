@@ -221,6 +221,7 @@ class BlogPostWidget(Widget):
                       )
 
     display_template = models.PositiveIntegerField(choices=WIDGET_TEMPLATE, default=WIDGET_TEMPLATE_DETAILED)
+    display_social_network_widget = models.BooleanField(default=False)
     
     def render(self):
         posts = BlogPost.published.get_latest_post_for_page(self.page, qty=self.display_elements, category=self.display_category) #, self.display_elements)
@@ -229,7 +230,10 @@ class BlogPostWidget(Widget):
         else: 
             template = "newsblogs_widget/detailed_view.html"
         widget =  render_to_string(template
-                                    ,{ 'name': self.name, 'posts':posts, 'widget': self })
+                                    ,{ 'name': self.name
+                                       ,'posts':posts
+                                       ,'widget': self
+                                       ,'social_medias': self.display_social_network_widget  })
         return widget
 
     class Meta:
