@@ -51,10 +51,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    #'satchmo_store.shop.context_processors.settings',   # Required by Satchmo
-    'django.core.context_processors.auth',                  # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
-    'django.core.context_processors.request',               # Add the request to the context
-    'django.core.context_processors.media',                 # Add MEDIA_URL to every RequestContext
+    'django.core.context_processors.auth',   # Must specify this one if we specify a TEMPLATE_CONTEXT_PROCESSORS tuple
+    'django.core.context_processors.request', # Add the request to the context
+    'django.core.context_processors.media',   # Add MEDIA_URL to every RequestContext
 #    'django.core.context_processors.debug',
 #    'django.core.context_processors.i18n',
     'vcms.menu_navigation.request_processors.page_info',
@@ -66,7 +65,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#   'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_DIRS = (
@@ -75,7 +73,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     #SERVER_PATH + '/templates',
     #os.path.dirname(__file__) + '/www/templates',
-    
 )
 
 MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
@@ -83,18 +80,14 @@ MIDDLEWARE_CLASSES = ('django.middleware.common.CommonMiddleware'
                       #'django.middleware.cache.UpdateCacheMiddleware',
                       #'django.middleware.cache.FetchFromCacheMiddleware',
                       ,'django.contrib.sessions.middleware.SessionMiddleware'
-                      #,"django.middleware.locale.LocaleMiddleware" # Required by Satchmo
                       ,'django.contrib.auth.middleware.AuthenticationMiddleware'
                       ,'django.middleware.doc.XViewMiddleware'
                       #'django.middleware.csrf.CsrfViewMiddleware' __TODO: Disabled since Satchmo 0.9.x doesn't officially support Django > 1.1 and this CSRF protection has been added in 1.2
-                      #,'threaded_multihost.middleware.ThreadLocalMiddleware' # Required by Satchmo
-                      #,'satchmo_store.shop.SSLMiddleware.SSLRedirect'        # Required by Satchmo
                       #,'vcms.www.middleware.EnforceLoginMiddleware',
                       ,'vcms.menu_navigation.middleware.MenuNavigationMiddleWare'
                       )
 
 INSTALLED_APPS = ('django.contrib.sites'
-                  #,'satchmo_store.shop' # Satchmo, must preceed django.contrib.admin
                   ,'django.contrib.admin'
                   ,'django.contrib.auth'
                   ,'django.contrib.contenttypes'
@@ -132,7 +125,6 @@ INSTALLED_APPS = ('django.contrib.sites'
                   ,'search_engine_tools'
                   #,'south'
                   )
-
 
 # ----------------------------
 # sorl-thumbnail config option
